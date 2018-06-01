@@ -1,39 +1,39 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14133" systemVersion="17E202" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Day" representedClassName="Day" syncable="YES" codeGenerationType="category">
-        <attribute name="date" optional="YES" syncable="YES"/>
-        <attribute name="id" optional="YES" syncable="YES"/>
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="id" attributeType="String" syncable="YES"/>
         <relationship name="habits" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="HabitDay" inverseName="day" inverseEntity="HabitDay" syncable="YES"/>
     </entity>
     <entity name="Habit" representedClassName="Habit" syncable="YES" codeGenerationType="category">
-        <attribute name="created" optional="YES" syncable="YES"/>
-        <attribute name="id" optional="YES" syncable="YES"/>
+        <attribute name="created" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="days" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="HabitDay" inverseName="habit" inverseEntity="HabitDay" syncable="YES"/>
         <relationship name="notifications" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Notification" inverseName="habits" inverseEntity="Notification" syncable="YES"/>
         <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="habits" inverseEntity="User" syncable="YES"/>
     </entity>
     <entity name="HabitDay" representedClassName="HabitDay" syncable="YES" codeGenerationType="category">
-        <attribute name="id" optional="YES" syncable="YES"/>
-        <attribute name="wasExecuted" optional="YES" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="wasExecuted" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="day" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Day" inverseName="habits" inverseEntity="Day" syncable="YES"/>
         <relationship name="habit" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Habit" inverseName="days" inverseEntity="Habit" syncable="YES"/>
     </entity>
     <entity name="Notification" representedClassName="Notification" syncable="YES" codeGenerationType="category">
-        <attribute name="fireDate" optional="YES" syncable="YES"/>
-        <attribute name="id" optional="YES" syncable="YES"/>
-        <attribute name="userNotificationId" optional="YES" syncable="YES"/>
+        <attribute name="fireDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="userNotificationId" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="habits" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Habit" inverseName="notifications" inverseEntity="Habit" syncable="YES"/>
     </entity>
     <entity name="User" representedClassName="User" syncable="YES" codeGenerationType="category">
-        <attribute name="created" optional="YES" syncable="YES"/>
-        <attribute name="id" optional="YES" syncable="YES"/>
+        <attribute name="created" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="habits" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Habit" inverseName="user" inverseEntity="Habit" syncable="YES"/>
     </entity>
     <elements>
-        <element name="User" positionX="-3213" positionY="-4068" width="128" height="88"/>
-        <element name="Habit" positionX="-3215" positionY="-3915" width="128" height="118"/>
-        <element name="Day" positionX="-3177" positionY="-3708" width="128" height="88"/>
-        <element name="Notification" positionX="-2961" positionY="-3889" width="128" height="103"/>
-        <element name="HabitDay" positionX="-3395" positionY="-3715" width="128" height="103"/>
+        <element name="Day" positionX="-3177" positionY="-3708" width="128" height="90"/>
+        <element name="Habit" positionX="-3215" positionY="-3915" width="128" height="30"/>
+        <element name="HabitDay" positionX="-3395" positionY="-3715" width="128" height="30"/>
+        <element name="Notification" positionX="-2961" positionY="-3889" width="128" height="30"/>
+        <element name="User" positionX="-3213" positionY="-4068" width="128" height="30"/>
     </elements>
 </model>
