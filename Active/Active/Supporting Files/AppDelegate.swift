@@ -12,9 +12,13 @@ import CoreData
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+  // MARK: Properties
+  
+  /// The app's main window.
   var window: UIWindow?
 
-
+  // MARK: Delegate methods
+  
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
     // Override point for customization after application launch.
     return true
@@ -46,6 +50,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   // MARK: - Core Data stack
 
+  /// The container used by the app.
   lazy var persistentContainer: NSPersistentContainer = {
       /*
        The persistent container for the application. This implementation
@@ -72,9 +77,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       })
       return container
   }()
+  
+  /// Convenience access to the app's persistent container.
+  static var persistentContainer: NSPersistentContainer {
+    return (UIApplication.shared.delegate as! AppDelegate).persistentContainer
+  }
+  
+  /// Convenience access to the app's used view context.
+  static var viewContext: NSManagedObjectContext {
+    return persistentContainer.viewContext
+  }
 
   // MARK: - Core Data Saving support
 
+  /// Saves the app's view context.
   func saveContext () {
       let context = persistentContainer.viewContext
       if context.hasChanges {
