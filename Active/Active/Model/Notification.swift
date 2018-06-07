@@ -8,6 +8,8 @@
 
 import CoreData
 
+/// The Notification model entity.
+/// - Note: Alongside with the entity, an specific UserNotifications is scheduled.
 class Notification: NSManagedObject {
 
 }

@@ -8,6 +8,7 @@
 
 import CoreData
 
+/// The User model entity.
 class User: NSManagedObject {
 
 }

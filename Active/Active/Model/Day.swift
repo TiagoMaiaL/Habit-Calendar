@@ -8,6 +8,7 @@
 
 import CoreData
 
+/// The calendar Day model entity.
 class Day: NSManagedObject {
 
 }

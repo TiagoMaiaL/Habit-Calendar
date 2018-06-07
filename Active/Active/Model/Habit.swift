@@ -9,8 +9,11 @@
 import CoreData
 
 /// The Habit model entity.
+/// - Note: The user can have as many habits as he/she wants.
 class Habit: NSManagedObject {
 
+    // MARK: Internal types
+    
     /// The habit color associated with the entity.
     enum Color {
         // TODO: Describe the possible colors.
@@ -29,7 +32,10 @@ class Habit: NSManagedObject {
             return ""
         }
     }
+    
+    // MARK: Life cycle
+    
+    override func prepareForDeletion() {
+        // TODO: Check what needs to be done in case of a deletion in this entity.
+    }
 }
-
-
-
