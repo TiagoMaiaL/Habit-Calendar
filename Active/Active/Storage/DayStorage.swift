@@ -30,7 +30,7 @@ class DayStorage {
     /// Queries for a day with the provided date.
     /// - Parameter date: the date associated with the day entity.
     /// - Returns: the day, if there's one.
-    func day(with date: Date) -> Day? {
+    func day(for date: Date) -> Day? {
         let request: NSFetchRequest<Day> = Day.fetchRequest()
         
         // Associate the predicate to search for the specific day(begin <= date <= end).
