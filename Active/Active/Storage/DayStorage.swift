@@ -27,6 +27,28 @@ class DayStorage {
     
     // MARK: - Imperatives
     
+    /// Queries for a day with the provided date.
+    /// - Parameter date: the date associated with the day entity.
+    /// - Returns: the day, if there's one.
+    func day(with date: Date) -> Day? {
+        let request: NSFetchRequest<Day> = Day.fetchRequest()
+        
+        // Associate the predicate to search for the specific day(begin <= date <= end).
+        let predicate = NSPredicate(format: "date >= %@ && date <= %@",
+                                    date.getBeginningOfDay() as NSDate,
+                                    date.getEndOfDay() as NSDate)
+        request.predicate = predicate
+        
+        // Query it.
+        let results = try? container.viewContext.fetch(request)
+        
+        // If the results count is greater than 1, there's an error in the entity
+        // creation somewhere. There should be only one day entity per date.
+        assert(results?.count ?? 0 <= 1, "DayStorage -- day: there's more than on Day entity for the passed date attribute.")
+        
+        return results?.first
+    }
+    
     /// Creates and persists a calendar day instance.
     /// - Parameter date: the date associated with the day entity.
     /// - Returns: the created calendar day.
@@ -37,6 +59,7 @@ class DayStorage {
     }
     
     /// Deletes the passed day instance.
+    /// - Paramater: the day to be deleted.
     func delete(day: Day) {
         container.viewContext.delete(day)
     }
