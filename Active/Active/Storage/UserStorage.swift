@@ -47,6 +47,8 @@ class UserStorage {
     /// - Returns: the newly created user entity.
     func create() -> User {
         let user = User(context: container.viewContext)
+        // TODO: Check how the indexing is being done since the latest version of core data.
+        user.id = UUID().uuidString
         user.created = Date()
         return user
     }
