@@ -18,6 +18,7 @@
 		4725D06120CA06EE00C3B63F /* DayStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4725D06020CA06EE00C3B63F /* DayStorage.swift */; };
 		4725D06320CA14A600C3B63F /* HabitDayStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4725D06220CA14A600C3B63F /* HabitDayStorage.swift */; };
 		474F9C8620CC7E180094C19C /* Date+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474F9C8520CC7E180094C19C /* Date+Utils.swift */; };
+		474F9C8A20CE3F670094C19C /* StorageTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474F9C8920CE3F670094C19C /* StorageTestCase.swift */; };
 		47F635F020BB920900AC4555 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F635EF20BB920900AC4555 /* AppDelegate.swift */; };
 		47F635F520BB920900AC4555 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47F635F320BB920900AC4555 /* Main.storyboard */; };
 		47F635F820BB920900AC4555 /* Active.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 47F635F620BB920900AC4555 /* Active.xcdatamodeld */; };
@@ -48,6 +49,7 @@
 		4725D06020CA06EE00C3B63F /* DayStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayStorage.swift; sourceTree = "<group>"; };
 		4725D06220CA14A600C3B63F /* HabitDayStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitDayStorage.swift; sourceTree = "<group>"; };
 		474F9C8520CC7E180094C19C /* Date+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Utils.swift"; sourceTree = "<group>"; };
+		474F9C8920CE3F670094C19C /* StorageTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageTestCase.swift; sourceTree = "<group>"; };
 		47F635EC20BB920900AC4555 /* Active.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Active.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		47F635EF20BB920900AC4555 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		47F635F420BB920900AC4555 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -126,6 +128,14 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		474F9C8820CE3F470094C19C /* StorageTests */ = {
+			isa = PBXGroup;
+			children = (
+				474F9C8920CE3F670094C19C /* StorageTestCase.swift */,
+			);
+			path = StorageTests;
+			sourceTree = "<group>";
+		};
 		47F635E320BB920900AC4555 = {
 			isa = PBXGroup;
 			children = (
@@ -161,6 +171,7 @@
 		47F6360620BB920D00AC4555 /* ActiveTests */ = {
 			isa = PBXGroup;
 			children = (
+				474F9C8820CE3F470094C19C /* StorageTests */,
 				47F6360720BB920D00AC4555 /* ActiveTests.swift */,
 				47F6360920BB920D00AC4555 /* Info.plist */,
 			);
@@ -317,6 +328,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				47F6360820BB920D00AC4555 /* ActiveTests.swift in Sources */,
+				474F9C8A20CE3F670094C19C /* StorageTestCase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
