@@ -30,6 +30,7 @@ class UserStorage {
     /// Gets the persisted and single User entity.
     /// - Note: Only one user is created by each app.
     /// - Returns: the app's user entity, if it exists.
+    // TODO: Check what are the possible exceptions thrown by a fetch.
     func getUser() throws -> User? {
         // Get the request to fetch the user.
         let request: NSFetchRequest<User> = User.fetchRequest()
