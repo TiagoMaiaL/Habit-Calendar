@@ -42,7 +42,8 @@ class DayStorageTests: StorageTestCase {
         let day = dayStorage.create(withDate: dayDate)
         
         // Assert the day isn't nil and has the correct date.
-        XCTAssertEqual(day.date, dayDate)
+        XCTAssertEqual(day.date, dayDate, "The created Day entity should have the correct date property.")
+        XCTAssertNotNil(day.id, "The created Day entity should have an id.")
     }
     
     func testSpecificDayFetching() {
@@ -57,8 +58,8 @@ class DayStorageTests: StorageTestCase {
         let fetchedDay = dayStorage.day(for: dayDate)
         
         // Assert that the fetched day's date is right.
-        XCTAssertNotNil(fetchedDay)
-        XCTAssertEqual(dayDate, fetchedDay?.date)
+        XCTAssertNotNil(fetchedDay, "The created day should be correctly fetched.")
+        XCTAssertEqual(dayDate, fetchedDay?.date, "The fetched Day's date should be correct.")
     }
     
     func testDayDeletion() {
@@ -74,7 +75,7 @@ class DayStorageTests: StorageTestCase {
         let fetchedDay = dayStorage.day(for: dayDate)
         
         // Assert that nothing was fetched.
-        XCTAssertNil(fetchedDay)
+        XCTAssertNil(fetchedDay, "The deleted Day's fetch attempt should return nil.")
     }
     
 }
