@@ -45,19 +45,25 @@ class UserStorageTests: StorageTestCase {
     }
     
     func testUserRetrieval() {
-        var user = try? userStorage.getUser()
-        
-        // FIXME: XCTAssertions don't work well with optionals. find a better alternative to test these values.
+        var user = userStorage.getUser()
         
         // Since there isn't a created user, it should return nil.
-        XCTAssertNil(user ?? nil, "Failed: No user shoud be fetched, since no user was created.")
+        XCTAssertNil(user, "Failed: No user shoud be fetched, since no user was created.")
         
-        // Create a new user.
-        _ = userStorage.create()
-        user = try? userStorage.getUser()
+        // Create a new user and Hold the userId to compare
+        // with the retrieved user's one.
+        let userId = userStorage.create().id
+        
+        // Get the previously created user.
+        user = userStorage.getUser()
+        // Get the retrieved user's id for comparision purposes.
+        let fetchedUserId: String? = user?.id
         
         // The previously created user should now be returned:
-        XCTAssertNotNil(user ?? nil, "Failed: A user should be fetched from the getUser() method.")
+        XCTAssertNotNil(user, "Failed: A user should be fetched from the getUser() method.")
+        // Check if the retrieved user is the same
+        // as the previously created one.
+        XCTAssertEqual(userId, fetchedUserId, "Failed: The fetched user's id should be equal to the id of the previously created user.")
     }
     
     func testUserDeletion() {
@@ -66,9 +72,10 @@ class UserStorageTests: StorageTestCase {
         // Delete the user.
         userStorage.delete()
         // Check the return of the fetch method.
-        let user = try? userStorage.getUser()
+        let user = userStorage.getUser()
         
         XCTAssertNil(user ?? nil, "Failed: The created user should be deleted.")
     }
     
+    // TODO: Consider adding a new test with the relationship to habits.
 }

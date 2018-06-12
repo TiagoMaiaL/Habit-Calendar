@@ -31,16 +31,16 @@ class UserStorage {
     /// - Note: Only one user is created by each app.
     /// - Returns: the app's user entity, if it exists.
     // TODO: Check what are the possible exceptions thrown by a fetch.
-    func getUser() throws -> User? {
+    func getUser() -> User? {
         // Get the request to fetch the user.
         let request: NSFetchRequest<User> = User.fetchRequest()
         // Fetch the app's user.
-        let results = try container.viewContext.fetch(request)
+        let results = try? container.viewContext.fetch(request)
         
         // Assert that only one user was persisted.
-        assert(results.count <= 1, "UserStorage -- getUser: There's more than one user persisted, only one should be allowed.")
+        assert(results?.count ?? 0 <= 1, "UserStorage -- getUser: There's more than one user persisted, only one should be allowed.")
         
-        return results.first
+        return results?.first
     }
     
     /// Creates a new User entity.
