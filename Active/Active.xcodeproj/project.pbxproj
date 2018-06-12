@@ -22,6 +22,7 @@
 		474A209120CEEBCC00E0EBD0 /* HabitDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4713A1FF20C164E6008A13D2 /* HabitDay.swift */; };
 		474A209220CEEBCF00E0EBD0 /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4713A20120C164FB008A13D2 /* Day.swift */; };
 		474A209320CEEBD200E0EBD0 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4713A20320C16542008A13D2 /* Notification.swift */; };
+		474A209520D00AFA00E0EBD0 /* DayStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474A209420D00AFA00E0EBD0 /* DayStorageTests.swift */; };
 		474F9C8620CC7E180094C19C /* Date+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474F9C8520CC7E180094C19C /* Date+Utils.swift */; };
 		474F9C8A20CE3F670094C19C /* StorageTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474F9C8920CE3F670094C19C /* StorageTestCase.swift */; };
 		474F9C8B20CEE1AF0094C19C /* Active.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 47F635F620BB920900AC4555 /* Active.xcdatamodeld */; };
@@ -55,6 +56,7 @@
 		4725D05E20C97D9C00C3B63F /* UserStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStorage.swift; sourceTree = "<group>"; };
 		4725D06020CA06EE00C3B63F /* DayStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayStorage.swift; sourceTree = "<group>"; };
 		4725D06220CA14A600C3B63F /* HabitDayStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitDayStorage.swift; sourceTree = "<group>"; };
+		474A209420D00AFA00E0EBD0 /* DayStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayStorageTests.swift; sourceTree = "<group>"; };
 		474F9C8520CC7E180094C19C /* Date+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Utils.swift"; sourceTree = "<group>"; };
 		474F9C8920CE3F670094C19C /* StorageTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageTestCase.swift; sourceTree = "<group>"; };
 		474F9C8C20CEE2840094C19C /* UserStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStorageTests.swift; sourceTree = "<group>"; };
@@ -141,6 +143,7 @@
 			children = (
 				474F9C8920CE3F670094C19C /* StorageTestCase.swift */,
 				474F9C8C20CEE2840094C19C /* UserStorageTests.swift */,
+				474A209420D00AFA00E0EBD0 /* DayStorageTests.swift */,
 			);
 			path = StorageTests;
 			sourceTree = "<group>";
@@ -344,6 +347,7 @@
 				474F9C8B20CEE1AF0094C19C /* Active.xcdatamodeld in Sources */,
 				474A209120CEEBCC00E0EBD0 /* HabitDay.swift in Sources */,
 				474A208F20CEEBC600E0EBD0 /* User.swift in Sources */,
+				474A209520D00AFA00E0EBD0 /* DayStorageTests.swift in Sources */,
 				474F9C8A20CE3F670094C19C /* StorageTestCase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

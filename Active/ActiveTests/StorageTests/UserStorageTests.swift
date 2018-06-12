@@ -6,12 +6,11 @@
 //  Copyright © 2018 Tiago Maia Lopes. All rights reserved.
 //
 
-import Foundation
 import XCTest
 import CoreData
 @testable import Active
 
-/// In charge of testing the UserStorage methods.
+/// Class in charge of testing the UserStorage methods.
 class UserStorageTests: StorageTestCase {
 
     // MARK: Properties
@@ -35,9 +34,7 @@ class UserStorageTests: StorageTestCase {
     }
     
     // MARK: Tests
-    
-    // Use XCTAssert and related functions to verify your tests produce the correct results.
-    
+
     func testUserCreation() {
         let user = userStorage.create()
         XCTAssertNotNil(user.created, "Failed: User creation.")
@@ -77,5 +74,5 @@ class UserStorageTests: StorageTestCase {
         XCTAssertNil(user ?? nil, "Failed: The created user should be deleted.")
     }
     
-    // TODO: Consider adding a new test with the relationship to habits.
+    // TODO: Consider adding a new test to test the relationship with Habit entities.
 }
