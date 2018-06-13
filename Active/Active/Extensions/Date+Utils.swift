@@ -11,6 +11,16 @@ import Foundation
 /// Adds Utilities used by the app to the Date type.
 extension Date {
     
+    // MARK: Properties
+    
+    /// The date's components according to system's calendar.
+    var components: DateComponents {
+        return getCurrentCalendar().dateComponents(
+            [.second, .minute, .hour, .day, .month, .year],
+            from: self
+        )
+    }
+    
     // MARK: Imperatives
     
     /// Gets the configured current calendar.
@@ -43,5 +53,16 @@ extension Date {
         assert(dayAtEnd != nil, "Date+Utils -- getEndOfDay: the computation of the end of the day could'nt be performed.")
         
         return dayAtEnd!
+    }
+    
+    /// Creates a new date by adding the asked number of days.
+    /// - Parameter numberOfDays: The number of days to be added to the date.
+    /// - Returns: A new date with the days added.
+    func byAddingDays(_ numberOfDays: Int) -> Date? {
+        return getCurrentCalendar().date(
+            byAdding: .day,
+            value: numberOfDays,
+            to: self
+        )
     }
 }
