@@ -51,14 +51,15 @@ class HabitStorage {
     /// Creates and persists a new Habit instance with the provided info.
     /// - Returns: The created Habit entity object.
     func create(with name: String,
-                color: Habit.Color,
+//                color: HabitColor,
                 days: [Date]) -> Habit {
         // TODO: Is it better to use a second queue to add new instances?
         // Declare a new habit instance.
         let habit = Habit(context: container.viewContext)
-
+        habit.id = UUID().uuidString
         habit.name = name
-        habit.color = color.getPersistenceIdentifier()
+        habit.created = Date()
+//        habit.color = color.getPersistenceIdentifier()
         
         // Create the HabitDay entities associated with the new habit.
         // TODO: Add the routine to create the day entities.
@@ -70,7 +71,7 @@ class HabitStorage {
     /// Edits the passed habit instane with the provided info.
     func edit(habit: Habit,
               withName name: String?,
-              color: Habit.Color?,
+//              color: HabitColor?,
               days: [Date]?,
               notifications: [Notification]?) -> Habit {
         
@@ -78,9 +79,9 @@ class HabitStorage {
             habit.name = name
         }
         
-        if let color = color {
-            habit.color = color.getPersistenceIdentifier()
-        }
+//        if let color = color {
+//            habit.color = color.getPersistenceIdentifier()
+//        }
         
         if let days = days {
             assert(!days.isEmpty, "HabitStorage -- edit: days argument shouldn't be empty.")
