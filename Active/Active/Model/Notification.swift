@@ -7,9 +7,15 @@
 //
 
 import CoreData
+import UserNotifications
 
 /// The Notification model entity.
-/// - Note: Alongside with the entity, an specific UserNotifications is scheduled.
+/// - Note: Alongside with the entity, an specific UserNotification is scheduled.
 class Notification: NSManagedObject {
 
+    // MARK: Properties
+    
+    /// The associated and scheduled request for a user notification.
+    var request: UNNotificationRequest?
+    
 }
