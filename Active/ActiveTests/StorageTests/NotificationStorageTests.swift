@@ -82,20 +82,53 @@ class NotificationStorageTests: StorageTestCase {
     
     func testNotificationFetch() {
         // Create a new habit
+        let habit = habitStorage.create(
+            with: "walk every day",
+            days: [Date()]
+        )
+        
         // Create a new notification
+        let fireDate = Date()
+        let notification = notificationStorage.create(
+            withFireDate: fireDate,
+            habit: habit
+        )
+        
         // Try to fetch the created notification
+        let fetchedNotification = notificationStorage.notification(
+            forHabit: habit,
+            andDate: fireDate
+        )
         
         // Check if method fetches the created notification.
-        // Check if notification's id is right.
+        XCTAssertNotNil(fetchedNotification, "Created notification should be fetched by using the notification method in the storage class.")
+        // Check if notification's id matches.
+        XCTAssertEqual(notification.id, fetchedNotification.id, "Created notification should have the correct attributes.")
     }
     
     func testNotificationDeletion() {
         // Create a new habit
+        let habit = habitStorage.create(
+            with: "walk every day",
+            days: [Date()]
+        )
+        
         // Create a new notification
+        let fireDate = Date()
+        let notification = notificationStorage.create(
+            withFireDate: fireDate,
+            habit: habit
+        )
         
         // Delete the created notification
+        notificationStorage.delete(notification)
         
         // Try to fetch the previously created notification.
         // Method shouldn't fetch any notification.
+        let fetchedNotification = notificationStorage.notification(
+            forHabit: habit,
+            andDate: fireDate
+        )
+        XCTAssertNil(fetchedNotification, "The deleted notification shouldn't be fetched.")
     }
 }
