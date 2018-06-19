@@ -46,6 +46,8 @@ class DayStorageTests: StorageTestCase {
         XCTAssertNotNil(day.id, "The created Day entity should have an id.")
     }
     
+    // TODO: Creating a day twice should throw an exception.
+    
     func testSpecificDayFetching() {
         // Declare the date to be used to create an
         // entity and fetch the created entity.
