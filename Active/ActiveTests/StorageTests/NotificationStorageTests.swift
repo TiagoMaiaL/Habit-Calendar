@@ -72,13 +72,35 @@ class NotificationStorageTests: StorageTestCase {
         
         XCTAssertEqual(swimmingHabit, habits.first!, "The created notification has an invalid habit.")
         
-        // TODO: Check if the entity has a user notification associated with it.
-        
+        // Check if the entity has a user notification associated with it.
         XCTAssertNotNil(notification.userNotificationId, "The created notification should have an associated and scheduled user notification.")
         XCTAssertNotNil(notification.request, "The created notification should have the associated user notification request object.")
     }
     
-    // TODO: Trying to create the same notification entity should throw an error.
+    func testNotificationCreationTwice() {
+        // Trying to create the same notification entity should throw an error.
+        
+        // Create a new habit.
+        let habit = habitStorage.create(
+            with: "Play the guitar",
+            days: [Date()]
+        )
+        
+        // Create a new notification
+        let fireDate = Date()
+        _ = notificationStorage.create(
+            withFireDate: fireDate,
+            habit: habit
+        )
+        
+        // Try to create another notification with the same data
+        // and check to see if it throws the expected exception.
+        XCTAssertThrowsError(
+            _ = notificationStorage.create(
+                withFireDate: fireDate,
+                habit: habit
+            ), "There's already a created notification for the provided fire date.")
+    }
     
     func testNotificationFetch() {
         // Create a new habit
