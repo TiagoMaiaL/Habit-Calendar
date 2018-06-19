@@ -30,6 +30,8 @@
 		474F9C8B20CEE1AF0094C19C /* Active.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 47F635F620BB920900AC4555 /* Active.xcdatamodeld */; };
 		474F9C8D20CEE2840094C19C /* UserStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474F9C8C20CEE2840094C19C /* UserStorageTests.swift */; };
 		4779588020D8ADA90080614F /* NotificationStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4779587F20D8ADA90080614F /* NotificationStorageTests.swift */; };
+		4779588320D8B2E10080614F /* UserNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4779588220D8B2E10080614F /* UserNotificationManager.swift */; };
+		4779588520D8B38B0080614F /* NotificationStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4779588420D8B38B0080614F /* NotificationStorage.swift */; };
 		47F635F020BB920900AC4555 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F635EF20BB920900AC4555 /* AppDelegate.swift */; };
 		47F635F520BB920900AC4555 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47F635F320BB920900AC4555 /* Main.storyboard */; };
 		47F635F820BB920900AC4555 /* Active.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 47F635F620BB920900AC4555 /* Active.xcdatamodeld */; };
@@ -66,6 +68,8 @@
 		474F9C8920CE3F670094C19C /* StorageTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageTestCase.swift; sourceTree = "<group>"; };
 		474F9C8C20CEE2840094C19C /* UserStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStorageTests.swift; sourceTree = "<group>"; };
 		4779587F20D8ADA90080614F /* NotificationStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationStorageTests.swift; sourceTree = "<group>"; };
+		4779588220D8B2E10080614F /* UserNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationManager.swift; sourceTree = "<group>"; };
+		4779588420D8B38B0080614F /* NotificationStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationStorage.swift; sourceTree = "<group>"; };
 		47F635EC20BB920900AC4555 /* Active.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Active.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		47F635EF20BB920900AC4555 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		47F635F420BB920900AC4555 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -116,6 +120,7 @@
 				4725D05C20C8A96200C3B63F /* HabitStorage.swift */,
 				4725D06020CA06EE00C3B63F /* DayStorage.swift */,
 				4725D06220CA14A600C3B63F /* HabitDayStorage.swift */,
+				4779588420D8B38B0080614F /* NotificationStorage.swift */,
 			);
 			path = Storage;
 			sourceTree = "<group>";
@@ -164,6 +169,14 @@
 			path = StorageTests;
 			sourceTree = "<group>";
 		};
+		4779588120D8B2AC0080614F /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				4779588220D8B2E10080614F /* UserNotificationManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
 		47F635E320BB920900AC4555 = {
 			isa = PBXGroup;
 			children = (
@@ -189,6 +202,7 @@
 				4725D05820C8A42E00C3B63F /* Controllers */,
 				4725D05720C8A42400C3B63F /* Storage */,
 				4713A20520C16555008A13D2 /* Model */,
+				4779588120D8B2AC0080614F /* Managers */,
 				474F9C8420CC7DEF0094C19C /* Extensions */,
 				47F6361220BB924100AC4555 /* Supporting Files */,
 				47F635FE20BB920D00AC4555 /* Info.plist */,
@@ -339,6 +353,7 @@
 				47F635F820BB920900AC4555 /* Active.xcdatamodeld in Sources */,
 				47F635F020BB920900AC4555 /* AppDelegate.swift in Sources */,
 				4713A20220C164FB008A13D2 /* Day.swift in Sources */,
+				4779588320D8B2E10080614F /* UserNotificationManager.swift in Sources */,
 				4713A20420C16542008A13D2 /* Notification.swift in Sources */,
 				4725D06120CA06EE00C3B63F /* DayStorage.swift in Sources */,
 				4725D05F20C97D9C00C3B63F /* UserStorage.swift in Sources */,
@@ -346,6 +361,7 @@
 				4725D05B20C8A4BA00C3B63F /* HabitsTableViewController.swift in Sources */,
 				4725D06320CA14A600C3B63F /* HabitDayStorage.swift in Sources */,
 				4713A1FE20C16459008A13D2 /* Habit.swift in Sources */,
+				4779588520D8B38B0080614F /* NotificationStorage.swift in Sources */,
 				4725D05D20C8A96200C3B63F /* HabitStorage.swift in Sources */,
 				4713A20020C164E6008A13D2 /* HabitDay.swift in Sources */,
 				4713A1FC20C1643E008A13D2 /* User.swift in Sources */,

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import XCTest
 import CoreData
 @testable import Active
 
@@ -50,16 +51,31 @@ class NotificationStorageTests: StorageTestCase {
             with: "Go swimming",
             days: [Date()]
         )
+        
+        let fireDate = Date()
         let notification = notificationStorage.create(
-            withFireDate: Date(),
+            withFireDate: fireDate,
             habit: swimmingHabit
         )
         
         // Check for id
+        XCTAssertNotNil(notification.id, "Notification id shouldn't be nil.")
         // Check for the correct fire date.
+        XCTAssertEqual(fireDate, notification.fireDate, "Notification should have the correct fire date.")
         // Check for the habits property
-        // Check if the entity has a user notificatio associated with it.
+        XCTAssert(notification.habits != nil && notification.habits!.count > 0, "Notification should have an associated habit entity with it.")
+        
+        guard let habits = notification.habits as? Set<Habit> else {
+            XCTFail("The created notification should have a correct set of habit instances.")
+            return
+        }
+        
+        XCTAssertEqual(swimmingHabit, habits.first!)
+        
+        // TODO: Check if the entity has a user notification associated with it.
     }
+    
+    // TODO: Trying to create the same notification entity twice should throw an error.
     
     func testNotificationFetch() {
         // Create a new habit

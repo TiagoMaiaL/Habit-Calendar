@@ -66,6 +66,7 @@ class HabitStorageTests: StorageTestCase {
         XCTAssertNotNil(joggingHabit.days, "Created habit should have the HabitDays property.")
         XCTAssert(joggingHabit.days!.count == days.count, "Created habit should have the correct amount of HabitDays.")
         
+        // TODO: Use guard instead.
         if let habitDays = joggingHabit.days as? Set<HabitDay> {
             for habitDay in habitDays {
                 // Check if the Day's date is in the provided dates.
