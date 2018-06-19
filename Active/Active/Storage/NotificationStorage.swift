@@ -37,10 +37,11 @@ class NotificationStorage {
     /// - Parameter withFireDate: Date used to schedule an user notification.
     /// - Parameter habit: The habit entity associated with the notification.
     /// - Returns: a new Notification entity.
-    func create(withFireDate: Date, habit: Habit) -> Notification {
+    func create(withFireDate fireDate: Date, habit: Habit) -> Notification {
         // Declare a new Notification instance.
         let notification = Notification(context: container.viewContext)
         notification.id = UUID().uuidString
+        notification.fireDate = fireDate
         notification.addToHabits(habit)
         
         // Schedule a new user notification for the created habit.

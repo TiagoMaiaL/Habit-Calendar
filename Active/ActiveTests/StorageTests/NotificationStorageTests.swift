@@ -65,17 +65,17 @@ class NotificationStorageTests: StorageTestCase {
         // Check for the habits property
         XCTAssert(notification.habits != nil && notification.habits!.count > 0, "Notification should have an associated habit entity with it.")
         
-        guard let habits = notification.habits as? Set<Habit> else {
+        guard let habits = notification.habits as? Set<Active.Habit> else {
             XCTFail("The created notification should have a correct set of habit instances.")
             return
         }
         
-        XCTAssertEqual(swimmingHabit, habits.first!)
+        XCTAssertEqual(swimmingHabit, habits.first!, "The created notification has an invalid habit.")
         
         // TODO: Check if the entity has a user notification associated with it.
     }
     
-    // TODO: Trying to create the same notification entity twice should throw an error.
+    // TODO: Trying to create the same notification entity should throw an error.
     
     func testNotificationFetch() {
         // Create a new habit
