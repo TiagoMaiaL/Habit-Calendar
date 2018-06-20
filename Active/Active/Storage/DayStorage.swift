@@ -27,6 +27,16 @@ class DayStorage {
     
     // MARK: - Imperatives
     
+    /// Creates and persists a calendar day instance.
+    /// - Parameter date: the date associated with the day entity.
+    /// - Returns: the created calendar day.
+    func create(withDate date: Date) -> Day {
+        let day = Day(context: container.viewContext)
+        day.id = UUID().uuidString
+        day.date = date
+        return day
+    }
+    
     /// Queries for a day with the provided date.
     /// - Parameter date: the date associated with the day entity.
     /// - Returns: the day, if there's one.
@@ -47,15 +57,6 @@ class DayStorage {
         assert(results?.count ?? 0 <= 1, "DayStorage -- day: there's more than on Day entity for the passed date attribute.")
         
         return results?.first
-    }
-    
-    /// Creates and persists a calendar day instance.
-    /// - Parameter date: the date associated with the day entity.
-    /// - Returns: the created calendar day.
-    func create(withDate date: Date) -> Day {
-        let day = Day(context: container.viewContext)
-        day.date = date
-        return day
     }
     
     /// Deletes the passed day instance.
