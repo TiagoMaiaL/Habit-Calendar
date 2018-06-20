@@ -48,4 +48,24 @@ class NotificationStorage {
         
         return notification
     }
+    
+    /// Fetches the stored notification by using the provided
+    /// habit and fireDate.
+    /// - Parameter forHabit: one of the habits associated with
+    ///                       the notification entity to be searched.
+    /// - Parameter andDate: the scheduled fire date.
+    /// - Returns: a notification entity matching the provided arguments,
+    ///            if one is fetched.
+    func notification(forHabit habit: Habit, andDate date: Date) -> Notification? {
+        // TODO:
+        
+        return nil
+    }
+    
+    /// Deletes from storage the passed notification.
+    /// - Parameter notification: the notification to be removed.
+    func delete(_ notification: Notification) {
+        // TODO:
+    }
+    
 }
