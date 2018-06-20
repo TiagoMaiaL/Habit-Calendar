@@ -12,6 +12,12 @@ import CoreData
 /// Class in charge of storing Notification entities.
 class NotificationStorage {
     
+    // MARK: Types
+    
+    enum NotificationStorageError: Error {
+        case notificationAlreadyCreated
+    }
+    
     // MARK: Properties
     
     /// The user notification manager used to schedule local notifications.
@@ -37,7 +43,13 @@ class NotificationStorage {
     /// - Parameter withFireDate: Date used to schedule an user notification.
     /// - Parameter habit: The habit entity associated with the notification.
     /// - Returns: a new Notification entity.
-    func create(withFireDate fireDate: Date, habit: Habit) -> Notification {
+    // TODO: Throw an exception when the same notification gets created twice.
+    func create(withFireDate fireDate: Date, habit: Habit) throws -> Notification {
+        // Check if there's a notification with the same attributes already stored.
+        if self.notification(forHabit: habit, andDate: fireDate) != nil {
+            throw NotificationStorageError.notificationAlreadyCreated
+        }
+        
         // Declare a new Notification instance.
         let notification = Notification(context: container.viewContext)
         notification.id = UUID().uuidString
@@ -79,7 +91,7 @@ class NotificationStorage {
     /// Deletes from storage the passed notification.
     /// - Parameter notification: the notification to be removed.
     func delete(_ notification: Notification) {
-        // TODO:
+        container.viewContext.delete(notification)
     }
     
 }

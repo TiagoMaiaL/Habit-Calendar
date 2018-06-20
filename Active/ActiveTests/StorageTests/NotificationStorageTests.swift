@@ -53,7 +53,7 @@ class NotificationStorageTests: StorageTestCase {
         )
         
         let fireDate = Date()
-        let notification = notificationStorage.create(
+        let notification = try! notificationStorage.create(
             withFireDate: fireDate,
             habit: swimmingHabit
         )
@@ -86,7 +86,7 @@ class NotificationStorageTests: StorageTestCase {
         
         // Create a new notification
         let fireDate = Date()
-        let notification = notificationStorage.create(
+        let notification = try? notificationStorage.create(
             withFireDate: fireDate,
             habit: habit
         )
@@ -100,7 +100,7 @@ class NotificationStorageTests: StorageTestCase {
         // Check if method fetches the created notification.
         XCTAssertNotNil(fetchedNotification, "Created notification should be fetched by using the notification method in the storage class.")
         // Check if notification's id matches.
-        XCTAssertEqual(notification.id, fetchedNotification?.id, "Created notification should have the correct attributes.")
+        XCTAssertEqual(notification?.id, fetchedNotification?.id, "Created notification should have the correct attributes.")
     }
     
     func testNotificationCreationTwice() {
@@ -114,7 +114,7 @@ class NotificationStorageTests: StorageTestCase {
         
         // Create a new notification
         let fireDate = Date()
-        _ = notificationStorage.create(
+        _ = try? notificationStorage.create(
             withFireDate: fireDate,
             habit: habit
         )
@@ -122,7 +122,7 @@ class NotificationStorageTests: StorageTestCase {
         // Try to create another notification with the same data
         // and check to see if it throws the expected exception.
         XCTAssertThrowsError(
-            _ = notificationStorage.create(
+            _ = try notificationStorage.create(
                 withFireDate: fireDate,
                 habit: habit
             ), "There's already a created notification for the provided fire date.")
@@ -137,7 +137,7 @@ class NotificationStorageTests: StorageTestCase {
         
         // Create a new notification
         let fireDate = Date()
-        let notification = notificationStorage.create(
+        let notification = try! notificationStorage.create(
             withFireDate: fireDate,
             habit: habit
         )
