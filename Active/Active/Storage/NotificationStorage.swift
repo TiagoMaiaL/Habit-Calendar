@@ -57,9 +57,23 @@ class NotificationStorage {
     /// - Returns: a notification entity matching the provided arguments,
     ///            if one is fetched.
     func notification(forHabit habit: Habit, andDate date: Date) -> Notification? {
-        // TODO:
+        // Declare the fetch request.
+        // The predicate should search for the specific habit and date.
+        let request: NSFetchRequest<Notification> = Notification.fetchRequest()
+        let predicate = NSPredicate(
+            format: "fireDate == %@ AND habits CONTAINS %@",
+            date as NSDate,
+            habit
+        )
+        request.predicate = predicate
+
+        let results = try? container.viewContext.fetch(request)
         
-        return nil
+        // The results shouldn't contain more than one notification.
+        // Only one notification should be created for the passed date.
+        assert(results?.count ?? 0 <= 1, "NotificationStorage -- notification: There's more than one notification for the passed arguments. Only one should be created and returned.")
+        
+        return results?.first
     }
     
     /// Deletes from storage the passed notification.

@@ -73,7 +73,7 @@ class NotificationStorageTests: StorageTestCase {
         XCTAssertEqual(swimmingHabit, habits.first!, "The created notification has an invalid habit.")
         
         // Check if the entity has a user notification associated with it.
-        XCTAssertNotNil(notification.userNotificationId, "The created notification should have an associated and scheduled user notification.")
+        XCTAssertNotNil(notification.userNotificationId, "The created notification should have an associated and scheduled user notification id.")
         XCTAssertNotNil(notification.request, "The created notification should have the associated user notification request object.")
     }
     
