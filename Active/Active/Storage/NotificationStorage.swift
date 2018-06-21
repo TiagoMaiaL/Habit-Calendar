@@ -43,7 +43,6 @@ class NotificationStorage {
     /// - Parameter withFireDate: Date used to schedule an user notification.
     /// - Parameter habit: The habit entity associated with the notification.
     /// - Returns: a new Notification entity.
-    // TODO: Throw an exception when the same notification gets created twice.
     func create(withFireDate fireDate: Date, habit: Habit) throws -> Notification {
         // Check if there's a notification with the same attributes already stored.
         if self.notification(forHabit: habit, andDate: fireDate) != nil {
@@ -54,7 +53,7 @@ class NotificationStorage {
         let notification = Notification(context: container.viewContext)
         notification.id = UUID().uuidString
         notification.fireDate = fireDate
-        notification.addToHabits(habit)
+        notification.habit = habit
         
         // Schedule a new user notification for the created habit.
         
@@ -73,7 +72,7 @@ class NotificationStorage {
         // The predicate should search for the specific habit and date.
         let request: NSFetchRequest<Notification> = Notification.fetchRequest()
         let predicate = NSPredicate(
-            format: "fireDate == %@ AND habits CONTAINS %@",
+            format: "fireDate == %@ AND habit == %@",
             date as NSDate,
             habit
         )
