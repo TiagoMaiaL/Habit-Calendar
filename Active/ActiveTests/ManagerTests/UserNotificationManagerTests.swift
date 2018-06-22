@@ -37,15 +37,19 @@ class UserNotificationManagerTests: XCTestCase {
     
     // MARK: Tests
     
-    // Ask permissions to use the framework (check how to test this).
-    // TODO:
+    func testManagerPermissionsRequest() {
+        // Ask permissions to use the framework (check how to test this).
+        // TODO:
+        XCTFail("Not implemented.")
+    }
     
-    // Schedule a notification.
     func testNotificationSchedule() {
+        // Schedule a notification.
+        
         // Prepare the user notification's content and trigger
         // options to schedule a notification.
         
-        // Declare the notification content.
+        // Declare the notification's content.
         let content = UNMutableNotificationContent()
         content.title = "Scheduling a notification."
         content.body = "Notification's body text."
@@ -59,22 +63,70 @@ class UserNotificationManagerTests: XCTestCase {
         // Schedule the notification.
         let notificationId = notificationManager.schedule(with: content, and: trigger)
         
-        // Try to fetch it by using the notification center.
-    notificationManager.notificationCenter.getPendingNotificationRequests { requests in
-            // Assert on the array length and request's id.
-            XCTAssertFalse(requests.isEmpty, "Notification wasn't correclty scheduled.")
-            XCTAssertEqual(requests.first?.identifier, notificationId)
+        XCTAssertFalse(notificationId.isEmpty, "The user notification's id shouldn't be empty.")
+    }
+    
+    func testScheduledNotificationFetch() {
+        // Declare the notification's content.
+        let content = UNMutableNotificationContent()
+        content.title = "Scheduling a notification."
+        content.body = "Notification's body text."
+        
+        // Declare the notification's trigger.
+        let trigger = UNTimeIntervalNotificationTrigger(
+            timeInterval: Date().timeIntervalSinceNow * 1.01,
+            repeats: false
+        )
+        
+        // Schedule the notification.
+        let notificationId = notificationManager.schedule(with: content, and: trigger)
+        
+        // Try to fetch it by using the manager.
+        XCTFail("Not implemented.")
+        // TODO: Use the support for async methods.
+        notificationManager.notification(with: notificationId) {
+            request in
+            
+            // Assert that the requests are equal.
+            XCTAssertEqual(request?.identifier, notificationId, "The fetched request should have the expected id.")
         }
     }
     
-    // Remove an scheduled notification.
     func testScheduledNotificationRemoval() {
+        // Remove an scheduled notification.
         
+        // Declare the notification content.
+        let content = UNMutableNotificationContent()
+        content.title = "Testing removal of a notification."
+        content.body = "Notification's body text."
+        
+        // Declare the trigger options.
+        let trigger = UNTimeIntervalNotificationTrigger(
+            timeInterval: Date().timeIntervalSinceNow + 60,
+            repeats: false
+        )
+        
+        // Schedule a new notification.
+        let notificationId = notificationManager.schedule(with: content, and: trigger)
+        
+        // Remove the scheduled notification by it's id.
+        notificationManager.remove(with: notificationId)
+        
+        // TODO: Correct this test by using async support.
+        XCTFail("Not implemented.")
+        
+        // The fetch for the created notification shouldn't return it.
+        notificationManager.notification(with: notificationId) {
+            request in
+            
+            // Assert that the requests are equal.
+            XCTAssertNil(request)
+        }
     }
-    
 }
 
 extension UserNotificationManagerTests {
+    
     // MARK: Tests
     
     // Test the factory method for notifications.

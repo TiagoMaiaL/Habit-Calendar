@@ -9,6 +9,7 @@
 import Foundation
 import XCTest
 import CoreData
+import UserNotifications
 @testable import Active
 
 /// Class in charge of testing the HabitStorage methods.
@@ -29,7 +30,8 @@ class NotificationStorageTests: StorageTestCase {
         habitStorage = HabitStorage(container: memoryPersistentContainer)
         
         // Initialize notification manager.
-        notificationManager = UserNotificationManager()
+        // TODO: Use the mock for the notification center.
+        notificationManager = UserNotificationManager(notificationCenter: UNUserNotificationCenter.current())
         
         // Initialize notificationStorage using the persistent container created for tests.
         notificationStorage = NotificationStorage(
