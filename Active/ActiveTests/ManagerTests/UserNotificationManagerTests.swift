@@ -70,7 +70,7 @@ class UserNotificationManagerTests: XCTestCase {
             notificationExpectation.fulfill()
         }
         
-        wait(for: [notificationExpectation], timeout: 1)
+        wait(for: [notificationExpectation], timeout: 0.1)
     }
     
     func testScheduledNotificationFetch() {
@@ -102,10 +102,12 @@ class UserNotificationManagerTests: XCTestCase {
                 XCTAssertNotNil(request, "The previously scheduled UserNotificationRequest should be correclty fetched.")
                 XCTAssertEqual(request?.identifier, identifier, "The fetched request should have the expected id.")
                 XCTAssertEqual(request?.trigger, trigger, "The fetched request should have the correct trigger options.")
+                
+                notificationFetchExpectation.fulfill()
             }
         }
         
-        wait(for: [notificationFetchExpectation], timeout: 1)
+        wait(for: [notificationFetchExpectation], timeout: 0.1)
     }
     
     // TODO: Test scheduling with errors.
@@ -146,7 +148,7 @@ class UserNotificationManagerTests: XCTestCase {
             }
         }
         
-        wait(for: [notificationRemovalExpectation], timeout: 1)
+        wait(for: [notificationRemovalExpectation], timeout: 0.1)
     }
 }
 

@@ -27,8 +27,6 @@ struct UserNotificationManager {
     
     // MARK: Imperatives
     
-    /// Asks for permission to
-    
     /// Schedules a new user notification by using the
     /// provided content and trigger.
     /// - Parameter content: The UNUserNotificationContent used in
@@ -38,7 +36,7 @@ struct UserNotificationManager {
     /// - Parameter completionHandler: The async block of code called
     ///                                after the notification gets
     ///                                scheduled.
-    /// - Returns: The notification id of the scheduled user
+    /// - Returns: The notification identifier of the scheduled user
     ///            notification.
     // TODO: Document the throws section.
     func schedule(with content: UNNotificationContent,
@@ -68,18 +66,27 @@ struct UserNotificationManager {
     
     /// Fetches the scheduled notification and returns it in
     /// the provided completionHandler.
-    /// - Parameter id: The notification's identifier.
+    /// - Parameter identifier: The notification's identifier.
     /// - Parameter completionHandler: The async block called with the
     ///                                found notification as it's
     ///                                parameter.
-    func notification(with id: String,
-                      completionHandler: (UNNotificationRequest?) -> ()) {
-        // TODO: Implement.
+    func notification(with identifier: String,
+                      _ completionHandler: @escaping (UNNotificationRequest?) -> ()) {
+        notificationCenter.getPendingNotificationRequests { requests in
+            // Filter for the specified UNUserNotificationRequest.
+            let request = requests.filter { request in
+                return request.identifier == identifier
+            }.first
+            
+            completionHandler(request)
+        }
     }
     
     /// Removes a scheduled notification by passing it's identifier.
-    /// - Parameter id: The notification's identifier.
-    func remove(with id: String) {
-        // TODO: Implement.
+    /// - Parameter identifier: The notification's identifier.
+    func remove(with identifier: String) {
+        notificationCenter.removePendingNotificationRequests(
+            withIdentifiers: [identifier]
+        )
     }
 }
