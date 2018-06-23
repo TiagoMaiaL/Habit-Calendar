@@ -27,6 +27,19 @@ struct UserNotificationManager {
     
     // MARK: Imperatives
     
+    /// Requests the user authorization to schedule local notifications.
+    /// - Parameter completionHandler: A block called with the result of
+    ///                                the authrorization prompt.
+    func requestAuthorization(_ completionHandler: @escaping (Bool) -> ()) {
+        notificationCenter.requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
+            if error == nil {
+                completionHandler(granted)
+            } else {
+                completionHandler(false)
+            }
+        }
+    }
+    
     /// Schedules a new user notification by using the
     /// provided content and trigger.
     /// - Parameter content: The UNUserNotificationContent used in

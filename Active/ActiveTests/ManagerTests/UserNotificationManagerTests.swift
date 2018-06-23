@@ -37,10 +37,46 @@ class UserNotificationManagerTests: XCTestCase {
     
     // MARK: Tests
     
-    func testManagerPermissionsRequest() {
-        // Ask permissions to use the framework (check how to test this).
-        // TODO:
-        XCTFail("Not implemented.")
+    func testManagerAuthorizationRequestGranted() {
+        // Declare the authorization request expectation.
+        let authorizationExpectation = XCTestExpectation(description: "Ask the user to authorize the usage of local notifications.")
+        
+        // Maybe use a mock here ??
+        // TODO: Use a partial mock to configure the granting.
+        
+        // Use manager to ask the user to use the local notifications.
+        notificationManager.requestAuthorization() {
+            granted in
+            
+            // Assert it was granted.
+            XCTAssertTrue(granted, "The authorization to use Local notifications should be given by the user.")
+            
+            authorizationExpectation.fulfill()
+        }
+        
+        // Wait for the expectation.
+        wait(for: [authorizationExpectation], timeout: 0.1)
+    }
+    
+    func testManagerAuthorizationRequestNotGranted() {
+        // Declare the authrorization request expectation.
+        let authorizationExpectation = XCTestExpectation(description: "Ask the user to authorize the usage of local notifications.")
+        
+        // Maybe use a mock here ??
+        // TODO: Use a partial mock to configure the denial.
+        
+        // Ask for permission, the permission should be denied.
+        notificationManager.requestAuthorization() {
+            granted in
+            
+            // Assert it wasn't granted.
+            XCTAssertFalse(granted, "The authorization to use Local notifications should be denied by the user.")
+            
+            authorizationExpectation.fulfill()
+        }
+        
+        // Wait for the expectation.
+        wait(for: [authorizationExpectation], timeout: 0.1)
     }
     
     func testNotificationSchedule() {
