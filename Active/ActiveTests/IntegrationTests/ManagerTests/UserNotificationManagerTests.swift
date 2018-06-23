@@ -200,9 +200,40 @@ extension UserNotificationManagerTests {
     
     // MARK: Tests
     
-    // Test the factory method for notifications.
-    // Test the schedule of by passing a given notification entity.
-    // Test the removal of a given notification by passing the entity.
-    // Test the removal of many notifications by passing an array of entities.
-    // Test the retrieval of an scheduled notification by passing an entity.
+    func testContentAndTriggerFactoriesWithFullAuthorization() {
+        // Test the factories for the user notification's trigger and content
+        // options when a Notification entity is passed, and the authorization
+        // was fully granted.
+        XCTFail("Not implemented.")
+    }
+    
+    func testTriggerFactoryWithBadgeAndSoundAuthorizations() {
+        // Test the factory for the user notification's trigger option when a
+        // Notification entity is passed, and the authorization
+        // is partially granted (no alerts, only badges and sounds).
+        XCTFail("Not implemented.")
+    }
+    
+    func testSchedulingUserNotificationPassingEntity() {
+        // Schedule an user notification by passing a Notification entity.
+        XCTFail("Not implemented.")
+    }
+    
+    func testUserNotificationRemovalPassingEntity() {
+        // Remove a given user notification by passing the Notification
+        // entity.
+        XCTFail("Not implemented.")
+    }
+    
+    func testUserNotificationsRemovalPassingEntities() {
+        // Test the removal of many user notifications by passing an array of
+        // Notification entities.
+        XCTFail("Not implemented.")
+    }
+    
+    func testUserNotificationFetchByPassingEntity() {
+        // Test the retrieval of an scheduled user notification by passing a
+        // Notification entity.
+        XCTFail("Not implemented.")
+    }
 }

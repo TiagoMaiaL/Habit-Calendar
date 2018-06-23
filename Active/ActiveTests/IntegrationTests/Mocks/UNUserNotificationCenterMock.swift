@@ -22,8 +22,8 @@ class UserNotificationCenterMock: TestableUserNotificationCenter {
     var shouldAuthorize = false
     
     /// The internal notification center used to implement all
-    /// testable protocol methods. This mock is
-    ///  going to be partial.
+    /// testable protocol methods.
+    /// This mock implementation is partial.
     private let userNotificationCenter = UNUserNotificationCenter.current()
     
     // MARK: Initializers
@@ -36,19 +36,22 @@ class UserNotificationCenterMock: TestableUserNotificationCenter {
     
     func requestAuthorization(options: UNAuthorizationOptions = [], completionHandler: @escaping (Bool, Error?) -> Void) {
         // Immediately call the completion handler
-        // by passing the configured grant result
+        // by passing the configured grant result.
         completionHandler(shouldAuthorize, nil)
     }
     
     func add(_ request: UNNotificationRequest, withCompletionHandler completionHandler: ((Error?) -> Void)?) {
+        // Recall internal notification center.
         userNotificationCenter.add(request, withCompletionHandler: completionHandler)
     }
     
     func getPendingNotificationRequests(completionHandler: @escaping ([UNNotificationRequest]) -> Void) {
+       // Recall internal notification center.
         userNotificationCenter.getPendingNotificationRequests(completionHandler: completionHandler)
     }
     
     func removePendingNotificationRequests(withIdentifiers identifiers: [String]) {
+       // Recall internal notification center.
         userNotificationCenter.removePendingNotificationRequests(withIdentifiers: identifiers)
     }
 }
