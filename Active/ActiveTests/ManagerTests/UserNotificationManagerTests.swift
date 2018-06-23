@@ -46,8 +46,7 @@ class UserNotificationManagerTests: XCTestCase {
     func testNotificationSchedule() {
         // Schedule a notification.
         
-        // Prepare the user notification's content and trigger
-        // options to schedule a notification.
+        let notificationExpectation = XCTestExpectation(description: "Schedule a UserNotificationRequest.")
         
         // Declare the notification's content.
         let content = UNMutableNotificationContent()
@@ -56,17 +55,28 @@ class UserNotificationManagerTests: XCTestCase {
         
         // Declare the trigger options.
         let trigger = UNTimeIntervalNotificationTrigger(
-            timeInterval: Date().timeIntervalSinceNow * 1.01,
+            timeInterval: Date().timeIntervalSinceNow + 60,
             repeats: false
         )
         
         // Schedule the notification.
-        let notificationId = notificationManager.schedule(with: content, and: trigger)
+        notificationManager.schedule(with: content, and: trigger) {
+            identifier in
+            
+            // Make assertions on the returned identifier.
+            XCTAssertNotNil(identifier, "The NotificationRequest's id shouldn't be nil.")
+            XCTAssertFalse(identifier!.isEmpty, "The NotificationRequest's id shouldn't be empty.")
+            
+            notificationExpectation.fulfill()
+        }
         
-        XCTAssertFalse(notificationId.isEmpty, "The user notification's id shouldn't be empty.")
+        wait(for: [notificationExpectation], timeout: 1)
     }
     
     func testScheduledNotificationFetch() {
+        // Declare the fetch expectation.
+        let notificationFetchExpectation = XCTestExpectation(description: "Fetch a scheduled notification request.")
+        
         // Declare the notification's content.
         let content = UNMutableNotificationContent()
         content.title = "Scheduling a notification."
@@ -74,26 +84,36 @@ class UserNotificationManagerTests: XCTestCase {
         
         // Declare the notification's trigger.
         let trigger = UNTimeIntervalNotificationTrigger(
-            timeInterval: Date().timeIntervalSinceNow * 1.01,
+            timeInterval: Date().timeIntervalSinceNow + 60,
             repeats: false
         )
         
         // Schedule the notification.
-        let notificationId = notificationManager.schedule(with: content, and: trigger)
-        
-        // Try to fetch it by using the manager.
-        XCTFail("Not implemented.")
-        // TODO: Use the support for async methods.
-        notificationManager.notification(with: notificationId) {
-            request in
+        notificationManager.schedule(with: content, and: trigger) {
+            identifier in
             
-            // Assert that the requests are equal.
-            XCTAssertEqual(request?.identifier, notificationId, "The fetched request should have the expected id.")
+            XCTAssertNotNil(identifier, "The identifier of the UserNotificationRequest shouldn't be nil.")
+            
+            // Try to fetch it by using the manager.
+            self.notificationManager.notification(with: identifier!) {
+                request in
+                
+                // Make assertions on the request properties.
+                XCTAssertNotNil(request, "The previously scheduled UserNotificationRequest should be correclty fetched.")
+                XCTAssertEqual(request?.identifier, identifier, "The fetched request should have the expected id.")
+                XCTAssertEqual(request?.trigger, trigger, "The fetched request should have the correct trigger options.")
+            }
         }
+        
+        wait(for: [notificationFetchExpectation], timeout: 1)
     }
+    
+    // TODO: Test scheduling with errors.
     
     func testScheduledNotificationRemoval() {
         // Remove an scheduled notification.
+        
+        let notificationRemovalExpectation = XCTestExpectation(description: "Delete a scheduled UserNotificationRequest.")
         
         // Declare the notification content.
         let content = UNMutableNotificationContent()
@@ -107,21 +127,26 @@ class UserNotificationManagerTests: XCTestCase {
         )
         
         // Schedule a new notification.
-        let notificationId = notificationManager.schedule(with: content, and: trigger)
-        
-        // Remove the scheduled notification by it's id.
-        notificationManager.remove(with: notificationId)
-        
-        // TODO: Correct this test by using async support.
-        XCTFail("Not implemented.")
-        
-        // The fetch for the created notification shouldn't return it.
-        notificationManager.notification(with: notificationId) {
-            request in
+        notificationManager.schedule(with: content, and: trigger) {
+            identifier in
             
-            // Assert that the requests are equal.
-            XCTAssertNil(request)
+            XCTAssertNotNil(identifier, "The UserNotificationRequest's identifier shouldn't be nil after creation.")
+            
+            // Remove the scheduled notification by it's id.
+            self.notificationManager.remove(with: identifier!)
+            
+            // The fetch for the created notification shouldn't return it.
+            self.notificationManager.notification(with: identifier!) {
+                request in
+                
+                // Because the request was deleted, it shouldn't be returned.
+                XCTAssertNil(request, "After fetching for a deleted UserNotificationRequest, the result should be nil.")
+                
+                notificationRemovalExpectation.fulfill()
+            }
         }
+        
+        wait(for: [notificationRemovalExpectation], timeout: 1)
     }
 }
 

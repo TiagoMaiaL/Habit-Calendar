@@ -35,18 +35,43 @@ struct UserNotificationManager {
     ///                      the notification.
     /// - Parameter trigger: The NotificatoinTrigger used to fire
     ///                      the notification.
-    /// - Returns: The notification id of the scheduled user notification.
+    /// - Parameter completionHandler: The async block of code called
+    ///                                after the notification gets
+    ///                                scheduled.
+    /// - Returns: The notification id of the scheduled user
+    ///            notification.
+    // TODO: Document the throws section.
     func schedule(with content: UNNotificationContent,
-                  and trigger: UNNotificationTrigger) -> String {
-        // TODO: Implement.
-        return ""
+                  and trigger: UNNotificationTrigger,
+                  _ completionHandler: @escaping (String?) -> ()) {
+        // Declare the request's identifier
+        let identifier = UUID().uuidString
+        
+        // Declare the user notification request
+        // to be scheduled.
+        let request = UNNotificationRequest(
+            identifier: identifier,
+            content: content,
+            trigger: trigger
+        )
+        
+        // Call the internal notification center and schedule it.
+        notificationCenter.add(request) { error in
+            if error == nil {
+                // TODO: Understand what's @escaping
+                completionHandler(identifier)
+            } else {
+                completionHandler(nil)
+            }
+        }
     }
     
     /// Fetches the scheduled notification and returns it in
     /// the provided completionHandler.
     /// - Parameter id: The notification's identifier.
     /// - Parameter completionHandler: The async block called with the
-    ///                                found notification as it's parameter.
+    ///                                found notification as it's
+    ///                                parameter.
     func notification(with id: String,
                       completionHandler: (UNNotificationRequest?) -> ()) {
         // TODO: Implement.
