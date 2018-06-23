@@ -15,6 +15,10 @@ class UserNotificationManagerTests: XCTestCase {
     
     // MARK: Properties
     
+    /// The User notification center mock used to fake
+    /// the authorization request.s
+    var notificationCenterMock: UserNotificationCenterMock!
+    
     /// The User notification manager used to schedule
     /// local user notifications.
     var notificationManager: UserNotificationManager!
@@ -24,8 +28,12 @@ class UserNotificationManagerTests: XCTestCase {
     override func setUp() {
         super.setUp()
         
+        // Instantiate a notification center with authorization set
+        // to return false (not granted).
+        notificationCenterMock = UserNotificationCenterMock(withAuthorization: false)
+        
         // Instantiate a new notification manager to be used by the current test.
-        notificationManager = UserNotificationManager(notificationCenter: UNUserNotificationCenter.current())
+        notificationManager = UserNotificationManager(notificationCenter: notificationCenterMock)
     }
     
     override func tearDown() {
@@ -43,6 +51,7 @@ class UserNotificationManagerTests: XCTestCase {
         
         // Maybe use a mock here ??
         // TODO: Use a partial mock to configure the granting.
+        notificationCenterMock.shouldAuthorize = true
         
         // Use manager to ask the user to use the local notifications.
         notificationManager.requestAuthorization() {
@@ -61,9 +70,8 @@ class UserNotificationManagerTests: XCTestCase {
     func testManagerAuthorizationRequestNotGranted() {
         // Declare the authrorization request expectation.
         let authorizationExpectation = XCTestExpectation(description: "Ask the user to authorize the usage of local notifications.")
-        
-        // Maybe use a mock here ??
-        // TODO: Use a partial mock to configure the denial.
+
+        notificationCenterMock.shouldAuthorize = false
         
         // Ask for permission, the permission should be denied.
         notificationManager.requestAuthorization() {

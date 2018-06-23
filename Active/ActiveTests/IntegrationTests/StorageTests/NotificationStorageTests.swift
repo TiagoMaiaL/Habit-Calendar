@@ -30,8 +30,7 @@ class NotificationStorageTests: StorageTestCase {
         habitStorage = HabitStorage(container: memoryPersistentContainer)
         
         // Initialize notification manager.
-        // TODO: Use the mock for the notification center.
-        notificationManager = UserNotificationManager(notificationCenter: UNUserNotificationCenter.current())
+        notificationManager = UserNotificationManager(notificationCenter: UserNotificationCenterMock(withAuthorization: true))
         
         // Initialize notificationStorage using the persistent container created for tests.
         notificationStorage = NotificationStorage(

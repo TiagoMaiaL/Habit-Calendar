@@ -9,6 +9,24 @@
 import Foundation
 import UserNotifications
 
+/// Protocol used to fake the authorization requests while testing.
+/// - Note: The authorization requests prompt the user to authorize.
+///         When testing, it halts the test and fails.
+protocol TestableUserNotificationCenter {
+    
+    func requestAuthorization(options: UNAuthorizationOptions, completionHandler: @escaping (Bool, Error?) -> Swift.Void)
+    
+    func add(_ request: UNNotificationRequest, withCompletionHandler completionHandler: ((Error?) -> Swift.Void)?)
+    
+    func getPendingNotificationRequests(completionHandler: @escaping ([UNNotificationRequest]) -> Swift.Void)
+    
+    func removePendingNotificationRequests(withIdentifiers identifiers: [String])
+}
+
+/// Extension used only to declare the protocol implementation in the
+/// UNUserNotificationCenter implementation.
+extension UNUserNotificationCenter {}
+
 /// Struct in charge of managing the creation, retrieval,
 /// and deletion of local user notification instances associated
 /// with the entity ones (Notification).
@@ -17,11 +35,11 @@ struct UserNotificationManager {
     // MARK: Properties
     
     /// The notification center used to manage the local notifications
-    let notificationCenter: UNUserNotificationCenter
+    let notificationCenter: TestableUserNotificationCenter
     
     // MARK: Initializers
     
-    init(notificationCenter: UNUserNotificationCenter) {
+    init(notificationCenter: TestableUserNotificationCenter) {
         self.notificationCenter = notificationCenter
     }
     
