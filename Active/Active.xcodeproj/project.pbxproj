@@ -29,7 +29,13 @@
 		474F9C8A20CE3F670094C19C /* StorageTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474F9C8920CE3F670094C19C /* StorageTestCase.swift */; };
 		474F9C8B20CEE1AF0094C19C /* Active.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 47F635F620BB920900AC4555 /* Active.xcdatamodeld */; };
 		474F9C8D20CEE2840094C19C /* UserStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474F9C8C20CEE2840094C19C /* UserStorageTests.swift */; };
+		475C96A220DEFB4C00212E1F /* DummyFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475C96A120DEFB4C00212E1F /* DummyFactory.swift */; };
+		475C96A420DEFC9500212E1F /* DayFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475C96A320DEFC9500212E1F /* DayFactory.swift */; };
+		475C96A620DEFEBC00212E1F /* HabitFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475C96A520DEFEBC00212E1F /* HabitFactory.swift */; };
+		475C96A820DF20A500212E1F /* NotificationFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475C96A720DF20A500212E1F /* NotificationFactory.swift */; };
+		475C96AA20DF235000212E1F /* HabitDayFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475C96A920DF235000212E1F /* HabitDayFactory.swift */; };
 		4761DFD320DE692A003F772A /* UNUserNotificationCenterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4761DFD220DE692A003F772A /* UNUserNotificationCenterMock.swift */; };
+		4761DFD620DEEAA7003F772A /* UserFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4761DFD520DEEAA7003F772A /* UserFactory.swift */; };
 		4779588020D8ADA90080614F /* NotificationStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4779587F20D8ADA90080614F /* NotificationStorageTests.swift */; };
 		4779588320D8B2E10080614F /* UserNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4779588220D8B2E10080614F /* UserNotificationManager.swift */; };
 		4779588520D8B38B0080614F /* NotificationStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4779588420D8B38B0080614F /* NotificationStorage.swift */; };
@@ -69,7 +75,13 @@
 		474F9C8520CC7E180094C19C /* Date+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Utils.swift"; sourceTree = "<group>"; };
 		474F9C8920CE3F670094C19C /* StorageTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageTestCase.swift; sourceTree = "<group>"; };
 		474F9C8C20CEE2840094C19C /* UserStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStorageTests.swift; sourceTree = "<group>"; };
+		475C96A120DEFB4C00212E1F /* DummyFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyFactory.swift; sourceTree = "<group>"; };
+		475C96A320DEFC9500212E1F /* DayFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayFactory.swift; sourceTree = "<group>"; };
+		475C96A520DEFEBC00212E1F /* HabitFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitFactory.swift; sourceTree = "<group>"; };
+		475C96A720DF20A500212E1F /* NotificationFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationFactory.swift; sourceTree = "<group>"; };
+		475C96A920DF235000212E1F /* HabitDayFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitDayFactory.swift; sourceTree = "<group>"; };
 		4761DFD220DE692A003F772A /* UNUserNotificationCenterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UNUserNotificationCenterMock.swift; sourceTree = "<group>"; };
+		4761DFD520DEEAA7003F772A /* UserFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFactory.swift; sourceTree = "<group>"; };
 		4779587F20D8ADA90080614F /* NotificationStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationStorageTests.swift; sourceTree = "<group>"; };
 		4779588220D8B2E10080614F /* UserNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationManager.swift; sourceTree = "<group>"; };
 		4779588420D8B38B0080614F /* NotificationStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationStorage.swift; sourceTree = "<group>"; };
@@ -176,6 +188,7 @@
 		4761DFD020DE68B8003F772A /* IntegrationTests */ = {
 			isa = PBXGroup;
 			children = (
+				4761DFD420DEB8D3003F772A /* Factory */,
 				4761DFD120DE68EB003F772A /* Mocks */,
 				47D8FC9C20DB28350094026B /* ManagerTests */,
 				474F9C8820CE3F470094C19C /* StorageTests */,
@@ -189,6 +202,19 @@
 				4761DFD220DE692A003F772A /* UNUserNotificationCenterMock.swift */,
 			);
 			path = Mocks;
+			sourceTree = "<group>";
+		};
+		4761DFD420DEB8D3003F772A /* Factory */ = {
+			isa = PBXGroup;
+			children = (
+				475C96A120DEFB4C00212E1F /* DummyFactory.swift */,
+				475C96A320DEFC9500212E1F /* DayFactory.swift */,
+				4761DFD520DEEAA7003F772A /* UserFactory.swift */,
+				475C96A520DEFEBC00212E1F /* HabitFactory.swift */,
+				475C96A720DF20A500212E1F /* NotificationFactory.swift */,
+				475C96A920DF235000212E1F /* HabitDayFactory.swift */,
+			);
+			path = Factory;
 			sourceTree = "<group>";
 		};
 		4779588120D8B2AC0080614F /* Managers */ = {
@@ -404,11 +430,16 @@
 			files = (
 				474A209020CEEBC900E0EBD0 /* Habit.swift in Sources */,
 				474F9C8D20CEE2840094C19C /* UserStorageTests.swift in Sources */,
+				475C96AA20DF235000212E1F /* HabitDayFactory.swift in Sources */,
 				474A209320CEEBD200E0EBD0 /* Notification.swift in Sources */,
 				474A209220CEEBCF00E0EBD0 /* Day.swift in Sources */,
+				475C96A620DEFEBC00212E1F /* HabitFactory.swift in Sources */,
+				4761DFD620DEEAA7003F772A /* UserFactory.swift in Sources */,
 				47F6360820BB920D00AC4555 /* ActiveTests.swift in Sources */,
+				475C96A420DEFC9500212E1F /* DayFactory.swift in Sources */,
 				4761DFD320DE692A003F772A /* UNUserNotificationCenterMock.swift in Sources */,
 				474A209C20D1B51300E0EBD0 /* DateUtilsTests.swift in Sources */,
+				475C96A220DEFB4C00212E1F /* DummyFactory.swift in Sources */,
 				474A209720D1B02700E0EBD0 /* HabitStorageTests.swift in Sources */,
 				474F9C8B20CEE1AF0094C19C /* Active.xcdatamodeld in Sources */,
 				474A209120CEEBCC00E0EBD0 /* HabitDay.swift in Sources */,
@@ -417,6 +448,7 @@
 				474A209520D00AFA00E0EBD0 /* DayStorageTests.swift in Sources */,
 				4779588020D8ADA90080614F /* NotificationStorageTests.swift in Sources */,
 				474F9C8A20CE3F670094C19C /* StorageTestCase.swift in Sources */,
+				475C96A820DF20A500212E1F /* NotificationFactory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
