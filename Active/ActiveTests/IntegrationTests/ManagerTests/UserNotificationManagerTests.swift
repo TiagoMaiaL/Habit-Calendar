@@ -11,7 +11,7 @@ import XCTest
 import UserNotifications
 @testable import Active
 
-class UserNotificationManagerTests: XCTestCase {
+class UserNotificationManagerTests: IntegrationTestCase {
     
     // MARK: Properties
     
@@ -48,9 +48,8 @@ class UserNotificationManagerTests: XCTestCase {
     func testManagerAuthorizationRequestGranted() {
         // Declare the authorization request expectation.
         let authorizationExpectation = XCTestExpectation(description: "Ask the user to authorize the usage of local notifications.")
-        
-        // Maybe use a mock here ??
-        // TODO: Use a partial mock to configure the granting.
+
+        // Configure the mock to authorize local notifications.
         notificationCenterMock.shouldAuthorize = true
         
         // Use manager to ask the user to use the local notifications.
@@ -63,7 +62,6 @@ class UserNotificationManagerTests: XCTestCase {
             authorizationExpectation.fulfill()
         }
         
-        // Wait for the expectation.
         wait(for: [authorizationExpectation], timeout: 0.1)
     }
     
@@ -71,6 +69,7 @@ class UserNotificationManagerTests: XCTestCase {
         // Declare the authrorization request expectation.
         let authorizationExpectation = XCTestExpectation(description: "Ask the user to authorize the usage of local notifications.")
 
+        // Configure the mock so as not to grant local notifications.
         notificationCenterMock.shouldAuthorize = false
         
         // Ask for permission, the permission should be denied.
@@ -204,16 +203,57 @@ extension UserNotificationManagerTests {
         // Test the factories for the user notification's trigger and content
         // options when a Notification entity is passed and the authorization
         // was fully granted by the user.
-        XCTFail("Not implemented.")
         
         // Declare the habit and notification (associated with a Habit dummy)
         // that needs to be passed.
+        guard let dummyHabit = factories.habit.makeDummy() as? Habit else {
+            XCTFail("Couldn't generate a dummy habit.")
+            return
+        }
+        
+        guard let dummyNotification = (dummyHabit.notifications as? Set<Notification>)?.first else {
+            XCTFail("Couldn't generate a dummy notification.")
+            return
+        }
         
         // Make the content and trigger options out of the passed habit.
+//        (content: UNNotificationContent, trigger: UNNotificationTrigger)
+        let userNotificationOptions = notificationManager.makeNotificationOptions(
+            for: dummyHabit,
+            and: dummyNotification
+        )
         
         // Check on the content properties(texts).
+        XCTAssertNotNil(
+            userNotificationOptions.content,
+            "The generated user notification should be set."
+        )
+        XCTAssertEqual(
+            userNotificationOptions.content.title,
+            dummyHabit.getTitleText(),
+            "The user notification content should have the correct title text."
+        )
+        XCTAssertEqual(
+            userNotificationOptions.content.subtitle,
+            dummyHabit.getSubtitleText(),
+            "The user notification content should have the correct subtitle text."
+        )
+        XCTAssertEqual(
+            userNotificationOptions.content.body,
+            dummyHabit.getDescriptionText(),
+            "The user notification content should have the correct description text."
+        )
         
         // Check on the trigger properties(date).
+        XCTAssertNotNil(
+            userNotificationOptions.trigger,
+            "The user notification trigger should be set."
+        )
+        XCTAssertEqual(
+            userNotificationOptions.trigger.nextTriggerDate(),
+            dummyHabit.notification.fireDate,
+            "The user notification trigger should have the correct fire date."
+        )
     }
     
     func testTriggerFactoryWithBadgeAndSoundAuthorizations() {
