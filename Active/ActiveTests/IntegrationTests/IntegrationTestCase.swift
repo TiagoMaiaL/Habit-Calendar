@@ -12,12 +12,19 @@ import CoreData
 
 /// The TestCase class used to test the app's storage layer.
 /// - Note: TestCase class intended to be subclassed by each file testing the storage classes.
-class StorageTestCase: XCTestCase {
+class IntegrationTestCase: XCTestCase {
 
     // MARK: - Properties
     
     /// The persistent container used to test the storage classes.
     var memoryPersistentContainer: NSPersistentContainer!
+    
+    /// The factories used to generate dummies from each core data entity.
+    var factories: (user: DummyFactory,
+                    habit: DummyFactory,
+                    notification: DummyFactory,
+                    day: DummyFactory,
+                    habitDay: DummyFactory)!
     
     // MARK: setup/tearDown
     
@@ -26,9 +33,21 @@ class StorageTestCase: XCTestCase {
         
         /// Create a brand new in-memory persistent container.
         memoryPersistentContainer = makeMemoryPersistentContainer()
+        
+        /// Create the factories used to write the storage and model tests.
+        factories = (
+            user: UserFactory(container: memoryPersistentContainer),
+            habit: HabitFactory(container: memoryPersistentContainer),
+            notification: NotificationFactory(container: memoryPersistentContainer),
+            day: DayFactory(container: memoryPersistentContainer),
+            habitDay: HabitDayFactory(container: memoryPersistentContainer)
+        )
     }
     
     override func tearDown() {
+        /// Remove the factories created.
+        factories = nil
+        
         /// Remove the used in-memory persistent container.
         memoryPersistentContainer = nil
         

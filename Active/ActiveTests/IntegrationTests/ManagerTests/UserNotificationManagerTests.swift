@@ -202,9 +202,18 @@ extension UserNotificationManagerTests {
     
     func testContentAndTriggerFactoriesWithFullAuthorization() {
         // Test the factories for the user notification's trigger and content
-        // options when a Notification entity is passed, and the authorization
-        // was fully granted.
+        // options when a Notification entity is passed and the authorization
+        // was fully granted by the user.
         XCTFail("Not implemented.")
+        
+        // Declare the habit and notification (associated with a Habit dummy)
+        // that needs to be passed.
+        
+        // Make the content and trigger options out of the passed habit.
+        
+        // Check on the content properties(texts).
+        
+        // Check on the trigger properties(date).
     }
     
     func testTriggerFactoryWithBadgeAndSoundAuthorizations() {
@@ -212,6 +221,12 @@ extension UserNotificationManagerTests {
         // Notification entity is passed, and the authorization
         // is partially granted (no alerts, only badges and sounds).
         XCTFail("Not implemented.")
+        
+        // Declare the habit and notification (associated with a Habit dummy)
+        // that needs to be passed.
+        
+        // Make the trigger out of the passed habit. The content options
+        // must be nil (authorization to badges and icons only).
     }
     
     func testSchedulingUserNotificationPassingEntity() {

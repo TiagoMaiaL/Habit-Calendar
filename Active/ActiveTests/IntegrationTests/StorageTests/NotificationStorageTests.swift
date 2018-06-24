@@ -13,7 +13,7 @@ import UserNotifications
 @testable import Active
 
 /// Class in charge of testing the HabitStorage methods.
-class NotificationStorageTests: StorageTestCase {
+class NotificationStorageTests: IntegrationTestCase {
     
     // MARK: Properties
     

@@ -11,7 +11,7 @@ import CoreData
 @testable import Active
 
 /// Class in charge of testing the DayStorage methods.
-class DayStorageTests: StorageTestCase {
+class DayStorageTests: IntegrationTestCase {
     
     // MARK: Properties
     

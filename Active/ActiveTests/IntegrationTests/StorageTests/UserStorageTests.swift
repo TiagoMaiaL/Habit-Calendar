@@ -11,7 +11,7 @@ import CoreData
 @testable import Active
 
 /// Class in charge of testing the UserStorage methods.
-class UserStorageTests: StorageTestCase {
+class UserStorageTests: IntegrationTestCase {
 
     // MARK: Properties
     

@@ -11,7 +11,7 @@ import CoreData
 @testable import Active
 
 /// Class in charge of testing the HabitStorage methods.
-class HabitStorageTests: StorageTestCase {
+class HabitStorageTests: IntegrationTestCase {
     
     // MARK: Properties
     
