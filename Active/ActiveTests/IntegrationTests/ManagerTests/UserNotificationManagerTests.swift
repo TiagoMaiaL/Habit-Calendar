@@ -311,18 +311,34 @@ extension UserNotificationManagerTests {
         wait(for: [expectation], timeout: 0.1)
     }
     
-    func testUserNotificationRemovalPassingEntity() {
-        // Remove a given user notification by passing the Notification
+    func testUserNotificationRemovalPassingEntities() {
+        // Remove a given user notification by passing the Notifications
         // entity.
-        XCTFail("Not implemented.")
+        let expectation = XCTestExpectation(description: "Remove a schedule user notification request by passing a Notification entity.")
         
         // Declare a dummy Notification entity.
-    }
-    
-    func testUserNotificationsRemovalPassingEntities() {
-        // Test the removal of many user notifications by passing an array of
-        // Notification entities.
-        XCTFail("Not implemented.")
+        guard let dummyNotification = makeNotification() else {
+            XCTFail("Couldn't generate a dummy notification.")
+            return
+        }
+        
+        // Schedule a notification request.
+        notificationManager.schedule(dummyNotification) { notification in
+            // Delete the scheduled notification request.
+            self.notificationManager.remove([notification])
+            
+            // Try fetching it, the request shouldn't be fetched.
+            self.notificationManager.getRequest(from: notification, completionHandler: { request in
+                XCTAssertNil(
+                    request,
+                    "The fetched request was deleted and shouldn't be fetched."
+                )
+                
+                expectation.fulfill()
+            })
+        }
+        
+        wait(for: [expectation], timeout: 0.1)
     }
     
     // MARK: Imperatives

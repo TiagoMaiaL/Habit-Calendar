@@ -193,4 +193,19 @@ extension UserNotificationManager {
         // Fetch it by passing the notification's identifier.
         getRequest(with: identifier, completionHandler)
     }
+    
+    /// Removes the notification requests associated with
+    /// the passed entities.
+    /// - Parameter notifications: The Notification entities.
+    func remove(_ notifications: [Notification]) {
+        // Declare the requests identifiers from the notifications.
+        let identifiers = notifications.compactMap { notification in
+            return notification.userNotificationId
+        }
+        
+       // Remove the requests.
+        notificationCenter.removePendingNotificationRequests(
+            withIdentifiers: identifiers
+        )
+    }
 }
