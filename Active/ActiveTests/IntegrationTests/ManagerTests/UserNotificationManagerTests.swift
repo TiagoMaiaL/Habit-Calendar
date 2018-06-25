@@ -251,10 +251,11 @@ extension UserNotificationManagerTests {
             dateTrigger,
             "The user notification trigger should be set."
         )
+        XCTAssertNotNil(dateTrigger!.nextTriggerDate(), "The notification trigger should have a valid trigger date.")
         XCTAssertEqual(
-            dateTrigger!.nextTriggerDate(),
-            dummyNotification.fireDate,
-            "The user notification trigger should have the correct fire date."
+            dateTrigger!.nextTriggerDate()!.description,
+            dummyNotification.getFireDate().description,
+            "The user notification trigger should have the correct next trigger date."
         )
     }
     

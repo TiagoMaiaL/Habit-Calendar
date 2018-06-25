@@ -140,7 +140,20 @@ extension UserNotificationManager {
     func makeNotificationOptions(
         for habit: Habit,
         and notification: Notification) -> UserNotificationOptions {
-        return (content: nil, trigger: nil)
+        
+        // Declare the notification contents with the correct attributes.
+        let content = UNMutableNotificationContent()
+        content.title = habit.getTitleText()
+        content.subtitle = habit.getSubtitleText()
+        content.body = habit.getDescriptionText()
+        
+        // Declare the notification trigger with the correct date.
+        let trigger = UNTimeIntervalNotificationTrigger(
+            timeInterval: notification.getFireDate().timeIntervalSinceNow,
+            repeats: false
+        )
+        
+        return (content: content, trigger: trigger)
     }
     
 }
