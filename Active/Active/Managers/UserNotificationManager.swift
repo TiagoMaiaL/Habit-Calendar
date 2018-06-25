@@ -95,13 +95,13 @@ struct UserNotificationManager {
         }
     }
     
-    /// Fetches the scheduled notification and returns it in
+    /// Fetches the scheduled user notification request and returns it in
     /// the provided completionHandler.
     /// - Parameter identifier: The notification's identifier.
     /// - Parameter completionHandler: The async block called with the
     ///                                found notification as it's
     ///                                parameter.
-    func notification(with identifier: String,
+    func getRequest(with identifier: String,
                       _ completionHandler: @escaping (UNNotificationRequest?) -> ()) {
         notificationCenter.getPendingNotificationRequests { requests in
             // Filter for the specified UNUserNotificationRequest.
@@ -176,5 +176,21 @@ extension UserNotificationManager {
             
             completionHandler(notification)
         }
+    }
+    
+    /// Fetches an user notification request associated with the passed
+    /// Notification entity.
+    /// - Parameter notification: The Notification entity.
+    /// - Parameter completionHandler: The completion called after the fetch.
+    func getRequest(from notification: Notification, completionHandler: @escaping (UNNotificationRequest?) -> ()) {
+        guard let identifier = notification.userNotificationId else {
+            assertionFailure(
+                "The passed notification entity should have an identifier."
+            )
+            return
+        }
+        
+        // Fetch it by passing the notification's identifier.
+        getRequest(with: identifier, completionHandler)
     }
 }

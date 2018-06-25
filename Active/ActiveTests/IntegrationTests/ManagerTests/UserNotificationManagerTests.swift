@@ -138,7 +138,7 @@ class UserNotificationManagerTests: IntegrationTestCase {
             XCTAssertNotNil(identifier, "The identifier of the UserNotificationRequest shouldn't be nil.")
             
             // Try to fetch it by using the manager.
-            self.notificationManager.notification(with: identifier!) {
+            self.notificationManager.getRequest(with: identifier!) {
                 request in
                 
                 // Make assertions on the request properties.
@@ -181,7 +181,7 @@ class UserNotificationManagerTests: IntegrationTestCase {
             self.notificationManager.remove(with: identifier!)
             
             // The fetch for the created notification shouldn't return it.
-            self.notificationManager.notification(with: identifier!) {
+            self.notificationManager.getRequest(with: identifier!) {
                 request in
                 
                 // Because the request was deleted, it shouldn't be returned.
@@ -204,14 +204,9 @@ extension UserNotificationManagerTests {
         // options when a Notification entity is passed and the authorization
         // was fully granted by the user.
         
-        // Declare the habit and notification (associated with a Habit dummy)
+        // Declare the notification (associated with a Habit dummy)
         // that needs to be passed.
-        guard let dummyHabit = factories.habit.makeDummy() as? Active.Habit else {
-            XCTFail("Couldn't generate a dummy habit.")
-            return
-        }
-        
-        guard let dummyNotification = (dummyHabit.notifications as? Set<Active.Notification>)?.first else {
+        guard let dummyNotification = makeNotification() else {
             XCTFail("Couldn't generate a dummy notification.")
             return
         }
@@ -228,17 +223,17 @@ extension UserNotificationManagerTests {
         )
         XCTAssertEqual(
             userNotificationOptions.content.title,
-            dummyHabit.getTitleText(),
+            dummyNotification.habit!.getTitleText(),
             "The user notification content should have the correct title text."
         )
         XCTAssertEqual(
             userNotificationOptions.content.subtitle,
-            dummyHabit.getSubtitleText(),
+            dummyNotification.habit!.getSubtitleText(),
             "The user notification content should have the correct subtitle text."
         )
         XCTAssertEqual(
             userNotificationOptions.content.body,
-            dummyHabit.getDescriptionText(),
+            dummyNotification.habit!.getDescriptionText(),
             "The user notification content should have the correct description text."
         )
         
@@ -262,11 +257,7 @@ extension UserNotificationManagerTests {
         let expectation = XCTestExpectation(description: "Schedule an user notification by passing a Notification core data entity.")
         
         // Declare a dummy notification to be used.
-        guard let dummyHabit = factories.habit.makeDummy() as? Habit else {
-            XCTFail("Couldn't generate a dummy habit.")
-            return
-        }
-        guard let dummyNotification = (dummyHabit.notifications as? Set<Active.Notification>)?.first else {
+        guard let dummyNotification = makeNotification() else {
             XCTFail("Couldn't generate a dummy notification.")
             return
         }
@@ -280,7 +271,7 @@ extension UserNotificationManagerTests {
             )
             
             // Check if the notification request can be fetched.
-            self.notificationManager.notification(with: notification.userNotificationId!, { request in
+            self.notificationManager.getRequest(with: notification.userNotificationId!, { request in
                 XCTAssertNotNil(request, "The scheduled notification entity should have an associated user notification request.")
                 
                 expectation.fulfill()
@@ -290,10 +281,42 @@ extension UserNotificationManagerTests {
         wait(for: [expectation], timeout: 0.1)
     }
     
+    func testUserNotificationFetchByPassingEntity() {
+        // Test the retrieval of an scheduled user notification by passing a
+        // Notification entity.
+        
+        let expectation = XCTestExpectation(description: "Try to fetch the user notification request associated with a dummy notification.")
+        
+        // Declare a dummy Notification entity.
+        guard let dummyNotification = makeNotification() else {
+            XCTFail("Couldn't generate a dummy notification.")
+            return
+        }
+        
+        // Schedule it using the manager.
+        notificationManager.schedule(dummyNotification) { notification in
+            // Try to fetch the notification request by passing
+            // the entity.
+            self.notificationManager.getRequest(from: notification) { request in
+                XCTAssertNotNil(request, "The scheduled user notification request should be correctly fetched.")
+                XCTAssertEqual(
+                    request!.identifier,
+                    notification.userNotificationId,
+                    "The user notification request and the notification entity should have the same identifier."
+                )
+                expectation.fulfill()
+            }
+        }
+        
+        wait(for: [expectation], timeout: 0.1)
+    }
+    
     func testUserNotificationRemovalPassingEntity() {
         // Remove a given user notification by passing the Notification
         // entity.
         XCTFail("Not implemented.")
+        
+        // Declare a dummy Notification entity.
     }
     
     func testUserNotificationsRemovalPassingEntities() {
@@ -302,9 +325,19 @@ extension UserNotificationManagerTests {
         XCTFail("Not implemented.")
     }
     
-    func testUserNotificationFetchByPassingEntity() {
-        // Test the retrieval of an scheduled user notification by passing a
-        // Notification entity.
-        XCTFail("Not implemented.")
+    // MARK: Imperatives
+    
+    /// Creates a dummy Notification core data entity.
+    /// - Returns: the dummy notification.
+    func makeNotification() -> Active.Notification? {
+        guard let dummyHabit = factories.habit.makeDummy() as? Active.Habit else {
+            return nil
+        }
+        
+        guard let dummyNotification = (dummyHabit.notifications as? Set<Active.Notification>)?.first else {
+            return nil
+        }
+        
+        return dummyNotification
     }
 }
