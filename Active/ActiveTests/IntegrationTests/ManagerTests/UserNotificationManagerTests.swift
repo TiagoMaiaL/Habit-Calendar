@@ -199,7 +199,7 @@ extension UserNotificationManagerTests {
     
     // MARK: Tests
     
-    func testContentAndTriggerFactoriesWithFullAuthorization() {
+    func testContentAndTriggerFactory() {
         // Test the factories for the user notification's trigger and content
         // options when a Notification entity is passed and the authorization
         // was fully granted by the user.
@@ -227,78 +227,67 @@ extension UserNotificationManagerTests {
             "The generated user notification should be set."
         )
         XCTAssertEqual(
-            userNotificationOptions.content!.title,
+            userNotificationOptions.content.title,
             dummyHabit.getTitleText(),
             "The user notification content should have the correct title text."
         )
         XCTAssertEqual(
-            userNotificationOptions.content!.subtitle,
+            userNotificationOptions.content.subtitle,
             dummyHabit.getSubtitleText(),
             "The user notification content should have the correct subtitle text."
         )
         XCTAssertEqual(
-            userNotificationOptions.content!.body,
+            userNotificationOptions.content.body,
             dummyHabit.getDescriptionText(),
             "The user notification content should have the correct description text."
         )
         
         // Declare the trigger as a UNTitmeIntervalNotificationTrigger.
-        let dateTrigger = userNotificationOptions.trigger as? UNTimeIntervalNotificationTrigger
+        guard let dateTrigger = userNotificationOptions.trigger as? UNTimeIntervalNotificationTrigger else {
+            XCTFail("The generated notification's trigger is nil.")
+            return
+        }
         
-        // Check on the trigger properties(date).
-        XCTAssertNotNil(
-            dateTrigger,
-            "The user notification trigger should be set."
-        )
-        XCTAssertNotNil(dateTrigger!.nextTriggerDate(), "The notification trigger should have a valid trigger date.")
+        XCTAssertNotNil(dateTrigger.nextTriggerDate(), "The notification trigger should have a valid trigger date.")
         XCTAssertEqual(
-            dateTrigger!.nextTriggerDate()!.description,
+            dateTrigger.nextTriggerDate()!.description,
             dummyNotification.getFireDate().description,
             "The user notification trigger should have the correct next trigger date."
         )
     }
     
-    func testTriggerFactoryWithBadgeAndSoundAuthorizations() {
-        // Test the factory for the user notification's trigger option when a
-        // Notification entity is passed, and the authorization
-        // is partially granted (no alerts, only badges and sounds).
+    func testSchedulingUserNotificationPassingEntity() {
+        // Schedule an user notification by passing a Notification entity.
         
-        notificationCenterMock.shouldAuthorizeAlert = false
+        let expectation = XCTestExpectation(description: "Schedule an user notification by passing a Notification core data entity.")
         
-        // Declare the habit and notification (associated with a Habit dummy)
-        // that needs to be passed.
+        // Declare a dummy notification to be used.
         guard let dummyHabit = factories.habit.makeDummy() as? Habit else {
-            XCTFail("Dummy habit couldn't be generated.")
+            XCTFail("Couldn't generate a dummy habit.")
             return
         }
         guard let dummyNotification = (dummyHabit.notifications as? Set<Active.Notification>)?.first else {
-            XCTFail("Dummy notification couldn't be generated.")
+            XCTFail("Couldn't generate a dummy notification.")
             return
         }
         
-        // Make the trigger out of the passed habit. The content options
-        // must be nil (authorization to badges and icons only).
-        let options = notificationManager.makeNotificationOptions(for: dummyNotification)
-        
-        XCTAssertNil(options.content, "The option's content should be nil (no alert authorization granted).")
-        
-        // Try to get the trigger as a time interval trigger.
-        guard let trigger = options.trigger as? UNTimeIntervalNotificationTrigger else {
-            XCTFail("The user notification trigger is invalid.")
-            return
+        // Schedule it by passing the dummy entity.
+        notificationManager.schedule(dummyNotification) { notification in
+            // It should have an user notification identifier.
+            XCTAssertNotNil(
+                notification.userNotificationId,
+                "The scheduled notification entity should have an associated  user notification request id."
+            )
+            
+            // Check if the notification request can be fetched.
+            self.notificationManager.notification(with: notification.userNotificationId!, { request in
+                XCTAssertNotNil(request, "The scheduled notification entity should have an associated user notification request.")
+                
+                expectation.fulfill()
+            })
         }
         
-        // Check to see if the dates match.
-        XCTAssertEqual(
-            dummyNotification.getFireDate().description,
-            trigger.nextTriggerDate()!.description,
-            "The trigger's fire date has an invalid date compared to the notification's one."
-        )
-    }
-    
-    func testSchedulingUserNotificationPassingEntity() {
-        // Schedule an user notification by passing a Notification entity.
-        XCTFail("Not implemented.")
+        wait(for: [expectation], timeout: 0.1)
     }
     
     func testUserNotificationRemovalPassingEntity() {

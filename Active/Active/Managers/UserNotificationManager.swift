@@ -12,11 +12,9 @@ import UserNotifications
 /// Protocol used to fake the authorization requests while testing.
 /// - Note: The authorization requests prompt the user to authorize.
 ///         When testing, it halts the test and fails.
-protocol NotificationCenter {
+protocol TestableNotificationCenter {
     
     func requestAuthorization(options: UNAuthorizationOptions, completionHandler: @escaping (Bool, Error?) -> Swift.Void)
-    
-//    func getNotificationSettings(completionHandler: @escaping (UNNotificationSettings) -> Swift.Void)
     
     func add(_ request: UNNotificationRequest, withCompletionHandler completionHandler: ((Error?) -> Swift.Void)?)
     
@@ -25,19 +23,9 @@ protocol NotificationCenter {
     func removePendingNotificationRequests(withIdentifiers identifiers: [String])
 }
 
-/// Protocol used to fake the user notification settings while testing.
-protocol NotificationSettings {
-    
-    var soundSetting: UNNotificationSetting { get }
-    
-    var badgeSetting: UNNotificationSetting { get }
-    
-    var alertSetting: UNNotificationSetting { get }
-}
-
 /// Extension used only to declare the protocol implementation in the
 /// UNUserNotificationCenter implementation.
-extension UNUserNotificationCenter: NotificationCenter {}
+extension UNUserNotificationCenter: TestableNotificationCenter {}
 
 /// Struct in charge of managing the creation, retrieval,
 /// and deletion of local user notification instances associated
@@ -47,11 +35,11 @@ struct UserNotificationManager {
     // MARK: Properties
     
     /// The notification center used to manage the local notifications
-    let notificationCenter: NotificationCenter
+    let notificationCenter: TestableNotificationCenter
     
     // MARK: Initializers
     
-    init(notificationCenter: NotificationCenter) {
+    init(notificationCenter: TestableNotificationCenter) {
         self.notificationCenter = notificationCenter
     }
     
@@ -140,7 +128,7 @@ extension UserNotificationManager {
     
     // MARK: Types
     
-    typealias UserNotificationOptions = (content: UNNotificationContent?, trigger: UNNotificationTrigger?)
+    typealias UserNotificationOptions = (content: UNNotificationContent, trigger: UNNotificationTrigger)
     
     // MARK: Imperatives
     
@@ -150,14 +138,15 @@ extension UserNotificationManager {
     ///                           notification will be generated.
     func makeNotificationOptions(for notification: Notification) -> UserNotificationOptions {
         
-        var content: UNMutableNotificationContent?
-        
         // Declare the notification contents with the correct attributes.
+        let content = UNMutableNotificationContent()
+        
         if let habit = notification.habit {
-            content = UNMutableNotificationContent()
-            content!.title = habit.getTitleText()
-            content!.subtitle = habit.getSubtitleText()
-            content!.body = habit.getDescriptionText()
+            content.title = habit.getTitleText()
+            content.subtitle = habit.getSubtitleText()
+            content.body = habit.getDescriptionText()
+        } else {
+            assertionFailure("The passed notification must have a valid habit entity.")
         }
         
         // Declare the notification trigger with the correct date.
@@ -169,4 +158,23 @@ extension UserNotificationManager {
         return (content: content, trigger: trigger)
     }
     
+    /// Schedules an user notification associated with the passed entity.
+    /// - Parameter notification: The core data entity to be scheduled.
+    /// - Parameter completionHandler: The handler called after the schedule
+    ///                                finishes.
+    func schedule(
+        _ notification: Notification,
+        completionHandler: @escaping (Notification) -> ()) {
+        
+        // Declare the options used to schedule a new request.
+        let options = makeNotificationOptions(for: notification)
+        
+        // Schedule the new request.
+        schedule(with: options.content, and: options.trigger) { identifier in
+            // Associate the returned request id to the Notification entity.
+            notification.userNotificationId = identifier
+            
+            completionHandler(notification)
+        }
+    }
 }

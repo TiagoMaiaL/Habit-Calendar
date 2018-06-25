@@ -14,15 +14,12 @@ import UserNotifications
 /// - Note: The authorization requests prompt the user to authorize.
 ///         When testing, it halts the test and fails. This mock
 ///         solves this by faking the results.
-class UserNotificationCenterMock: NotificationCenter {
+class UserNotificationCenterMock: TestableNotificationCenter {
     
     // MARK: Properties
     
     /// Configures the mock to grant the user's authorization.
     var shouldAuthorize = false
-    
-    /// Configures the mock to allow all kinds of notification settings.
-    var shouldAuthorizeAlert = true
     
     /// The internal notification center used to implement all
     /// testable protocol methods.
@@ -43,19 +40,6 @@ class UserNotificationCenterMock: NotificationCenter {
         completionHandler(shouldAuthorize, nil)
     }
     
-//    func getNotificationSettings(completionHandler: @escaping (UNNotificationSettings) -> Swift.Void) {
-//        // Declare the notification settings instance.
-//        let mockSettings = NotificationSettingsMock()
-//
-//        // Set it's properties according to the mock configuration.
-//        if !shouldAuthorizeAlert {
-//            mockSettings.alertSetting = .disabled
-//        }
-//
-//        // Direclty return it by calling the completion handler.
-//        completionHandler(mockSettings)
-//    }
-    
     func add(_ request: UNNotificationRequest, withCompletionHandler completionHandler: ((Error?) -> Void)?) {
         // Recall internal notification center.
         userNotificationCenter.add(request, withCompletionHandler: completionHandler)
@@ -70,14 +54,4 @@ class UserNotificationCenterMock: NotificationCenter {
        // Recall internal notification center.
         userNotificationCenter.removePendingNotificationRequests(withIdentifiers: identifiers)
     }
-}
-
-/// Mock used to fake the settings for the delivery of user notifications.
-class NotificationSettingsMock: NotificationSettings {
-    
-    var soundSetting: UNNotificationSetting = .enabled
-    
-    var badgeSetting: UNNotificationSetting = .enabled
-    
-    var alertSetting: UNNotificationSetting = .enabled
 }
