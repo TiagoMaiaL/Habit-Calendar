@@ -218,8 +218,7 @@ extension UserNotificationManagerTests {
         
         // Make the content and trigger options out of the passed habit.
         let userNotificationOptions = notificationManager.makeNotificationOptions(
-            for: dummyHabit,
-            and: dummyNotification
+            for: dummyNotification
         )
         
         // Check on the content properties(texts).
@@ -263,13 +262,38 @@ extension UserNotificationManagerTests {
         // Test the factory for the user notification's trigger option when a
         // Notification entity is passed, and the authorization
         // is partially granted (no alerts, only badges and sounds).
-        XCTFail("Not implemented.")
+        
+        notificationCenterMock.shouldAuthorizeAlert = false
         
         // Declare the habit and notification (associated with a Habit dummy)
         // that needs to be passed.
+        guard let dummyHabit = factories.habit.makeDummy() as? Habit else {
+            XCTFail("Dummy habit couldn't be generated.")
+            return
+        }
+        guard let dummyNotification = (dummyHabit.notifications as? Set<Active.Notification>)?.first else {
+            XCTFail("Dummy notification couldn't be generated.")
+            return
+        }
         
         // Make the trigger out of the passed habit. The content options
         // must be nil (authorization to badges and icons only).
+        let options = notificationManager.makeNotificationOptions(for: dummyNotification)
+        
+        XCTAssertNil(options.content, "The option's content should be nil (no alert authorization granted).")
+        
+        // Try to get the trigger as a time interval trigger.
+        guard let trigger = options.trigger as? UNTimeIntervalNotificationTrigger else {
+            XCTFail("The user notification trigger is invalid.")
+            return
+        }
+        
+        // Check to see if the dates match.
+        XCTAssertEqual(
+            dummyNotification.getFireDate().description,
+            trigger.nextTriggerDate()!.description,
+            "The trigger's fire date has an invalid date compared to the notification's one."
+        )
     }
     
     func testSchedulingUserNotificationPassingEntity() {

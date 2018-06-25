@@ -12,9 +12,11 @@ import UserNotifications
 /// Protocol used to fake the authorization requests while testing.
 /// - Note: The authorization requests prompt the user to authorize.
 ///         When testing, it halts the test and fails.
-protocol TestableUserNotificationCenter {
+protocol NotificationCenter {
     
     func requestAuthorization(options: UNAuthorizationOptions, completionHandler: @escaping (Bool, Error?) -> Swift.Void)
+    
+//    func getNotificationSettings(completionHandler: @escaping (UNNotificationSettings) -> Swift.Void)
     
     func add(_ request: UNNotificationRequest, withCompletionHandler completionHandler: ((Error?) -> Swift.Void)?)
     
@@ -23,9 +25,19 @@ protocol TestableUserNotificationCenter {
     func removePendingNotificationRequests(withIdentifiers identifiers: [String])
 }
 
+/// Protocol used to fake the user notification settings while testing.
+protocol NotificationSettings {
+    
+    var soundSetting: UNNotificationSetting { get }
+    
+    var badgeSetting: UNNotificationSetting { get }
+    
+    var alertSetting: UNNotificationSetting { get }
+}
+
 /// Extension used only to declare the protocol implementation in the
 /// UNUserNotificationCenter implementation.
-extension UNUserNotificationCenter {}
+extension UNUserNotificationCenter: NotificationCenter {}
 
 /// Struct in charge of managing the creation, retrieval,
 /// and deletion of local user notification instances associated
@@ -35,11 +47,11 @@ struct UserNotificationManager {
     // MARK: Properties
     
     /// The notification center used to manage the local notifications
-    let notificationCenter: TestableUserNotificationCenter
+    let notificationCenter: NotificationCenter
     
     // MARK: Initializers
     
-    init(notificationCenter: TestableUserNotificationCenter) {
+    init(notificationCenter: NotificationCenter) {
         self.notificationCenter = notificationCenter
     }
     
@@ -134,18 +146,19 @@ extension UserNotificationManager {
     
     /// Creates the user notification options (content and trigger)
     /// from the passed habit and notification entities.
-    /// - Parameter habit: The habit associated with the user notification.
     /// - Parameter notification: The notification from which the user
     ///                           notification will be generated.
-    func makeNotificationOptions(
-        for habit: Habit,
-        and notification: Notification) -> UserNotificationOptions {
+    func makeNotificationOptions(for notification: Notification) -> UserNotificationOptions {
+        
+        var content: UNMutableNotificationContent?
         
         // Declare the notification contents with the correct attributes.
-        let content = UNMutableNotificationContent()
-        content.title = habit.getTitleText()
-        content.subtitle = habit.getSubtitleText()
-        content.body = habit.getDescriptionText()
+        if let habit = notification.habit {
+            content = UNMutableNotificationContent()
+            content!.title = habit.getTitleText()
+            content!.subtitle = habit.getSubtitleText()
+            content!.body = habit.getDescriptionText()
+        }
         
         // Declare the notification trigger with the correct date.
         let trigger = UNTimeIntervalNotificationTrigger(
