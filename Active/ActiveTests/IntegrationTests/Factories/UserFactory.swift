@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+@testable import Active
 
 /// Factory in charge of generating User (entity) dummies.
 struct UserFactory: DummyFactory {

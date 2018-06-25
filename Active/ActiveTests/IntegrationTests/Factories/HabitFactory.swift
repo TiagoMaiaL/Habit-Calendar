@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+@testable import Active
 
 /// Factory in charge of generating Day (entity) dummies.
 struct HabitFactory: DummyFactory {
@@ -42,7 +43,7 @@ struct HabitFactory: DummyFactory {
         // Associate 3 Notification dummies.
         // Associate 3 HabitDay dummies.
         for _ in 1...3 {
-            if let notification = notificationFactory.makeDummy() as? Notification {
+            if let notification = notificationFactory.makeDummy() as? Active.Notification {
                 habit.addToNotifications(notification)
             }
             if let habitDay = habitDayFactory.makeDummy() as? HabitDay {

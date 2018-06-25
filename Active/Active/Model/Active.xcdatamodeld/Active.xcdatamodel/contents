@@ -8,8 +8,8 @@
     <entity name="Habit" representedClassName=".Habit" syncable="YES" codeGenerationType="category">
         <attribute name="color" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="created" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" attributeType="String" syncable="YES"/>
+        <attribute name="name" attributeType="String" syncable="YES"/>
         <attribute name="score" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="days" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="HabitDay" inverseName="habit" inverseEntity="HabitDay" syncable="YES"/>
         <relationship name="notifications" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Notification" inverseName="habit" inverseEntity="Notification" syncable="YES"/>
@@ -34,7 +34,7 @@
     </entity>
     <elements>
         <element name="Day" positionX="-3177" positionY="-3708" width="128" height="90"/>
-        <element name="Habit" positionX="-3215" positionY="-3922" width="128" height="163"/>
+        <element name="Habit" positionX="-3215" positionY="-3922" width="128" height="28"/>
         <element name="HabitDay" positionX="-3395" positionY="-3715" width="128" height="105"/>
         <element name="Notification" positionX="-2961" positionY="-3889" width="128" height="103"/>
         <element name="User" positionX="-3213" positionY="-4068" width="128" height="90"/>

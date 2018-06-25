@@ -17,6 +17,34 @@ class Habit: NSManagedObject {
     override func prepareForDeletion() {
         // TODO: Check what needs to be done in case of a deletion in this entity.
     }
+    
+    // MARK: Imperatives
+    
+    /// Gets the habit title text.
+    /// - Note: The habit title text may be used for user notifications
+    ///         and to display the habit's info in the list or graphics.
+    /// - Returns: The habit's title string.
+    func getTitleText() -> String {
+        assert(name != nil, "Habit's name must have a value.")
+        return name!
+    }
+    
+    /// Gets the habit subtitle text.
+    /// - Note: The habit subtitle text may be used for user
+    ///         notifications and to display the habit's info.
+    /// - Returns: The habit's subtitle string.
+    func getSubtitleText() -> String {
+        // TODO: Make this localized.
+        return "Have you practiced this activity?"
+    }
+    
+    /// Gets the habit description text.
+    /// - Note: The habit description text is used for user
+    ///         notifications.
+    /// - Returns: The habit's description string.
+    func getDescriptionText() -> String {
+        return ""
+    }
 }
 
 /// Enum representing all possible colors a habit entity can have as a property.

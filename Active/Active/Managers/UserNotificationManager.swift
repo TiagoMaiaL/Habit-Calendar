@@ -121,3 +121,26 @@ struct UserNotificationManager {
         )
     }
 }
+
+/// Extension in charge of adding facility methods to deal with Notification
+/// and Habit entities.
+extension UserNotificationManager {
+    
+    // MARK: Types
+    
+    typealias UserNotificationOptions = (content: UNNotificationContent?, trigger: UNNotificationTrigger?)
+    
+    // MARK: Imperatives
+    
+    /// Creates the user notification options (content and trigger)
+    /// from the passed habit and notification entities.
+    /// - Parameter habit: The habit associated with the user notification.
+    /// - Parameter notification: The notification from which the user
+    ///                           notification will be generated.
+    func makeNotificationOptions(
+        for habit: Habit,
+        and notification: Notification) -> UserNotificationOptions {
+        return (content: nil, trigger: nil)
+    }
+    
+}

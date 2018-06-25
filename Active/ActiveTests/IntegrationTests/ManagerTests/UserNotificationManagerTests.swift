@@ -206,18 +206,17 @@ extension UserNotificationManagerTests {
         
         // Declare the habit and notification (associated with a Habit dummy)
         // that needs to be passed.
-        guard let dummyHabit = factories.habit.makeDummy() as? Habit else {
+        guard let dummyHabit = factories.habit.makeDummy() as? Active.Habit else {
             XCTFail("Couldn't generate a dummy habit.")
             return
         }
         
-        guard let dummyNotification = (dummyHabit.notifications as? Set<Notification>)?.first else {
+        guard let dummyNotification = (dummyHabit.notifications as? Set<Active.Notification>)?.first else {
             XCTFail("Couldn't generate a dummy notification.")
             return
         }
         
         // Make the content and trigger options out of the passed habit.
-//        (content: UNNotificationContent, trigger: UNNotificationTrigger)
         let userNotificationOptions = notificationManager.makeNotificationOptions(
             for: dummyHabit,
             and: dummyNotification
@@ -229,29 +228,32 @@ extension UserNotificationManagerTests {
             "The generated user notification should be set."
         )
         XCTAssertEqual(
-            userNotificationOptions.content.title,
+            userNotificationOptions.content!.title,
             dummyHabit.getTitleText(),
             "The user notification content should have the correct title text."
         )
         XCTAssertEqual(
-            userNotificationOptions.content.subtitle,
+            userNotificationOptions.content!.subtitle,
             dummyHabit.getSubtitleText(),
             "The user notification content should have the correct subtitle text."
         )
         XCTAssertEqual(
-            userNotificationOptions.content.body,
+            userNotificationOptions.content!.body,
             dummyHabit.getDescriptionText(),
             "The user notification content should have the correct description text."
         )
         
+        // Declare the trigger as a UNTitmeIntervalNotificationTrigger.
+        let dateTrigger = userNotificationOptions.trigger as? UNTimeIntervalNotificationTrigger
+        
         // Check on the trigger properties(date).
         XCTAssertNotNil(
-            userNotificationOptions.trigger,
+            dateTrigger,
             "The user notification trigger should be set."
         )
         XCTAssertEqual(
-            userNotificationOptions.trigger.nextTriggerDate(),
-            dummyHabit.notification.fireDate,
+            dateTrigger!.nextTriggerDate(),
+            dummyNotification.fireDate,
             "The user notification trigger should have the correct fire date."
         )
     }

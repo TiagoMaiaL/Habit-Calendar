@@ -17,23 +17,18 @@
 		4725D05F20C97D9C00C3B63F /* UserStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4725D05E20C97D9C00C3B63F /* UserStorage.swift */; };
 		4725D06120CA06EE00C3B63F /* DayStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4725D06020CA06EE00C3B63F /* DayStorage.swift */; };
 		4725D06320CA14A600C3B63F /* HabitDayStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4725D06220CA14A600C3B63F /* HabitDayStorage.swift */; };
-		474A208F20CEEBC600E0EBD0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4713A1FB20C1643E008A13D2 /* User.swift */; };
-		474A209020CEEBC900E0EBD0 /* Habit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4713A1FD20C16459008A13D2 /* Habit.swift */; };
-		474A209120CEEBCC00E0EBD0 /* HabitDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4713A1FF20C164E6008A13D2 /* HabitDay.swift */; };
-		474A209220CEEBCF00E0EBD0 /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4713A20120C164FB008A13D2 /* Day.swift */; };
-		474A209320CEEBD200E0EBD0 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4713A20320C16542008A13D2 /* Notification.swift */; };
 		474A209520D00AFA00E0EBD0 /* DayStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474A209420D00AFA00E0EBD0 /* DayStorageTests.swift */; };
 		474A209720D1B02700E0EBD0 /* HabitStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474A209620D1B02700E0EBD0 /* HabitStorageTests.swift */; };
 		474A209C20D1B51300E0EBD0 /* DateUtilsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474A209B20D1B51300E0EBD0 /* DateUtilsTests.swift */; };
 		474F9C8620CC7E180094C19C /* Date+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474F9C8520CC7E180094C19C /* Date+Utils.swift */; };
 		474F9C8A20CE3F670094C19C /* IntegrationTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474F9C8920CE3F670094C19C /* IntegrationTestCase.swift */; };
-		474F9C8B20CEE1AF0094C19C /* Active.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 47F635F620BB920900AC4555 /* Active.xcdatamodeld */; };
 		474F9C8D20CEE2840094C19C /* UserStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474F9C8C20CEE2840094C19C /* UserStorageTests.swift */; };
 		475C96A220DEFB4C00212E1F /* DummyFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475C96A120DEFB4C00212E1F /* DummyFactory.swift */; };
 		475C96A420DEFC9500212E1F /* DayFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475C96A320DEFC9500212E1F /* DayFactory.swift */; };
 		475C96A620DEFEBC00212E1F /* HabitFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475C96A520DEFEBC00212E1F /* HabitFactory.swift */; };
 		475C96A820DF20A500212E1F /* NotificationFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475C96A720DF20A500212E1F /* NotificationFactory.swift */; };
 		475C96AA20DF235000212E1F /* HabitDayFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475C96A920DF235000212E1F /* HabitDayFactory.swift */; };
+		475C96AD20E1216D00212E1F /* HabitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475C96AC20E1216D00212E1F /* HabitTests.swift */; };
 		4761DFD320DE692A003F772A /* UNUserNotificationCenterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4761DFD220DE692A003F772A /* UNUserNotificationCenterMock.swift */; };
 		4761DFD620DEEAA7003F772A /* UserFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4761DFD520DEEAA7003F772A /* UserFactory.swift */; };
 		4779588020D8ADA90080614F /* NotificationStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4779587F20D8ADA90080614F /* NotificationStorageTests.swift */; };
@@ -80,6 +75,7 @@
 		475C96A520DEFEBC00212E1F /* HabitFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitFactory.swift; sourceTree = "<group>"; };
 		475C96A720DF20A500212E1F /* NotificationFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationFactory.swift; sourceTree = "<group>"; };
 		475C96A920DF235000212E1F /* HabitDayFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitDayFactory.swift; sourceTree = "<group>"; };
+		475C96AC20E1216D00212E1F /* HabitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitTests.swift; sourceTree = "<group>"; };
 		4761DFD220DE692A003F772A /* UNUserNotificationCenterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UNUserNotificationCenterMock.swift; sourceTree = "<group>"; };
 		4761DFD520DEEAA7003F772A /* UserFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFactory.swift; sourceTree = "<group>"; };
 		4779587F20D8ADA90080614F /* NotificationStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationStorageTests.swift; sourceTree = "<group>"; };
@@ -184,14 +180,23 @@
 			path = StorageTests;
 			sourceTree = "<group>";
 		};
+		475C96AB20E0832A00212E1F /* ModelTests */ = {
+			isa = PBXGroup;
+			children = (
+				475C96AC20E1216D00212E1F /* HabitTests.swift */,
+			);
+			path = ModelTests;
+			sourceTree = "<group>";
+		};
 		4761DFD020DE68B8003F772A /* IntegrationTests */ = {
 			isa = PBXGroup;
 			children = (
 				474F9C8920CE3F670094C19C /* IntegrationTestCase.swift */,
-				4761DFD420DEB8D3003F772A /* Factory */,
+				4761DFD420DEB8D3003F772A /* Factories */,
 				4761DFD120DE68EB003F772A /* Mocks */,
 				47D8FC9C20DB28350094026B /* ManagerTests */,
 				474F9C8820CE3F470094C19C /* StorageTests */,
+				475C96AB20E0832A00212E1F /* ModelTests */,
 			);
 			path = IntegrationTests;
 			sourceTree = "<group>";
@@ -204,7 +209,7 @@
 			path = Mocks;
 			sourceTree = "<group>";
 		};
-		4761DFD420DEB8D3003F772A /* Factory */ = {
+		4761DFD420DEB8D3003F772A /* Factories */ = {
 			isa = PBXGroup;
 			children = (
 				475C96A120DEFB4C00212E1F /* DummyFactory.swift */,
@@ -214,7 +219,7 @@
 				475C96A720DF20A500212E1F /* NotificationFactory.swift */,
 				475C96A920DF235000212E1F /* HabitDayFactory.swift */,
 			);
-			path = Factory;
+			path = Factories;
 			sourceTree = "<group>";
 		};
 		4779588120D8B2AC0080614F /* Managers */ = {
@@ -428,11 +433,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				474A209020CEEBC900E0EBD0 /* Habit.swift in Sources */,
+				475C96AD20E1216D00212E1F /* HabitTests.swift in Sources */,
 				474F9C8D20CEE2840094C19C /* UserStorageTests.swift in Sources */,
 				475C96AA20DF235000212E1F /* HabitDayFactory.swift in Sources */,
-				474A209320CEEBD200E0EBD0 /* Notification.swift in Sources */,
-				474A209220CEEBCF00E0EBD0 /* Day.swift in Sources */,
 				475C96A620DEFEBC00212E1F /* HabitFactory.swift in Sources */,
 				4761DFD620DEEAA7003F772A /* UserFactory.swift in Sources */,
 				47F6360820BB920D00AC4555 /* ActiveTests.swift in Sources */,
@@ -441,10 +444,7 @@
 				474A209C20D1B51300E0EBD0 /* DateUtilsTests.swift in Sources */,
 				475C96A220DEFB4C00212E1F /* DummyFactory.swift in Sources */,
 				474A209720D1B02700E0EBD0 /* HabitStorageTests.swift in Sources */,
-				474F9C8B20CEE1AF0094C19C /* Active.xcdatamodeld in Sources */,
-				474A209120CEEBCC00E0EBD0 /* HabitDay.swift in Sources */,
 				47D8FC9E20DC13990094026B /* UserNotificationManagerTests.swift in Sources */,
-				474A208F20CEEBC600E0EBD0 /* User.swift in Sources */,
 				474A209520D00AFA00E0EBD0 /* DayStorageTests.swift in Sources */,
 				4779588020D8ADA90080614F /* NotificationStorageTests.swift in Sources */,
 				474F9C8A20CE3F670094C19C /* IntegrationTestCase.swift in Sources */,

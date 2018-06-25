@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+@testable import Active
 
 /// Factory in charge of generating HabitDay (entity) dummies.
 struct HabitDayFactory: DummyFactory {
@@ -23,7 +24,7 @@ struct HabitDayFactory: DummyFactory {
     /// - Returns: The generated HabitDay dummy as a NSManagedObject.
     func makeDummy() -> NSManagedObject {
         // Declare a new habitDay entity.
-        let habitDay = HabitDay(context: container.viewContext)
+        let habitDay = Active.HabitDay(context: container.viewContext)
         
         // Associate it's properties (id, wasExecuted).
         habitDay.id = UUID().uuidString
