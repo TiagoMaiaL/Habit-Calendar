@@ -13,6 +13,11 @@ import CoreData
 /// Factory in charge of generating HabitDay (entity) dummies.
 struct HabitDayFactory: DummyFactory {
     
+    // MARK: Types
+    
+    // This factory generates entities of the HabitDay class.
+    typealias Entity = HabitDay
+    
     // MARK: Properties
     
     var container: NSPersistentContainer
@@ -22,7 +27,7 @@ struct HabitDayFactory: DummyFactory {
     /// Generates a new HabitDay dummy with it's associated Day dummy.
     /// - Note: The generated dummy doens't have an associated Habit dummy.
     /// - Returns: The generated HabitDay dummy as a NSManagedObject.
-    func makeDummy() -> NSManagedObject {
+    func makeDummy() -> HabitDay {
         // Declare a new habitDay entity.
         let habitDay = Active.HabitDay(context: container.viewContext)
         
@@ -34,9 +39,7 @@ struct HabitDayFactory: DummyFactory {
         let dayFactory = DayFactory(container: container)
         
         // Associate it with a Day dummy object.
-        if let day = dayFactory.makeDummy() as? Day {
-            habitDay.day = day
-        }
+        habitDay.day = dayFactory.makeDummy()
 
         // Return the created HabitDay dummy object.
         return habitDay

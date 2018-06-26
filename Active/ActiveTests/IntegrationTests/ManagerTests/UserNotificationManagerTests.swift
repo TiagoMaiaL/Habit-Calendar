@@ -206,10 +206,7 @@ extension UserNotificationManagerTests {
         
         // Declare the notification (associated with a Habit dummy)
         // that needs to be passed.
-        guard let dummyNotification = makeNotification() else {
-            XCTFail("Couldn't generate a dummy notification.")
-            return
-        }
+        let dummyNotification = makeNotification()
         
         // Make the content and trigger options out of the passed habit.
         let userNotificationOptions = notificationManager.makeNotificationOptions(
@@ -257,10 +254,7 @@ extension UserNotificationManagerTests {
         let expectation = XCTestExpectation(description: "Schedule an user notification by passing a Notification core data entity.")
         
         // Declare a dummy notification to be used.
-        guard let dummyNotification = makeNotification() else {
-            XCTFail("Couldn't generate a dummy notification.")
-            return
-        }
+        let dummyNotification = makeNotification()
         
         // Schedule it by passing the dummy entity.
         notificationManager.schedule(dummyNotification) { notification in
@@ -288,10 +282,7 @@ extension UserNotificationManagerTests {
         let expectation = XCTestExpectation(description: "Try to fetch the user notification request associated with a dummy notification.")
         
         // Declare a dummy Notification entity.
-        guard let dummyNotification = makeNotification() else {
-            XCTFail("Couldn't generate a dummy notification.")
-            return
-        }
+        let dummyNotification = makeNotification()
         
         // Schedule it using the manager.
         notificationManager.schedule(dummyNotification) { notification in
@@ -317,10 +308,7 @@ extension UserNotificationManagerTests {
         let expectation = XCTestExpectation(description: "Remove a schedule user notification request by passing a Notification entity.")
         
         // Declare a dummy Notification entity.
-        guard let dummyNotification = makeNotification() else {
-            XCTFail("Couldn't generate a dummy notification.")
-            return
-        }
+        let dummyNotification = makeNotification()
         
         // Schedule a notification request.
         notificationManager.schedule(dummyNotification) { notification in
@@ -339,21 +327,5 @@ extension UserNotificationManagerTests {
         }
         
         wait(for: [expectation], timeout: 0.1)
-    }
-    
-    // MARK: Imperatives
-    
-    /// Creates a dummy Notification core data entity.
-    /// - Returns: the dummy notification.
-    func makeNotification() -> Active.Notification? {
-        guard let dummyHabit = factories.habit.makeDummy() as? Active.Habit else {
-            return nil
-        }
-        
-        guard let dummyNotification = (dummyHabit.notifications as? Set<Active.Notification>)?.first else {
-            return nil
-        }
-        
-        return dummyNotification
-    }
+    }    
 }

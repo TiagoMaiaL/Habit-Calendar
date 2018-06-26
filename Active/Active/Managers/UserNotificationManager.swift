@@ -164,7 +164,7 @@ extension UserNotificationManager {
     ///                                finishes.
     func schedule(
         _ notification: Notification,
-        completionHandler: @escaping (Notification) -> ()) {
+        completionHandler: Optional<(Notification) -> ()> = nil) {
         
         // Declare the options used to schedule a new request.
         let options = makeNotificationOptions(for: notification)
@@ -174,7 +174,7 @@ extension UserNotificationManager {
             // Associate the returned request id to the Notification entity.
             notification.userNotificationId = identifier
             
-            completionHandler(notification)
+            completionHandler?(notification)
         }
     }
     

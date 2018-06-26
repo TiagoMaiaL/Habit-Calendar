@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		470230D420E28A56003A1F6E /* HabitDayStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470230D320E28A56003A1F6E /* HabitDayStorageTests.swift */; };
 		4713A1FC20C1643E008A13D2 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4713A1FB20C1643E008A13D2 /* User.swift */; };
 		4713A1FE20C16459008A13D2 /* Habit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4713A1FD20C16459008A13D2 /* Habit.swift */; };
 		4713A20020C164E6008A13D2 /* HabitDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4713A1FF20C164E6008A13D2 /* HabitDay.swift */; };
@@ -54,6 +55,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		470230D320E28A56003A1F6E /* HabitDayStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitDayStorageTests.swift; sourceTree = "<group>"; };
 		4713A1FB20C1643E008A13D2 /* User.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; tabWidth = 4; };
 		4713A1FD20C16459008A13D2 /* Habit.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = Habit.swift; sourceTree = "<group>"; tabWidth = 4; };
 		4713A1FF20C164E6008A13D2 /* HabitDay.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = HabitDay.swift; sourceTree = "<group>"; tabWidth = 4; };
@@ -176,6 +178,7 @@
 				474A209420D00AFA00E0EBD0 /* DayStorageTests.swift */,
 				474A209620D1B02700E0EBD0 /* HabitStorageTests.swift */,
 				4779587F20D8ADA90080614F /* NotificationStorageTests.swift */,
+				470230D320E28A56003A1F6E /* HabitDayStorageTests.swift */,
 			);
 			path = StorageTests;
 			sourceTree = "<group>";
@@ -443,6 +446,7 @@
 				4761DFD320DE692A003F772A /* UNUserNotificationCenterMock.swift in Sources */,
 				474A209C20D1B51300E0EBD0 /* DateUtilsTests.swift in Sources */,
 				475C96A220DEFB4C00212E1F /* DummyFactory.swift in Sources */,
+				470230D420E28A56003A1F6E /* HabitDayStorageTests.swift in Sources */,
 				474A209720D1B02700E0EBD0 /* HabitStorageTests.swift in Sources */,
 				47D8FC9E20DC13990094026B /* UserNotificationManagerTests.swift in Sources */,
 				474A209520D00AFA00E0EBD0 /* DayStorageTests.swift in Sources */,

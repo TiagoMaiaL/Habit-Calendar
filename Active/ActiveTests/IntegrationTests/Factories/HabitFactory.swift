@@ -13,6 +13,11 @@ import CoreData
 /// Factory in charge of generating Day (entity) dummies.
 struct HabitFactory: DummyFactory {
     
+    // MARK: Types
+    
+    // This factory generates entities of the Habit class.
+    typealias Entity = Habit
+    
     // MARK: Properties
     
     var container: NSPersistentContainer
@@ -23,7 +28,7 @@ struct HabitFactory: DummyFactory {
     /// - Note: The dummy is related to other HabitDay
     ///         and Notification dummies.
     /// - Returns: The Habit entity as an NSManagedObject.
-    func makeDummy() -> NSManagedObject {
+    func makeDummy() -> Habit {
         // Declare the habit entity.
         let habit = Habit(context: container.viewContext)
         
@@ -43,12 +48,12 @@ struct HabitFactory: DummyFactory {
         // Associate 3 Notification dummies.
         // Associate 3 HabitDay dummies.
         for _ in 1...3 {
-            if let notification = notificationFactory.makeDummy() as? Active.Notification {
-                habit.addToNotifications(notification)
-            }
-            if let habitDay = habitDayFactory.makeDummy() as? HabitDay {
-                habit.addToDays(habitDay)
-            }
+            habit.addToNotifications(
+                notificationFactory.makeDummy()
+            )
+            habit.addToDays(
+                habitDayFactory.makeDummy()
+            )
         }
         
         return habit

@@ -48,28 +48,59 @@ class NotificationStorageTests: IntegrationTestCase {
     // MARK: Tests
     
     func testNotificationCreation() {
+        let RequestExpectation = XCTestExpectation(
+            description: "The created notification needs to have a scheduled user notification request associated with it."
+        )
+        
+        // Create a habit.
         let swimmingHabit = habitStorage.create(
             with: "Go swimming",
             days: [Date()]
         )
         
-        let fireDate = Date()
-        let notification = try? notificationStorage.create(
+        // Create the notification.
+        let fireDate = Date(timeInterval: 10, since: Date())
+        guard let notification = try? notificationStorage.create(
             withFireDate: fireDate,
             habit: swimmingHabit
+            ) else {
+                XCTFail("The storage's creation should return a valid Notification entity.")
+                return
+        }
+        
+        XCTAssertNotNil(
+            notification,
+            "The Notification entity shouldn't be nil."
+        )
+        // Check for id
+        XCTAssertNotNil(
+            notification.id,
+            "Notification id shouldn't be nil."
+        )
+        // Check for the correct fire date.
+        XCTAssertEqual(
+            fireDate,
+            notification.fireDate,
+            "Notification should have the correct fire date."
+        )
+        // Check for the habits property
+        XCTAssertEqual(
+            swimmingHabit,
+            notification.habit,
+            "The created notification has an invalid habit."
         )
         
-        XCTAssertNotNil(notification, "The Notification entity shouldn't be nil.")
-        // Check for id
-        XCTAssertNotNil(notification!.id, "Notification id shouldn't be nil.")
-        // Check for the correct fire date.
-        XCTAssertEqual(fireDate, notification!.fireDate, "Notification should have the correct fire date.")
-        // Check for the habits property
-        XCTAssertEqual(swimmingHabit, notification!.habit, "The created notification has an invalid habit.")
+        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { _ in
+            // Check if the entity has a user notification request
+            // associated with it.
+            XCTAssertNotNil(
+                notification.userNotificationId,
+                "The created notification should have an associated and scheduled user notification id."
+            )
+            RequestExpectation.fulfill()
+        }
         
-        // Check if the entity has a user notification associated with it.
-        XCTAssertNotNil(notification!.userNotificationId, "The created notification should have an associated and scheduled user notification id.")
-        XCTAssertNotNil(notification!.request, "The created notification should have the associated user notification request object.")
+        wait(for: [RequestExpectation], timeout: 0.2)
     }
     
     func testNotificationFetch() {
@@ -80,7 +111,7 @@ class NotificationStorageTests: IntegrationTestCase {
         )
         
         // Create a new notification
-        let fireDate = Date()
+        let fireDate = Date(timeInterval: 10, since: Date())
         let notification = try? notificationStorage.create(
             withFireDate: fireDate,
             habit: habit
@@ -109,7 +140,7 @@ class NotificationStorageTests: IntegrationTestCase {
         )
         
         // Create a new notification
-        let fireDate = Date()
+        let fireDate = Date(timeInterval: 10, since: Date())
         _ = try? notificationStorage.create(
             withFireDate: fireDate,
             habit: habit
@@ -132,7 +163,7 @@ class NotificationStorageTests: IntegrationTestCase {
         )
         
         // Create a new notification
-        let fireDate = Date()
+        let fireDate = Date(timeInterval: 10, since: Date())
         let notification = try? notificationStorage.create(
             withFireDate: fireDate,
             habit: habit

@@ -13,13 +13,20 @@ import CoreData
 /// Factory in charge of generating Day (entity) dummies.
 struct DayFactory: DummyFactory {
     
+    // MARK: Types
+    
+    // This factory generates entities of the Day class.
+    typealias Entity = Day
+    
     // MARK: Properties
     
     var container: NSPersistentContainer
     
     // MARK: Imperatives
     
-    func makeDummy() -> NSManagedObject {
+    /// Makes a day entity with the current day as it's date.
+    /// - Returns: A new day entity.
+    func makeDummy() -> Day {
         // Declare a new Day entity.
         let day = Day(context: container.viewContext)
         

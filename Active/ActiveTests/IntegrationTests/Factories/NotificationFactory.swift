@@ -13,6 +13,11 @@ import CoreData
 /// Factory in charge of generating Notification (entity) dummies.
 struct NotificationFactory: DummyFactory {
     
+    // MARK: Types
+    
+    // This factory generates entities of the Notification class.
+    typealias Entity = Active.Notification
+    
     // MARK: Properties
     
     var container: NSPersistentContainer
@@ -24,7 +29,7 @@ struct NotificationFactory: DummyFactory {
     ///         an assciated habit object, and it doesn't have a user
     ///         notification id.
     /// - Returns: A generated Notification dummy as a NSManagedObject.
-    func makeDummy() -> NSManagedObject {
+    func makeDummy() -> Active.Notification {
         // Declare the Notification entity.
         let notification = Notification(context: container.viewContext)
         

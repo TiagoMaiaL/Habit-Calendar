@@ -21,10 +21,7 @@ class HabitTests: IntegrationTestCase {
         let habitName = "Read more"
         
         // Create a dummy Habit.
-        guard let dummyHabit = factories.habit.makeDummy() as? Habit else {
-            XCTFail("Dummy habit couldn't be generated.")
-            return
-        }
+        let dummyHabit = factories.habit.makeDummy()
         dummyHabit.name = habitName
         
         // Get the title text.
@@ -39,10 +36,7 @@ class HabitTests: IntegrationTestCase {
         let expectedSubtitle = "Have you practiced this activity?"
         
         // Create a dummy habit.
-        guard let dummyHabit = factories.habit.makeDummy() as? Habit else {
-            XCTFail("Dummy habit couldn't be generated.")
-            return
-        }
+        let dummyHabit = factories.habit.makeDummy()
         
         // Assert the habit's subtitle is the expected one.
         XCTAssertEqual(dummyHabit.getSubtitleText(), expectedSubtitle)

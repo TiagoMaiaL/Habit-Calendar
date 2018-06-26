@@ -12,6 +12,11 @@ import CoreData
 
 /// Factory in charge of generating User (entity) dummies.
 struct UserFactory: DummyFactory {
+
+    // MARK: Types
+    
+    // This factory generates entities of the User class.
+    typealias Entity = User
     
     // MARK: Properties
     
@@ -20,7 +25,7 @@ struct UserFactory: DummyFactory {
     // MARK: Imperatives
     
     /// Creates an User entity object.
-    func makeDummy() -> NSManagedObject {
+    func makeDummy() -> User {
         // Create the entity.
         let user = User(context: container.viewContext)
         

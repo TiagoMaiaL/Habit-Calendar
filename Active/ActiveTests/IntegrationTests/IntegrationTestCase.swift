@@ -20,11 +20,11 @@ class IntegrationTestCase: XCTestCase {
     var memoryPersistentContainer: NSPersistentContainer!
     
     /// The factories used to generate dummies from each core data entity.
-    var factories: (user: DummyFactory,
-                    habit: DummyFactory,
-                    notification: DummyFactory,
-                    day: DummyFactory,
-                    habitDay: DummyFactory)!
+    var factories: (user: UserFactory,
+                    habit: HabitFactory,
+                    notification: NotificationFactory,
+                    day: DayFactory,
+                    habitDay: HabitDayFactory)!
     
     // MARK: setup/tearDown
     
@@ -81,4 +81,21 @@ class IntegrationTestCase: XCTestCase {
         return container
     }
     
+    /// Helper method to create a dummy Notification entity
+    /// from a dummy Habit.
+    /// - Returns: the dummy notification.
+    func makeNotification() -> Active.Notification {
+        // Declare the dummy habit.
+        let dummyHabit = factories.habit.makeDummy()
+        
+        // Declare the dummy notification out of the passed habit.
+        guard let dummyNotification = (dummyHabit.notifications as? Set<Active.Notification>)?.first else {
+            assertionFailure(
+                "A notification object must be retrieved from a dummy Habit"
+            )
+            return factories.notification.makeDummy()
+        }
+        
+        return dummyNotification
+    }
 }
