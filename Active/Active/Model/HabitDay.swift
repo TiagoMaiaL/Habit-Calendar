@@ -13,4 +13,12 @@ import CoreData
 ///         A calendar day can also have as many habits as the user wants.
 class HabitDay: NSManagedObject {
 
+    // MARK: Imperatives
+    
+    /// Marks that the habit associated with this entity
+    /// was executed or not.
+    /// - Parameter executed: Bool indicating execution, defaults to true.
+    func markAsExecuted(_ executed: Bool = true) {
+        wasExecuted = executed
+    }
 }

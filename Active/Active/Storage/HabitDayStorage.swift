@@ -42,13 +42,8 @@ class HabitDayStorage {
         var habitDays = [HabitDay]()
         
         for date in dates {
-            // Get the calendar Day entity from the storage.
-            // If a calendar Day entity wasn't found, a new Day entity should be created to
-            // hold the HabitDay entities.
-            let calendarDay = calendarDayStorage.day(for: date) ?? calendarDayStorage.create(withDate: date)
-            
             // Create the HabitDay entity from the Habit and calendar Day entities.
-            let habitDay = create(with: calendarDay, habit: habit)
+            let habitDay = create(with: date, habit: habit)
             
             habitDays.append(habitDay)
         }
@@ -57,13 +52,18 @@ class HabitDayStorage {
     }
     
     /// Creates a HabitDay entity with the provided calendar day and habit.
-    /// - Parameter day: the calendar day associated with the entity.
+    /// - Parameter date: the calendar date to be associated with the entity.
     /// - Parameter habit: The habit associated with the entity.
     /// - Returns: the created entity.
-    func create(with day: Day, habit: Habit) -> HabitDay {
+    func create(with date: Date, habit: Habit) -> HabitDay {
         let habitDay = HabitDay(context: container.viewContext)
         
-        habitDay.day = day
+        // Get the calendar Day entity from the storage.
+        // If a calendar Day entity wasn't found, a new Day entity should be
+        // created to hold the HabitDay entities.
+        let calendarDay = calendarDayStorage.day(for: date) ?? calendarDayStorage.create(withDate: date)
+        
+        habitDay.day = calendarDay
         habitDay.habit = habit
         // Starts with wasExecuted as false.
         habitDay.wasExecuted = false
@@ -73,8 +73,9 @@ class HabitDayStorage {
     
     /// Deletes the provided HabitDay entity from the storage.
     /// - Parameter habitDay: The entity to be deleted.
-    func delete(habitDay: HabitDay) {
+    func delete(_ habitDay: HabitDay) {
         container.viewContext.delete(habitDay)
+        try? container.viewContext.save()
     }
     
 }
