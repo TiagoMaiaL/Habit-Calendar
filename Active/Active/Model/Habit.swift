@@ -12,6 +12,26 @@ import CoreData
 /// - Note: The user can have as many habits as he/she wants.
 class Habit: NSManagedObject {
     
+    // MARK: Properties
+    
+    /// The count of days in which the habit was marked
+    /// as executed.
+    var executedCount: Int {
+        let predicate = NSPredicate(
+            format: "wasExecuted == true"
+        )
+        return days?.filtered(using: predicate).count ?? 0
+    }
+    
+    /// The percentage of executed days out of all days.
+    var executionPercentage: Double {
+        if let daysCount = days?.count,
+            daysCount > 0 {
+            return Double(executedCount) / Double(daysCount) * 100
+        }
+        return 0
+    }
+    
     // MARK: Life cycle
     
     override func prepareForDeletion() {
