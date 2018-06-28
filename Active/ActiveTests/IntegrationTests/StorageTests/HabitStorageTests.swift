@@ -15,6 +15,10 @@ class HabitStorageTests: IntegrationTestCase {
     
     // MARK: Properties
     
+    var dayStorage: DayStorage!
+    
+    var habitDayStorage: HabitDayStorage!
+    
     var habitStorage: HabitStorage!
     
     // MARK: setup/tearDown
@@ -22,13 +26,27 @@ class HabitStorageTests: IntegrationTestCase {
     override func setUp() {
         super.setUp()
         
+        // Initialize the DayStorage.
+        dayStorage = DayStorage(container: memoryPersistentContainer)
+        
+        // Initialize the HabitDayStorage.
+        habitDayStorage = HabitDayStorage(
+            container: memoryPersistentContainer,
+            calendarDayStorage: dayStorage
+        )
+        
         // Initialize dayStorage using the persistent container created for tests.
-        habitStorage = HabitStorage(container: memoryPersistentContainer)
+        habitStorage = HabitStorage(
+            container: memoryPersistentContainer,
+            habitDayStorage: habitDayStorage
+        )
     }
     
     override func tearDown() {
-        // Remove the initialized storage class.
+        // Remove the initialized storages.
         habitStorage = nil
+        habitDayStorage = nil
+        dayStorage = nil
         
         super.tearDown()
     }
@@ -55,28 +73,52 @@ class HabitStorageTests: IntegrationTestCase {
         )
         
         // Check the habit's id property.
-        XCTAssertNotNil(joggingHabit.id, "Created Habit entities should have an id.")
+        XCTAssertNotNil(
+            joggingHabit.id,
+            "Created Habit entities should have an id."
+        )
         
         // Check the habit's name.
-        XCTAssertEqual(joggingHabit.name, name)
+        XCTAssertEqual(
+            joggingHabit.name,
+            name
+        )
         // Check the habit's created property.
-        XCTAssertNotNil(joggingHabit.created, "Created habit should have the creation date.")
+        XCTAssertNotNil(
+            joggingHabit.created,
+            "Created habit should have the creation date."
+        )
         
         // Check the habit's days.
-        XCTAssertNotNil(joggingHabit.days, "Created habit should have the HabitDays property.")
-        XCTAssert(joggingHabit.days!.count == days.count, "Created habit should have the correct amount of HabitDays.")
+        XCTAssertNotNil(
+            joggingHabit.days,
+            "Created habit should have the HabitDays property."
+        )
+        XCTAssert(
+            joggingHabit.days!.count == days.count,
+            "Created habit should have the expected amount of HabitDays."
+        )
         
-        // TODO: Use guard instead.
-        if let habitDays = joggingHabit.days as? Set<HabitDay> {
-            for habitDay in habitDays {
-                // Check if the Day's date is in the provided dates.
-                // If it isn't, the HabitDays creation went wrong.
-                XCTAssertNotNil(habitDay.day, "The habitDay should have a valid Day relationship.")
-                XCTAssertNotNil(habitDay.day!.date, "The habitDay's Day entity should have a valid date property.")
-                XCTAssert(days.contains(habitDay.day!.date!), "The Day's date should have a valid date (matching with the provided ones in the Habit creation).")
-            }
-        } else {
+        guard let habitDays = joggingHabit.days as? Set<HabitDay> else {
             XCTFail("Couldn't cast the days property to a Set with HabitDay entities.")
+            return
+        }
+        
+        for habitDay in habitDays {
+            // Check if the Day's date is in the provided dates.
+            // If it isn't, the HabitDays creation went wrong.
+            XCTAssertNotNil(
+                habitDay.day,
+                "The habitDay should have a valid Day relationship."
+            )
+            XCTAssertNotNil(
+                habitDay.day!.date,
+                "The habitDay's Day entity should have a valid date property."
+            )
+            XCTAssert(
+                days.contains(habitDay.day!.date!),
+                "The Day's date should have a valid date (matching with the provided ones in the Habit creation)."
+            )
         }
     }
     

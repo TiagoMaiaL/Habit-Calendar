@@ -15,14 +15,21 @@ class HabitStorage {
     // MARK: - Properties
     
     /// The persistent container used by the storage.
-    let container: NSPersistentContainer
+    private let container: NSPersistentContainer
+    
+    /// The HabitDayStorage used to create the habit days associated
+    /// with the habits..
+    private let habitDayStorage: HabitDayStorage
     
     // MARK: - Initializers
     
     /// Creates a new HabitStorage class using the provided persistent container.
     /// - Parameter container: the persistent container used by the storage.
-    init(container: NSPersistentContainer) {
+    /// - Parameter habitDayStorage: The storage used to manage habitDays.
+    init(container: NSPersistentContainer,
+         habitDayStorage: HabitDayStorage) {
         self.container = container
+        self.habitDayStorage = habitDayStorage
     }
     
     // MARK: - Imperatives
@@ -54,6 +61,7 @@ class HabitStorage {
 //                color: HabitColor,
                 days: [Date]) -> Habit {
         // TODO: Is it better to use a second queue to add new instances?
+        
         // Declare a new habit instance.
         let habit = Habit(context: container.viewContext)
         habit.id = UUID().uuidString
@@ -62,8 +70,10 @@ class HabitStorage {
 //        habit.color = color.getPersistenceIdentifier()
         
         // Create the HabitDay entities associated with the new habit.
-        // TODO: Add the routine to create the day entities.
-        habit.addToDays([])
+        _ = habitDayStorage.createDays(
+            with: days,
+            habit: habit
+        )
         
         return habit
     }
@@ -95,8 +105,10 @@ class HabitStorage {
             }
             
             // Add the passed days to the entity.
-            // TODO: Add the routine to create the day entities.
-            habit.addToDays([])
+            _ = habitDayStorage.createDays(
+                with: days,
+                habit: habit
+            )
         }
         
         if let notifications = notifications {

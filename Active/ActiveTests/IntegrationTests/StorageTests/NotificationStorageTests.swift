@@ -18,6 +18,8 @@ class NotificationStorageTests: IntegrationTestCase {
     // MARK: Properties
     
     var notificationManager: UserNotificationManager!
+    var dayStorage: DayStorage!
+    var habitDayStorage: HabitDayStorage!
     var habitStorage: HabitStorage!
     var notificationStorage: NotificationStorage!
     
@@ -26,8 +28,20 @@ class NotificationStorageTests: IntegrationTestCase {
     override func setUp() {
         super.setUp()
         
+        // Initialize day storage.
+        dayStorage = DayStorage(container: memoryPersistentContainer)
+        
+        // Initialize habitDay storage.
+        habitDayStorage = HabitDayStorage(
+            container: memoryPersistentContainer,
+            calendarDayStorage: dayStorage
+        )
+        
         // Initialize habit storage.
-        habitStorage = HabitStorage(container: memoryPersistentContainer)
+        habitStorage = HabitStorage(
+            container: memoryPersistentContainer,
+            habitDayStorage: habitDayStorage
+        )
         
         // Initialize notification manager.
         notificationManager = UserNotificationManager(notificationCenter: UserNotificationCenterMock(withAuthorization: true))
