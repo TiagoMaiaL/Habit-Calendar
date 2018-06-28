@@ -23,7 +23,22 @@ struct HabitFactory: DummyFactory {
     var container: NSPersistentContainer
     
     /// The maximum number of days contained within the generated dummy.
-    let maxNumberOfDays = 61
+    private let maxNumberOfDays = 61
+    
+    /// A collection of dummy habit names.
+    private let names = [
+        "Play the guitar",
+        "Play the piano",
+        "Go jogging",
+        "Play chess",
+        "Read",
+        "Go swimming",
+        "Workout",
+        "Write",
+        "Study math",
+        "Program",
+        "Learn to dance"
+    ]
     
     // MARK: Imperatives
     
@@ -38,8 +53,9 @@ struct HabitFactory: DummyFactory {
         // Associate it's properties (id, created, name, color).
         habit.id = UUID().uuidString
         habit.created = Date()
-        // TODO: make the name and color properties become random.
-        habit.name = "Dummy Habit"
+        habit.name = names[Int.random(0..<names.count)]
+        // TODO: Make the color be a random value.
+        // Write the enum first.
         habit.color = "Green"
         
         // Declare a NotificationFactory's instance.
@@ -48,10 +64,7 @@ struct HabitFactory: DummyFactory {
         // Declare a HabitDayFactory's instance.
         let habitDayFactory = HabitDayFactory(container: container)
         
-        // TODO: Make the days and notifications become random.
         // Associate it's relationships:
-        // Associate 3 Notification dummies.
-        // Associate 3 HabitDay dummies.
         let randomRange = 0..<Int.random(2..<maxNumberOfDays)
         for dayIndex in randomRange {
             // Declare the current day's date.
@@ -66,6 +79,7 @@ struct HabitFactory: DummyFactory {
                 dummyHabitDay.day?.date = dayDate
                 dummyNotification.fireDate = dayDate
                 
+                // Associate the notification and day to the habit entity.
                 habit.addToNotifications(
                     dummyNotification
                 )
