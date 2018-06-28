@@ -12,6 +12,13 @@ import CoreData
 /// Class in charge of storing calendar Day entities.
 class DayStorage {
     
+    // MARK: Types
+    
+    // TODO: Make these storage errors more generic.
+    enum DayStorageError: Error {
+        case dayAlreadyCreated
+    }
+    
     // MARK: Properties
     
     /// The persistent container used by the storage.
@@ -29,8 +36,15 @@ class DayStorage {
     
     /// Creates and persists a calendar day instance.
     /// - Parameter date: the date associated with the day entity.
+    /// - Throws: An error when a Day with the same date already exists.
     /// - Returns: the created calendar day.
-    func create(withDate date: Date) -> Day {
+    func create(withDate date: Date) throws -> Day {
+        // Check if an entity with the same date already exists.
+        // If so, throw an error.
+        if self.day(for: date) != nil {
+            throw DayStorageError.dayAlreadyCreated
+        }
+        
         let day = Day(context: container.viewContext)
         day.id = UUID().uuidString
         day.date = date

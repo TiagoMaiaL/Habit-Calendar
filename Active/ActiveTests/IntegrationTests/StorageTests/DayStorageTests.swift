@@ -39,21 +39,35 @@ class DayStorageTests: IntegrationTestCase {
         // Declare the date to be represented by the day entity.
         let dayDate = Date()
         // Create the day by passing the declared date.
-        let day = dayStorage.create(withDate: dayDate)
+        let day = try? dayStorage.create(withDate: dayDate)
         
         // Assert the day isn't nil and has the correct date.
+        XCTAssertNotNil(
+            day,
+            "The created day shouldn't be nil."
+        )
         XCTAssertEqual(
-            day.date,
+            day!.date,
             dayDate,
             "The created Day entity should have the correct date property."
         )
         XCTAssertNotNil(
-            day.id,
+            day!.id,
             "The created Day entity should have an id."
         )
     }
     
-    // TODO: Creating a day twice should throw an exception.
+    func testTheCreationOfTheSameDayTwiceShouldThrow() {
+        // Create a dummy day.
+        let dummyDay = factories.day.makeDummy()
+        
+        // Try to create another day with the same date.
+        // Assert that the attempt throws an error.
+        XCTAssertThrowsError(
+            try dayStorage.create(withDate: dummyDay.date!),
+            "The attempt to create the same day more than once should throw an error."
+        )
+    }
     
     func testSpecificDayFetching() {
         // Create the dummy day and hold its date for comparision.
@@ -68,7 +82,7 @@ class DayStorageTests: IntegrationTestCase {
         // Assert that the fetched day's date is right.
         XCTAssertNotNil(
             fetchedDay,
-            "The created day should be correctly fetched."
+            "The dummy day should be correctly fetched."
         )
         XCTAssertEqual(
             date,
