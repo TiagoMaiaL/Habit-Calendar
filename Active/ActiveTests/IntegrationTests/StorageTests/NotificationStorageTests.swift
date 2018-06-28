@@ -52,17 +52,14 @@ class NotificationStorageTests: IntegrationTestCase {
             description: "The created notification needs to have a scheduled user notification request associated with it."
         )
         
-        // Create a habit.
-        let swimmingHabit = habitStorage.create(
-            with: "Go swimming",
-            days: [Date()]
-        )
+        // Create a dummy habit.
+        let dummyHabit = factories.habit.makeDummy()
         
         // Create the notification.
         let fireDate = Date(timeInterval: 10, since: Date())
         guard let notification = try? notificationStorage.create(
             withFireDate: fireDate,
-            habit: swimmingHabit
+            habit: dummyHabit
             ) else {
                 XCTFail("The storage's creation should return a valid Notification entity.")
                 return
@@ -85,7 +82,7 @@ class NotificationStorageTests: IntegrationTestCase {
         )
         // Check for the habits property
         XCTAssertEqual(
-            swimmingHabit,
+            dummyHabit,
             notification.habit,
             "The created notification has an invalid habit."
         )
@@ -104,86 +101,52 @@ class NotificationStorageTests: IntegrationTestCase {
     }
     
     func testNotificationFetch() {
-        // Create a new habit
-        let habit = habitStorage.create(
-            with: "walk every day",
-            days: [Date()]
-        )
-        
-        // Create a new notification
-        let fireDate = Date(timeInterval: 10, since: Date())
-        let notification = try? notificationStorage.create(
-            withFireDate: fireDate,
-            habit: habit
-        )
+        // Create a dummy notification.
+        let dummyNotification = makeNotification()
         
         // Try to fetch the created notification
         let fetchedNotification = notificationStorage.notification(
-            forHabit: habit,
-            andDate: fireDate
+            forHabit: dummyNotification.habit!,
+            andDate: dummyNotification.fireDate!
         )
         
-        XCTAssertNotNil(notification, "The Notification entity shouldn't be nil.")
         // Check if method fetches the created notification.
         XCTAssertNotNil(fetchedNotification, "Created notification should be fetched by using the notification method in the storage class.")
         // Check if notification's id matches.
-        XCTAssertEqual(notification!.id, fetchedNotification?.id, "Created notification should have the correct attributes.")
+        XCTAssertEqual(dummyNotification.id, fetchedNotification?.id, "Created notification should have the correct attributes.")
     }
     
     func testNotificationCreationTwiceShouldThrow() {
         // Trying to create the same notification entity should throw an error.
-        
-        // Create a new habit.
-        let habit = habitStorage.create(
-            with: "Play the guitar",
-            days: [Date()]
-        )
-        
-        // Create a new notification
-        let fireDate = Date(timeInterval: 10, since: Date())
-        _ = try? notificationStorage.create(
-            withFireDate: fireDate,
-            habit: habit
-        )
+        let dummyNotification = makeNotification()
         
         // Try to create another notification with the same data
         // and check to see if it throws the expected exception.
         XCTAssertThrowsError(
             _ = try notificationStorage.create(
-                withFireDate: fireDate,
-                habit: habit
+                withFireDate: dummyNotification.fireDate!,
+                habit: dummyNotification.habit!
             ), "Trying to create the same notification twice should throw an error.")
     }
     
     func testNotificationDeletion() {
-        // Create a new habit
-        let habit = habitStorage.create(
-            with: "walk every day",
-            days: [Date()]
-        )
-        
-        // Create a new notification
-        let fireDate = Date(timeInterval: 10, since: Date())
-        let notification = try? notificationStorage.create(
-            withFireDate: fireDate,
-            habit: habit
-        )
-        
-        XCTAssertNotNil(notification, "The Notification entity shouldn't be nil.")
-        // The new notification should be correctly fetched.
+        // Declare a dummy notification
+        let dummyNotification = makeNotification()
+
+        // The dummy notification should be correctly fetched.
         XCTAssertNotNil(notificationStorage.notification(
-            forHabit: habit,
-            andDate: fireDate
+            forHabit: dummyNotification.habit!,
+            andDate: dummyNotification.fireDate!
         ), "The previously created notification should be fetched.")
         
-        // Delete the created notification
-        notificationStorage.delete(notification!)
+        // Delete the dummy notification
+        notificationStorage.delete(dummyNotification)
         
-        // Try to fetch the previously created notification.
-        // Method shouldn't fetch any notification.
+        // Try to fetch the deleted dummy notification.
+        // The method shouldn't fetch nothing.
         XCTAssertNil(notificationStorage.notification(
-            forHabit: habit,
-            andDate: fireDate
+            forHabit: dummyNotification.habit!,
+            andDate: dummyNotification.fireDate!
         ), "The deleted notification shouldn't be fetched.")
     }
 }

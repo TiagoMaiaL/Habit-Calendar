@@ -96,6 +96,17 @@ class IntegrationTestCase: XCTestCase {
             return factories.notification.makeDummy()
         }
         
+        // Make assertions to ensure that the habit and
+        // fireDate properties are set.
+        assert(
+            dummyNotification.fireDate != nil,
+            "The fireDate property from the generated notification dummy should be set."
+        )
+        assert(
+            dummyNotification.habit != nil,
+            "The habit property from the generated notification dummy should be set."
+        )
+        
         return dummyNotification
     }
 }
