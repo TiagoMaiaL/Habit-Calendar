@@ -81,11 +81,10 @@ class HabitTests: IntegrationTestCase {
     }
     
     func testPercentageExecutionProperty() {
-        // TODO: Make the count randomly generated.
         // 1. Declare the number of days.
-        let numberOfDays = 25
+        let numberOfDays = Int.random(1..<26)
         // 1.1. Declare the number of executed days.
-        let numberOfExecutedDays = 10
+        let numberOfExecutedDays = Int.random(0..<numberOfDays)
         // 1.2. Declare the expected percentage.
         let executionPercentage = (Double(numberOfExecutedDays) / Double(numberOfDays)) * 100
         
