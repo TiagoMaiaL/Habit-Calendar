@@ -53,7 +53,7 @@ class HabitDayStorageTests: IntegrationTestCase {
         
         // 2. Declare the day's date.
         guard let date = Date().byAddingDays(3) else {
-            XCTFail("Couldn't generate the expected date.")
+            XCTFail("Couldn't generate a fake date.")
             return
         }
         
