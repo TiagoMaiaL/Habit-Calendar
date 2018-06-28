@@ -42,42 +42,62 @@ class DayStorageTests: IntegrationTestCase {
         let day = dayStorage.create(withDate: dayDate)
         
         // Assert the day isn't nil and has the correct date.
-        XCTAssertEqual(day.date, dayDate, "The created Day entity should have the correct date property.")
-        XCTAssertNotNil(day.id, "The created Day entity should have an id.")
+        XCTAssertEqual(
+            day.date,
+            dayDate,
+            "The created Day entity should have the correct date property."
+        )
+        XCTAssertNotNil(
+            day.id,
+            "The created Day entity should have an id."
+        )
     }
     
     // TODO: Creating a day twice should throw an exception.
     
     func testSpecificDayFetching() {
-        // Declare the date to be used to create an
-        // entity and fetch the created entity.
-        let dayDate = Date()
+        // Create the dummy day and hold its date for comparision.
+        guard let date = factories.day.makeDummy().date else {
+            XCTFail("The day dummy lacks the date property.")
+            return
+        }
         
-        // Create the day entity.
-        _ = dayStorage.create(withDate: dayDate)
-        
-        // Fetch the created entity.
-        let fetchedDay = dayStorage.day(for: dayDate)
+        // Fetch the generated dummy.
+        let fetchedDay = dayStorage.day(for: date)
         
         // Assert that the fetched day's date is right.
-        XCTAssertNotNil(fetchedDay, "The created day should be correctly fetched.")
-        XCTAssertEqual(dayDate, fetchedDay?.date, "The fetched Day's date should be correct.")
+        XCTAssertNotNil(
+            fetchedDay,
+            "The created day should be correctly fetched."
+        )
+        XCTAssertEqual(
+            date,
+            fetchedDay?.date, "The fetched Day's date should be correct."
+        )
     }
     
     func testDayDeletion() {
-        // Declare the day's date for creation and fetching.
-        let dayDate = Date()
+        // Create a dummy day and hold its date for fetching.
+        let dummyDay = factories.day.makeDummy()
+        guard let date = dummyDay.date else {
+            XCTFail("The day dummy lacks the date property.")
+            return
+        }
         
-        // Create a Day entity.
-        let createdDay = dayStorage.create(withDate: dayDate)
+        // Fetch the dummy day and ensure it's returned.
+        XCTAssertNotNil(
+            dayStorage.day(for: date),
+            "The created dummy should be correclty fetched before the deletion."
+        )
+        
         // Delete the created entity.
-        dayStorage.delete(day: createdDay)
+        dayStorage.delete(day: dummyDay)
         
-        // Try to fetch it.
-        let fetchedDay = dayStorage.day(for: dayDate)
-        
-        // Assert that nothing was fetched.
-        XCTAssertNil(fetchedDay, "The deleted Day's fetch attempt should return nil.")
+        // Try to fetch the dummy day again, now it shouldn't be fetched.
+        XCTAssertNil(
+            dayStorage.day(for: date),
+            "The deleted Day's fetch attempt should return nil."
+        )
     }
     
 }

@@ -44,6 +44,7 @@ struct HabitFactory: DummyFactory {
         // Declare a HabitDayFactory's instance.
         let habitDayFactory = HabitDayFactory(container: container)
         
+        // TODO: Make the days and notifications become random.
         // Associate it's relationships:
         // Associate 3 Notification dummies.
         // Associate 3 HabitDay dummies.
