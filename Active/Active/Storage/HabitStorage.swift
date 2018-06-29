@@ -96,9 +96,14 @@ class HabitStorage {
         if let days = days {
             assert(!days.isEmpty, "HabitStorage -- edit: days argument shouldn't be empty.")
             
-            if let days = habit.days as? Set<HabitDay> {
+            // Declare the predicate to filter for days greater
+            // than today (future days).
+            let futurePredicate = NSPredicate(
+                format: "day.date >= %@", Date().getBeginningOfDay() as NSDate
+            )
+            
+            if let days = habit.days?.filtered(using: futurePredicate) as? Set<HabitDay> {
                 // Remove the current days that are in the future.
-                // TODO: Check only for the days in the future.
                 for habitDay in days {
                     container.viewContext.delete(habitDay)
                 }

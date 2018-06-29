@@ -230,8 +230,58 @@ class HabitStorageTests: IntegrationTestCase {
     }
     
     func testHabitEditionWithDaysPropertiesThatAreOnlyInTheFuture() {
-        // TODO:
-        XCTFail("Not implemented.")
+        // 1. Declare a dummy habit.
+        let dummyHabit = factories.habit.makeDummy()
+        
+        // 2. Add 3 past (The date is before than today) habit days to it.
+        let pastDays = (1...3).compactMap {
+            Date().byAddingDays($0 * -1)
+        }
+        _ = habitStorage.edit(
+            habit: dummyHabit,
+            days: pastDays
+        )
+        
+        // 3. Make the edition of habit days to replace the existing ones
+        //    that are future.
+        // 3.1. Edit the dummy habit.
+        _ = habitStorage.edit(
+            habit: dummyHabit,
+            days: (1...10).compactMap({
+                Date().byAddingDays($0)
+            })
+        )
+        
+        // 4. Make the assertions on the added days and on the past ones.
+        // 4.1. The days should have the expected count (past + added).
+        XCTAssertEqual(
+            13,
+            dummyHabit.days?.count,
+            "The habit's days should have the expected count (past + added)."
+        )
+        
+        // 4.2. The past days shouldn't be edited.
+        // 4.2.1. Get the dummy habit's past days.
+        let predicate = NSPredicate(format: "day.date < %@", Date() as NSDate)
+        guard let pastHabitDays = dummyHabit.days?.filtered(using: predicate) as? Set<HabitDay> else {
+            XCTFail("Couldn't get the past habit days.")
+            return
+        }
+        
+        // 4.2.1. Make the assertions.
+        XCTAssertEqual(
+            pastHabitDays.count,
+            pastDays.count,
+            "The edition shouldn't affect the past days. The count of the habit's past days is wrong."
+        )
+        for pastHabitDay in pastHabitDays {
+            XCTAssertTrue(
+                pastDays.map({ $0.description }).contains(
+                    pastHabitDay.day?.date?.description ?? ""
+                ),
+                "The past day's date should be contained within the expected ones."
+            )
+        }
     }
     
     func testHabitEditionWithNotificationProperty() {
