@@ -37,25 +37,35 @@ class NotificationStorageTests: IntegrationTestCase {
             calendarDayStorage: dayStorage
         )
         
-        // Initialize habit storage.
-        habitStorage = HabitStorage(
-            container: memoryPersistentContainer,
-            habitDayStorage: habitDayStorage
-        )
-        
         // Initialize notification manager.
-        notificationManager = UserNotificationManager(notificationCenter: UserNotificationCenterMock(withAuthorization: true))
+        notificationManager = UserNotificationManager(
+            notificationCenter: UserNotificationCenterMock(
+                withAuthorization: true
+            )
+        )
         
         // Initialize notificationStorage using the persistent container created for tests.
         notificationStorage = NotificationStorage(
             container: memoryPersistentContainer,
             manager: notificationManager
         )
+        
+        // Initialize habit storage.
+        habitStorage = HabitStorage(
+            container: memoryPersistentContainer,
+            habitDayStorage: habitDayStorage,
+            notificationStorage: notificationStorage
+        )
     }
     
     override func tearDown() {
         // Remove the initialized storage class.
+        notificationManager = nil
         notificationStorage = nil
+        dayStorage = nil
+        habitDayStorage = nil
+        habitStorage = nil
+        
         super.tearDown()
     }
     
@@ -101,7 +111,7 @@ class NotificationStorageTests: IntegrationTestCase {
             "The created notification has an invalid habit."
         )
         
-        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { _ in
+        Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) { _ in
             // Check if the entity has a user notification request
             // associated with it.
             XCTAssertNotNil(
@@ -111,7 +121,7 @@ class NotificationStorageTests: IntegrationTestCase {
             RequestExpectation.fulfill()
         }
         
-        wait(for: [RequestExpectation], timeout: 0.2)
+        wait(for: [RequestExpectation], timeout: 0.5)
     }
     
     func testNotificationFetch() {

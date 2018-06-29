@@ -16,9 +16,9 @@ class HabitStorageTests: IntegrationTestCase {
     // MARK: Properties
     
     var dayStorage: DayStorage!
-    
     var habitDayStorage: HabitDayStorage!
-    
+    var notificationStorage: NotificationStorage!
+    var notificationManager: UserNotificationManager!
     var habitStorage: HabitStorage!
     
     // MARK: setup/tearDown
@@ -35,18 +35,34 @@ class HabitStorageTests: IntegrationTestCase {
             calendarDayStorage: dayStorage
         )
         
+        // Initialize the notification manager used by the storage.
+        notificationManager = UserNotificationManager(
+            notificationCenter: UserNotificationCenterMock(
+                withAuthorization: true
+            )
+        )
+        
+        // Initialize the notification storage.
+        notificationStorage = NotificationStorage(
+            container: memoryPersistentContainer,
+            manager: notificationManager
+        )
+        
         // Initialize dayStorage using the persistent container created for tests.
         habitStorage = HabitStorage(
             container: memoryPersistentContainer,
-            habitDayStorage: habitDayStorage
+            habitDayStorage: habitDayStorage,
+            notificationStorage: notificationStorage
         )
     }
     
     override func tearDown() {
         // Remove the initialized storages.
-        habitStorage = nil
-        habitDayStorage = nil
         dayStorage = nil
+        habitDayStorage = nil
+        notificationManager = nil
+        notificationStorage = nil
+        habitStorage = nil
         
         super.tearDown()
     }
@@ -285,8 +301,42 @@ class HabitStorageTests: IntegrationTestCase {
     }
     
     func testHabitEditionWithNotificationProperty() {
-        // TODO:
-        XCTFail("Not implemented.")
+        // 1. Create a empty dummy habit.
+        let dummyHabit = Habit(context: memoryPersistentContainer.viewContext)
+        dummyHabit.id = UUID().uuidString
+        dummyHabit.name = "Testing notifications"
+        dummyHabit.created = Date()
+        dummyHabit.color = "red"
+        
+        // 2. Declare the fire dates.
+        let fireDates = (1...7).compactMap { Date().byAddingDays($0) }
+
+        // 3. Create the notifications by providing the dates.
+        _ = habitStorage.edit(habit: dummyHabit, notifications: fireDates)
+        
+        // 4. Fetch the dummy's notifications and make assertions on it.
+        // 4.1. Check if the count is the expected one.
+        XCTAssertEqual(
+            dummyHabit.notifications?.count,
+            dummyHabit.days?.count,
+            "The added notifications should have the expected count."
+        )
+        
+        // 4.2. Check if the notification's fireDates are within
+        //      the expected ones.
+        guard let addedNotifications = dummyHabit.notifications as? Set<Active.Notification> else {
+            XCTFail("The added notifications couldn't be retrieved.")
+            return
+        }
+        
+        for notification in addedNotifications {
+            XCTAssertTrue(
+                fireDates.map({ $0.description }).contains(
+                    notification.fireDate?.description ?? ""
+                ),
+                "Tbe added notification doesn't have a valid date contained within the expected ones."
+            )
+        }
     }
     
     func testHabitDeletion() {

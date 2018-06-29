@@ -17,6 +17,10 @@ class HabitStorage {
     /// The persistent container used by the storage.
     private let container: NSPersistentContainer
     
+    /// The Notification storage used to create Notification entities
+    /// associated with a given habit.
+    private let notificationStorage: NotificationStorage
+    
     /// The HabitDayStorage used to create the habit days associated
     /// with the habits..
     private let habitDayStorage: HabitDayStorage
@@ -27,9 +31,11 @@ class HabitStorage {
     /// - Parameter container: the persistent container used by the storage.
     /// - Parameter habitDayStorage: The storage used to manage habitDays.
     init(container: NSPersistentContainer,
-         habitDayStorage: HabitDayStorage) {
+         habitDayStorage: HabitDayStorage,
+         notificationStorage: NotificationStorage) {
         self.container = container
         self.habitDayStorage = habitDayStorage
+        self.notificationStorage = notificationStorage
     }
     
     // MARK: - Imperatives
@@ -83,7 +89,7 @@ class HabitStorage {
               withName name: String? = nil,
 //              color: HabitColor?,
               days: [Date]? = nil,
-              notifications: [Notification]? = nil) -> Habit {
+              notifications: [Date]? = nil) -> Habit {
         
         if let name = name {
             habit.name = name
@@ -126,7 +132,14 @@ class HabitStorage {
                 }
             }
             
-            habit.addToNotifications(NSSet(array: notifications))
+            // Iterate over the notifications' dates and:
+            for fireDate in notifications {
+                // Create a notification using the storage.
+                _ = try? notificationStorage.create(
+                    withFireDate: fireDate,
+                    habit: habit
+                )
+            }
         }
         
         return habit

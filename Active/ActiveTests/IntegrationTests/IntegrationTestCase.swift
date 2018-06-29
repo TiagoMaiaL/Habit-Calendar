@@ -49,6 +49,7 @@ class IntegrationTestCase: XCTestCase {
         factories = nil
         
         /// Remove the used in-memory persistent container.
+        memoryPersistentContainer.viewContext.rollback()
         memoryPersistentContainer = nil
         
         super.tearDown()

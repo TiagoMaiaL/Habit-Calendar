@@ -89,6 +89,10 @@ struct HabitFactory: DummyFactory {
             }
         }
         
+        // TODO: Make assertions to check if the dummy has:
+        // the days.
+        // the notifications.
+        
         return habit
     }
 }
