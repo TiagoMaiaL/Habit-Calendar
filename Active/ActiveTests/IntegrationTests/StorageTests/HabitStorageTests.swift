@@ -189,11 +189,47 @@ class HabitStorageTests: IntegrationTestCase {
     }
     
     func testHabitEditionWithColorProperty() {
-        // TODO:
+        // TODO: Define the possible colors as an enum.
         XCTFail("Not implemented.")
     }
     
     func testHabitEditionWithDaysProperty() {
+        // 1. Declare a dummy habit.
+        let dummyHabit = factories.habit.makeDummy()
+        
+        // 2. Create a new array of days' dates.
+        let daysDates = (1..<14).compactMap { dayIndex -> Date? in
+            Date().byAddingDays(dayIndex)
+        }
+        
+        // 3. Edit the days property.
+        _ = habitStorage.edit(habit: dummyHabit, days: daysDates)
+        
+        // 4. Make assertions on the days:
+        // 4.1. Assert on the days' count.
+        XCTAssertEqual(
+            dummyHabit.days?.count,
+            daysDates.count,
+            "The Habit days should be correclty set and have the expected count."
+        )
+        
+        // 4.2. Assert on the days' dates.
+        guard let habitDays = dummyHabit.days as? Set<HabitDay> else {
+            XCTFail("Couldn't get the edited habit days.")
+            return
+        }
+        for habitDay in habitDays {
+            // 4.2.1. Check if the day's date is in the expected dates.
+            XCTAssertTrue(
+                daysDates.map { $0.description }.contains(
+                    habitDay.day?.date?.description ?? ""
+                ),
+                "The new added day should have a correct day among the specified ones."
+            )
+        }
+    }
+    
+    func testHabitEditionWithDaysPropertiesThatAreOnlyInTheFuture() {
         // TODO:
         XCTFail("Not implemented.")
     }
