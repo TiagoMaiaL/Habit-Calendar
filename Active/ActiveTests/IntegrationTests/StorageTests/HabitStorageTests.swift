@@ -122,42 +122,67 @@ class HabitStorageTests: IntegrationTestCase {
         }
     }
     
-    func testHabitFetch() {
-        // TODO:
-        XCTFail()
-        // Create a habit.
-        // Try to fetch the created habit.
-        // Check the ids.
-    }
-    
     func testHabitFetchedResultsControllerFactory() {
-        // TODO:
-        XCTFail()
+        // Get the fetched results controller.
+        let fetchedResultsController = habitStorage.makeFetchedResultsController()
+        
+        // Assert on its fetch request.
+        XCTAssertEqual(
+            "Habit",
+            fetchedResultsController.fetchRequest.entityName,
+            "Only Habit entities should be fetched by the controller."
+        )
+        
+        // Assert on its sort descriptors.
+        guard let sortDescriptors = fetchedResultsController.fetchRequest.sortDescriptors else {
+            XCTFail(
+                "The fetched Habit entities should be sorted."
+            )
+            return
+        }
+        
+        // The sort descriptors should sort in both
+        // the created or score properties.
+        XCTAssertEqual(
+            2,
+            sortDescriptors.count,
+            "The Habits should be sorted by the created and score properties."
+        )
+        XCTAssertEqual(
+            sortDescriptors[0].key,
+            "created",
+            "Should sort by the Habit entity's created property."
+        )
+        XCTAssertEqual(
+            sortDescriptors[1].key,
+            "score",
+            "Should sort by the Habit entity's score property."
+        )
     }
     
     func testHabitEditionWithNameProperty() {
         // TODO:
-        XCTFail()
+        XCTFail("Not implemented.")
     }
     
     func testHabitEditionWithColorProperty() {
         // TODO:
-        XCTFail()
+        XCTFail("Not implemented.")
     }
     
     func testHabitEditionWithDaysProperty() {
         // TODO:
-        XCTFail()
+        XCTFail("Not implemented.")
     }
     
     func testHabitEditionWithNotificationProperty() {
         // TODO:
-        XCTFail()
+        XCTFail("Not implemented.")
     }
     
     func testHabitDeletion() {
         // TODO:
-        XCTFail()
+        XCTFail("Not implemented.")
         // Create a new habit.
         // Delete the created habit.
         // Try to fetch the previously created habit.
