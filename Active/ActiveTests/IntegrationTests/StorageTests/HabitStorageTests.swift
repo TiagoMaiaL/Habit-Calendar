@@ -161,8 +161,31 @@ class HabitStorageTests: IntegrationTestCase {
     }
     
     func testHabitEditionWithNameProperty() {
-        // TODO:
-        XCTFail("Not implemented.")
+        // Declare the name to be set.
+        let habitName = "Fight Muay-Thai"
+        
+        // Declare a habit dummy.
+        let habitDummy = factories.habit.makeDummy()
+        
+        // Edit the Habit to change the name.
+        let editedHabit = habitStorage.edit(
+            habit: habitDummy,
+            withName: habitName
+        )
+        
+        // Assert that the edited habit and the dummy one are the same.
+        XCTAssertEqual(
+            editedHabit,
+            habitDummy,
+            "The edition routine should return the same habit instance but with the edited properties.."
+        )
+        
+        // Assert on the name property.
+        XCTAssertEqual(
+            habitDummy.name,
+            habitName,
+            "The dummy habit should now have the edited name."
+        )
     }
     
     func testHabitEditionWithColorProperty() {

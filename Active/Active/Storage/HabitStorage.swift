@@ -80,10 +80,10 @@ class HabitStorage {
     
     /// Edits the passed habit instane with the provided info.
     func edit(habit: Habit,
-              withName name: String?,
+              withName name: String? = nil,
 //              color: HabitColor?,
-              days: [Date]?,
-              notifications: [Notification]?) -> Habit {
+              days: [Date]? = nil,
+              notifications: [Notification]? = nil) -> Habit {
         
         if let name = name {
             habit.name = name
