@@ -31,9 +31,9 @@ class UserStorage {
     /// - Note: Only one user is created by each app.
     /// - Returns: the app's user entity, if it exists.
     // TODO: Check what are the possible exceptions thrown by a fetch.
-    func getUser() -> User? {
+    func getUser() -> UserMO? {
         // Get the request to fetch the user.
-        let request: NSFetchRequest<User> = User.fetchRequest()
+        let request: NSFetchRequest<UserMO> = UserMO.fetchRequest()
         // Fetch the app's user.
         let results = try? container.viewContext.fetch(request)
         
@@ -45,9 +45,8 @@ class UserStorage {
     
     /// Creates a new User entity.
     /// - Returns: the newly created user entity.
-    func create() -> User {
-        let user = User(context: container.viewContext)
-        // TODO: Check how the indexing is being done since the latest version of core data.
+    func create() -> UserMO {
+        let user = UserMO(context: container.viewContext)
         user.id = UUID().uuidString
         user.created = Date()
         return user
@@ -56,7 +55,7 @@ class UserStorage {
     /// Removes the passed User entity.
     func delete() {
         // Declare the request to fetch the user.
-        let request: NSFetchRequest<User> = User.fetchRequest()
+        let request: NSFetchRequest<UserMO> = UserMO.fetchRequest()
         
         // Try to get the uniquely created user.
         do {

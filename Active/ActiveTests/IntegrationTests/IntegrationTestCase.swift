@@ -85,12 +85,12 @@ class IntegrationTestCase: XCTestCase {
     /// Helper method to create a dummy Notification entity
     /// from a dummy Habit.
     /// - Returns: the dummy notification.
-    func makeNotification() -> Active.Notification {
+    func makeNotification() -> NotificationMO {
         // Declare the dummy habit.
         let dummyHabit = factories.habit.makeDummy()
         
         // Declare the dummy notification out of the passed habit.
-        guard let dummyNotification = (dummyHabit.notifications as? Set<Active.Notification>)?.first else {
+        guard let dummyNotification = (dummyHabit.notifications as? Set<NotificationMO>)?.first else {
             assertionFailure(
                 "A notification object must be retrieved from a dummy Habit"
             )

@@ -16,7 +16,7 @@ struct DayFactory: DummyFactory {
     // MARK: Types
     
     // This factory generates entities of the Day class.
-    typealias Entity = Day
+    typealias Entity = DayMO
     
     // MARK: Properties
     
@@ -26,9 +26,9 @@ struct DayFactory: DummyFactory {
     
     /// Makes a day entity with the current day as it's date.
     /// - Returns: A new day entity.
-    func makeDummy() -> Day {
+    func makeDummy() -> DayMO {
         // Declare a new Day entity.
-        let day = Day(context: container.viewContext)
+        let day = DayMO(context: container.viewContext)
         
         // Configure it's properties (id, date).
         day.id = UUID().uuidString

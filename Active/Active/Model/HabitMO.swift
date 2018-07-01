@@ -10,7 +10,7 @@ import CoreData
 
 /// The Habit model entity.
 /// - Note: The user can have as many habits as he/she wants.
-class Habit: NSManagedObject {
+class HabitMO: NSManagedObject {
     
     // MARK: Properties
     

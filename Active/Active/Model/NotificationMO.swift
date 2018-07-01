@@ -11,7 +11,7 @@ import UserNotifications
 
 /// The Notification model entity.
 /// - Note: Alongside with the entity, an specific UserNotification is scheduled.
-class Notification: NSManagedObject {
+class NotificationMO: NSManagedObject {
 
     // MARK: Properties
     

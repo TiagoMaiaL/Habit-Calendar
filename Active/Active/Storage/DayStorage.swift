@@ -38,14 +38,14 @@ class DayStorage {
     /// - Parameter date: the date associated with the day entity.
     /// - Throws: An error when a Day with the same date already exists.
     /// - Returns: the created calendar day.
-    func create(withDate date: Date) throws -> Day {
+    func create(withDate date: Date) throws -> DayMO {
         // Check if an entity with the same date already exists.
         // If so, throw an error.
         if self.day(for: date) != nil {
             throw DayStorageError.dayAlreadyCreated
         }
         
-        let day = Day(context: container.viewContext)
+        let day = DayMO(context: container.viewContext)
         day.id = UUID().uuidString
         day.date = date
         return day
@@ -54,8 +54,8 @@ class DayStorage {
     /// Queries for a day with the provided date.
     /// - Parameter date: the date associated with the day entity.
     /// - Returns: the day, if there's one.
-    func day(for date: Date) -> Day? {
-        let request: NSFetchRequest<Day> = Day.fetchRequest()
+    func day(for date: Date) -> DayMO? {
+        let request: NSFetchRequest<DayMO> = DayMO.fetchRequest()
         
         // Associate the predicate to search for the specific day(begin <= date <= end).
         let predicate = NSPredicate(format: "date >= %@ && date <= %@",
@@ -75,7 +75,7 @@ class DayStorage {
     
     /// Deletes the passed day instance.
     /// - Paramater: the day to be deleted.
-    func delete(day: Day) {
+    func delete(day: DayMO) {
         container.viewContext.delete(day)
     }
     

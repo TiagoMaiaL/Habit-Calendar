@@ -43,14 +43,14 @@ class NotificationStorage {
     /// - Parameter withFireDate: Date used to schedule an user notification.
     /// - Parameter habit: The habit entity associated with the notification.
     /// - Returns: a new Notification entity.
-    func create(withFireDate fireDate: Date, habit: Habit) throws -> Notification {
+    func create(withFireDate fireDate: Date, habit: HabitMO) throws -> NotificationMO {
         // Check if there's a notification with the same attributes already stored.
         if self.notification(forHabit: habit, andDate: fireDate) != nil {
             throw NotificationStorageError.notificationAlreadyCreated
         }
         
         // Declare a new Notification instance.
-        let notification = Notification(context: container.viewContext)
+        let notification = NotificationMO(context: container.viewContext)
         notification.id = UUID().uuidString
         notification.fireDate = fireDate
         notification.habit = habit
@@ -68,10 +68,10 @@ class NotificationStorage {
     /// - Parameter andDate: the scheduled fire date.
     /// - Returns: a notification entity matching the provided arguments,
     ///            if one is fetched.
-    func notification(forHabit habit: Habit, andDate date: Date) -> Notification? {
+    func notification(forHabit habit: HabitMO, andDate date: Date) -> NotificationMO? {
         // Declare the fetch request.
         // The predicate should search for the specific habit and date.
-        let request: NSFetchRequest<Notification> = Notification.fetchRequest()
+        let request: NSFetchRequest<NotificationMO> = NotificationMO.fetchRequest()
         let predicate = NSPredicate(
             format: "fireDate == %@ AND habit == %@",
             date as NSDate,
@@ -90,7 +90,7 @@ class NotificationStorage {
     
     /// Deletes from storage the passed notification.
     /// - Parameter notification: the notification to be removed.
-    func delete(_ notification: Notification) {
+    func delete(_ notification: NotificationMO) {
         container.viewContext.delete(notification)
     }
     

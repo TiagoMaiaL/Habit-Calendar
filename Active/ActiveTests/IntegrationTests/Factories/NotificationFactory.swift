@@ -16,7 +16,7 @@ struct NotificationFactory: DummyFactory {
     // MARK: Types
     
     // This factory generates entities of the Notification class.
-    typealias Entity = Active.Notification
+    typealias Entity = NotificationMO
     
     // MARK: Properties
     
@@ -29,9 +29,9 @@ struct NotificationFactory: DummyFactory {
     ///         an assciated habit object, and it doesn't have a user
     ///         notification id.
     /// - Returns: A generated Notification dummy as a NSManagedObject.
-    func makeDummy() -> Active.Notification {
+    func makeDummy() -> NotificationMO {
         // Declare the Notification entity.
-        let notification = Notification(context: container.viewContext)
+        let notification = NotificationMO(context: container.viewContext)
         
         // Associate its properties.
         notification.id = UUID().uuidString

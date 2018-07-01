@@ -11,7 +11,7 @@ import CoreData
 /// The HabitDay model entity.
 /// - Note: A habit may have a list of days in which the goal may be accomplished.
 ///         A calendar day can also have as many habits as the user wants.
-class HabitDay: NSManagedObject {
+class HabitDayMO: NSManagedObject {
 
     // MARK: Imperatives
     

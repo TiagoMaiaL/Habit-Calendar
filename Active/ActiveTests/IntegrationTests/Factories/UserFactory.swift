@@ -16,7 +16,7 @@ struct UserFactory: DummyFactory {
     // MARK: Types
     
     // This factory generates entities of the User class.
-    typealias Entity = User
+    typealias Entity = UserMO
     
     // MARK: Properties
     
@@ -25,9 +25,9 @@ struct UserFactory: DummyFactory {
     // MARK: Imperatives
     
     /// Creates an User entity object.
-    func makeDummy() -> User {
+    func makeDummy() -> UserMO {
         // Create the entity.
-        let user = User(context: container.viewContext)
+        let user = UserMO(context: container.viewContext)
         
         // Configure it's properties.
         user.id = UUID().uuidString

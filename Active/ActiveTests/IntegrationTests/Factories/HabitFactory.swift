@@ -16,7 +16,7 @@ struct HabitFactory: DummyFactory {
     // MARK: Types
     
     // This factory generates entities of the Habit class.
-    typealias Entity = Habit
+    typealias Entity = HabitMO
     
     // MARK: Properties
     
@@ -46,9 +46,9 @@ struct HabitFactory: DummyFactory {
     /// - Note: The dummy is related to other HabitDay
     ///         and Notification dummies.
     /// - Returns: The Habit entity as an NSManagedObject.
-    func makeDummy() -> Habit {
+    func makeDummy() -> HabitMO {
         // Declare the habit entity.
-        let habit = Habit(context: container.viewContext)
+        let habit = HabitMO(context: container.viewContext)
         
         // Associate it's properties (id, created, name, color).
         habit.id = UUID().uuidString

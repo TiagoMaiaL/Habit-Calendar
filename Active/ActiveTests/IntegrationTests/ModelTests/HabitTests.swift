@@ -63,7 +63,7 @@ class HabitTests: IntegrationTestCase {
         
         // 3. Mark some of them as executed and add them
         //    to a set.
-        var executedDays = Set<HabitDay>()
+        var executedDays = Set<HabitDayMO>()
         
         for index in 0..<37 {
             let habitDay = habitDays[index]
@@ -91,7 +91,7 @@ class HabitTests: IntegrationTestCase {
         // 2. Declare a dummy habit.
         let dummyHabit = factories.habit.makeDummy()
         // 2.1. Clear the dummy days that come with the habit.
-        if let days = dummyHabit.days as? Set<HabitDay> {
+        if let days = dummyHabit.days as? Set<HabitDayMO> {
             for habitDay in days {
                 dummyHabit.removeFromDays(habitDay)
             }

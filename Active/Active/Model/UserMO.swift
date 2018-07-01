@@ -1,5 +1,5 @@
 //
-//  Day.swift
+//  User.swift
 //  Active
 //
 //  Created by Tiago Maia Lopes on 01/06/18.
@@ -8,7 +8,7 @@
 
 import CoreData
 
-/// The calendar Day model entity.
-class Day: NSManagedObject {
+/// The User model entity.
+class UserMO: NSManagedObject {
 
 }

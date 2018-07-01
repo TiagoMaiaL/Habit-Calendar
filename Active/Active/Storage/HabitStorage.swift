@@ -43,8 +43,8 @@ class HabitStorage {
     /// Creates a NSFetchedResultsController for fetching habit instances
     /// ordered by the creation date and score of each habit.
     /// - Returns: The created fetched results controller.
-    func makeFetchedResultsController() -> NSFetchedResultsController<Habit> {
-        let request: NSFetchRequest<Habit> = Habit.fetchRequest()
+    func makeFetchedResultsController() -> NSFetchedResultsController<HabitMO> {
+        let request: NSFetchRequest<HabitMO> = HabitMO.fetchRequest()
         // The request should order the habits by the creation date and score.
         request.sortDescriptors = [
             NSSortDescriptor(key: "created", ascending: false),
@@ -65,11 +65,11 @@ class HabitStorage {
     /// - Returns: The created Habit entity object.
     func create(with name: String,
 //                color: HabitColor,
-                days: [Date]) -> Habit {
-        // TODO: Is it better to use a second queue to add new instances?
+                days: [Date]) -> HabitMO {
+        // TODO: USE A BACKGROUND TASK TO ADD NEW ENTITIES.
         
         // Declare a new habit instance.
-        let habit = Habit(context: container.viewContext)
+        let habit = HabitMO(context: container.viewContext)
         habit.id = UUID().uuidString
         habit.name = name
         habit.created = Date()
@@ -85,11 +85,11 @@ class HabitStorage {
     }
     
     /// Edits the passed habit instane with the provided info.
-    func edit(habit: Habit,
+    func edit(habit: HabitMO,
               withName name: String? = nil,
 //              color: HabitColor?,
               days: [Date]? = nil,
-              notifications: [Date]? = nil) -> Habit {
+              notifications: [Date]? = nil) -> HabitMO {
         
         if let name = name {
             habit.name = name
@@ -108,7 +108,7 @@ class HabitStorage {
                 format: "day.date >= %@", Date().getBeginningOfDay() as NSDate
             )
             
-            if let days = habit.days?.filtered(using: futurePredicate) as? Set<HabitDay> {
+            if let days = habit.days?.filtered(using: futurePredicate) as? Set<HabitDayMO> {
                 // Remove the current days that are in the future.
                 for habitDay in days {
                     container.viewContext.delete(habitDay)
@@ -125,7 +125,7 @@ class HabitStorage {
         if let notifications = notifications {
             assert(!notifications.isEmpty, "HabitStorage -- edit: notifications argument shouldn't be empty.")
             
-            if let notifications = habit.notifications as? Set<Notification> {
+            if let notifications = habit.notifications as? Set<NotificationMO> {
                 // Remove the current notifications.
                 for notification in notifications {
                     container.viewContext.delete(notification)
@@ -146,7 +146,7 @@ class HabitStorage {
     }
     
     /// Removes the passed habit from the database.
-    func delete(habit: Habit) {
+    func delete(habit: HabitMO) {
         container.viewContext.delete(habit)
     }
 }

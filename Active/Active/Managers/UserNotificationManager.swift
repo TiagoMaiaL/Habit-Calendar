@@ -136,7 +136,7 @@ extension UserNotificationManager {
     /// from the passed habit and notification entities.
     /// - Parameter notification: The notification from which the user
     ///                           notification will be generated.
-    func makeNotificationOptions(for notification: Notification) -> UserNotificationOptions {
+    func makeNotificationOptions(for notification: NotificationMO) -> UserNotificationOptions {
         
         // Declare the notification contents with the correct attributes.
         let content = UNMutableNotificationContent()
@@ -163,8 +163,8 @@ extension UserNotificationManager {
     /// - Parameter completionHandler: The handler called after the schedule
     ///                                finishes.
     func schedule(
-        _ notification: Notification,
-        completionHandler: Optional<(Notification) -> ()> = nil) {
+        _ notification: NotificationMO,
+        completionHandler: Optional<(NotificationMO) -> ()> = nil) {
         
         // Declare the options used to schedule a new request.
         let options = makeNotificationOptions(for: notification)
@@ -182,7 +182,7 @@ extension UserNotificationManager {
     /// Notification entity.
     /// - Parameter notification: The Notification entity.
     /// - Parameter completionHandler: The completion called after the fetch.
-    func getRequest(from notification: Notification, completionHandler: @escaping (UNNotificationRequest?) -> ()) {
+    func getRequest(from notification: NotificationMO, completionHandler: @escaping (UNNotificationRequest?) -> ()) {
         guard let identifier = notification.userNotificationId else {
             assertionFailure(
                 "The passed notification entity should have an identifier."
@@ -197,7 +197,7 @@ extension UserNotificationManager {
     /// Removes the notification requests associated with
     /// the passed entities.
     /// - Parameter notifications: The Notification entities.
-    func remove(_ notifications: [Notification]) {
+    func remove(_ notifications: [NotificationMO]) {
         // Declare the requests identifiers from the notifications.
         let identifiers = notifications.compactMap { notification in
             return notification.userNotificationId

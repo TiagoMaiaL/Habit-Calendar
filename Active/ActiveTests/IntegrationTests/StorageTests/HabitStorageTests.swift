@@ -115,7 +115,7 @@ class HabitStorageTests: IntegrationTestCase {
             "Created habit should have the expected amount of HabitDays."
         )
         
-        guard let habitDays = joggingHabit.days as? Set<HabitDay> else {
+        guard let habitDays = joggingHabit.days as? Set<HabitDayMO> else {
             XCTFail("Couldn't cast the days property to a Set with HabitDay entities.")
             return
         }
@@ -230,7 +230,7 @@ class HabitStorageTests: IntegrationTestCase {
         )
         
         // 4.2. Assert on the days' dates.
-        guard let habitDays = dummyHabit.days as? Set<HabitDay> else {
+        guard let habitDays = dummyHabit.days as? Set<HabitDayMO> else {
             XCTFail("Couldn't get the edited habit days.")
             return
         }
@@ -279,7 +279,7 @@ class HabitStorageTests: IntegrationTestCase {
         // 4.2. The past days shouldn't be edited.
         // 4.2.1. Get the dummy habit's past days.
         let predicate = NSPredicate(format: "day.date < %@", Date() as NSDate)
-        guard let pastHabitDays = dummyHabit.days?.filtered(using: predicate) as? Set<HabitDay> else {
+        guard let pastHabitDays = dummyHabit.days?.filtered(using: predicate) as? Set<HabitDayMO> else {
             XCTFail("Couldn't get the past habit days.")
             return
         }
@@ -302,7 +302,7 @@ class HabitStorageTests: IntegrationTestCase {
     
     func testHabitEditionWithNotificationProperty() {
         // 1. Create a empty dummy habit.
-        let dummyHabit = Habit(context: memoryPersistentContainer.viewContext)
+        let dummyHabit = HabitMO(context: memoryPersistentContainer.viewContext)
         dummyHabit.id = UUID().uuidString
         dummyHabit.name = "Testing notifications"
         dummyHabit.created = Date()
@@ -324,7 +324,7 @@ class HabitStorageTests: IntegrationTestCase {
         
         // 4.2. Check if the notification's fireDates are within
         //      the expected ones.
-        guard let addedNotifications = dummyHabit.notifications as? Set<Active.Notification> else {
+        guard let addedNotifications = dummyHabit.notifications as? Set<NotificationMO> else {
             XCTFail("The added notifications couldn't be retrieved.")
             return
         }

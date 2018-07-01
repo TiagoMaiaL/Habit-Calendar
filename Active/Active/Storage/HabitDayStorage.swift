@@ -36,10 +36,10 @@ class HabitDayStorage {
     /// - Parameter dates: the dates for each day.
     /// - Parameter habit: The habit associated with the entities.
     /// - Returns: the array of HabitDay entities.
-    func createDays(with dates: [Date], habit: Habit) -> [HabitDay] {
+    func createDays(with dates: [Date], habit: HabitMO) -> [HabitDayMO] {
         assert(!dates.isEmpty, "HabitDayStorage -- createDays: dates argument shouldn't be empty.")
         
-        var habitDays = [HabitDay]()
+        var habitDays = [HabitDayMO]()
         
         for date in dates {
             // Create the HabitDay entity from the Habit and calendar Day entities.
@@ -55,8 +55,8 @@ class HabitDayStorage {
     /// - Parameter date: the calendar date to be associated with the entity.
     /// - Parameter habit: The habit associated with the entity.
     /// - Returns: the created entity.
-    func create(with date: Date, habit: Habit) -> HabitDay {
-        let habitDay = HabitDay(context: container.viewContext)
+    func create(with date: Date, habit: HabitMO) -> HabitDayMO {
+        let habitDay = HabitDayMO(context: container.viewContext)
         
         // Get the calendar Day entity from the storage.
         // If a calendar Day entity wasn't found, a new Day entity should be
@@ -73,7 +73,7 @@ class HabitDayStorage {
     
     /// Deletes the provided HabitDay entity from the storage.
     /// - Parameter habitDay: The entity to be deleted.
-    func delete(_ habitDay: HabitDay) {
+    func delete(_ habitDay: HabitDayMO) {
         container.viewContext.delete(habitDay)
         try? container.viewContext.save()
     }
