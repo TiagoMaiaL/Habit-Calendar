@@ -56,7 +56,7 @@ class NotificationStorage {
         notification.habit = habit
         
         // Schedule a new user notification for the created habit.
-        manager.schedule(notification)
+//        manager.schedule(notification)
         
         return notification
     }

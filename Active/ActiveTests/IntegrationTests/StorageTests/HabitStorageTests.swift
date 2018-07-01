@@ -318,7 +318,7 @@ class HabitStorageTests: IntegrationTestCase {
         // 4.1. Check if the count is the expected one.
         XCTAssertEqual(
             dummyHabit.notifications?.count,
-            dummyHabit.days?.count,
+            fireDates.count,
             "The added notifications should have the expected count."
         )
         
