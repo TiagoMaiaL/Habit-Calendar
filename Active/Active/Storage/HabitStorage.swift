@@ -14,26 +14,21 @@ class HabitStorage {
     
     // MARK: - Properties
     
-    /// The persistent container used by the storage.
-    private let container: NSPersistentContainer
-    
     /// The Notification storage used to create Notification entities
     /// associated with a given habit.
     private let notificationStorage: NotificationStorage
     
     /// The HabitDayStorage used to create the habit days associated
-    /// with the habits..
+    /// with the habits.
     private let habitDayStorage: HabitDayStorage
     
     // MARK: - Initializers
     
     /// Creates a new HabitStorage class using the provided persistent container.
-    /// - Parameter container: the persistent container used by the storage.
     /// - Parameter habitDayStorage: The storage used to manage habitDays.
-    init(container: NSPersistentContainer,
-         habitDayStorage: HabitDayStorage,
+    /// - Parameter notificationStorage: The notification storage used to edit the entities' notifications.
+    init(habitDayStorage: HabitDayStorage,
          notificationStorage: NotificationStorage) {
-        self.container = container
         self.habitDayStorage = habitDayStorage
         self.notificationStorage = notificationStorage
     }
@@ -42,8 +37,9 @@ class HabitStorage {
     
     /// Creates a NSFetchedResultsController for fetching habit instances
     /// ordered by the creation date and score of each habit.
+    /// - Parameter context: The context used to fetch the habits.
     /// - Returns: The created fetched results controller.
-    func makeFetchedResultsController() -> NSFetchedResultsController<HabitMO> {
+    func makeFetchedResultsController(context: NSManagedObjectContext) -> NSFetchedResultsController<HabitMO> {
         let request: NSFetchRequest<HabitMO> = HabitMO.fetchRequest()
         // The request should order the habits by the creation date and score.
         request.sortDescriptors = [
@@ -53,7 +49,7 @@ class HabitStorage {
 
         let controller = NSFetchedResultsController(
             fetchRequest: request,
-            managedObjectContext: container.viewContext,
+            managedObjectContext: context,
             sectionNameKeyPath: nil,
             cacheName: nil
         )
@@ -62,14 +58,16 @@ class HabitStorage {
     }
     
     /// Creates and persists a new Habit instance with the provided info.
+    /// - Parameter context: The context used to write the new habit into.
+    /// - Parameter name: The name of the habit entity.
+    /// - Parameter days: The dates of the days the habit will be tracked.
     /// - Returns: The created Habit entity object.
-    func create(with name: String,
+    func create(using context: NSManagedObjectContext,
+                name: String,
 //                color: HabitColor,
-                days: [Date]) -> HabitMO {
-        // TODO: USE A BACKGROUND TASK TO ADD NEW ENTITIES.
-        
+                and days: [Date]) -> HabitMO {
         // Declare a new habit instance.
-        let habit = HabitMO(context: container.viewContext)
+        let habit = HabitMO(context: context)
         habit.id = UUID().uuidString
         habit.name = name
         habit.created = Date()
@@ -77,19 +75,27 @@ class HabitStorage {
         
         // Create the HabitDay entities associated with the new habit.
         _ = habitDayStorage.createDays(
-            with: days,
-            habit: habit
+            using: context,
+            dates: days,
+            and: habit
         )
         
         return habit
     }
     
-    /// Edits the passed habit instane with the provided info.
-    func edit(habit: HabitMO,
-              withName name: String? = nil,
+    /// Edits the passed habit instance with the provided info.
+    /// - Parameter habit: The Habit entity to be changed.
+    /// - Parameter context: The context used to change the habit and the associated entities.
+    /// - Parameter name: The new name of the passed habit.
+    /// - Parameter days: The new days' dates of the passed habit.
+    /// - Parameter notifications: The new dates of each notification object
+    ///                            to be added to the habit.
+    func edit(_ habit: HabitMO,
+              using context: NSManagedObjectContext,
+              name: String? = nil,
 //              color: HabitColor?,
               days: [Date]? = nil,
-              notifications: [Date]? = nil) -> HabitMO {
+              and notifications: [Date]? = nil) -> HabitMO {
         
         if let name = name {
             habit.name = name
@@ -111,14 +117,15 @@ class HabitStorage {
             if let days = habit.days?.filtered(using: futurePredicate) as? Set<HabitDayMO> {
                 // Remove the current days that are in the future.
                 for habitDay in days {
-                    container.viewContext.delete(habitDay)
+                    context.delete(habitDay)
                 }
             }
             
             // Add the passed days to the entity.
             _ = habitDayStorage.createDays(
-                with: days,
-                habit: habit
+                using: context,
+                dates: days,
+                and: habit
             )
         }
         
@@ -128,7 +135,7 @@ class HabitStorage {
             if let notifications = habit.notifications as? Set<NotificationMO> {
                 // Remove the current notifications.
                 for notification in notifications {
-                    container.viewContext.delete(notification)
+                    context.delete(notification)
                 }
             }
             
@@ -136,8 +143,9 @@ class HabitStorage {
             for fireDate in notifications {
                 // Create a notification using the storage.
                 _ = try? notificationStorage.create(
-                    withFireDate: fireDate,
-                    habit: habit
+                    using: context,
+                    with: fireDate,
+                    and: habit
                 )
             }
         }
@@ -146,7 +154,8 @@ class HabitStorage {
     }
     
     /// Removes the passed habit from the database.
-    func delete(habit: HabitMO) {
-        container.viewContext.delete(habit)
+    /// - Parameter context: The context used to delete the habit from.
+    func delete(_ habit: HabitMO, from context: NSManagedObjectContext) {
+        context.delete(habit)
     }
 }

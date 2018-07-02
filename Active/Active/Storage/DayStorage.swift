@@ -19,42 +19,31 @@ class DayStorage {
         case dayAlreadyCreated
     }
     
-    // MARK: Properties
-    
-    /// The persistent container used by the storage.
-    let container: NSPersistentContainer
-    
-    // MARK: - Initializers
-    
-    /// Creates a new HabitStorage class using the provided persistent container.
-    /// - Parameter container: the persistent container used by the storage.
-    init(container: NSPersistentContainer) {
-        self.container = container
-    }
-    
     // MARK: - Imperatives
     
     /// Creates and persists a calendar day instance.
+    /// - Parameter context: the context used to write the entity to.
     /// - Parameter date: the date associated with the day entity.
     /// - Throws: An error when a Day with the same date already exists.
     /// - Returns: the created calendar day.
-    func create(withDate date: Date) throws -> DayMO {
+    func create(using context: NSManagedObjectContext, and date: Date) throws -> DayMO {
         // Check if an entity with the same date already exists.
         // If so, throw an error.
-        if self.day(for: date) != nil {
+        if self.day(using: context, and: date) != nil {
             throw DayStorageError.dayAlreadyCreated
         }
         
-        let day = DayMO(context: container.viewContext)
+        let day = DayMO(context: context)
         day.id = UUID().uuidString
         day.date = date
         return day
     }
     
     /// Queries for a day with the provided date.
+    /// - Parameter context: the context used to fetch the day from.
     /// - Parameter date: the date associated with the day entity.
     /// - Returns: the day, if there's one.
-    func day(for date: Date) -> DayMO? {
+    func day(using context: NSManagedObjectContext, and date: Date) -> DayMO? {
         let request: NSFetchRequest<DayMO> = DayMO.fetchRequest()
         
         // Associate the predicate to search for the specific day(begin <= date <= end).
@@ -64,7 +53,7 @@ class DayStorage {
         request.predicate = predicate
         
         // Query it.
-        let results = try? container.viewContext.fetch(request)
+        let results = try? context.fetch(request)
         
         // If the results count is greater than 1, there's an error in the entity
         // creation somewhere. There should be only one day entity per date.
@@ -74,9 +63,10 @@ class DayStorage {
     }
     
     /// Deletes the passed day instance.
+    /// - Parameter context: The context used to delete the entity from.
     /// - Paramater: the day to be deleted.
-    func delete(day: DayMO) {
-        container.viewContext.delete(day)
+    func delete(from context: NSManagedObjectContext, day: DayMO) {
+        context.delete(day)
     }
     
 }

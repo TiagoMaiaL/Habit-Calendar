@@ -13,37 +13,33 @@ import CoreData
 class HabitDayStorage {
     
     // MARK: - Properties
-    
-    /// The persistent container used by the storage.
-    let container: NSPersistentContainer
-    
+
     /// The Day storage used to manage Day instances.
     let calendarDayStorage: DayStorage
     
     // MARK: - Initializers
     
     /// Creates a new HabitStorage class using the provided persistent container.
-    /// - Parameter container: the persistent container used by the storage.
     /// - Parameter calendarDayStorage: the storage used to manage calendar day instances.
-    init(container: NSPersistentContainer, calendarDayStorage: DayStorage) {
-        self.container = container
+    init(calendarDayStorage: DayStorage) {
         self.calendarDayStorage = calendarDayStorage
     }
     
     // MARK: - Imperatives
     
     /// Creates an array of HabitDay entities with the provided dates and habit.
-    /// - Parameter dates: the dates for each day.
+    /// - Parameter context: The context used to insert the days into.
+    /// - Parameter dates: The dates for each day.
     /// - Parameter habit: The habit associated with the entities.
     /// - Returns: the array of HabitDay entities.
-    func createDays(with dates: [Date], habit: HabitMO) -> [HabitDayMO] {
+    func createDays(using context: NSManagedObjectContext, dates: [Date], and habit: HabitMO) -> [HabitDayMO] {
         assert(!dates.isEmpty, "HabitDayStorage -- createDays: dates argument shouldn't be empty.")
         
         var habitDays = [HabitDayMO]()
         
         for date in dates {
             // Create the HabitDay entity from the Habit and calendar Day entities.
-            let habitDay = create(with: date, habit: habit)
+            let habitDay = create(using: context, date: date, and: habit)
             
             habitDays.append(habitDay)
         }
@@ -52,16 +48,21 @@ class HabitDayStorage {
     }
     
     /// Creates a HabitDay entity with the provided calendar day and habit.
-    /// - Parameter date: the calendar date to be associated with the entity.
+    /// - Parameter context: The context used to write the day into.
+    /// - Parameter date: The calendar date to be associated with the entity.
     /// - Parameter habit: The habit associated with the entity.
     /// - Returns: the created entity.
-    func create(with date: Date, habit: HabitMO) -> HabitDayMO {
-        let habitDay = HabitDayMO(context: container.viewContext)
+    func create(using context: NSManagedObjectContext, date: Date, and habit: HabitMO) -> HabitDayMO {
+        // Declare the context to be used.
+        let context = habit.managedObjectContext ?? context
+        
+        // Create the entity.
+        let habitDay = HabitDayMO(context: context)
         
         // Get the calendar Day entity from the storage.
         // If a calendar Day entity wasn't found, a new Day entity should be
         // created to hold the HabitDay entities.
-        let calendarDay = try? calendarDayStorage.day(for: date) ?? calendarDayStorage.create(withDate: date)
+        let calendarDay = try? calendarDayStorage.day(using: context, and: date) ?? calendarDayStorage.create(using: context, and: date)
         
         habitDay.day = calendarDay
         habitDay.habit = habit
@@ -73,9 +74,9 @@ class HabitDayStorage {
     
     /// Deletes the provided HabitDay entity from the storage.
     /// - Parameter habitDay: The entity to be deleted.
-    func delete(_ habitDay: HabitDayMO) {
-        container.viewContext.delete(habitDay)
-        try? container.viewContext.save()
+    /// - Parameter context: The context used to remove the entity from.
+    func delete(_ habitDay: HabitDayMO, from context: NSManagedObjectContext) {
+        context.delete(habitDay)
     }
     
 }
