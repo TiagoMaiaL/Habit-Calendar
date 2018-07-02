@@ -15,6 +15,7 @@ class UserStorageTests: IntegrationTestCase {
 
     // MARK: Properties
     
+    /// The storage to be tested.
     var userStorage: UserStorage!
     
     // MARK: setup/tearDown
@@ -23,7 +24,7 @@ class UserStorageTests: IntegrationTestCase {
         super.setUp()
         
         // Initialize userStorage using the persistent container created for tests.
-        userStorage = UserStorage(container: memoryPersistentContainer)
+        userStorage = UserStorage()
     }
     
     override func tearDown() {
@@ -36,7 +37,7 @@ class UserStorageTests: IntegrationTestCase {
     // MARK: Tests
 
     func testUserCreation() {
-        let user = userStorage.create()
+        let user = userStorage.create(using: context)
         XCTAssertNotNil(
             user.created,
             "The user created property should be declared."
@@ -48,7 +49,7 @@ class UserStorageTests: IntegrationTestCase {
     }
     
     func testUserRetrieval() {
-        var user = userStorage.getUser()
+        var user = userStorage.getUser(using: context)
         
         // Since there isn't a created user, it should return nil.
         XCTAssertNil(
@@ -61,7 +62,7 @@ class UserStorageTests: IntegrationTestCase {
         let userId = factories.user.makeDummy().id
         
         // Get the previously created user.
-        user = userStorage.getUser()
+        user = userStorage.getUser(using: context)
         
         // The previously created user should now be returned:
         XCTAssertNotNil(
@@ -83,9 +84,9 @@ class UserStorageTests: IntegrationTestCase {
         _ = factories.user.makeDummy()
         
         // Delete the user.
-        userStorage.delete()
+        userStorage.delete(from: context)
         // Check the return of the fetch method.
-        let user = userStorage.getUser()
+        let user = userStorage.getUser(using: context)
         
         XCTAssertNil(
             user,

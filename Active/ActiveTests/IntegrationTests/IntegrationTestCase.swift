@@ -19,6 +19,11 @@ class IntegrationTestCase: XCTestCase {
     /// The persistent container used to test the storage classes.
     var memoryPersistentContainer: NSPersistentContainer!
     
+    /// The default context used by the tests.
+    var context: NSManagedObjectContext {
+        return memoryPersistentContainer.viewContext
+    }
+    
     /// The factories used to generate dummies from each core data entity.
     var factories: (user: UserFactory,
                     habit: HabitFactory,

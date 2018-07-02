@@ -27,15 +27,10 @@ class HabitDayStorageTests: IntegrationTestCase {
         super.setUp()
         
         // Initialize the Day storage.
-        dayStorage = DayStorage(
-            container: memoryPersistentContainer
-        )
+        dayStorage = DayStorage()
         
         // Initialize the HabitDay storage.
-        habitDayStorage = HabitDayStorage(
-            container: memoryPersistentContainer,
-            calendarDayStorage: dayStorage
-        )
+        habitDayStorage = HabitDayStorage(calendarDayStorage: dayStorage)
     }
     
     override func tearDown() {
@@ -58,7 +53,11 @@ class HabitDayStorageTests: IntegrationTestCase {
         }
         
         // 3. Create the HabitDay out of the habit and date.
-        let habitDay = habitDayStorage.create(with: date, habit: dummyHabit)
+        let habitDay = habitDayStorage.create(
+            using: context,
+            date: date,
+            and: dummyHabit
+        )
         
         // 3.1. Make an assertion to check if the habit has the returned
         //      HabitDay entity.
@@ -101,8 +100,9 @@ class HabitDayStorageTests: IntegrationTestCase {
         
         // 3. Create the habitDays:
         let habitDays = habitDayStorage.createDays(
-            with: days,
-            habit: dummyHabit
+            using: context,
+            dates: days,
+            and: dummyHabit
         )
         
         // 3.1. Make assertions on the count
@@ -144,7 +144,7 @@ class HabitDayStorageTests: IntegrationTestCase {
         dummyHabitDay.habit = dummyHabit
         
         // 2. Remove the created habit.
-        habitDayStorage.delete(dummyHabitDay)
+        habitDayStorage.delete(dummyHabitDay, from: context)
         
         // 3. Assert that it's not contained in the dummyHabit.
         XCTAssertFalse(

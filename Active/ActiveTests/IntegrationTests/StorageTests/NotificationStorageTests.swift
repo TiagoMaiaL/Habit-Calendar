@@ -29,11 +29,10 @@ class NotificationStorageTests: IntegrationTestCase {
         super.setUp()
         
         // Initialize day storage.
-        dayStorage = DayStorage(container: memoryPersistentContainer)
+        dayStorage = DayStorage()
         
         // Initialize habitDay storage.
         habitDayStorage = HabitDayStorage(
-            container: memoryPersistentContainer,
             calendarDayStorage: dayStorage
         )
         
@@ -46,13 +45,11 @@ class NotificationStorageTests: IntegrationTestCase {
         
         // Initialize notificationStorage using the persistent container created for tests.
         notificationStorage = NotificationStorage(
-            container: memoryPersistentContainer,
             manager: notificationManager
         )
         
         // Initialize habit storage.
         habitStorage = HabitStorage(
-            container: memoryPersistentContainer,
             habitDayStorage: habitDayStorage,
             notificationStorage: notificationStorage
         )
@@ -82,11 +79,12 @@ class NotificationStorageTests: IntegrationTestCase {
         // Create the notification.
         let fireDate = Date(timeInterval: 10, since: Date())
         guard let notification = try? notificationStorage.create(
-            withFireDate: fireDate,
-            habit: dummyHabit
-            ) else {
-                XCTFail("The storage's creation should return a valid Notification entity.")
-                return
+            using: context,
+            with: fireDate,
+            and: dummyHabit
+        ) else {
+            XCTFail("The storage's creation should return a valid Notification entity.")
+            return
         }
         
         XCTAssertNotNil(
@@ -130,8 +128,9 @@ class NotificationStorageTests: IntegrationTestCase {
         
         // Try to fetch the created notification
         let fetchedNotification = notificationStorage.notification(
-            forHabit: dummyNotification.habit!,
-            andDate: dummyNotification.fireDate!
+            from: context,
+            habit: dummyNotification.habit!,
+            and: dummyNotification.fireDate!
         )
         
         // Check if method fetches the created notification.
@@ -148,8 +147,9 @@ class NotificationStorageTests: IntegrationTestCase {
         // and check to see if it throws the expected exception.
         XCTAssertThrowsError(
             _ = try notificationStorage.create(
-                withFireDate: dummyNotification.fireDate!,
-                habit: dummyNotification.habit!
+                using: context,
+                with: dummyNotification.fireDate!,
+                and: dummyNotification.habit!
             ), "Trying to create the same notification twice should throw an error.")
     }
     
@@ -159,18 +159,20 @@ class NotificationStorageTests: IntegrationTestCase {
 
         // The dummy notification should be correctly fetched.
         XCTAssertNotNil(notificationStorage.notification(
-            forHabit: dummyNotification.habit!,
-            andDate: dummyNotification.fireDate!
+            from: context,
+            habit: dummyNotification.habit!,
+            and: dummyNotification.fireDate!
         ), "The previously created notification should be fetched.")
         
         // Delete the dummy notification
-        notificationStorage.delete(dummyNotification)
+        notificationStorage.delete(dummyNotification, from: context)
         
         // Try to fetch the deleted dummy notification.
         // The method shouldn't fetch nothing.
         XCTAssertNil(notificationStorage.notification(
-            forHabit: dummyNotification.habit!,
-            andDate: dummyNotification.fireDate!
+            from: context,
+            habit: dummyNotification.habit!,
+            and: dummyNotification.fireDate!
         ), "The deleted notification shouldn't be fetched.")
     }
 }

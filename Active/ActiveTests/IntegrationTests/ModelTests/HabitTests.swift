@@ -13,6 +13,26 @@ import XCTest
 /// Class in charge of testing the Habit core data entity methods.
 class HabitTests: IntegrationTestCase {
     
+    // MARK: Properties
+    
+    var habitDayStorage: HabitDayStorage!
+    
+    // MARK: setup/tearDown
+    
+    override func setUp() {
+        super.setUp()
+        
+        // Initialize the habitDayStorage.
+        habitDayStorage = HabitDayStorage(calendarDayStorage: DayStorage())
+    }
+    
+    override func tearDown() {
+        // Remove the HabitDayStorage.
+        habitDayStorage = nil
+        
+        super.tearDown()
+    }
+    
     // MARK: Tests
  
     func testTitleText() {
@@ -46,7 +66,6 @@ class HabitTests: IntegrationTestCase {
         let dummyHabit = factories.habit.makeDummy()
         
         // 2. Declare the habitDays to be added to the habit.
-        let storage = makeHabitDayStorage()
         let dates = (1...63).compactMap { dayIndex -> Date? in
             Date().byAddingDays(dayIndex)
         }
@@ -56,9 +75,10 @@ class HabitTests: IntegrationTestCase {
             "Couldn't correctly generate the dates."
         )
         
-        let habitDays = storage.createDays(
-            with: dates,
-            habit: dummyHabit
+        let habitDays = habitDayStorage.createDays(
+            using: context,
+            dates: dates,
+            and: dummyHabit
         )
         
         // 3. Mark some of them as executed and add them
@@ -98,7 +118,6 @@ class HabitTests: IntegrationTestCase {
         }
         
         // 3. Declare the habitDays to be added to the habit.
-        let storage = makeHabitDayStorage()
         let dates = (1...numberOfDays).compactMap { dayIndex -> Date? in
             Date().byAddingDays(dayIndex)
         }
@@ -107,9 +126,10 @@ class HabitTests: IntegrationTestCase {
             "Couldn't correctly generate the dates."
         )
         
-        let habitDays = storage.createDays(
-            with: dates,
-            habit: dummyHabit
+        let habitDays = habitDayStorage.createDays(
+            using: context,
+            dates: dates,
+            and: dummyHabit
         )
         
         // 3.1. Declare 10 of the habit Days as executed.
@@ -129,20 +149,5 @@ class HabitTests: IntegrationTestCase {
     
     func testDescriptionText() {
         XCTFail("Not implemented.")
-    }
-    
-    // MARK: Imperatives
-    
-    /// Makes a new instance of the HabitDay storage.
-    /// - Returns: A HabitDayStorage instance.
-    func makeHabitDayStorage() -> HabitDayStorage {
-        let dayStorage = DayStorage(
-            container: memoryPersistentContainer
-        )
-        let habitDayStorage = HabitDayStorage(
-            container: memoryPersistentContainer,
-            calendarDayStorage: dayStorage
-        )
-        return habitDayStorage
     }
 }

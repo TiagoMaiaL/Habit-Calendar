@@ -27,11 +27,10 @@ class HabitStorageTests: IntegrationTestCase {
         super.setUp()
         
         // Initialize the DayStorage.
-        dayStorage = DayStorage(container: memoryPersistentContainer)
+        dayStorage = DayStorage()
         
         // Initialize the HabitDayStorage.
         habitDayStorage = HabitDayStorage(
-            container: memoryPersistentContainer,
             calendarDayStorage: dayStorage
         )
         
@@ -44,13 +43,11 @@ class HabitStorageTests: IntegrationTestCase {
         
         // Initialize the notification storage.
         notificationStorage = NotificationStorage(
-            container: memoryPersistentContainer,
             manager: notificationManager
         )
         
         // Initialize dayStorage using the persistent container created for tests.
         habitStorage = HabitStorage(
-            container: memoryPersistentContainer,
             habitDayStorage: habitDayStorage,
             notificationStorage: notificationStorage
         )
@@ -84,8 +81,9 @@ class HabitStorageTests: IntegrationTestCase {
         
         // Create the habit.
         let joggingHabit = habitStorage.create(
-            with: name,
-            days: days
+            using: context,
+            name: name,
+            and: days
         )
         
         // Check the habit's id property.
@@ -140,7 +138,7 @@ class HabitStorageTests: IntegrationTestCase {
     
     func testHabitFetchedResultsControllerFactory() {
         // Get the fetched results controller.
-        let fetchedResultsController = habitStorage.makeFetchedResultsController()
+        let fetchedResultsController = habitStorage.makeFetchedResultsController(context: context)
         
         // Assert on its fetch request.
         XCTAssertEqual(
@@ -185,8 +183,9 @@ class HabitStorageTests: IntegrationTestCase {
         
         // Edit the Habit to change the name.
         let editedHabit = habitStorage.edit(
-            habit: habitDummy,
-            withName: habitName
+            habitDummy,
+            using: context,
+            name: habitName
         )
         
         // Assert that the edited habit and the dummy one are the same.
@@ -219,7 +218,11 @@ class HabitStorageTests: IntegrationTestCase {
         }
         
         // 3. Edit the days property.
-        _ = habitStorage.edit(habit: dummyHabit, days: daysDates)
+        _ = habitStorage.edit(
+            dummyHabit,
+            using: context,
+            days: daysDates
+        )
         
         // 4. Make assertions on the days:
         // 4.1. Assert on the days' count.
@@ -254,7 +257,8 @@ class HabitStorageTests: IntegrationTestCase {
             Date().byAddingDays($0 * -1)
         }
         _ = habitStorage.edit(
-            habit: dummyHabit,
+            dummyHabit,
+            using: context,
             days: pastDays
         )
         
@@ -262,7 +266,8 @@ class HabitStorageTests: IntegrationTestCase {
         //    that are future.
         // 3.1. Edit the dummy habit.
         _ = habitStorage.edit(
-            habit: dummyHabit,
+            dummyHabit,
+            using: context,
             days: (1...10).compactMap({
                 Date().byAddingDays($0)
             })
@@ -312,7 +317,11 @@ class HabitStorageTests: IntegrationTestCase {
         let fireDates = (1...7).compactMap { Date().byAddingDays($0) }
 
         // 3. Create the notifications by providing the dates.
-        _ = habitStorage.edit(habit: dummyHabit, notifications: fireDates)
+        _ = habitStorage.edit(
+            dummyHabit,
+            using: context,
+            and: fireDates
+        )
         
         // 4. Fetch the dummy's notifications and make assertions on it.
         // 4.1. Check if the count is the expected one.

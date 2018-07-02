@@ -65,7 +65,7 @@ class DayStorage {
     /// Deletes the passed day instance.
     /// - Parameter context: The context used to delete the entity from.
     /// - Paramater: the day to be deleted.
-    func delete(from context: NSManagedObjectContext, day: DayMO) {
+    func delete(_ day: DayMO, from context: NSManagedObjectContext) {
         context.delete(day)
     }
     

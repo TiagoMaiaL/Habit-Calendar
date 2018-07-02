@@ -15,6 +15,7 @@ class DayStorageTests: IntegrationTestCase {
     
     // MARK: Properties
     
+    /// The storage tested by these tests.
     var dayStorage: DayStorage!
     
     // MARK: setup/tearDown
@@ -23,7 +24,7 @@ class DayStorageTests: IntegrationTestCase {
         super.setUp()
         
         // Initialize dayStorage using the persistent container created for tests.
-        dayStorage = DayStorage(container: memoryPersistentContainer)
+        dayStorage = DayStorage()
     }
     
     override func tearDown() {
@@ -39,7 +40,7 @@ class DayStorageTests: IntegrationTestCase {
         // Declare the date to be represented by the day entity.
         let dayDate = Date()
         // Create the day by passing the declared date.
-        let day = try? dayStorage.create(withDate: dayDate)
+        let day = try? dayStorage.create(using: context, and: dayDate)
         
         // Assert the day isn't nil and has the correct date.
         XCTAssertNotNil(
@@ -64,7 +65,7 @@ class DayStorageTests: IntegrationTestCase {
         // Try to create another day with the same date.
         // Assert that the attempt throws an error.
         XCTAssertThrowsError(
-            try dayStorage.create(withDate: dummyDay.date!),
+            try dayStorage.create(using: context, and: dummyDay.date!),
             "The attempt to create the same day more than once should throw an error."
         )
     }
@@ -77,7 +78,7 @@ class DayStorageTests: IntegrationTestCase {
         }
         
         // Fetch the generated dummy.
-        let fetchedDay = dayStorage.day(for: date)
+        let fetchedDay = dayStorage.day(using: context, and: date)
         
         // Assert that the fetched day's date is right.
         XCTAssertNotNil(
@@ -100,19 +101,18 @@ class DayStorageTests: IntegrationTestCase {
         
         // Fetch the dummy day and ensure it's returned.
         XCTAssertNotNil(
-            dayStorage.day(for: date),
+            dayStorage.day(using: context, and: date),
             "The created dummy should be correclty fetched before the deletion."
         )
         
         // Delete the created entity.
-        dayStorage.delete(day: dummyDay)
+        dayStorage.delete(dummyDay, from: context)
         
         // Try to fetch the dummy day again, now it shouldn't be fetched.
         XCTAssertNil(
-            dayStorage.day(for: date),
+            dayStorage.day(using: context, and: date),
             "The deleted Day's fetch attempt should return nil."
         )
     }
-    
 }
 
