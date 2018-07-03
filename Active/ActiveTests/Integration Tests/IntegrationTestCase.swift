@@ -65,8 +65,6 @@ class IntegrationTestCase: XCTestCase {
     /// Creates an in-memory persistent container to be used by the tests.
     /// - Returns: The in-memory NSPersistentContainer.
     func makeMemoryPersistentContainer() -> NSPersistentContainer {
-        let contents = FileManager.default.contents(atPath: NSPersistentContainer.defaultDirectoryURL().absoluteString)
-        
         let container = NSPersistentContainer(name: "Active")
         
         // Declare the in-memory Store description.

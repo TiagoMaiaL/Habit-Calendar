@@ -60,6 +60,9 @@ struct HabitFactory: DummyFactory {
         // Declare a NotificationFactory's instance.
         let notificationFactory = NotificationFactory(context: context)
         
+        // Declare a DayFactory's instance.
+        let dayFactory = DayFactory(context: context)
+        
         // Declare a HabitDayFactory's instance.
         let habitDayFactory = HabitDayFactory(context: context)
         
@@ -69,13 +72,32 @@ struct HabitFactory: DummyFactory {
             // Declare the current day's date.
             if let dayDate = Date().byAddingDays(dayIndex) {
                 
+                // Declare the current Day entity:
+                var dummyDay: DayMO!
+                
+                // Try to fetch it from the current day date.
+                let request: NSFetchRequest<DayMO> = DayMO.fetchRequest()
+                let predicate = NSPredicate(format: "date >= %@ && date <= %@",
+                                            dayDate.getBeginningOfDay() as NSDate,
+                                            dayDate.getEndOfDay() as NSDate)
+                request.predicate = predicate
+                let results = try? context.fetch(request)
+                
+                if results?.isEmpty ?? true {
+                    // If none was found, create a new one with the date.
+                    dummyDay = dayFactory.makeDummy()
+                    dummyDay.date = dayDate
+                } else {
+                    dummyDay = results?.first!
+                }
+                
                 // Declare the current habit.
                 let dummyHabitDay = habitDayFactory.makeDummy()
                 // Declare the current notification.
                 let dummyNotification = notificationFactory.makeDummy()
                 
                 // Associate the date to the day and notification entities.
-                dummyHabitDay.day?.date = dayDate
+                dummyHabitDay.day = dummyDay
                 dummyNotification.fireDate = dayDate
                 
                 // Associate the notification and day to the habit entity.

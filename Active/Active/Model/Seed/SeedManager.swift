@@ -38,18 +38,22 @@ class SeedManager {
         { context in
             print("Seeding habits.")
             
-            // Instantiate a new Habit factory using the context.
-            let habitFactory = HabitFactory(context: context)
-            
-            // Make a new dummy.
-            let habit = habitFactory.makeDummy()
-            
-            // Associate it's user.
+            // Get the previously seeded user.
             guard let user = try? context.fetch(UserMO.fetchRequest()).first as? UserMO else {
                 assertionFailure("Couldn't get the seeded user.")
                 return
             }
-            habit.user = user
+            
+            // Instantiate a new Habit factory using the context.
+            let habitFactory = HabitFactory(context: context)
+            
+            for _ in 1...7 {
+                // Make a new dummy.
+                let habit = habitFactory.makeDummy()
+                
+                // Associate the habit's user.
+                habit.user = user
+            }
         },
     ]
     

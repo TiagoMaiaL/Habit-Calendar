@@ -23,8 +23,9 @@ struct HabitDayFactory: DummyFactory {
     
     // MARK: Imperatives
     
-    /// Generates a new HabitDay dummy with it's associated Day dummy.
-    /// - Note: The generated dummy doens't have an associated Habit dummy.
+    /// Generates a new empty HabitDay dummy.
+    /// - Note: The generated dummy doesn't have the associated Habit and
+    ///         Day dummies.
     /// - Returns: The generated HabitDay dummy as a NSManagedObject.
     func makeDummy() -> HabitDayMO {
         // Declare a new habitDay entity.
@@ -34,12 +35,6 @@ struct HabitDayFactory: DummyFactory {
         habitDay.id = UUID().uuidString
         habitDay.wasExecuted = false
         
-        // Declare the Day factory to be used.
-        let dayFactory = DayFactory(context: context)
-        
-        // Associate it with a Day dummy object.
-        habitDay.day = dayFactory.makeDummy()
-
         // Return the created HabitDay dummy object.
         return habitDay
     }
