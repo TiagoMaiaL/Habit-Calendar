@@ -8,9 +8,8 @@
 
 import Foundation
 import CoreData
-@testable import Active
 
-/// Factory in charge of generating Notification (entity) dummies.
+/// Factory in charge of generating NotificationMO dummies.
 struct NotificationFactory: DummyFactory {
     
     // MARK: Types
@@ -20,7 +19,7 @@ struct NotificationFactory: DummyFactory {
     
     // MARK: Properties
     
-    var container: NSPersistentContainer
+    var context: NSManagedObjectContext
     
     // MARK: Imperatives
     
@@ -31,7 +30,7 @@ struct NotificationFactory: DummyFactory {
     /// - Returns: A generated Notification dummy as a NSManagedObject.
     func makeDummy() -> NotificationMO {
         // Declare the Notification entity.
-        let notification = NotificationMO(context: container.viewContext)
+        let notification = NotificationMO(context: context)
         
         // Associate its properties.
         notification.id = UUID().uuidString

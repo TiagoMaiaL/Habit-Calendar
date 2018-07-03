@@ -11,8 +11,7 @@ import CoreData
 
 /// Declares the main interface for the dummy factories
 /// of each core data entity.
-/// - Note: Dummies are only used for testing
-///         the storage and model layers.
+/// - Note: Dummies are only used for testing and seeding.
 protocol DummyFactory {
     
     // MARK: Types
@@ -23,7 +22,7 @@ protocol DummyFactory {
     // MARK: Properties
     
     /// The container used to generate dummies.
-    var container: NSPersistentContainer { get }
+    var context: NSManagedObjectContext { get }
     
     // MARK: Imperatives
     

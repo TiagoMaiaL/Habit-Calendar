@@ -41,11 +41,11 @@ class IntegrationTestCase: XCTestCase {
         
         /// Create the factories used to write the storage and model tests.
         factories = (
-            user: UserFactory(container: memoryPersistentContainer),
-            habit: HabitFactory(container: memoryPersistentContainer),
-            notification: NotificationFactory(container: memoryPersistentContainer),
-            day: DayFactory(container: memoryPersistentContainer),
-            habitDay: HabitDayFactory(container: memoryPersistentContainer)
+            user: UserFactory(context: context),
+            habit: HabitFactory(context: context),
+            notification: NotificationFactory(context: context),
+            day: DayFactory(context: context),
+            habitDay: HabitDayFactory(context: context)
         )
     }
     
@@ -65,6 +65,8 @@ class IntegrationTestCase: XCTestCase {
     /// Creates an in-memory persistent container to be used by the tests.
     /// - Returns: The in-memory NSPersistentContainer.
     func makeMemoryPersistentContainer() -> NSPersistentContainer {
+        let contents = FileManager.default.contents(atPath: NSPersistentContainer.defaultDirectoryURL().absoluteString)
+        
         let container = NSPersistentContainer(name: "Active")
         
         // Declare the in-memory Store description.

@@ -8,9 +8,8 @@
 
 import Foundation
 import CoreData
-@testable import Active
 
-/// Factory in charge of generating User (entity) dummies.
+/// Factory in charge of generating UserMO dummies.
 struct UserFactory: DummyFactory {
 
     // MARK: Types
@@ -20,14 +19,14 @@ struct UserFactory: DummyFactory {
     
     // MARK: Properties
     
-    var container: NSPersistentContainer
+    var context: NSManagedObjectContext
     
     // MARK: Imperatives
     
     /// Creates an User entity object.
     func makeDummy() -> UserMO {
         // Create the entity.
-        let user = UserMO(context: container.viewContext)
+        let user = UserMO(context: context)
         
         // Configure it's properties.
         user.id = UUID().uuidString

@@ -8,9 +8,8 @@
 
 import Foundation
 import CoreData
-@testable import Active
 
-/// Factory in charge of generating Day (entity) dummies.
+/// Factory in charge of generating DayMO dummies.
 struct HabitFactory: DummyFactory {
     
     // MARK: Types
@@ -20,7 +19,7 @@ struct HabitFactory: DummyFactory {
     
     // MARK: Properties
     
-    var container: NSPersistentContainer
+    var context: NSManagedObjectContext
     
     /// The maximum number of days contained within the generated dummy.
     private let maxNumberOfDays = 61
@@ -48,7 +47,7 @@ struct HabitFactory: DummyFactory {
     /// - Returns: The Habit entity as an NSManagedObject.
     func makeDummy() -> HabitMO {
         // Declare the habit entity.
-        let habit = HabitMO(context: container.viewContext)
+        let habit = HabitMO(context: context)
         
         // Associate it's properties (id, created, name, color).
         habit.id = UUID().uuidString
@@ -59,10 +58,10 @@ struct HabitFactory: DummyFactory {
         habit.color = "Green"
         
         // Declare a NotificationFactory's instance.
-        let notificationFactory = NotificationFactory(container: container)
+        let notificationFactory = NotificationFactory(context: context)
         
         // Declare a HabitDayFactory's instance.
-        let habitDayFactory = HabitDayFactory(container: container)
+        let habitDayFactory = HabitDayFactory(context: context)
         
         // Associate it's relationships:
         let randomRange = 0..<Int.random(2..<maxNumberOfDays)

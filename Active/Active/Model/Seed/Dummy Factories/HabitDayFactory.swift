@@ -8,9 +8,8 @@
 
 import Foundation
 import CoreData
-@testable import Active
 
-/// Factory in charge of generating HabitDay (entity) dummies.
+/// Factory in charge of generating HabitDayMO dummies.
 struct HabitDayFactory: DummyFactory {
     
     // MARK: Types
@@ -20,7 +19,7 @@ struct HabitDayFactory: DummyFactory {
     
     // MARK: Properties
     
-    var container: NSPersistentContainer
+    var context: NSManagedObjectContext
     
     // MARK: Imperatives
     
@@ -29,14 +28,14 @@ struct HabitDayFactory: DummyFactory {
     /// - Returns: The generated HabitDay dummy as a NSManagedObject.
     func makeDummy() -> HabitDayMO {
         // Declare a new habitDay entity.
-        let habitDay = Active.HabitDayMO(context: container.viewContext)
+        let habitDay = Active.HabitDayMO(context: context)
         
         // Associate it's properties (id, wasExecuted).
         habitDay.id = UUID().uuidString
         habitDay.wasExecuted = false
         
         // Declare the Day factory to be used.
-        let dayFactory = DayFactory(container: container)
+        let dayFactory = DayFactory(context: context)
         
         // Associate it with a Day dummy object.
         habitDay.day = dayFactory.makeDummy()

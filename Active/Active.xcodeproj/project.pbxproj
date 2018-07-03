@@ -26,20 +26,21 @@
 		474F9C8620CC7E180094C19C /* Date+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474F9C8520CC7E180094C19C /* Date+Utils.swift */; };
 		474F9C8A20CE3F670094C19C /* IntegrationTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474F9C8920CE3F670094C19C /* IntegrationTestCase.swift */; };
 		474F9C8D20CEE2840094C19C /* UserStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474F9C8C20CEE2840094C19C /* UserStorageTests.swift */; };
-		475C96A220DEFB4C00212E1F /* DummyFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475C96A120DEFB4C00212E1F /* DummyFactory.swift */; };
-		475C96A420DEFC9500212E1F /* DayFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475C96A320DEFC9500212E1F /* DayFactory.swift */; };
-		475C96A620DEFEBC00212E1F /* HabitFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475C96A520DEFEBC00212E1F /* HabitFactory.swift */; };
-		475C96A820DF20A500212E1F /* NotificationFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475C96A720DF20A500212E1F /* NotificationFactory.swift */; };
-		475C96AA20DF235000212E1F /* HabitDayFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475C96A920DF235000212E1F /* HabitDayFactory.swift */; };
 		475C96AD20E1216D00212E1F /* HabitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475C96AC20E1216D00212E1F /* HabitTests.swift */; };
 		4761DFD320DE692A003F772A /* UNUserNotificationCenterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4761DFD220DE692A003F772A /* UNUserNotificationCenterMock.swift */; };
-		4761DFD620DEEAA7003F772A /* UserFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4761DFD520DEEAA7003F772A /* UserFactory.swift */; };
 		4779588020D8ADA90080614F /* NotificationStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4779587F20D8ADA90080614F /* NotificationStorageTests.swift */; };
 		4779588320D8B2E10080614F /* UserNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4779588220D8B2E10080614F /* UserNotificationManager.swift */; };
 		4779588520D8B38B0080614F /* NotificationStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4779588420D8B38B0080614F /* NotificationStorage.swift */; };
 		47D8FC9E20DC13990094026B /* UserNotificationManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D8FC9D20DC13990094026B /* UserNotificationManagerTests.swift */; };
 		47E6C20B20EAF550003BDB4D /* HabitCreationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E6C20A20EAF550003BDB4D /* HabitCreationViewController.swift */; };
 		47E6C20D20EAF567003BDB4D /* HabitDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E6C20C20EAF567003BDB4D /* HabitDetailsViewController.swift */; };
+		47E6C21020EB1233003BDB4D /* SeedManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E6C20F20EB1233003BDB4D /* SeedManager.swift */; };
+		47E6C21120EB129C003BDB4D /* DummyFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475C96A120DEFB4C00212E1F /* DummyFactory.swift */; };
+		47E6C21320EB12A2003BDB4D /* DayFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475C96A320DEFC9500212E1F /* DayFactory.swift */; };
+		47E6C21420EB12A5003BDB4D /* UserFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4761DFD520DEEAA7003F772A /* UserFactory.swift */; };
+		47E6C21520EB12B2003BDB4D /* HabitFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475C96A520DEFEBC00212E1F /* HabitFactory.swift */; };
+		47E6C21620EB12B6003BDB4D /* NotificationFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475C96A720DF20A500212E1F /* NotificationFactory.swift */; };
+		47E6C21720EB12BA003BDB4D /* HabitDayFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475C96A920DF235000212E1F /* HabitDayFactory.swift */; };
 		47F635F020BB920900AC4555 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F635EF20BB920900AC4555 /* AppDelegate.swift */; };
 		47F635F520BB920900AC4555 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47F635F320BB920900AC4555 /* Main.storyboard */; };
 		47F635F820BB920900AC4555 /* Active.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 47F635F620BB920900AC4555 /* Active.xcdatamodeld */; };
@@ -92,6 +93,7 @@
 		47D8FC9D20DC13990094026B /* UserNotificationManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationManagerTests.swift; sourceTree = "<group>"; };
 		47E6C20A20EAF550003BDB4D /* HabitCreationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitCreationViewController.swift; sourceTree = "<group>"; };
 		47E6C20C20EAF567003BDB4D /* HabitDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitDetailsViewController.swift; sourceTree = "<group>"; };
+		47E6C20F20EB1233003BDB4D /* SeedManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedManager.swift; sourceTree = "<group>"; };
 		47F635EC20BB920900AC4555 /* Active.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Active.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		47F635EF20BB920900AC4555 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		47F635F420BB920900AC4555 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 				4713A1FF20C164E6008A13D2 /* HabitDayMO.swift */,
 				4713A20120C164FB008A13D2 /* DayMO.swift */,
 				4713A20320C16542008A13D2 /* NotificationMO.swift */,
+				47E6C20E20EB1213003BDB4D /* Seed */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -165,12 +168,12 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		474A209820D1B4E400E0EBD0 /* ExtensionTests */ = {
+		474A209820D1B4E400E0EBD0 /* Extension Tests */ = {
 			isa = PBXGroup;
 			children = (
 				474A209B20D1B51300E0EBD0 /* DateUtilsTests.swift */,
 			);
-			path = ExtensionTests;
+			path = "Extension Tests";
 			sourceTree = "<group>";
 		};
 		474F9C8420CC7DEF0094C19C /* Extensions */ = {
@@ -182,7 +185,7 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		474F9C8820CE3F470094C19C /* StorageTests */ = {
+		474F9C8820CE3F470094C19C /* Storage Tests */ = {
 			isa = PBXGroup;
 			children = (
 				474F9C8C20CEE2840094C19C /* UserStorageTests.swift */,
@@ -191,29 +194,28 @@
 				4779587F20D8ADA90080614F /* NotificationStorageTests.swift */,
 				470230D320E28A56003A1F6E /* HabitDayStorageTests.swift */,
 			);
-			path = StorageTests;
+			path = "Storage Tests";
 			sourceTree = "<group>";
 		};
-		475C96AB20E0832A00212E1F /* ModelTests */ = {
+		475C96AB20E0832A00212E1F /* Model Tests */ = {
 			isa = PBXGroup;
 			children = (
 				475C96AC20E1216D00212E1F /* HabitTests.swift */,
 				470230D520E2A696003A1F6E /* HabitDayTests.swift */,
 			);
-			path = ModelTests;
+			path = "Model Tests";
 			sourceTree = "<group>";
 		};
-		4761DFD020DE68B8003F772A /* IntegrationTests */ = {
+		4761DFD020DE68B8003F772A /* Integration Tests */ = {
 			isa = PBXGroup;
 			children = (
 				474F9C8920CE3F670094C19C /* IntegrationTestCase.swift */,
-				4761DFD420DEB8D3003F772A /* Factories */,
 				4761DFD120DE68EB003F772A /* Mocks */,
-				47D8FC9C20DB28350094026B /* ManagerTests */,
-				474F9C8820CE3F470094C19C /* StorageTests */,
-				475C96AB20E0832A00212E1F /* ModelTests */,
+				47D8FC9C20DB28350094026B /* Manager Tests */,
+				474F9C8820CE3F470094C19C /* Storage Tests */,
+				475C96AB20E0832A00212E1F /* Model Tests */,
 			);
-			path = IntegrationTests;
+			path = "Integration Tests";
 			sourceTree = "<group>";
 		};
 		4761DFD120DE68EB003F772A /* Mocks */ = {
@@ -224,7 +226,7 @@
 			path = Mocks;
 			sourceTree = "<group>";
 		};
-		4761DFD420DEB8D3003F772A /* Factories */ = {
+		4761DFD420DEB8D3003F772A /* Dummy Factories */ = {
 			isa = PBXGroup;
 			children = (
 				475C96A120DEFB4C00212E1F /* DummyFactory.swift */,
@@ -234,7 +236,7 @@
 				475C96A720DF20A500212E1F /* NotificationFactory.swift */,
 				475C96A920DF235000212E1F /* HabitDayFactory.swift */,
 			);
-			path = Factories;
+			path = "Dummy Factories";
 			sourceTree = "<group>";
 		};
 		4779588120D8B2AC0080614F /* Managers */ = {
@@ -245,12 +247,21 @@
 			path = Managers;
 			sourceTree = "<group>";
 		};
-		47D8FC9C20DB28350094026B /* ManagerTests */ = {
+		47D8FC9C20DB28350094026B /* Manager Tests */ = {
 			isa = PBXGroup;
 			children = (
 				47D8FC9D20DC13990094026B /* UserNotificationManagerTests.swift */,
 			);
-			path = ManagerTests;
+			path = "Manager Tests";
+			sourceTree = "<group>";
+		};
+		47E6C20E20EB1213003BDB4D /* Seed */ = {
+			isa = PBXGroup;
+			children = (
+				4761DFD420DEB8D3003F772A /* Dummy Factories */,
+				47E6C20F20EB1233003BDB4D /* SeedManager.swift */,
+			);
+			path = Seed;
 			sourceTree = "<group>";
 		};
 		47F635E320BB920900AC4555 = {
@@ -289,8 +300,8 @@
 		47F6360620BB920D00AC4555 /* ActiveTests */ = {
 			isa = PBXGroup;
 			children = (
-				4761DFD020DE68B8003F772A /* IntegrationTests */,
-				474A209820D1B4E400E0EBD0 /* ExtensionTests */,
+				4761DFD020DE68B8003F772A /* Integration Tests */,
+				474A209820D1B4E400E0EBD0 /* Extension Tests */,
 				47F6360720BB920D00AC4555 /* ActiveTests.swift */,
 				47F6360920BB920D00AC4555 /* Info.plist */,
 			);
@@ -426,14 +437,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				47E6C21520EB12B2003BDB4D /* HabitFactory.swift in Sources */,
 				47F635F820BB920900AC4555 /* Active.xcdatamodeld in Sources */,
+				47E6C21120EB129C003BDB4D /* DummyFactory.swift in Sources */,
 				470230D820E5250A003A1F6E /* Int+Utils.swift in Sources */,
 				47F635F020BB920900AC4555 /* AppDelegate.swift in Sources */,
 				4713A20220C164FB008A13D2 /* DayMO.swift in Sources */,
 				4779588320D8B2E10080614F /* UserNotificationManager.swift in Sources */,
+				47E6C21020EB1233003BDB4D /* SeedManager.swift in Sources */,
 				4713A20420C16542008A13D2 /* NotificationMO.swift in Sources */,
 				4725D06120CA06EE00C3B63F /* DayStorage.swift in Sources */,
 				4725D05F20C97D9C00C3B63F /* UserStorage.swift in Sources */,
+				47E6C21620EB12B6003BDB4D /* NotificationFactory.swift in Sources */,
 				474F9C8620CC7E180094C19C /* Date+Utils.swift in Sources */,
 				4725D05B20C8A4BA00C3B63F /* HabitsTableViewController.swift in Sources */,
 				4725D06320CA14A600C3B63F /* HabitDayStorage.swift in Sources */,
@@ -441,9 +456,12 @@
 				4779588520D8B38B0080614F /* NotificationStorage.swift in Sources */,
 				47E6C20B20EAF550003BDB4D /* HabitCreationViewController.swift in Sources */,
 				4725D05D20C8A96200C3B63F /* HabitStorage.swift in Sources */,
+				47E6C21320EB12A2003BDB4D /* DayFactory.swift in Sources */,
 				4713A20020C164E6008A13D2 /* HabitDayMO.swift in Sources */,
 				47E6C20D20EAF567003BDB4D /* HabitDetailsViewController.swift in Sources */,
 				4713A1FC20C1643E008A13D2 /* UserMO.swift in Sources */,
+				47E6C21420EB12A5003BDB4D /* UserFactory.swift in Sources */,
+				47E6C21720EB12BA003BDB4D /* HabitDayFactory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -453,22 +471,16 @@
 			files = (
 				475C96AD20E1216D00212E1F /* HabitTests.swift in Sources */,
 				474F9C8D20CEE2840094C19C /* UserStorageTests.swift in Sources */,
-				475C96AA20DF235000212E1F /* HabitDayFactory.swift in Sources */,
-				475C96A620DEFEBC00212E1F /* HabitFactory.swift in Sources */,
-				4761DFD620DEEAA7003F772A /* UserFactory.swift in Sources */,
 				470230D620E2A696003A1F6E /* HabitDayTests.swift in Sources */,
 				47F6360820BB920D00AC4555 /* ActiveTests.swift in Sources */,
-				475C96A420DEFC9500212E1F /* DayFactory.swift in Sources */,
 				4761DFD320DE692A003F772A /* UNUserNotificationCenterMock.swift in Sources */,
 				474A209C20D1B51300E0EBD0 /* DateUtilsTests.swift in Sources */,
-				475C96A220DEFB4C00212E1F /* DummyFactory.swift in Sources */,
 				470230D420E28A56003A1F6E /* HabitDayStorageTests.swift in Sources */,
 				474A209720D1B02700E0EBD0 /* HabitStorageTests.swift in Sources */,
 				47D8FC9E20DC13990094026B /* UserNotificationManagerTests.swift in Sources */,
 				474A209520D00AFA00E0EBD0 /* DayStorageTests.swift in Sources */,
 				4779588020D8ADA90080614F /* NotificationStorageTests.swift in Sources */,
 				474F9C8A20CE3F670094C19C /* IntegrationTestCase.swift in Sources */,
-				475C96A820DF20A500212E1F /* NotificationFactory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

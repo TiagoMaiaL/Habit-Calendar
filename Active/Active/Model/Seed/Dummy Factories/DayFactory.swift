@@ -8,9 +8,8 @@
 
 import Foundation
 import CoreData
-@testable import Active
 
-/// Factory in charge of generating Day (entity) dummies.
+/// Factory in charge of generating DayMO dummies.
 struct DayFactory: DummyFactory {
     
     // MARK: Types
@@ -20,7 +19,7 @@ struct DayFactory: DummyFactory {
     
     // MARK: Properties
     
-    var container: NSPersistentContainer
+    var context: NSManagedObjectContext
     
     // MARK: Imperatives
     
@@ -28,7 +27,7 @@ struct DayFactory: DummyFactory {
     /// - Returns: A new day entity.
     func makeDummy() -> DayMO {
         // Declare a new Day entity.
-        let day = DayMO(context: container.viewContext)
+        let day = DayMO(context: context)
         
         // Configure it's properties (id, date).
         day.id = UUID().uuidString
