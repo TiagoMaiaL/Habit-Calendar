@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -19,13 +20,48 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     /// The app's seed manager.
     /// - Note: The seed takes place between each app launches.
-    lazy var seedManager: SeedManager = SeedManager(container: persistentContainer)
+    private lazy var seedManager: SeedManager = SeedManager(
+        container: persistentContainer
+    )
+    
+    /// The app's DayMO storage.
+    private(set) lazy var dayStorage = DayStorage()
+    
+    /// The app's HabitDayMO storage.
+    private(set) lazy var habitDayStorage = HabitDayStorage(
+        calendarDayStorage: dayStorage
+    )
+    
+    /// The app's UserNotificationManager in charge of all local user notifications.
+    private(set) lazy var notificationManager = UserNotificationManager(
+        notificationCenter: UNUserNotificationCenter.current()
+    )
+    
+    /// The app's NotificationMO storage.
+    private(set) lazy var notificationStorage = NotificationStorage(
+        manager: notificationManager
+    )
+    
+    /// The app's Habit storage that's going to be used by the controllers.
+    private lazy var habitStorage: HabitStorage = HabitStorage(
+        habitDayStorage: habitDayStorage,
+        notificationStorage: notificationStorage
+    )
     
     // MARK: Delegate methods
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Begin again by seeding the app's database with new dummy entities.
         seedManager.seed()
+        
+        // Inject the main dependencies into the initial HabitTableViewController:
+        if let habitsListingController = window?.rootViewController?.contents as? HabitsTableViewController {
+            // Inject its container.
+            habitsListingController.container = persistentContainer
+            
+            // Inject its habit storage.
+            habitsListingController.habitStorage = habitStorage
+        }
         
         return true
     }

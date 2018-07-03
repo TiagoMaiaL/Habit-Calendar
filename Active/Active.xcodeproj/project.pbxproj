@@ -41,6 +41,7 @@
 		47E6C21520EB12B2003BDB4D /* HabitFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475C96A520DEFEBC00212E1F /* HabitFactory.swift */; };
 		47E6C21620EB12B6003BDB4D /* NotificationFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475C96A720DF20A500212E1F /* NotificationFactory.swift */; };
 		47E6C21720EB12BA003BDB4D /* HabitDayFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475C96A920DF235000212E1F /* HabitDayFactory.swift */; };
+		47E6C21F20EC16C8003BDB4D /* UIViewController+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E6C21E20EC16C8003BDB4D /* UIViewController+Utils.swift */; };
 		47F635F020BB920900AC4555 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F635EF20BB920900AC4555 /* AppDelegate.swift */; };
 		47F635F520BB920900AC4555 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47F635F320BB920900AC4555 /* Main.storyboard */; };
 		47F635F820BB920900AC4555 /* Active.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 47F635F620BB920900AC4555 /* Active.xcdatamodeld */; };
@@ -94,6 +95,7 @@
 		47E6C20A20EAF550003BDB4D /* HabitCreationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitCreationViewController.swift; sourceTree = "<group>"; };
 		47E6C20C20EAF567003BDB4D /* HabitDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitDetailsViewController.swift; sourceTree = "<group>"; };
 		47E6C20F20EB1233003BDB4D /* SeedManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedManager.swift; sourceTree = "<group>"; };
+		47E6C21E20EC16C8003BDB4D /* UIViewController+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Utils.swift"; sourceTree = "<group>"; };
 		47F635EC20BB920900AC4555 /* Active.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Active.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		47F635EF20BB920900AC4555 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		47F635F420BB920900AC4555 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -181,6 +183,7 @@
 			children = (
 				474F9C8520CC7E180094C19C /* Date+Utils.swift */,
 				470230D720E5250A003A1F6E /* Int+Utils.swift */,
+				47E6C21E20EC16C8003BDB4D /* UIViewController+Utils.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -461,6 +464,7 @@
 				47E6C20D20EAF567003BDB4D /* HabitDetailsViewController.swift in Sources */,
 				4713A1FC20C1643E008A13D2 /* UserMO.swift in Sources */,
 				47E6C21420EB12A5003BDB4D /* UserFactory.swift in Sources */,
+				47E6C21F20EC16C8003BDB4D /* UIViewController+Utils.swift in Sources */,
 				47E6C21720EB12BA003BDB4D /* HabitDayFactory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
