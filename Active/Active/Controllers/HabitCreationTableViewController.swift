@@ -7,17 +7,27 @@
 //
 
 import UIKit
+import CoreData
 
 /// Controller used to allow the user to create/edit habits.
-class HabitCreationTableViewController: UITableViewController {
+class HabitCreationTableViewController: UITableViewController, HabitDaysSelectionViewControllerDelegate, HabitNotificationsSelectionViewControllerDelegate {
 
     // MARK: Properties
+    
+    /// The segue identifier for the DaysSelection controller.
+    private let daysSelectionSegue = "Show days selection controller"
+    
+    /// The segue identifier for the NotificationsSelection controller.
+    private let notificationSelectionSegue = "Show fire dates selection controller"
     
     /// The text field used to give the habit a name.
     @IBOutlet weak var nameTextField: UITextField!
     
     /// The button used to store the habit.
     @IBOutlet weak var doneButton: UIButton!
+    
+    /// The container in which the habit is going to be persisted.
+    var container: NSPersistentContainer!
     
     /// The habit storage used for this controller to
     /// create/edit the habit.
@@ -29,18 +39,20 @@ class HabitCreationTableViewController: UITableViewController {
     /// The habit's name being informed by the user.
     private var name: String? {
         didSet {
-            // TODO: Update the done button enabled state.
+            configureCreationButton()
         }
     }
     
     /// The habit's days the user has selected.
     // For now only one day is going to be added.
-    private var days: [Date]?
+    private var days: [Date]? {
+        didSet {
+            configureCreationButton()
+        }
+    }
     
     /// The habit's notification time the user has chosen.
-    private var notificationFireDate: Date?
-    
-    // TODO: Declare the used habit's storage.
+    private var notificationFireDates: [Date]?
     
     // TODO: Show a cell indicating the user hasn't
     // enabled local notifications.
@@ -50,6 +62,8 @@ class HabitCreationTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // TODO: Set the preconditions for the store and container to be set.
+        
         // Associate the event listener to the textField.
         nameTextField.addTarget(
             self,
@@ -58,7 +72,22 @@ class HabitCreationTableViewController: UITableViewController {
         )
         
         // Set the done button's initial state.
-        doneButton.isEnabled = false
+        configureCreationButton()
+    }
+    
+    // MARK: Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segue.identifier {
+        case daysSelectionSegue:
+            let daysController = segue.destination as! HabitDaysSelectionViewController
+            daysController.delegate = self
+        case notificationSelectionSegue:
+            let notificationsController = segue.destination as! HabitNotificationsSelectionViewController
+            notificationsController.delegate = self
+        default:
+            break
+        }
     }
     
     // MARK: Actions
@@ -70,6 +99,7 @@ class HabitCreationTableViewController: UITableViewController {
         )
         
         // TODO: Save the passed habit.
+        
     }
     
     // MARK: Imperatives
@@ -79,5 +109,32 @@ class HabitCreationTableViewController: UITableViewController {
     @objc private func nameChanged(textField: UITextField) {
         // Associate the name with the field's text.
         name = textField.text
+    }
+    
+    /// Enables or disables the button depending on the habit's filled data.
+    private func configureCreationButton() {
+        // Check if the name and days are correctly set.
+        doneButton.isEnabled = !(name ?? "").isEmpty && !(days ?? []).isEmpty
+    }
+}
+
+extension HabitCreationTableViewController {
+    
+    // MARK: HabitDaysSelectionViewController Delegate Methods
+    
+    func didSelectDays(_ daysDates: [Date]) {
+        // Associate the habit's days with the dates selected by the user.
+        days = daysDates
+    }
+}
+
+extension HabitCreationTableViewController {
+    
+    // MARK: HabitNotificationsSelectionViewControllerDelegate Delegate Methods
+    
+    func didSelectFireDates(_ fireDates: [Date]) {
+        // Associate the habit's fire dates with the fireDates selected by
+        // the user.
+        notificationFireDates = fireDates
     }
 }

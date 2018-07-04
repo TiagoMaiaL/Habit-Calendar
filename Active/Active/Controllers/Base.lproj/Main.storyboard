@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -115,6 +116,9 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="zeZ-9t-rmb" kind="show" identifier="Show days selection controller" id="y7q-nn-pWX"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="K5o-Sa-vnr" rowHeight="60" style="IBUITableViewCellStyleDefault" id="5x1-FQ-bQv" userLabel="Notifications Cell">
                                         <rect key="frame" x="0.0" y="121" width="375" height="60"/>
@@ -132,6 +136,9 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="hr1-dK-bvy" kind="show" identifier="Show fire dates selection controller" id="J1H-vQ-s49"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="60" id="Gct-Ag-4Xe" userLabel="Done Button Cell">
                                         <rect key="frame" x="0.0" y="181" width="375" height="60"/>
@@ -167,6 +174,104 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bag-g3-dbf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2028" y="-465.51724137931041"/>
+        </scene>
+        <!--Notifications-->
+        <scene sceneID="e0g-by-TQS">
+            <objects>
+                <viewController title="Notifications" id="hr1-dK-bvy" customClass="HabitNotificationsSelectionViewController" customModule="Active" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="bYh-yH-9aK">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="At what time would you like to be rembered to do your habitual activity?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vnn-0H-Gxy">
+                                <rect key="frame" x="38" y="94" width="300" height="41"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="30" translatesAutoresizingMaskIntoConstraints="NO" id="go7-OO-Gwc">
+                                <rect key="frame" x="28" y="160" width="320" height="216"/>
+                                <date key="date" timeIntervalSinceReferenceDate="552425893.24196696">
+                                    <!--2018-07-04 19:38:13 +0000-->
+                                </date>
+                            </datePicker>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oC4-D2-mh4">
+                                <rect key="frame" x="170" y="396" width="35" height="30"/>
+                                <state key="normal" title="done"/>
+                                <connections>
+                                    <action selector="selectDay:" destination="zeZ-9t-rmb" eventType="touchUpInside" id="ErF-O5-S7a"/>
+                                    <action selector="selectFireDates:" destination="hr1-dK-bvy" eventType="touchUpInside" id="Avv-xH-Ndt"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="go7-OO-Gwc" firstAttribute="top" secondItem="vnn-0H-Gxy" secondAttribute="bottom" constant="25" id="GkA-rw-2CR"/>
+                            <constraint firstItem="oC4-D2-mh4" firstAttribute="centerX" secondItem="bYh-yH-9aK" secondAttribute="centerX" id="NMZ-HG-U6i"/>
+                            <constraint firstItem="vnn-0H-Gxy" firstAttribute="top" secondItem="0cT-Ky-et7" secondAttribute="top" constant="30" id="UEP-Ad-V4m"/>
+                            <constraint firstItem="vnn-0H-Gxy" firstAttribute="centerX" secondItem="bYh-yH-9aK" secondAttribute="centerX" id="Uw8-Mt-94o"/>
+                            <constraint firstItem="oC4-D2-mh4" firstAttribute="top" secondItem="go7-OO-Gwc" secondAttribute="bottom" constant="20" id="cpa-GG-DRz"/>
+                            <constraint firstItem="vnn-0H-Gxy" firstAttribute="width" secondItem="0cT-Ky-et7" secondAttribute="width" multiplier="0.8" id="iNg-G6-5WV"/>
+                            <constraint firstItem="go7-OO-Gwc" firstAttribute="centerX" secondItem="bYh-yH-9aK" secondAttribute="centerX" id="sjN-1C-SuZ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="0cT-Ky-et7"/>
+                    </view>
+                    <connections>
+                        <outlet property="timePickerView" destination="go7-OO-Gwc" id="rTK-46-k0V"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rE2-W1-pId" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2870" y="-91"/>
+        </scene>
+        <!--Days-->
+        <scene sceneID="LN7-wK-ThL">
+            <objects>
+                <viewController title="Days" id="zeZ-9t-rmb" customClass="HabitDaysSelectionViewController" customModule="Active" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="lOR-5n-C4N">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="At what days would you like to track your habit?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vzy-ce-8kO">
+                                <rect key="frame" x="37.5" y="94" width="300" height="41"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="tGL-Fb-Uty">
+                                <rect key="frame" x="28" y="160" width="320" height="216"/>
+                                <date key="date" timeIntervalSinceReferenceDate="552425893.24196696">
+                                    <!--2018-07-04 19:38:13 +0000-->
+                                </date>
+                            </datePicker>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cqd-Qf-JuL">
+                                <rect key="frame" x="170" y="396" width="35" height="30"/>
+                                <state key="normal" title="done"/>
+                                <connections>
+                                    <action selector="selectDay:" destination="zeZ-9t-rmb" eventType="touchUpInside" id="h58-DZ-ZuX"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Vzy-ce-8kO" firstAttribute="centerX" secondItem="jIC-fg-zIB" secondAttribute="centerX" id="0MM-Tb-F94"/>
+                            <constraint firstItem="Cqd-Qf-JuL" firstAttribute="top" secondItem="tGL-Fb-Uty" secondAttribute="bottom" constant="20" id="0gG-uy-9Z9"/>
+                            <constraint firstItem="Vzy-ce-8kO" firstAttribute="width" secondItem="lOR-5n-C4N" secondAttribute="width" multiplier="0.8" id="684-hN-OgH"/>
+                            <constraint firstItem="Cqd-Qf-JuL" firstAttribute="centerX" secondItem="lOR-5n-C4N" secondAttribute="centerX" id="Hb7-CT-sWN"/>
+                            <constraint firstItem="tGL-Fb-Uty" firstAttribute="top" secondItem="Vzy-ce-8kO" secondAttribute="bottom" constant="25" id="RLA-8q-TY7"/>
+                            <constraint firstItem="Vzy-ce-8kO" firstAttribute="top" secondItem="jIC-fg-zIB" secondAttribute="top" constant="30" id="RNg-xK-Lyx"/>
+                            <constraint firstItem="tGL-Fb-Uty" firstAttribute="centerX" secondItem="lOR-5n-C4N" secondAttribute="centerX" id="s6n-zk-g3v"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="jIC-fg-zIB"/>
+                    </view>
+                    <connections>
+                        <outlet property="dayPickerView" destination="tGL-Fb-Uty" id="sxn-Xr-iT9"/>
+                        <outlet property="doneButton" destination="Cqd-Qf-JuL" id="8tr-Hk-KmA"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9zz-Nw-yjM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2871" y="-884"/>
         </scene>
         <!--Read-->
         <scene sceneID="xFu-io-JbZ">
