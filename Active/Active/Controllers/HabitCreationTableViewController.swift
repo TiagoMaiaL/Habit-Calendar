@@ -31,7 +31,7 @@ class HabitCreationTableViewController: UITableViewController, HabitDaysSelectio
     
     /// The habit storage used for this controller to
     /// create/edit the habit.
-    var habitStorage: HabitStorage!
+    var habitStore: HabitStorage!
     
     /// The habit entity being editted.
     var habit: HabitMO?
@@ -62,7 +62,9 @@ class HabitCreationTableViewController: UITableViewController, HabitDaysSelectio
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // TODO: Set the preconditions for the store and container to be set.
+        // Assert on the values of the inject dependencies (implicitly unwrapped).
+        assert(container != nil, "Error: failed to inject the persistent container.")
+        assert(habitStore != nil, "Error: failed to inject the habit store")
         
         // Associate the event listener to the textField.
         nameTextField.addTarget(
@@ -80,11 +82,20 @@ class HabitCreationTableViewController: UITableViewController, HabitDaysSelectio
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
         case daysSelectionSegue:
-            let daysController = segue.destination as! HabitDaysSelectionViewController
-            daysController.delegate = self
+            // Associate the DaysSelectionController's delegate.
+            if let daysController = segue.destination as? HabitDaysSelectionViewController {
+                daysController.delegate = self
+            } else {
+                assertionFailure("Error: Couldn't get the days selection controller.")
+            }
+            
         case notificationSelectionSegue:
-            let notificationsController = segue.destination as! HabitNotificationsSelectionViewController
-            notificationsController.delegate = self
+            // Associate the NotificationsSelectionController's delegate.
+            if let notificationsController = segue.destination as? HabitNotificationsSelectionViewController {
+                notificationsController.delegate = self
+            } else {
+                assertionFailure("Error: Couldn't get the fire dates selection controller.")
+            }
         default:
             break
         }
@@ -94,12 +105,32 @@ class HabitCreationTableViewController: UITableViewController, HabitDaysSelectio
     
     /// Creates the habit.
     @IBAction func storeHabit(_ sender: UIButton) {
+        // Save the habit.
+        // If there's no previous habit, create and persist a new one.
+        container.performBackgroundTask { context in
+            if self.habit == nil {
+                _ = self.habitStore.create(
+                    using: context,
+                    name: self.name!,
+                    and: self.days!
+                )
+            } else {
+                // If there's a previous habit, update it with the new values.
+                _ = self.habitStore.edit(
+                    self.habit!,
+                    using: context,
+                    name: self.name,
+                    days: self.days,
+                    and: self.notificationFireDates)
+            }
+            
+            // TODO: Report any errors to the user.
+            try? context.save()
+        }
+        
         navigationController?.popViewController(
             animated: true
         )
-        
-        // TODO: Save the passed habit.
-        
     }
     
     // MARK: Imperatives

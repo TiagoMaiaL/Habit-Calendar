@@ -14,6 +14,9 @@ class HabitsTableViewController: UITableViewController, NSFetchedResultsControll
   
     // MARK: Properties
     
+    /// The identifier for the habit creation controller's segue.
+    private let newHabitSegueIdentifier = "Create a new habit"
+    
     /// The Habit cell's reuse identifier.
     private let habitCellIdentifier = "Habit table view cell"
     
@@ -36,10 +39,6 @@ class HabitsTableViewController: UITableViewController, NSFetchedResultsControll
     
     // MARK: ViewController Life Cycle
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -49,6 +48,25 @@ class HabitsTableViewController: UITableViewController, NSFetchedResultsControll
         
         // TODO: Check if this step will be needed.
         // Reload the tableView.
+    }
+    
+    // MARK: Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segue.identifier {
+        case newHabitSegueIdentifier:
+            // Inject the controller's habit storage and persistent container.
+            if let habitCreationController = segue.destination as? HabitCreationTableViewController {
+                habitCreationController.container = container
+                habitCreationController.habitStore = habitStorage
+            } else {
+                assertionFailure(
+                    "Error: Couldn't get the habit creation controller."
+                )
+            }
+        default:
+            break
+        }
     }
 
     // MARK: DataSource Methods

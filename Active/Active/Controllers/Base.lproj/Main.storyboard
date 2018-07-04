@@ -56,7 +56,7 @@
                     <navigationItem key="navigationItem" title="Habits" id="VDb-Iq-agm">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="YAq-Yr-JhL">
                             <connections>
-                                <segue destination="e07-lh-rVp" kind="show" id="Xkx-Wi-bYR"/>
+                                <segue destination="e07-lh-rVp" kind="show" identifier="Create a new habit" id="Xkx-Wi-bYR"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
