@@ -18,11 +18,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     /// The app's main window.
     var window: UIWindow?
     
+    /// Convenient access to the app's delegate instance.
+    static var current: AppDelegate {
+        return UIApplication.shared.delegate as! AppDelegate
+    }
+    
     /// The app's seed manager.
     /// - Note: The seed takes place between each app launches.
     private lazy var seedManager: SeedManager = SeedManager(
         container: persistentContainer
     )
+    
+    /// The app's UserMO storage.
+    private(set) lazy var userStorage = UserStorage()
+    
+    /// The app's UserMO main entity.
+    private(set) lazy var mainUser = userStorage.getUser(
+        using: persistentContainer.viewContext
+    )!
     
     /// The app's DayMO storage.
     private(set) lazy var dayStorage = DayStorage()
@@ -32,7 +45,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         calendarDayStorage: dayStorage
     )
     
-    /// The app's UserNotificationManager in charge of all local user notifications.
+    /// The app's UserNotificationManager in charge of all local
+    /// user notifications.
     private(set) lazy var notificationManager = UserNotificationManager(
         notificationCenter: UNUserNotificationCenter.current()
     )
@@ -43,7 +57,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     )
     
     /// The app's Habit storage that's going to be used by the controllers.
-    private lazy var habitStorage: HabitStorage = HabitStorage(
+    private(set) lazy var habitStorage: HabitStorage = HabitStorage(
         habitDayStorage: habitDayStorage,
         notificationStorage: notificationStorage
     )
@@ -58,7 +72,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let habitsListingController = window?.rootViewController?.contents as? HabitsTableViewController {
             // Inject its container.
             habitsListingController.container = persistentContainer
-            
             // Inject its habit storage.
             habitsListingController.habitStorage = habitStorage
         }
@@ -125,12 +138,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return container
     }()
     
-    /// Convenience access to the app's persistent container.
+    /// Convenient access to the app's persistent container.
     static var persistentContainer: NSPersistentContainer {
-        return (UIApplication.shared.delegate as! AppDelegate).persistentContainer
+        return AppDelegate.current.persistentContainer
     }
     
-    /// Convenience access to the app's used view context.
+    /// Convenient access to the app's used view context.
     static var viewContext: NSManagedObjectContext {
         return persistentContainer.viewContext
     }

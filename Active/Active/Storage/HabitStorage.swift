@@ -61,11 +61,15 @@ class HabitStorage {
     /// - Parameter context: The context used to write the new habit into.
     /// - Parameter name: The name of the habit entity.
     /// - Parameter days: The dates of the days the habit will be tracked.
+    /// - Parameter notifications: The fire dates of each notification object
+    ///                            to be added to the habit.
     /// - Returns: The created Habit entity object.
     func create(using context: NSManagedObjectContext,
+                user: UserMO,
                 name: String,
 //                color: HabitColor,
-                and days: [Date]) -> HabitMO {
+                days: [Date],
+                and notifications: [Date]? = nil) -> HabitMO {
         // Declare a new habit instance.
         let habit = HabitMO(context: context)
         habit.id = UUID().uuidString
@@ -73,12 +77,27 @@ class HabitStorage {
         habit.created = Date()
 //        habit.color = color.getPersistenceIdentifier()
         
+        // Associate its user.
+        habit.user = user
+        
         // Create the HabitDay entities associated with the new habit.
         _ = habitDayStorage.createDays(
             using: context,
             dates: days,
             and: habit
         )
+        
+        // Create and associate the notifications to the habit being created.
+        if let fireDates = notifications {
+            for fireDate in fireDates {
+                // Create a notification using the storage.
+                _ = try? notificationStorage.create(
+                    using: context,
+                    with: fireDate,
+                    and: habit
+                )
+            }
+        }
         
         return habit
     }

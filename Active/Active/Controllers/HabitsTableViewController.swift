@@ -55,10 +55,12 @@ class HabitsTableViewController: UITableViewController, NSFetchedResultsControll
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
         case newHabitSegueIdentifier:
-            // Inject the controller's habit storage and persistent container.
+            // Inject the controller's habit storage, user storage,
+            // and persistent container.
             if let habitCreationController = segue.destination as? HabitCreationTableViewController {
                 habitCreationController.container = container
                 habitCreationController.habitStore = habitStorage
+                habitCreationController.userStore = AppDelegate.current.userStorage
             } else {
                 assertionFailure(
                     "Error: Couldn't get the habit creation controller."

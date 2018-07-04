@@ -64,6 +64,7 @@ class HabitDayStorage {
         // created to hold the HabitDay entities.
         let calendarDay = try? calendarDayStorage.day(using: context, and: date) ?? calendarDayStorage.create(using: context, and: date)
         
+        habitDay.id = UUID().uuidString
         habitDay.day = calendarDay
         habitDay.habit = habit
         // Starts with wasExecuted as false.

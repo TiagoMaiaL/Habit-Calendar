@@ -33,6 +33,10 @@ class HabitCreationTableViewController: UITableViewController, HabitDaysSelectio
     /// create/edit the habit.
     var habitStore: HabitStorage!
     
+    /// The user storage used to associate the main user
+    /// to any created habits.
+    var userStore: UserStorage!
+    
     /// The habit entity being editted.
     var habit: HabitMO?
     
@@ -105,14 +109,23 @@ class HabitCreationTableViewController: UITableViewController, HabitDaysSelectio
     
     /// Creates the habit.
     @IBAction func storeHabit(_ sender: UIButton) {
-        // Save the habit.
         // If there's no previous habit, create and persist a new one.
         container.performBackgroundTask { context in
+            // Retrieve the app's current user before using it.
+            guard let user = self.userStore.getUser(using: context) else {
+                // It's a bug if there's no user. The user should be created on
+                // the first launch.
+                assertionFailure("Inconsistency: There's no user in the database. It should be set.")
+                return
+            }
+            
             if self.habit == nil {
                 _ = self.habitStore.create(
                     using: context,
+                    user: user,
                     name: self.name!,
-                    and: self.days!
+                    days: self.days!,
+                    and: self.notificationFireDates
                 )
             } else {
                 // If there's a previous habit, update it with the new values.
@@ -121,11 +134,12 @@ class HabitCreationTableViewController: UITableViewController, HabitDaysSelectio
                     using: context,
                     name: self.name,
                     days: self.days,
-                    and: self.notificationFireDates)
+                    and: self.notificationFireDates
+                )
             }
             
             // TODO: Report any errors to the user.
-            try? context.save()
+            try! context.save()
         }
         
         navigationController?.popViewController(
