@@ -17,6 +17,9 @@ class HabitsTableViewController: UITableViewController, NSFetchedResultsControll
     /// The identifier for the habit creation controller's segue.
     private let newHabitSegueIdentifier = "Create a new habit"
     
+    /// The identifier for the habit details controller's segue.
+    private let detailsSegueIdentifier = "Show habit details"
+    
     /// The Habit cell's reuse identifier.
     private let habitCellIdentifier = "Habit table view cell"
     
@@ -64,6 +67,27 @@ class HabitsTableViewController: UITableViewController, NSFetchedResultsControll
             } else {
                 assertionFailure(
                     "Error: Couldn't get the habit creation controller."
+                )
+            }
+        case detailsSegueIdentifier:
+            // Inject the controller's habit, habit storage and container.
+            if let habitDetailsController = segue.destination as? HabitDetailsViewController {
+                habitDetailsController.container = container
+                habitDetailsController.habitStorage = habitStorage
+                
+                // Get the selected habit for injection.
+                guard let indexPath = tableView.indexPathForSelectedRow else {
+                    assertionFailure("Error: couldn't get the user's selected row.")
+                    return
+                }
+                let selectedHabit = fetchedResultsController.object(at: indexPath)
+                
+                // Inject the selected habit.
+                habitDetailsController.habit = selectedHabit
+                
+            } else {
+                assertionFailure(
+                    "Error: Couldn't get the habit details controller."
                 )
             }
         default:

@@ -44,7 +44,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="wZd-FS-1mH" kind="show" id="1cB-T8-RhX"/>
+                                    <segue destination="wZd-FS-1mH" kind="show" identifier="Show habit details" id="1cB-T8-RhX"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -280,7 +280,20 @@
                     <view key="view" contentMode="scaleToFill" id="MZ9-hX-HsL">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nSc-cp-U05">
+                                <rect key="frame" x="165" y="318" width="45" height="30"/>
+                                <state key="normal" title="Delete"/>
+                                <connections>
+                                    <action selector="deleteHabit:" destination="wZd-FS-1mH" eventType="touchUpInside" id="xOI-vl-H2p"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="nSc-cp-U05" firstAttribute="centerY" secondItem="MZ9-hX-HsL" secondAttribute="centerY" id="Cu7-Hm-A8v"/>
+                            <constraint firstItem="nSc-cp-U05" firstAttribute="centerX" secondItem="MZ9-hX-HsL" secondAttribute="centerX" id="G6s-Jg-Jyb"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="tww-hp-589"/>
                     </view>
                 </viewController>

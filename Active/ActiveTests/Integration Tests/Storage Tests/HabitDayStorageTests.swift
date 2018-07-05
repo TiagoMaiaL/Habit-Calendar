@@ -73,6 +73,10 @@ class HabitDayStorageTests: IntegrationTestCase {
             "The HabitDay entity should have an associated Day entity."
         )
         XCTAssertNotNil(
+            habitDay.id,
+            "The created habit day should have an id."
+        )
+        XCTAssertNotNil(
             habitDay.day!.date,
             "The HabitDay's Day entity should is invalid."
         )
@@ -144,7 +148,10 @@ class HabitDayStorageTests: IntegrationTestCase {
         dummyHabitDay.habit = dummyHabit
         
         // 2. Remove the created habit.
-        habitDayStorage.delete(dummyHabitDay, from: context)
+        habitDayStorage.delete(
+            dummyHabitDay,
+            from: dummyHabitDay.managedObjectContext!
+        )
         
         // 3. Assert that it's not contained in the dummyHabit.
         XCTAssertFalse(
