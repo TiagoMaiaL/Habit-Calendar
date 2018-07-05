@@ -98,6 +98,7 @@ struct HabitFactory: DummyFactory {
                 
                 // Associate the date to the day and notification entities.
                 dummyHabitDay.day = dummyDay
+                dummyHabitDay.habit = habit
                 dummyNotification.fireDate = dayDate
                 
                 // Associate the notification and day to the habit entity.

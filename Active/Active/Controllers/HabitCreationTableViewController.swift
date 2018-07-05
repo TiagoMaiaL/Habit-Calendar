@@ -66,7 +66,7 @@ class HabitCreationTableViewController: UITableViewController, HabitDaysSelectio
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Assert on the values of the inject dependencies (implicitly unwrapped).
+        // Assert on the values of the injected dependencies (implicitly unwrapped).
         assert(container != nil, "Error: failed to inject the persistent container.")
         assert(habitStore != nil, "Error: failed to inject the habit store")
         

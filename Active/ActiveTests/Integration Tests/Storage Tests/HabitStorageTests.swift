@@ -82,8 +82,9 @@ class HabitStorageTests: IntegrationTestCase {
         // Create the habit.
         let joggingHabit = habitStorage.create(
             using: context,
+            user: factories.user.makeDummy(),
             name: name,
-            and: days
+            days: days
         )
         
         // Check the habit's id property.
