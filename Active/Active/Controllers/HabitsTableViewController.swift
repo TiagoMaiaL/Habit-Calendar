@@ -40,17 +40,34 @@ class HabitsTableViewController: UITableViewController, NSFetchedResultsControll
         return fetchedController
     }()
     
+    // MARK: Deinitialization
+    
+    deinit {
+        // Remove the registered observers.
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     // MARK: ViewController Life Cycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        // Register to possible notifications thrown by changes in
+        // other managed contexts.
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handleContextChanges(notification:)),
+            name: Notification.Name.NSManagedObjectContextDidSave,
+            object: nil
+        )
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         // Start fetching for the habits.
-        // TODO: Catch the errors.
-        try? fetchedResultsController.performFetch()
-        
-        // TODO: Check if this step will be needed.
-        // Reload the tableView.
+        // TODO: Check what errors are thrown by the fetch.
+        try! fetchedResultsController.performFetch()
     }
     
     // MARK: Navigation
@@ -84,7 +101,6 @@ class HabitsTableViewController: UITableViewController, NSFetchedResultsControll
                 
                 // Inject the selected habit.
                 habitDetailsController.habit = selectedHabit
-                
             } else {
                 assertionFailure(
                     "Error: Couldn't get the habit details controller."
@@ -126,4 +142,57 @@ class HabitsTableViewController: UITableViewController, NSFetchedResultsControll
         
         return cell
     }
+    
+    // MARK: Actions
+    
+    /// Listens to any saved changes happening in other contexts and refreshes
+    /// the viewContext.
+    /// - Parameter notification: The thrown notification
+    @objc private func handleContextChanges(notification: Notification) {
+        // Refresh the current view context by using the payloads
+        // in the notifications.
+        container.viewContext.mergeChanges(fromContextDidSave: notification)
+    }
+}
+
+extension HabitsTableViewController {
+    
+    // MARK: NSFetchedResultsControllerDelegate implementation methods
+    
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        // Begin the tableView updates.
+        tableView.beginUpdates()
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        
+        // Add or remove rows based on the kind of changes:
+        switch type {
+        case .delete:
+            if let indexPath = indexPath {
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+            }
+        case .insert:
+            if let indexPath = newIndexPath {
+                tableView.insertRows(at: [indexPath], with: .automatic)
+            }
+        case .move:
+            if let indexPath = indexPath, let newIndexPath = newIndexPath {
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+                tableView.insertRows(at: [newIndexPath], with: .automatic)
+            }
+            break
+        case .update:
+            if let indexPath = indexPath {
+                tableView.reloadRows(at: [indexPath], with: .automatic)
+            }
+            break
+        }
+    }
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        // End the tableView updates.
+        tableView.endUpdates()
+    }
+    
 }
