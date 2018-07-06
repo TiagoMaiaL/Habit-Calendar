@@ -76,6 +76,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             habitsListingController.habitStorage = habitStorage
         }
         
+        // TODO: Move this authorization request to the appropriate controller.
+        // Request the user's authorization to schedule local notifications.
+        notificationManager.requestAuthorization { authorized in
+            print("User \(authorized ? "authorized" : "denied").")
+        }
+        
         return true
     }
     

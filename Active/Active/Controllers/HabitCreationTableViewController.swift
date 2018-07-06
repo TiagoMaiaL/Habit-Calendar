@@ -58,8 +58,7 @@ class HabitCreationTableViewController: UITableViewController, HabitDaysSelectio
     /// The habit's notification time the user has chosen.
     private var notificationFireDates: [Date]?
     
-    // TODO: Show a cell indicating the user hasn't
-    // enabled local notifications.
+    // TODO: Show a cell indicating the user hasn't enabled local notifications.
     
     // MARK: ViewController Life Cycle
     

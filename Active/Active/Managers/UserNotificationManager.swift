@@ -137,7 +137,6 @@ extension UserNotificationManager {
     /// - Parameter notification: The notification from which the user
     ///                           notification will be generated.
     func makeNotificationOptions(for notification: NotificationMO) -> UserNotificationOptions {
-        
         // Declare the notification contents with the correct attributes.
         let content = UNMutableNotificationContent()
         
@@ -149,9 +148,14 @@ extension UserNotificationManager {
             assertionFailure("The passed notification must have a valid habit entity.")
         }
         
+        // Declare the time interval used to schedule the notification.
+        let fireDateTimeInterval = notification.getFireDate().timeIntervalSinceNow
+        // Assert it's in the future.
+        assert(fireDateTimeInterval > 0, "Inconsistency: the notification fire date must be positive")
+        
         // Declare the notification trigger with the correct date.
         let trigger = UNTimeIntervalNotificationTrigger(
-            timeInterval: notification.getFireDate().timeIntervalSinceNow,
+            timeInterval: fireDateTimeInterval,
             repeats: false
         )
         
