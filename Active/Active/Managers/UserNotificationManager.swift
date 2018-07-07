@@ -131,6 +131,15 @@ struct UserNotificationManager {
             withIdentifiers: [identifier]
         )
     }
+    
+    /// Returns if the local notifications are authorized or not.
+    /// - Parameter completionBlock: The block called with the results.
+    func getAuthorizationStatus(_ completionBlock: @escaping (Bool) -> ()) {
+        // Get the notification settings and return if it's authorized or not.
+        notificationCenter.getNotificationSettings { settings in
+            completionBlock(settings.authorizationStatus == .authorized)
+        }
+    }
 }
 
 /// Extension in charge of adding facility methods to deal with Notification
@@ -162,7 +171,7 @@ extension UserNotificationManager {
         // Declare the time interval used to schedule the notification.
         let fireDateTimeInterval = Date().timeIntervalSinceNow + 10
 //        let fireDateTimeInterval = notification.getFireDate().timeIntervalSinceNow
-        // Assert it's in the future.
+        // Assert that the fire date is in the future.
         assert(fireDateTimeInterval > 0, "Inconsistency: the notification fire date must be positive")
         
         // Declare the notification trigger with the correct date.

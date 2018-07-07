@@ -217,6 +217,8 @@
                         <viewLayoutGuide key="safeArea" id="0cT-Ky-et7"/>
                     </view>
                     <connections>
+                        <outlet property="doneButton" destination="oC4-D2-mh4" id="Tbr-mI-C4H"/>
+                        <outlet property="informationLabel" destination="vnn-0H-Gxy" id="nhQ-Ni-yWi"/>
                         <outlet property="timePickerView" destination="go7-OO-Gwc" id="rTK-46-k0V"/>
                     </connections>
                 </viewController>

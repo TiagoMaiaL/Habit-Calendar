@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import UserNotifications
 
 /// Controller used to allow the user to create/edit habits.
 class HabitCreationTableViewController: UITableViewController, HabitDaysSelectionViewControllerDelegate, HabitNotificationsSelectionViewControllerDelegate {
@@ -96,6 +97,9 @@ class HabitCreationTableViewController: UITableViewController, HabitDaysSelectio
             // Associate the NotificationsSelectionController's delegate.
             if let notificationsController = segue.destination as? HabitNotificationsSelectionViewController {
                 notificationsController.delegate = self
+                notificationsController.notificationManager = UserNotificationManager(
+                    notificationCenter: UNUserNotificationCenter.current()
+                )
             } else {
                 assertionFailure("Error: Couldn't get the fire dates selection controller.")
             }
