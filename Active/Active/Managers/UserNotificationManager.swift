@@ -164,15 +164,15 @@ extension UserNotificationManager {
             content.title = habit.getTitleText()
             content.subtitle = habit.getSubtitleText()
             content.body = habit.getDescriptionText()
+            content.badge = 1
         } else {
             assertionFailure("The passed notification must have a valid habit entity.")
         }
         
         // Declare the time interval used to schedule the notification.
-        let fireDateTimeInterval = Date().timeIntervalSinceNow + 10
-//        let fireDateTimeInterval = notification.getFireDate().timeIntervalSinceNow
+        let fireDateTimeInterval = notification.getFireDate().timeIntervalSinceNow
         // Assert that the fire date is in the future.
-        assert(fireDateTimeInterval > 0, "Inconsistency: the notification fire date must be positive")
+        assert(fireDateTimeInterval > 0, "Inconsistency: the notification's fire date must be in the future.")
         
         // Declare the notification trigger with the correct date.
         let trigger = UNTimeIntervalNotificationTrigger(
