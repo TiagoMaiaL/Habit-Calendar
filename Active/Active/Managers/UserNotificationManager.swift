@@ -14,6 +14,8 @@ import UserNotifications
 ///         When testing, it halts the test and fails.
 protocol TestableNotificationCenter {
     
+    func getNotificationSettings(completionHandler: @escaping (UNNotificationSettings) -> Swift.Void)
+    
     func requestAuthorization(options: UNAuthorizationOptions, completionHandler: @escaping (Bool, Error?) -> Swift.Void)
     
     func add(_ request: UNNotificationRequest, withCompletionHandler completionHandler: ((Error?) -> Swift.Void)?)
@@ -73,24 +75,33 @@ struct UserNotificationManager {
     func schedule(with content: UNNotificationContent,
                   and trigger: UNNotificationTrigger,
                   _ completionHandler: @escaping (String?) -> ()) {
-        // Declare the request's identifier
-        let identifier = UUID().uuidString
-        
-        // Declare the user notification request
-        // to be scheduled.
-        let request = UNNotificationRequest(
-            identifier: identifier,
-            content: content,
-            trigger: trigger
-        )
-        
-        // Call the internal notification center and schedule it.
-        notificationCenter.add(request) { error in
-            if error == nil {
-                // TODO: Understand what's @escaping
-                completionHandler(identifier)
-            } else {
-                completionHandler(nil)
+        notificationCenter.getNotificationSettings { settings in
+            
+            print("Auth status: \(settings.authorizationStatus == .authorized ? "authorized" : "Denied")")
+            
+            // Check to see if the notification is allowed.
+            // If it is, schedule the request.
+            if settings.authorizationStatus == .authorized {
+                // Declare the request's identifier
+                let identifier = UUID().uuidString
+                
+                // Declare the user notification request
+                // to be scheduled.
+                let request = UNNotificationRequest(
+                    identifier: identifier,
+                    content: content,
+                    trigger: trigger
+                )
+                
+                // Call the internal notification center and schedule it.
+                self.notificationCenter.add(request) { error in
+                    if error == nil {
+                        // TODO: Understand what's @escaping
+                        completionHandler(identifier)
+                    } else {
+                        completionHandler(nil)
+                    }
+                }
             }
         }
     }
@@ -149,7 +160,8 @@ extension UserNotificationManager {
         }
         
         // Declare the time interval used to schedule the notification.
-        let fireDateTimeInterval = notification.getFireDate().timeIntervalSinceNow
+        let fireDateTimeInterval = Date().timeIntervalSinceNow + 10
+//        let fireDateTimeInterval = notification.getFireDate().timeIntervalSinceNow
         // Assert it's in the future.
         assert(fireDateTimeInterval > 0, "Inconsistency: the notification fire date must be positive")
         
