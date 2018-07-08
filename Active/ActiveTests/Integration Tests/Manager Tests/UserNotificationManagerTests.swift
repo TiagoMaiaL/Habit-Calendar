@@ -103,7 +103,11 @@ class UserNotificationManagerTests: IntegrationTestCase {
         )
         
         // Schedule the notification.
-        notificationManager.schedule(with: content, and: trigger) {
+        notificationManager.schedule(
+            with: UUID().uuidString,
+            content: content,
+            and: trigger
+        ) {
             identifier in
             
             // Make assertions on the returned identifier.
@@ -132,7 +136,11 @@ class UserNotificationManagerTests: IntegrationTestCase {
         )
         
         // Schedule the notification.
-        notificationManager.schedule(with: content, and: trigger) {
+        notificationManager.schedule(
+            with: UUID().uuidString,
+            content: content,
+            and: trigger
+        ) {
             identifier in
             
             XCTAssertNotNil(identifier, "The identifier of the UserNotificationRequest shouldn't be nil.")
@@ -172,7 +180,11 @@ class UserNotificationManagerTests: IntegrationTestCase {
         )
         
         // Schedule a new notification.
-        notificationManager.schedule(with: content, and: trigger) {
+        notificationManager.schedule(
+            with: UUID().uuidString,
+            content: content,
+            and: trigger
+        ) {
             identifier in
             
             XCTAssertNotNil(identifier, "The UserNotificationRequest's identifier shouldn't be nil after creation.")

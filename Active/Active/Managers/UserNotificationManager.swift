@@ -16,6 +16,8 @@ protocol TestableNotificationCenter {
     
     func getNotificationSettings(completionHandler: @escaping (UNNotificationSettings) -> Swift.Void)
     
+    func getAuthorizationStatus(completionHandler: @escaping (Bool) -> Swift.Void)
+    
     func requestAuthorization(options: UNAuthorizationOptions, completionHandler: @escaping (Bool, Error?) -> Swift.Void)
     
     func add(_ request: UNNotificationRequest, withCompletionHandler completionHandler: ((Error?) -> Swift.Void)?)
@@ -27,7 +29,16 @@ protocol TestableNotificationCenter {
 
 /// Extension used only to declare the protocol implementation in the
 /// UNUserNotificationCenter implementation.
-extension UNUserNotificationCenter: TestableNotificationCenter {}
+extension UNUserNotificationCenter: TestableNotificationCenter {
+    
+    /// Checks if the usage of local notifications is allowed.
+    /// - Parameter completionHandler: The block called with the result.
+    func getAuthorizationStatus(completionHandler: @escaping (Bool) -> Swift.Void) {
+        getNotificationSettings { settings in
+            completionHandler(settings.authorizationStatus == .authorized)
+        }
+    }
+}
 
 /// Struct in charge of managing the creation, retrieval,
 /// and deletion of local user notification instances associated
@@ -72,19 +83,17 @@ struct UserNotificationManager {
     /// - Returns: The notification identifier of the scheduled user
     ///            notification.
     // TODO: Document the throws section.
-    func schedule(with content: UNNotificationContent,
+    func schedule(with identifier: String,
+                  content: UNNotificationContent,
                   and trigger: UNNotificationTrigger,
                   _ completionHandler: @escaping (String?) -> ()) {
-        notificationCenter.getNotificationSettings { settings in
+        getAuthorizationStatus { isAuthorized in
             
-            print("Auth status: \(settings.authorizationStatus == .authorized ? "authorized" : "Denied")")
+            print("Auth status: \(isAuthorized ? "authorized" : "Denied")")
             
             // Check to see if the notification is allowed.
             // If it is, schedule the request.
-            if settings.authorizationStatus == .authorized {
-                // Declare the request's identifier
-                let identifier = UUID().uuidString
-                
+            if isAuthorized {
                 // Declare the user notification request
                 // to be scheduled.
                 let request = UNNotificationRequest(
@@ -133,12 +142,12 @@ struct UserNotificationManager {
     }
     
     /// Returns if the local notifications are authorized or not.
-    /// - Parameter completionBlock: The block called with the results.
-    func getAuthorizationStatus(_ completionBlock: @escaping (Bool) -> ()) {
+    /// - Parameter completionHandler: The block called with the results.
+    func getAuthorizationStatus(_ completionHandler: @escaping (Bool) -> ()) {
         // Get the notification settings and return if it's authorized or not.
-        notificationCenter.getNotificationSettings { settings in
-            completionBlock(settings.authorizationStatus == .authorized)
-        }
+        notificationCenter.getAuthorizationStatus(
+            completionHandler: completionHandler
+        )
     }
 }
 
@@ -194,11 +203,16 @@ extension UserNotificationManager {
         // Declare the options used to schedule a new request.
         let options = makeNotificationOptions(for: notification)
         
+        // Associate the user notification's identifier.
+        notification.userNotificationId = UUID().uuidString
+        
         // Schedule the new request.
-        schedule(with: options.content, and: options.trigger) { identifier in
+        schedule(
+            with: notification.userNotificationId!,
+            content: options.content,
+            and: options.trigger
+        ) { identifier in
             // Associate the returned request id to the Notification entity.
-            notification.userNotificationId = identifier
-            
             completionHandler?(notification)
         }
     }
@@ -228,7 +242,7 @@ extension UserNotificationManager {
             return notification.userNotificationId
         }
         
-       // Remove the requests.
+        // Remove the requests.
         notificationCenter.removePendingNotificationRequests(
             withIdentifiers: identifiers
         )

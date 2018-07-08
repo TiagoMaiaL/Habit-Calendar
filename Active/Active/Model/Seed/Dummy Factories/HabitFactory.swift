@@ -67,7 +67,7 @@ struct HabitFactory: DummyFactory {
         let habitDayFactory = HabitDayFactory(context: context)
         
         // Associate it's relationships:
-        let randomRange = 0..<Int.random(2..<maxNumberOfDays)
+        let randomRange = 1..<Int.random(2..<maxNumberOfDays)
         for dayIndex in randomRange {
             // Declare the current day's date.
             if let dayDate = Date().byAddingDays(dayIndex) {

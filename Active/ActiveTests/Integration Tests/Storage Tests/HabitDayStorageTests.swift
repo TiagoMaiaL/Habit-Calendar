@@ -150,13 +150,13 @@ class HabitDayStorageTests: IntegrationTestCase {
         // 2. Remove the created habit.
         habitDayStorage.delete(
             dummyHabitDay,
-            from: dummyHabitDay.managedObjectContext!
+            from: dummyHabit.managedObjectContext!
         )
         
         // 3. Assert that it's not contained in the dummyHabit.
-        XCTAssertFalse(
-            dummyHabit.days?.contains(dummyHabitDay) ?? true,
-            "The habitDay wasn't deleted."
+        XCTAssertTrue(
+            dummyHabitDay.isDeleted,
+            "The habitDay wasn't deleted, but it should."
         )
     }
 }

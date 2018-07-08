@@ -46,12 +46,24 @@ class UserNotificationCenterMock: TestableNotificationCenter {
     }
     
     func getPendingNotificationRequests(completionHandler: @escaping ([UNNotificationRequest]) -> Void) {
-       // Recall internal notification center.
+        // Recall internal notification center.
         userNotificationCenter.getPendingNotificationRequests(completionHandler: completionHandler)
     }
     
     func removePendingNotificationRequests(withIdentifiers identifiers: [String]) {
-       // Recall internal notification center.
+        // Recall internal notification center.
         userNotificationCenter.removePendingNotificationRequests(withIdentifiers: identifiers)
     }
+    
+    func getNotificationSettings(completionHandler: @escaping (UNNotificationSettings) -> Swift.Void) {
+        // Recall internal notification center.
+        userNotificationCenter.getNotificationSettings(completionHandler: completionHandler)
+    }
+    
+    /// Checks if the usage of local notifications is allowed.
+    /// - Parameter completionHandler: The block called with the result.
+    func getAuthorizationStatus(completionHandler: @escaping (Bool) -> Swift.Void) {
+        completionHandler(true)
+    }
+    
 }
