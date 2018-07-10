@@ -103,8 +103,7 @@ extension HabitDaysSelectionViewController: JTAppleCalendarViewDataSource, JTApp
     
     func calendar(_ calendar: JTAppleCalendarView, shouldSelectDate date: Date, cell: JTAppleCell?, cellState: CellState) -> Bool {
         // The user can only select a date in the future.
-        // TODO:
-        return true
+        return date.isFuture || date.isInToday
     }
     
     func calendar(_ calendar: JTAppleCalendarView, didSelectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
