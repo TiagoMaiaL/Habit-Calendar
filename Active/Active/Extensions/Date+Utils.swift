@@ -21,6 +21,21 @@ extension Date {
         )
     }
     
+    /// Indicates if the date is in today or not.
+    var isInToday: Bool {
+        return getCurrentCalendar().isDateInToday(self)
+    }
+    
+    /// Indicates if the date is in the future or not.
+    var isFuture: Bool {
+        return timeIntervalSinceNow > 0
+    }
+    
+    /// Indicates if the date is in the past or not.
+    var isPast: Bool {
+        return timeIntervalSinceNow < 0
+    }
+    
     // MARK: Imperatives
     
     /// Gets the configured current calendar.

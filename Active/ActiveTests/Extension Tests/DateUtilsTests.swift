@@ -110,5 +110,50 @@ class DateUtilsTests: XCTestCase {
             "The expected date's year should be the initial date's year + 2."
         )
     }
+    
+    func testIfDateIsToday() {
+        // Get the current date.
+        let now = Date()
+        
+        // Assert it's today.
+        XCTAssertTrue(
+            now.isInToday,
+            "The current date should be considered today."
+        )
+    }
+    
+    func testIfDateIsInFuture() {
+        // Get the current date.
+        let now = Date()
+        
+        // Append some days to it.
+        guard let futureDate = now.byAddingDays(10) else {
+            XCTFail("Couldn't get a day in the future.")
+            return
+        }
+        
+        // Check if it's in the future.
+        XCTAssertTrue(
+            futureDate.isFuture,
+            "The date should be considered to be in the future."
+        )
+    }
+    
+    func testIfDateIsInPast() {
+        // Get the current date.
+        let now = Date()
+        
+        // Remove some days from it.
+        guard let futureDate = now.byAddingDays(-5) else {
+            XCTFail("Couldn't get a day in the past.")
+            return
+        }
+        
+        // Check if it's in the future.
+        XCTAssertTrue(
+            futureDate.isPast,
+            "The date should be considered to be in the past."
+        )
+    }
 }
 
