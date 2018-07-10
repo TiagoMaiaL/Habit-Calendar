@@ -44,11 +44,20 @@ class HabitDaysSelectionViewController: UIViewController {
     
     // MARK: Actions
     
-    @IBAction func selectDay(_ sender: UIButton) {
+    @IBAction func selectDays(_ sender: UIButton) {
         // TODO: Pass the selected array of dates.
         
         // Pop the current controller.
         navigationController?.popViewController(animated: true)
+    }
+    
+    // MARK: Imperatives
+    
+    /// Handles the interaction of the done button according to
+    /// the selected days.
+    private func handleDoneButton() {
+        // Enable/Disable the button if the dates are selected or not.
+        doneButton.isEnabled = !calendarView.selectedDates.isEmpty
     }
 }
 
@@ -123,6 +132,9 @@ extension HabitDaysSelectionViewController: JTAppleCalendarViewDataSource, JTApp
                 firstSelectedDay = date
             }
         }
+        
+        // Handle the done button's state.
+        handleDoneButton()
     }
 
     func calendar(_ calendar: JTAppleCalendarView, didDeselectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
@@ -130,6 +142,9 @@ extension HabitDaysSelectionViewController: JTAppleCalendarViewDataSource, JTApp
         if let cell = cell {
             handleAppearanceOfCell(cell, using: cellState)
         }
+        
+        // Handle the done button's state.
+        handleDoneButton()
     }
     
     // MARK: Imperatives

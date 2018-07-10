@@ -199,7 +199,7 @@
                                 <rect key="frame" x="170" y="396" width="35" height="30"/>
                                 <state key="normal" title="done"/>
                                 <connections>
-                                    <action selector="selectDay:" destination="zeZ-9t-rmb" eventType="touchUpInside" id="ErF-O5-S7a"/>
+                                    <action selector="selectDays:" destination="zeZ-9t-rmb" eventType="touchUpInside" id="ErF-O5-S7a"/>
                                     <action selector="selectFireDates:" destination="hr1-dK-bvy" eventType="touchUpInside" id="Avv-xH-Ndt"/>
                                 </connections>
                             </button>
@@ -240,11 +240,11 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cqd-Qf-JuL">
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cqd-Qf-JuL">
                                 <rect key="frame" x="170" y="617" width="35" height="30"/>
                                 <state key="normal" title="done"/>
                                 <connections>
-                                    <action selector="selectDay:" destination="zeZ-9t-rmb" eventType="touchUpInside" id="h58-DZ-ZuX"/>
+                                    <action selector="selectDays:" destination="zeZ-9t-rmb" eventType="touchUpInside" id="h58-DZ-ZuX"/>
                                 </connections>
                             </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ge3-Po-cVn" customClass="JTAppleCalendarView" customModule="JTAppleCalendar">
