@@ -65,4 +65,15 @@ extension Date {
             to: self
         )
     }
+    
+    /// Creates a new date by adding the asked number of years.
+    /// - Parameter numberOfYears: The number of years to be added.
+    /// - Returns: A new date with the added years.
+    func byAddingYears(_ numberOfYears: Int) -> Date? {
+        return getCurrentCalendar().date(
+            byAdding: .year,
+            value: numberOfYears,
+            to: self
+        )
+    }
 }

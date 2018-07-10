@@ -81,5 +81,31 @@ class DateUtilsTests: XCTestCase {
         XCTAssertEqual((date?.components.day ?? 1) + 7, dateAfter?.components.day, "The days should be correclty added.")
     }
     
+    func testGettingDateByAddingYears() {
+        // Get the current date.
+        let now = Date()
+        
+        // Get a new date by appending two years to the initial one.
+        let twoYearsFromNow = now.byAddingYears(2)
+        
+        // Compare the days and months.
+        XCTAssertEqual(
+            now.components.day,
+            twoYearsFromNow?.components.day,
+            "The two dates should have the same day number."
+        )
+        XCTAssertEqual(
+            now.components.month,
+            twoYearsFromNow?.components.month,
+            "The two dates should have the same month number."
+        )
+        
+        // Compare the years.
+        XCTAssertEqual(
+            (now.components.year ?? 0) + 2,
+            twoYearsFromNow?.components.year ?? 0,
+            "The expected date's year should be the initial date's year + 2."
+        )
+    }
 }
 
