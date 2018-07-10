@@ -45,7 +45,8 @@ class HabitDaysSelectionViewController: UIViewController {
     // MARK: Actions
     
     @IBAction func selectDays(_ sender: UIButton) {
-        // TODO: Pass the selected array of dates.
+        // Pass the selected dates to the delegate.
+        delegate?.didSelectDays(calendarView.selectedDates)
         
         // Pop the current controller.
         navigationController?.popViewController(animated: true)
