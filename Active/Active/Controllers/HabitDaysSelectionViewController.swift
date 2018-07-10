@@ -35,7 +35,12 @@ class HabitDaysSelectionViewController: UIViewController {
         // Configure the calendar view.
         calendarView.calendarDelegate = self
         calendarView.calendarDataSource = self
+        calendarView.allowsMultipleSelection = true
+        calendarView.isRangeSelectionUsed = true
     }
+    
+    /// The user's first selected date.
+    private var firstSelectedDay: Date?
     
     // MARK: Actions
     
@@ -96,12 +101,36 @@ extension HabitDaysSelectionViewController: JTAppleCalendarViewDataSource, JTApp
         handleAppearanceOfCell(cell, using: cellState)
     }
     
-    func calendar(_ calendar: JTAppleCalendarView, didSelectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
+    func calendar(_ calendar: JTAppleCalendarView, shouldSelectDate date: Date, cell: JTAppleCell?, cellState: CellState) -> Bool {
+        // The user can only select a date in the future.
         // TODO:
+        return true
+    }
+    
+    func calendar(_ calendar: JTAppleCalendarView, didSelectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
+        // Change the cell's appearance to show the selected state.
+        if let cell = cell {
+            handleAppearanceOfCell(cell, using: cellState)
+            
+            // Configure the range according to the tap.
+            if let firstDay = firstSelectedDay {
+                calendar.selectDates(
+                    from: firstDay,
+                    to: date,
+                    triggerSelectionDelegate: false,
+                    keepSelectionIfMultiSelectionAllowed: true
+                )
+            } else {
+                firstSelectedDay = date
+            }
+        }
     }
 
     func calendar(_ calendar: JTAppleCalendarView, didDeselectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
-        // TODO:
+        // Change the cell's appearance to show the deselected state.
+        if let cell = cell {
+            handleAppearanceOfCell(cell, using: cellState)
+        }
     }
     
     // MARK: Imperatives
@@ -127,13 +156,18 @@ extension HabitDaysSelectionViewController: JTAppleCalendarViewDataSource, JTApp
         // Change the appearance according to selection and if the
         // date is within the month or not.
         
-        // TODO: Set the appearance according to selection.
+        // Change the cell's background color to match the selection state.
+        if cellState.isSelected {
+            cell.backgroundColor = .green
+        } else {
+            cell.backgroundColor = nil
+        }
         
         switch cellState.dateBelongsTo {
         case .thisMonth:
             cell.dayTitleLabel.alpha = 1
         default:
-            cell.dayTitleLabel.alpha = 0.5
+            cell.dayTitleLabel.alpha = 0.3
         }
     }
 }
