@@ -54,37 +54,88 @@ extension HabitDaysSelectionViewController: JTAppleCalendarViewDataSource, JTApp
     func configureCalendar(_ calendar: JTAppleCalendarView) -> ConfigurationParameters {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy MM dd"
+        formatter.timeZone = Calendar.current.timeZone
+        formatter.locale = Calendar.current.locale
         
-        let startDate = formatter.date(from: "2016 02 01")! // You can use date generated from a formatter
-        let endDate = Date()                                // You can also use dates created from this function
+        let now = Date()
+        guard let endDate = now.byAddingYears(2) else {
+            assertionFailure(
+                "Couldn't get the date by adding two years from now."
+            )
+            return ConfigurationParameters(
+                startDate: now,
+                endDate: now
+            )
+        }
+        
         let parameters = ConfigurationParameters(
-            startDate: startDate,
+            startDate: now,
             endDate: endDate,
-            numberOfRows: 6, // Only 1, 2, 3, & 6 are allowed
-            calendar: Calendar.current,
-            generateInDates: .forAllMonths,
-            generateOutDates: .tillEndOfGrid,
-            firstDayOfWeek: .sunday
+            hasStrictBoundaries: true
         )
         return parameters
     }
     
+    // MARK: JTAppleCalendarViewDelegate Methods
+    
     func calendar(_ calendar: JTAppleCalendarView, cellForItemAt date: Date, cellState: CellState, indexPath: IndexPath) -> JTAppleCell {
+        // Dequeue the cell.
         let cell = calendar.dequeueReusableJTAppleCell(
             withReuseIdentifier: cellIdentifier,
             for: indexPath
-        ) as! CalendarDayCell
-     
-        // Configure the cell's UI.
-        cell.dayTitleLabel.text = cellState.text
+        )
+        
+        // Configure its appearance.
+        handleAppearanceOfCell(cell, using: cellState)
         
         return cell
     }
     
     func calendar(_ calendar: JTAppleCalendarView, willDisplay cell: JTAppleCell, forItemAt date: Date, cellState: CellState, indexPath: IndexPath) {
-        print("=X")
+        // Configure its appearance.
+        handleAppearanceOfCell(cell, using: cellState)
     }
     
+    func calendar(_ calendar: JTAppleCalendarView, didSelectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
+        // TODO:
+    }
+
+    func calendar(_ calendar: JTAppleCalendarView, didDeselectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
+        // TODO:
+    }
+    
+    // MARK: Imperatives
+    
+    /// Configures the appearance of a given cell when
+    /// it's about to be displayed.
+    /// - Parameters:
+    ///     - cell: The cell being displayed.
+    ///     - cellState: The cell's state.
+    private func handleAppearanceOfCell(
+        _ cell: JTAppleCell,
+        using cellState: CellState
+    ) {
+        // Cast it to the expected instance.
+        guard let cell = cell as? CalendarDayCell else {
+            assertionFailure("Couldn't cast the cell to a CalendarDayCell's instance.")
+            return
+        }
+        
+        // Set the cell's date text.
+        cell.dayTitleLabel.text = cellState.text
+        
+        // Change the appearance according to selection and if the
+        // date is within the month or not.
+        
+        // TODO: Set the appearance according to selection.
+        
+        switch cellState.dateBelongsTo {
+        case .thisMonth:
+            cell.dayTitleLabel.alpha = 1
+        default:
+            cell.dayTitleLabel.alpha = 0.5
+        }
+    }
 }
 
 /// The controller's delegate in charge of receiving the selected days dates.
@@ -92,5 +143,4 @@ protocol HabitDaysSelectionViewControllerDelegate: class {
     
     /// Called when the habit days are done being selected by the user.
     func didSelectDays(_ daysDates: [Date])
-    
 }

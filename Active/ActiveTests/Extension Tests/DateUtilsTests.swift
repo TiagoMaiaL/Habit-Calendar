@@ -85,8 +85,11 @@ class DateUtilsTests: XCTestCase {
         // Get the current date.
         let now = Date()
         
+        // Declare the years to be added.
+        let randomNumber = Int.random(0..<1_000_000)
+        
         // Get a new date by appending two years to the initial one.
-        let twoYearsFromNow = now.byAddingYears(2)
+        let twoYearsFromNow = now.byAddingYears(randomNumber)
         
         // Compare the days and months.
         XCTAssertEqual(
@@ -102,7 +105,7 @@ class DateUtilsTests: XCTestCase {
         
         // Compare the years.
         XCTAssertEqual(
-            (now.components.year ?? 0) + 2,
+            (now.components.year ?? 0) + randomNumber,
             twoYearsFromNow?.components.year ?? 0,
             "The expected date's year should be the initial date's year + 2."
         )
