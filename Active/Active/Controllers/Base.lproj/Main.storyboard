@@ -373,6 +373,7 @@
                     <connections>
                         <outlet property="calendarView" destination="ge3-Po-cVn" id="cJ7-IJ-lwC"/>
                         <outlet property="doneButton" destination="Cqd-Qf-JuL" id="8tr-Hk-KmA"/>
+                        <outlet property="monthTitleLabel" destination="KgN-56-97R" id="SNf-4U-mgo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9zz-Nw-yjM" userLabel="First Responder" sceneMemberID="firstResponder"/>

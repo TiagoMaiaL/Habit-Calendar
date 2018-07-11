@@ -24,6 +24,9 @@ class HabitDaysSelectionViewController: UIViewController {
     /// The button the user uses to tell when he's done.
     @IBOutlet weak var doneButton: UIButton!
     
+    /// The title of the month being displayed by the calendar.
+    @IBOutlet weak var monthTitleLabel: UILabel!
+    
     /// The delegate in charge of receiving days selected by the user.
     weak var delegate: HabitDaysSelectionViewControllerDelegate?
     
@@ -37,6 +40,13 @@ class HabitDaysSelectionViewController: UIViewController {
         calendarView.calendarDataSource = self
         calendarView.allowsMultipleSelection = true
         calendarView.isRangeSelectionUsed = true
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Configute the calendar's header initial state.
+        handleCalendarHeader()
     }
     
     /// The user's first selected date.
@@ -59,6 +69,21 @@ class HabitDaysSelectionViewController: UIViewController {
     private func handleDoneButton() {
         // Enable/Disable the button if the dates are selected or not.
         doneButton.isEnabled = !calendarView.selectedDates.isEmpty
+    }
+    
+    /// Handles the title of the calendar's header view.
+    private func handleCalendarHeader() {
+        // Get the first month's date or today.
+        let firstDate = calendarView.visibleDates().monthDates.first?.date ?? Date()
+        
+        // Declare a date formatter to get the month and year.
+        let formatter = DateFormatter()
+        formatter.locale = Locale.current
+        formatter.timeZone = TimeZone.current
+        formatter.dateFormat = "MMMM, yyyy"
+        
+        // Change the title label to reflect it.
+        monthTitleLabel.text = formatter.string(from: firstDate)
     }
 }
 
@@ -146,6 +171,11 @@ extension HabitDaysSelectionViewController: JTAppleCalendarViewDataSource, JTApp
         
         // Handle the done button's state.
         handleDoneButton()
+    }
+    
+    func calendar(_ calendar: JTAppleCalendarView, didScrollToDateSegmentWith visibleDates: DateSegmentInfo) {
+        // Set the calendar's header's current state.
+        handleCalendarHeader()
     }
     
     // MARK: Imperatives
