@@ -198,21 +198,31 @@ extension HabitDaysSelectionViewController: JTAppleCalendarViewDataSource, JTApp
         // Set the cell's date text.
         cell.dayTitleLabel.text = cellState.text
         
-        // Change the appearance according to selection and if the
-        // date is within the month or not.
+        // Change the appearance according to:
+        // 1. selection
+        // 2. date is in the past or present.
+        // 3. is the date in the current day or not.
         
         // Change the cell's background color to match the selection state.
         if cellState.isSelected {
             cell.backgroundColor = .green
         } else {
-            cell.backgroundColor = nil
-        }
-        
-        switch cellState.dateBelongsTo {
-        case .thisMonth:
-            cell.dayTitleLabel.alpha = 1
-        default:
-            cell.dayTitleLabel.alpha = 0.3
+            cell.backgroundColor = .white
+            
+            switch cellState.dateBelongsTo {
+            case .thisMonth:
+                cell.dayTitleLabel.alpha = 1
+            default:
+                // Not in the month.
+                cell.dayTitleLabel.alpha = 0.5
+            }
+            
+            if cellState.date.isInToday {
+                cell.backgroundColor = .purple
+            } else if cellState.date.isPast {
+                cell.backgroundColor = .gray
+                cell.alpha = 0.2
+            }
         }
     }
 }
