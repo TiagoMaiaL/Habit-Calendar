@@ -62,6 +62,40 @@ class DateUtilsTests: XCTestCase {
         XCTAssertEqual(todayEnd.components.hour, 23, "The end of a day's date should be at 23 hours.")
     }
     
+    func testGettingDateByAddingMinutes() {
+        // Declare a date at the beginning of the day.
+        let today = Date().getBeginningOfDay()
+        
+        // Get a new date by adding 2 hours (120 minutes)
+        let fifteen = today.byAddingMinutes(15)
+        
+        // Compare the month, year and day components, they should be equal.
+        XCTAssertEqual(
+            today.components.day,
+            fifteen?.components.day,
+            "The days shouldn't be changed."
+        )
+        XCTAssertEqual(
+            today.components.month,
+            fifteen?.components.month,
+            "The months shouldn't be changed."
+        )
+        XCTAssertEqual(
+            today.components.year,
+            fifteen?.components.year,
+            "The years shouldn't be changed."
+        )
+        
+        // Compare the minutes.
+        // The new date should have the initial amount
+        // of minutes in Date 1 + 120.
+        XCTAssertEqual(
+            fifteen?.components.minute,
+            (today.components.minute ?? 0) + 15,
+            "The new date should have the expected amount of minutes."
+        )
+    }
+    
     func testGettingDateByAddingDays() {
         // Declare a date at the beginning of the month.
         let date = Calendar.current.date(

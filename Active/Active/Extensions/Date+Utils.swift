@@ -65,9 +65,21 @@ extension Date {
         let dayAtEnd = getCurrentCalendar().date(byAdding: components, to: getBeginningOfDay())
         
         // Is there a mistake with the computation of the date?
-        assert(dayAtEnd != nil, "Date+Utils -- getEndOfDay: the computation of the end of the day could'nt be performed.")
+        assert(dayAtEnd != nil, "Date+Utils -- getEndOfDay: the computation of the end of the day couldn't be performed.")
         
         return dayAtEnd!
+    }
+    
+    /// Creates a new date by adding the asked number of minutes.
+    /// - Parameter numberOfMinutes: The number of minutes to be
+    ///                              added to the date.
+    /// - Returns: A new date with the minutes added.
+    func byAddingMinutes(_ numberOfMinutes: Int) -> Date? {
+        return getCurrentCalendar().date(
+            byAdding: .minute,
+            value: numberOfMinutes,
+            to: self
+        )
     }
     
     /// Creates a new date by adding the asked number of days.
