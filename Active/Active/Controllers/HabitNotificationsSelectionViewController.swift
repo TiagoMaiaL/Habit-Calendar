@@ -34,6 +34,9 @@ class HabitNotificationsSelectionViewController: UIViewController {
         minutesInterval: interval
     )
     
+    /// The fire dates selected by the user.
+    private var selectedFireDates = Set<Date>()
+    
     /// The controller's label informing the possible actions
     /// for the controller.
 //    @IBOutlet weak var informationLabel: UILabel!
@@ -87,13 +90,24 @@ class HabitNotificationsSelectionViewController: UIViewController {
     // MARK: Actions
     
     @IBAction func selectFireDates(_ sender: UIButton) {
+        assert(
+            !selectedFireDates.isEmpty,
+            "Inconsistency: the selected fire dates shouldn't be empty."
+        )
+        
         // Call the delegate passing the fire dates selected
         // by the user.
-        delegate?.didSelectFireDates([]) // TODO: Pass the selected dates.
+        delegate?.didSelectFireDates(Array<Date>(selectedFireDates))
         navigationController?.popViewController(animated: true)
     }
     
     // MARK: Imperatives
+    
+    /// Configures the state of the done button according
+    /// to the selected fire dates.
+    private func handleDoneButton() {
+        doneButton.isEnabled = !selectedFireDates.isEmpty
+    }
     
     /// Update the views according to the User's authorization.
     @objc private func updateViews(_ notification: Notification? = nil) {
@@ -105,7 +119,6 @@ class HabitNotificationsSelectionViewController: UIViewController {
                     // Enable the button and the tableView selection.
                     // Change the controller's appearance.
 //                    self.informationLabel.text = "At what time would you like to be rembered to do your habitual activity?"
-                    self.doneButton.isEnabled = true
                 } else {
                     // Change information label, and disable
                     // the button and the tableView selection.
@@ -113,7 +126,6 @@ class HabitNotificationsSelectionViewController: UIViewController {
                     // that there's no authorization to use
                     // local notifications.
 //                    self.informationLabel.text = "In order to get remembered about you habits, enable the user notifications in the settings app."
-                    self.doneButton.isEnabled = false
                 }
             }
         }
@@ -180,6 +192,30 @@ extension HabitNotificationsSelectionViewController: UITableViewDataSource, UITa
         cell.textLabel?.text = fireDateFormatter.string(from: fireDates[indexPath.row])
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // Get the selected date.
+        let selectedDate = fireDates[indexPath.row]
+        
+        // Add it to the selected ones.
+        selectedFireDates.insert(selectedDate)
+        
+        // Enable the done button.
+        handleDoneButton()
+    }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        // Get the selected date.
+        let selectedDate = fireDates[indexPath.row]
+        
+        // Remove it from the selected dates.
+        if selectedFireDates.contains(selectedDate) {
+            selectedFireDates.remove(selectedDate)
+        }
+        
+        // Handle the done button enabled state.
+        handleDoneButton()
     }
 }
 

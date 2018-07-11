@@ -211,7 +211,7 @@
                                             <outlet property="delegate" destination="hr1-dK-bvy" id="BSB-f9-rOm"/>
                                         </connections>
                                     </tableView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oC4-D2-mh4">
+                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oC4-D2-mh4">
                                         <rect key="frame" x="0.0" y="553" width="375" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="nsA-6A-1EM"/>
