@@ -4,9 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -183,43 +181,62 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="At what time would you like to be rembered to do your habitual activity?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vnn-0H-Gxy">
-                                <rect key="frame" x="38" y="94" width="300" height="41"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="30" translatesAutoresizingMaskIntoConstraints="NO" id="go7-OO-Gwc">
-                                <rect key="frame" x="28" y="160" width="320" height="216"/>
-                                <date key="date" timeIntervalSinceReferenceDate="552425893.24196696">
-                                    <!--2018-07-04 19:38:13 +0000-->
-                                </date>
-                            </datePicker>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oC4-D2-mh4">
-                                <rect key="frame" x="170" y="396" width="35" height="30"/>
-                                <state key="normal" title="done"/>
-                                <connections>
-                                    <action selector="selectDays:" destination="zeZ-9t-rmb" eventType="touchUpInside" id="ErF-O5-S7a"/>
-                                    <action selector="selectFireDates:" destination="hr1-dK-bvy" eventType="touchUpInside" id="Avv-xH-Ndt"/>
-                                </connections>
-                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ykH-gD-1hk">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <subviews>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ldA-Co-AkB">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="553"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <prototypes>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="fire date selection cell" textLabel="wyh-eF-kYV" style="IBUITableViewCellStyleDefault" id="sFh-AE-ZBt">
+                                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="sFh-AE-ZBt" id="BhU-qr-Sgj">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="wyh-eF-kYV">
+                                                            <rect key="frame" x="15" y="0.0" width="345" height="43.5"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </tableViewCellContentView>
+                                            </tableViewCell>
+                                        </prototypes>
+                                        <connections>
+                                            <outlet property="dataSource" destination="hr1-dK-bvy" id="Imt-Gp-yAD"/>
+                                            <outlet property="delegate" destination="hr1-dK-bvy" id="BSB-f9-rOm"/>
+                                        </connections>
+                                    </tableView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oC4-D2-mh4">
+                                        <rect key="frame" x="0.0" y="553" width="375" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="nsA-6A-1EM"/>
+                                        </constraints>
+                                        <state key="normal" title="done"/>
+                                        <connections>
+                                            <action selector="selectDays:" destination="zeZ-9t-rmb" eventType="touchUpInside" id="ErF-O5-S7a"/>
+                                            <action selector="selectFireDates:" destination="hr1-dK-bvy" eventType="touchUpInside" id="Avv-xH-Ndt"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="go7-OO-Gwc" firstAttribute="top" secondItem="vnn-0H-Gxy" secondAttribute="bottom" constant="25" id="GkA-rw-2CR"/>
-                            <constraint firstItem="oC4-D2-mh4" firstAttribute="centerX" secondItem="bYh-yH-9aK" secondAttribute="centerX" id="NMZ-HG-U6i"/>
-                            <constraint firstItem="vnn-0H-Gxy" firstAttribute="top" secondItem="0cT-Ky-et7" secondAttribute="top" constant="30" id="UEP-Ad-V4m"/>
-                            <constraint firstItem="vnn-0H-Gxy" firstAttribute="centerX" secondItem="bYh-yH-9aK" secondAttribute="centerX" id="Uw8-Mt-94o"/>
-                            <constraint firstItem="oC4-D2-mh4" firstAttribute="top" secondItem="go7-OO-Gwc" secondAttribute="bottom" constant="20" id="cpa-GG-DRz"/>
-                            <constraint firstItem="vnn-0H-Gxy" firstAttribute="width" secondItem="0cT-Ky-et7" secondAttribute="width" multiplier="0.8" id="iNg-G6-5WV"/>
-                            <constraint firstItem="go7-OO-Gwc" firstAttribute="centerX" secondItem="bYh-yH-9aK" secondAttribute="centerX" id="sjN-1C-SuZ"/>
+                            <constraint firstItem="0cT-Ky-et7" firstAttribute="bottom" secondItem="ykH-gD-1hk" secondAttribute="bottom" id="0fC-xp-hd7"/>
+                            <constraint firstItem="ykH-gD-1hk" firstAttribute="leading" secondItem="0cT-Ky-et7" secondAttribute="leading" id="26C-51-6On"/>
+                            <constraint firstItem="ykH-gD-1hk" firstAttribute="top" secondItem="0cT-Ky-et7" secondAttribute="top" id="V7P-ZO-kJH"/>
+                            <constraint firstItem="0cT-Ky-et7" firstAttribute="trailing" secondItem="ykH-gD-1hk" secondAttribute="trailing" id="Zrs-0J-oeR"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="0cT-Ky-et7"/>
                     </view>
                     <connections>
                         <outlet property="doneButton" destination="oC4-D2-mh4" id="Tbr-mI-C4H"/>
-                        <outlet property="informationLabel" destination="vnn-0H-Gxy" id="nhQ-Ni-yWi"/>
-                        <outlet property="timePickerView" destination="go7-OO-Gwc" id="rTK-46-k0V"/>
+                        <outlet property="tableView" destination="ldA-Co-AkB" id="2r1-Xl-jLm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rE2-W1-pId" userLabel="First Responder" sceneMemberID="firstResponder"/>

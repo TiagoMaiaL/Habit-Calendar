@@ -14,17 +14,38 @@ class HabitNotificationsSelectionViewController: UIViewController {
 
     // MARK: Properties
     
-    /// The picker the user uses to select the fire date.
-    @IBOutlet weak var timePickerView: UIDatePicker!
+    /// The fire date cell's reusable identifier.
+    private let cellIdentifier = "fire date selection cell"
+    
+    /// The static fire dates interval.
+    private let interval = 30
+    
+    private let fireDateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.locale = Locale.current
+        formatter.timeZone = TimeZone.current
+        formatter.dateFormat = "HH:mm"
+        
+        return formatter
+    }()
+    
+    /// The fire dates displayed to the user for selection.
+    private lazy var fireDates = makeFireDatesProgression(
+        minutesInterval: interval
+    )
     
     /// The controller's label informing the possible actions
     /// for the controller.
-    @IBOutlet weak var informationLabel: UILabel!
+//    @IBOutlet weak var informationLabel: UILabel!
+    
+    /// The fire dates selection table view.
+    @IBOutlet weak var tableView: UITableView!
     
     /// The button used to finish the selection.
     @IBOutlet weak var doneButton: UIButton!
     
-    /// The notification manager used to get the authorization status.
+    /// The notification manager used to get the authorization status and
+    /// reflect the result in the view.
     var notificationManager: UserNotificationManager!
     
     /// The delegate in charge of receiving the selected fire dates.
@@ -68,7 +89,7 @@ class HabitNotificationsSelectionViewController: UIViewController {
     @IBAction func selectFireDates(_ sender: UIButton) {
         // Call the delegate passing the fire dates selected
         // by the user.
-        delegate?.didSelectFireDates([timePickerView.date])
+        delegate?.didSelectFireDates([]) // TODO: Pass the selected dates.
         navigationController?.popViewController(animated: true)
     }
     
@@ -81,19 +102,84 @@ class HabitNotificationsSelectionViewController: UIViewController {
             // If it's not authorized, change the view informing it.
             DispatchQueue.main.async {
                 if isAuthorized {
-                    // Enable the button and the picker view.
-                    self.informationLabel.text = "At what time would you like to be rembered to do your habitual activity?"
-                    self.timePickerView.isEnabled = true
+                    // Enable the button and the tableView selection.
+                    // Change the controller's appearance.
+//                    self.informationLabel.text = "At what time would you like to be rembered to do your habitual activity?"
                     self.doneButton.isEnabled = true
                 } else {
                     // Change information label, and disable
-                    // the picker and the button.
-                    self.informationLabel.text = "In order to get remembered about you habits, enable the user notifications in the settings app."
-                    self.timePickerView.isEnabled = false
+                    // the button and the tableView selection.
+                    // Change the controller's appearance to represent
+                    // that there's no authorization to use
+                    // local notifications.
+//                    self.informationLabel.text = "In order to get remembered about you habits, enable the user notifications in the settings app."
                     self.doneButton.isEnabled = false
                 }
             }
         }
+    }
+}
+
+extension HabitNotificationsSelectionViewController: UITableViewDataSource, UITableViewDelegate {
+    
+    // MARK: Imperatives
+    
+    /// Creates an array of successive fire times by adding
+    /// the specified interval in minutes.
+    /// - Note: The first date is 00:00 and the last date is 23:59 or
+    ///         a time before.
+    /// - Parameter minutesInterval: The minutes used to create the
+    ///                              progression of dates.
+    /// - Returns: An array of successive fire times within a day.
+    func makeFireDatesProgression(minutesInterval: Int) -> [Date] {
+        var fireDates = [Date]()
+        
+        let minutesInDay = 24 * 60
+        let beginningDate = Date().getBeginningOfDay()
+        
+        // Generate the dates and append them to the array.
+        // Declare the range to be used by determining the amount of
+        // dates to be added.
+        for index in 0..<Int(minutesInDay / minutesInterval) {
+            // Get the next date in the progression.
+            guard let nextDate = beginningDate.byAddingMinutes(
+                minutesInterval * index
+            ) else {
+                assertionFailure("Inconsistency: the range can't be correclty generated.")
+                return []
+            }
+            
+            fireDates.append(nextDate)
+        }
+        
+        return fireDates
+    }
+    
+    // MARK: TableView DataSource methods
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return fireDates.count
+    }
+    
+    // MARK: TableView Delegate methods
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        // Get the cell.
+        var cell = tableView.dequeueReusableCell(
+            withIdentifier: cellIdentifier
+        ) ?? UITableViewCell(
+            style: .default,
+            reuseIdentifier: cellIdentifier
+        )
+        
+        // Set it's time text by using a date formatter.
+        cell.textLabel?.text = fireDateFormatter.string(from: fireDates[indexPath.row])
+        
+        return cell
     }
 }
 
