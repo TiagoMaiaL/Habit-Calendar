@@ -23,6 +23,16 @@ class HabitDetailsViewController: UIViewController {
     /// provided habit.
     var container: NSPersistentContainer!
     
+    /// View holding the prompt to ask the user if the activity
+    /// was executed in the current day.
+    @IBOutlet weak var promptView: UIView!
+    
+    /// The positive prompt button.
+    @IBOutlet weak var positivePromptButton: UIButton!
+    
+    /// The negative prompt button.
+    @IBOutlet weak var negativePromptButton: UIButton!
+    
     // MARK: ViewController Life Cycle
     
     override func viewDidLoad() {
@@ -72,5 +82,18 @@ class HabitDetailsViewController: UIViewController {
         // Present it.
         present(alert, animated: true)
     }
+    
+    @IBAction func savePromptResult(_ sender: UIButton) {
+        print("=D")
+    }
+    
+    // MARK: Imperatives
+    
+    /// Show the prompt view if today is a day(HabitDayMO) being tracked
+    /// by the app.
+    private func handlePrompt() {
+        // Try to get a habit day for today.
+    }
+    
     
 }
