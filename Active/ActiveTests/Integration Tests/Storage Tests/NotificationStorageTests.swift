@@ -77,7 +77,7 @@ class NotificationStorageTests: IntegrationTestCase {
         let dummyHabit = factories.habit.makeDummy()
         
         // Create the notification.
-        let fireDate = Date(timeInterval: 10, since: Date())
+        let fireDate = Date().byAddingMinutes(20)!
         guard let notification = try? notificationStorage.create(
             using: context,
             with: fireDate,
@@ -174,5 +174,97 @@ class NotificationStorageTests: IntegrationTestCase {
             habit: dummyNotification.habit!,
             and: dummyNotification.fireDate!
         ), "The deleted notification shouldn't be fetched.")
+    }
+    
+    func testFireDatesFactory() {
+        // Create a dummy habit.
+        let dummyHabit = factories.habit.makeDummy()
+        
+        // Declare the fire times to be used.
+        let fireTime = Date().getBeginningOfDay().byAddingMinutes(70)!
+        
+        // Create the fire dates by calling the factory.
+        let fireDates = notificationStorage.createNotificationFireDatesFrom(
+            habit: dummyHabit,
+            and: [fireTime]
+        )
+        
+        // Assert on the generated fire dates:
+        // The amount of dates -> days.count * fireTimes.count
+        XCTAssertEqual(
+            dummyHabit.days?.count ?? 0,
+            fireDates.count,
+            "The fire dates don't have the expected count -> days.count * fireTimes.Count."
+        )
+        
+        // Assert on the days:
+        // Each fire date needs to have the same minutes and hours as the fire
+        // time, and it also needs to have a corresponding day, with the month
+        // and year.
+        for fireDate in fireDates {
+            // Assert on the time components (minute and hours).
+            XCTAssertEqual(
+                fireDate.components.minute,
+                fireTime.components.minute,
+                "The generated fire date doesn't have the correct minutes."
+            )
+            XCTAssertEqual(
+                fireDate.components.hour,
+                fireTime.components.hour,
+                "The generated fire date doesn't have the correct hours."
+            )
+            
+            // Get the corresponding day by using the day, month and
+            // year components. There should be a unique corresponding
+            // date.
+            guard let days = (dummyHabit.days as? Set<HabitDayMO>) else {
+                XCTFail("Couldn't get the dummy days.")
+                return
+            }
+            
+            XCTAssertEqual(
+                1, // The number of days corresponding to the fire date.
+                days.compactMap { $0.day?.date }.filter {
+                    $0.components.day == fireDate.components.day &&
+                    $0.components.month == fireDate.components.month &&
+                    $0.components.year == fireDate.components.year
+                }.count
+            )
+        }
+    }
+    
+    func testNotificationsCreationFromFireDates() {
+        // Create a dummy Habit.
+        let dummyHabit = factories.habit.makeDummy()
+        
+        // Declare the fireTime to be used.
+        let fireTime = Date().getBeginningOfDay().byAddingMinutes(130)!
+        
+        // Create the fire dates for the habit.
+        let fireDates = notificationStorage.createNotificationFireDatesFrom(
+            habit: dummyHabit,
+            and: [fireTime]
+        )
+        
+        // Create the notifications.
+        let notifications = notificationStorage.createNotificationsFrom(
+            habit: dummyHabit,
+            using: context,
+            and: fireDates
+        )
+        
+        // Assert on the count.
+        XCTAssertEqual(
+            notifications.count,
+            fireDates.count,
+            "The number of created notifications isn't correct."
+        )
+        // Assert on the fire dates.
+        for notification in notifications {
+            XCTAssertTrue(
+                fireDates.contains(notification.fireDate!),
+                "The notification doesn't have a corresponding fire date."
+            )
+        }
     }
 }

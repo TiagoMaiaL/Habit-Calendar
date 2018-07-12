@@ -87,6 +87,8 @@ class UserNotificationManagerTests: IntegrationTestCase {
     }
     
     func testNotificationSchedule() {
+        XCTFail("Not implemented.") // TODO: Fix this test.
+        
         // Schedule a notification.
         
         let notificationExpectation = XCTestExpectation(description: "Schedule a UserNotificationRequest.")
@@ -121,6 +123,8 @@ class UserNotificationManagerTests: IntegrationTestCase {
     }
     
     func testScheduledNotificationFetch() {
+        XCTFail("Not implemented.") // TODO: Fix this test.
+        
         // Declare the fetch expectation.
         let notificationFetchExpectation = XCTestExpectation(description: "Fetch a scheduled notification request.")
         
@@ -143,10 +147,13 @@ class UserNotificationManagerTests: IntegrationTestCase {
         ) {
             identifier in
             
-            XCTAssertNotNil(identifier, "The identifier of the UserNotificationRequest shouldn't be nil.")
+            guard let identifier = identifier else {
+                XCTFail("The identifier shouldn't be nil.")
+                return
+            }
             
             // Try to fetch it by using the manager.
-            self.notificationManager.getRequest(with: identifier!) {
+            self.notificationManager.getRequest(with: identifier) {
                 request in
                 
                 // Make assertions on the request properties.
@@ -158,7 +165,7 @@ class UserNotificationManagerTests: IntegrationTestCase {
             }
         }
         
-        wait(for: [notificationFetchExpectation], timeout: 0.1)
+        wait(for: [notificationFetchExpectation], timeout: 0.2)
     }
     
     // TODO: Test scheduling with errors.
