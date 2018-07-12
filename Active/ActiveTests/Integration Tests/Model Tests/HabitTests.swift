@@ -150,4 +150,49 @@ class HabitTests: IntegrationTestCase {
     func testDescriptionText() {
         XCTFail("Not implemented.")
     }
+    
+    func testGettingCurrentHabitDay() {
+        // Create an empty dummy habit.
+        let dummyHabit = makeEmptyDummy()
+        
+        // Add a habit day to it.
+        let dummyDay = factories.day.makeDummy()
+        let dummyHabitDay = factories.habitDay.makeDummy()
+        
+        dummyHabitDay.day = dummyDay
+        dummyHabitDay.habit = dummyHabit
+        
+        // Check if it returns the current habit day (corresponding to today).
+        XCTAssertNotNil(
+            dummyHabit.getCurrentDay(),
+            "There should be a current habit day being tracked."
+        )
+    }
+    
+    func testGettingCurrentHabitDayShouldReturnNil() {
+        // Create an empty dummy habit.
+        let dummyHabit = makeEmptyDummy()
+        
+        // Check if it returns the current habit day (corresponding to today).
+        XCTAssertNil(
+            dummyHabit.getCurrentDay(),
+            "There shouldn't be a current habit day being tracked."
+        )
+    }
+    
+    // TODO: Pass this to the factory.
+    private func makeEmptyDummy() -> HabitMO {
+        let habit = HabitMO(context: context)
+        
+        // Associate it's properties (id, created, name, color).
+        habit.id = UUID().uuidString
+        habit.created = Date()
+        habit.name = "Random habit name"
+        // TODO: Make the color be a random value.
+        // Write the enum first.
+        habit.color = "Green"
+        
+        return habit
+    }
+    
 }

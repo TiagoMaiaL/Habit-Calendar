@@ -88,6 +88,7 @@ class UserNotificationManagerTests: IntegrationTestCase {
     
     func testNotificationSchedule() {
         XCTFail("Not implemented.") // TODO: Fix this test.
+        return
         
         // Schedule a notification.
         
@@ -124,6 +125,8 @@ class UserNotificationManagerTests: IntegrationTestCase {
     
     func testScheduledNotificationFetch() {
         XCTFail("Not implemented.") // TODO: Fix this test.
+
+        return
         
         // Declare the fetch expectation.
         let notificationFetchExpectation = XCTestExpectation(description: "Fetch a scheduled notification request.")
@@ -171,6 +174,9 @@ class UserNotificationManagerTests: IntegrationTestCase {
     // TODO: Test scheduling with errors.
     
     func testScheduledNotificationRemoval() {
+        XCTFail("Not implemented.")
+        return
+        
         // Remove an scheduled notification.
         
         let notificationRemovalExpectation = XCTestExpectation(description: "Delete a scheduled UserNotificationRequest.")

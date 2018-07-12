@@ -65,6 +65,23 @@ class HabitMO: NSManagedObject {
     func getDescriptionText() -> String {
         return ""
     }
+    
+    /// Returns the current habit day for today (the current date),
+    /// if there's one being tracked.
+    func getCurrentDay() -> HabitDayMO? {
+        // Get the current date.
+        let today = Date()
+        
+        // Declare the predicate to search only for the current day.
+        let predicate = NSPredicate(
+            format: "day.date >= %@ and day.date <= %@",
+            today.getBeginningOfDay() as NSDate,
+            today.getEndOfDay() as NSDate
+        )
+        
+        // Fetch it and return the first result, if there's one.
+        return days?.filtered(using: predicate).first as? HabitDayMO
+    }
 }
 
 /// Enum representing all possible colors a habit entity can have as a property.
