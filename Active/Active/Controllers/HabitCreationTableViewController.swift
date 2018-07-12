@@ -56,8 +56,8 @@ class HabitCreationTableViewController: UITableViewController, HabitDaysSelectio
         }
     }
     
-    /// The habit's notification time the user has chosen.
-    private var notificationFireDates: [Date]?
+    /// The habit's notification times the user has chosen.
+    private var selectedNotificationFireTimes: [Date]?
     
     // TODO: Show a cell indicating the user hasn't enabled local notifications.
     
@@ -128,7 +128,7 @@ class HabitCreationTableViewController: UITableViewController, HabitDaysSelectio
                     user: user,
                     name: self.name!,
                     days: self.days!,
-                    and: self.notificationFireDates
+                    and: self.selectedNotificationFireTimes
                 )
             } else {
                 // If there's a previous habit, update it with the new values.
@@ -137,7 +137,7 @@ class HabitCreationTableViewController: UITableViewController, HabitDaysSelectio
                     using: context,
                     name: self.name,
                     days: self.days,
-                    and: self.notificationFireDates
+                    and: self.selectedNotificationFireTimes
                 )
             }
             
@@ -183,6 +183,6 @@ extension HabitCreationTableViewController {
     func didSelectFireDates(_ fireDates: [Date]) {
         // Associate the habit's fire dates with the fireDates selected by
         // the user.
-        notificationFireDates = fireDates
+        selectedNotificationFireTimes = fireDates
     }
 }

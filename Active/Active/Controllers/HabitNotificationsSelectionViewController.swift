@@ -181,7 +181,7 @@ extension HabitNotificationsSelectionViewController: UITableViewDataSource, UITa
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // Get the cell.
-        var cell = tableView.dequeueReusableCell(
+        let cell = tableView.dequeueReusableCell(
             withIdentifier: cellIdentifier
         ) ?? UITableViewCell(
             style: .default,
