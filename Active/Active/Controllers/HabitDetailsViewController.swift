@@ -56,6 +56,13 @@ class HabitDetailsViewController: UIViewController {
         title = habit.name
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Configure the appearance of the prompt view.
+        handlePrompt()
+    }
+    
     // MARK: Actions
     
     @IBAction func deleteHabit(_ sender: UIButton) {
@@ -84,7 +91,34 @@ class HabitDetailsViewController: UIViewController {
     }
     
     @IBAction func savePromptResult(_ sender: UIButton) {
-        print("=D")
+        guard let currentHabitDay = habit.getCurrentDay() else {
+            assertionFailure(
+                "Inconsistency: There isn't a current habit day but the prompt is being displayed."
+            )
+            return
+        }
+        
+        currentHabitDay.managedObjectContext?.perform {
+            if sender === self.positivePromptButton {
+                // Mark it as executed.
+                currentHabitDay.wasExecuted = true
+            } else if sender === self.negativePromptButton {
+                // Mark is as non executed.
+                currentHabitDay.wasExecuted = false
+            }
+            
+            // Save the result.
+            try? currentHabitDay.managedObjectContext?.save()
+            
+            // TODO: Refresh the prompt view to not ask anymore.
+            // Hide the prompt header.
+            DispatchQueue.main.async {
+                self.handlePrompt()
+            }
+            
+            // TODO: Refresh the calendar view to reflect the change.
+            
+        }
     }
     
     // MARK: Imperatives
@@ -93,7 +127,12 @@ class HabitDetailsViewController: UIViewController {
     /// by the app.
     private func handlePrompt() {
         // Try to get a habit day for today.
+        if let currentDay = habit.getCurrentDay(),
+            currentDay.wasExecuted == false {
+            // Configure the appearance of the prompt.
+            promptView.isHidden = false
+        } else {
+            promptView.isHidden = true
+        }
     }
-    
-    
 }

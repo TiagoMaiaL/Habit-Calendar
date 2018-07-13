@@ -25,7 +25,7 @@
     </entity>
     <entity name="HabitDay" representedClassName=".HabitDayMO" syncable="YES" codeGenerationType="category">
         <attribute name="id" attributeType="String" syncable="YES"/>
-        <attribute name="wasExecuted" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="wasExecuted" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="day" maxCount="1" deletionRule="Nullify" destinationEntity="Day" inverseName="habits" inverseEntity="Day" syncable="YES"/>
         <relationship name="habit" maxCount="1" deletionRule="Nullify" destinationEntity="Habit" inverseName="days" inverseEntity="Habit" syncable="YES"/>
     </entity>

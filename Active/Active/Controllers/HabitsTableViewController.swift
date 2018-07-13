@@ -149,6 +149,13 @@ class HabitsTableViewController: UITableViewController, NSFetchedResultsControll
     /// the viewContext.
     /// - Parameter notification: The thrown notification
     @objc private func handleContextChanges(notification: Notification) {
+        // If the changes were only updates, reload the tableView.
+        if let _ = notification.userInfo?["updated"] as? Set<NSManagedObject> {
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+        
         // Refresh the current view context by using the payloads
         // in the notifications.
         container.viewContext.mergeChanges(fromContextDidSave: notification)
