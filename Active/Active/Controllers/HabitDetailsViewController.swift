@@ -145,14 +145,13 @@ class HabitDetailsViewController: UIViewController {
             // Save the result.
             try? currentHabitDay.managedObjectContext?.save()
             
-            // TODO: Refresh the prompt view to not ask anymore.
-            // Hide the prompt header.
+            
             DispatchQueue.main.async {
+                // Hide the prompt header.
                 self.handlePrompt()
+                // Reload calendar to show the executed day.
+                self.calendarView.reloadData()
             }
-            
-            // TODO: Refresh the calendar view to reflect the change.
-            
         }
     }
     
@@ -205,7 +204,25 @@ extension HabitDetailsViewController: JTAppleCalendarViewDataSource, JTAppleCale
             for: indexPath
         ) as! DetailsCalendarDayCell
         
-        cell.dayTitleLabel.text = cellState.text
+        if cellState.dateBelongsTo == .thisMonth {
+            // Set the cell's color if the date represents a habit day.
+            
+            let predicate = NSPredicate(
+                format: "day.date > %@ AND day.date < %@",
+                date.getBeginningOfDay() as NSDate,
+                date.getEndOfDay() as NSDate
+            )
+            if let currentHabitDay = habit.days?.filtered(using: predicate).first as? HabitDayMO {
+                cell.backgroundColor = currentHabitDay.wasExecuted ? .purple : .red
+            } else {
+                cell.backgroundColor = .white
+            }
+            
+            cell.dayTitleLabel.text = cellState.text
+        } else {
+            cell.dayTitleLabel.text = ""
+            cell.backgroundColor = .white
+        }
         
         return cell
     }
