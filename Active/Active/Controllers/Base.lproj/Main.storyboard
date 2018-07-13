@@ -407,7 +407,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nSc-cp-U05">
-                                <rect key="frame" x="165" y="318" width="45" height="30"/>
+                                <rect key="frame" x="165" y="617" width="45" height="30"/>
                                 <state key="normal" title="Delete"/>
                                 <connections>
                                     <action selector="deleteHabit:" destination="wZd-FS-1mH" eventType="touchUpInside" id="xOI-vl-H2p"/>
@@ -459,18 +459,58 @@
                                     <constraint firstItem="NjK-FV-QL6" firstAttribute="top" secondItem="U7c-c3-phk" secondAttribute="top" constant="20" symbolic="YES" id="xaP-aU-pku"/>
                                 </constraints>
                             </view>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="7Pe-pH-Udy" customClass="JTAppleCalendarView" customModule="JTAppleCalendar">
+                                <rect key="frame" x="0.0" y="164" width="375" height="453"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="PNf-8b-lZW">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Habit day cell id" id="CWe-an-Y5t" customClass="DetailsCalendarDayCell" customModule="Active" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UEo-Sq-0ja">
+                                                    <rect key="frame" x="21" y="15" width="8" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="UEo-Sq-0ja" firstAttribute="centerX" secondItem="CWe-an-Y5t" secondAttribute="centerX" id="Ky2-HD-Kzz"/>
+                                            <constraint firstItem="UEo-Sq-0ja" firstAttribute="centerY" secondItem="CWe-an-Y5t" secondAttribute="centerY" id="ZXz-DU-9bs"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="dayTitleLabel" destination="UEo-Sq-0ja" id="XSa-kO-T0Q"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="nSc-cp-U05" firstAttribute="centerY" secondItem="MZ9-hX-HsL" secondAttribute="centerY" id="Cu7-Hm-A8v"/>
                             <constraint firstItem="nSc-cp-U05" firstAttribute="centerX" secondItem="MZ9-hX-HsL" secondAttribute="centerX" id="G6s-Jg-Jyb"/>
                             <constraint firstItem="tww-hp-589" firstAttribute="trailing" secondItem="U7c-c3-phk" secondAttribute="trailing" id="JQz-ky-SES"/>
+                            <constraint firstItem="7Pe-pH-Udy" firstAttribute="top" secondItem="U7c-c3-phk" secondAttribute="bottom" id="UDB-lV-0as"/>
+                            <constraint firstItem="tww-hp-589" firstAttribute="trailing" secondItem="7Pe-pH-Udy" secondAttribute="trailing" id="cLY-xl-xXD"/>
                             <constraint firstItem="U7c-c3-phk" firstAttribute="top" secondItem="tww-hp-589" secondAttribute="top" id="eak-m4-IHD"/>
+                            <constraint firstItem="7Pe-pH-Udy" firstAttribute="leading" secondItem="tww-hp-589" secondAttribute="leading" id="n77-jk-SKQ"/>
+                            <constraint firstItem="nSc-cp-U05" firstAttribute="top" secondItem="7Pe-pH-Udy" secondAttribute="bottom" id="ph4-xK-XG4"/>
+                            <constraint firstItem="tww-hp-589" firstAttribute="bottom" secondItem="nSc-cp-U05" secondAttribute="bottom" constant="20" id="s8Y-I9-bCo"/>
                             <constraint firstItem="U7c-c3-phk" firstAttribute="leading" secondItem="tww-hp-589" secondAttribute="leading" id="t1m-AQ-jLX"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="tww-hp-589"/>
                     </view>
                     <connections>
+                        <outlet property="calendarView" destination="7Pe-pH-Udy" id="dhu-6f-iLR"/>
                         <outlet property="negativePromptButton" destination="ISa-nl-Ma1" id="DZL-Ne-WHs"/>
                         <outlet property="positivePromptButton" destination="2ca-B7-9qd" id="Ktn-r1-j4z"/>
                         <outlet property="promptView" destination="U7c-c3-phk" id="mq3-Sg-vnF"/>

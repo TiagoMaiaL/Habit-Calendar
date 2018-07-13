@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import JTAppleCalendar
 
 class HabitDetailsViewController: UIViewController {
 
@@ -15,6 +16,11 @@ class HabitDetailsViewController: UIViewController {
     
     /// The habit presented by this controller.
     var habit: HabitMO!
+    
+    /// The ordered days for the passed habit.
+    /// - Note: This array mustn't be empty. The existence of days is ensured
+    ///         in the habit's creation and edition process.
+    private var orderedHabitDays: [HabitDayMO]!
     
     /// The habit storage used to manage the controller's habit.
     var habitStorage: HabitStorage!
@@ -32,6 +38,14 @@ class HabitDetailsViewController: UIViewController {
     
     /// The negative prompt button.
     @IBOutlet weak var negativePromptButton: UIButton!
+
+    /// The cell's reusable identifier.
+    private let cellIdentifier = "Habit day cell id"
+    
+    /// The calendar view showing the habit days.
+    /// - Note: The collection view will show a range with
+    ///         the Habit's first days until the last ones.
+    @IBOutlet weak var calendarView: JTAppleCalendarView!
     
     // MARK: ViewController Life Cycle
     
@@ -52,6 +66,27 @@ class HabitDetailsViewController: UIViewController {
             container != nil,
             "Error: the needed container wasn't injected."
         )
+        
+        // Try to get the ordered days from the passed habit.
+        let dateSorting = NSSortDescriptor(key: "day.date", ascending: true)
+        
+        guard let orderedDays = habit.days?.sortedArray(using: [dateSorting]) as? [HabitDayMO] else {
+            assertionFailure("Inconsistency: Couldn't sort the habit's days by the date property.")
+            return
+        }
+        
+        // All created habits must have associated habit days.
+        assert(
+            !orderedDays.isEmpty,
+            "Inconsistency: the habit's days shouldn't be empty."
+        )
+        
+        // Assign the fetched days.
+        orderedHabitDays = orderedDays
+        
+        // Configure the calendar.
+        calendarView.calendarDataSource = self
+        calendarView.calendarDelegate = self
         
         title = habit.name
     }
@@ -134,5 +169,48 @@ class HabitDetailsViewController: UIViewController {
         } else {
             promptView.isHidden = true
         }
+    }
+}
+
+extension HabitDetailsViewController: JTAppleCalendarViewDataSource, JTAppleCalendarViewDelegate {
+    
+    // MARK: JTAppleCalendarViewDataSource Methods
+    
+    func configureCalendar(_ calendar: JTAppleCalendarView) -> ConfigurationParameters {
+        // Get the oldest and newest habitDays.
+        let oldestDay = orderedHabitDays.first!
+        let newestDay = orderedHabitDays.last!
+        
+        // It'd be a bug if there wasn't valid days with the HabitDay.
+        assert(
+            oldestDay.day?.date != nil,
+            "Inconsistency: Couldn't get the first day's date property."
+        )
+        assert(
+            newestDay.day?.date != nil,
+            "Inconsistency: Couldn't get the last day's date property."
+        )
+        
+        return ConfigurationParameters(
+            startDate: oldestDay.day!.date!,
+            endDate: newestDay.day!.date!
+        )
+    }
+    
+    // MARK: JTAppleCalendarViewDelegate Methods
+    
+    func calendar(_ calendar: JTAppleCalendarView, cellForItemAt date: Date, cellState: CellState, indexPath: IndexPath) -> JTAppleCell {
+        let cell = calendar.dequeueReusableJTAppleCell(
+            withReuseIdentifier: cellIdentifier,
+            for: indexPath
+        ) as! DetailsCalendarDayCell
+        
+        cell.dayTitleLabel.text = cellState.text
+        
+        return cell
+    }
+    
+    func calendar(_ calendar: JTAppleCalendarView, willDisplay cell: JTAppleCell, forItemAt date: Date, cellState: CellState, indexPath: IndexPath) {
+        
     }
 }
