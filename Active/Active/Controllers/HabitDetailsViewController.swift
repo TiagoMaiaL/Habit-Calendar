@@ -145,7 +145,6 @@ class HabitDetailsViewController: UIViewController {
             // Save the result.
             try? currentHabitDay.managedObjectContext?.save()
             
-            
             DispatchQueue.main.async {
                 // Hide the prompt header.
                 self.handlePrompt()

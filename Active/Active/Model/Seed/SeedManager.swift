@@ -14,7 +14,7 @@ class SeedManager {
     
     // MARK: Types
     
-    private typealias SeedProcedure = (NSManagedObjectContext) -> ()
+    private typealias SeedProcedure = (NSManagedObjectContext) -> Void
     
     // MARK: Properties
     
@@ -28,6 +28,16 @@ class SeedManager {
     private let seedProcedures: [SeedProcedure] = [
         { context in
             print("Seeding user.")
+            
+            // Try to fetch any users in the database.
+            let request: NSFetchRequest<UserMO> = UserMO.fetchRequest()
+            let results = try? context.fetch(request)
+            
+            // If there's already a saved UserMO,
+            // don't proceed with the user seed.
+            if let results = results, !results.isEmpty {
+                return
+            }
             
             // Instantiate a new user factory using the context.
             let userFactory = UserFactory(context: context)
@@ -56,7 +66,7 @@ class SeedManager {
             }
         },
     ]
-    
+
     // MARK: Initializers
     
     /// - Parameter container: The container used when seeding the entities.
@@ -93,19 +103,33 @@ class SeedManager {
         }
     }
     
-    /// Erases the database and the seeded entities.
+    /// Removes all previously seeded entities from the persistent stores.
     func erase() {
-        // Iterate through each internal persitent stores
-        // and remove each one of them.
         print("Removing seeded entities.")
-        container.persistentStoreCoordinator.persistentStores.forEach { store in
-            let currentURL = container.persistentStoreCoordinator.url(for: store)
-            
-            try! container.persistentStoreCoordinator.destroyPersistentStore(
-                at: currentURL,
-                ofType: ".sqlite"
-            )
+        
+        // Declare the context to be used for the seed erase.
+        let context = container.viewContext
+        
+        // Delete all DayMO entities.
+        let daysRequest: NSFetchRequest<DayMO> = DayMO.fetchRequest()
+        
+        if let days = try? context.fetch(daysRequest) {
+            for day in days {
+                context.delete(day)
+            }
         }
+        
+        // Get a new user storage instance.
+        let userStorage = UserStorage()
+        
+        // Get the current user.
+        if let user = userStorage.getUser(using: context) {
+            // Delete it.
+            context.delete(user)
+        }
+        
+        // Save the context.
+        try! context.save()
     }
     
     /// Prints the number of entities within the database after the seed.

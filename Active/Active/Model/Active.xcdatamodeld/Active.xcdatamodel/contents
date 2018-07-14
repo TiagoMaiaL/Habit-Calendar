@@ -3,7 +3,7 @@
     <entity name="Day" representedClassName=".DayMO" versionHashModifier="added index" syncable="YES" codeGenerationType="category">
         <attribute name="date" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="id" attributeType="String" syncable="YES"/>
-        <relationship name="habits" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="HabitDay" inverseName="day" inverseEntity="HabitDay" syncable="YES"/>
+        <relationship name="habits" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="HabitDay" inverseName="day" inverseEntity="HabitDay" syncable="YES"/>
         <fetchIndex name="byDateIndex">
             <fetchIndexElement property="date" type="Binary" order="ascending"/>
         </fetchIndex>
@@ -14,8 +14,8 @@
         <attribute name="id" attributeType="String" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
         <attribute name="score" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <relationship name="days" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="HabitDay" inverseName="habit" inverseEntity="HabitDay" syncable="YES"/>
-        <relationship name="notifications" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Notification" inverseName="habit" inverseEntity="Notification" syncable="YES"/>
+        <relationship name="days" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="HabitDay" inverseName="habit" inverseEntity="HabitDay" syncable="YES"/>
+        <relationship name="notifications" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Notification" inverseName="habit" inverseEntity="Notification" syncable="YES"/>
         <relationship name="user" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="habits" inverseEntity="User" syncable="YES"/>
         <fetchIndex name="byCreatedNameAndIdIndex">
             <fetchIndexElement property="created" type="Binary" order="descending"/>
@@ -41,13 +41,13 @@
     <entity name="User" representedClassName=".UserMO" syncable="YES" codeGenerationType="category">
         <attribute name="created" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="id" attributeType="String" syncable="YES"/>
-        <relationship name="habits" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Habit" inverseName="user" inverseEntity="Habit" syncable="YES"/>
+        <relationship name="habits" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="Habit" inverseName="user" inverseEntity="Habit" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Day" positionX="-3177" positionY="-3708" width="128" height="90"/>
-        <element name="Habit" positionX="-3215" positionY="-3922" width="128" height="165"/>
+        <element name="Day" positionX="-3062" positionY="-3708" width="128" height="88"/>
+        <element name="Habit" positionX="-3215" positionY="-3922" width="128" height="163"/>
         <element name="HabitDay" positionX="-3395" positionY="-3715" width="128" height="105"/>
         <element name="Notification" positionX="-2961" positionY="-3889" width="128" height="105"/>
-        <element name="User" positionX="-3213" positionY="-4068" width="128" height="90"/>
+        <element name="User" positionX="-3213" positionY="-4068" width="128" height="88"/>
     </elements>
 </model>

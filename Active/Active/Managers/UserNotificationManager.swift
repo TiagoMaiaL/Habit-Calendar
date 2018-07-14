@@ -86,7 +86,7 @@ struct UserNotificationManager {
     func schedule(with identifier: String,
                   content: UNNotificationContent,
                   and trigger: UNNotificationTrigger,
-                  _ completionHandler: @escaping (String?) -> ()) {
+                  _ completionHandler: @escaping (String?) -> Void) {
         getAuthorizationStatus { isAuthorized in
             
             print("Auth status: \(isAuthorized ? "authorized" : "Denied")")
@@ -122,7 +122,7 @@ struct UserNotificationManager {
     ///                                found notification as it's
     ///                                parameter.
     func getRequest(with identifier: String,
-                      _ completionHandler: @escaping (UNNotificationRequest?) -> ()) {
+                      _ completionHandler: @escaping (UNNotificationRequest?) -> Void) {
         notificationCenter.getPendingNotificationRequests { requests in
             // Filter for the specified UNUserNotificationRequest.
             let request = requests.filter { request in
@@ -143,7 +143,7 @@ struct UserNotificationManager {
     
     /// Returns if the local notifications are authorized or not.
     /// - Parameter completionHandler: The block called with the results.
-    func getAuthorizationStatus(_ completionHandler: @escaping (Bool) -> ()) {
+    func getAuthorizationStatus(_ completionHandler: @escaping (Bool) -> Void) {
         // Get the notification settings and return if it's authorized or not.
         notificationCenter.getAuthorizationStatus(
             completionHandler: completionHandler
@@ -198,7 +198,7 @@ extension UserNotificationManager {
     ///                                finishes.
     func schedule(
         _ notification: NotificationMO,
-        completionHandler: Optional<(NotificationMO) -> ()> = nil) {
+        completionHandler: Optional<(NotificationMO) -> Void> = nil) {
         
         // Declare the options used to schedule a new request.
         let options = makeNotificationOptions(for: notification)
@@ -221,7 +221,7 @@ extension UserNotificationManager {
     /// Notification entity.
     /// - Parameter notification: The Notification entity.
     /// - Parameter completionHandler: The completion called after the fetch.
-    func getRequest(from notification: NotificationMO, completionHandler: @escaping (UNNotificationRequest?) -> ()) {
+    func getRequest(from notification: NotificationMO, completionHandler: @escaping (UNNotificationRequest?) -> Void) {
         guard let identifier = notification.userNotificationId else {
             assertionFailure(
                 "The passed notification entity should have an identifier."

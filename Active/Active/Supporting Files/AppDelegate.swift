@@ -65,6 +65,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: Delegate methods
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        // Remove the previously seeded entities.
+        seedManager.erase()
+        
         // Begin again by seeding the app's database with new dummy entities.
         seedManager.seed()
         
@@ -106,9 +109,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Save the view context.
         self.saveContext()
-        
-        // Remove the previously seeded entities.
-        seedManager.erase()
     }
     
     // MARK: - Core Data stack
