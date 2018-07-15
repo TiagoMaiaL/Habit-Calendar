@@ -308,45 +308,36 @@ class HabitStorageTests: IntegrationTestCase {
     
     func testHabitEditionWithNotificationProperty() {
         // 1. Create a empty dummy habit.
-        let dummyHabit = HabitMO(context: memoryPersistentContainer.viewContext)
-        dummyHabit.id = UUID().uuidString
-        dummyHabit.name = "Testing notifications"
-        dummyHabit.created = Date()
-        dummyHabit.color = "red"
+        let dummyHabit = factories.habit.makeDummy()
         
-        // 2. Declare the fire dates.
-        let fireDates = (1...7).compactMap { Date().byAddingDays($0) }
+        // 2. Declare the fire times.
+        let fireTimes = [
+            Date().getBeginningOfDay().byAddingMinutes(15)!,
+            Date().getBeginningOfDay().byAddingMinutes(120)!
+        ]
 
         // 3. Create the notifications by providing the dates.
         _ = habitStorage.edit(
             dummyHabit,
             using: context,
-            and: fireDates
+            and: fireTimes
         )
         
         // 4. Fetch the dummy's notifications and make assertions on it.
         // 4.1. Check if the count is the expected one.
-        XCTAssertEqual(
-            dummyHabit.notifications?.count,
-            fireDates.count,
-            "The added notifications should have the expected count."
-        )
         
-        // 4.2. Check if the notification's fireDates are within
-        //      the expected ones.
-        guard let addedNotifications = dummyHabit.notifications as? Set<NotificationMO> else {
-            XCTFail("The added notifications couldn't be retrieved.")
+        // Get only the future days for counting.
+        
+        guard let futureDays = (dummyHabit.days as? Set<HabitDayMO>)?.filter({ $0.day?.date?.isFuture ?? false }) else {
+            XCTFail("Couldn't get the dummy habit's future days for comparision.")
             return
         }
         
-        for notification in addedNotifications {
-            XCTAssertTrue(
-                fireDates.map({ $0.description }).contains(
-                    notification.fireDate?.description ?? ""
-                ),
-                "Tbe added notification doesn't have a valid date contained within the expected ones."
-            )
-        }
+        XCTAssertEqual(
+            dummyHabit.notifications?.count,
+            futureDays.count * fireTimes.count,
+            "The added notifications should have the expected count of the passed fire times * days."
+        )
     }
     
     func testHabitDeletion() {

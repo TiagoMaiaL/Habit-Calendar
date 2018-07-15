@@ -180,7 +180,6 @@ class HabitTests: IntegrationTestCase {
         )
     }
     
-    // TODO: Pass this to the factory.
     private func makeEmptyDummy() -> HabitMO {
         let habit = HabitMO(context: context)
         
@@ -188,7 +187,6 @@ class HabitTests: IntegrationTestCase {
         habit.id = UUID().uuidString
         habit.created = Date()
         habit.name = "Random habit name"
-        // TODO: Make the color be a random value.
         // Write the enum first.
         habit.color = "Green"
         

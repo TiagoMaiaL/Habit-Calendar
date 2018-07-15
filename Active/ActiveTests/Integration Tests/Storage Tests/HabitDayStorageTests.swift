@@ -78,7 +78,7 @@ class HabitDayStorageTests: IntegrationTestCase {
         )
         XCTAssertNotNil(
             habitDay.day!.date,
-            "The HabitDay's Day entity should is invalid."
+            "The HabitDay's Day entity shouldn't be invalid."
         )
         XCTAssertEqual(
             habitDay.day!.date!.description,

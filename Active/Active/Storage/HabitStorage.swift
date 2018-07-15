@@ -158,6 +158,7 @@ class HabitStorage {
             if let notifications = habit.notifications as? Set<NotificationMO> {
                 // Remove the current notifications.
                 for notification in notifications {
+                    habit.removeFromNotifications(notification)
                     context.delete(notification)
                 }
             }
