@@ -180,6 +180,25 @@ class HabitTests: IntegrationTestCase {
         )
     }
     
+    func testFetchingFutureDays() {
+        // Declare a dummy habit.
+        let dummyHabit = factories.habit.makeDummy()
+        
+        // Get its future days by filtering through them.
+        guard let futureDays = (dummyHabit.days as? Set<HabitDayMO>)?.filter({ $0.day?.date?.isFuture ?? false }) else {
+            XCTFail("Couldn't get the future days only.")
+            return
+        }
+        
+        // Compare the count with the one returned by
+        // the entity's method (getFutureDays).
+        XCTAssertEqual(
+            futureDays.count,
+            dummyHabit.getFutureDays().count,
+            "The method should return the correct amount of future habit day entities."
+        )
+    }
+    
     private func makeEmptyDummy() -> HabitMO {
         let habit = HabitMO(context: context)
         

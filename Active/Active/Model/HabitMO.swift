@@ -32,12 +32,6 @@ class HabitMO: NSManagedObject {
         return 0
     }
     
-    // MARK: Life cycle
-    
-    override func prepareForDeletion() {
-        // TODO: Check what needs to be done in case of a deletion in this entity.
-    }
-    
     // MARK: Imperatives
     
     /// Gets the habit title text.
@@ -81,6 +75,22 @@ class HabitMO: NSManagedObject {
         
         // Fetch it and return the first result, if there's one.
         return days?.filtered(using: predicate).first as? HabitDayMO
+    }
+    
+    /// Returns the entity's habit days that are later than the current date.
+    /// - Returns: The habit's day entities in the future.
+    func getFutureDays() -> [HabitDayMO] {
+        // Declare the predicate to filter for days greater
+        // than today (future days).
+        let futurePredicate = NSPredicate(
+            format: "day.date >= %@", Date() as NSDate
+        )
+        
+        if let days = days?.filtered(using: futurePredicate) as? Set<HabitDayMO> {
+            return Array<HabitDayMO>(days)
+        } else {
+            return []
+        }
     }
 }
 
