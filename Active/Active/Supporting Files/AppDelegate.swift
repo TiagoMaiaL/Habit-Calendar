@@ -65,11 +65,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: Delegate methods
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Remove the previously seeded entities.
-        seedManager.erase()
-        
-        // Begin again by seeding the app's database with new dummy entities.
-        seedManager.seed()
+        #if DEBUG
+        // Only run the seed in the debug mode and when the process's
+        // environment isn't the test one.
+        if ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] == nil {
+            // Remove the previously seeded entities.
+            seedManager.erase()
+            
+            // Begin again by seeding the app's database with new dummy entities.
+            seedManager.seed()
+        }
+        #endif
         
         // Inject the main dependencies into the initial HabitTableViewController:
         if let habitsListingController = window?.rootViewController?.contents as? HabitsTableViewController {

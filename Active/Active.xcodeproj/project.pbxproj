@@ -746,6 +746,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				"OTHER_SWIFT_FLAGS[arch=*]" = "-D DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = tiago.maia.Active;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
