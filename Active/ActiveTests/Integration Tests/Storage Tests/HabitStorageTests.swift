@@ -341,11 +341,16 @@ class HabitStorageTests: IntegrationTestCase {
     }
     
     func testHabitDeletion() {
-        // TODO:
-        XCTFail("Not implemented.")
         // Create a new habit.
+        let dummyHabit = factories.habit.makeDummy()
+        
         // Delete the created habit.
-        // Try to fetch the previously created habit.
-        // The result should be nil.
+        habitStorage.delete(dummyHabit, from: context)
+        
+        // Assert it was deleted.
+        XCTAssertTrue(
+            dummyHabit.isDeleted,
+            "The habit entity should be marked as deleted."
+        )
     }
 }
