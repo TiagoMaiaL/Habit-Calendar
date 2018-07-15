@@ -84,6 +84,7 @@ class HabitStorageTests: IntegrationTestCase {
             using: context,
             user: factories.user.makeDummy(),
             name: name,
+            color: HabitMO.Color.red,
             days: days
         )
         
@@ -205,8 +206,22 @@ class HabitStorageTests: IntegrationTestCase {
     }
     
     func testHabitEditionWithColorProperty() {
-        // TODO: Define the possible colors as an enum.
-        XCTFail("Not implemented.")
+        // 1. Declare a dummy habit.
+        let dummyHabit = factories.habit.makeDummy()
+        
+        // 2. Edit it with the desired color.
+        _ = habitStorage.edit(
+            dummyHabit,
+            using: context,
+            color: HabitMO.Color.purple
+        )
+        
+        // 3. Assert the habit entity now has the passed color.
+        XCTAssertEqual(
+            dummyHabit.color,
+            HabitMO.Color.purple.rawValue,
+            "The editted habit should have the purple color."
+        )
     }
     
     func testHabitEditionWithDaysProperty() {

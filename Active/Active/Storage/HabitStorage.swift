@@ -67,7 +67,7 @@ class HabitStorage {
     func create(using context: NSManagedObjectContext,
                 user: UserMO,
                 name: String,
-//                color: HabitColor,
+                color: HabitMO.Color,
                 days: [Date],
                 and notificationFireTimes: [Date]? = nil) -> HabitMO {
         // Declare a new habit instance.
@@ -75,7 +75,7 @@ class HabitStorage {
         habit.id = UUID().uuidString
         habit.name = name
         habit.created = Date()
-//        habit.color = color.getPersistenceIdentifier()
+        habit.color = color.rawValue
         
         // Associate its user.
         habit.user = user
@@ -116,7 +116,7 @@ class HabitStorage {
     func edit(_ habit: HabitMO,
               using context: NSManagedObjectContext,
               name: String? = nil,
-//              color: HabitColor?,
+              color: HabitMO.Color? = nil,
               days: [Date]? = nil,
               and notificationFireTimes: [Date]? = nil) -> HabitMO {
         
@@ -124,9 +124,9 @@ class HabitStorage {
             habit.name = name
         }
         
-//        if let color = color {
-//            habit.color = color.getPersistenceIdentifier()
-//        }
+        if let color = color {
+            habit.color = color.rawValue
+        }
         
         if let days = days {
             assert(!days.isEmpty, "HabitStorage -- edit: days argument shouldn't be empty.")

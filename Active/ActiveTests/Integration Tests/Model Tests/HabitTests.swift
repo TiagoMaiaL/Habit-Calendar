@@ -201,13 +201,11 @@ class HabitTests: IntegrationTestCase {
     
     private func makeEmptyDummy() -> HabitMO {
         let habit = HabitMO(context: context)
-        
         // Associate it's properties (id, created, name, color).
         habit.id = UUID().uuidString
         habit.created = Date()
         habit.name = "Random habit name"
-        // Write the enum first.
-        habit.color = "Green"
+        habit.color = HabitMO.Color.blue.rawValue
         
         return habit
     }

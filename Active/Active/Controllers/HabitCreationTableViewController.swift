@@ -127,6 +127,7 @@ class HabitCreationTableViewController: UITableViewController, HabitDaysSelectio
                     using: context,
                     user: user,
                     name: self.name!,
+                    color: HabitMO.Color.green, // TODO: Use a real enum value.
                     days: self.days!,
                     and: self.selectedNotificationFireTimes
                 )

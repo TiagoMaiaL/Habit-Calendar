@@ -9,7 +9,7 @@
         </fetchIndex>
     </entity>
     <entity name="Habit" representedClassName=".HabitMO" versionHashModifier="added index" syncable="YES" codeGenerationType="category">
-        <attribute name="color" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="color" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="created" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="id" attributeType="String" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>

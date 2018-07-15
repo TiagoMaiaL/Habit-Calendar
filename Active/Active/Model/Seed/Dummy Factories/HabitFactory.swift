@@ -53,9 +53,7 @@ struct HabitFactory: DummyFactory {
         habit.id = UUID().uuidString
         habit.created = Date()
         habit.name = names[Int.random(0..<names.count)]
-        // TODO: Make the color be a random value.
-        // Write the enum first.
-        habit.color = "Green"
+        habit.color = HabitMO.Color.green.rawValue
         
         // Declare a NotificationFactory's instance.
         let notificationFactory = NotificationFactory(context: context)
