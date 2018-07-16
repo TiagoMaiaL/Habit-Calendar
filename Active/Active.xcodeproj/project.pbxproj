@@ -35,6 +35,8 @@
 		4779588320D8B2E10080614F /* UserNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4779588220D8B2E10080614F /* UserNotificationManager.swift */; };
 		4779588520D8B38B0080614F /* NotificationStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4779588420D8B38B0080614F /* NotificationStorage.swift */; };
 		47D8308420F92553002D3A97 /* DetailsCalendarDayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D8308320F92553002D3A97 /* DetailsCalendarDayCell.swift */; };
+		47D8308620FCE820002D3A97 /* OffensiveMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D8308520FCE820002D3A97 /* OffensiveMO.swift */; };
+		47D8308820FCE82F002D3A97 /* DaysSequenceMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D8308720FCE82F002D3A97 /* DaysSequenceMO.swift */; };
 		47D8FC9E20DC13990094026B /* UserNotificationManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D8FC9D20DC13990094026B /* UserNotificationManagerTests.swift */; };
 		47E6C20B20EAF550003BDB4D /* HabitCreationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E6C20A20EAF550003BDB4D /* HabitCreationTableViewController.swift */; };
 		47E6C20D20EAF567003BDB4D /* HabitDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E6C20C20EAF567003BDB4D /* HabitDetailsViewController.swift */; };
@@ -103,6 +105,8 @@
 		4779588220D8B2E10080614F /* UserNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationManager.swift; sourceTree = "<group>"; };
 		4779588420D8B38B0080614F /* NotificationStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationStorage.swift; sourceTree = "<group>"; };
 		47D8308320F92553002D3A97 /* DetailsCalendarDayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsCalendarDayCell.swift; sourceTree = "<group>"; };
+		47D8308520FCE820002D3A97 /* OffensiveMO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffensiveMO.swift; sourceTree = "<group>"; };
+		47D8308720FCE82F002D3A97 /* DaysSequenceMO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaysSequenceMO.swift; sourceTree = "<group>"; };
 		47D8FC9D20DC13990094026B /* UserNotificationManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationManagerTests.swift; sourceTree = "<group>"; };
 		47E6C20A20EAF550003BDB4D /* HabitCreationTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitCreationTableViewController.swift; sourceTree = "<group>"; };
 		47E6C20C20EAF567003BDB4D /* HabitDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitDetailsViewController.swift; sourceTree = "<group>"; };
@@ -162,6 +166,8 @@
 				4713A1FF20C164E6008A13D2 /* HabitDayMO.swift */,
 				4713A20120C164FB008A13D2 /* DayMO.swift */,
 				4713A20320C16542008A13D2 /* NotificationMO.swift */,
+				47D8308520FCE820002D3A97 /* OffensiveMO.swift */,
+				47D8308720FCE82F002D3A97 /* DaysSequenceMO.swift */,
 				47E6C20E20EB1213003BDB4D /* Seed */,
 			);
 			path = Model;
@@ -557,7 +563,9 @@
 				4725D05B20C8A4BA00C3B63F /* HabitsTableViewController.swift in Sources */,
 				4725D06320CA14A600C3B63F /* HabitDayStorage.swift in Sources */,
 				4713A1FE20C16459008A13D2 /* HabitMO.swift in Sources */,
+				47D8308620FCE820002D3A97 /* OffensiveMO.swift in Sources */,
 				4779588520D8B38B0080614F /* NotificationStorage.swift in Sources */,
+				47D8308820FCE82F002D3A97 /* DaysSequenceMO.swift in Sources */,
 				47E6C20B20EAF550003BDB4D /* HabitCreationTableViewController.swift in Sources */,
 				4725D05D20C8A96200C3B63F /* HabitStorage.swift in Sources */,
 				47E6C21320EB12A2003BDB4D /* DayFactory.swift in Sources */,
