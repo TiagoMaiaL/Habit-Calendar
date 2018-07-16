@@ -23,7 +23,7 @@ class DayStorageTests: IntegrationTestCase {
     override func setUp() {
         super.setUp()
         
-        // Initialize dayStorage using the persistent container created for tests.
+        // Initialize a new DayStorage instance.
         dayStorage = DayStorage()
     }
     

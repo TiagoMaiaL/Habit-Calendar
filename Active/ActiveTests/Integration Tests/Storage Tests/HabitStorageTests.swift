@@ -160,7 +160,7 @@ class HabitStorageTests: IntegrationTestCase {
         // The sort descriptors should sort in both
         // the created or score properties.
         XCTAssertEqual(
-            2,
+            1,
             sortDescriptors.count,
             "The Habits should be sorted by the created and score properties."
         )
@@ -168,11 +168,6 @@ class HabitStorageTests: IntegrationTestCase {
             sortDescriptors[0].key,
             "created",
             "Should sort by the Habit entity's created property."
-        )
-        XCTAssertEqual(
-            sortDescriptors[1].key,
-            "score",
-            "Should sort by the Habit entity's score property."
         )
     }
     

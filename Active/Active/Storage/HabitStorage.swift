@@ -43,8 +43,7 @@ class HabitStorage {
         let request: NSFetchRequest<HabitMO> = HabitMO.fetchRequest()
         // The request should order the habits by the creation date and score.
         request.sortDescriptors = [
-            NSSortDescriptor(key: "created", ascending: false),
-            NSSortDescriptor(key: "score", ascending: true)
+            NSSortDescriptor(key: "created", ascending: false)
         ]
 
         let controller = NSFetchedResultsController(

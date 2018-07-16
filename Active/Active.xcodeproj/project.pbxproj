@@ -38,6 +38,7 @@
 		47D8308620FCE820002D3A97 /* OffensiveMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D8308520FCE820002D3A97 /* OffensiveMO.swift */; };
 		47D8308820FCE82F002D3A97 /* DaysSequenceMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D8308720FCE82F002D3A97 /* DaysSequenceMO.swift */; };
 		47D8308A20FCFDD6002D3A97 /* DaysSequenceStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D8308920FCFDD6002D3A97 /* DaysSequenceStorage.swift */; };
+		47D8308C20FD00E5002D3A97 /* DaysSequenceStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D8308B20FD00E5002D3A97 /* DaysSequenceStorageTests.swift */; };
 		47D8FC9E20DC13990094026B /* UserNotificationManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D8FC9D20DC13990094026B /* UserNotificationManagerTests.swift */; };
 		47E6C20B20EAF550003BDB4D /* HabitCreationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E6C20A20EAF550003BDB4D /* HabitCreationTableViewController.swift */; };
 		47E6C20D20EAF567003BDB4D /* HabitDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E6C20C20EAF567003BDB4D /* HabitDetailsViewController.swift */; };
@@ -109,6 +110,7 @@
 		47D8308520FCE820002D3A97 /* OffensiveMO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffensiveMO.swift; sourceTree = "<group>"; };
 		47D8308720FCE82F002D3A97 /* DaysSequenceMO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaysSequenceMO.swift; sourceTree = "<group>"; };
 		47D8308920FCFDD6002D3A97 /* DaysSequenceStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaysSequenceStorage.swift; sourceTree = "<group>"; };
+		47D8308B20FD00E5002D3A97 /* DaysSequenceStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaysSequenceStorageTests.swift; sourceTree = "<group>"; };
 		47D8FC9D20DC13990094026B /* UserNotificationManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationManagerTests.swift; sourceTree = "<group>"; };
 		47E6C20A20EAF550003BDB4D /* HabitCreationTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitCreationTableViewController.swift; sourceTree = "<group>"; };
 		47E6C20C20EAF567003BDB4D /* HabitDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitDetailsViewController.swift; sourceTree = "<group>"; };
@@ -245,6 +247,7 @@
 				474A209620D1B02700E0EBD0 /* HabitStorageTests.swift */,
 				4779587F20D8ADA90080614F /* NotificationStorageTests.swift */,
 				470230D320E28A56003A1F6E /* HabitDayStorageTests.swift */,
+				47D8308B20FD00E5002D3A97 /* DaysSequenceStorageTests.swift */,
 			);
 			path = "Storage Tests";
 			sourceTree = "<group>";
@@ -598,6 +601,7 @@
 				474A209520D00AFA00E0EBD0 /* DayStorageTests.swift in Sources */,
 				4779588020D8ADA90080614F /* NotificationStorageTests.swift in Sources */,
 				474F9C8A20CE3F670094C19C /* IntegrationTestCase.swift in Sources */,
+				47D8308C20FD00E5002D3A97 /* DaysSequenceStorageTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
