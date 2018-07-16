@@ -49,69 +49,36 @@ struct HabitFactory: DummyFactory {
         // Declare the habit entity.
         let habit = HabitMO(context: context)
         
-        // Associate it's properties (id, created, name, color).
+        // Associate its properties (id, created, name, color).
         habit.id = UUID().uuidString
         habit.created = Date()
         habit.name = names[Int.random(0..<names.count)]
         habit.color = HabitMO.Color.green.rawValue
         
-        // Declare a NotificationFactory's instance.
+        // Associate its relationships:
         let notificationFactory = NotificationFactory(context: context)
+        let sequenceFactory = DaysSequenceFactory(context: context)
+        let dummySequence = sequenceFactory.makeDummy()
+        dummySequence.habit = habit
         
-        // Declare a DayFactory's instance.
-        let dayFactory = DayFactory(context: context)
-        
-        // Declare a HabitDayFactory's instance.
-        let habitDayFactory = HabitDayFactory(context: context)
-        
-        // Associate it's relationships:
-        let randomRange = 0..<Int.random(2..<maxNumberOfDays)
-        for dayIndex in randomRange {
-            // Declare the current day's date.
-            if let dayDate = Date().byAddingDays(dayIndex) {
+        if let habitDays = dummySequence.days as? Set<HabitDayMO> {
+            for habitDay in habitDays {
+                habitDay.habit = habit
                 
-                // Declare the current Day entity:
-                var dummyDay: DayMO!
-                
-                // Try to fetch it from the current day date.
-                let request: NSFetchRequest<DayMO> = DayMO.fetchRequest()
-                let predicate = NSPredicate(format: "date >= %@ && date <= %@",
-                                            dayDate.getBeginningOfDay() as NSDate,
-                                            dayDate.getEndOfDay() as NSDate)
-                request.predicate = predicate
-                let results = try? context.fetch(request)
-                
-                if results?.isEmpty ?? true {
-                    // If none was found, create a new one with the date.
-                    dummyDay = dayFactory.makeDummy()
-                    dummyDay.date = dayDate
-                } else {
-                    dummyDay = results?.first!
-                }
-                
-                // Declare the current habit.
-                let dummyHabitDay = habitDayFactory.makeDummy()
-                // Declare the current notification.
-                let dummyNotification = notificationFactory.makeDummy()
-                
-                // Associate the date to the day and notification entities.
-                dummyHabitDay.day = dummyDay
-                dummyHabitDay.habit = habit
-                dummyNotification.fireDate = dayDate
-                
-                // Associate the notification and day to the habit entity.
-                habit.addToNotifications(
-                    dummyNotification
-                )
-                habit.addToDays(
-                    dummyHabitDay
-                )
+                let notification = notificationFactory.makeDummy()
+                notification.fireDate = habitDay.day!.date
+                notification.habit = habit
             }
         }
         
-        // TODO: Make assertions to check if the dummy has:
-        // the days.
-        // the notifications.
+        assert(
+            (habit.daysSequences?.count ?? 0) > 0,
+            "The generated dummy habit must have a sequence."
+        )
+        assert(
+            (habit.notifications?.count ?? 0) > 0,
+            "The generated dummy habit must have notifications."
+        )
         
         return habit
     }

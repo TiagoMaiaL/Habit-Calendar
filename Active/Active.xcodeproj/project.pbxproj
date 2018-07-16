@@ -39,6 +39,7 @@
 		47D8308820FCE82F002D3A97 /* DaysSequenceMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D8308720FCE82F002D3A97 /* DaysSequenceMO.swift */; };
 		47D8308A20FCFDD6002D3A97 /* DaysSequenceStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D8308920FCFDD6002D3A97 /* DaysSequenceStorage.swift */; };
 		47D8308C20FD00E5002D3A97 /* DaysSequenceStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D8308B20FD00E5002D3A97 /* DaysSequenceStorageTests.swift */; };
+		47D8308E20FD1490002D3A97 /* DaysSequenceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D8308D20FD1490002D3A97 /* DaysSequenceFactory.swift */; };
 		47D8FC9E20DC13990094026B /* UserNotificationManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D8FC9D20DC13990094026B /* UserNotificationManagerTests.swift */; };
 		47E6C20B20EAF550003BDB4D /* HabitCreationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E6C20A20EAF550003BDB4D /* HabitCreationTableViewController.swift */; };
 		47E6C20D20EAF567003BDB4D /* HabitDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E6C20C20EAF567003BDB4D /* HabitDetailsViewController.swift */; };
@@ -111,6 +112,7 @@
 		47D8308720FCE82F002D3A97 /* DaysSequenceMO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaysSequenceMO.swift; sourceTree = "<group>"; };
 		47D8308920FCFDD6002D3A97 /* DaysSequenceStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaysSequenceStorage.swift; sourceTree = "<group>"; };
 		47D8308B20FD00E5002D3A97 /* DaysSequenceStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaysSequenceStorageTests.swift; sourceTree = "<group>"; };
+		47D8308D20FD1490002D3A97 /* DaysSequenceFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaysSequenceFactory.swift; sourceTree = "<group>"; };
 		47D8FC9D20DC13990094026B /* UserNotificationManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationManagerTests.swift; sourceTree = "<group>"; };
 		47E6C20A20EAF550003BDB4D /* HabitCreationTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitCreationTableViewController.swift; sourceTree = "<group>"; };
 		47E6C20C20EAF567003BDB4D /* HabitDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitDetailsViewController.swift; sourceTree = "<group>"; };
@@ -290,6 +292,7 @@
 				475C96A520DEFEBC00212E1F /* HabitFactory.swift */,
 				475C96A720DF20A500212E1F /* NotificationFactory.swift */,
 				475C96A920DF235000212E1F /* HabitDayFactory.swift */,
+				47D8308D20FD1490002D3A97 /* DaysSequenceFactory.swift */,
 			);
 			path = "Dummy Factories";
 			sourceTree = "<group>";
@@ -558,6 +561,7 @@
 				4737312D20ED503B00895DD2 /* HabitNotificationsSelectionViewController.swift in Sources */,
 				4713A20220C164FB008A13D2 /* DayMO.swift in Sources */,
 				4779588320D8B2E10080614F /* UserNotificationManager.swift in Sources */,
+				47D8308E20FD1490002D3A97 /* DaysSequenceFactory.swift in Sources */,
 				47E6C21020EB1233003BDB4D /* SeedManager.swift in Sources */,
 				4713A20420C16542008A13D2 /* NotificationMO.swift in Sources */,
 				4737313C20F3D7AD00895DD2 /* CalendarDayCell.swift in Sources */,
