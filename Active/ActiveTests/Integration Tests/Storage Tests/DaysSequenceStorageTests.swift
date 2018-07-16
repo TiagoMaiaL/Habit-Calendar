@@ -126,49 +126,6 @@ class DaysSequenceStorageTests: IntegrationTestCase {
         }
     }
     
-    func testSequenceEditionByPassingNewDaysDates() {
-        // 1. Declare the dummySequence to be editted,
-        // and declare the new dates.
-        let dummySequence = factories.daysSequence.makeDummy()
-        let editionDates = [
-            Date().getBeginningOfDay(),
-            Date().byAddingDays(1)!.getBeginningOfDay()
-        ]
-        
-        // 2. Edit the sequence by passing the dates to be changed.
-        _ = sequenceStorage.edit(
-            dummySequence,
-            in: context,
-            with: editionDates
-        )
-        
-        // 3. Assert the sequence now has only two days with the expected
-        // edition dates.
-        XCTAssertEqual(
-            dummySequence.days?.count,
-            editionDates.count,
-            "The editted sequence should have the expected count of days."
-        )
-        
-        guard let habitDays = dummySequence.days as? Set<HabitDayMO> else {
-            XCTFail("The sequence should have associated days with it.")
-            return
-        }
-        
-        for habitDay in habitDays {
-            XCTAssertTrue(
-                editionDates.map { $0.description }.contains(
-                    habitDay.day?.date?.description ?? ""
-                ),
-                "The editted sequence should have valid days with dates among the edition ones."
-            )
-        }
-    }
-    
-    func testInvalidEditionOfPastSequence() {
-        XCTFail("Not Implemented.")
-    }
-    
     func testSequenceDeletion() {
         // 1. Declare a dummy sequence.
         let dummySequence = factories.daysSequence.makeDummy()

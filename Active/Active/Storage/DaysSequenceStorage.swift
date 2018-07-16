@@ -66,26 +66,6 @@ class DaysSequenceStorage {
         return sequence
     }
     
-    /// Edits the provided entity by adding and replacing the new provided
-    /// days' dates.
-    /// - Note: Editting a sequence is only allowed when the sequence's days are
-    ///         still being currently tracked (the days are in the present).
-    ///         If the days have already passed (are in the past),
-    ///         the edition isn't allowed.
-    /// - Parameters:
-    ///     - sequence: The sequence to be editted.
-    ///     - context: The context to which the entity is updated.
-    ///     - daysDates: The days' dates to be appended to the sequence.
-    /// - Returns: The editted sequence entity.
-    func edit(
-        _ sequence: DaysSequenceMO,
-        in context: NSManagedObjectContext,
-        with daysDates: [Date]
-    ) -> DaysSequenceMO {
-        // TODO: Configure the sequence.
-        return sequence
-    }
-    
     /// Deletes the provided entity from the given context.
     /// - Parameters:
     ///     - sequence: The sequence to be deleted.
