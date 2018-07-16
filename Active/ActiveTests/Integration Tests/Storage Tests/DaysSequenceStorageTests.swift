@@ -140,13 +140,17 @@ class DaysSequenceStorageTests: IntegrationTestCase {
     }
     
     func testSequenceDeletion() {
-        XCTFail("Not Implemented.")
-        
         // 1. Declare a dummy sequence.
+        let dummySequence = factories.daysSequence.makeDummy()
         
         // 2. Delete it using the storage.
+        sequenceStorage.delete(dummySequence, from: context)
         
         // 3. Assert it was deleted.
+        XCTAssertTrue(
+            dummySequence.isDeleted,
+            "The dummy sequence should be marked as deleted."
+        )
     }
     
 }

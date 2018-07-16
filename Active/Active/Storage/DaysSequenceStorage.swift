@@ -87,8 +87,13 @@ class DaysSequenceStorage {
     }
     
     /// Deletes the provided entity from the given context.
-    /// - Parameter sequence: The sequence to be deleted.
-    func delete(_ sequence: DaysSequenceMO) {
-        // TODO: Delete the sequence.
+    /// - Parameters:
+    ///     - sequence: The sequence to be deleted.
+    ///     - context: The context in which the deletion takes place.
+    func delete(
+        _ sequence: DaysSequenceMO,
+        from context: NSManagedObjectContext
+    ) {
+        context.delete(sequence)
     }
 }

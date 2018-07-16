@@ -29,7 +29,8 @@ class IntegrationTestCase: XCTestCase {
                     habit: HabitFactory,
                     notification: NotificationFactory,
                     day: DayFactory,
-                    habitDay: HabitDayFactory)!
+                    habitDay: HabitDayFactory,
+                    daysSequence: DaysSequenceFactory)!
     
     // MARK: setup/tearDown
     
@@ -45,7 +46,8 @@ class IntegrationTestCase: XCTestCase {
             habit: HabitFactory(context: context),
             notification: NotificationFactory(context: context),
             day: DayFactory(context: context),
-            habitDay: HabitDayFactory(context: context)
+            habitDay: HabitDayFactory(context: context),
+            daysSequence: DaysSequenceFactory(context: context)
         )
     }
     
