@@ -11,6 +11,17 @@ import CoreData
 /// Class in charge of managing the DaysSequenceMO entities.
 class DaysSequenceStorage {
     
+    // MARK: Properties
+    
+    /// The habitDayStorage used to create the days.
+    private let habitDayStorage: HabitDayStorage
+    
+    // MARK: Initializers
+    
+    init(habitDayStorage: HabitDayStorage) {
+        self.habitDayStorage = habitDayStorage
+    }
+    
     // MARK: Imperatives
     
     /// Creates a sequence entity by using the provided days' dates and the
@@ -25,8 +36,33 @@ class DaysSequenceStorage {
         daysDates: [Date],
         and habit: HabitMO
     ) -> DaysSequenceMO {
+        assert(
+            daysDates.count > 1,
+            "The provided days dates need to have two or more dates."
+        )
+        
+        // TODO: Order the passed days dates.
+        
         let sequence = DaysSequenceMO(context: context)
-        // TODO: Configure the sequence.
+        
+        // Configure its main properties:
+        sequence.id = UUID().uuidString
+        sequence.createdAt = Date()
+        sequence.fromDate = daysDates.first!
+        sequence.toDate = daysDates.last!
+        
+        // Associate its habit entity.
+        sequence.habit = habit
+        
+        // Configure its days.
+        // Create the days using the HabitDayStorage.
+        let habitDays = habitDayStorage.createDays(
+            using: context,
+            dates: daysDates,
+            and: habit
+        )
+        sequence.addToDays(Set<HabitDayMO>(habitDays) as NSSet)
+        
         return sequence
     }
     

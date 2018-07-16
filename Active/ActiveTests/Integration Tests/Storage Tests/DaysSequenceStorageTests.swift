@@ -23,7 +23,11 @@ class DaysSequenceStorageTests: IntegrationTestCase {
         super.setUp()
         
         // Initialize a new DaysSequenceStorage instance.
-        sequenceStorage = DaysSequenceStorage()
+        sequenceStorage = DaysSequenceStorage(
+            habitDayStorage: HabitDayStorage(
+                calendarDayStorage: DayStorage()
+            )
+        )
     }
     
     override func tearDown() {
@@ -59,7 +63,7 @@ class DaysSequenceStorageTests: IntegrationTestCase {
         
         // 2. Declare the days dates. They are generated until a random amount.
         let dates = (0..<Int.random(2..<50)).compactMap {
-            Date().byAddingDays($0)
+            Date().byAddingDays($0)?.getBeginningOfDay()
         }
         
         // 3. Create a new sequence for the habit with the generated dates.
@@ -70,7 +74,33 @@ class DaysSequenceStorageTests: IntegrationTestCase {
         )
         
         // 4. Make assertions on the newly created sequence:
-        // 4.1. Check if the sequence's habit is the
+        // 4.1. Assert on its main properties.
+        XCTAssertNotNil(
+            createdSequence.id,
+            "The created sequence doesn't have an id."
+        )
+        XCTAssertNotNil(
+            createdSequence.createdAt,
+            "The created sequence doesn't have a createdAt property."
+        )
+        
+        // The fromDate should correspond to the first day
+        // in the previously generated dates.
+        XCTAssertEqual(
+            createdSequence.fromDate,
+            dates.first!,
+            "The created sequence doesn't have the right fromDate."
+        )
+        
+        // The toDate should correspond to the first day
+        // in the previously generated dates.
+        XCTAssertEqual(
+            createdSequence.toDate,
+            dates.last!,
+            "The created sequence doesn't have the right toDate."
+        )
+        
+        // 4.2. Check if the sequence's habit is the
         // expected dummy one.
         XCTAssertEqual(
             createdSequence.habit,
@@ -78,23 +108,23 @@ class DaysSequenceStorageTests: IntegrationTestCase {
             "The created sequence should have the correct habit (the dummy one) associated with it."
         )
         
-        // 4.2. Check the amount of days.
+        // 4.3. Check the amount of days.
         XCTAssertEqual(
             createdSequence.days?.count,
             dates.count,
             "The created days sequence has the wrong amount of dates."
         )
-        // 4.3. Check if the sequence's days dates are within the passed ones.
+        // 4.4. Check if the sequence's days dates are within the passed ones.
         guard let createdHabitDays = createdSequence.days as? Set<HabitDayMO> else {
             XCTFail("The created days sequence doesn't have the correct day entities.")
             return
         }
-        // 4.3.1. For each generated habit day, check if the entity has a date
+        // 4.4.1. For each generated habit day, check if the entity has a date
         // within the specified ones.
         for habitDay in createdHabitDays {
             XCTAssertTrue(
                 dates.map { $0.description }.contains(
-                    habitDay.day?.date?.description ?? ""
+                    habitDay.day?.date?.getBeginningOfDay().description ?? ""
                 ),
                 "The sequence's day's date is not within the expected ones."
             )
