@@ -29,7 +29,7 @@ struct DaysSequenceFactory: DummyFactory {
     /// - Returns: The generated HabitDay dummy as a NSManagedObject.
     func makeDummy() -> DaysSequenceMO {
         // Declare the dates used to create the sequence.
-        let dates = (1..<Int.random(2..<50)).compactMap {
+        let dates = (0..<Int.random(1..<50)).compactMap {
             Date().byAddingDays($0)?.getBeginningOfDay()
         }
         
