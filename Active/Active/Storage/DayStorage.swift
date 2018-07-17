@@ -24,6 +24,8 @@ class DayStorage {
     /// Creates and persists a calendar day instance.
     /// - Parameter context: the context used to write the entity to.
     /// - Parameter date: the date associated with the day entity.
+    /// - Note: The new entity's date is always at the beginning
+    //          of the day specified in the required date.
     /// - Throws: An error when a Day with the same date already exists.
     /// - Returns: the created calendar day.
     func create(using context: NSManagedObjectContext, and date: Date) throws -> DayMO {
@@ -35,7 +37,7 @@ class DayStorage {
         
         let day = DayMO(context: context)
         day.id = UUID().uuidString
-        day.date = date
+        day.date = date.getBeginningOfDay()
         return day
     }
     

@@ -82,7 +82,7 @@ class HabitDayStorageTests: IntegrationTestCase {
         )
         XCTAssertEqual(
             habitDay.day!.date!.description,
-            date.description,
+            date.getBeginningOfDay().description,
             "The habitDay's Day doesn't have the expected date value."
         )
     }
@@ -134,8 +134,8 @@ class HabitDayStorageTests: IntegrationTestCase {
                 "The HabitDay doesn't have a valid Day entity."
             )
             XCTAssertTrue(
-                days.map { $0.description }.contains(habitDay.day!.date!.description),
-                "The HabitDay's entity isn't correct, not inside the expected ones."
+                days.map { $0.getBeginningOfDay().description }.contains(habitDay.day!.date!.description),
+                "The HabitDay's entity isn't correct, its date isn't inside the expected ones."
             )
         }
     }

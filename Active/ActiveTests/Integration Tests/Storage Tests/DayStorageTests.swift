@@ -43,13 +43,15 @@ class DayStorageTests: IntegrationTestCase {
         let day = try? dayStorage.create(using: context, and: dayDate)
         
         // Assert the day isn't nil and has the correct date.
+        // The date stored by the new DayMO is always at the
+        // beginning of the passed one.
         XCTAssertNotNil(
             day,
             "The created day shouldn't be nil."
         )
         XCTAssertEqual(
             day!.date,
-            dayDate,
+            dayDate.getBeginningOfDay(),
             "The created Day entity should have the correct date property."
         )
         XCTAssertNotNil(

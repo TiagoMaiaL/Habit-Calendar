@@ -132,7 +132,9 @@ class HabitStorageTests: IntegrationTestCase {
                 "The habitDay's Day entity should have a valid date property."
             )
             XCTAssert(
-                days.contains(habitDay.day!.date!),
+                days.map{
+                    $0.getBeginningOfDay().description
+                }.contains(habitDay.day!.date!.description),
                 "The Day's date should have a valid date (matching with the provided ones in the Habit creation)."
             )
         }
@@ -251,7 +253,7 @@ class HabitStorageTests: IntegrationTestCase {
         for habitDay in habitDays {
             // 4.2.1. Check if the day's date is in the expected dates.
             XCTAssertTrue(
-                daysDates.map { $0.description }.contains(
+                daysDates.map { $0.getBeginningOfDay().description }.contains(
                     habitDay.day?.date?.description ?? ""
                 ),
                 "The new added day should have a correct day among the specified ones."
@@ -308,7 +310,7 @@ class HabitStorageTests: IntegrationTestCase {
         )
         for pastHabitDay in pastHabitDays {
             XCTAssertTrue(
-                pastDays.map({ $0.description }).contains(
+                pastDays.map({ $0.getBeginningOfDay().description }).contains(
                     pastHabitDay.day?.date?.description ?? ""
                 ),
                 "The past day's date should be contained within the expected ones."
