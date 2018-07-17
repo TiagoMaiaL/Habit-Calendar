@@ -14,6 +14,17 @@ class DaysSequenceMO: NSManagedObject {
     
     // MARK: Imperatives
     
+    /// Returns the sequence's current day (associated with today's date).
+    /// - Returns: The habit day entity representing today's date.
+    func getCurrentDay() -> HabitDayMO? {
+        let todayPredicate = NSPredicate(
+            format: "day.date >= %@ and day.date <= %@",
+            Date().getBeginningOfDay() as NSDate,
+            Date().getEndOfDay() as NSDate
+        )
+        return days?.filtered(using: todayPredicate).first as? HabitDayMO
+    }
+    
     /// Returns the executed days from the sequence.
     func getExecutedDays() -> Set<HabitDayMO>? {
         let executedPredicate = NSPredicate(format: "wasExecuted = true")

@@ -82,11 +82,33 @@ class DaysSequenceTests: IntegrationTestCase {
     }
     
     func testGettingTheCurrentDay() {
-        XCTMarkNotImplemented()
+        // 1. Create a new dummy sequence.
+        let dummySequence = factories.daysSequence.makeDummy()
+        
+        // 2. Get its current day and make assertions on its dates.
+        guard let currentDay = dummySequence.getCurrentDay() else {
+            XCTFail("Couldn't get the sequence's current day.")
+            return
+        }
+        
+        XCTAssertEqual(
+            Date().getBeginningOfDay().description,
+            currentDay.day!.date!.description,
+            "The sequence's current day doesn't have the expected date."
+        )
     }
     
     func testGettingCurrentDayShouldBeNil() {
-        XCTMarkNotImplemented()
+        // 1. Create an empty dummy sequence.
+        let emptyDummySequence = DaysSequenceMO(
+            context: context
+        )
+        
+        // 2. Assert its current day is nil.
+        XCTAssertNil(
+            emptyDummySequence.getCurrentDay(),
+            "The empty sequence shouldn't return the current day."
+        )
     }
     
     func testMarkingCurrentDayAsExecuted() {
