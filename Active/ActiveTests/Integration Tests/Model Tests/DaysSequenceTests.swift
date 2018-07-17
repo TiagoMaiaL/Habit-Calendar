@@ -98,7 +98,7 @@ class DaysSequenceTests: IntegrationTestCase {
         )
     }
     
-    func testGettingCurrentDayShouldBeNil() {
+    func testGettingEmptySequenceCurrentDayShouldBeNil() {
         // 1. Create an empty dummy sequence.
         let emptyDummySequence = DaysSequenceMO(
             context: context
@@ -108,6 +108,24 @@ class DaysSequenceTests: IntegrationTestCase {
         XCTAssertNil(
             emptyDummySequence.getCurrentDay(),
             "The empty sequence shouldn't return the current day."
+        )
+    }
+    
+    func testGettingSequenceCurrentDayShouldBeNil() {
+        // 1. Create a dummy sequence.
+        let dummySequence = factories.daysSequence.makeDummy()
+        // 1.1. Clear it by removing its current day.
+        guard let currentDay = dummySequence.getCurrentDay() else {
+            XCTFail("Couldn't get the sequence's current day.")
+            return
+        }
+        dummySequence.removeFromDays(currentDay)
+        context.delete(currentDay)
+        
+        // 2. Assert its current day now is nil.
+        XCTAssertNil(
+            dummySequence.getCurrentDay(),
+            "The sequence shouldn't return its current day."
         )
     }
     
