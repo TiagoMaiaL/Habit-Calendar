@@ -41,15 +41,13 @@ class DaysSequenceStorage {
             "The provided days dates need to have two or more dates."
         )
         
-        // TODO: Order the passed days dates.
-        
         let sequence = DaysSequenceMO(context: context)
         
         // Configure its main properties:
         sequence.id = UUID().uuidString
         sequence.createdAt = Date()
-        sequence.fromDate = daysDates.first!
-        sequence.toDate = daysDates.last!
+        sequence.fromDate = daysDates.sorted().first!
+        sequence.toDate = daysDates.sorted().last!
         
         // Associate its habit entity.
         sequence.habit = habit
