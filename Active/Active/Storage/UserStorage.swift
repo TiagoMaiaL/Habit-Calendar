@@ -37,7 +37,7 @@ class UserStorage {
     func create(using context: NSManagedObjectContext) -> UserMO {
         let user = UserMO(context: context)
         user.id = UUID().uuidString
-        user.created = Date()
+        user.createdAt = Date()
         return user
     }
     

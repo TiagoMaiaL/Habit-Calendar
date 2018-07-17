@@ -39,7 +39,7 @@ class UserStorageTests: IntegrationTestCase {
     func testUserCreation() {
         let user = userStorage.create(using: context)
         XCTAssertNotNil(
-            user.created,
+            user.createdAt,
             "The user created property should be declared."
         )
         XCTAssertNotNil(

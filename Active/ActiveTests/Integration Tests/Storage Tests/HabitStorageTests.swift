@@ -101,7 +101,7 @@ class HabitStorageTests: IntegrationTestCase {
         )
         // Check the habit's created property.
         XCTAssertNotNil(
-            joggingHabit.created,
+            joggingHabit.createdAt,
             "Created habit should have the creation date."
         )
         
@@ -168,7 +168,7 @@ class HabitStorageTests: IntegrationTestCase {
         )
         XCTAssertEqual(
             sortDescriptors[0].key,
-            "created",
+            "createdAt",
             "Should sort by the Habit entity's created property."
         )
     }

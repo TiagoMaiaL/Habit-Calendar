@@ -43,7 +43,7 @@ class HabitStorage {
         let request: NSFetchRequest<HabitMO> = HabitMO.fetchRequest()
         // The request should order the habits by the creation date and score.
         request.sortDescriptors = [
-            NSSortDescriptor(key: "created", ascending: false)
+            NSSortDescriptor(key: "createdAt", ascending: false)
         ]
 
         let controller = NSFetchedResultsController(
@@ -73,7 +73,7 @@ class HabitStorage {
         let habit = HabitMO(context: context)
         habit.id = UUID().uuidString
         habit.name = name
-        habit.created = Date()
+        habit.createdAt = Date()
         habit.color = color.rawValue
         
         // Associate its user.

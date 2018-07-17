@@ -30,7 +30,7 @@ struct UserFactory: DummyFactory {
         
         // Configure it's properties.
         user.id = UUID().uuidString
-        user.created = Date()
+        user.createdAt = Date()
         
         return user
     }

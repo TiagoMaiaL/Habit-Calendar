@@ -203,7 +203,7 @@ class HabitTests: IntegrationTestCase {
         let habit = HabitMO(context: context)
         // Associate it's properties (id, created, name, color).
         habit.id = UUID().uuidString
-        habit.created = Date()
+        habit.createdAt = Date()
         habit.name = "Random habit name"
         habit.color = HabitMO.Color.blue.rawValue
         

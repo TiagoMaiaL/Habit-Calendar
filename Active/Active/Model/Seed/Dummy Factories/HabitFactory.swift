@@ -51,7 +51,7 @@ struct HabitFactory: DummyFactory {
         
         // Associate its properties (id, created, name, color).
         habit.id = UUID().uuidString
-        habit.created = Date()
+        habit.createdAt = Date()
         habit.name = names[Int.random(0..<names.count)]
         habit.color = HabitMO.Color.green.rawValue
         
