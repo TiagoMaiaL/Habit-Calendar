@@ -34,8 +34,7 @@ class DaysSequenceTests: IntegrationTestCase {
         let executedCount = habitDays.count / 2
         
         for i in 0..<executedCount {
-            let currentHabitDay = habitDays[i]
-            currentHabitDay.markAsExecuted()
+            habitDays[i].markAsExecuted()
         }
         
         // 3. Make assertions on it:
@@ -48,7 +47,23 @@ class DaysSequenceTests: IntegrationTestCase {
     }
     
     func testGettingSequenceMissedDays() {
-        XCTFail("Not Implemented.")
+        // 1. Declare a dummy sequence.
+        let sequenceDummy = factories.daysSequence.makeDummy()
+        
+        // 2. Mark some days as executed.
+        let habitDays = Array(sequenceDummy.days as! Set<HabitDayMO>)
+        let executedCount = habitDays.count / 3
+        
+        for i in 0..<executedCount {
+            habitDays[i].markAsExecuted()
+        }
+        
+        // 3. Fetch the missed days.
+        XCTAssertEqual(
+            habitDays.count - executedCount,
+            sequenceDummy.getMissedDays()?.count,
+            "The sequence's missed days don't have the expected count."
+        )
     }
     
     func testGettingSequenceProgressInfo() {

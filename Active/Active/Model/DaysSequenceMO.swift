@@ -19,4 +19,10 @@ class DaysSequenceMO: NSManagedObject {
         let executedPredicate = NSPredicate(format: "wasExecuted = true")
         return days?.filtered(using: executedPredicate) as? Set<HabitDayMO>
     }
+    
+    /// Returns the missed days from the sequence.
+    func getMissedDays() -> Set<HabitDayMO>? {
+        let executedPredicate = NSPredicate(format: "wasExecuted = false")
+        return days?.filtered(using: executedPredicate) as? Set<HabitDayMO>
+    }
 }
