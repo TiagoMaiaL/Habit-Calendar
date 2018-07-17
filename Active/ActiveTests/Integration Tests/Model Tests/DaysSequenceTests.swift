@@ -130,7 +130,23 @@ class DaysSequenceTests: IntegrationTestCase {
     }
     
     func testMarkingCurrentDayAsExecuted() {
-        XCTMarkNotImplemented()
+        // 1. Create a dummy sequence.
+        let dummySequence = factories.daysSequence.makeDummy()
+        
+        // 2. Mark its current day as executed.
+        dummySequence.markCurrentDayAsExecuted()
+        
+        // 3. Fetch the current day and assert it was
+        // marked as executed.
+        guard let currentDay = dummySequence.getCurrentDay() else {
+            XCTFail("Couldn't retrieve the sequence's current day.")
+            return
+        }
+        
+        XCTAssertTrue(
+            currentDay.wasExecuted,
+            "The current day wasn't marked as executed."
+        )
     }
     
     func testGettingCurrentOffensiveShouldReturnNil() {
