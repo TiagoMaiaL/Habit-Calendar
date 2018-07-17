@@ -25,4 +25,11 @@ class DaysSequenceMO: NSManagedObject {
         let executedPredicate = NSPredicate(format: "wasExecuted = false")
         return days?.filtered(using: executedPredicate) as? Set<HabitDayMO>
     }
+    
+    /// Returns the sequence's completion progress.
+    /// - Returns: A tuple containing the number of executed days and
+    ///            the total in the sequence.
+    func getCompletionProgress() -> (executed: Int, total: Int) {
+        return (getExecutedDays()?.count ?? 0, days?.count ?? 0)
+    }
 }
