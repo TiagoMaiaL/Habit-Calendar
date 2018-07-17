@@ -45,7 +45,8 @@ class UserNotificationManagerTests: IntegrationTestCase {
     
     // MARK: Tests
     
-//    func testManagerAuthorizationRequestGranted() {
+    func testManagerAuthorizationRequestGranted() {
+        XCTMarkNotImplemented()
 //        // Declare the authorization request expectation.
 //        let authorizationExpectation = XCTestExpectation(description: "Ask the user to authorize the usage of local notifications.")
 //
@@ -63,9 +64,10 @@ class UserNotificationManagerTests: IntegrationTestCase {
 //        }
 //
 //        wait(for: [authorizationExpectation], timeout: 0.1)
-//    }
+    }
 //
-//    func testManagerAuthorizationRequestNotGranted() {
+    func testManagerAuthorizationRequestNotGranted() {
+        XCTMarkNotImplemented()
 //        // Declare the authrorization request expectation.
 //        let authorizationExpectation = XCTestExpectation(description: "Ask the user to authorize the usage of local notifications.")
 //
@@ -84,10 +86,10 @@ class UserNotificationManagerTests: IntegrationTestCase {
 //
 //        // Wait for the expectation.
 //        wait(for: [authorizationExpectation], timeout: 0.1)
-//    }
+    }
 //
-//    func testNotificationSchedule() {
-//        XCTFail("Not implemented.") // TODO: Fix this test.
+    func testNotificationSchedule() {
+        XCTMarkNotImplemented()
 //        return
 //
 //        // Schedule a notification.
@@ -121,10 +123,10 @@ class UserNotificationManagerTests: IntegrationTestCase {
 //        }
 //
 //        wait(for: [notificationExpectation], timeout: 0.1)
-//    }
+    }
 //
-//    func testScheduledNotificationFetch() {
-//        XCTFail("Not implemented.") // TODO: Fix this test.
+    func testScheduledNotificationFetch() {
+        XCTMarkNotImplemented()
 //
 //        return
 //
@@ -169,14 +171,12 @@ class UserNotificationManagerTests: IntegrationTestCase {
 //        }
 //
 //        wait(for: [notificationFetchExpectation], timeout: 0.2)
-//    }
+    }
 //
 //    // TODO: Test scheduling with errors.
 //
-//    func testScheduledNotificationRemoval() {
-//        XCTFail("Not implemented.")
-//        return
-//
+    func testScheduledNotificationRemoval() {
+        XCTMarkNotImplemented()
 //        // Remove an scheduled notification.
 //
 //        let notificationRemovalExpectation = XCTestExpectation(description: "Delete a scheduled UserNotificationRequest.")
@@ -217,14 +217,15 @@ class UserNotificationManagerTests: IntegrationTestCase {
 //        }
 //
 //        wait(for: [notificationRemovalExpectation], timeout: 0.1)
-//    }
-//}
+    }
+}
 //
-//extension UserNotificationManagerTests {
+extension UserNotificationManagerTests {
 //
 //    // MARK: Tests
 //
-//    func testContentAndTriggerFactory() {
+    func testContentAndTriggerFactory() {
+        XCTMarkNotImplemented()
 //        // Test the factories for the user notification's trigger and content
 //        // options when a Notification entity is passed and the authorization
 //        // was fully granted by the user.
@@ -271,9 +272,10 @@ class UserNotificationManagerTests: IntegrationTestCase {
 //            dummyNotification.getFireDate().description,
 //            "The user notification trigger should have the correct next trigger date."
 //        )
-//    }
+    }
 //
-//    func testSchedulingUserNotificationPassingEntity() {
+    func testSchedulingUserNotificationPassingEntity() {
+        XCTMarkNotImplemented()
 //        // Schedule an user notification by passing a Notification entity.
 //
 //        let expectation = XCTestExpectation(description: "Schedule an user notification by passing a Notification core data entity.")
@@ -298,9 +300,10 @@ class UserNotificationManagerTests: IntegrationTestCase {
 //        }
 //
 //        wait(for: [expectation], timeout: 0.1)
-//    }
+    }
 //
-//    func testUserNotificationFetchByPassingEntity() {
+    func testUserNotificationFetchByPassingEntity() {
+        XCTMarkNotImplemented()
 //        // Test the retrieval of an scheduled user notification by passing a
 //        // Notification entity.
 //
@@ -325,9 +328,10 @@ class UserNotificationManagerTests: IntegrationTestCase {
 //        }
 //
 //        wait(for: [expectation], timeout: 0.1)
-//    }
+    }
 //
-//    func testUserNotificationRemovalPassingEntities() {
+    func testUserNotificationRemovalPassingEntities() {
+        XCTMarkNotImplemented()
 //        // Remove a given user notification by passing the Notifications
 //        // entity.
 //        let expectation = XCTestExpectation(description: "Remove a schedule user notification request by passing a Notification entity.")
@@ -352,5 +356,5 @@ class UserNotificationManagerTests: IntegrationTestCase {
 //        }
 //
 //        wait(for: [expectation], timeout: 0.1)
-//    }
+    }
 }

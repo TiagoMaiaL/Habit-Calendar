@@ -29,6 +29,7 @@
 		474F9C8620CC7E180094C19C /* Date+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474F9C8520CC7E180094C19C /* Date+Utils.swift */; };
 		474F9C8A20CE3F670094C19C /* IntegrationTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474F9C8920CE3F670094C19C /* IntegrationTestCase.swift */; };
 		474F9C8D20CEE2840094C19C /* UserStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474F9C8C20CEE2840094C19C /* UserStorageTests.swift */; };
+		4752FDC120FE623900116F1A /* XCTUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4752FDC020FE623900116F1A /* XCTUtils.swift */; };
 		475C96AD20E1216D00212E1F /* HabitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475C96AC20E1216D00212E1F /* HabitTests.swift */; };
 		4761DFD320DE692A003F772A /* UNUserNotificationCenterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4761DFD220DE692A003F772A /* UNUserNotificationCenterMock.swift */; };
 		4779588020D8ADA90080614F /* NotificationStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4779587F20D8ADA90080614F /* NotificationStorageTests.swift */; };
@@ -97,6 +98,7 @@
 		474F9C8520CC7E180094C19C /* Date+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Utils.swift"; sourceTree = "<group>"; };
 		474F9C8920CE3F670094C19C /* IntegrationTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegrationTestCase.swift; sourceTree = "<group>"; };
 		474F9C8C20CEE2840094C19C /* UserStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStorageTests.swift; sourceTree = "<group>"; };
+		4752FDC020FE623900116F1A /* XCTUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCTUtils.swift; sourceTree = "<group>"; };
 		475C96A120DEFB4C00212E1F /* DummyFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyFactory.swift; sourceTree = "<group>"; };
 		475C96A320DEFC9500212E1F /* DayFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayFactory.swift; sourceTree = "<group>"; };
 		475C96A520DEFEBC00212E1F /* HabitFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitFactory.swift; sourceTree = "<group>"; };
@@ -366,6 +368,7 @@
 				4761DFD020DE68B8003F772A /* Integration Tests */,
 				474A209820D1B4E400E0EBD0 /* Extension Tests */,
 				47F6360920BB920D00AC4555 /* Info.plist */,
+				4752FDC020FE623900116F1A /* XCTUtils.swift */,
 			);
 			path = ActiveTests;
 			sourceTree = "<group>";
@@ -604,6 +607,7 @@
 				474A209C20D1B51300E0EBD0 /* DateUtilsTests.swift in Sources */,
 				47D8309020FD6288002D3A97 /* DaysSequenceTests.swift in Sources */,
 				470230D420E28A56003A1F6E /* HabitDayStorageTests.swift in Sources */,
+				4752FDC120FE623900116F1A /* XCTUtils.swift in Sources */,
 				474A209720D1B02700E0EBD0 /* HabitStorageTests.swift in Sources */,
 				47D8FC9E20DC13990094026B /* UserNotificationManagerTests.swift in Sources */,
 				474A209520D00AFA00E0EBD0 /* DayStorageTests.swift in Sources */,

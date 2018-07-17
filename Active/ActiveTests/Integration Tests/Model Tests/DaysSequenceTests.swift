@@ -13,16 +13,6 @@ import XCTest
 /// Class in charge of testing the DaysSequencesMO methods.
 class DaysSequenceTests: IntegrationTestCase {
     
-    // MARK: setup/tearDown
-    
-    override func setUp() {
-        super.setUp()
-    }
-    
-    override func tearDown() {
-        super.tearDown()
-    }
-    
     // MARK: Tests
     
     func testGettingSequenceExecutedDays() {
@@ -89,5 +79,33 @@ class DaysSequenceTests: IntegrationTestCase {
             sequenceDummy.getCompletionProgress().total,
             "The sequence's total days from the completion progress don't have the expected count."
         )
+    }
+    
+    func testGettingTheCurrentDay() {
+        XCTMarkNotImplemented()
+    }
+    
+    func testGettingCurrentDayShouldBeNil() {
+        XCTMarkNotImplemented()
+    }
+    
+    func testMarkingCurrentDayAsExecuted() {
+        XCTMarkNotImplemented()
+    }
+    
+    func testGettingCurrentOffensiveShouldReturnNil() {
+        XCTMarkNotImplemented()
+    }
+    
+    func testMarkingCurrentDayAsExecutedShouldCreateNewOffensive() {
+        XCTMarkNotImplemented()
+    }
+    
+    func testMarkingCurrentDayAsExecutedContinuesPreviousOffensive() {
+        XCTMarkNotImplemented()
+    }
+    
+    func testBreakingPreviousOffensiveShouldCreateNewOffensive() {
+        XCTMarkNotImplemented()
     }
 }

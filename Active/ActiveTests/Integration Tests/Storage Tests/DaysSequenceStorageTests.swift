@@ -124,6 +124,12 @@ class DaysSequenceStorageTests: IntegrationTestCase {
                 "The sequence's day's date is not within the expected ones."
             )
         }
+        
+        // 4.5. Assert the sequence comes clean of offensives.
+        XCTAssertTrue(
+            (createdSequence.offensives?.count ?? 0) == 0,
+            "The created sequence shouldn't have any offensives, it should be clean."
+        )
     }
     
     func testSequenceDeletion() {
