@@ -82,7 +82,8 @@ class DaysSequenceMO: NSManagedObject {
         // Try fetching the current offensive. If we can get it,
         // update it.
         if let currentOffensive = getCurrentOffensive() {
-            // TODO:
+            currentOffensive.toDate = Date().getBeginningOfDay()
+            currentOffensive.updatedAt = Date()
         } else {
             // If there isn't a current offensive, add a new one to the
             // current sequence and habit.
