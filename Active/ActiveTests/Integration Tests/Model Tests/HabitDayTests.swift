@@ -29,6 +29,10 @@ class HabitDayTests: IntegrationTestCase {
             dummyHabitDay.wasExecuted,
             "The habit day should be marked as executed."
         )
+        XCTAssertNotNil(
+            dummyHabitDay.updatedAt,
+            "The habit day should have an updatedAt date."
+        )
     }
 
     func testEditionToMarkHabitAsNotExecutedAtTheDay() {
@@ -51,6 +55,10 @@ class HabitDayTests: IntegrationTestCase {
         XCTAssertFalse(
             dummyHabitDay.wasExecuted,
             "The habit day shouldn't be marked as executed."
+        )
+        XCTAssertNotNil(
+            dummyHabitDay.updatedAt,
+            "The habit day should have an updatedAt date."
         )
     }
 }

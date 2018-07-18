@@ -148,7 +148,7 @@ class HabitTests: IntegrationTestCase {
     }
     
     func testDescriptionText() {
-        XCTFail("Not implemented.")
+        XCTMarkNotImplemented()
     }
     
     func testGettingCurrentHabitDay() {

@@ -20,5 +20,6 @@ class HabitDayMO: NSManagedObject {
     /// - Parameter executed: Bool indicating execution, defaults to true.
     func markAsExecuted(_ executed: Bool = true) {
         wasExecuted = executed
+        updatedAt = Date()
     }
 }

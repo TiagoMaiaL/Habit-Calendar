@@ -26,6 +26,36 @@ class DaysSequenceMO: NSManagedObject {
         return days?.filtered(using: todayPredicate).first as? HabitDayMO
     }
     
+    /// Returns the sequence's current offensive, if there's one.
+    /// - Note: The current offensive isn't broken and its toDate represents the
+    ///         last habitDay before the current one.
+    /// - Returns: The current OffensiveMO entity or nil.
+    func getCurrentOffensive() -> OffensiveMO? {
+        // Get the last sequence's day.
+        let pastDays = (days?.sortedArray(
+            using: [NSSortDescriptor(key: "day.date", ascending: true)]
+        ) as? [HabitDayMO])?.filter {
+            $0.day?.date?.getEndOfDay().isPast ?? false
+        }
+        
+        guard let lastDay = pastDays?.last else {
+            return nil
+        }
+        
+        assert(
+            lastDay.day != nil && lastDay.day!.date != nil,
+            "Inconsistency: The habitDay must have a valid day."
+        )
+        
+        // Get the last offensive by filtering for the one with the toDate
+        // property being the last sequence's date (in ascending order).
+        let toDatePredicate = NSPredicate(
+            format: "toDate = %@",
+            lastDay.day!.date! as NSDate
+        )
+        return offensives?.filtered(using: toDatePredicate).first as? OffensiveMO
+    }
+    
     /// Marks the current day as executed, if one exists in the sequence.
     /// - Note: Marking the current day as executed creates or updates
     ///         a related offensive entity associated with the sequence.

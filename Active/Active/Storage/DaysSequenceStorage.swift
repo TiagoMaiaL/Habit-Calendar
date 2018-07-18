@@ -38,7 +38,7 @@ class DaysSequenceStorage {
     ) -> DaysSequenceMO {
         assert(
             daysDates.count > 1,
-            "The provided days dates need to have two or more dates."
+            "The provided days dates must have two or more dates."
         )
         
         let sequence = DaysSequenceMO(context: context)

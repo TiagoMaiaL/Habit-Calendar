@@ -149,8 +149,71 @@ class DaysSequenceTests: IntegrationTestCase {
         )
     }
     
-    func testGettingCurrentOffensiveShouldReturnNil() {
-        XCTMarkNotImplemented()
+    func testGettingEmptySequenceCurrentOffensiveShouldReturnNil() {
+        // 1. Make an empty sequence dummy.
+        let emptyDummySequence = DaysSequenceMO(context: context)
+        
+        // 2. Assert that getting its current offensive should return nil.
+        XCTAssertNil(
+            emptyDummySequence.getCurrentOffensive(),
+            "Trying to get the offensive of an empty sequence should return nil."
+        )
+    }
+    
+    func testGettingSequenceCurrentOffensive() {
+        // 1. Declare a dummy sequence.
+        let dummySequence = factories.daysSequence.makeDummy()
+        // 1.1. Add some past days.
+        let pastDays = makeHabitDays(from: -6 ..< 0)
+        dummySequence.addToDays(Set(pastDays) as NSSet)
+        
+        // 1.2. Add a current offensive to it.
+        let offensive = OffensiveMO(context: context)
+        offensive.id = UUID().uuidString
+        offensive.createdAt = Date()
+        offensive.fromDate = pastDays.first?.day?.date
+        offensive.toDate = pastDays.last?.day?.date
+        
+        dummySequence.addToOffensives(offensive)
+        
+        // 2. Assert the sequence returns the current sequence.
+        XCTAssertNotNil(
+            dummySequence.getCurrentOffensive(),
+            "The sequence should return the configured current offensive."
+        )
+    }
+    
+    func testGettingSequenceCurrentOffensiveShouldReturnNilWhenBrokenOffensivesExist() {
+        // 1. Declare a dummy sequence.
+        let dummySequence = factories.daysSequence.makeDummy()
+        // 1.1. Add some past days.
+        let pastDays = makeHabitDays(from: -12 ..< 0)
+        dummySequence.addToDays(Set(pastDays) as NSSet)
+        
+        // 1.2. Add some broken offensives related to those past days.
+        // The broken offensives have begin and end dates that are not
+        // related to the last habit day or the day before the current one.
+        [(from: pastDays[0], to: pastDays[2]),
+         (from: pastDays[4], to: pastDays[6])].forEach {
+            let currentOffensive = OffensiveMO(context: context)
+            currentOffensive.id = UUID().uuidString
+            currentOffensive.createdAt = Date()
+            currentOffensive.fromDate = $0.from.day!.date!
+            currentOffensive.toDate = $0.from.day!.date!
+            
+            dummySequence.addToOffensives(currentOffensive)
+        }
+        
+        guard (dummySequence.offensives?.count ?? 0) > 0 else {
+            XCTFail("Couldn't properly configure the offensives to proceed with the tests.")
+            return
+        }
+        
+        // 2. Getting the current offensive should return nil.
+        XCTAssertNil(
+            dummySequence.getCurrentOffensive(),
+            "The sequence shouldn't return any broken sequence as its current offensive."
+        )
     }
     
     func testMarkingCurrentDayAsExecutedShouldCreateNewOffensive() {
@@ -163,5 +226,26 @@ class DaysSequenceTests: IntegrationTestCase {
     
     func testBreakingPreviousOffensiveShouldCreateNewOffensive() {
         XCTMarkNotImplemented()
+    }
+    
+    // MARK: Imperatives
+    
+    /// Generates habit days with its dates generated from the passed range.
+    /// - Parameter range: The Int range representing the amount of days to be
+    ///                    generated. The generated days's dates are the
+    ///                    current date by adding the range index to its day.
+    /// - Returns: An array of habit days.
+    private func makeHabitDays(from range: CountableRange<Int>) -> [HabitDayMO] {
+        return range.compactMap { (index: Int) -> HabitDayMO in
+            let dayDate = Date().byAddingDays(index)!.getBeginningOfDay()
+            
+            let day = factories.day.makeDummy()
+            day.date = dayDate
+            
+            let habitDay = factories.habitDay.makeDummy()
+            habitDay.day = day
+            
+            return habitDay
+        }
     }
 }
