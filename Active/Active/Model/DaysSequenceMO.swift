@@ -50,8 +50,9 @@ class DaysSequenceMO: NSManagedObject {
         // Get the last offensive by filtering for the one with the toDate
         // property being the last sequence's date (in ascending order).
         let toDatePredicate = NSPredicate(
-            format: "toDate = %@",
-            lastDay.day!.date! as NSDate
+            format: "toDate = %@ OR toDate = %@",
+            lastDay.day!.date! as NSDate,
+            Date().getBeginningOfDay() as NSDate
         )
         return offensives?.filtered(using: toDatePredicate).first as? OffensiveMO
     }

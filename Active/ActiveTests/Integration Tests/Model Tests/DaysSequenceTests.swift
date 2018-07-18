@@ -183,6 +183,31 @@ class DaysSequenceTests: IntegrationTestCase {
         )
     }
     
+    func testGettingSequenceCurrentOffensiveWhenToDateIsToday() {
+        // 1. Declare a dummy sequence.
+        let dummySequence = factories.daysSequence.makeDummy()
+        // 1.1. Add some past days to it.
+        let pastDays = makeHabitDays(from: -15 ..< 0)
+        dummySequence.addToDays(Set(pastDays) as NSSet)
+        
+        // 1.2. Add a current offensive to it. The offensive's toDate property
+        // should be the current day. This is the scenario of the user marking
+        // the current day as executed.
+        let offensive = OffensiveMO(context: context)
+        offensive.id = UUID().uuidString
+        offensive.createdAt = Date()
+        offensive.fromDate = pastDays.first?.day?.date
+        offensive.toDate = Date().getBeginningOfDay()
+        
+        dummySequence.addToOffensives(offensive)
+        
+        // 2. Assert the sequence returns the current sequence.
+        XCTAssertNotNil(
+            dummySequence.getCurrentOffensive(),
+            "The sequence should return the configured offensive as its current one."
+        )
+    }
+    
     func testGettingSequenceCurrentOffensiveShouldReturnNilWhenBrokenOffensivesExist() {
         // 1. Declare a dummy sequence.
         let dummySequence = factories.daysSequence.makeDummy()
@@ -218,6 +243,12 @@ class DaysSequenceTests: IntegrationTestCase {
     
     func testMarkingCurrentDayAsExecutedShouldCreateNewOffensive() {
         XCTMarkNotImplemented()
+        
+        // 1. Declare a dummy sequence.
+        
+        // 2. Mark its current day as executed.
+        
+        // 3. Try getting the sequence's current offensive.
     }
     
     func testMarkingCurrentDayAsExecutedContinuesPreviousOffensive() {
