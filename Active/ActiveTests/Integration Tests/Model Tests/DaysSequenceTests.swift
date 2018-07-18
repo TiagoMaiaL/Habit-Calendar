@@ -242,13 +242,28 @@ class DaysSequenceTests: IntegrationTestCase {
     }
     
     func testMarkingCurrentDayAsExecutedShouldCreateNewOffensive() {
-        XCTMarkNotImplemented()
-        
         // 1. Declare a dummy sequence.
+        let dummySequence = factories.daysSequence.makeDummy()
         
         // 2. Mark its current day as executed.
+        dummySequence.markCurrentDayAsExecuted()
         
         // 3. Try getting the sequence's current offensive.
+        guard let currentOffensive = dummySequence.getCurrentOffensive() else {
+            XCTFail("The sequence should have a new offensive added to it.")
+            return
+        }
+        
+        XCTAssertEqual(
+            currentOffensive.fromDate?.description,
+            Date().getBeginningOfDay().description,
+            "The created offensive should have the current date as its from date."
+        )
+        XCTAssertEqual(
+            currentOffensive.toDate?.description,
+            Date().getBeginningOfDay().description,
+            "The created offensive should have the current date as its to date."
+        )
     }
     
     func testMarkingCurrentDayAsExecutedContinuesPreviousOffensive() {

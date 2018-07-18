@@ -37,23 +37,32 @@ class DaysSequenceMO: NSManagedObject {
         ) as? [HabitDayMO])?.filter {
             $0.day?.date?.getEndOfDay().isPast ?? false
         }
+        let lastDay = pastDays?.last
         
-        guard let lastDay = pastDays?.last else {
-            return nil
+        if lastDay != nil {
+            assert(
+                lastDay!.day != nil && lastDay!.day!.date != nil,
+                "Inconsistency: The habitDay must have a valid day."
+            )
         }
-        
-        assert(
-            lastDay.day != nil && lastDay.day!.date != nil,
-            "Inconsistency: The habitDay must have a valid day."
-        )
         
         // Get the last offensive by filtering for the one with the toDate
         // property being the last sequence's date (in ascending order).
-        let toDatePredicate = NSPredicate(
-            format: "toDate = %@ OR toDate = %@",
-            lastDay.day!.date! as NSDate,
-            Date().getBeginningOfDay() as NSDate
-        )
+        var toDatePredicate: NSPredicate!
+        
+        if let lastDay = lastDay {
+            toDatePredicate = NSPredicate(
+                format: "toDate = %@ OR toDate = %@",
+                lastDay.day!.date! as NSDate,
+                Date().getBeginningOfDay() as NSDate
+            )
+        } else {
+            toDatePredicate = NSPredicate(
+                format: "toDate = %@",
+                Date().getBeginningOfDay() as NSDate
+            )
+        }
+        
         return offensives?.filtered(using: toDatePredicate).first as? OffensiveMO
     }
     
@@ -70,12 +79,15 @@ class DaysSequenceMO: NSManagedObject {
         // Mark the current day as executed.
         currentDay.markAsExecuted()
 
-        // TODO:
         // Try fetching the current offensive. If we can get it,
         // update it.
-        // TODO:
-        // If there isn't a current offensive, add a new one to the
-        // current sequence and habit.
+        if let currentOffensive = getCurrentOffensive() {
+            // TODO:
+        } else {
+            // If there isn't a current offensive, add a new one to the
+            // current sequence and habit.
+            makeOffensive()
+        }
     }
     
     /// Returns the executed days from the sequence.
@@ -95,5 +107,20 @@ class DaysSequenceMO: NSManagedObject {
     ///            the total in the sequence.
     func getCompletionProgress() -> (executed: Int, total: Int) {
         return (getExecutedDays()?.count ?? 0, days?.count ?? 0)
+    }
+    
+    /// Creates a new offensive entity and adds it to the current
+    /// sequence instance.
+    private func makeOffensive() {
+        if let context = managedObjectContext {
+            let currentOffensive = OffensiveMO(context: context)
+            currentOffensive.id = UUID().uuidString
+            currentOffensive.createdAt = Date()
+            currentOffensive.fromDate = Date().getBeginningOfDay()
+            currentOffensive.toDate = Date().getBeginningOfDay()
+            
+            currentOffensive.habit = habit
+            currentOffensive.daysSequence = self
+        }
     }
 }
