@@ -26,6 +26,10 @@ class UserNotificationCenterMock: TestableNotificationCenter {
     /// This mock implementation is partial.
     private let userNotificationCenter = UNUserNotificationCenter.current()
     
+    /// The internal notification requests kept in memory for
+    /// mock implementations.
+    private var requests = [UNNotificationRequest]()
+    
     // MARK: Initializers
     
     init(withAuthorization shouldAuthorize: Bool) {
@@ -41,18 +45,28 @@ class UserNotificationCenterMock: TestableNotificationCenter {
     }
     
     func add(_ request: UNNotificationRequest, withCompletionHandler completionHandler: ((Error?) -> Void)?) {
-        // Recall internal notification center.
-        userNotificationCenter.add(request, withCompletionHandler: completionHandler)
+        // Add the request to the internal requests array.
+        requests.append(request)
+        completionHandler?(nil)
     }
     
     func getPendingNotificationRequests(completionHandler: @escaping ([UNNotificationRequest]) -> Void) {
-        // Recall internal notification center.
-        userNotificationCenter.getPendingNotificationRequests(completionHandler: completionHandler)
+        // Return the internal requests.
+        completionHandler(requests)
     }
     
     func removePendingNotificationRequests(withIdentifiers identifiers: [String]) {
-        // Recall internal notification center.
-        userNotificationCenter.removePendingNotificationRequests(withIdentifiers: identifiers)
+        // Remove all requests with the passed identifiers from the internal
+        // array.
+        var temporaryRequests = self.requests
+        
+        for (index, request) in self.requests.enumerated() {
+            if identifiers.contains(request.identifier) {
+                temporaryRequests.remove(at: index)
+            }
+        }
+        
+        self.requests = temporaryRequests
     }
     
     func getNotificationSettings(completionHandler: @escaping (UNNotificationSettings) -> Swift.Void) {
@@ -63,7 +77,7 @@ class UserNotificationCenterMock: TestableNotificationCenter {
     /// Checks if the usage of local notifications is allowed.
     /// - Parameter completionHandler: The block called with the result.
     func getAuthorizationStatus(completionHandler: @escaping (Bool) -> Swift.Void) {
-        completionHandler(true)
+        completionHandler(shouldAuthorize)
     }
     
 }
