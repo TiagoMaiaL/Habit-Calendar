@@ -103,4 +103,17 @@ extension Date {
             to: self
         )
     }
+    
+    /// Calculates the difference in days between the receiver and the passed
+    /// date.
+    /// - Note: If the difference is negative, it means its n days
+    ///         before the receiver.
+    /// - Returns: The difference of days being an integer number.
+    func getDifferenceInDays(from date: Date) -> Int {
+        return getCurrentCalendar().dateComponents(
+            [.day],
+            from: self,
+            to: date
+        ).day ?? 0
+    }
 }

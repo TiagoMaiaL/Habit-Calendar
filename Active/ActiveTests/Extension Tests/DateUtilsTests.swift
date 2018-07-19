@@ -189,5 +189,41 @@ class DateUtilsTests: XCTestCase {
             "The date should be considered to be in the past."
         )
     }
+    
+    func testGettingNumberOfDaysBetweenDates() {
+        // 1. Declare the range: initial and final dates.
+        let daysNumber = 13
+        let initialDate = Date()
+        let finalDate = Date().byAddingDays(daysNumber)!
+        
+        // 2. Call the method on the initial date to get the difference in
+        // days to another date.
+        let difference = initialDate.getDifferenceInDays(from: finalDate)
+        
+        // 3. Assert that the difference in days is correct.
+        XCTAssertEqual(
+            difference,
+            daysNumber,
+            "The difference between the dates is wrong."
+        )
+    }
+    
+    func testGettingNumberOfDaysBetweenDatesReturnsNegativeDifference() {
+        // 1. Declare the range: initial and final dates.
+        let daysNumber = 13
+        let initialDate = Date()
+        let finalDate = Date().byAddingDays(daysNumber)!
+        
+        // 2. Call the method on the initial date to get the difference in
+        // days to another date.
+        let difference = finalDate.getDifferenceInDays(from: initialDate)
+        
+        // 3. Assert that the difference in days is correct.
+        XCTAssertEqual(
+            difference,
+            -daysNumber,
+            "The difference between the dates isn't the expected negative one."
+        )
+    }
 }
 
