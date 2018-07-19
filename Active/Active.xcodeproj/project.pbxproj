@@ -35,6 +35,7 @@
 		4779588020D8ADA90080614F /* NotificationStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4779587F20D8ADA90080614F /* NotificationStorageTests.swift */; };
 		4779588320D8B2E10080614F /* UserNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4779588220D8B2E10080614F /* UserNotificationManager.swift */; };
 		4779588520D8B38B0080614F /* NotificationStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4779588420D8B38B0080614F /* NotificationStorage.swift */; };
+		47D7003B2100F72A00F4FE88 /* OffensiveTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D7003A2100F72A00F4FE88 /* OffensiveTests.swift */; };
 		47D8308420F92553002D3A97 /* DetailsCalendarDayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D8308320F92553002D3A97 /* DetailsCalendarDayCell.swift */; };
 		47D8308620FCE820002D3A97 /* OffensiveMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D8308520FCE820002D3A97 /* OffensiveMO.swift */; };
 		47D8308820FCE82F002D3A97 /* DaysSequenceMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D8308720FCE82F002D3A97 /* DaysSequenceMO.swift */; };
@@ -110,6 +111,7 @@
 		4779587F20D8ADA90080614F /* NotificationStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationStorageTests.swift; sourceTree = "<group>"; };
 		4779588220D8B2E10080614F /* UserNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationManager.swift; sourceTree = "<group>"; };
 		4779588420D8B38B0080614F /* NotificationStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationStorage.swift; sourceTree = "<group>"; };
+		47D7003A2100F72A00F4FE88 /* OffensiveTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffensiveTests.swift; sourceTree = "<group>"; };
 		47D8308320F92553002D3A97 /* DetailsCalendarDayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsCalendarDayCell.swift; sourceTree = "<group>"; };
 		47D8308520FCE820002D3A97 /* OffensiveMO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffensiveMO.swift; sourceTree = "<group>"; };
 		47D8308720FCE82F002D3A97 /* DaysSequenceMO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaysSequenceMO.swift; sourceTree = "<group>"; };
@@ -264,6 +266,7 @@
 				475C96AC20E1216D00212E1F /* HabitTests.swift */,
 				470230D520E2A696003A1F6E /* HabitDayTests.swift */,
 				47D8308F20FD6288002D3A97 /* DaysSequenceTests.swift */,
+				47D7003A2100F72A00F4FE88 /* OffensiveTests.swift */,
 			);
 			path = "Model Tests";
 			sourceTree = "<group>";
@@ -606,6 +609,7 @@
 				4761DFD320DE692A003F772A /* UNUserNotificationCenterMock.swift in Sources */,
 				474A209C20D1B51300E0EBD0 /* DateUtilsTests.swift in Sources */,
 				47D8309020FD6288002D3A97 /* DaysSequenceTests.swift in Sources */,
+				47D7003B2100F72A00F4FE88 /* OffensiveTests.swift in Sources */,
 				470230D420E28A56003A1F6E /* HabitDayStorageTests.swift in Sources */,
 				4752FDC120FE623900116F1A /* XCTUtils.swift in Sources */,
 				474A209720D1B02700E0EBD0 /* HabitStorageTests.swift in Sources */,
