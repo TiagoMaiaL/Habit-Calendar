@@ -266,7 +266,7 @@ class DaysSequenceTests: IntegrationTestCase {
         )
     }
     
-    func testMarkingCurrentDayAsExecutedContinuesPreviousOffensive() {        
+    func testMarkingCurrentDayAsExecutedContinuesPreviousOffensive() {
         // 1. Declare a dummy sequence.
         let dummySequence = factories.daysSequence.makeDummy()
         
@@ -296,7 +296,37 @@ class DaysSequenceTests: IntegrationTestCase {
     }
     
     func testBreakingPreviousOffensiveShouldCreateNewOffensive() {
-        XCTMarkNotImplemented()
+        // 1. Declare a dummy sequence.
+        let dummySequence = factories.daysSequence.makeDummy()
+
+        // 1.1. Add some past days to it.
+        let pastDays = makeHabitDays(from: -26..<0)
+        dummySequence.addToDays(Set(pastDays) as NSSet)
+        
+        // 1.2. Configure a broken offensive and add to it.
+        let offensive = OffensiveMO(context: context)
+        offensive.id = UUID().uuidString
+        offensive.createdAt = Date()
+        offensive.fromDate = pastDays.first?.day?.date
+        offensive.toDate = pastDays[pastDays.count - 2].day?.date
+        
+        dummySequence.addToOffensives(offensive)
+        
+        // 2. Mark the current day as executed.
+        dummySequence.markCurrentDayAsExecuted()
+        
+        // 3. Assert it now has a current offensive and its
+        // fromDate and toDate are equal to the current date.
+        XCTAssertEqual(
+            dummySequence.getCurrentOffensive()?.fromDate?.description,
+            Date().getBeginningOfDay().description,
+            "The current offensive's from date should be equals to the current date."
+        )
+        XCTAssertEqual(
+            dummySequence.getCurrentOffensive()?.toDate?.description,
+            Date().getBeginningOfDay().description,
+            "The current offensive's to date should be equals to the current date."
+        )
     }
     
     // MARK: Imperatives
