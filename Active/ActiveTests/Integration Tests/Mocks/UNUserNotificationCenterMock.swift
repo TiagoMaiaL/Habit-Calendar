@@ -14,7 +14,7 @@ import UserNotifications
 /// - Note: The authorization requests prompt the user to authorize.
 ///         When testing, it halts the test and fails. This mock
 ///         solves this by faking the results.
-class UserNotificationCenterMock: TestableNotificationCenter {
+class UserNotificationCenterMock: UserNotificationCenter {
     
     // MARK: Properties
     

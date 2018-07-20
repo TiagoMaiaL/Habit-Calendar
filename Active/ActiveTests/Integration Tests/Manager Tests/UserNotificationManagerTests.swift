@@ -46,177 +46,202 @@ class UserNotificationManagerTests: IntegrationTestCase {
     // MARK: Tests
     
     func testManagerAuthorizationRequestGranted() {
-        XCTMarkNotImplemented()
-//        // Declare the authorization request expectation.
-//        let authorizationExpectation = XCTestExpectation(description: "Ask the user to authorize the usage of local notifications.")
-//
-//        // Configure the mock to authorize local notifications.
-//        notificationCenterMock.shouldAuthorize = true
-//
-//        // Use manager to ask the user to use the local notifications.
-//        notificationManager.requestAuthorization() {
-//            granted in
-//
-//            // Assert it was granted.
-//            XCTAssertTrue(granted, "The authorization to use Local notifications should be given by the user.")
-//
-//            authorizationExpectation.fulfill()
-//        }
-//
-//        wait(for: [authorizationExpectation], timeout: 0.1)
+        // Declare the authorization request expectation.
+        let authorizationExpectation = XCTestExpectation(description: "Ask the user to authorize the usage of local notifications.")
+
+        // Configure the mock to authorize local notifications.
+        notificationCenterMock.shouldAuthorize = true
+
+        // Use manager to ask the user to use the local notifications.
+        notificationManager.requestAuthorization() {
+            granted in
+
+            // Assert it was granted.
+            XCTAssertTrue(granted, "The authorization to use Local notifications should be given by the user.")
+
+            authorizationExpectation.fulfill()
+        }
+
+        wait(for: [authorizationExpectation], timeout: 0.1)
     }
 //
     func testManagerAuthorizationRequestNotGranted() {
-        XCTMarkNotImplemented()
-//        // Declare the authrorization request expectation.
-//        let authorizationExpectation = XCTestExpectation(description: "Ask the user to authorize the usage of local notifications.")
-//
-//        // Configure the mock so as not to grant local notifications.
-//        notificationCenterMock.shouldAuthorize = false
-//
-//        // Ask for permission, the permission should be denied.
-//        notificationManager.requestAuthorization() {
-//            granted in
-//
-//            // Assert it wasn't granted.
-//            XCTAssertFalse(granted, "The authorization to use Local notifications should be denied by the user.")
-//
-//            authorizationExpectation.fulfill()
-//        }
-//
-//        // Wait for the expectation.
-//        wait(for: [authorizationExpectation], timeout: 0.1)
+        // Declare the authrorization request expectation.
+        let authorizationExpectation = XCTestExpectation(description: "Ask the user to authorize the usage of local notifications.")
+
+        // Configure the mock so as not to grant local notifications.
+        notificationCenterMock.shouldAuthorize = false
+
+        // Ask for permission, the permission should be denied.
+        notificationManager.requestAuthorization() {
+            granted in
+
+            // Assert it wasn't granted.
+            XCTAssertFalse(granted, "The authorization to use Local notifications should be denied by the user.")
+
+            authorizationExpectation.fulfill()
+        }
+
+        // Wait for the expectation.
+        wait(for: [authorizationExpectation], timeout: 0.1)
     }
-//
+
     func testNotificationSchedule() {
-        XCTMarkNotImplemented()
-//        return
-//
-//        // Schedule a notification.
-//
-//        let notificationExpectation = XCTestExpectation(description: "Schedule a UserNotificationRequest.")
-//
-//        // Declare the notification's content.
-//        let content = UNMutableNotificationContent()
-//        content.title = "Scheduling a notification."
-//        content.body = "Notification's body text."
-//
-//        // Declare the trigger options.
-//        let trigger = UNTimeIntervalNotificationTrigger(
-//            timeInterval: Date().timeIntervalSinceNow + 60,
-//            repeats: false
-//        )
-//
-//        // Schedule the notification.
-//        notificationManager.schedule(
-//            with: UUID().uuidString,
-//            content: content,
-//            and: trigger
-//        ) {
-//            identifier in
-//
-//            // Make assertions on the returned identifier.
-//            XCTAssertNotNil(identifier, "The NotificationRequest's id shouldn't be nil.")
-//            XCTAssertFalse(identifier!.isEmpty, "The NotificationRequest's id shouldn't be empty.")
-//
-//            notificationExpectation.fulfill()
-//        }
-//
-//        wait(for: [notificationExpectation], timeout: 0.1)
+        notificationCenterMock.shouldAuthorize = true
+        
+        // Schedule a notification.
+        let notificationExpectation = XCTestExpectation(description: "Schedule a UserNotificationRequest.")
+
+        // Declare the notification's content.
+        let identifier = UUID().uuidString
+        let content = UNMutableNotificationContent()
+        content.title = "Scheduling a notification."
+        content.body = "Notification's body text."
+
+        // Declare the trigger options.
+        let trigger = UNTimeIntervalNotificationTrigger(
+            timeInterval: Date().byAddingDays(1)!.timeIntervalSinceNow,
+            repeats: false
+        )
+
+        // Schedule the notification.
+        notificationManager.schedule(
+            with: identifier,
+            content: content,
+            and: trigger
+        ) {
+            error in
+
+            // Assert that there's no errors.
+            XCTAssertNil(
+                error,
+                "Scheduling a notification shouldn't cause any errors."
+            )
+            
+            // Try fetching the created notification from the mock.
+            self.notificationCenterMock.getPendingNotificationRequests {
+                requests in
+                XCTAssertEqual(
+                    1,
+                    requests.count,
+                    "There should be one scheduled notification request."
+                )
+                XCTAssertEqual(
+                    identifier,
+                    requests.first?.identifier,
+                    "The request should have the right identifier."
+                )
+                
+                notificationExpectation.fulfill()
+            }
+        }
+
+        wait(for: [notificationExpectation], timeout: 0.1)
     }
 //
     func testScheduledNotificationFetch() {
-        XCTMarkNotImplemented()
-//
-//        return
-//
-//        // Declare the fetch expectation.
-//        let notificationFetchExpectation = XCTestExpectation(description: "Fetch a scheduled notification request.")
-//
-//        // Declare the notification's content.
-//        let content = UNMutableNotificationContent()
-//        content.title = "Scheduling a notification."
-//        content.body = "Notification's body text."
-//
-//        // Declare the notification's trigger.
-//        let trigger = UNTimeIntervalNotificationTrigger(
-//            timeInterval: Date().timeIntervalSinceNow + 60,
-//            repeats: false
-//        )
-//
-//        // Schedule the notification.
-//        notificationManager.schedule(
-//            with: UUID().uuidString,
-//            content: content,
-//            and: trigger
-//        ) {
-//            identifier in
-//
-//            guard let identifier = identifier else {
-//                XCTFail("The identifier shouldn't be nil.")
-//                return
-//            }
-//
-//            // Try to fetch it by using the manager.
-//            self.notificationManager.getRequest(with: identifier) {
-//                request in
-//
-//                // Make assertions on the request properties.
-//                XCTAssertNotNil(request, "The previously scheduled UserNotificationRequest should be correclty fetched.")
-//                XCTAssertEqual(request?.identifier, identifier, "The fetched request should have the expected id.")
-//                XCTAssertEqual(request?.trigger, trigger, "The fetched request should have the correct trigger options.")
-//
-//                notificationFetchExpectation.fulfill()
-//            }
-//        }
-//
-//        wait(for: [notificationFetchExpectation], timeout: 0.2)
+        notificationCenterMock.shouldAuthorize = true
+        
+        // Declare the fetch expectation.
+        let notificationFetchExpectation = XCTestExpectation(description: "Fetch a scheduled notification request.")
+
+        // Declare the notification's content.
+        let identifier = UUID().uuidString
+        let content = UNMutableNotificationContent()
+        content.title = "Scheduling a notification."
+        content.body = "Notification's body text."
+
+        // Declare the notification's trigger.
+        let trigger = UNTimeIntervalNotificationTrigger(
+            timeInterval: Date().timeIntervalSinceNow + 60,
+            repeats: false
+        )
+
+        // Schedule the notification.
+        notificationManager.schedule(
+            with: identifier,
+            content: content,
+            and: trigger
+        ) {
+            error in
+
+            // Try to fetch it by using the manager.
+            self.notificationManager.getRequest(with: identifier) {
+                request in
+
+                guard let request = request else {
+                    XCTFail(
+                        "The previously scheduled UserNotificationRequest should be correclty fetched."
+                    )
+                    return
+                }
+                
+                // Make assertions on the request properties.
+                XCTAssertEqual(
+                    request.identifier,
+                    identifier,
+                    "The fetched request should have the expected id."
+                )
+                XCTAssertEqual(
+                    request.trigger,
+                    trigger,
+                    "The fetched request should have the correct trigger options."
+                )
+                notificationFetchExpectation.fulfill()
+            }
+        }
+
+        wait(for: [notificationFetchExpectation], timeout: 0.1)
     }
 //
 //    // TODO: Test scheduling with errors.
 //
-    func testScheduledNotificationRemoval() {
-        XCTMarkNotImplemented()
-//        // Remove an scheduled notification.
-//
-//        let notificationRemovalExpectation = XCTestExpectation(description: "Delete a scheduled UserNotificationRequest.")
-//
-//        // Declare the notification content.
-//        let content = UNMutableNotificationContent()
-//        content.title = "Testing removal of a notification."
-//        content.body = "Notification's body text."
-//
-//        // Declare the trigger options.
-//        let trigger = UNTimeIntervalNotificationTrigger(
-//            timeInterval: Date().timeIntervalSinceNow + 60,
-//            repeats: false
-//        )
-//
-//        // Schedule a new notification.
-//        notificationManager.schedule(
-//            with: UUID().uuidString,
-//            content: content,
-//            and: trigger
-//        ) {
-//            identifier in
-//
-//            XCTAssertNotNil(identifier, "The UserNotificationRequest's identifier shouldn't be nil after creation.")
-//
-//            // Remove the scheduled notification by it's id.
-//            self.notificationManager.remove(with: identifier!)
-//
-//            // The fetch for the created notification shouldn't return it.
-//            self.notificationManager.getRequest(with: identifier!) {
-//                request in
-//
-//                // Because the request was deleted, it shouldn't be returned.
-//                XCTAssertNil(request, "After fetching for a deleted UserNotificationRequest, the result should be nil.")
-//
-//                notificationRemovalExpectation.fulfill()
-//            }
-//        }
-//
-//        wait(for: [notificationRemovalExpectation], timeout: 0.1)
+    func testUnschedulingNotification() {
+        notificationCenterMock.shouldAuthorize = true
+        
+        // Remove an scheduled notification.
+        let notificationRemovalExpectation = XCTestExpectation(
+            description: "Delete a scheduled UserNotificationRequest."
+        )
+
+        // Declare the notification content.
+        let identifier = UUID().uuidString
+        let content = UNMutableNotificationContent()
+        content.title = "Testing removal of a notification."
+        content.body = "Notification's body text."
+
+        // Declare the trigger options.
+        let trigger = UNTimeIntervalNotificationTrigger(
+            timeInterval: Date().timeIntervalSinceNow + 60,
+            repeats: false
+        )
+
+        // Schedule a new notification.
+        notificationManager.schedule(
+            with: identifier,
+            content: content,
+            and: trigger
+        ) {
+            error in
+
+            // Remove the scheduled notification by it's id.
+            self.notificationManager.unschedule(with: identifier)
+
+            // The fetch for the created notification shouldn't return it.
+            self.notificationManager.getRequest(with: identifier) {
+                request in
+
+                // Because the request was deleted, it shouldn't be returned.
+                XCTAssertNil(
+                    request,
+                    "After fetching for a deleted UserNotificationRequest, the result should be nil."
+                )
+
+                notificationRemovalExpectation.fulfill()
+            }
+        }
+
+        wait(for: [notificationRemovalExpectation], timeout: 0.1)
     }
 }
 //
