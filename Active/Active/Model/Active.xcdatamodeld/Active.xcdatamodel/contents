@@ -44,7 +44,8 @@
     <entity name="Notification" representedClassName=".NotificationMO" versionHashModifier="added index" syncable="YES" codeGenerationType="category">
         <attribute name="fireDate" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="id" attributeType="String" syncable="YES"/>
-        <attribute name="userNotificationId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="userNotificationId" attributeType="String" syncable="YES"/>
+        <attribute name="wasScheduled" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="habit" maxCount="1" deletionRule="Nullify" destinationEntity="Habit" inverseName="notifications" inverseEntity="Habit" syncable="YES"/>
         <fetchIndex name="byFireDateIndex">
             <fetchIndexElement property="fireDate" type="Binary" order="ascending"/>
@@ -69,7 +70,7 @@
         <element name="DaysSequence" positionX="-3645" positionY="-3883" width="128" height="148"/>
         <element name="Habit" positionX="-3215" positionY="-3922" width="128" height="178"/>
         <element name="HabitDay" positionX="-3438" positionY="-3978" width="128" height="133"/>
-        <element name="Notification" positionX="-2997" positionY="-3861" width="128" height="103"/>
+        <element name="Notification" positionX="-2997" positionY="-3861" width="128" height="118"/>
         <element name="Offensive" positionX="-3431" positionY="-3661" width="128" height="148"/>
         <element name="User" positionX="-3242" positionY="-4131" width="128" height="88"/>
     </elements>

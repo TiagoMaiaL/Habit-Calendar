@@ -23,8 +23,8 @@ class HabitsTableViewController: UITableViewController, NSFetchedResultsControll
     /// The Habit cell's reuse identifier.
     private let habitCellIdentifier = "Habit table view cell"
     
-    /// The used persistence container. Defaults to the AppDelegate's one.
-    var container = AppDelegate.persistentContainer
+    /// The used persistence container.
+    var container: NSPersistentContainer!
     
     /// The Habit storage used to fetch the tracked habits.
     var habitStorage: HabitStorage!
@@ -51,6 +51,10 @@ class HabitsTableViewController: UITableViewController, NSFetchedResultsControll
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Assert if the dependencies were properly injected.
+        assert(container != nil, "The persistent container must be injected.")
+        assert(habitStorage != nil, "The habit storage must be injected.")
         
         // Register to possible notifications thrown by changes in
         // other managed contexts.

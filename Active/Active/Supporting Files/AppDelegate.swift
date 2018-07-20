@@ -65,17 +65,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: Delegate methods
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        #if DEBUG
-        // Only run the seed in the debug mode and when the process's
-        // environment isn't the test one.
-        if ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] == nil {
+        /// Flag indicating if the tests are being executed or not.
+        let isTesting = ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] != nil
+
+        if !isTesting {
+            // TODO: Move this authorization request to the appropriate controller.
+            // Request the user's authorization to schedule local notifications.
+            notificationManager.requestAuthorization { authorized in
+                print("User \(authorized ? "authorized" : "denied").")
+            }
+            
+            // Only run the seed in the debug mode and when the process's
+            // environment isn't the test one.
+            #if DEBUG
             // Remove the previously seeded entities.
             seedManager.erase()
             
             // Begin again by seeding the app's database with new dummy entities.
             seedManager.seed()
+            #endif
         }
-        #endif
         
         // Inject the main dependencies into the initial HabitTableViewController:
         if let habitsListingController = window?.rootViewController?.contents as? HabitsTableViewController {
@@ -83,12 +92,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             habitsListingController.container = persistentContainer
             // Inject its habit storage.
             habitsListingController.habitStorage = habitStorage
-        }
-        
-        // TODO: Move this authorization request to the appropriate controller.
-        // Request the user's authorization to schedule local notifications.
-        notificationManager.requestAuthorization { authorized in
-            print("User \(authorized ? "authorized" : "denied").")
         }
         
         return true
