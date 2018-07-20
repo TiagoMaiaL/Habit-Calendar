@@ -93,22 +93,40 @@ class NotificationSchedulerTests: IntegrationTestCase {
         )
     }
     
-    func testSchedulingANotification() {
-        XCTMarkNotImplemented()
-        
-        // Declare the expectation to be fullfilled.
+    func testSchedulingNotification() {
+        // Schedule a notification.
         let scheduleExpectation = XCTestExpectation(
             description: "Schedules an user notification related to a NotificationMO."
         )
         
-        // 1. Declare a dummy notification.
+        // Declare a dummy notification to be used.
+        let dummyNotification = makeNotification()
         
-        // 2. Schedule it.
+        // Schedule it by passing the dummy entity.
+        notificationScheduler.schedule(dummyNotification) { notification in
+            // It should have an user notification identifier.
+            XCTAssertTrue(
+                notification.wasScheduled,
+                "The notification entity should've been scheduled."
+            )
+            
+            // Check if the notification was indeed scheduled.
+            self.notificationCenterMock.getPendingNotificationRequests { requests in
+                for request in requests {
+                    if request.identifier == notification.userNotificationId {
+                        scheduleExpectation.fulfill()
+                        return
+                    }
+                }
+                
+                XCTFail("Couldn't find the scheduled expectation.")
+            }
+        }
         
-        // 3. Try fetching it using the mock.
+        wait(for: [scheduleExpectation], timeout: 0.1)
     }
     
-    func testUnschedulingANotification() {
+    func testUnschedulingNotification() {
         XCTMarkNotImplemented()
         
         // Declare the expectation to be fullfilled.

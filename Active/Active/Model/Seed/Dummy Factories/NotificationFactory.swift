@@ -34,7 +34,7 @@ struct NotificationFactory: DummyFactory {
         
         // Associate its properties.
         notification.id = UUID().uuidString
-        notification.fireDate = Date(timeInterval: Double(arc4random()), since: Date())
+        notification.fireDate = Date().byAddingDays(Int.random(0..<50))
         
         return notification
     }

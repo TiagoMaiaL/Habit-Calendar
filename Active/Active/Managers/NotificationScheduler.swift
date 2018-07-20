@@ -54,4 +54,37 @@ struct NotificationScheduler {
         return (content: content, trigger: trigger)
     }
     
+    /// Schedules an user notification associated with the passed entity.
+    /// - Parameters:
+    ///     - notification: The core data entity to be scheduled.
+    ///     - completionHandler: The handler called after the schedule
+    ///                          finishes.
+    func schedule(
+        _ notification: NotificationMO,
+        completionHandler: Optional<(NotificationMO) -> Void> = nil) {
+        
+        // Declare the options used to schedule a new request.
+        let options = makeNotificationOptions(for: notification)
+        
+        // Associate the user notification's identifier.
+        notification.userNotificationId = UUID().uuidString
+        
+        // Schedule the new request.
+        notificationManager.schedule(
+            with: notification.userNotificationId!,
+            content: options.content,
+            and: options.trigger
+        ) { error in
+            if error == nil {
+                // Set the notification's scheduled flag.
+                notification.managedObjectContext?.perform {
+                    notification.wasScheduled = true
+                    completionHandler?(notification)
+                }
+            } else {
+                completionHandler?(notification)
+            }
+        }
+    }
+    
 }

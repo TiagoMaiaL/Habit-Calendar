@@ -66,7 +66,11 @@ struct HabitFactory: DummyFactory {
                 habitDay.habit = habit
                 
                 let notification = notificationFactory.makeDummy()
-                notification.fireDate = habitDay.day!.date
+                if habitDay.day?.date?.isPast ?? true {
+                    notification.fireDate = Date().byAddingMinutes(60)
+                } else {
+                    notification.fireDate = habitDay.day!.date
+                }
                 notification.habit = habit
             }
         }

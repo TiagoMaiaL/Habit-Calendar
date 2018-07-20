@@ -52,10 +52,11 @@ class NotificationStorage {
         let notification = NotificationMO(context: context)
         notification.id = UUID().uuidString
         notification.fireDate = fireDate
+        notification.userNotificationId = UUID().uuidString
         notification.habit = habit
         
         // Schedule a new user notification for the created habit.
-        manager.schedule(notification)
+//        manager.schedule(notification)
         
         return notification
     }

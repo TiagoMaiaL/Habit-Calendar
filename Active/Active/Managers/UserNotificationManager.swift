@@ -152,31 +152,6 @@ extension UserNotificationManager {
         return (content: content, trigger: trigger)
     }
     
-    /// Schedules an user notification associated with the passed entity.
-    /// - Parameter notification: The core data entity to be scheduled.
-    /// - Parameter completionHandler: The handler called after the schedule
-    ///                                finishes.
-    func schedule(
-        _ notification: NotificationMO,
-        completionHandler: Optional<(NotificationMO) -> Void> = nil) {
-        
-        // Declare the options used to schedule a new request.
-        let options = makeNotificationOptions(for: notification)
-        
-        // Associate the user notification's identifier.
-        notification.userNotificationId = UUID().uuidString
-        
-        // Schedule the new request.
-        schedule(
-            with: notification.userNotificationId!,
-            content: options.content,
-            and: options.trigger
-        ) { identifier in
-            // Associate the returned request id to the Notification entity.
-            completionHandler?(notification)
-        }
-    }
-    
     /// Fetches an user notification request associated with the passed
     /// Notification entity.
     /// - Parameter notification: The Notification entity.

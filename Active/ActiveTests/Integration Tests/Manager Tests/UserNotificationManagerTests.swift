@@ -250,30 +250,7 @@ extension UserNotificationManagerTests {
 //
     func testSchedulingUserNotificationPassingEntity() {
         XCTMarkNotImplemented()
-//        // Schedule an user notification by passing a Notification entity.
-//
-//        let expectation = XCTestExpectation(description: "Schedule an user notification by passing a Notification core data entity.")
-//
-//        // Declare a dummy notification to be used.
-//        let dummyNotification = makeNotification()
-//
-//        // Schedule it by passing the dummy entity.
-//        notificationManager.schedule(dummyNotification) { notification in
-//            // It should have an user notification identifier.
-//            XCTAssertNotNil(
-//                notification.userNotificationId,
-//                "The scheduled notification entity should have an associated  user notification request id."
-//            )
-//
-//            // Check if the notification request can be fetched.
-//            self.notificationManager.getRequest(with: notification.userNotificationId!, { request in
-//                XCTAssertNotNil(request, "The scheduled notification entity should have an associated user notification request.")
-//
-//                expectation.fulfill()
-//            })
-//        }
-//
-//        wait(for: [expectation], timeout: 0.1)
+
     }
 //
     func testUserNotificationFetchByPassingEntity() {

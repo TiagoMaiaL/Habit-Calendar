@@ -102,6 +102,16 @@ class NotificationStorageTests: IntegrationTestCase {
             notification.fireDate,
             "Notification should have the correct fire date."
         )
+        // Check for the userNotificationId.
+        XCTAssertNotNil(
+            notification.userNotificationId,
+            "The user notification id must be set in advance."
+        )
+        // Check for the wasScheduled property.
+        XCTAssertFalse(
+            notification.wasScheduled,
+            "The user notification wasn't scheduled yet."
+        )
         // Check for the habits property
         XCTAssertEqual(
             dummyHabit,
