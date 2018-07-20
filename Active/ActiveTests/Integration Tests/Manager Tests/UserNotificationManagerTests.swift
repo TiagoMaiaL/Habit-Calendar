@@ -6,7 +6,6 @@
 //  Copyright © 2018 Tiago Maia Lopes. All rights reserved.
 //
 
-import Foundation
 import XCTest
 import UserNotifications
 @testable import Active
