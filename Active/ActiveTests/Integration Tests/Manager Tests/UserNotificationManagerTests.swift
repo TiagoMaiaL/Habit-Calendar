@@ -224,7 +224,9 @@ class UserNotificationManagerTests: IntegrationTestCase {
             error in
 
             // Remove the scheduled notification by it's id.
-            self.notificationManager.unschedule(with: identifier)
+            self.notificationManager.unschedule(
+                withIdentifiers:  [identifier]
+            )
 
             // The fetch for the created notification shouldn't return it.
             self.notificationManager.getRequest(with: identifier) {

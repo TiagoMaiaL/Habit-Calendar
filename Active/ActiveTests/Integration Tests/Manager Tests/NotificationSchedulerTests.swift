@@ -127,17 +127,38 @@ class NotificationSchedulerTests: IntegrationTestCase {
     }
     
     func testUnschedulingNotification() {
-        XCTMarkNotImplemented()
-        
         // Declare the expectation to be fullfilled.
+        let unscheduleExpectation = XCTestExpectation(
+            description: "Unschedules an user notification associated with a NotificationMO."
+        )
         
         // 1. Declare a dummy notification.
+        let dummyNotification = makeNotification()
         
         // 2. Schedule it.
+        notificationScheduler.schedule(dummyNotification) {
+            notification in
+            // 3. Unschedule it.
+            self.notificationScheduler.unschedule(
+                [dummyNotification]
+            )
+            
+            // 4. Assert it was deleted by trying to fetch it
+            // using the mock.
+            self.notificationCenterMock.getPendingNotificationRequests {
+                requests in
+                XCTAssertTrue(
+                    requests.filter {
+                        $0.identifier == dummyNotification.userNotificationId
+                    }.count == 0,
+                    "The scheduled notification should have been deleted."
+                )
+                
+                unscheduleExpectation.fulfill()
+            }
+        }
         
-        // 3. Unschedule it.
-        
-        // 4. Assert it was deleted by fetching it using the mock.
+        wait(for: [unscheduleExpectation], timeout: 0.1)
     }
     
     func testSchedulingManyNotifications() {

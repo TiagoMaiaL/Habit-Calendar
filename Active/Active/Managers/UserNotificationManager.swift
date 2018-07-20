@@ -77,9 +77,9 @@ struct UserNotificationManager {
     
     /// Removes a scheduled notification by passing it's identifier.
     /// - Parameter identifier: The notification's identifier.
-    func unschedule(with identifier: String) {
+    func unschedule(withIdentifiers identifiers: [String]) {
         notificationCenter.removePendingNotificationRequests(
-            withIdentifiers: [identifier]
+            withIdentifiers: identifiers
         )
     }
     
@@ -107,79 +107,6 @@ struct UserNotificationManager {
         // Get the notification settings and return if it's authorized or not.
         notificationCenter.getAuthorizationStatus(
             completionHandler: completionHandler
-        )
-    }
-}
-
-/// Extension in charge of adding facility methods to deal with Notification
-/// and Habit entities.
-extension UserNotificationManager {
-    
-    // MARK: Types
-    
-    typealias UserNotificationOptions = (content: UNNotificationContent, trigger: UNNotificationTrigger)
-    
-    // MARK: Imperatives
-    
-    /// Creates the user notification options (content and trigger)
-    /// from the passed habit and notification entities.
-    /// - Parameter notification: The notification from which the user
-    ///                           notification will be generated.
-    func makeNotificationOptions(for notification: NotificationMO) -> UserNotificationOptions {
-        // Declare the notification contents with the correct attributes.
-        let content = UNMutableNotificationContent()
-        
-        if let habit = notification.habit {
-            content.title = habit.getTitleText()
-            content.subtitle = habit.getSubtitleText()
-            content.body = habit.getDescriptionText()
-            content.badge = 1
-        } else {
-            assertionFailure("The passed notification must have a valid habit entity.")
-        }
-        
-        // Declare the time interval used to schedule the notification.
-        let fireDateTimeInterval = notification.getFireDate().timeIntervalSinceNow
-        // Assert that the fire date is in the future.
-        assert(fireDateTimeInterval > 0, "Inconsistency: the notification's fire date must be in the future.")
-        
-        // Declare the notification trigger with the correct date.
-        let trigger = UNTimeIntervalNotificationTrigger(
-            timeInterval: fireDateTimeInterval,
-            repeats: false
-        )
-        
-        return (content: content, trigger: trigger)
-    }
-    
-    /// Fetches an user notification request associated with the passed
-    /// Notification entity.
-    /// - Parameter notification: The Notification entity.
-    /// - Parameter completionHandler: The completion called after the fetch.
-    func getRequest(from notification: NotificationMO, completionHandler: @escaping (UNNotificationRequest?) -> Void) {
-        guard let identifier = notification.userNotificationId else {
-            assertionFailure(
-                "The passed notification entity should have an identifier."
-            )
-            return
-        }
-        
-        // Fetch it by passing the notification's identifier.
-        getRequest(with: identifier, completionHandler)
-    }
-    
-    /// Removes the notification requests associated with
-    /// the passed entities.
-    /// - Parameter notifications: The Notification entities.
-    func remove(_ notifications: [NotificationMO]) {
-        // Declare the requests identifiers from the notifications.
-        let identifiers = notifications.compactMap { notification in
-            return notification.userNotificationId
-        }
-        
-        // Remove the requests.
-        notificationCenter.removePendingNotificationRequests(
-            withIdentifiers: identifiers
         )
     }
 }

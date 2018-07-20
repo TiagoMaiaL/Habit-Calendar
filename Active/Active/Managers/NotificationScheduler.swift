@@ -87,4 +87,14 @@ struct NotificationScheduler {
         }
     }
     
+    /// Unschedules the notification requests associated with
+    /// the passed entities.
+    /// - Parameter notifications: The Notification entities.
+    func unschedule(_ notifications: [NotificationMO]) {
+        // Remove the requests.
+        notificationManager.unschedule(
+            withIdentifiers: notifications.compactMap { $0.userNotificationId }
+        )
+    }
+    
 }
