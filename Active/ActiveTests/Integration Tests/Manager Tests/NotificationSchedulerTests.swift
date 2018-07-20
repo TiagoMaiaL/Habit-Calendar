@@ -162,7 +162,48 @@ class NotificationSchedulerTests: IntegrationTestCase {
     }
     
     func testSchedulingManyNotifications() {
-        XCTMarkNotImplemented()
+        // 1. Declare the expectation to be fulfilled.
+        let scheduleExpectation = XCTestExpectation(
+            description: "Schedule a bunch of user notifications related to the NotificationMO entities."
+        )
+        
+        // 2. Declare a dummy habit with n notifications.
+        let dummyHabit = factories.habit.makeDummy()
+        
+        // 3. Schedule the notifications.
+        let notifications = Array(dummyHabit.notifications as! Set<NotificationMO>)
+        notificationScheduler.schedule(notifications)
+        
+        // 4. Fetch them by using the mock and assert on each value.
+        self.notificationCenterMock.getPendingNotificationRequests {
+            requests in
+            
+            let identifiers = requests.map { $0.identifier }
+            
+            // Setup a timer to get the notifications to be marked as
+            // executed. Since they're marked within the managed object
+            // context's thread, they aren't marked immediatelly,
+            // that's why a timer is needed here.
+            Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { _ in
+                for notification in notifications {
+                    // Assert on the wasExecuted property.
+                    XCTAssertTrue(
+                        notification.wasScheduled,
+                        "The notification should have been scheduled."
+                    )
+                    // Assert on the identifier.
+                    XCTAssertTrue(
+                        identifiers.contains(
+                            notification.userNotificationId!
+                        ),
+                        "The notification wasn't properly scheduled."
+                    )
+                }
+                scheduleExpectation.fulfill()
+            }
+        }
+        
+        wait(for: [scheduleExpectation], timeout: 0.2)
     }
     
     func testUnschedulingManyNotifications() {

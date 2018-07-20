@@ -87,6 +87,16 @@ struct NotificationScheduler {
         }
     }
     
+    /// Schedules an user notification associated with the passed entity.
+    /// - Parameters:
+    ///     - notification: The core data entity to be scheduled.
+    func schedule(
+        _ notifications: [NotificationMO]) {
+        for notification in notifications {
+            schedule(notification)            
+        }
+    }
+    
     /// Unschedules the notification requests associated with
     /// the passed entities.
     /// - Parameter notifications: The Notification entities.
