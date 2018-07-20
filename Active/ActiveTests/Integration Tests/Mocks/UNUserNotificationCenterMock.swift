@@ -60,8 +60,9 @@ class UserNotificationCenterMock: UserNotificationCenter {
         // array.
         var temporaryRequests = self.requests
         
-        for (index, request) in self.requests.enumerated() {
-            if identifiers.contains(request.identifier) {
+        for request in self.requests {
+            if identifiers.contains(request.identifier),
+                let index = temporaryRequests.index(of: request) {
                 temporaryRequests.remove(at: index)
             }
         }

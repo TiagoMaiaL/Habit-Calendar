@@ -93,7 +93,7 @@ struct NotificationScheduler {
     func schedule(
         _ notifications: [NotificationMO]) {
         for notification in notifications {
-            schedule(notification)            
+            schedule(notification)
         }
     }
     
@@ -104,7 +104,7 @@ struct NotificationScheduler {
         // Remove the requests.
         notificationManager.unschedule(
             withIdentifiers: notifications.compactMap { $0.userNotificationId }
-        )
+        )        
     }
     
 }

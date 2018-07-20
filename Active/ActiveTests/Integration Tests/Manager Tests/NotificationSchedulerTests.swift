@@ -207,6 +207,37 @@ class NotificationSchedulerTests: IntegrationTestCase {
     }
     
     func testUnschedulingManyNotifications() {
-        XCTMarkNotImplemented()
+        // 1. Declare the expectation.
+        let unscheduleExpectation = XCTestExpectation(
+            description: "Unschedule many user notifications."
+        )
+        
+        // 2. Declare a dummy habit and get its notifications.
+        let dummyHabit = factories.habit.makeDummy()
+        let notifications = Array(
+            dummyHabit.notifications as! Set<NotificationMO>
+        )
+        
+        // 3. Schedule all of them.
+        notificationScheduler.schedule(notifications)
+        
+        // 4. Fire a timer to delete all of them.
+        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) {
+            _ in
+            self.notificationScheduler.unschedule(notifications)
+            
+            // 5. Assert they were deleted by trying to fetch them from the
+            // mock.
+            self.notificationCenterMock.getPendingNotificationRequests {
+                requests in
+                XCTAssertTrue(
+                    requests.isEmpty,
+                    "The notifications should have been deleted."
+                )
+                unscheduleExpectation.fulfill()
+            }
+        }
+        
+        wait(for: [unscheduleExpectation], timeout: 0.2)
     }
 }
