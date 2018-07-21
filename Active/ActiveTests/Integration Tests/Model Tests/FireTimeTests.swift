@@ -20,8 +20,8 @@ class FireTimeTests: IntegrationTestCase {
         let dummyFireTime = FireTimeMO(context: context)
         dummyFireTime.id = UUID().uuidString
         dummyFireTime.createdAt = Date()
-        dummyFireTime.fireHour = Int16(Int.random(0..<60))
-        dummyFireTime.fireMinute = Int16(Int.random(0..<60))
+        dummyFireTime.hour = Int16(Int.random(0..<60))
+        dummyFireTime.minute = Int16(Int.random(0..<60))
         
         // 2. Get its fire time as a date instance.
         let fireTimeComponents = dummyFireTime.getFireTimeComponents()
@@ -29,12 +29,12 @@ class FireTimeTests: IntegrationTestCase {
         // 3. Assert on its hour and minute components.
         // Its year, month and day components should be nil.
         XCTAssertEqual(
-            Int(dummyFireTime.fireHour),
+            Int(dummyFireTime.hour),
             fireTimeComponents.hour,
             "The generated date should have the expected hour."
         )
         XCTAssertEqual(
-            Int(dummyFireTime.fireMinute),
+            Int(dummyFireTime.minute),
             fireTimeComponents.minute,
             "The generated date should have the expected minute."
         )

@@ -20,8 +20,8 @@ class FireTimeMO: NSManagedObject {
         return DateComponents(
             calendar: Calendar.current,
             timeZone: TimeZone.current,
-            hour: Int(fireHour),
-            minute: Int(fireMinute)
+            hour: Int(hour),
+            minute: Int(minute)
         )
     }
 }
