@@ -18,19 +18,6 @@ class NotificationStorage {
         case notificationAlreadyCreated
     }
     
-    // MARK: Properties
-    
-    /// The user notification manager used to schedule local notifications.
-    let manager: UserNotificationManager
-
-    // MARK: Initializers
-    
-    /// Creates a new HabitStorage class using the provided persistent container.
-    /// - Parameter manager: the user notification manager used by the storage.
-    init(manager: UserNotificationManager) {
-        self.manager = manager
-    }
-    
     // MARK: Imperatives
     
     /// Creates and stores a new Notification entity
@@ -54,9 +41,6 @@ class NotificationStorage {
         notification.fireDate = fireDate
         notification.userNotificationId = UUID().uuidString
         notification.habit = habit
-        
-        // Schedule a new user notification for the created habit.
-//        manager.schedule(notification)
         
         return notification
     }

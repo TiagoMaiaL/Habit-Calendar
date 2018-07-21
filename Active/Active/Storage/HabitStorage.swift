@@ -22,15 +22,20 @@ class HabitStorage {
     /// with the habits.
     private let habitDayStorage: HabitDayStorage
     
+    /// The user notifications scheduler.
+    private let notificationScheduler: NotificationScheduler
+    
     // MARK: - Initializers
     
     /// Creates a new HabitStorage class using the provided persistent container.
     /// - Parameter habitDayStorage: The storage used to manage habitDays.
     /// - Parameter notificationStorage: The notification storage used to edit the entities' notifications.
     init(habitDayStorage: HabitDayStorage,
-         notificationStorage: NotificationStorage) {
+         notificationStorage: NotificationStorage,
+         notificationScheduler: NotificationScheduler) {
         self.habitDayStorage = habitDayStorage
         self.notificationStorage = notificationStorage
+        self.notificationScheduler = notificationScheduler
     }
     
     // MARK: - Imperatives
@@ -88,17 +93,11 @@ class HabitStorage {
         
         // Create and associate the notifications to the habit being created.
         if let fireTimes = notificationFireTimes {
-            // Get the notification fire dates.
-            let fireDates = notificationStorage.createNotificationFireDatesFrom(
+            // Create and schedule the notifications.
+            _ = makeNotifications(
+                context: context,
                 habit: habit,
-                and: fireTimes
-            )
-            
-            // Create the notification entities for the habit being editted.
-            _ = notificationStorage.createNotificationsFrom(
-                habit: habit,
-                using: context,
-                and: fireDates
+                fireTimes: fireTimes
             )
         }
         
@@ -155,6 +154,10 @@ class HabitStorage {
             assert(!fireTimes.isEmpty, "HabitStorage -- edit: notifications argument shouldn't be empty.")
             
             if let notifications = habit.notifications as? Set<NotificationMO> {
+                // Unschedule all user notifications associated with
+                // the entities.
+                notificationScheduler.unschedule(Array(notifications))
+                
                 // Remove the current notifications.
                 for notification in notifications {
                     habit.removeFromNotifications(notification)
@@ -162,17 +165,11 @@ class HabitStorage {
                 }
             }
             
-            // Get the notification fire dates.
-            let fireDates = notificationStorage.createNotificationFireDatesFrom(
+            // Create and schedule the notifications.
+            _ = makeNotifications(
+                context: context,
                 habit: habit,
-                and: fireTimes
-            )
-            
-            // Create the notification entities for the habit bein editted.
-            _ = notificationStorage.createNotificationsFrom(
-                habit: habit,
-                using: context,
-                and: fireDates
+                fireTimes: fireTimes
             )
         }
         
@@ -183,5 +180,36 @@ class HabitStorage {
     /// - Parameter context: The context used to delete the habit from.
     func delete(_ habit: HabitMO, from context: NSManagedObjectContext) {
         context.delete(habit)
+    }
+    
+    /// Creates a bunch of notification entities and schedule all of its
+    /// related user notifications, if authorized to do so.
+    /// - Parameters:
+    ///     - context: The NSManagedObject context to be used.
+    ///     - habit: The habit to add the notifications to.
+    ///     - fireTimes: The notifications' fire times.
+    /// - Returns: The notification entities.
+    private func makeNotifications(
+        context: NSManagedObjectContext,
+        habit: HabitMO,
+        fireTimes: [Date]
+    ) -> [NotificationMO] {
+        // Get the notification fire dates.
+        let fireDates = notificationStorage.createNotificationFireDatesFrom(
+            habit: habit,
+            and: fireTimes
+        )
+        
+        // Create the notification entities for the habit bein editted.
+        let notifications = notificationStorage.createNotificationsFrom(
+            habit: habit,
+            using: context,
+            and: fireDates
+        )
+        
+        // Schedule the user notifications.
+        notificationScheduler.schedule(notifications)
+        
+        return notifications
     }
 }

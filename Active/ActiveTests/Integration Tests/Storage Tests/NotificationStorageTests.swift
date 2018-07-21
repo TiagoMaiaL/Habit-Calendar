@@ -17,10 +17,6 @@ class NotificationStorageTests: IntegrationTestCase {
     
     // MARK: Properties
     
-    var notificationManager: UserNotificationManager!
-    var dayStorage: DayStorage!
-    var habitDayStorage: HabitDayStorage!
-    var habitStorage: HabitStorage!
     var notificationStorage: NotificationStorage!
     
     // MARK: setup/tearDown
@@ -28,40 +24,13 @@ class NotificationStorageTests: IntegrationTestCase {
     override func setUp() {
         super.setUp()
         
-        // Initialize day storage.
-        dayStorage = DayStorage()
-        
-        // Initialize habitDay storage.
-        habitDayStorage = HabitDayStorage(
-            calendarDayStorage: dayStorage
-        )
-        
-        // Initialize notification manager.
-        notificationManager = UserNotificationManager(
-            notificationCenter: UserNotificationCenterMock(
-                withAuthorization: true
-            )
-        )
-        
         // Initialize notificationStorage using the persistent container created for tests.
-        notificationStorage = NotificationStorage(
-            manager: notificationManager
-        )
-        
-        // Initialize habit storage.
-        habitStorage = HabitStorage(
-            habitDayStorage: habitDayStorage,
-            notificationStorage: notificationStorage
-        )
+        notificationStorage = NotificationStorage()
     }
     
     override func tearDown() {
         // Remove the initialized storage class.
-        notificationManager = nil
         notificationStorage = nil
-        dayStorage = nil
-        habitDayStorage = nil
-        habitStorage = nil
         
         super.tearDown()
     }

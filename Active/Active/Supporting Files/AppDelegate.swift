@@ -51,15 +51,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         notificationCenter: UNUserNotificationCenter.current()
     )
     
-    /// The app's NotificationMO storage.
-    private(set) lazy var notificationStorage = NotificationStorage(
-        manager: notificationManager
+    private lazy var notificationScheduler = NotificationScheduler(
+        notificationManager: notificationManager
     )
+    
+    /// The app's NotificationMO storage.
+    private(set) lazy var notificationStorage = NotificationStorage()
     
     /// The app's Habit storage that's going to be used by the controllers.
     private(set) lazy var habitStorage: HabitStorage = HabitStorage(
         habitDayStorage: habitDayStorage,
-        notificationStorage: notificationStorage
+        notificationStorage: notificationStorage,
+        notificationScheduler: notificationScheduler
     )
     
     // MARK: Delegate methods
