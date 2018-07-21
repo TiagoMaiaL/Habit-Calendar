@@ -441,6 +441,20 @@ class HabitStorageTests: IntegrationTestCase {
     
     func testEditingHabitDaysShouldRescheduleUserNotifications() {
         XCTMarkNotImplemented()
+        
+        let rescheduleExpectation = XCTestExpectation(
+            description: "Reschedules the user notifications after changing the days dates."
+        )
+        
+        // 1. Declare the dummy habit.
+        
+        // 2. Declare the new days dates.
+        
+        // 3. Edit the habit.
+        
+        // 4. 
+        
+        wait(for: [rescheduleExpectation], timeout: 0.2)
     }
     
     func testEditingHabitFireDatesShouldRescheduleUserNotifications() {

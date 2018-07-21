@@ -35,6 +35,8 @@
 		4779588020D8ADA90080614F /* NotificationStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4779587F20D8ADA90080614F /* NotificationStorageTests.swift */; };
 		4779588320D8B2E10080614F /* UserNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4779588220D8B2E10080614F /* UserNotificationManager.swift */; };
 		4779588520D8B38B0080614F /* NotificationStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4779588420D8B38B0080614F /* NotificationStorage.swift */; };
+		47AA365321037B0B0008D2DC /* FireTimeMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AA365221037B0B0008D2DC /* FireTimeMO.swift */; };
+		47AA365521037B8B0008D2DC /* FireTimeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AA365421037B8B0008D2DC /* FireTimeTests.swift */; };
 		47D7003B2100F72A00F4FE88 /* OffensiveTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D7003A2100F72A00F4FE88 /* OffensiveTests.swift */; };
 		47D7003D210179F600F4FE88 /* NotificationScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D7003C210179F600F4FE88 /* NotificationScheduler.swift */; };
 		47D7004121017D0A00F4FE88 /* NotificationSchedulerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D7004021017D0A00F4FE88 /* NotificationSchedulerTests.swift */; };
@@ -113,6 +115,8 @@
 		4779587F20D8ADA90080614F /* NotificationStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationStorageTests.swift; sourceTree = "<group>"; };
 		4779588220D8B2E10080614F /* UserNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationManager.swift; sourceTree = "<group>"; };
 		4779588420D8B38B0080614F /* NotificationStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationStorage.swift; sourceTree = "<group>"; };
+		47AA365221037B0B0008D2DC /* FireTimeMO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireTimeMO.swift; sourceTree = "<group>"; };
+		47AA365421037B8B0008D2DC /* FireTimeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireTimeTests.swift; sourceTree = "<group>"; };
 		47D7003A2100F72A00F4FE88 /* OffensiveTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffensiveTests.swift; sourceTree = "<group>"; };
 		47D7003C210179F600F4FE88 /* NotificationScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationScheduler.swift; sourceTree = "<group>"; };
 		47D7004021017D0A00F4FE88 /* NotificationSchedulerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSchedulerTests.swift; sourceTree = "<group>"; };
@@ -184,6 +188,7 @@
 				4713A20320C16542008A13D2 /* NotificationMO.swift */,
 				47D8308520FCE820002D3A97 /* OffensiveMO.swift */,
 				47D8308720FCE82F002D3A97 /* DaysSequenceMO.swift */,
+				47AA365221037B0B0008D2DC /* FireTimeMO.swift */,
 				47E6C20E20EB1213003BDB4D /* Seed */,
 			);
 			path = Model;
@@ -271,6 +276,7 @@
 				470230D520E2A696003A1F6E /* HabitDayTests.swift */,
 				47D8308F20FD6288002D3A97 /* DaysSequenceTests.swift */,
 				47D7003A2100F72A00F4FE88 /* OffensiveTests.swift */,
+				47AA365421037B8B0008D2DC /* FireTimeTests.swift */,
 			);
 			path = "Model Tests";
 			sourceTree = "<group>";
@@ -584,6 +590,7 @@
 				4725D06120CA06EE00C3B63F /* DayStorage.swift in Sources */,
 				4725D05F20C97D9C00C3B63F /* UserStorage.swift in Sources */,
 				47E6C21620EB12B6003BDB4D /* NotificationFactory.swift in Sources */,
+				47AA365321037B0B0008D2DC /* FireTimeMO.swift in Sources */,
 				474F9C8620CC7E180094C19C /* Date+Utils.swift in Sources */,
 				47D8308420F92553002D3A97 /* DetailsCalendarDayCell.swift in Sources */,
 				4725D05B20C8A4BA00C3B63F /* HabitsTableViewController.swift in Sources */,
@@ -625,6 +632,7 @@
 				474A209520D00AFA00E0EBD0 /* DayStorageTests.swift in Sources */,
 				4779588020D8ADA90080614F /* NotificationStorageTests.swift in Sources */,
 				474F9C8A20CE3F670094C19C /* IntegrationTestCase.swift in Sources */,
+				47AA365521037B8B0008D2DC /* FireTimeTests.swift in Sources */,
 				47D8308C20FD00E5002D3A97 /* DaysSequenceStorageTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
