@@ -15,6 +15,32 @@ class FireTimeTests: IntegrationTestCase {
 
     // MARK: Tests
     
-    
+    func testFireTimeDateGetter() {
+        // 1. Declare the fireTimeMO to be used.
+        let dummyFireTime = FireTimeMO(context: context)
+        dummyFireTime.id = UUID().uuidString
+        dummyFireTime.createdAt = Date()
+        dummyFireTime.fireHour = Int16(Int.random(0..<60))
+        dummyFireTime.fireMinute = Int16(Int.random(0..<60))
+        
+        // 2. Get its fire time as a date instance.
+        let fireTimeComponents = dummyFireTime.getFireTimeComponents()
+        
+        // 3. Assert on its hour and minute components.
+        // Its year, month and day components should be nil.
+        XCTAssertEqual(
+            Int(dummyFireTime.fireHour),
+            fireTimeComponents.hour,
+            "The generated date should have the expected hour."
+        )
+        XCTAssertEqual(
+            Int(dummyFireTime.fireMinute),
+            fireTimeComponents.minute,
+            "The generated date should have the expected minute."
+        )
+        XCTAssertNil(fireTimeComponents.year, "The year should be nil.")
+        XCTAssertNil(fireTimeComponents.month, "The month should be nil.")
+        XCTAssertNil(fireTimeComponents.day, "The day should be nil.")
+    }
     
 }
