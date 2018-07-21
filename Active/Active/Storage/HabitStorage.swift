@@ -73,7 +73,7 @@ class HabitStorage {
                 name: String,
                 color: HabitMO.Color,
                 days: [Date],
-                and notificationFireTimes: [Date]? = nil) -> HabitMO {
+                and notificationFireTimes: [DateComponents]? = nil) -> HabitMO {
         // Declare a new habit instance.
         let habit = HabitMO(context: context)
         habit.id = UUID().uuidString
@@ -116,7 +116,7 @@ class HabitStorage {
               name: String? = nil,
               color: HabitMO.Color? = nil,
               days: [Date]? = nil,
-              and notificationFireTimes: [Date]? = nil) -> HabitMO {
+              and notificationFireTimes: [DateComponents]? = nil) -> HabitMO {
         
         if let name = name {
             habit.name = name
@@ -192,7 +192,7 @@ class HabitStorage {
     private func makeNotifications(
         context: NSManagedObjectContext,
         habit: HabitMO,
-        fireTimes: [Date]
+        fireTimes: [DateComponents]
     ) -> [NotificationMO] {
         // Get the notification fire dates.
         let fireDates = notificationStorage.createNotificationFireDatesFrom(

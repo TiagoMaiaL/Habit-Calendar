@@ -119,8 +119,8 @@ class NotificationStorage {
     /// - Returns: the fire dates for the habit.
     func createNotificationFireDatesFrom(
         habit: HabitMO,
-        and fireTimes: [Date]
-        ) -> [Date] {
+        and fireTimes: [DateComponents]
+    ) -> [Date] {
         var fireDates = [Date]()
         
         if let habitDays = habit.days as? Set<HabitDayMO> {
@@ -128,23 +128,14 @@ class NotificationStorage {
                 // Get the current day's date.
                 if let dayDate = habitDay.day?.date?.getBeginningOfDay() {
                     
-                    // For each fire time, create a new fire date
-                    // corresponding to the current day.
-                    // The fire date is the day's date (day, month, year)
-                    // combined with the selected fire time (minute, hour).
+                    // For each fire time, create new fire dates by combining
+                    // the components with the day's date.
                     for fireTime in fireTimes {
                         // Get the calendar.
-                        let calendar = Calendar.current
-                        
-                        let components = calendar.dateComponents(
-                            [.minute, .hour],
-                            from: fireTime
-                        )
-                        
-                        if let fireDate = calendar.date(
-                            byAdding: components,
+                        if let fireDate = Calendar.current.date(
+                            byAdding: fireTime,
                             to: dayDate
-                            ), fireDate.isFuture {
+                        ), fireDate.isFuture {
                             fireDates.append(fireDate)
                         }
                     }

@@ -122,14 +122,15 @@ class HabitCreationTableViewController: UITableViewController, HabitDaysSelectio
                 return
             }
             
+            // TODO: Pass the fire times as dateComponents.
             if self.habit == nil {
                 _ = self.habitStore.create(
                     using: context,
                     user: user,
                     name: self.name!,
                     color: HabitMO.Color.green, // TODO: Use a real enum value.
-                    days: self.days!,
-                    and: self.selectedNotificationFireTimes
+                    days: self.days!//,
+//                    and: self.selectedNotificationFireTimes
                 )
             } else {
                 // If there's a previous habit, update it with the new values.
@@ -137,8 +138,8 @@ class HabitCreationTableViewController: UITableViewController, HabitDaysSelectio
                     self.habit!,
                     using: context,
                     name: self.name,
-                    days: self.days,
-                    and: self.selectedNotificationFireTimes
+                    days: self.days//,
+//                    and: self.selectedNotificationFireTimes
                 )
             }
             

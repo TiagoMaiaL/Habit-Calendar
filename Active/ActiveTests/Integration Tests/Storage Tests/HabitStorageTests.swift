@@ -142,6 +142,46 @@ class HabitStorageTests: IntegrationTestCase {
         }
     }
     
+    func testHabitCreationByPassingFireTimes() {
+        XCTMarkNotImplemented()
+        
+        // 1. Declare the fire times' components.
+        let fireTimes = [
+            DateComponents(
+                hour: Int.random(0..<59),
+                minute: Int.random(0..<59)
+            ),
+            DateComponents(
+                hour: Int.random(0..<59),
+                minute: Int.random(0..<59)
+            ),
+            DateComponents(
+                hour: Int.random(0..<59),
+                minute: Int.random(0..<59)
+            )
+        ]
+        
+        // 2. Create the habit.
+        let habit = habitStorage.create(
+            using: context,
+            user: factories.user.makeDummy(),
+            name: "exercise",
+            color: .red,
+            days: [Date().byAddingDays(15)!],
+            and: fireTimes
+        )
+        
+        // 3. Make assertions on the habit's fire times.
+        XCTAssertNotNil(
+            habit.fireTimes,
+            "The habit should have fireTimes created with it."
+        )
+        XCTAssertTrue(
+            habit.fireTimes?.count == fireTimes.count,
+            "The habit should have notifications created with it."
+        )
+    }
+    
     func testHabitFetchedResultsControllerFactory() {
         // Get the fetched results controller.
         let fetchedResultsController = habitStorage.makeFetchedResultsController(context: context)
@@ -320,17 +360,46 @@ class HabitStorageTests: IntegrationTestCase {
         }
     }
     
-    func testHabitEditionWithNotificationProperty() {
-        // 1. Create a empty dummy habit.
+    func testHabitEditionWithFireTimesPropertyShouldCreateFireTimeEntities() {
+        // 1. Create a dummy habit.
         let dummyHabit = factories.habit.makeDummy()
         
         // 2. Declare the fire times.
         let fireTimes = [
-            Date().getBeginningOfDay().byAddingMinutes(15)!,
-            Date().getBeginningOfDay().byAddingMinutes(120)!
+            DateComponents(hour: 02, minute: 30),
+            DateComponents(hour: 12, minute: 15),
+            DateComponents(hour: 15, minute: 45)
+        ]
+        
+        // 3. Edit the habit by passing the fire times.
+        _ = habitStorage.edit(
+            dummyHabit,
+            using: context,
+            and: fireTimes
+        )
+        
+        // 4. Check if FireTimeMO entities were created.
+        XCTAssertNotNil(
+            dummyHabit.fireTimes,
+            "The habit's edition should have created FireTimeMO entities."
+        )
+        XCTAssertTrue(
+            dummyHabit.fireTimes?.count == fireTimes.count,
+            "The habit's edition should have created FireTimeMO entities."
+        )
+    }
+    
+    func testHabitEditionWithFireTimesPropertyShouldCreateNotifications() {
+        // 1. Create a dummy habit.
+        let dummyHabit = factories.habit.makeDummy()
+        
+        // 2. Declare the fire times.
+        let fireTimes = [
+            DateComponents(hour: 15, minute: 30),
+            DateComponents(hour: 11, minute: 15),
         ]
 
-        // 3. Create the notifications by providing the dates.
+        // 3. Create the notifications by providing the components.
         _ = habitStorage.edit(
             dummyHabit,
             using: context,
@@ -341,7 +410,6 @@ class HabitStorageTests: IntegrationTestCase {
         // 4.1. Check if the count is the expected one.
         
         // Get only the future days for counting.
-        
         guard let futureDays = (dummyHabit.days as? Set<HabitDayMO>)?.filter({ $0.day?.date?.isFuture ?? false }) else {
             XCTFail("Couldn't get the dummy habit's future days for comparision.")
             return
@@ -379,10 +447,10 @@ class HabitStorageTests: IntegrationTestCase {
         let days = (1..<Int.random(2..<50)).compactMap {
             Date().byAddingDays($0)
         }
-        let fireDates = [
-            Date().getBeginningOfDay().byAddingMinutes(150),
-            Date().getBeginningOfDay().byAddingMinutes(4 * 60)
-        ].compactMap { $0 }
+        let fireTimes = [
+            DateComponents(hour: 18, minute: 30),
+            DateComponents(hour: 12, minute: 15),
+        ]
         
         // 2. Create the habit.
         let createdHabit = habitStorage.create(
@@ -391,7 +459,7 @@ class HabitStorageTests: IntegrationTestCase {
             name: "Testing notifications",
             color: .red,
             days: days,
-            and: fireDates
+            and: fireTimes
         )
         
         // Use a timer to make the assertions on the scheduling of user
@@ -402,13 +470,13 @@ class HabitStorageTests: IntegrationTestCase {
             // - Assert on the count of notifications and user notifications.
             XCTAssertEqual(
                 createdHabit.notifications?.count,
-                days.count * fireDates.count
+                days.count * fireTimes.count
             )
             self.notificationCenterMock.getPendingNotificationRequests {
                 requests in
                 XCTAssertEqual(
                     requests.count,
-                    days.count * fireDates.count
+                    days.count * fireTimes.count
                 )
                 
                 // - Assert on the identifiers of each notificationMO and
@@ -452,7 +520,7 @@ class HabitStorageTests: IntegrationTestCase {
         
         // 3. Edit the habit.
         
-        // 4. 
+        // 4.
         
         wait(for: [rescheduleExpectation], timeout: 0.2)
     }

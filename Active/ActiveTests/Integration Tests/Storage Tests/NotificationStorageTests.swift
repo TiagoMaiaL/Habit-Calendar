@@ -160,7 +160,7 @@ class NotificationStorageTests: IntegrationTestCase {
         let dummyHabit = factories.habit.makeDummy()
         
         // Declare the fire times to be used.
-        let fireTime = Date().getBeginningOfDay().byAddingMinutes(70)!
+        let fireTime = DateComponents(hour: 12, minute: 55)
         
         // Create the fire dates by calling the factory.
         let fireDates = notificationStorage.createNotificationFireDatesFrom(
@@ -185,12 +185,12 @@ class NotificationStorageTests: IntegrationTestCase {
             // Assert on the time components (minute and hours).
             XCTAssertEqual(
                 fireDate.components.minute,
-                fireTime.components.minute,
+                fireTime.minute,
                 "The generated fire date doesn't have the correct minutes."
             )
             XCTAssertEqual(
                 fireDate.components.hour,
-                fireTime.components.hour,
+                fireTime.hour,
                 "The generated fire date doesn't have the correct hours."
             )
             
@@ -218,7 +218,7 @@ class NotificationStorageTests: IntegrationTestCase {
         let dummyHabit = factories.habit.makeDummy()
         
         // Declare the fireTime to be used.
-        let fireTime = Date().getBeginningOfDay().byAddingMinutes(130)!
+        let fireTime = DateComponents(hour: 07, minute: 45)
         
         // Create the fire dates for the habit.
         let fireDates = notificationStorage.createNotificationFireDatesFrom(
