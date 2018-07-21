@@ -25,6 +25,9 @@ class HabitStorage {
     /// The user notifications scheduler.
     private let notificationScheduler: NotificationScheduler
     
+    /// The fire time used to create and associate the FireTimeMO entities.
+    private let fireTimeStorage: FireTimeStorage
+    
     // MARK: - Initializers
     
     /// Creates a new HabitStorage class using the provided persistent container.
@@ -32,10 +35,13 @@ class HabitStorage {
     /// - Parameter notificationStorage: The notification storage used to edit the entities' notifications.
     init(habitDayStorage: HabitDayStorage,
          notificationStorage: NotificationStorage,
-         notificationScheduler: NotificationScheduler) {
+         notificationScheduler: NotificationScheduler,
+         fireTimeStorage: FireTimeStorage
+    ) {
         self.habitDayStorage = habitDayStorage
         self.notificationStorage = notificationStorage
         self.notificationScheduler = notificationScheduler
+        self.fireTimeStorage = fireTimeStorage
     }
     
     // MARK: - Imperatives
@@ -194,6 +200,15 @@ class HabitStorage {
         habit: HabitMO,
         fireTimes: [DateComponents]
     ) -> [NotificationMO] {
+        // Create and associate the FireTimeMO entities with the habit.
+        for fireTime in fireTimes {
+            _ = fireTimeStorage.create(
+                using: context,
+                components: fireTime,
+                andHabit: habit
+            )
+        }
+        
         // Get the notification fire dates.
         let fireDates = notificationStorage.createNotificationFireDatesFrom(
             habit: habit,

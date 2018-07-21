@@ -52,7 +52,8 @@ class HabitStorageTests: IntegrationTestCase {
         habitStorage = HabitStorage(
             habitDayStorage: habitDayStorage,
             notificationStorage: notificationStorage,
-            notificationScheduler: notificationScheduler
+            notificationScheduler: notificationScheduler,
+            fireTimeStorage: FireTimeStorage()
         )
     }
     
@@ -143,8 +144,6 @@ class HabitStorageTests: IntegrationTestCase {
     }
     
     func testHabitCreationByPassingFireTimes() {
-        XCTMarkNotImplemented()
-        
         // 1. Declare the fire times' components.
         let fireTimes = [
             DateComponents(
@@ -172,10 +171,6 @@ class HabitStorageTests: IntegrationTestCase {
         )
         
         // 3. Make assertions on the habit's fire times.
-        XCTAssertNotNil(
-            habit.fireTimes,
-            "The habit should have fireTimes created with it."
-        )
         XCTAssertTrue(
             habit.fireTimes?.count == fireTimes.count,
             "The habit should have notifications created with it."
@@ -379,10 +374,6 @@ class HabitStorageTests: IntegrationTestCase {
         )
         
         // 4. Check if FireTimeMO entities were created.
-        XCTAssertNotNil(
-            dummyHabit.fireTimes,
-            "The habit's edition should have created FireTimeMO entities."
-        )
         XCTAssertTrue(
             dummyHabit.fireTimes?.count == fireTimes.count,
             "The habit's edition should have created FireTimeMO entities."

@@ -62,7 +62,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private(set) lazy var habitStorage: HabitStorage = HabitStorage(
         habitDayStorage: habitDayStorage,
         notificationStorage: notificationStorage,
-        notificationScheduler: notificationScheduler
+        notificationScheduler: notificationScheduler,
+        fireTimeStorage: FireTimeStorage()
     )
     
     // MARK: Delegate methods
