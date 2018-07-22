@@ -123,21 +123,19 @@ class NotificationStorage {
     ) -> [Date] {
         var fireDates = [Date]()
         
-        if let habitDays = habit.days as? Set<HabitDayMO> {
-            for habitDay in habitDays {
-                // Get the current day's date.
-                if let dayDate = habitDay.day?.date?.getBeginningOfDay() {
-                    
-                    // For each fire time, create new fire dates by combining
-                    // the components with the day's date.
-                    for fireTime in fireTimes {
-                        // Get the calendar.
-                        if let fireDate = Calendar.current.date(
-                            byAdding: fireTime,
-                            to: dayDate
-                        ), fireDate.isFuture {
-                            fireDates.append(fireDate)
-                        }
+        for habitDay in habit.getFutureDays() {
+            // Get the current day's date.
+            if let dayDate = habitDay.day?.date?.getBeginningOfDay() {
+                
+                // For each fire time, create new fire dates by combining
+                // the components with the day's date.
+                for fireTime in fireTimes {
+                    // Get the calendar.
+                    if let fireDate = Calendar.current.date(
+                        byAdding: fireTime,
+                        to: dayDate
+                    ), fireDate.isFuture {
+                        fireDates.append(fireDate)
                     }
                 }
             }

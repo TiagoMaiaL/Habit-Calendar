@@ -39,6 +39,7 @@
 		47AA365521037B8B0008D2DC /* FireTimeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AA365421037B8B0008D2DC /* FireTimeTests.swift */; };
 		47AA3657210382380008D2DC /* FireTimeStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AA3656210382380008D2DC /* FireTimeStorageTests.swift */; };
 		47AA3659210382AB0008D2DC /* FireTimeStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AA3658210382AB0008D2DC /* FireTimeStorage.swift */; };
+		47AA365B2104D5E60008D2DC /* FireTimeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AA365A2104D5E60008D2DC /* FireTimeFactory.swift */; };
 		47D7003B2100F72A00F4FE88 /* OffensiveTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D7003A2100F72A00F4FE88 /* OffensiveTests.swift */; };
 		47D7003D210179F600F4FE88 /* NotificationScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D7003C210179F600F4FE88 /* NotificationScheduler.swift */; };
 		47D7004121017D0A00F4FE88 /* NotificationSchedulerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D7004021017D0A00F4FE88 /* NotificationSchedulerTests.swift */; };
@@ -121,6 +122,7 @@
 		47AA365421037B8B0008D2DC /* FireTimeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireTimeTests.swift; sourceTree = "<group>"; };
 		47AA3656210382380008D2DC /* FireTimeStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireTimeStorageTests.swift; sourceTree = "<group>"; };
 		47AA3658210382AB0008D2DC /* FireTimeStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireTimeStorage.swift; sourceTree = "<group>"; };
+		47AA365A2104D5E60008D2DC /* FireTimeFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireTimeFactory.swift; sourceTree = "<group>"; };
 		47D7003A2100F72A00F4FE88 /* OffensiveTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffensiveTests.swift; sourceTree = "<group>"; };
 		47D7003C210179F600F4FE88 /* NotificationScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationScheduler.swift; sourceTree = "<group>"; };
 		47D7004021017D0A00F4FE88 /* NotificationSchedulerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSchedulerTests.swift; sourceTree = "<group>"; };
@@ -317,6 +319,7 @@
 				475C96A720DF20A500212E1F /* NotificationFactory.swift */,
 				475C96A920DF235000212E1F /* HabitDayFactory.swift */,
 				47D8308D20FD1490002D3A97 /* DaysSequenceFactory.swift */,
+				47AA365A2104D5E60008D2DC /* FireTimeFactory.swift */,
 			);
 			path = "Dummy Factories";
 			sourceTree = "<group>";
@@ -593,6 +596,7 @@
 				47E6C21020EB1233003BDB4D /* SeedManager.swift in Sources */,
 				4713A20420C16542008A13D2 /* NotificationMO.swift in Sources */,
 				4737313C20F3D7AD00895DD2 /* CalendarDayCell.swift in Sources */,
+				47AA365B2104D5E60008D2DC /* FireTimeFactory.swift in Sources */,
 				4725D06120CA06EE00C3B63F /* DayStorage.swift in Sources */,
 				4725D05F20C97D9C00C3B63F /* UserStorage.swift in Sources */,
 				47E6C21620EB12B6003BDB4D /* NotificationFactory.swift in Sources */,

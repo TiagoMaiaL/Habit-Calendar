@@ -9,12 +9,12 @@
 import Foundation
 import CoreData
 
-/// Factory in charge of generating HabitDayMO dummies.
+/// Factory in charge of generating DaysSequenceMO dummies.
 struct DaysSequenceFactory: DummyFactory {
     
     // MARK: Types
     
-    // This factory generates entities of the HabitDay class.
+    // This factory generates entities of the DaysSequenceMO class.
     typealias Entity = DaysSequenceMO
     
     // MARK: Properties
@@ -26,7 +26,7 @@ struct DaysSequenceFactory: DummyFactory {
     /// Generates a new DaysSequence dummy.
     /// - Note: The generated dummy and its days don't have the an associated
     ///         Habit.
-    /// - Returns: The generated HabitDay dummy as a NSManagedObject.
+    /// - Returns: The generated DaysSequenceMO dummy as a NSManagedObject.
     func makeDummy() -> DaysSequenceMO {
         // Declare the dates used to create the sequence.
         let dates = (0..<Int.random(1..<50)).compactMap {

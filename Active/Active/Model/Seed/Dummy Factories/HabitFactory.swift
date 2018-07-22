@@ -56,22 +56,40 @@ struct HabitFactory: DummyFactory {
         habit.color = HabitMO.Color.green.rawValue
         
         // Associate its relationships:
+        let fireTimeFactory = FireTimeFactory(context: context)
+        let fireTimes = [
+            fireTimeFactory.makeDummy(),
+            fireTimeFactory.makeDummy()
+        ]
+        habit.addToFireTimes(Set(fireTimes) as NSSet)
+        
         let notificationFactory = NotificationFactory(context: context)
         let sequenceFactory = DaysSequenceFactory(context: context)
         let dummySequence = sequenceFactory.makeDummy()
         dummySequence.habit = habit
         
-        if let habitDays = dummySequence.days as? Set<HabitDayMO> {
-            for habitDay in habitDays {
-                habitDay.habit = habit
-                
-                let notification = notificationFactory.makeDummy()
-                if habitDay.day?.date?.isPast ?? true {
-                    notification.fireDate = Date().byAddingMinutes(60)
-                } else {
-                    notification.fireDate = habitDay.day!.date
+        let habitDays = dummySequence.days as! Set<HabitDayMO>
+        
+        // For each day, generate the notifications based on the fire times and
+        // the habit's day.
+        for habitDay in habitDays {
+            habitDay.habit = habit
+            
+            for fireTime in fireTimes {
+                // Create the fireDate by appending the date to the fireTime's
+                // components.
+                if var fireDate = Calendar.current.date(
+                    byAdding: fireTime.getFireTimeComponents(),
+                    to: habitDay.day!.date!
+                ) {
+                    if fireDate.isPast {
+                        fireDate = Date().byAddingMinutes(60)!
+                    }
+                    
+                    let notification = notificationFactory.makeDummy()
+                    notification.fireDate = fireDate
+                    notification.habit = habit
                 }
-                notification.habit = habit
             }
         }
         

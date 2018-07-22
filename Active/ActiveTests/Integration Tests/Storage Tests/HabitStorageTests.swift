@@ -374,8 +374,9 @@ class HabitStorageTests: IntegrationTestCase {
         )
         
         // 4. Check if FireTimeMO entities were created.
-        XCTAssertTrue(
-            dummyHabit.fireTimes?.count == fireTimes.count,
+        XCTAssertEqual(
+            dummyHabit.fireTimes?.count,
+            fireTimes.count,
             "The habit's edition should have created FireTimeMO entities."
         )
     }
@@ -511,7 +512,10 @@ class HabitStorageTests: IntegrationTestCase {
         
         // 3. Edit the habit.
         
-        // 4.
+        // 4. Make the appropriated assertions:
+        // - assert on the number of notification entities
+        // - assert that all notifications were properly scheduled.
+        // - assert on the number of user notifications
         
         wait(for: [rescheduleExpectation], timeout: 0.2)
     }

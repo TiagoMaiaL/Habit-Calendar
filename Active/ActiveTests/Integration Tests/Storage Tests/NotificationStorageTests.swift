@@ -170,7 +170,6 @@ class NotificationStorageTests: IntegrationTestCase {
         
         // Assert on the generated fire dates:
         // The amount of dates -> days.count * fireTimes.count
-        
         XCTAssertEqual(
             dummyHabit.getFutureDays().count,
             fireDates.count,

@@ -159,6 +159,14 @@ class HabitStorage {
         if let fireTimes = notificationFireTimes {
             assert(!fireTimes.isEmpty, "HabitStorage -- edit: notifications argument shouldn't be empty.")
             
+            // Remove the current fire times.
+            if let fireTimes = habit.fireTimes as? Set<FireTimeMO> {
+                for fireTime in fireTimes {
+                    habit.removeFromFireTimes(fireTime)
+                    context.delete(fireTime)
+                }
+            }
+            
             if let notifications = habit.notifications as? Set<NotificationMO> {
                 // Unschedule all user notifications associated with
                 // the entities.
