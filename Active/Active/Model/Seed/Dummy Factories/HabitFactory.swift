@@ -94,6 +94,10 @@ struct HabitFactory: DummyFactory {
         }
         
         assert(
+            (habit.fireTimes?.count ?? 0) > 0,
+            "The generated dummy must have fire times."
+        )
+        assert(
             (habit.daysSequences?.count ?? 0) > 0,
             "The generated dummy habit must have a sequence."
         )

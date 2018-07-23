@@ -134,7 +134,7 @@ class NotificationStorage {
                     if let fireDate = Calendar.current.date(
                         byAdding: fireTime,
                         to: dayDate
-                    ), fireDate.isFuture {
+                    ) {
                         fireDates.append(fireDate)
                     }
                 }

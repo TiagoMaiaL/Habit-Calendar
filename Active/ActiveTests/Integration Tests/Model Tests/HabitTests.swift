@@ -199,6 +199,65 @@ class HabitTests: IntegrationTestCase {
         )
     }
     
+    func testGettingCurrentSequenceShouldReturnNil() {
+        // 1. Declare an empty habit.
+        let emptyHabit = makeEmptyDummy()
+        
+        // 2. Assert is current sequence is nil.
+        XCTAssertNil(
+            emptyHabit.getCurrentSequence(),
+            "An empty habit shouldn't return any current sequence."
+        )
+    }
+    
+    func testGettingTheOnlyCurrentSequence() {
+        // 1. Declare an empty habit.
+        let emptyHabit = makeEmptyDummy()
+        
+        // 2. Add a DaysSequence to it.
+        let sequenceFactory = DaysSequenceFactory(context: context)
+        let sequence = sequenceFactory.makeDummy()
+        emptyHabit.addToDaysSequences(sequence)
+        
+        // 3. Assert it's returned when getting the current sequence.
+        XCTAssertEqual(
+            emptyHabit.getCurrentSequence(),
+            sequence,
+            "The current sequence should be correctly returned."
+        )
+    }
+    
+    func testGettingTheCurrentSequenceAmongMany() {
+        // 1. Declare an empty habit.
+        let emptyHabit = makeEmptyDummy()
+        
+        // 2. Add 3 DaysSequence entities to it.
+        let sequence1 = DaysSequenceMO(context: context)
+        sequence1.fromDate = Date().byAddingDays(-60)!.getBeginningOfDay()
+        sequence1.toDate = Date().byAddingDays(-50)!.getBeginningOfDay()
+        
+        let sequence2 = DaysSequenceMO(context: context)
+        sequence2.fromDate = Date().byAddingDays(-48)!.getBeginningOfDay()
+        sequence2.toDate = Date().byAddingDays(-30)!.getBeginningOfDay()
+        
+        let currentSequence = DaysSequenceMO(context: context)
+        currentSequence.fromDate = Date().getBeginningOfDay()
+        currentSequence.toDate = Date().byAddingDays(10)!.getBeginningOfDay()
+        
+        emptyHabit.addToDaysSequences(
+            [sequence1, sequence2, currentSequence]
+        )
+        
+        // 3. Assert it returns the current and correct one.
+        XCTAssertEqual(
+            emptyHabit.getCurrentSequence(),
+            currentSequence,
+            "The habit should return its current sequence among all of the added ones."
+        )
+    }
+    
+    // MARK: Imperatives
+    
     private func makeEmptyDummy() -> HabitMO {
         let habit = HabitMO(context: context)
         // Associate it's properties (id, created, name, color).

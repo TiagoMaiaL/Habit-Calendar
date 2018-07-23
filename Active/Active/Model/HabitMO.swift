@@ -103,4 +103,17 @@ class HabitMO: NSManagedObject {
             return []
         }
     }
+    
+    /// Returns the current sequence.
+    /// - Note: The current sequence is a DaysSequence containing the current
+    ///         date within its range (fromDate, toDate).
+    func getCurrentSequence() -> DaysSequenceMO? {
+        let today = Date().getBeginningOfDay()
+        let currentPredicate = NSPredicate(
+            format: "fromDate <= %@ AND %@ <= toDate",
+            today as NSDate,
+            today as NSDate
+        )
+        return daysSequences?.filtered(using: currentPredicate).first as? DaysSequenceMO
+    }
 }
