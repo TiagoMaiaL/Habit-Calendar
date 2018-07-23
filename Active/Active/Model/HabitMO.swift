@@ -108,7 +108,7 @@ class HabitMO: NSManagedObject {
     /// - Note: The current sequence is a DaysSequence containing the current
     ///         date within its range (fromDate, toDate).
     func getCurrentSequence() -> DaysSequenceMO? {
-        let today = Date().getBeginningOfDay()
+        let today = Date()
         let currentPredicate = NSPredicate(
             format: "fromDate <= %@ AND %@ <= toDate",
             today as NSDate,

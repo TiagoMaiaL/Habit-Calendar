@@ -45,6 +45,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         calendarDayStorage: dayStorage
     )
     
+    /// The app's DaysSequenceStorage.
+    private (set) lazy var daysSequenceStorage = DaysSequenceStorage(
+        habitDayStorage: habitDayStorage
+    )
+    
     /// The app's UserNotificationManager in charge of all local
     /// user notifications.
     private(set) lazy var notificationManager = UserNotificationManager(
@@ -60,7 +65,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     /// The app's Habit storage that's going to be used by the controllers.
     private(set) lazy var habitStorage: HabitStorage = HabitStorage(
-        habitDayStorage: habitDayStorage,
+        daysSequenceStorage: daysSequenceStorage,
         notificationStorage: notificationStorage,
         notificationScheduler: notificationScheduler,
         fireTimeStorage: FireTimeStorage()

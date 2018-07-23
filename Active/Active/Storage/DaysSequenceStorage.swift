@@ -46,7 +46,7 @@ class DaysSequenceStorage {
         // Configure its main properties:
         sequence.id = UUID().uuidString
         sequence.createdAt = Date()
-        sequence.fromDate = daysDates.sorted().first!
+        sequence.fromDate = Date().getBeginningOfDay()
         sequence.toDate = daysDates.sorted().last!
         
         // Associate its habit entity.

@@ -17,6 +17,7 @@ class HabitStorageTests: IntegrationTestCase {
     
     var dayStorage: DayStorage!
     var habitDayStorage: HabitDayStorage!
+    var daysSequenceStorage: DaysSequenceStorage!
     var notificationStorage: NotificationStorage!
     var notificationCenterMock: UserNotificationCenterMock!
     var notificationScheduler: NotificationScheduler!
@@ -35,6 +36,10 @@ class HabitStorageTests: IntegrationTestCase {
             calendarDayStorage: dayStorage
         )
         
+        daysSequenceStorage = DaysSequenceStorage(
+            habitDayStorage: habitDayStorage
+        )
+        
         // Initialize the notification manager used by the storage.
         notificationCenterMock = UserNotificationCenterMock(
             withAuthorization: false
@@ -50,7 +55,7 @@ class HabitStorageTests: IntegrationTestCase {
         
         // Initialize dayStorage using the persistent container created for tests.
         habitStorage = HabitStorage(
-            habitDayStorage: habitDayStorage,
+            daysSequenceStorage: daysSequenceStorage,
             notificationStorage: notificationStorage,
             notificationScheduler: notificationScheduler,
             fireTimeStorage: FireTimeStorage()
@@ -61,6 +66,7 @@ class HabitStorageTests: IntegrationTestCase {
         // Remove the initialized storages.
         dayStorage = nil
         habitDayStorage = nil
+        daysSequenceStorage = nil
         notificationScheduler = nil
         notificationStorage = nil
         habitStorage = nil
@@ -108,17 +114,27 @@ class HabitStorageTests: IntegrationTestCase {
             "Created habit should have the creation date."
         )
         
-        // Check the habit's days.
+        // Check the habit's days and sequence.
+        XCTAssertEqual(
+            joggingHabit.daysSequences?.count,
+            1,
+            "The habit should have a sequence containing all habit days."
+        )
+        guard let sequence = (joggingHabit.daysSequences as? Set<DaysSequenceMO>)?.first else {
+            XCTFail("Couldn't get the generated days sequence.")
+            return
+        }
+        
         XCTAssertNotNil(
-            joggingHabit.days,
+            sequence.days,
             "Created habit should have the HabitDays property."
         )
         XCTAssert(
-            joggingHabit.days!.count == days.count,
+            sequence.days?.count == days.count,
             "Created habit should have the expected amount of HabitDays."
         )
         
-        guard let habitDays = joggingHabit.days as? Set<HabitDayMO> else {
+        guard let habitDays = sequence.days as? Set<HabitDayMO> else {
             XCTFail("Couldn't cast the days property to a Set with HabitDay entities.")
             return
         }
@@ -166,7 +182,7 @@ class HabitStorageTests: IntegrationTestCase {
             user: factories.user.makeDummy(),
             name: "exercise",
             color: .red,
-            days: [Date().byAddingDays(15)!],
+            days: [Date().byAddingDays(10)!, Date().byAddingDays(15)!],
             and: fireTimes
         )
         
@@ -258,7 +274,7 @@ class HabitStorageTests: IntegrationTestCase {
         )
     }
     
-    func testHabitEditionWithDaysProperty() {
+    func testHabitEditionWithDaysPropertyShouldCreateNewSequence() {
         // 1. Declare a dummy habit.
         let dummyHabit = factories.habit.makeDummy()
         
@@ -274,16 +290,28 @@ class HabitStorageTests: IntegrationTestCase {
             days: daysDates
         )
         
-        // 4. Make assertions on the days:
-        // 4.1. Assert on the days' count.
+        // 4. Make assertions on the days and sequence:
+        // 4.1. Assert on the days sequence.
         XCTAssertEqual(
-            dummyHabit.days?.count,
-            daysDates.count,
-            "The Habit days should be correclty set and have the expected count."
+            dummyHabit.daysSequences?.count,
+            2,
+            "A new daysSequence should have been created after the days edition."
         )
         
-        // 4.2. Assert on the days' dates.
-        guard let habitDays = dummyHabit.days as? Set<HabitDayMO> else {
+        guard let sequence = dummyHabit.getCurrentSequence() else {
+            XCTFail("Couldn't get the current sequence.")
+            return
+        }
+        
+        // 4.2. Assert on the days' count.
+        XCTAssertEqual(
+            sequence.days?.count,
+            daysDates.count,
+            "The Habit days should be correctly set and have the expected count."
+        )
+        
+        // 4.3. Assert on the days' dates.
+        guard let habitDays = sequence.days as? Set<HabitDayMO> else {
             XCTFail("Couldn't get the edited habit days.")
             return
         }
@@ -294,63 +322,6 @@ class HabitStorageTests: IntegrationTestCase {
                     habitDay.day?.date?.description ?? ""
                 ),
                 "The new added day should have a correct day among the specified ones."
-            )
-        }
-    }
-    
-    func testHabitEditionWithDaysPropertiesThatAreOnlyInTheFuture() {
-        // 1. Declare a dummy habit.
-        let dummyHabit = factories.habit.makeDummy()
-        
-        // 2. Add 3 past (The date is before than today) habit days to it.
-        let pastDays = (1...3).compactMap {
-            Date().byAddingDays($0 * -1)
-        }
-        _ = habitStorage.edit(
-            dummyHabit,
-            using: context,
-            days: pastDays
-        )
-        
-        // 3. Make the edition of habit days to replace the existing ones
-        //    that are future.
-        // 3.1. Edit the dummy habit.
-        _ = habitStorage.edit(
-            dummyHabit,
-            using: context,
-            days: (1...10).compactMap({
-                Date().byAddingDays($0)
-            })
-        )
-        
-        // 4. Make the assertions on the added days and on the past ones.
-        // 4.1. The days should have the expected count (past + added).
-        XCTAssertEqual(
-            13,
-            dummyHabit.days?.count,
-            "The habit's days should have the expected count (past + added)."
-        )
-        
-        // 4.2. The past days shouldn't be edited.
-        // 4.2.1. Get the dummy habit's past days.
-        let predicate = NSPredicate(format: "day.date < %@", Date() as NSDate)
-        guard let pastHabitDays = dummyHabit.days?.filtered(using: predicate) as? Set<HabitDayMO> else {
-            XCTFail("Couldn't get the past habit days.")
-            return
-        }
-        
-        // 4.2.1. Make the assertions.
-        XCTAssertEqual(
-            pastHabitDays.count,
-            pastDays.count,
-            "The edition shouldn't affect the past days. The count of the habit's past days is wrong."
-        )
-        for pastHabitDay in pastHabitDays {
-            XCTAssertTrue(
-                pastDays.map({ $0.getBeginningOfDay().description }).contains(
-                    pastHabitDay.day?.date?.description ?? ""
-                ),
-                "The past day's date should be contained within the expected ones."
             )
         }
     }
@@ -500,22 +471,58 @@ class HabitStorageTests: IntegrationTestCase {
     }
     
     func testEditingHabitDaysShouldRescheduleUserNotifications() {
-        XCTMarkNotImplemented()
-        
         let rescheduleExpectation = XCTestExpectation(
             description: "Reschedules the user notifications after changing the days dates."
         )
         
+        // Enable the mock's authorization to schedule the notifications.
+        notificationCenterMock.shouldAuthorize = true
+        
         // 1. Declare the dummy habit.
+        let dummyHabit = factories.habit.makeDummy()
         
         // 2. Declare the new days dates.
+        let days = (0..<Int.random(1..<50)).compactMap {
+            Date().byAddingDays($0)
+        }
         
         // 3. Edit the habit.
+        _ = habitStorage.edit(
+            dummyHabit,
+            using: context,
+            days: days
+        )
         
         // 4. Make the appropriated assertions:
         // - assert on the number of notification entities
-        // - assert that all notifications were properly scheduled.
-        // - assert on the number of user notifications
+        XCTAssertEqual(
+            dummyHabit.notifications?.count,
+            dummyHabit.getFutureDays().count * dummyHabit.fireTimes!.count,
+            "The amount of notifications should be the number of future days * the fire times."
+        )
+        
+        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) {
+            _ in
+            
+            // - assert on the number of user notifications
+            self.notificationCenterMock.getPendingNotificationRequests {
+                requests in
+                
+                XCTAssertEqual(
+                    requests.count,
+                    dummyHabit.notifications?.count,
+                    "The user notifications weren't properly scheduled."
+                )
+                
+                // - assert that all notifications were properly scheduled.
+                XCTAssertTrue(
+                    (dummyHabit.notifications as! Set<NotificationMO>).filter { !$0.wasScheduled }.count == 0,
+                    "The notifications weren't properly scheduled."
+                )
+                
+                rescheduleExpectation.fulfill()
+            }
+        }
         
         wait(for: [rescheduleExpectation], timeout: 0.2)
     }
