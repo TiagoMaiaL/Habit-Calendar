@@ -482,7 +482,7 @@ class HabitStorageTests: IntegrationTestCase {
         let dummyHabit = factories.habit.makeDummy()
         
         // 2. Declare the new days dates.
-        let days = (0..<Int.random(1..<50)).compactMap {
+        let days = (1..<Int.random(2..<50)).compactMap {
             Date().byAddingDays($0)
         }
         
@@ -493,11 +493,16 @@ class HabitStorageTests: IntegrationTestCase {
             days: days
         )
         
+        guard let sequence = dummyHabit.getCurrentSequence() else {
+            XCTFail("Couldn't get the added sequence of days.")
+            return
+        }
+        
         // 4. Make the appropriated assertions:
-        // - assert on the number of notification entities
+        // - assert on the number of notification entities:
         XCTAssertEqual(
             dummyHabit.notifications?.count,
-            dummyHabit.getFutureDays().count * dummyHabit.fireTimes!.count,
+            sequence.days!.count * dummyHabit.fireTimes!.count,
             "The amount of notifications should be the number of future days * the fire times."
         )
         
@@ -528,10 +533,138 @@ class HabitStorageTests: IntegrationTestCase {
     }
     
     func testEditingHabitFireDatesShouldRescheduleUserNotifications() {
-        XCTMarkNotImplemented()
+        let rescheduleExpectation = XCTestExpectation(
+            description: "Reschedules the user notifications after changing the notifications fire times."
+        )
+        
+        // Enable the mock's authorization to schedule the notifications.
+        notificationCenterMock.shouldAuthorize = true
+        
+        // 1. Declare the dummy habit.
+        let dummyHabit = factories.habit.makeDummy()
+        
+        // 2. Declare the new fire tiems.
+        let fireTimes = [
+            DateComponents(
+                hour: Int.random(0..<23),
+                minute: Int.random(0..<59)
+            ),
+            DateComponents(
+                hour: Int.random(0..<23),
+                minute: Int.random(0..<59)
+            ),
+            DateComponents(
+                hour: Int.random(0..<23),
+                minute: Int.random(0..<59)
+            )
+        ]
+        
+        // 3. Edit the habit.
+        _ = habitStorage.edit(
+            dummyHabit,
+            using: context,
+            and: fireTimes
+        )
+        
+        // 4. Make the appropriated assertions:
+        // - assert on the number of notification entities:
+        XCTAssertEqual(
+            dummyHabit.notifications?.count,
+            dummyHabit.getFutureDays().count * fireTimes.count,
+            "The amount of notifications should be the number of future days * the fire times."
+        )
+        
+        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) {
+            _ in
+            
+            // - assert on the number of user notifications
+            self.notificationCenterMock.getPendingNotificationRequests {
+                requests in
+                
+                XCTAssertEqual(
+                    requests.count,
+                    dummyHabit.notifications?.count,
+                    "The user notifications weren't properly scheduled."
+                )
+                
+                // - assert that all notifications were properly scheduled.
+                XCTAssertTrue(
+                    (dummyHabit.notifications as! Set<NotificationMO>).filter { !$0.wasScheduled }.count == 0,
+                    "The notifications weren't properly scheduled."
+                )
+                
+                rescheduleExpectation.fulfill()
+            }
+        }
+        
+        wait(for: [rescheduleExpectation], timeout: 0.2)
     }
     
     func testEditingDaysAndFireDatesShouldRescheduleUserNotifications() {
-        XCTMarkNotImplemented()
+        let rescheduleExpectation = XCTestExpectation(
+            description: "Reschedules the user notifications after changing the days and the notifications fire times."
+        )
+        
+        // Enable the mock's authorization to schedule the notifications.
+        notificationCenterMock.shouldAuthorize = true
+        
+        // 1. Declare the dummy habit.
+        let dummyHabit = factories.habit.makeDummy()
+        
+        // 2. Declare the new days and fire tiems.
+        let days = (1..<Int.random(2..<50)).compactMap {
+            Date().byAddingDays($0)
+        }
+        let fireTimes = [
+            DateComponents(
+                hour: Int.random(0..<23),
+                minute: Int.random(0..<59)
+            ),
+            DateComponents(
+                hour: Int.random(0..<23),
+                minute: Int.random(0..<59)
+            ),
+        ]
+        
+        // 3. Edit the habit.
+        _ = habitStorage.edit(
+            dummyHabit,
+            using: context,
+            days: days,
+            and: fireTimes
+        )
+        
+        // 4. Make the appropriated assertions:
+        // - assert on the number of notification entities:
+        XCTAssertEqual(
+            dummyHabit.notifications?.count,
+            dummyHabit.getFutureDays().count * fireTimes.count,
+            "The amount of notifications should be the number of future days * the fire times."
+        )
+        
+        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) {
+            _ in
+            
+            // - assert on the number of user notifications
+            self.notificationCenterMock.getPendingNotificationRequests {
+                requests in
+                
+                XCTAssertEqual(
+                    requests.count,
+                    dummyHabit.notifications?.count,
+                    "The user notifications weren't properly scheduled."
+                )
+                
+                // - assert that all notifications were properly scheduled.
+                XCTAssertTrue(
+                    (dummyHabit.notifications as! Set<NotificationMO>).filter { !$0.wasScheduled }.count == 0,
+                    "The notifications weren't properly scheduled."
+                )
+                
+                rescheduleExpectation.fulfill()
+            }
+        }
+        
+        wait(for: [rescheduleExpectation], timeout: 0.2)
     }
 }
