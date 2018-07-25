@@ -26,7 +26,8 @@ class SeedManager {
     ///         containing the code in charge of the seed. This array will
     ///         be iterated and the blocks run with a given managed context.
     private let seedProcedures: [SeedProcedure] = [
-        { context in
+        {
+            context in
             print("Seeding user.")
             
             // Try to fetch any users in the database.
@@ -45,7 +46,8 @@ class SeedManager {
             // Make a new dummy.
             _ = userFactory.makeDummy()
         },
-        { context in
+        {
+            context in
             print("Seeding habits.")
             
             // Get the previously seeded user.
@@ -65,6 +67,50 @@ class SeedManager {
                 habit.user = user
             }
         },
+        {
+            context in
+            print("Seeding past past days to some habits.")
+            
+            // Seed a random amount of past habit days in the current sequences
+            // of some habits.
+            let habitsRequest: NSFetchRequest<HabitMO> = HabitMO.fetchRequest()
+            if let habits = try? context.fetch(habitsRequest) {
+                for habit in habits {
+                    // Get a random bool to decide if the past days should be
+                    // added to the current habit or not.
+                    if arc4random_uniform(2) == 0 {
+                        // Append a random amount of past days to the current
+                        // habit.
+                        let randomPastDays = (Int.random(-30 ..< -2) ..< 0).compactMap {
+                            Date().getBeginningOfDay().byAddingDays($0)
+                        }
+                        let pastHabitDays = randomPastDays.map {
+                            date -> DayMO in
+                            let day = DayMO(context: context)
+                            day.date = date
+                            day.id = UUID().uuidString
+                            
+                            return day
+                        }.map {
+                            day -> HabitDayMO in
+                            
+                            let habitDay = HabitDayMO(context: context)
+                            habitDay.id = UUID().uuidString
+                            habitDay.day = day
+                            
+                            return habitDay
+                        }
+                        
+                        habit.addToDays(Set(pastHabitDays) as NSSet)
+                        habit.getCurrentSequence()?.addToDays(Set(pastHabitDays) as NSSet)
+                    }
+                }
+            }
+        },
+        {
+            context in
+            print("Seeding random offensives to the habits that have past days.")
+        }
     ]
 
     // MARK: Initializers
