@@ -12,6 +12,15 @@ import CoreData
 /// tracked and executed on.
 class DaysSequenceMO: NSManagedObject {
     
+    // MARK: Life cycle
+    
+    override func didChangeValue(forKey key: String) {
+        super.didChangeValue(forKey: key)
+        
+        // TODO: Change fromDate property.
+        print("Changing \(key) ------ DaysSequenceMO")
+    }
+    
     // MARK: Imperatives
     
     /// Returns the sequence's current day (associated with today's date),
