@@ -5,11 +5,18 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
+        <array key="SF-Pro-Display-Semibold.otf">
+            <string>SFProDisplay-Semibold</string>
+        </array>
+        <array key="SF-Pro-Text-Light.otf">
+            <string>SFProText-Light</string>
+        </array>
         <array key="SF-Pro-Text-Regular.otf">
             <string>SFProText-Regular</string>
         </array>
@@ -19,7 +26,7 @@
         <scene sceneID="iX1-7u-bcd">
             <objects>
                 <tableViewController title="Habits" id="QhD-k9-yHg" customClass="HabitsTableViewController" customModule="Active" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="FRg-bt-DmY">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="FRg-bt-DmY">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -41,30 +48,85 @@
                             </constraints>
                         </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Habit table view cell" textLabel="GwK-Nl-Tef" detailTextLabel="WHP-Hi-ZcW" rowHeight="75" style="IBUITableViewCellStyleSubtitle" id="96w-aW-Ru5">
-                                <rect key="frame" x="0.0" y="98" width="375" height="75"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Habit table view cell" rowHeight="150" id="96w-aW-Ru5" customClass="HabitTableViewCell" customModule="Active" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="98" width="375" height="150"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="96w-aW-Ru5" id="qFl-HC-SWT">
-                                    <rect key="frame" x="0.0" y="0.0" width="341" height="74.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="150"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Read" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="GwK-Nl-Tef">
-                                            <rect key="frame" x="16" y="17" width="39" height="20.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="1 / 30 completed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="WHP-Hi-ZcW">
-                                            <rect key="frame" x="16" y="40.5" width="95" height="14.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NHh-F9-cft" userLabel="Card view">
+                                            <rect key="frame" x="26" y="21" width="323" height="108"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="iJD-cf-E77">
+                                                    <rect key="frame" x="16" y="16" width="291" height="76"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Play guitar" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bjx-cs-62X">
+                                                            <rect key="frame" x="0.0" y="0.0" width="116.5" height="28"/>
+                                                            <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="25"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="XUX-gI-rlJ">
+                                                            <rect key="frame" x="0.0" y="38" width="291" height="38"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="07 / 89 days" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hH7-d5-qyV">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="86.5" height="18"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="18" id="2OC-yd-NQl"/>
+                                                                    </constraints>
+                                                                    <fontDescription key="fontDescription" name="SFProText-Light" family="SF Pro Text" pointSize="15"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kQL-n5-UO9" userLabel="Progress view" customClass="ProgressView" customModule="Active" customModuleProvider="target">
+                                                                    <rect key="frame" x="0.0" y="26" width="291" height="12"/>
+                                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="12" id="Cty-pg-OVJ"/>
+                                                                    </constraints>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="color" keyPath="tint">
+                                                                            <color key="value" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="progress">
+                                                                            <real key="value" value="0.20000000000000001"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                    </userDefinedRuntimeAttributes>
+                                                                </view>
+                                                            </subviews>
+                                                            <constraints>
+                                                                <constraint firstItem="kQL-n5-UO9" firstAttribute="width" secondItem="XUX-gI-rlJ" secondAttribute="width" id="8bh-cW-w9H"/>
+                                                            </constraints>
+                                                        </stackView>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="XUX-gI-rlJ" firstAttribute="leading" secondItem="iJD-cf-E77" secondAttribute="leading" id="B3a-WQ-bTl"/>
+                                                        <constraint firstAttribute="trailing" secondItem="XUX-gI-rlJ" secondAttribute="trailing" id="lcz-hD-AR9"/>
+                                                    </constraints>
+                                                </stackView>
+                                            </subviews>
+                                            <color key="backgroundColor" red="0.92549019607843142" green="0.94117647058823528" blue="0.94509803921568625" alpha="1" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="iJD-cf-E77" secondAttribute="bottom" constant="16" id="4P7-to-f4s"/>
+                                                <constraint firstItem="iJD-cf-E77" firstAttribute="top" secondItem="NHh-F9-cft" secondAttribute="top" constant="16" id="Z0H-UR-1YY"/>
+                                                <constraint firstItem="iJD-cf-E77" firstAttribute="leading" secondItem="NHh-F9-cft" secondAttribute="leading" constant="16" id="v3E-nf-Mtd"/>
+                                                <constraint firstAttribute="trailing" secondItem="iJD-cf-E77" secondAttribute="trailing" constant="16" id="zer-a2-kwR"/>
+                                            </constraints>
+                                        </view>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailingMargin" secondItem="NHh-F9-cft" secondAttribute="trailing" constant="10" id="CaT-8f-Ozt"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="NHh-F9-cft" secondAttribute="bottom" constant="10" id="cMk-ha-AbG"/>
+                                        <constraint firstItem="NHh-F9-cft" firstAttribute="top" secondItem="qFl-HC-SWT" secondAttribute="topMargin" constant="10" id="oTg-WC-WGf"/>
+                                        <constraint firstItem="NHh-F9-cft" firstAttribute="leading" secondItem="qFl-HC-SWT" secondAttribute="leadingMargin" constant="10" id="vZv-0m-4dB"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="cardView" destination="NHh-F9-cft" id="qFl-YL-2Pi"/>
+                                    <outlet property="nameLabel" destination="Bjx-cs-62X" id="PRe-Gq-fcB"/>
+                                    <outlet property="progressBar" destination="kQL-n5-UO9" id="tl0-jn-udE"/>
+                                    <outlet property="progressLabel" destination="hH7-d5-qyV" id="ZCy-jz-BUe"/>
                                     <segue destination="wZd-FS-1mH" kind="show" identifier="Show habit details" id="1cB-T8-RhX"/>
                                 </connections>
                             </tableViewCell>

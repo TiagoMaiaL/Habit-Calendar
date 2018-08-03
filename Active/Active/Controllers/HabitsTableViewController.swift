@@ -160,12 +160,14 @@ class HabitsTableViewController: UITableViewController, NSFetchedResultsControll
         // Get the current habit object.
         let habit = fetchedResultsController.object(at: indexPath)
         
-        // Display the habit properties:
-        // Its name.
-        cell.textLabel?.text = habit.name
-        // Its progress.
-        cell.detailTextLabel?.text = "\(habit.executedCount)/\(habit.days?.count ?? 0) compleded"
-        
+        if let cell = cell as? HabitTableViewCell {
+            // Display the habit properties:
+            // Its name.
+            cell.nameLabel?.text = habit.name
+            // Its progress.
+            cell.progressLabel?.text = "\(habit.executedCount)/\(habit.days?.count ?? 0) days"
+        }
+
         return cell
     }
     
