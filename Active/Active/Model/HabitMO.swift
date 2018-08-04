@@ -16,11 +16,20 @@ class HabitMO: NSManagedObject {
     
     /// Enum representing all possible Habit colors.
     enum Color: Int16 {
-        // TODO: Describe all possible colors.
-        case green = 1,
+        case midnightBlue = 0,
+            amethyst,
+            pomegranate,
+            alizarin,
+            carrot,
+            orange,
             blue,
-            red,
-            purple
+            peterRiver,
+            belizeRole,
+            turquoise,
+            emerald
+        
+        /// The total amount of listed colors.
+        static let count = 11
     }
 
     // MARK: Properties

@@ -53,7 +53,9 @@ struct HabitFactory: DummyFactory {
         habit.id = UUID().uuidString
         habit.createdAt = Date()
         habit.name = names[Int.random(0..<names.count)]
-        habit.color = HabitMO.Color.green.rawValue
+        habit.color = HabitMO.Color(
+            rawValue: Int16(Int.random(0..<HabitMO.Color.count))
+        )!.rawValue
         
         // Associate its relationships:
         let fireTimeFactory = FireTimeFactory(context: context)

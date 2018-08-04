@@ -164,8 +164,9 @@ class HabitsTableViewController: UITableViewController, NSFetchedResultsControll
             // Display the habit properties:
             // Its name.
             cell.nameLabel?.text = habit.name
-            // Its progress.
-            cell.progressLabel?.text = "\(habit.executedCount)/\(habit.days?.count ?? 0) days"
+            // And its progress.
+            cell.progressLabel?.text = "\(habit.executedCount) / \(habit.days?.count ?? 0) completed days"
+            cell.progressBar.tint = HabitMO.Color(rawValue: habit.color)?.getColor()
         }
 
         return cell

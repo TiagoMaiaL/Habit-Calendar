@@ -128,7 +128,7 @@ class HabitCreationTableViewController: UITableViewController, HabitDaysSelectio
                     using: context,
                     user: user,
                     name: self.name!,
-                    color: HabitMO.Color.green, // TODO: Use a real enum value.
+                    color: HabitMO.Color.emerald, // TODO: Use a real enum value.
                     days: self.days!//,
 //                    and: self.selectedNotificationFireTimes
                 )
@@ -186,5 +186,38 @@ extension HabitCreationTableViewController {
         // Associate the habit's fire dates with the fireDates selected by
         // the user.
         selectedNotificationFireTimes = fireDates
+    }
+}
+
+/// Extension that adds UIColor capabilities to the Color model enum.
+extension HabitMO.Color {
+    
+    /// Gets the UIColor representing the current enum instance.
+    /// - Returns: The UIColor associated with the instance.
+    func getColor() -> UIColor {
+        switch self {
+        case .midnightBlue:
+            return UIColor(red: 52/255, green: 73/255, blue: 94/255, alpha: 1)
+        case .amethyst:
+            return UIColor(red: 155/255, green: 89/255, blue: 182/255, alpha: 1)
+        case .pomegranate:
+            return UIColor(red: 192/255, green: 57/255, blue: 43/255, alpha: 1)
+        case .alizarin:
+            return UIColor(red: 231/255, green: 76/255, blue: 60/255, alpha: 1)
+        case .carrot:
+            return UIColor(red: 230/255, green: 126/255, blue: 34/255, alpha: 1)
+        case .orange:
+            return UIColor(red: 243/255, green: 156/255, blue: 18/255, alpha: 1)
+        case .blue:
+            return UIColor(red: 0/255, green: 168/255, blue: 255/255, alpha: 1.0)
+        case .peterRiver:
+            return UIColor(red: 52/255, green: 152/255, blue: 219/255, alpha: 1)
+        case .belizeRole:
+            return UIColor(red: 41/255, green: 128/255, blue: 185/255, alpha: 1)
+        case .turquoise:
+            return UIColor(red: 26/255, green: 188/255, blue: 156/255, alpha: 1)
+        case .emerald:
+            return UIColor(red: 46/255, green: 204/255, blue: 113/255, alpha: 1)
+        }
     }
 }
