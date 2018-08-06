@@ -121,6 +121,15 @@ class DaysSequenceMO: NSManagedObject {
         return days?.filtered(using: pastPredicate) as? Set<HabitDayMO>
     }
     
+    /// Returns the future days from the sequence.
+    func getFutureDays() -> Set<HabitDayMO>? {
+        let futurePredicate = NSPredicate(
+            format: "day.date > %@",
+            Date().getBeginningOfDay() as NSDate
+        )
+        return days?.filtered(using: futurePredicate) as? Set<HabitDayMO>
+    }
+    
     /// Returns the sequence's completion progress.
     /// - Returns: A tuple containing the number of executed days and
     ///            the total in the sequence.

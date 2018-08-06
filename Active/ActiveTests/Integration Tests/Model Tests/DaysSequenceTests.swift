@@ -347,9 +347,20 @@ class DaysSequenceTests: IntegrationTestCase {
     }
     
     func testGettingSequenceFutureDays() {
-        XCTMarkNotImplemented()
+        // 1. Declare a dummy sequence.
+        let dummySequence = factories.daysSequence.makeDummy()
         
-        // TODO:
+        // 1.1 Get its future days by getting its days count and
+        // subtracting 1 (the current one).
+        let futureAmount = dummySequence.days!.count - 1
+        
+        // 2. Assert the returned number of future days matches the
+        // expected one.
+        XCTAssertEqual(
+            futureAmount,
+            dummySequence.getFutureDays()?.count,
+            "The amount of future days returned by the sequence should be equal to the expected amount."
+        )
     }
     
     // MARK: Imperatives
