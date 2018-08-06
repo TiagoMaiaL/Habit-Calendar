@@ -70,12 +70,18 @@ class HabitCreationTableViewController: UITableViewController, HabitDaysSelectio
         assert(container != nil, "Error: failed to inject the persistent container.")
         assert(habitStore != nil, "Error: failed to inject the habit store")
         
+        // Configure the appearance of the navigation bar to never use the
+        // large titles.
+        navigationItem.largeTitleDisplayMode = .never
+        
         // Associate the event listener to the textField.
         nameTextField.addTarget(
             self,
             action: #selector(nameChanged(textField:)),
             for: .editingChanged
         )
+        // Create a toolbar and add it as the field's accessory view.
+        nameTextField.inputAccessoryView = makeToolbar()
         
         // Set the done button's initial state.
         configureCreationButton()
@@ -152,6 +158,11 @@ class HabitCreationTableViewController: UITableViewController, HabitDaysSelectio
         )
     }
     
+    /// Finishes editing the name's textField.
+    @objc private func endNameEdition() {
+        nameTextField.resignFirstResponder()
+    }
+    
     // MARK: Imperatives
     
     /// Listens to the change events emmited the name text field.
@@ -165,6 +176,33 @@ class HabitCreationTableViewController: UITableViewController, HabitDaysSelectio
     private func configureCreationButton() {
         // Check if the name and days are correctly set.
         doneButton.isEnabled = !(name ?? "").isEmpty && !(days ?? []).isEmpty
+    }
+    
+    /// Creates and configures a new UIToolbar with a done button to be
+    /// used as the name field's accessoryView.
+    /// - Returns: An UIToolbar.
+    private func makeToolbar() -> UIToolbar {
+        let toolBar = UIToolbar(
+            frame: CGRect(
+                x: 0,
+                y: 0,
+                width: UIScreen.main.bounds.size.width,
+                height: 50
+            )
+        )
+        toolBar.setItems(
+            [
+                UIBarButtonItem(
+                    title: "Done",
+                    style: .done,
+                    target: self,
+                    action: #selector(endNameEdition)
+                )
+            ],
+            animated: false
+        )
+        
+        return toolBar
     }
 }
 

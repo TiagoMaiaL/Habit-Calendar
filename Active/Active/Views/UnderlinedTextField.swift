@@ -62,8 +62,7 @@ import UIKit
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        // TODO: Add the underline layer here.
-        
+
         if underlineLayer == nil {
             // Declare the underline CALayer.
             underlineLayer = CALayer()
@@ -78,7 +77,7 @@ import UIKit
         // Add it to the view and position it at the bottom.
         underlineLayer?.frame = CGRect(
             x: 0,
-            y: frame.size.height - thickness,
+            y: frame.size.height,
             width: frame.size.width,
             height: thickness
         )
