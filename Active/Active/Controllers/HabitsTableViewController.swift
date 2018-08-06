@@ -134,6 +134,7 @@ class HabitsTableViewController: UITableViewController, NSFetchedResultsControll
         // Display the current amount of habits in the header.
         let countRequest: NSFetchRequest<HabitMO> = HabitMO.fetchRequest()
         let count = try! container.viewContext.count(for: countRequest)
+        // TODO: Localize this.
         habitsCountLabel.text = "\(count) habit\(count > 1 ? "s" : "")"
     }
 
@@ -164,9 +165,19 @@ class HabitsTableViewController: UITableViewController, NSFetchedResultsControll
             // Its name.
             cell.nameLabel?.text = habit.name
             // And its progress.
-            // TODO: Change this to get the right sequence values.
-            cell.progressLabel?.text = "\(habit.executedCount) / \(habit.days?.count ?? 0) completed days"
+            var pastCount = habit.getCurrentSequence()?.getPastDays()?.count ?? 0
+            let daysCount = habit.getCurrentSequence()?.days?.count ?? 1
+            
+            // If the current day was marked as executed, account it as a past
+            // day as well.
+            if habit.getCurrentSequence()?.getCurrentDay()?.wasExecuted ?? false {
+                pastCount += 1
+            }
+            
+            cell.progressLabel?.text = "\(pastCount) / \(daysCount) completed days"
             cell.progressBar.tint = HabitMO.Color(rawValue: habit.color)?.getColor()
+            // Change the bar's progress (past days / total).
+            cell.progressBar.progress = CGFloat(Double(pastCount) / Double(daysCount))
         }
 
         return cell

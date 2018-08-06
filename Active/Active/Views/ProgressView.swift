@@ -14,11 +14,19 @@ import UIKit
     // MARK: Properties
     
     /// The main color of the progress view.
-    @IBInspectable public var tint: UIColor?
+    @IBInspectable public var tint: UIColor? {
+        didSet {
+            setNeedsDisplay()
+        }
+    }
     
     /// A float from 0 to 1 indicating the progress being displayed
     /// by the view.
-    @IBInspectable public var progress: CGFloat = 0
+    @IBInspectable public var progress: CGFloat = 0 {
+        didSet {
+            setNeedsDisplay()
+        }
+    }
     
     /// The rect used for drawing the progress shapes.
     private var drawableRect: CGRect {
