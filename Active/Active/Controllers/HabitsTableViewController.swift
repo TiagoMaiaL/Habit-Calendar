@@ -150,8 +150,7 @@ class HabitsTableViewController: UITableViewController, NSFetchedResultsControll
         
         return 0
     }
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(
             withIdentifier: habitCellIdentifier,
             for: indexPath
@@ -165,6 +164,7 @@ class HabitsTableViewController: UITableViewController, NSFetchedResultsControll
             // Its name.
             cell.nameLabel?.text = habit.name
             // And its progress.
+            // TODO: Change this to get the right sequence values.
             cell.progressLabel?.text = "\(habit.executedCount) / \(habit.days?.count ?? 0) completed days"
             cell.progressBar.tint = HabitMO.Color(rawValue: habit.color)?.getColor()
         }

@@ -329,6 +329,29 @@ class DaysSequenceTests: IntegrationTestCase {
         )
     }
     
+    func testGettingSequencePastDays() {
+        // 1. Declare a dummy sequence.
+        let dummySequence = factories.daysSequence.makeDummy()
+        
+        // 1.1 Add some past days to it.
+        let pastAmount = -25
+        let pastDays = makeHabitDays(from: pastAmount..<0)
+        dummySequence.addToDays(Set(pastDays) as NSSet)
+        
+        // 2. Assert the returned number of past days matches the added ones.
+        XCTAssertEqual(
+            abs(pastAmount),
+            dummySequence.getPastDays()?.count,
+            "The amount of past days returned by the sequence should be equal to the amount of added ones."
+        )
+    }
+    
+    func testGettingSequenceFutureDays() {
+        XCTMarkNotImplemented()
+        
+        // TODO:
+    }
+    
     // MARK: Imperatives
     
     /// Generates habit days with its dates generated from the passed range.

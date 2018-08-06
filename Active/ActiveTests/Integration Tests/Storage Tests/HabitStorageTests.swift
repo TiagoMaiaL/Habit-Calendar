@@ -89,11 +89,12 @@ class HabitStorageTests: IntegrationTestCase {
         }
         
         // Create the habit.
+        let color = HabitMO.Color.alizarin
         let joggingHabit = habitStorage.create(
             using: context,
             user: factories.user.makeDummy(),
             name: name,
-            color: HabitMO.Color.red,
+            color: color,
             days: days
         )
         
@@ -112,6 +113,12 @@ class HabitStorageTests: IntegrationTestCase {
         XCTAssertNotNil(
             joggingHabit.createdAt,
             "Created habit should have the creation date."
+        )
+        // Check the habit's color property.
+        XCTAssertEqual(
+            joggingHabit.color,
+            color.rawValue,
+            "The created habit should have the expected color."
         )
         
         // Check the habit's days and sequence.
@@ -181,7 +188,7 @@ class HabitStorageTests: IntegrationTestCase {
             using: context,
             user: factories.user.makeDummy(),
             name: "exercise",
-            color: .red,
+            color: .alizarin,
             days: [Date().byAddingDays(10)!, Date().byAddingDays(15)!],
             and: fireTimes
         )
@@ -260,17 +267,18 @@ class HabitStorageTests: IntegrationTestCase {
         let dummyHabit = factories.habit.makeDummy()
         
         // 2. Edit it with the desired color.
+        let colorToEdit = HabitMO.Color.amethyst
         _ = habitStorage.edit(
             dummyHabit,
             using: context,
-            color: HabitMO.Color.purple
+            color: colorToEdit
         )
         
         // 3. Assert the habit entity now has the passed color.
         XCTAssertEqual(
             dummyHabit.color,
-            HabitMO.Color.purple.rawValue,
-            "The editted habit should have the purple color."
+            colorToEdit.rawValue,
+            "The editted habit should have the amethyst color."
         )
     }
     
@@ -420,7 +428,7 @@ class HabitStorageTests: IntegrationTestCase {
             using: context,
             user: dummyUser,
             name: "Testing notifications",
-            color: .red,
+            color: .blue,
             days: days,
             and: fireTimes
         )
