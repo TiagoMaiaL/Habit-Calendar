@@ -53,6 +53,7 @@
 		4732CE762114E8A200E2770C /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4732CE752114E8A200E2770C /* ProgressView.swift */; };
 		4732CE782114F23200E2770C /* HabitTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4732CE772114F23200E2770C /* HabitTableViewCell.swift */; };
 		4732CE7A2114FF5F00E2770C /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4732CE792114FF5F00E2770C /* CardView.swift */; };
+		4732CE7C2118DA8400E2770C /* UnderlinedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4732CE7B2118DA8400E2770C /* UnderlinedTextField.swift */; };
 		4737312B20ED502800895DD2 /* HabitDaysSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4737312A20ED502800895DD2 /* HabitDaysSelectionViewController.swift */; };
 		4737312D20ED503B00895DD2 /* HabitNotificationsSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4737312C20ED503B00895DD2 /* HabitNotificationsSelectionViewController.swift */; };
 		4737313C20F3D7AD00895DD2 /* CalendarDayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4737313B20F3D7AD00895DD2 /* CalendarDayCell.swift */; };
@@ -163,6 +164,7 @@
 		4732CE752114E8A200E2770C /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
 		4732CE772114F23200E2770C /* HabitTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitTableViewCell.swift; sourceTree = "<group>"; };
 		4732CE792114FF5F00E2770C /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		4732CE7B2118DA8400E2770C /* UnderlinedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderlinedTextField.swift; sourceTree = "<group>"; };
 		4737312A20ED502800895DD2 /* HabitDaysSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitDaysSelectionViewController.swift; sourceTree = "<group>"; };
 		4737312C20ED503B00895DD2 /* HabitNotificationsSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitNotificationsSelectionViewController.swift; sourceTree = "<group>"; };
 		4737313B20F3D7AD00895DD2 /* CalendarDayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CalendarDayCell.swift; path = Active/Views/CalendarDayCell.swift; sourceTree = SOURCE_ROOT; };
@@ -301,6 +303,7 @@
 				4732CE752114E8A200E2770C /* ProgressView.swift */,
 				4732CE772114F23200E2770C /* HabitTableViewCell.swift */,
 				4732CE792114FF5F00E2770C /* CardView.swift */,
+				4732CE7B2118DA8400E2770C /* UnderlinedTextField.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -759,6 +762,7 @@
 				47E6C20B20EAF550003BDB4D /* HabitCreationTableViewController.swift in Sources */,
 				4725D05D20C8A96200C3B63F /* HabitStorage.swift in Sources */,
 				47E6C21320EB12A2003BDB4D /* DayFactory.swift in Sources */,
+				4732CE7C2118DA8400E2770C /* UnderlinedTextField.swift in Sources */,
 				4713A20020C164E6008A13D2 /* HabitDayMO.swift in Sources */,
 				47E6C20D20EAF567003BDB4D /* HabitDetailsViewController.swift in Sources */,
 				4737312B20ED502800895DD2 /* HabitDaysSelectionViewController.swift in Sources */,
