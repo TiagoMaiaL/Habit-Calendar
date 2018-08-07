@@ -27,6 +27,15 @@ class HabitCreationTableViewController: UITableViewController, HabitDaysSelectio
     /// The button used to store the habit.
     @IBOutlet weak var doneButton: UIButton!
     
+    /// The label displaying the number of selected days.
+    @IBOutlet weak var daysAmountLabel: UILabel!
+    
+    /// The label displaying the first day in the selected sequence.
+    @IBOutlet weak var fromDayLabel: UILabel!
+    
+    /// The label displaying the last day in the selected sequence.
+    @IBOutlet weak var toDayLabel: UILabel!
+    
     /// The container in which the habit is going to be persisted.
     var container: NSPersistentContainer!
     
@@ -82,6 +91,9 @@ class HabitCreationTableViewController: UITableViewController, HabitDaysSelectio
         )
         // Create a toolbar and add it as the field's accessory view.
         nameTextField.inputAccessoryView = makeToolbar()
+        
+        // Display the days labels initial text.
+        configureDaysLabels()
         
         // Set the done button's initial state.
         configureCreationButton()
@@ -178,6 +190,31 @@ class HabitCreationTableViewController: UITableViewController, HabitDaysSelectio
         doneButton.isEnabled = !(name ?? "").isEmpty && !(days ?? []).isEmpty
     }
     
+    /// Configures the text being displayed by each label within the days
+    /// field.
+    private func configureDaysLabels() {
+        if let days = days?.sorted(), !days.isEmpty {
+            let dayFormatter = ISO8601DateFormatter()
+            dayFormatter.formatOptions = [
+                .withDashSeparatorInDate,
+                .withYear,
+                .withMonth,
+                .withDay,
+            ]
+
+            // Set the text for the label displaying the number of days.
+            daysAmountLabel.text = "\(days.count) day\(days.count == 1 ? "" : "s") selected."
+            // Set the text for the label displaying initial day in the sequence.
+            fromDayLabel.text = dayFormatter.string(from: days.first!)
+            // Set the text for the label displaying final day in the sequence.
+            toDayLabel.text = dayFormatter.string(from: days.last!)
+        } else {
+            daysAmountLabel.text = "No days were selected."
+            fromDayLabel.text = "--"
+            toDayLabel.text = "--"
+        }
+    }
+    
     /// Creates and configures a new UIToolbar with a done button to be
     /// used as the name field's accessoryView.
     /// - Returns: An UIToolbar.
@@ -213,6 +250,8 @@ extension HabitCreationTableViewController {
     func didSelectDays(_ daysDates: [Date]) {
         // Associate the habit's days with the dates selected by the user.
         days = daysDates
+        // Change the days labels to display the current sequence info.
+        configureDaysLabels()
     }
 }
 
