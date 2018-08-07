@@ -12,9 +12,9 @@ import CoreData
 
 /// Class in charge of testing the HabitStorage methods.
 class HabitStorageTests: IntegrationTestCase {
-    
+
     // MARK: Properties
-    
+
     var dayStorage: DayStorage!
     var habitDayStorage: HabitDayStorage!
     var daysSequenceStorage: DaysSequenceStorage!
@@ -22,24 +22,24 @@ class HabitStorageTests: IntegrationTestCase {
     var notificationCenterMock: UserNotificationCenterMock!
     var notificationScheduler: NotificationScheduler!
     var habitStorage: HabitStorage!
-    
+
     // MARK: setup/tearDown
-    
+
     override func setUp() {
         super.setUp()
-        
+
         // Initialize the DayStorage.
         dayStorage = DayStorage()
-        
+
         // Initialize the HabitDayStorage.
         habitDayStorage = HabitDayStorage(
             calendarDayStorage: dayStorage
         )
-        
+
         daysSequenceStorage = DaysSequenceStorage(
             habitDayStorage: habitDayStorage
         )
-        
+
         // Initialize the notification manager used by the storage.
         notificationCenterMock = UserNotificationCenterMock(
             withAuthorization: false
@@ -49,10 +49,10 @@ class HabitStorageTests: IntegrationTestCase {
                 notificationCenter: notificationCenterMock
             )
         )
-        
+
         // Initialize the notification storage.
         notificationStorage = NotificationStorage()
-        
+
         // Initialize dayStorage using the persistent container created for tests.
         habitStorage = HabitStorage(
             daysSequenceStorage: daysSequenceStorage,
@@ -61,7 +61,7 @@ class HabitStorageTests: IntegrationTestCase {
             fireTimeStorage: FireTimeStorage()
         )
     }
-    
+
     override func tearDown() {
         // Remove the initialized storages.
         dayStorage = nil
@@ -70,24 +70,24 @@ class HabitStorageTests: IntegrationTestCase {
         notificationScheduler = nil
         notificationStorage = nil
         habitStorage = nil
-        
+
         super.tearDown()
     }
-    
+
     // MARK: Tests
-    
+
     func testHabitCreation() {
         let name = "Go jogging"
         let days = (0...7).compactMap { dayNumber in
             // Create and return a date by adding the number of days.
             Date().byAddingDays(dayNumber)
         }
-        
+
         // If there are no days in the array, the test shouldn't proceed.
         if days.isEmpty {
             XCTFail("FIX: The dates for the Habit creation can't be empty.")
         }
-        
+
         // Create the habit.
         let color = HabitMO.Color.alizarin
         let joggingHabit = habitStorage.create(
@@ -97,13 +97,13 @@ class HabitStorageTests: IntegrationTestCase {
             color: color,
             days: days
         )
-        
+
         // Check the habit's id property.
         XCTAssertNotNil(
             joggingHabit.id,
             "Created Habit entities should have an id."
         )
-        
+
         // Check the habit's name.
         XCTAssertEqual(
             joggingHabit.name,
@@ -120,7 +120,7 @@ class HabitStorageTests: IntegrationTestCase {
             color.rawValue,
             "The created habit should have the expected color."
         )
-        
+
         // Check the habit's days and sequence.
         XCTAssertEqual(
             joggingHabit.daysSequences?.count,
@@ -131,7 +131,7 @@ class HabitStorageTests: IntegrationTestCase {
             XCTFail("Couldn't get the generated days sequence.")
             return
         }
-        
+
         XCTAssertNotNil(
             sequence.days,
             "Created habit should have the HabitDays property."
@@ -140,12 +140,12 @@ class HabitStorageTests: IntegrationTestCase {
             sequence.days?.count == days.count,
             "Created habit should have the expected amount of HabitDays."
         )
-        
+
         guard let habitDays = sequence.days as? Set<HabitDayMO> else {
             XCTFail("Couldn't cast the days property to a Set with HabitDay entities.")
             return
         }
-        
+
         for habitDay in habitDays {
             // Check if the Day's date is in the provided dates.
             // If it isn't, the HabitDays creation went wrong.
@@ -158,14 +158,14 @@ class HabitStorageTests: IntegrationTestCase {
                 "The habitDay's Day entity should have a valid date property."
             )
             XCTAssert(
-                days.map{
+                days.map {
                     $0.getBeginningOfDay().description
                 }.contains(habitDay.day!.date!.description),
                 "The Day's date should have a valid date (matching with the provided ones in the Habit creation)."
             )
         }
     }
-    
+
     func testHabitCreationByPassingFireTimes() {
         // 1. Declare the fire times' components.
         let fireTimes = [
@@ -182,7 +182,7 @@ class HabitStorageTests: IntegrationTestCase {
                 minute: Int.random(0..<59)
             )
         ]
-        
+
         // 2. Create the habit.
         let habit = habitStorage.create(
             using: context,
@@ -192,25 +192,25 @@ class HabitStorageTests: IntegrationTestCase {
             days: [Date().byAddingDays(10)!, Date().byAddingDays(15)!],
             and: fireTimes
         )
-        
+
         // 3. Make assertions on the habit's fire times.
         XCTAssertTrue(
             habit.fireTimes?.count == fireTimes.count,
             "The habit should have notifications created with it."
         )
     }
-    
+
     func testHabitFetchedResultsControllerFactory() {
         // Get the fetched results controller.
         let fetchedResultsController = habitStorage.makeFetchedResultsController(context: context)
-        
+
         // Assert on its fetch request.
         XCTAssertEqual(
             "Habit",
             fetchedResultsController.fetchRequest.entityName,
             "Only Habit entities should be fetched by the controller."
         )
-        
+
         // Assert on its sort descriptors.
         guard let sortDescriptors = fetchedResultsController.fetchRequest.sortDescriptors else {
             XCTFail(
@@ -218,7 +218,7 @@ class HabitStorageTests: IntegrationTestCase {
             )
             return
         }
-        
+
         // The sort descriptors should sort in both
         // the created or score properties.
         XCTAssertEqual(
@@ -232,28 +232,28 @@ class HabitStorageTests: IntegrationTestCase {
             "Should sort by the Habit entity's created property."
         )
     }
-    
+
     func testHabitEditionWithNameProperty() {
         // Declare the name to be set.
         let habitName = "Fight Muay-Thai"
-        
+
         // Declare a habit dummy.
         let habitDummy = factories.habit.makeDummy()
-        
+
         // Edit the Habit to change the name.
         let editedHabit = habitStorage.edit(
             habitDummy,
             using: context,
             name: habitName
         )
-        
+
         // Assert that the edited habit and the dummy one are the same.
         XCTAssertEqual(
             editedHabit,
             habitDummy,
             "The edition routine should return the same habit instance but with the edited properties.."
         )
-        
+
         // Assert on the name property.
         XCTAssertEqual(
             habitDummy.name,
@@ -261,11 +261,11 @@ class HabitStorageTests: IntegrationTestCase {
             "The dummy habit should now have the edited name."
         )
     }
-    
+
     func testHabitEditionWithColorProperty() {
         // 1. Declare a dummy habit.
         let dummyHabit = factories.habit.makeDummy()
-        
+
         // 2. Edit it with the desired color.
         let colorToEdit = HabitMO.Color.amethyst
         _ = habitStorage.edit(
@@ -273,7 +273,7 @@ class HabitStorageTests: IntegrationTestCase {
             using: context,
             color: colorToEdit
         )
-        
+
         // 3. Assert the habit entity now has the passed color.
         XCTAssertEqual(
             dummyHabit.color,
@@ -281,23 +281,23 @@ class HabitStorageTests: IntegrationTestCase {
             "The editted habit should have the amethyst color."
         )
     }
-    
+
     func testHabitEditionWithDaysPropertyShouldCreateNewSequence() {
         // 1. Declare a dummy habit.
         let dummyHabit = factories.habit.makeDummy()
-        
+
         // 2. Create a new array of days' dates.
         let daysDates = (1..<14).compactMap { dayIndex -> Date? in
             Date().byAddingDays(dayIndex)
         }
-        
+
         // 3. Edit the days property.
         _ = habitStorage.edit(
             dummyHabit,
             using: context,
             days: daysDates
         )
-        
+
         // 4. Make assertions on the days and sequence:
         // 4.1. Assert on the days sequence.
         XCTAssertEqual(
@@ -305,19 +305,19 @@ class HabitStorageTests: IntegrationTestCase {
             2,
             "A new daysSequence should have been created after the days edition."
         )
-        
+
         guard let sequence = dummyHabit.getCurrentSequence() else {
             XCTFail("Couldn't get the current sequence.")
             return
         }
-        
+
         // 4.2. Assert on the days' count.
         XCTAssertEqual(
             sequence.days?.count,
             daysDates.count,
             "The Habit days should be correctly set and have the expected count."
         )
-        
+
         // 4.3. Assert on the days' dates.
         guard let habitDays = sequence.days as? Set<HabitDayMO> else {
             XCTFail("Couldn't get the edited habit days.")
@@ -333,25 +333,25 @@ class HabitStorageTests: IntegrationTestCase {
             )
         }
     }
-    
+
     func testHabitEditionWithFireTimesPropertyShouldCreateFireTimeEntities() {
         // 1. Create a dummy habit.
         let dummyHabit = factories.habit.makeDummy()
-        
+
         // 2. Declare the fire times.
         let fireTimes = [
             DateComponents(hour: 02, minute: 30),
             DateComponents(hour: 12, minute: 15),
             DateComponents(hour: 15, minute: 45)
         ]
-        
+
         // 3. Edit the habit by passing the fire times.
         _ = habitStorage.edit(
             dummyHabit,
             using: context,
             and: fireTimes
         )
-        
+
         // 4. Check if FireTimeMO entities were created.
         XCTAssertEqual(
             dummyHabit.fireTimes?.count,
@@ -359,15 +359,15 @@ class HabitStorageTests: IntegrationTestCase {
             "The habit's edition should have created FireTimeMO entities."
         )
     }
-    
+
     func testHabitEditionWithFireTimesPropertyShouldCreateNotifications() {
         // 1. Create a dummy habit.
         let dummyHabit = factories.habit.makeDummy()
-        
+
         // 2. Declare the fire times.
         let fireTimes = [
             DateComponents(hour: 15, minute: 30),
-            DateComponents(hour: 11, minute: 15),
+            DateComponents(hour: 11, minute: 15)
         ]
 
         // 3. Create the notifications by providing the components.
@@ -376,43 +376,43 @@ class HabitStorageTests: IntegrationTestCase {
             using: context,
             and: fireTimes
         )
-        
+
         // 4. Fetch the dummy's notifications and make assertions on it.
         // 4.1. Check if the count is the expected one.
-        
+
         // Get only the future days for counting.
         guard let futureDays = (dummyHabit.days as? Set<HabitDayMO>)?.filter({ $0.day?.date?.isFuture ?? false }) else {
             XCTFail("Couldn't get the dummy habit's future days for comparision.")
             return
         }
-        
+
         XCTAssertEqual(
             dummyHabit.notifications?.count,
             futureDays.count * fireTimes.count,
             "The added notifications should have the expected count of the passed fire times * days."
         )
     }
-    
+
     func testHabitDeletion() {
         // Create a new habit.
         let dummyHabit = factories.habit.makeDummy()
-        
+
         // Delete the created habit.
         habitStorage.delete(dummyHabit, from: context)
-        
+
         // Assert it was deleted.
         XCTAssertTrue(
             dummyHabit.isDeleted,
             "The habit entity should be marked as deleted."
         )
     }
-    
+
     func testCreatingHabitShouldScheduleUserNotifications() {
         notificationCenterMock.shouldAuthorize = true
         let scheduleExpectation = XCTestExpectation(
             description: "Create a new habit and create and schedule the notifications."
         )
-        
+
         // 1. Declare the habit attributes needed for creation:
         let dummyUser = factories.user.makeDummy()
         let days = (1..<Int.random(2..<50)).compactMap {
@@ -420,9 +420,9 @@ class HabitStorageTests: IntegrationTestCase {
         }
         let fireTimes = [
             DateComponents(hour: 18, minute: 30),
-            DateComponents(hour: 12, minute: 15),
+            DateComponents(hour: 12, minute: 15)
         ]
-        
+
         // 2. Create the habit.
         let createdHabit = habitStorage.create(
             using: context,
@@ -432,7 +432,7 @@ class HabitStorageTests: IntegrationTestCase {
             days: days,
             and: fireTimes
         )
-        
+
         // Use a timer to make the assertions on the scheduling of user
         // notifications. Scheduling notifications is an async operation.
         Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) {
@@ -449,7 +449,7 @@ class HabitStorageTests: IntegrationTestCase {
                     requests.count,
                     days.count * fireTimes.count
                 )
-                
+
                 // - Assert on the identifiers of each notificationMO and
                 //   user notifications.
                 let identifiers = requests.map { $0.identifier }
@@ -458,54 +458,54 @@ class HabitStorageTests: IntegrationTestCase {
                     return
                 }
                 let notifications = Array(notificationsSet)
-                
+
                 XCTAssertTrue(
                     notifications.filter {
                         return !identifiers.contains( $0.userNotificationId! )
                     }.count == 0,
                     "All notifications should have been properly scheduled."
                 )
-                
+
                 // - Assert on the notifications' wasScheduled property.
                 XCTAssertTrue(
                     notifications.filter { !$0.wasScheduled }.count == 0,
                     "All notifications should have been scheduled."
                 )
-                
+
                 scheduleExpectation.fulfill()
             }
         }
         wait(for: [scheduleExpectation], timeout: 0.2)
     }
-    
+
     func testEditingHabitDaysShouldRescheduleUserNotifications() {
         let rescheduleExpectation = XCTestExpectation(
             description: "Reschedules the user notifications after changing the days dates."
         )
-        
+
         // Enable the mock's authorization to schedule the notifications.
         notificationCenterMock.shouldAuthorize = true
-        
+
         // 1. Declare the dummy habit.
         let dummyHabit = factories.habit.makeDummy()
-        
+
         // 2. Declare the new days dates.
         let days = (1..<Int.random(2..<50)).compactMap {
             Date().byAddingDays($0)
         }
-        
+
         // 3. Edit the habit.
         _ = habitStorage.edit(
             dummyHabit,
             using: context,
             days: days
         )
-        
+
         guard let sequence = dummyHabit.getCurrentSequence() else {
             XCTFail("Couldn't get the added sequence of days.")
             return
         }
-        
+
         // 4. Make the appropriated assertions:
         // - assert on the number of notification entities:
         XCTAssertEqual(
@@ -513,44 +513,44 @@ class HabitStorageTests: IntegrationTestCase {
             sequence.days!.count * dummyHabit.fireTimes!.count,
             "The amount of notifications should be the number of future days * the fire times."
         )
-        
+
         Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) {
             _ in
-            
+
             // - assert on the number of user notifications
             self.notificationCenterMock.getPendingNotificationRequests {
                 requests in
-                
+
                 XCTAssertEqual(
                     requests.count,
                     dummyHabit.notifications?.count,
                     "The user notifications weren't properly scheduled."
                 )
-                
+
                 // - assert that all notifications were properly scheduled.
                 XCTAssertTrue(
                     (dummyHabit.notifications as! Set<NotificationMO>).filter { !$0.wasScheduled }.count == 0,
                     "The notifications weren't properly scheduled."
                 )
-                
+
                 rescheduleExpectation.fulfill()
             }
         }
-        
+
         wait(for: [rescheduleExpectation], timeout: 0.2)
     }
-    
+
     func testEditingHabitFireDatesShouldRescheduleUserNotifications() {
         let rescheduleExpectation = XCTestExpectation(
             description: "Reschedules the user notifications after changing the notifications fire times."
         )
-        
+
         // Enable the mock's authorization to schedule the notifications.
         notificationCenterMock.shouldAuthorize = true
-        
+
         // 1. Declare the dummy habit.
         let dummyHabit = factories.habit.makeDummy()
-        
+
         // 2. Declare the new fire tiems.
         let fireTimes = [
             DateComponents(
@@ -566,14 +566,14 @@ class HabitStorageTests: IntegrationTestCase {
                 minute: Int.random(0..<59)
             )
         ]
-        
+
         // 3. Edit the habit.
         _ = habitStorage.edit(
             dummyHabit,
             using: context,
             and: fireTimes
         )
-        
+
         // 4. Make the appropriated assertions:
         // - assert on the number of notification entities:
         XCTAssertEqual(
@@ -581,44 +581,44 @@ class HabitStorageTests: IntegrationTestCase {
             dummyHabit.getFutureDays().count * fireTimes.count,
             "The amount of notifications should be the number of future days * the fire times."
         )
-        
+
         Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) {
             _ in
-            
+
             // - assert on the number of user notifications
             self.notificationCenterMock.getPendingNotificationRequests {
                 requests in
-                
+
                 XCTAssertEqual(
                     requests.count,
                     dummyHabit.notifications?.count,
                     "The user notifications weren't properly scheduled."
                 )
-                
+
                 // - assert that all notifications were properly scheduled.
                 XCTAssertTrue(
                     (dummyHabit.notifications as! Set<NotificationMO>).filter { !$0.wasScheduled }.count == 0,
                     "The notifications weren't properly scheduled."
                 )
-                
+
                 rescheduleExpectation.fulfill()
             }
         }
-        
+
         wait(for: [rescheduleExpectation], timeout: 0.2)
     }
-    
+
     func testEditingDaysAndFireDatesShouldRescheduleUserNotifications() {
         let rescheduleExpectation = XCTestExpectation(
             description: "Reschedules the user notifications after changing the days and the notifications fire times."
         )
-        
+
         // Enable the mock's authorization to schedule the notifications.
         notificationCenterMock.shouldAuthorize = true
-        
+
         // 1. Declare the dummy habit.
         let dummyHabit = factories.habit.makeDummy()
-        
+
         // 2. Declare the new days and fire tiems.
         let days = (1..<Int.random(2..<50)).compactMap {
             Date().byAddingDays($0)
@@ -631,9 +631,9 @@ class HabitStorageTests: IntegrationTestCase {
             DateComponents(
                 hour: Int.random(0..<23),
                 minute: Int.random(0..<59)
-            ),
+            )
         ]
-        
+
         // 3. Edit the habit.
         _ = habitStorage.edit(
             dummyHabit,
@@ -641,7 +641,7 @@ class HabitStorageTests: IntegrationTestCase {
             days: days,
             and: fireTimes
         )
-        
+
         // 4. Make the appropriated assertions:
         // - assert on the number of notification entities:
         XCTAssertEqual(
@@ -649,30 +649,30 @@ class HabitStorageTests: IntegrationTestCase {
             dummyHabit.getFutureDays().count * fireTimes.count,
             "The amount of notifications should be the number of future days * the fire times."
         )
-        
+
         Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) {
             _ in
-            
+
             // - assert on the number of user notifications
             self.notificationCenterMock.getPendingNotificationRequests {
                 requests in
-                
+
                 XCTAssertEqual(
                     requests.count,
                     dummyHabit.notifications?.count,
                     "The user notifications weren't properly scheduled."
                 )
-                
+
                 // - assert that all notifications were properly scheduled.
                 XCTAssertTrue(
                     (dummyHabit.notifications as! Set<NotificationMO>).filter { !$0.wasScheduled }.count == 0,
                     "The notifications weren't properly scheduled."
                 )
-                
+
                 rescheduleExpectation.fulfill()
             }
         }
-        
+
         wait(for: [rescheduleExpectation], timeout: 0.2)
     }
 }

@@ -13,24 +13,24 @@ import UserNotifications
 /// and deletion of local user notification instances associated
 /// with the entity ones (Notification).
 struct UserNotificationManager {
-    
+
     // MARK: Properties
-    
+
     /// The notification center used to manage the local notifications
     private let notificationCenter: UserNotificationCenter
-    
+
     // MARK: Initializers
-    
+
     init(notificationCenter: UserNotificationCenter) {
         self.notificationCenter = notificationCenter
     }
-    
+
     // MARK: Imperatives
-    
+
     /// Requests the user authorization to schedule local notifications.
     /// - Parameter completionHandler: A block called with the result of
     ///                                the authrorization prompt.
-    func requestAuthorization(_ completionHandler: @escaping (Bool) -> ()) {
+    func requestAuthorization(_ completionHandler: @escaping (Bool) -> Void) {
         notificationCenter.requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
             if error == nil {
                 completionHandler(granted)
@@ -39,7 +39,7 @@ struct UserNotificationManager {
             }
         }
     }
-    
+
     /// Schedules a new user notification by using the
     /// provided content and trigger.
     /// - Parameter content: The UNUserNotificationContent used in
@@ -66,7 +66,7 @@ struct UserNotificationManager {
                     content: content,
                     trigger: trigger
                 )
-                
+
                 // Call the internal notification center and schedule it.
                 self.notificationCenter.add(request) { error in
                     completionHandler(error)
@@ -74,7 +74,7 @@ struct UserNotificationManager {
             }
         }
     }
-    
+
     /// Removes a scheduled notification by passing it's identifier.
     /// - Parameter identifier: The notification's identifier.
     func unschedule(withIdentifiers identifiers: [String]) {
@@ -82,7 +82,7 @@ struct UserNotificationManager {
             withIdentifiers: identifiers
         )
     }
-    
+
     /// Fetches the scheduled user notification request and returns it in
     /// the provided completionHandler.
     /// - Parameter identifier: The notification's identifier.
@@ -96,11 +96,11 @@ struct UserNotificationManager {
             let request = requests.filter { request in
                 return request.identifier == identifier
             }.first
-            
+
             completionHandler(request)
         }
     }
-    
+
     /// Returns if the local notifications are authorized or not.
     /// - Parameter completionHandler: The block called with the results.
     func getAuthorizationStatus(_ completionHandler: @escaping (Bool) -> Void) {
@@ -115,24 +115,24 @@ struct UserNotificationManager {
 /// - Note: The authorization requests prompt the user to authorize.
 ///         When testing, it halts the test and fails.
 protocol UserNotificationCenter {
-    
+
     func getNotificationSettings(completionHandler: @escaping (UNNotificationSettings) -> Swift.Void)
-    
+
     func getAuthorizationStatus(completionHandler: @escaping (Bool) -> Swift.Void)
-    
+
     func requestAuthorization(options: UNAuthorizationOptions, completionHandler: @escaping (Bool, Error?) -> Swift.Void)
-    
+
     func add(_ request: UNNotificationRequest, withCompletionHandler completionHandler: ((Error?) -> Swift.Void)?)
-    
+
     func getPendingNotificationRequests(completionHandler: @escaping ([UNNotificationRequest]) -> Swift.Void)
-    
+
     func removePendingNotificationRequests(withIdentifiers identifiers: [String])
 }
 
 /// Extension used only to declare the protocol implementation in the
 /// UNUserNotificationCenter implementation.
 extension UNUserNotificationCenter: UserNotificationCenter {
-    
+
     /// Checks if the usage of local notifications is allowed.
     /// - Parameter completionHandler: The block called with the result.
     func getAuthorizationStatus(completionHandler: @escaping (Bool) -> Swift.Void) {

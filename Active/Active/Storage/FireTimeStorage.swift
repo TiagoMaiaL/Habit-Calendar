@@ -10,9 +10,9 @@ import CoreData
 
 /// Class in charge of storing FireTime entities.
 class FireTimeStorage {
-    
+
     // MARK: Imperatives
-    
+
     /// Creates a FireTimeMO entity by using the passed components.
     /// - Parameters:
     ///     - context: The NSManagedObjectContext used to create the entity.
@@ -32,7 +32,7 @@ class FireTimeStorage {
             components.minute != nil,
             "The components' minute must be set."
         )
-        
+
         // Create the fire time entity.
         let fireTime = FireTimeMO(context: context)
         fireTime.id = UUID().uuidString
@@ -40,8 +40,8 @@ class FireTimeStorage {
         fireTime.hour = Int16(components.hour!)
         fireTime.minute = Int16(components.minute!)
         fireTime.habit = habit
-        
+
         return fireTime
     }
-    
+
 }

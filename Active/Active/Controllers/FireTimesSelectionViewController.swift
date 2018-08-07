@@ -13,28 +13,28 @@ import UIKit
 class FireTimesSelectionViewController: UIViewController {
 
     // MARK: Types
-    
+
     typealias FireTime = DateComponents
-    
+
     // MARK: Properties
-    
+
     /// The fire date cell's reusable identifier.
     private let cellIdentifier = "fire date selection cell"
-    
+
     /// The static fire dates interval.
     private let interval = 30
-    
+
     /// The formatter for each fire time option displayed to the user.
     private let fireDateFormatter = DateFormatter.makeFireTimeDateFormatter()
-    
+
     /// The fire times displayed to the user for selection.
     private lazy var fireTimes = makeFireTimesProgression(
         minutesInterval: interval
     )
-    
+
     /// The fire dates selected by the user.
     var selectedFireTimes = Set<FireTime>()
-    
+
     /// The habit color used in the cell's and
     /// button's style.
     var habitColor: UIColor = UIColor(
@@ -49,37 +49,37 @@ class FireTimesSelectionViewController: UIViewController {
             // TODO: Configure the button's background color.
         }
     }
-    
+
     /// The fire dates selection table view.
     @IBOutlet weak var tableView: UITableView!
-    
+
     /// The button used to finish the selection.
     @IBOutlet weak var doneButton: UIButton!
-    
+
     /// The notification manager used to get the authorization status and
     /// reflect the result in the view.
     var notificationManager: UserNotificationManager!
-    
+
     /// The delegate in charge of receiving the selected fire dates.
     weak var delegate: FireTimesSelectionViewControllerDelegate?
-    
+
     // MARK: Deinitializers
-    
+
     deinit {
         // Remove any observers.
     }
-    
+
     // MARK: Life Cycle
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         // Make assertions on the required dependencies.
         assert(
             notificationManager != nil,
             "Failed to inject the notification manager."
         )
-        
+
         // TODO: Put the observation events in the habit creation controller.
         // Start observing the app's active state event. This is made
         // to check if the user notifications are now allowed and update
@@ -91,34 +91,34 @@ class FireTimesSelectionViewController: UIViewController {
             object: nil
         )
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         updateViews()
     }
-    
+
     // MARK: Actions
-    
+
     @IBAction func selectFireTimes(_ sender: UIButton) {
         assert(
             !selectedFireTimes.isEmpty,
             "Inconsistency: the selected fire dates shouldn't be empty."
         )
-        
+
         // Call the delegate passing the fire dates selected
         // by the user.
         delegate?.didSelectFireTimes(Array(selectedFireTimes))
         navigationController?.popViewController(animated: true)
     }
-    
+
     // MARK: Imperatives
-    
+
     /// Configures the state of the done button according
     /// to the selected fire dates.
     private func handleDoneButton() {
         doneButton.isEnabled = !selectedFireTimes.isEmpty
     }
-    
+
     /// Update the views according to the User's authorization.
     @objc private func updateViews(_ notification: Notification? = nil) {
         // Check if the local notifications are authorized by the user.
@@ -143,9 +143,9 @@ class FireTimesSelectionViewController: UIViewController {
 }
 
 extension FireTimesSelectionViewController: UITableViewDataSource, UITableViewDelegate {
-    
+
     // MARK: Imperatives
-    
+
     /// Creates an array of successive fire times by adding
     /// the specified interval in minutes.
     /// - Note: The first date is 00:00 and the last date is 23:59 or
@@ -155,10 +155,10 @@ extension FireTimesSelectionViewController: UITableViewDataSource, UITableViewDe
     /// - Returns: An array of successive fire times within a day.
     func makeFireTimesProgression(minutesInterval: Int) -> [FireTime] {
         var fireTimes = [FireTime]()
-        
+
         let minutesInDay = 24 * 60
         let beginningDate = Date().getBeginningOfDay()
-        
+
         // Generate the dates and append them to the array.
         // Declare the range to be used by determining the amount of
         // dates to be added.
@@ -170,25 +170,25 @@ extension FireTimesSelectionViewController: UITableViewDataSource, UITableViewDe
                 assertionFailure("Inconsistency: the range can't be correclty generated.")
                 return []
             }
-            
+
             fireTimes.append(nextDate.components)
         }
-        
+
         return fireTimes
     }
-    
+
     // MARK: TableView DataSource methods
-    
+
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return fireTimes.count
     }
-    
+
     // MARK: TableView Delegate methods
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // Get the cell.
         let cell = tableView.dequeueReusableCell(
@@ -197,15 +197,15 @@ extension FireTimesSelectionViewController: UITableViewDataSource, UITableViewDe
             style: .default,
             reuseIdentifier: cellIdentifier
         )
-        
+
         // Declare the current fire time to be displayed.
         let currentFireTime = fireTimes[indexPath.row]
-        
+
         // Set it's time text by using a date formatter.
         if let fireDate = Calendar.current.date(from: currentFireTime) {
             cell.textLabel?.text = fireDateFormatter.string(from: fireDate)
         }
-        
+
         // If this fire time is among the selected ones,
         // display the selected style in the cell.
         if selectedFireTimes.contains(currentFireTime) {
@@ -219,11 +219,11 @@ extension FireTimesSelectionViewController: UITableViewDataSource, UITableViewDe
 
         return cell
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Get the selected date.
         let selectedFireTime = fireTimes[indexPath.row]
-        
+
         if selectedFireTimes.contains(selectedFireTime) {
             // Remove it from the selected ones.
             selectedFireTimes.remove(selectedFireTime)
@@ -231,10 +231,10 @@ extension FireTimesSelectionViewController: UITableViewDataSource, UITableViewDe
             // Add it to the selected ones.
             selectedFireTimes.insert(selectedFireTime)
         }
-        
+
         // Reload the cell to display its selected state.
         tableView.reloadRows(at: [indexPath], with: .fade)
-        
+
         // Enable the done button.
         handleDoneButton()
     }
@@ -242,7 +242,7 @@ extension FireTimesSelectionViewController: UITableViewDataSource, UITableViewDe
 
 /// The controller's delegate in charge of receiving the selected days dates.
 protocol FireTimesSelectionViewControllerDelegate: class {
-    
+
     /// Called when the habit days are done being selected by the user.
     func didSelectFireTimes(
         _ fireTimes: [FireTimesSelectionViewController.FireTime]

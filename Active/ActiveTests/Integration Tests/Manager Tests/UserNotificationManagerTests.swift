@@ -11,39 +11,39 @@ import UserNotifications
 @testable import Active
 
 class UserNotificationManagerTests: IntegrationTestCase {
-    
+
     // MARK: Properties
-    
+
     /// The User notification center mock used to fake
     /// the authorization request.s
     var notificationCenterMock: UserNotificationCenterMock!
-    
+
     /// The User notification manager used to schedule
     /// local user notifications.
     var notificationManager: UserNotificationManager!
-    
+
     // MARK: Setup/Teardown
-    
+
     override func setUp() {
         super.setUp()
-        
+
         // Instantiate a notification center with authorization set
         // to return false (not granted).
         notificationCenterMock = UserNotificationCenterMock(withAuthorization: false)
-        
+
         // Instantiate a new notification manager to be used by the current test.
         notificationManager = UserNotificationManager(notificationCenter: notificationCenterMock)
     }
-    
+
     override func tearDown() {
         // Removes the previously created notificationManager.
         notificationManager = nil
-        
+
         super.tearDown()
     }
-    
+
     // MARK: Tests
-    
+
     func testManagerAuthorizationRequestGranted() {
         // Declare the authorization request expectation.
         let authorizationExpectation = XCTestExpectation(description: "Ask the user to authorize the usage of local notifications.")
@@ -52,7 +52,7 @@ class UserNotificationManagerTests: IntegrationTestCase {
         notificationCenterMock.shouldAuthorize = true
 
         // Use manager to ask the user to use the local notifications.
-        notificationManager.requestAuthorization() {
+        notificationManager.requestAuthorization {
             granted in
 
             // Assert it was granted.
@@ -72,7 +72,7 @@ class UserNotificationManagerTests: IntegrationTestCase {
         notificationCenterMock.shouldAuthorize = false
 
         // Ask for permission, the permission should be denied.
-        notificationManager.requestAuthorization() {
+        notificationManager.requestAuthorization {
             granted in
 
             // Assert it wasn't granted.
@@ -87,7 +87,7 @@ class UserNotificationManagerTests: IntegrationTestCase {
 
     func testNotificationSchedule() {
         notificationCenterMock.shouldAuthorize = true
-        
+
         // Schedule a notification.
         let notificationExpectation = XCTestExpectation(description: "Schedule a UserNotificationRequest.")
 
@@ -116,7 +116,7 @@ class UserNotificationManagerTests: IntegrationTestCase {
                 error,
                 "Scheduling a notification shouldn't cause any errors."
             )
-            
+
             // Try fetching the created notification from the mock.
             self.notificationCenterMock.getPendingNotificationRequests {
                 requests in
@@ -130,7 +130,7 @@ class UserNotificationManagerTests: IntegrationTestCase {
                     requests.first?.identifier,
                     "The request should have the right identifier."
                 )
-                
+
                 notificationExpectation.fulfill()
             }
         }
@@ -140,7 +140,7 @@ class UserNotificationManagerTests: IntegrationTestCase {
 //
     func testScheduledNotificationFetch() {
         notificationCenterMock.shouldAuthorize = true
-        
+
         // Declare the fetch expectation.
         let notificationFetchExpectation = XCTestExpectation(description: "Fetch a scheduled notification request.")
 
@@ -162,7 +162,7 @@ class UserNotificationManagerTests: IntegrationTestCase {
             content: content,
             and: trigger
         ) {
-            error in
+            _ in
 
             // Try to fetch it by using the manager.
             self.notificationManager.getRequest(with: identifier) {
@@ -174,7 +174,7 @@ class UserNotificationManagerTests: IntegrationTestCase {
                     )
                     return
                 }
-                
+
                 // Make assertions on the request properties.
                 XCTAssertEqual(
                     request.identifier,
@@ -197,7 +197,7 @@ class UserNotificationManagerTests: IntegrationTestCase {
 //
     func testUnschedulingNotification() {
         notificationCenterMock.shouldAuthorize = true
-        
+
         // Remove an scheduled notification.
         let notificationRemovalExpectation = XCTestExpectation(
             description: "Delete a scheduled UserNotificationRequest."
@@ -221,11 +221,11 @@ class UserNotificationManagerTests: IntegrationTestCase {
             content: content,
             and: trigger
         ) {
-            error in
+            _ in
 
             // Remove the scheduled notification by it's id.
             self.notificationManager.unschedule(
-                withIdentifiers:  [identifier]
+                withIdentifiers: [identifier]
             )
 
             // The fetch for the created notification shouldn't return it.

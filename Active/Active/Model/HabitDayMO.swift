@@ -14,7 +14,7 @@ import CoreData
 class HabitDayMO: NSManagedObject {
 
     // MARK: Imperatives
-    
+
     /// Marks that the habit associated with this entity
     /// was executed or not.
     /// - Parameter executed: Bool indicating execution, defaults to true.
