@@ -55,7 +55,7 @@
 		4732CE7A2114FF5F00E2770C /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4732CE792114FF5F00E2770C /* CardView.swift */; };
 		4732CE7C2118DA8400E2770C /* UnderlinedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4732CE7B2118DA8400E2770C /* UnderlinedTextField.swift */; };
 		4737312B20ED502800895DD2 /* HabitDaysSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4737312A20ED502800895DD2 /* HabitDaysSelectionViewController.swift */; };
-		4737312D20ED503B00895DD2 /* HabitNotificationsSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4737312C20ED503B00895DD2 /* HabitNotificationsSelectionViewController.swift */; };
+		4737312D20ED503B00895DD2 /* FireTimesSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4737312C20ED503B00895DD2 /* FireTimesSelectionViewController.swift */; };
 		4737313C20F3D7AD00895DD2 /* CalendarDayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4737313B20F3D7AD00895DD2 /* CalendarDayCell.swift */; };
 		474A209520D00AFA00E0EBD0 /* DayStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474A209420D00AFA00E0EBD0 /* DayStorageTests.swift */; };
 		474A209720D1B02700E0EBD0 /* HabitStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474A209620D1B02700E0EBD0 /* HabitStorageTests.swift */; };
@@ -166,7 +166,7 @@
 		4732CE792114FF5F00E2770C /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		4732CE7B2118DA8400E2770C /* UnderlinedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderlinedTextField.swift; sourceTree = "<group>"; };
 		4737312A20ED502800895DD2 /* HabitDaysSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitDaysSelectionViewController.swift; sourceTree = "<group>"; };
-		4737312C20ED503B00895DD2 /* HabitNotificationsSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitNotificationsSelectionViewController.swift; sourceTree = "<group>"; };
+		4737312C20ED503B00895DD2 /* FireTimesSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireTimesSelectionViewController.swift; sourceTree = "<group>"; };
 		4737313B20F3D7AD00895DD2 /* CalendarDayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CalendarDayCell.swift; path = Active/Views/CalendarDayCell.swift; sourceTree = SOURCE_ROOT; };
 		474A209420D00AFA00E0EBD0 /* DayStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayStorageTests.swift; sourceTree = "<group>"; };
 		474A209620D1B02700E0EBD0 /* HabitStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitStorageTests.swift; sourceTree = "<group>"; };
@@ -289,7 +289,7 @@
 				4725D05A20C8A4BA00C3B63F /* HabitsTableViewController.swift */,
 				47E6C20A20EAF550003BDB4D /* HabitCreationTableViewController.swift */,
 				4737312A20ED502800895DD2 /* HabitDaysSelectionViewController.swift */,
-				4737312C20ED503B00895DD2 /* HabitNotificationsSelectionViewController.swift */,
+				4737312C20ED503B00895DD2 /* FireTimesSelectionViewController.swift */,
 				47E6C20C20EAF567003BDB4D /* HabitDetailsViewController.swift */,
 			);
 			path = Controllers;
@@ -736,7 +736,7 @@
 				47E6C21120EB129C003BDB4D /* DummyFactory.swift in Sources */,
 				470230D820E5250A003A1F6E /* Int+Utils.swift in Sources */,
 				47F635F020BB920900AC4555 /* AppDelegate.swift in Sources */,
-				4737312D20ED503B00895DD2 /* HabitNotificationsSelectionViewController.swift in Sources */,
+				4737312D20ED503B00895DD2 /* FireTimesSelectionViewController.swift in Sources */,
 				4713A20220C164FB008A13D2 /* DayMO.swift in Sources */,
 				47D7003D210179F600F4FE88 /* NotificationScheduler.swift in Sources */,
 				4779588320D8B2E10080614F /* UserNotificationManager.swift in Sources */,

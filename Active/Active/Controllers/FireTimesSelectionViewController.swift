@@ -8,10 +8,14 @@
 
 import UIKit
 
-/// The controller used to select the notification fire dates for the
+/// The controller used to select the notifications fire times for the
 /// habit being created/edited.
-class HabitNotificationsSelectionViewController: UIViewController {
+class FireTimesSelectionViewController: UIViewController {
 
+    // MARK: Types
+    
+    typealias FireTime = DateComponents
+    
     // MARK: Properties
     
     /// The fire date cell's reusable identifier.
@@ -20,6 +24,7 @@ class HabitNotificationsSelectionViewController: UIViewController {
     /// The static fire dates interval.
     private let interval = 30
     
+    /// The formatter for each fire time option displayed to the user.
     private let fireDateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.locale = Locale.current
@@ -29,17 +34,22 @@ class HabitNotificationsSelectionViewController: UIViewController {
         return formatter
     }()
     
-    /// The fire dates displayed to the user for selection.
-    private lazy var fireDates = makeFireDatesProgression(
+    /// The fire times displayed to the user for selection.
+    private lazy var fireTimes = makeFireTimesProgression(
         minutesInterval: interval
     )
     
     /// The fire dates selected by the user.
-    private var selectedFireDates = Set<Date>()
+    var selectedFireTimes = Set<FireTime>()
     
-    /// The controller's label informing the possible actions
-    /// for the controller.
-//    @IBOutlet weak var informationLabel: UILabel!
+    /// The habit color used in the cell's and
+    /// button's style.
+    var habitColor: UIColor = UIColor(
+        red: 47/255,
+        green: 54/255,
+        blue: 64/255,
+        alpha: 1
+    )
     
     /// The fire dates selection table view.
     @IBOutlet weak var tableView: UITableView!
@@ -52,7 +62,7 @@ class HabitNotificationsSelectionViewController: UIViewController {
     var notificationManager: UserNotificationManager!
     
     /// The delegate in charge of receiving the selected fire dates.
-    weak var delegate: HabitNotificationsSelectionViewControllerDelegate?
+    weak var delegate: FireTimesSelectionViewControllerDelegate?
     
     // MARK: Deinitializers
     
@@ -71,8 +81,9 @@ class HabitNotificationsSelectionViewController: UIViewController {
             "Failed to inject the notification manager."
         )
         
+        // TODO: Put the observation events in the habit creation controller.
         // Start observing the app's active state event. This is made
-        // to check if the Notifications are now allowed and update
+        // to check if the user notifications are now allowed and update
         // the views accordingly.
         NotificationCenter.default.addObserver(
             self,
@@ -89,15 +100,15 @@ class HabitNotificationsSelectionViewController: UIViewController {
     
     // MARK: Actions
     
-    @IBAction func selectFireDates(_ sender: UIButton) {
+    @IBAction func selectFireTimes(_ sender: UIButton) {
         assert(
-            !selectedFireDates.isEmpty,
+            !selectedFireTimes.isEmpty,
             "Inconsistency: the selected fire dates shouldn't be empty."
         )
         
         // Call the delegate passing the fire dates selected
         // by the user.
-        delegate?.didSelectFireDates(Array<Date>(selectedFireDates))
+        delegate?.didSelectFireTimes(Array(selectedFireTimes))
         navigationController?.popViewController(animated: true)
     }
     
@@ -106,7 +117,7 @@ class HabitNotificationsSelectionViewController: UIViewController {
     /// Configures the state of the done button according
     /// to the selected fire dates.
     private func handleDoneButton() {
-        doneButton.isEnabled = !selectedFireDates.isEmpty
+        doneButton.isEnabled = !selectedFireTimes.isEmpty
     }
     
     /// Update the views according to the User's authorization.
@@ -132,7 +143,7 @@ class HabitNotificationsSelectionViewController: UIViewController {
     }
 }
 
-extension HabitNotificationsSelectionViewController: UITableViewDataSource, UITableViewDelegate {
+extension FireTimesSelectionViewController: UITableViewDataSource, UITableViewDelegate {
     
     // MARK: Imperatives
     
@@ -143,8 +154,8 @@ extension HabitNotificationsSelectionViewController: UITableViewDataSource, UITa
     /// - Parameter minutesInterval: The minutes used to create the
     ///                              progression of dates.
     /// - Returns: An array of successive fire times within a day.
-    func makeFireDatesProgression(minutesInterval: Int) -> [Date] {
-        var fireDates = [Date]()
+    func makeFireTimesProgression(minutesInterval: Int) -> [FireTime] {
+        var fireTimes = [FireTime]()
         
         let minutesInDay = 24 * 60
         let beginningDate = Date().getBeginningOfDay()
@@ -161,10 +172,10 @@ extension HabitNotificationsSelectionViewController: UITableViewDataSource, UITa
                 return []
             }
             
-            fireDates.append(nextDate)
+            fireTimes.append(nextDate.components)
         }
         
-        return fireDates
+        return fireTimes
     }
     
     // MARK: TableView DataSource methods
@@ -174,7 +185,7 @@ extension HabitNotificationsSelectionViewController: UITableViewDataSource, UITa
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return fireDates.count
+        return fireTimes.count
     }
     
     // MARK: TableView Delegate methods
@@ -188,41 +199,54 @@ extension HabitNotificationsSelectionViewController: UITableViewDataSource, UITa
             reuseIdentifier: cellIdentifier
         )
         
-        // Set it's time text by using a date formatter.
-        cell.textLabel?.text = fireDateFormatter.string(from: fireDates[indexPath.row])
+        // Declare the current fire time to be displayed.
+        let currentFireTime = fireTimes[indexPath.row]
         
+        // Set it's time text by using a date formatter.
+        if let fireDate = Calendar.current.date(from: currentFireTime) {
+            cell.textLabel?.text = fireDateFormatter.string(from: fireDate)
+        }
+        
+        // If this fire time is among the selected ones,
+        // display the selected style in the cell.
+        if selectedFireTimes.contains(currentFireTime) {
+            // TODO: Use the selected color for the habit.
+            cell.backgroundColor = habitColor
+            cell.textLabel?.textColor = .white
+        } else {
+            // Set the cell's style to be the default one.
+            cell.backgroundColor = .white
+            cell.textLabel?.textColor = .black
+        }
+
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Get the selected date.
-        let selectedDate = fireDates[indexPath.row]
+        let selectedFireTime = fireTimes[indexPath.row]
         
-        // Add it to the selected ones.
-        selectedFireDates.insert(selectedDate)
-        
-        // Enable the done button.
-        handleDoneButton()
-    }
-    
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        // Get the selected date.
-        let selectedDate = fireDates[indexPath.row]
-        
-        // Remove it from the selected dates.
-        if selectedFireDates.contains(selectedDate) {
-            selectedFireDates.remove(selectedDate)
+        if selectedFireTimes.contains(selectedFireTime) {
+            // Remove it from the selected ones.
+            selectedFireTimes.remove(selectedFireTime)
+        } else {
+            // Add it to the selected ones.
+            selectedFireTimes.insert(selectedFireTime)
         }
         
-        // Handle the done button enabled state.
+        // Reload the cell to display its selected state.
+        tableView.reloadRows(at: [indexPath], with: .fade)
+        
+        // Enable the done button.
         handleDoneButton()
     }
 }
 
 /// The controller's delegate in charge of receiving the selected days dates.
-protocol HabitNotificationsSelectionViewControllerDelegate: class {
+protocol FireTimesSelectionViewControllerDelegate: class {
     
     /// Called when the habit days are done being selected by the user.
-    func didSelectFireDates(_ fireDates: [Date])
-    
+    func didSelectFireTimes(
+        _ fireTimes: [FireTimesSelectionViewController.FireTime]
+    )
 }

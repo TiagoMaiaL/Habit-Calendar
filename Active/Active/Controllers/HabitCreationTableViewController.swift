@@ -11,7 +11,7 @@ import CoreData
 import UserNotifications
 
 /// Controller used to allow the user to create/edit habits.
-class HabitCreationTableViewController: UITableViewController, HabitDaysSelectionViewControllerDelegate, HabitNotificationsSelectionViewControllerDelegate {
+class HabitCreationTableViewController: UITableViewController, HabitDaysSelectionViewControllerDelegate, FireTimesSelectionViewControllerDelegate {
 
     // MARK: Properties
     
@@ -35,6 +35,12 @@ class HabitCreationTableViewController: UITableViewController, HabitDaysSelectio
     
     /// The label displaying the last day in the selected sequence.
     @IBOutlet weak var toDayLabel: UILabel!
+    
+    /// The label displaying the amount of fire times selected.
+    @IBOutlet weak var fireTimesAmountLabel: UILabel!
+    
+    /// The label displaying the of fire time times selected.
+    @IBOutlet weak var selectedFireTimesLabel: UILabel!
     
     /// The container in which the habit is going to be persisted.
     var container: NSPersistentContainer!
@@ -66,7 +72,7 @@ class HabitCreationTableViewController: UITableViewController, HabitDaysSelectio
     }
     
     /// The habit's notification times the user has chosen.
-    private var selectedNotificationFireTimes: [Date]?
+    private var selectedNotificationFireTimes: [FireTimesSelectionViewController.FireTime]?
     
     // TODO: Show a cell indicating the user hasn't enabled local notifications.
     
@@ -92,8 +98,11 @@ class HabitCreationTableViewController: UITableViewController, HabitDaysSelectio
         // Create a toolbar and add it as the field's accessory view.
         nameTextField.inputAccessoryView = makeToolbar()
         
-        // Display the days labels initial text.
+        // Display the initial text of the days labels.
         configureDaysLabels()
+        
+        // Display the initial text of the notifications labels.
+        configureFireTimesLabels()
         
         // Set the done button's initial state.
         configureCreationButton()
@@ -113,11 +122,14 @@ class HabitCreationTableViewController: UITableViewController, HabitDaysSelectio
             
         case notificationSelectionSegue:
             // Associate the NotificationsSelectionController's delegate.
-            if let notificationsController = segue.destination as? HabitNotificationsSelectionViewController {
+            if let notificationsController = segue.destination as? FireTimesSelectionViewController {
                 notificationsController.delegate = self
                 notificationsController.notificationManager = UserNotificationManager(
                     notificationCenter: UNUserNotificationCenter.current()
                 )
+                if let fireTimes = selectedNotificationFireTimes {
+                    notificationsController.selectedFireTimes = Set(fireTimes)
+                }
             } else {
                 assertionFailure("Error: Couldn't get the fire dates selection controller.")
             }
@@ -215,6 +227,17 @@ class HabitCreationTableViewController: UITableViewController, HabitDaysSelectio
         }
     }
     
+    /// Configures the text being displayed by each label within
+    /// the notifications field.
+    private func configureFireTimesLabels() {
+        // Set the text for the label displaying the amount of fire times.
+        fireTimesAmountLabel.text = "No fire times selected."
+        
+        // Set the text for the label displaying some of the
+        // selected fire times.
+        selectedFireTimesLabel.text = "--"
+    }
+    
     /// Creates and configures a new UIToolbar with a done button to be
     /// used as the name field's accessoryView.
     /// - Returns: An UIToolbar.
@@ -259,10 +282,12 @@ extension HabitCreationTableViewController {
     
     // MARK: HabitNotificationsSelectionViewControllerDelegate Delegate Methods
     
-    func didSelectFireDates(_ fireDates: [Date]) {
+    func didSelectFireTimes(_ fireTimes: [FireTimesSelectionViewController.FireTime]) {
         // Associate the habit's fire dates with the fireDates selected by
         // the user.
-        selectedNotificationFireTimes = fireDates
+        selectedNotificationFireTimes = fireTimes
+        // Change the labels to display the selected fire times.
+        configureFireTimesLabels()
     }
 }
 

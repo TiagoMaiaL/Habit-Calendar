@@ -13,7 +13,7 @@ extension Date {
     
     // MARK: Properties
     
-    /// The date's components according to system's calendar.
+    /// The date's components according to the system's calendar.
     var components: DateComponents {
         return getCurrentCalendar().dateComponents(
             [.second, .minute, .hour, .day, .month, .year],
