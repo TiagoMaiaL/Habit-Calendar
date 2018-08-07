@@ -25,14 +25,7 @@ class FireTimesSelectionViewController: UIViewController {
     private let interval = 30
     
     /// The formatter for each fire time option displayed to the user.
-    private let fireDateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.locale = Locale.current
-        formatter.timeZone = TimeZone.current
-        formatter.dateFormat = "HH:mm"
-        
-        return formatter
-    }()
+    private let fireDateFormatter = DateFormatter.makeFireTimeDateFormatter()
     
     /// The fire times displayed to the user for selection.
     private lazy var fireTimes = makeFireTimesProgression(
@@ -49,7 +42,13 @@ class FireTimesSelectionViewController: UIViewController {
         green: 54/255,
         blue: 64/255,
         alpha: 1
-    )
+    ) {
+        didSet {
+            // Reload the table view to update the selected style.
+            tableView.reloadData()
+            // TODO: Configure the button's background color.
+        }
+    }
     
     /// The fire dates selection table view.
     @IBOutlet weak var tableView: UITableView!
@@ -210,7 +209,6 @@ extension FireTimesSelectionViewController: UITableViewDataSource, UITableViewDe
         // If this fire time is among the selected ones,
         // display the selected style in the cell.
         if selectedFireTimes.contains(currentFireTime) {
-            // TODO: Use the selected color for the habit.
             cell.backgroundColor = habitColor
             cell.textLabel?.textColor = .white
         } else {

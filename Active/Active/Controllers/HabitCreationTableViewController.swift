@@ -230,12 +230,33 @@ class HabitCreationTableViewController: UITableViewController, HabitDaysSelectio
     /// Configures the text being displayed by each label within
     /// the notifications field.
     private func configureFireTimesLabels() {
-        // Set the text for the label displaying the amount of fire times.
-        fireTimesAmountLabel.text = "No fire times selected."
-        
-        // Set the text for the label displaying some of the
-        // selected fire times.
-        selectedFireTimesLabel.text = "--"
+        if let fireTimes = selectedNotificationFireTimes, !fireTimes.isEmpty {
+            // Set the text for the label displaying the amount of fire times.
+            fireTimesAmountLabel.text = "\(fireTimes.count) fire time\(fireTimes.count == 1 ? "" : "s") selected."
+            
+            // Set the text for the label displaying some of the
+            // selected fire times:
+            let fireTimeFormatter = DateFormatter.makeFireTimeDateFormatter()
+            let fireDates = fireTimes.compactMap {
+                return Calendar.current.date(from: $0)
+            }.sorted()
+            var fireTimesText = ""
+            
+            for fireDate in fireDates {
+                fireTimesText += fireTimeFormatter.string(from: fireDate)
+                
+                // If the current fire time isn't the last one,
+                // include a colon to separate it from the next.
+                if fireDates.index(of: fireDate)! != fireDates.endIndex - 1 {
+                    fireTimesText += ", "
+                }
+            }
+            
+            selectedFireTimesLabel.text = fireTimesText
+        } else {
+            fireTimesAmountLabel.text = "No fire times selected."
+            selectedFireTimesLabel.text = "--"
+        }
     }
     
     /// Creates and configures a new UIToolbar with a done button to be
