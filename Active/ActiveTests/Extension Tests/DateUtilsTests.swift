@@ -36,13 +36,32 @@ class DateUtilsTests: XCTestCase {
         let todayBeginning = today.getBeginningOfDay()
 
         // Compare the dates' day, month and year.
-        XCTAssertEqual(today.components.day, todayBeginning.components.day, "The dates should have equal days.")
-        XCTAssertEqual(today.components.month, todayBeginning.components.month, "The dates should have equal months.")
-        XCTAssertEqual(today.components.year, todayBeginning.components.year, "The dates should have equal years.")
+        XCTAssertEqual(
+            today.components.day,
+            todayBeginning.components.day,
+            "The dates should have equal days."
+        )
+        XCTAssertEqual(
+            today.components.month,
+            todayBeginning.components.month,
+            "The dates should have equal months."
+        )
+        XCTAssertEqual(
+            today.components.year,
+            todayBeginning.components.year,
+            "The dates should have equal years."
+        )
 
         // Check if the generated date represents the previous date at midnight.
-        XCTAssertEqual(todayBeginning.components.minute, 0, "The beginning of a day's date should be at midnight (0 minutes).")
-        XCTAssertEqual(todayBeginning.components.hour, 0, "The beginning of a day's date should be at midnight (0 hours, midnight).")
+        XCTAssertEqual(
+            todayBeginning.components.minute,
+            0,
+            "The beginning of a day's date should be at midnight (0 minutes).")
+        XCTAssertEqual(
+            todayBeginning.components.hour,
+            0,
+            "The beginning of a day's date should be at midnight (0 hours, midnight)."
+        )
     }
 
     func testGettingTheEndOfToday() {
@@ -112,7 +131,11 @@ class DateUtilsTests: XCTestCase {
         XCTAssertEqual(date?.components.year, dateAfter?.components.year)
 
         // Check if the days were correclty added.
-        XCTAssertEqual((date?.components.day ?? 1) + 7, dateAfter?.components.day, "The days should be correclty added.")
+        XCTAssertEqual(
+            (date?.components.day ?? 1) + 7,
+            dateAfter?.components.day,
+            "The days should be correclty added."
+        )
     }
 
     func testGettingDateByAddingYears() {

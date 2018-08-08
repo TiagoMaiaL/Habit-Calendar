@@ -190,7 +190,7 @@ class HabitsTableViewController: UITableViewController, NSFetchedResultsControll
     /// - Parameter notification: The thrown notification
     @objc private func handleContextChanges(notification: Notification) {
         // If the changes were only updates, reload the tableView.
-        if let _ = notification.userInfo?["updated"] as? Set<NSManagedObject> {
+        if (notification.userInfo?["updated"] as? Set<NSManagedObject>) != nil {
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
@@ -211,8 +211,13 @@ extension HabitsTableViewController {
         tableView.beginUpdates()
     }
 
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-
+    func controller(
+        _ controller: NSFetchedResultsController<NSFetchRequestResult>,
+        didChange anObject: Any,
+        at indexPath: IndexPath?,
+        for type: NSFetchedResultsChangeType,
+        newIndexPath: IndexPath?
+    ) {
         // Add or remove rows based on the kind of changes:
         switch type {
         case .delete:
@@ -228,12 +233,10 @@ extension HabitsTableViewController {
                 tableView.deleteRows(at: [indexPath], with: .automatic)
                 tableView.insertRows(at: [newIndexPath], with: .automatic)
             }
-            break
         case .update:
             if let indexPath = indexPath {
                 tableView.reloadRows(at: [indexPath], with: .automatic)
             }
-            break
         }
     }
 

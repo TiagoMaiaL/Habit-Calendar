@@ -70,7 +70,10 @@ struct HabitFactory: DummyFactory {
         let dummySequence = sequenceFactory.makeDummy()
         dummySequence.habit = habit
 
-        let habitDays = dummySequence.days as! Set<HabitDayMO>
+        guard let habitDays = dummySequence.days as? Set<HabitDayMO> else {
+            assertionFailure("Error: The sequence dummy doesn't have valid days.")
+            return habit
+        }
 
         // For each day, generate the notifications based on the fire times and
         // the habit's day.

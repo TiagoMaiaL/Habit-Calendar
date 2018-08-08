@@ -107,7 +107,7 @@ class HabitMO: NSManagedObject {
         )
 
         if let days = days?.filtered(using: futurePredicate) as? Set<HabitDayMO> {
-            return Array<HabitDayMO>(days)
+            return [HabitDayMO](days)
         } else {
             return []
         }

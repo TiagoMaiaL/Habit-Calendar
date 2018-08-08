@@ -20,11 +20,15 @@ class DaysSequenceTests: IntegrationTestCase {
         let sequenceDummy = factories.daysSequence.makeDummy()
 
         // 2. Mark some days as executed.
-        let habitDays = Array(sequenceDummy.days as! Set<HabitDayMO>)
+        guard let daysSet = sequenceDummy.days as? Set<HabitDayMO> else {
+            XCTFail("Error: Couldn't get the dummy sequence's days.")
+            return
+        }
+        let habitDays = Array(daysSet)
         let executedCount = habitDays.count / 2
 
-        for i in 0..<executedCount {
-            habitDays[i].markAsExecuted()
+        for index in 0..<executedCount {
+            habitDays[index].markAsExecuted()
         }
 
         // 3. Make assertions on it:
@@ -41,11 +45,15 @@ class DaysSequenceTests: IntegrationTestCase {
         let sequenceDummy = factories.daysSequence.makeDummy()
 
         // 2. Mark some days as executed.
-        let habitDays = Array(sequenceDummy.days as! Set<HabitDayMO>)
+        guard let daysSet = sequenceDummy.days as? Set<HabitDayMO> else {
+            XCTFail("Error: Couldn't get the dummy sequence's days.")
+            return
+        }
+        let habitDays = Array(daysSet)
         let executedCount = habitDays.count / 3
 
-        for i in 0..<executedCount {
-            habitDays[i].markAsExecuted()
+        for index in 0..<executedCount {
+            habitDays[index].markAsExecuted()
         }
 
         // 3. Assert on the missed days.
@@ -61,11 +69,15 @@ class DaysSequenceTests: IntegrationTestCase {
         let sequenceDummy = factories.daysSequence.makeDummy()
 
         // 2. Mark some days as executed.
-        let habitDays = Array(sequenceDummy.days as! Set<HabitDayMO>)
+        guard let daysSet = sequenceDummy.days as? Set<HabitDayMO> else {
+            XCTFail("Error: Couldn't get the dummy sequence's days.")
+            return
+        }
+        let habitDays = Array(daysSet)
         let executedCount = habitDays.count / 4
 
-        for i in 0..<executedCount {
-            habitDays[i].markAsExecuted()
+        for index in 0..<executedCount {
+            habitDays[index].markAsExecuted()
         }
 
         // 3. Assert on the completionProgress.

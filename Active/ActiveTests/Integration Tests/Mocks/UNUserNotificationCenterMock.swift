@@ -38,24 +38,34 @@ class UserNotificationCenterMock: UserNotificationCenter {
 
     // MARK: Imperatives
 
-    func requestAuthorization(options: UNAuthorizationOptions = [], completionHandler: @escaping (Bool, Error?) -> Void) {
+    func requestAuthorization(
+        options: UNAuthorizationOptions = [],
+        completionHandler: @escaping (Bool, Error?) -> Void
+    ) {
         // Immediately call the completion handler
         // by passing the configured grant result.
         completionHandler(shouldAuthorize, nil)
     }
 
-    func add(_ request: UNNotificationRequest, withCompletionHandler completionHandler: ((Error?) -> Void)?) {
+    func add(
+        _ request: UNNotificationRequest,
+        withCompletionHandler completionHandler: ((Error?) -> Void)?
+    ) {
         // Add the request to the internal requests array.
         requests.append(request)
         completionHandler?(nil)
     }
 
-    func getPendingNotificationRequests(completionHandler: @escaping ([UNNotificationRequest]) -> Void) {
+    func getPendingNotificationRequests(
+        completionHandler: @escaping ([UNNotificationRequest]) -> Void
+    ) {
         // Return the internal requests.
         completionHandler(requests)
     }
 
-    func removePendingNotificationRequests(withIdentifiers identifiers: [String]) {
+    func removePendingNotificationRequests(
+        withIdentifiers identifiers: [String]
+    ) {
         // Remove all requests with the passed identifiers from the internal
         // array.
         var temporaryRequests = self.requests
@@ -70,7 +80,9 @@ class UserNotificationCenterMock: UserNotificationCenter {
         self.requests = temporaryRequests
     }
 
-    func getNotificationSettings(completionHandler: @escaping (UNNotificationSettings) -> Swift.Void) {
+    func getNotificationSettings(
+        completionHandler: @escaping (UNNotificationSettings) -> Swift.Void
+    ) {
         // Recall internal notification center.
         userNotificationCenter.getNotificationSettings(completionHandler: completionHandler)
     }

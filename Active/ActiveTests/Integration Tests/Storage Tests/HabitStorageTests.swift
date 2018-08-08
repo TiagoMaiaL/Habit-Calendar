@@ -435,16 +435,14 @@ class HabitStorageTests: IntegrationTestCase {
 
         // Use a timer to make the assertions on the scheduling of user
         // notifications. Scheduling notifications is an async operation.
-        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) {
-            _ in
+        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { _ in
             // 3. Assert that the habit's notifications were scheduled:
             // - Assert on the count of notifications and user notifications.
             XCTAssertEqual(
                 createdHabit.notifications?.count,
                 days.count * fireTimes.count
             )
-            self.notificationCenterMock.getPendingNotificationRequests {
-                requests in
+            self.notificationCenterMock.getPendingNotificationRequests { requests in
                 XCTAssertEqual(
                     requests.count,
                     days.count * fireTimes.count
@@ -514,12 +512,10 @@ class HabitStorageTests: IntegrationTestCase {
             "The amount of notifications should be the number of future days * the fire times."
         )
 
-        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) {
-            _ in
+        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { _ in
 
             // - assert on the number of user notifications
-            self.notificationCenterMock.getPendingNotificationRequests {
-                requests in
+            self.notificationCenterMock.getPendingNotificationRequests { requests in
 
                 XCTAssertEqual(
                     requests.count,
@@ -529,7 +525,7 @@ class HabitStorageTests: IntegrationTestCase {
 
                 // - assert that all notifications were properly scheduled.
                 XCTAssertTrue(
-                    (dummyHabit.notifications as! Set<NotificationMO>).filter { !$0.wasScheduled }.count == 0,
+                    (dummyHabit.notifications as? Set<NotificationMO>)?.filter { !$0.wasScheduled }.count == 0,
                     "The notifications weren't properly scheduled."
                 )
 
@@ -582,12 +578,10 @@ class HabitStorageTests: IntegrationTestCase {
             "The amount of notifications should be the number of future days * the fire times."
         )
 
-        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) {
-            _ in
+        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { _ in
 
             // - assert on the number of user notifications
-            self.notificationCenterMock.getPendingNotificationRequests {
-                requests in
+            self.notificationCenterMock.getPendingNotificationRequests { requests in
 
                 XCTAssertEqual(
                     requests.count,
@@ -597,7 +591,7 @@ class HabitStorageTests: IntegrationTestCase {
 
                 // - assert that all notifications were properly scheduled.
                 XCTAssertTrue(
-                    (dummyHabit.notifications as! Set<NotificationMO>).filter { !$0.wasScheduled }.count == 0,
+                    (dummyHabit.notifications as? Set<NotificationMO>)?.filter { !$0.wasScheduled }.count == 0,
                     "The notifications weren't properly scheduled."
                 )
 
@@ -650,12 +644,10 @@ class HabitStorageTests: IntegrationTestCase {
             "The amount of notifications should be the number of future days * the fire times."
         )
 
-        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) {
-            _ in
+        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { _ in
 
             // - assert on the number of user notifications
-            self.notificationCenterMock.getPendingNotificationRequests {
-                requests in
+            self.notificationCenterMock.getPendingNotificationRequests { requests in
 
                 XCTAssertEqual(
                     requests.count,
@@ -665,7 +657,7 @@ class HabitStorageTests: IntegrationTestCase {
 
                 // - assert that all notifications were properly scheduled.
                 XCTAssertTrue(
-                    (dummyHabit.notifications as! Set<NotificationMO>).filter { !$0.wasScheduled }.count == 0,
+                    (dummyHabit.notifications as? Set<NotificationMO>)?.filter { !$0.wasScheduled }.count == 0,
                     "The notifications weren't properly scheduled."
                 )
 

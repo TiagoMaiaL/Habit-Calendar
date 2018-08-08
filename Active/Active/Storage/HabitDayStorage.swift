@@ -62,7 +62,8 @@ class HabitDayStorage {
         // Get the calendar Day entity from the storage.
         // If a calendar Day entity wasn't found, a new Day entity should be
         // created to hold the HabitDay entities.
-        let calendarDay = try? calendarDayStorage.day(using: context, and: date) ?? calendarDayStorage.create(using: context, and: date)
+        let calendarDay = try? calendarDayStorage.day(using: context, and: date) ??
+            calendarDayStorage.create(using: context, and: date)
 
         habitDay.id = UUID().uuidString
         habitDay.day = calendarDay

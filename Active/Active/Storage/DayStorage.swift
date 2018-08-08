@@ -59,7 +59,10 @@ class DayStorage {
 
         // If the results count is greater than 1, there's an error in the entity
         // creation somewhere. There should be only one day entity per date.
-        assert(results?.count ?? 0 <= 1, "DayStorage -- day: there's more than on Day entity for the passed date attribute.")
+        assert(
+            results?.count ?? 0 <= 1,
+            "DayStorage -- day: there's more than on Day entity for the passed date attribute."
+        )
 
         return results?.first
     }

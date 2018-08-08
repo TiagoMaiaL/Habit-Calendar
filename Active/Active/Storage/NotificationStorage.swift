@@ -97,7 +97,10 @@ class NotificationStorage {
 
         // The results shouldn't contain more than one notification.
         // Only one notification should be created for the passed date.
-        assert(results?.count ?? 0 <= 1, "NotificationStorage -- notification: There's more than one notification for the passed arguments. Only one should be created and returned.")
+        assert(
+            results?.count ?? 0 <= 1,
+            "There's more than one notification for the passed arguments. Only one should be created and returned."
+        )
 
         return results?.first
     }

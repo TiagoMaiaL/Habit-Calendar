@@ -7,6 +7,7 @@ target 'Active' do
 
   # Pods for Active
   pod 'JTAppleCalendar', '~> 7.1.5'
+  pod 'SwiftLint'
 
   target 'ActiveTests' do
     inherit! :search_paths

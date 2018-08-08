@@ -26,7 +26,10 @@ class UserStorage {
         let results = try? context.fetch(request)
 
         // Assert that only one user was persisted.
-        assert(results?.count ?? 0 <= 1, "UserStorage -- getUser: There's more than one user persisted, only one should be allowed.")
+        assert(
+            results?.count ?? 0 <= 1,
+            "UserStorage -- getUser: There's more than one user persisted, only one should be allowed."
+        )
 
         return results?.first
     }

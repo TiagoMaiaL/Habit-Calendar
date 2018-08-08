@@ -132,12 +132,14 @@ class HabitStorage {
     /// - Parameter days: The new days' dates of the passed habit.
     /// - Parameter notifications: The new dates of each notification object
     ///                            to be added to the habit.
-    func edit(_ habit: HabitMO,
-              using context: NSManagedObjectContext,
-              name: String? = nil,
-              color: HabitMO.Color? = nil,
-              days: [Date]? = nil,
-              and notificationFireTimes: [DateComponents]? = nil) -> HabitMO {
+    func edit(
+        _ habit: HabitMO,
+        using context: NSManagedObjectContext,
+        name: String? = nil,
+        color: HabitMO.Color? = nil,
+        days: [Date]? = nil,
+        and notificationFireTimes: [DateComponents]? = nil
+    ) -> HabitMO {
 
         if let name = name {
             habit.name = name
@@ -148,52 +150,15 @@ class HabitStorage {
         }
 
         if let days = days {
-            assert(!days.isEmpty, "HabitStorage -- edit: days argument shouldn't be empty.")
-
-            // Get the current sequence.
-            if let currentSequence = habit.getCurrentSequence() {
-                // Remove its future days.
-                for day in habit.getFutureDays() {
-                    if day.sequence === currentSequence {
-                        currentSequence.removeFromDays(day)
-                    }
-                    habit.removeFromDays(day)
-                    context.delete(day)
-                }
-
-                // Change its toDate to today.
-                currentSequence.toDate = Date().getBeginningOfDay()
-            }
-
-            // Add a new sequence.
-            _ = daysSequenceStorage.create(
-                using: context,
-                daysDates: days,
-                and: habit
-            )
+            editDays(days, ofHabit: habit)
         }
 
         if let fireTimes = notificationFireTimes {
-            assert(!fireTimes.isEmpty, "HabitStorage -- edit: notifications argument shouldn't be empty.")
-
-            // Remove the current fire time entities associated with the habit.
-            if let currentFireTimes = habit.fireTimes as? Set<FireTimeMO> {
-                for fireTime in currentFireTimes {
-                    habit.removeFromFireTimes(fireTime)
-                    context.delete(fireTime)
-                }
-            }
-
-            // Create and associate the FireTimeMO entities with the habit.
-            for fireTime in fireTimes {
-                _ = fireTimeStorage.create(
-                    using: context,
-                    components: fireTime,
-                    andHabit: habit
-                )
-            }
+            editFireTimes(fireTimes, ofHabit: habit)
         }
 
+        // If the days or fire times were editted, the habit's notifications become invalid, so it's necessary
+        // to create and schedule new ones.
         if days != nil || notificationFireTimes != nil {
             if let notifications = habit.notifications as? Set<NotificationMO> {
                 // Unschedule all user notifications associated with
@@ -217,6 +182,76 @@ class HabitStorage {
 
         return habit
     }
+
+    /// Edits the habit's sequence of days by closing the current and adding a new one.
+    /// - Parameters:
+    ///     - days: The days to be added.
+    ///     - habit: The habit to be edited.
+    private func editDays(_ days: [Date], ofHabit habit: HabitMO) {
+        assert(!days.isEmpty, "HabitStorage -- edit: days argument shouldn't be empty.")
+
+        guard let context = habit.managedObjectContext else {
+            assertionFailure("The habit being edited must have a context.")
+            return
+        }
+
+        // Close the current habit's sequence of days:
+        if let currentSequence = habit.getCurrentSequence() {
+            // Remove its future days.
+            for day in habit.getFutureDays() {
+                if day.sequence === currentSequence {
+                    currentSequence.removeFromDays(day)
+                }
+                habit.removeFromDays(day)
+                context.delete(day)
+            }
+
+            // Change its toDate to today.
+            currentSequence.toDate = Date().getBeginningOfDay()
+        }
+
+        // Add a new sequence.
+        _ = daysSequenceStorage.create(
+            using: context,
+            daysDates: days,
+            and: habit
+        )
+    }
+
+    /// Edits the habit's fire times by removing the old entities and adding the new ones.
+    /// - Parameters:
+    ///     - fireTimes: The fire times to be added.
+    ///     - habit: The habit to be edited.
+    private func editFireTimes(_ fireTimes: [DateComponents], ofHabit habit: HabitMO) {
+        assert(!fireTimes.isEmpty, "HabitStorage -- edit: notifications argument shouldn't be empty.")
+
+        guard let context = habit.managedObjectContext else {
+            assertionFailure("The habit being edited must have a context.")
+            return
+        }
+
+        // Remove the current fire time entities associated with the habit.
+        if let currentFireTimes = habit.fireTimes as? Set<FireTimeMO> {
+            for fireTime in currentFireTimes {
+                habit.removeFromFireTimes(fireTime)
+                context.delete(fireTime)
+            }
+        }
+
+        // Create and associate the FireTimeMO entities with the habit.
+        for fireTime in fireTimes {
+            _ = fireTimeStorage.create(
+                using: context,
+                components: fireTime,
+                andHabit: habit
+            )
+        }
+    }
+
+    /// Edits the habit's fire times by removing the old entities and adding the new ones.
+    /// - Parameters:
+    ///     - fireTimes: The fire times to be added.
+    ///     - habit: The habit to be edited.
 
     /// Removes the passed habit from the database.
     /// - Parameter context: The context used to delete the habit from.

@@ -46,34 +46,39 @@ class UserNotificationManagerTests: IntegrationTestCase {
 
     func testManagerAuthorizationRequestGranted() {
         // Declare the authorization request expectation.
-        let authorizationExpectation = XCTestExpectation(description: "Ask the user to authorize the usage of local notifications.")
+        let authorizationExpectation = XCTestExpectation(
+            description: "Ask the user to authorize the usage of local notifications."
+        )
 
         // Configure the mock to authorize local notifications.
         notificationCenterMock.shouldAuthorize = true
 
         // Use manager to ask the user to use the local notifications.
-        notificationManager.requestAuthorization {
-            granted in
+        notificationManager.requestAuthorization { granted in
 
             // Assert it was granted.
-            XCTAssertTrue(granted, "The authorization to use Local notifications should be given by the user.")
+            XCTAssertTrue(
+                granted,
+                "The authorization to use Local notifications should be given by the user."
+            )
 
             authorizationExpectation.fulfill()
         }
 
         wait(for: [authorizationExpectation], timeout: 0.1)
     }
-//
+
     func testManagerAuthorizationRequestNotGranted() {
         // Declare the authrorization request expectation.
-        let authorizationExpectation = XCTestExpectation(description: "Ask the user to authorize the usage of local notifications.")
+        let authorizationExpectation = XCTestExpectation(
+            description: "Ask the user to authorize the usage of local notifications."
+        )
 
         // Configure the mock so as not to grant local notifications.
         notificationCenterMock.shouldAuthorize = false
 
         // Ask for permission, the permission should be denied.
-        notificationManager.requestAuthorization {
-            granted in
+        notificationManager.requestAuthorization { granted in
 
             // Assert it wasn't granted.
             XCTAssertFalse(granted, "The authorization to use Local notifications should be denied by the user.")
@@ -108,8 +113,7 @@ class UserNotificationManagerTests: IntegrationTestCase {
             with: identifier,
             content: content,
             and: trigger
-        ) {
-            error in
+        ) { error in
 
             // Assert that there's no errors.
             XCTAssertNil(
@@ -118,8 +122,7 @@ class UserNotificationManagerTests: IntegrationTestCase {
             )
 
             // Try fetching the created notification from the mock.
-            self.notificationCenterMock.getPendingNotificationRequests {
-                requests in
+            self.notificationCenterMock.getPendingNotificationRequests { requests in
                 XCTAssertEqual(
                     1,
                     requests.count,
@@ -161,12 +164,10 @@ class UserNotificationManagerTests: IntegrationTestCase {
             with: identifier,
             content: content,
             and: trigger
-        ) {
-            _ in
+        ) { _ in
 
             // Try to fetch it by using the manager.
-            self.notificationManager.getRequest(with: identifier) {
-                request in
+            self.notificationManager.getRequest(with: identifier) { request in
 
                 guard let request = request else {
                     XCTFail(
@@ -192,9 +193,7 @@ class UserNotificationManagerTests: IntegrationTestCase {
 
         wait(for: [notificationFetchExpectation], timeout: 0.1)
     }
-//
-//    // TODO: Test scheduling with errors.
-//
+
     func testUnschedulingNotification() {
         notificationCenterMock.shouldAuthorize = true
 
@@ -220,17 +219,14 @@ class UserNotificationManagerTests: IntegrationTestCase {
             with: identifier,
             content: content,
             and: trigger
-        ) {
-            _ in
-
+        ) { _ in
             // Remove the scheduled notification by it's id.
             self.notificationManager.unschedule(
                 withIdentifiers: [identifier]
             )
 
             // The fetch for the created notification shouldn't return it.
-            self.notificationManager.getRequest(with: identifier) {
-                request in
+            self.notificationManager.getRequest(with: identifier) { request in
 
                 // Because the request was deleted, it shouldn't be returned.
                 XCTAssertNil(

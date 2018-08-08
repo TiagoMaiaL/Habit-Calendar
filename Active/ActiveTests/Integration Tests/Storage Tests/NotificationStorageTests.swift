@@ -38,8 +38,10 @@ class NotificationStorageTests: IntegrationTestCase {
     // MARK: Tests
 
     func testNotificationCreation() {
-        let RequestExpectation = XCTestExpectation(
-            description: "The created notification needs to have a scheduled user notification request associated with it."
+        let requestExpectation = XCTestExpectation(
+            description: """
+The created notification needs to have a scheduled user notification request associated with it.
+"""
         )
 
         // Create a dummy habit.
@@ -95,10 +97,10 @@ class NotificationStorageTests: IntegrationTestCase {
                 notification.userNotificationId,
                 "The created notification should have an associated and scheduled user notification id."
             )
-            RequestExpectation.fulfill()
+            requestExpectation.fulfill()
         }
 
-        wait(for: [RequestExpectation], timeout: 0.5)
+        wait(for: [requestExpectation], timeout: 0.5)
     }
 
     func testNotificationFetch() {
@@ -113,9 +115,16 @@ class NotificationStorageTests: IntegrationTestCase {
         )
 
         // Check if method fetches the created notification.
-        XCTAssertNotNil(fetchedNotification, "Created notification should be fetched by using the notification method in the storage class.")
+        XCTAssertNotNil(
+            fetchedNotification,
+            "Created notification should be fetched by using the notification method in the storage class."
+        )
         // Check if notification's id matches.
-        XCTAssertEqual(dummyNotification.id, fetchedNotification?.id, "Created notification should have the correct attributes.")
+        XCTAssertEqual(
+            dummyNotification.id,
+            fetchedNotification?.id,
+            "Created notification should have the correct attributes."
+        )
     }
 
     func testNotificationCreationTwiceShouldThrow() {

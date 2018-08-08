@@ -61,7 +61,7 @@ struct NotificationScheduler {
     ///                          finishes.
     func schedule(
         _ notification: NotificationMO,
-        completionHandler: Optional<(NotificationMO) -> Void> = nil) {
+        completionHandler: ((NotificationMO) -> Void)? = nil) {
 
         // Declare the options used to schedule a new request.
         let options = makeNotificationOptions(for: notification)

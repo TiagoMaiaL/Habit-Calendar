@@ -70,7 +70,9 @@ class HabitDetailsViewController: UIViewController {
         // Try to get the ordered days from the passed habit.
         let dateSorting = NSSortDescriptor(key: "day.date", ascending: true)
 
-        guard let orderedDays = habit.getCurrentSequence()?.days?.sortedArray(using: [dateSorting]) as? [HabitDayMO] else {
+        guard let orderedDays = habit.getCurrentSequence()?.days?.sortedArray(
+            using: [dateSorting]
+        ) as? [HabitDayMO] else {
             assertionFailure("Inconsistency: Couldn't sort the habit's days by the date property.")
             return
         }
@@ -106,7 +108,10 @@ class HabitDetailsViewController: UIViewController {
         // Declare the alert.
         let alert = UIAlertController(
             title: "Delete",
-            message: "Are you sure you want to delete this habit? Deleting this habit makes all the history information unavailable.",
+            message: """
+Are you sure you want to delete this habit? Deleting this habit makes all the history \
+information unavailable.
+""",
             preferredStyle: .alert
         )
         // Declare its actions.
@@ -197,11 +202,21 @@ extension HabitDetailsViewController: JTAppleCalendarViewDataSource, JTAppleCale
 
     // MARK: JTAppleCalendarViewDelegate Methods
 
-    func calendar(_ calendar: JTAppleCalendarView, cellForItemAt date: Date, cellState: CellState, indexPath: IndexPath) -> JTAppleCell {
+    func calendar(
+        _ calendar: JTAppleCalendarView,
+        cellForItemAt date: Date,
+        cellState: CellState,
+        indexPath: IndexPath
+    ) -> JTAppleCell {
         let cell = calendar.dequeueReusableJTAppleCell(
             withReuseIdentifier: cellIdentifier,
             for: indexPath
-        ) as! DetailsCalendarDayCell
+        )
+
+        guard let dayCell = cell as? DetailsCalendarDayCell else {
+            assertionFailure("Couldn't get the expected details calendar cell.")
+            return cell
+        }
 
         if cellState.dateBelongsTo == .thisMonth {
             // Set the cell's color if the date represents a habit day.
@@ -217,16 +232,20 @@ extension HabitDetailsViewController: JTAppleCalendarViewDataSource, JTAppleCale
                 cell.backgroundColor = .white
             }
 
-            cell.dayTitleLabel.text = cellState.text
+            dayCell.dayTitleLabel.text = cellState.text
         } else {
-            cell.dayTitleLabel.text = ""
-            cell.backgroundColor = .white
+            dayCell.dayTitleLabel.text = ""
+            dayCell.backgroundColor = .white
         }
 
-        return cell
+        return dayCell
     }
 
-    func calendar(_ calendar: JTAppleCalendarView, willDisplay cell: JTAppleCell, forItemAt date: Date, cellState: CellState, indexPath: IndexPath) {
-
-    }
+    func calendar(
+        _ calendar: JTAppleCalendarView,
+        willDisplay cell: JTAppleCell,
+        forItemAt date: Date,
+        cellState: CellState,
+        indexPath: IndexPath
+    ) {}
 }

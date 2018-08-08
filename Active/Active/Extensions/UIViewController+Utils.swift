@@ -17,10 +17,9 @@ extension UIViewController {
     ///         controller itself.
     var contents: UIViewController {
         if self is UINavigationController {
-            return (self as! UINavigationController).viewControllers.first ?? self
+            return (self as? UINavigationController)?.viewControllers.first ?? self
         } else {
             return self
         }
     }
-
 }

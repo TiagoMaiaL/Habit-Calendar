@@ -31,10 +31,10 @@ class FireTimesSelectionViewController: UIViewController {
     private lazy var fireTimes = makeFireTimesProgression(
         minutesInterval: interval
     )
-    
+
     /// The label displaying the number of fire times selected by the user.
     @IBOutlet weak var fireTimesAmountLabel: UILabel?
-    
+
     /// The fire dates selected by the user.
     var selectedFireTimes = Set<FireTime>() {
         didSet {
@@ -46,7 +46,7 @@ class FireTimesSelectionViewController: UIViewController {
             displayFireTimesAmount()
         }
     }
-    
+
     /// The habit color used in the cell's and
     /// button's style.
     var habitColor: UIColor = UIColor(
@@ -103,7 +103,7 @@ class FireTimesSelectionViewController: UIViewController {
             name: Notification.Name.UIApplicationDidBecomeActive,
             object: nil
         )
-        
+
         // Configure the tableView's content insets.
         tableView.contentInset = UIEdgeInsets(
             top: 0,
@@ -111,7 +111,7 @@ class FireTimesSelectionViewController: UIViewController {
             bottom: 120,
             right: 0
         )
-        
+
         // Configure the done button's initial state.
         doneButton.isEnabled = false
         doneButton.backgroundColor = habitColor
@@ -135,12 +135,12 @@ class FireTimesSelectionViewController: UIViewController {
         delegate?.didSelectFireTimes(Array(selectedFireTimes))
         navigationController?.popViewController(animated: true)
     }
-    
+
     @IBAction func eraseSelection(_ sender: UIBarButtonItem) {
         selectedFireTimes.removeAll()
         tableView.reloadData()
     }
-    
+
     // MARK: Imperatives
 
     /// Configures the state of the done button according
@@ -148,12 +148,14 @@ class FireTimesSelectionViewController: UIViewController {
     private func handleDoneButton() {
         doneButton.isEnabled = !selectedFireTimes.isEmpty
     }
-    
+
     /// Displays the amount of fire times selected by the user.
     private func displayFireTimesAmount() {
-        fireTimesAmountLabel?.text = "\(selectedFireTimes.count) selected fire time\(selectedFireTimes.count == 1 ? "" : "s")"
+        fireTimesAmountLabel?.text = """
+        \(selectedFireTimes.count) selected fire time\(selectedFireTimes.count == 1 ? "" : "s")
+        """
     }
-    
+
     /// Update the views according to the User's authorization.
     @objc private func updateViews(_ notification: Notification? = nil) {
         // Check if the local notifications are authorized by the user.
@@ -163,14 +165,12 @@ class FireTimesSelectionViewController: UIViewController {
                 if isAuthorized {
                     // Enable the button and the tableView selection.
                     // Change the controller's appearance.
-//                    self.informationLabel.text = "At what time would you like to be rembered to do your habitual activity?"
                 } else {
                     // Change information label, and disable
                     // the button and the tableView selection.
                     // Change the controller's appearance to represent
                     // that there's no authorization to use
                     // local notifications.
-//                    self.informationLabel.text = "In order to get remembered about you habits, enable the user notifications in the settings app."
                 }
             }
         }

@@ -14,8 +14,6 @@ import QuartzCore
 
     // MARK: Properties
 
-    // TODO: Add the shadow.
-
     /// The card's corner radius.
     @IBInspectable public var cornerRadius: CGFloat {
         get {

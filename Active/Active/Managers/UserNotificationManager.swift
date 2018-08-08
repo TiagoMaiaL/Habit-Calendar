@@ -89,8 +89,10 @@ struct UserNotificationManager {
     /// - Parameter completionHandler: The async block called with the
     ///                                found notification as it's
     ///                                parameter.
-    func getRequest(with identifier: String,
-                      _ completionHandler: @escaping (UNNotificationRequest?) -> Void) {
+    func getRequest(
+        with identifier: String,
+        _ completionHandler: @escaping (UNNotificationRequest?) -> Void
+    ) {
         notificationCenter.getPendingNotificationRequests { requests in
             // Filter for the specified UNUserNotificationRequest.
             let request = requests.filter { request in
@@ -116,17 +118,31 @@ struct UserNotificationManager {
 ///         When testing, it halts the test and fails.
 protocol UserNotificationCenter {
 
-    func getNotificationSettings(completionHandler: @escaping (UNNotificationSettings) -> Swift.Void)
+    func getNotificationSettings(
+        completionHandler: @escaping (UNNotificationSettings) -> Swift.Void
+    )
 
-    func getAuthorizationStatus(completionHandler: @escaping (Bool) -> Swift.Void)
+    func getAuthorizationStatus(
+        completionHandler: @escaping (Bool) -> Swift.Void
+    )
 
-    func requestAuthorization(options: UNAuthorizationOptions, completionHandler: @escaping (Bool, Error?) -> Swift.Void)
+    func requestAuthorization(
+        options: UNAuthorizationOptions,
+        completionHandler: @escaping (Bool, Error?) -> Swift.Void
+    )
 
-    func add(_ request: UNNotificationRequest, withCompletionHandler completionHandler: ((Error?) -> Swift.Void)?)
+    func add(
+        _ request: UNNotificationRequest,
+        withCompletionHandler completionHandler: ((Error?) -> Swift.Void)?
+    )
 
-    func getPendingNotificationRequests(completionHandler: @escaping ([UNNotificationRequest]) -> Swift.Void)
+    func getPendingNotificationRequests(
+        completionHandler: @escaping ([UNNotificationRequest]) -> Swift.Void
+    )
 
-    func removePendingNotificationRequests(withIdentifiers identifiers: [String])
+    func removePendingNotificationRequests(
+        withIdentifiers identifiers: [String]
+    )
 }
 
 /// Extension used only to declare the protocol implementation in the

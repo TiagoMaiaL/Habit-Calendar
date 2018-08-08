@@ -81,15 +81,13 @@ class SeedManager {
                         let randomPastDays = (Int.random(-30 ..< -2) ..< 0).compactMap {
                             Date().getBeginningOfDay().byAddingDays($0)
                         }
-                        let pastHabitDays = randomPastDays.map {
-                            date -> DayMO in
+                        let pastHabitDays = randomPastDays.map { date -> DayMO in
                             let day = DayMO(context: context)
                             day.date = date
                             day.id = UUID().uuidString
 
                             return day
-                        }.map {
-                            day -> HabitDayMO in
+                        }.map { day -> HabitDayMO in
 
                             let habitDay = HabitDayMO(context: context)
                             habitDay.id = UUID().uuidString
@@ -186,7 +184,11 @@ class SeedManager {
         }
 
         // Save the context.
-        try! context.save()
+        do {
+            try context.save()
+        } catch {
+            assertionFailure("Error when erasing the seed.")
+        }
     }
 
     /// Prints the number of entities within the database after the seed.

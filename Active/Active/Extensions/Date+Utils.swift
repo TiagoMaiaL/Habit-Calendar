@@ -65,7 +65,7 @@ extension Date {
         let dayAtEnd = getCurrentCalendar().date(byAdding: components, to: getBeginningOfDay())
 
         // Is there a mistake with the computation of the date?
-        assert(dayAtEnd != nil, "Date+Utils -- getEndOfDay: the computation of the end of the day couldn't be performed.")
+        assert(dayAtEnd != nil, "The computation of the end of the day couldn't be performed.")
 
         return dayAtEnd!
     }

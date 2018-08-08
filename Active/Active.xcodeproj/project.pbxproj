@@ -539,8 +539,8 @@
 				47F635E820BB920900AC4555 /* Sources */,
 				47F635E920BB920900AC4555 /* Frameworks */,
 				47F635EA20BB920900AC4555 /* Resources */,
-				474F9C8720CE37C40094C19C /* Warning Todos Script */,
 				A5A00789F6385782FB57EB56 /* [CP] Embed Pods Frameworks */,
+				4732CE7F211B342C00E2770C /* Swift lint */,
 			);
 			buildRules = (
 			);
@@ -659,19 +659,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		474F9C8720CE37C40094C19C /* Warning Todos Script */ = {
+		4732CE7F211B342C00E2770C /* Swift lint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Warning Todos Script";
+			name = "Swift lint";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "KEYWORDS=\"TODO:|FIXME:|DevTeam:|XXX:\"\nfind \"${SRCROOT}\" \\( -name \"*.h\" -or -name \"*.m\" -or -name \"*.swift\" \\) -print0 | xargs -0 egrep --with-filename --line-number --only-matching \"($KEYWORDS).*\\$\" | perl -p -e \"s/($KEYWORDS)/ warning: \\$1/\"";
+			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"";
 		};
 		7C81BC38E6B57965F72B50B5 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;

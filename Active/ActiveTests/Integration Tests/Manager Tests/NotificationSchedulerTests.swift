@@ -30,7 +30,8 @@ class NotificationSchedulerTests: IntegrationTestCase {
         notificationCenterMock = UserNotificationCenterMock(
             withAuthorization: true
         )
-        notificationScheduler = NotificationScheduler(notificationManager: UserNotificationManager(notificationCenter: notificationCenterMock)
+        notificationScheduler = NotificationScheduler(
+            notificationManager: UserNotificationManager(notificationCenter: notificationCenterMock)
         )
     }
 
@@ -104,22 +105,23 @@ class NotificationSchedulerTests: IntegrationTestCase {
 
         // Schedule it by passing the dummy entity.
         notificationScheduler.schedule(dummyNotification) { notification in
-            // It should have an user notification identifier.
+            // Check if it was marked as scheduled.
             XCTAssertTrue(
                 notification.wasScheduled,
                 "The notification entity should've been scheduled."
             )
 
-            // Check if the notification was indeed scheduled.
+            // Check if the notification was indeed scheduled:
             self.notificationCenterMock.getPendingNotificationRequests { requests in
-                for request in requests {
-                    if request.identifier == notification.userNotificationId {
-                        scheduleExpectation.fulfill()
-                        return
-                    }
-                }
+                // Search for the user notification request associated with it.
+                let request = requests.filter { $0.identifier == notification.userNotificationId }.first
 
-                XCTFail("Couldn't find the scheduled expectation.")
+                if request != nil {
+                    scheduleExpectation.fulfill()
+                } else {
+                    // If it wasn't found, make the test fail.
+                    XCTFail("Couldn't find the scheduled user notification request.")
+                }
             }
         }
 
@@ -136,8 +138,7 @@ class NotificationSchedulerTests: IntegrationTestCase {
         let dummyNotification = makeNotification()
 
         // 2. Schedule it.
-        notificationScheduler.schedule(dummyNotification) {
-            _ in
+        notificationScheduler.schedule(dummyNotification) { _ in
             // 3. Unschedule it.
             self.notificationScheduler.unschedule(
                 [dummyNotification]
@@ -145,8 +146,7 @@ class NotificationSchedulerTests: IntegrationTestCase {
 
             // 4. Assert it was deleted by trying to fetch it
             // using the mock.
-            self.notificationCenterMock.getPendingNotificationRequests {
-                requests in
+            self.notificationCenterMock.getPendingNotificationRequests { requests in
                 XCTAssertTrue(
                     requests.filter {
                         $0.identifier == dummyNotification.userNotificationId
@@ -171,12 +171,15 @@ class NotificationSchedulerTests: IntegrationTestCase {
         let dummyHabit = factories.habit.makeDummy()
 
         // 3. Schedule the notifications.
-        let notifications = Array(dummyHabit.notifications as! Set<NotificationMO>)
+        guard let notificationsSet = dummyHabit.notifications as? Set<NotificationMO> else {
+            XCTFail("Error: Couldn't get the dummy habit notifications.")
+            return
+        }
+        let notifications = Array(notificationsSet)
         notificationScheduler.schedule(notifications)
 
         // 4. Fetch them by using the mock and assert on each value.
-        self.notificationCenterMock.getPendingNotificationRequests {
-            requests in
+        self.notificationCenterMock.getPendingNotificationRequests { requests in
 
             let identifiers = requests.map { $0.identifier }
 
@@ -214,22 +217,24 @@ class NotificationSchedulerTests: IntegrationTestCase {
 
         // 2. Declare a dummy habit and get its notifications.
         let dummyHabit = factories.habit.makeDummy()
-        let notifications = Array(
-            dummyHabit.notifications as! Set<NotificationMO>
-        )
+
+        guard let notificationsSet = dummyHabit.notifications as? Set<NotificationMO> else {
+            XCTFail("Error: Couldn't get the dummy habit's notifications.")
+            return
+        }
+
+        let notifications = Array(notificationsSet)
 
         // 3. Schedule all of them.
         notificationScheduler.schedule(notifications)
 
         // 4. Fire a timer to delete all of them.
-        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) {
-            _ in
+        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { _ in
             self.notificationScheduler.unschedule(notifications)
 
             // 5. Assert they were deleted by trying to fetch them from the
             // mock.
-            self.notificationCenterMock.getPendingNotificationRequests {
-                requests in
+            self.notificationCenterMock.getPendingNotificationRequests { requests in
                 XCTAssertTrue(
                     requests.isEmpty,
                     "The notifications should have been deleted."

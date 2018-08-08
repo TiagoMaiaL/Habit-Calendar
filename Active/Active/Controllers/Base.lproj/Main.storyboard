@@ -65,7 +65,7 @@
                                                     <rect key="frame" x="16" y="16" width="291" height="76"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Play guitar" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bjx-cs-62X">
-                                                            <rect key="frame" x="0.0" y="0.0" width="118.5" height="28"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="109" height="28"/>
                                                             <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="25"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -74,7 +74,7 @@
                                                             <rect key="frame" x="0.0" y="38" width="291" height="38"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="07 / 89 days" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hH7-d5-qyV">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="77.5" height="18"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="80.5" height="18"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="18" id="2OC-yd-NQl"/>
                                                                     </constraints>
@@ -219,7 +219,7 @@
                                                     <rect key="frame" x="26" y="21" width="323" height="68"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0AK-r5-sfZ">
-                                                            <rect key="frame" x="0.0" y="0.0" width="66" height="38"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="70" height="38"/>
                                                             <attributedString key="attributedText">
                                                                 <fragment content="Name ">
                                                                     <attributes>
@@ -488,16 +488,16 @@ reminded about your habit?</string>
                                             </constraints>
                                         </view>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="zJ1-bL-rA4">
-                                            <rect key="frame" x="117.5" y="16.5" width="140" height="77.5"/>
+                                            <rect key="frame" x="116.5" y="16.5" width="142.5" height="78"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 fire times selected" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nz0-4c-Qss">
-                                                    <rect key="frame" x="3" y="0.0" width="134.5" height="17.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="142.5" height="18"/>
                                                     <fontDescription key="fontDescription" name="SFProText-Light" family="SF Pro Text" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZDt-Pv-rzP" customClass="RoundedButton" customModule="Active" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="27.5" width="140" height="50"/>
+                                                    <rect key="frame" x="1.5" y="28" width="140" height="50"/>
                                                     <color key="backgroundColor" red="0.0" green="0.6588235294" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="50" id="aWW-NN-Ric"/>

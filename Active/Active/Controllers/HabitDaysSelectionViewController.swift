@@ -118,7 +118,11 @@ extension HabitDaysSelectionViewController: JTAppleCalendarViewDataSource, JTApp
 
     // MARK: JTAppleCalendarViewDelegate Methods
 
-    func calendar(_ calendar: JTAppleCalendarView, cellForItemAt date: Date, cellState: CellState, indexPath: IndexPath) -> JTAppleCell {
+    func calendar(
+        _ calendar: JTAppleCalendarView,
+        cellForItemAt date: Date,
+        cellState: CellState, indexPath: IndexPath
+    ) -> JTAppleCell {
         // Dequeue the cell.
         let cell = calendar.dequeueReusableJTAppleCell(
             withReuseIdentifier: cellIdentifier,
@@ -131,17 +135,33 @@ extension HabitDaysSelectionViewController: JTAppleCalendarViewDataSource, JTApp
         return cell
     }
 
-    func calendar(_ calendar: JTAppleCalendarView, willDisplay cell: JTAppleCell, forItemAt date: Date, cellState: CellState, indexPath: IndexPath) {
+    func calendar(
+        _ calendar: JTAppleCalendarView,
+        willDisplay cell: JTAppleCell,
+        forItemAt date: Date,
+        cellState: CellState,
+        indexPath: IndexPath
+    ) {
         // Configure its appearance.
         handleAppearanceOfCell(cell, using: cellState)
     }
 
-    func calendar(_ calendar: JTAppleCalendarView, shouldSelectDate date: Date, cell: JTAppleCell?, cellState: CellState) -> Bool {
+    func calendar(
+        _ calendar: JTAppleCalendarView,
+        shouldSelectDate date: Date,
+        cell: JTAppleCell?,
+        cellState: CellState
+    ) -> Bool {
         // The user can only select a date in the future.
         return date.isFuture || date.isInToday
     }
 
-    func calendar(_ calendar: JTAppleCalendarView, didSelectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
+    func calendar(
+        _ calendar: JTAppleCalendarView,
+        didSelectDate date: Date,
+        cell: JTAppleCell?,
+        cellState: CellState
+    ) {
         // Change the cell's appearance to show the selected state.
         if let cell = cell {
             handleAppearanceOfCell(cell, using: cellState)
@@ -163,7 +183,12 @@ extension HabitDaysSelectionViewController: JTAppleCalendarViewDataSource, JTApp
         handleDoneButton()
     }
 
-    func calendar(_ calendar: JTAppleCalendarView, didDeselectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
+    func calendar(
+        _ calendar: JTAppleCalendarView,
+        didDeselectDate date: Date,
+        cell: JTAppleCell?,
+        cellState: CellState
+    ) {
         // Change the cell's appearance to show the deselected state.
         if let cell = cell {
             handleAppearanceOfCell(cell, using: cellState)
@@ -173,7 +198,10 @@ extension HabitDaysSelectionViewController: JTAppleCalendarViewDataSource, JTApp
         handleDoneButton()
     }
 
-    func calendar(_ calendar: JTAppleCalendarView, didScrollToDateSegmentWith visibleDates: DateSegmentInfo) {
+    func calendar(
+        _ calendar: JTAppleCalendarView,
+        didScrollToDateSegmentWith visibleDates: DateSegmentInfo
+    ) {
         // Set the calendar's header's current state.
         handleCalendarHeader()
     }
