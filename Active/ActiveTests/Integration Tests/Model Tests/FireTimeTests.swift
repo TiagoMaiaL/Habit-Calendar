@@ -14,7 +14,7 @@ import XCTest
 class FireTimeTests: IntegrationTestCase {
 
     // MARK: Tests
-    
+
     func testFireTimeDateGetter() {
         // 1. Declare the fireTimeMO to be used.
         let dummyFireTime = FireTimeMO(context: context)
@@ -22,10 +22,10 @@ class FireTimeTests: IntegrationTestCase {
         dummyFireTime.createdAt = Date()
         dummyFireTime.hour = Int16(Int.random(0..<60))
         dummyFireTime.minute = Int16(Int.random(0..<60))
-        
+
         // 2. Get its fire time as a date instance.
         let fireTimeComponents = dummyFireTime.getFireTimeComponents()
-        
+
         // 3. Assert on its hour and minute components.
         // Its year, month and day components should be nil.
         XCTAssertEqual(
@@ -42,5 +42,5 @@ class FireTimeTests: IntegrationTestCase {
         XCTAssertNil(fireTimeComponents.month, "The month should be nil.")
         XCTAssertNil(fireTimeComponents.day, "The day should be nil.")
     }
-    
+
 }

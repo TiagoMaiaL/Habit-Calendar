@@ -14,55 +14,55 @@ import UserNotifications
 class HabitCreationTableViewController: UITableViewController, HabitDaysSelectionViewControllerDelegate, FireTimesSelectionViewControllerDelegate {
 
     // MARK: Properties
-    
+
     /// The segue identifier for the DaysSelection controller.
     private let daysSelectionSegue = "Show days selection controller"
-    
+
     /// The segue identifier for the NotificationsSelection controller.
     private let notificationSelectionSegue = "Show fire dates selection controller"
-    
+
     /// The text field used to give the habit a name.
     @IBOutlet weak var nameTextField: UITextField!
-    
+
     /// The button used to store the habit.
     @IBOutlet weak var doneButton: UIButton!
-    
+
     /// The label displaying the number of selected days.
     @IBOutlet weak var daysAmountLabel: UILabel!
-    
+
     /// The label displaying the first day in the selected sequence.
     @IBOutlet weak var fromDayLabel: UILabel!
-    
+
     /// The label displaying the last day in the selected sequence.
     @IBOutlet weak var toDayLabel: UILabel!
-    
+
     /// The label displaying the amount of fire times selected.
     @IBOutlet weak var fireTimesAmountLabel: UILabel!
-    
+
     /// The label displaying the of fire time times selected.
     @IBOutlet weak var selectedFireTimesLabel: UILabel!
-    
+
     /// The container in which the habit is going to be persisted.
     var container: NSPersistentContainer!
-    
+
     /// The habit storage used for this controller to
     /// create/edit the habit.
     var habitStore: HabitStorage!
-    
+
     /// The user storage used to associate the main user
     /// to any created habits.
     var userStore: UserStorage!
-    
+
     /// The habit entity being editted.
     var habit: HabitMO?
-    
+
     /// The habit's name being informed by the user.
     private var name: String? {
         didSet {
             configureCreationButton()
         }
     }
-    
+
     /// The habit's days the user has selected.
     // For now only one day is going to be added.
     private var days: [Date]? {
@@ -70,25 +70,25 @@ class HabitCreationTableViewController: UITableViewController, HabitDaysSelectio
             configureCreationButton()
         }
     }
-    
+
     /// The habit's notification times the user has chosen.
     private var selectedNotificationFireTimes: [FireTimesSelectionViewController.FireTime]?
-    
+
     // TODO: Show a cell indicating the user hasn't enabled local notifications.
-    
+
     // MARK: ViewController Life Cycle
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         // Assert on the values of the injected dependencies (implicitly unwrapped).
         assert(container != nil, "Error: failed to inject the persistent container.")
         assert(habitStore != nil, "Error: failed to inject the habit store")
-        
+
         // Configure the appearance of the navigation bar to never use the
         // large titles.
         navigationItem.largeTitleDisplayMode = .never
-        
+
         // Associate the event listener to the textField.
         nameTextField.addTarget(
             self,
@@ -97,19 +97,19 @@ class HabitCreationTableViewController: UITableViewController, HabitDaysSelectio
         )
         // Create a toolbar and add it as the field's accessory view.
         nameTextField.inputAccessoryView = makeToolbar()
-        
+
         // Display the initial text of the days labels.
         configureDaysLabels()
-        
+
         // Display the initial text of the notifications labels.
         configureFireTimesLabels()
-        
+
         // Set the done button's initial state.
         configureCreationButton()
     }
-    
+
     // MARK: Navigation
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
         case daysSelectionSegue:
@@ -119,7 +119,7 @@ class HabitCreationTableViewController: UITableViewController, HabitDaysSelectio
             } else {
                 assertionFailure("Error: Couldn't get the days selection controller.")
             }
-            
+
         case notificationSelectionSegue:
             // Associate the NotificationsSelectionController's delegate.
             if let notificationsController = segue.destination as? FireTimesSelectionViewController {
@@ -137,9 +137,9 @@ class HabitCreationTableViewController: UITableViewController, HabitDaysSelectio
             break
         }
     }
-    
+
     // MARK: Actions
-    
+
     /// Creates the habit.
     @IBAction func storeHabit(_ sender: UIButton) {
         // If there's no previous habit, create and persist a new one.
@@ -151,7 +151,7 @@ class HabitCreationTableViewController: UITableViewController, HabitDaysSelectio
                 assertionFailure("Inconsistency: There's no user in the database. It should be set.")
                 return
             }
-            
+
             // TODO: Pass the fire times as dateComponents.
             if self.habit == nil {
                 _ = self.habitStore.create(
@@ -172,36 +172,36 @@ class HabitCreationTableViewController: UITableViewController, HabitDaysSelectio
 //                    and: self.selectedNotificationFireTimes
                 )
             }
-            
+
             // TODO: Report any errors to the user.
             try! context.save()
         }
-        
+
         navigationController?.popViewController(
             animated: true
         )
     }
-    
+
     /// Finishes editing the name's textField.
     @objc private func endNameEdition() {
         nameTextField.resignFirstResponder()
     }
-    
+
     // MARK: Imperatives
-    
+
     /// Listens to the change events emmited the name text field.
     /// - Paramter textField: The textField being editted.
     @objc private func nameChanged(textField: UITextField) {
         // Associate the name with the field's text.
         name = textField.text
     }
-    
+
     /// Enables or disables the button depending on the habit's filled data.
     private func configureCreationButton() {
         // Check if the name and days are correctly set.
         doneButton.isEnabled = !(name ?? "").isEmpty && !(days ?? []).isEmpty
     }
-    
+
     /// Configures the text being displayed by each label within the days
     /// field.
     private func configureDaysLabels() {
@@ -211,7 +211,7 @@ class HabitCreationTableViewController: UITableViewController, HabitDaysSelectio
                 .withDashSeparatorInDate,
                 .withYear,
                 .withMonth,
-                .withDay,
+                .withDay
             ]
 
             // Set the text for the label displaying the number of days.
@@ -226,14 +226,14 @@ class HabitCreationTableViewController: UITableViewController, HabitDaysSelectio
             toDayLabel.text = "--"
         }
     }
-    
+
     /// Configures the text being displayed by each label within
     /// the notifications field.
     private func configureFireTimesLabels() {
         if let fireTimes = selectedNotificationFireTimes, !fireTimes.isEmpty {
             // Set the text for the label displaying the amount of fire times.
             fireTimesAmountLabel.text = "\(fireTimes.count) fire time\(fireTimes.count == 1 ? "" : "s") selected."
-            
+
             // Set the text for the label displaying some of the
             // selected fire times:
             let fireTimeFormatter = DateFormatter.makeFireTimeDateFormatter()
@@ -241,24 +241,24 @@ class HabitCreationTableViewController: UITableViewController, HabitDaysSelectio
                 return Calendar.current.date(from: $0)
             }.sorted()
             var fireTimesText = ""
-            
+
             for fireDate in fireDates {
                 fireTimesText += fireTimeFormatter.string(from: fireDate)
-                
+
                 // If the current fire time isn't the last one,
                 // include a colon to separate it from the next.
                 if fireDates.index(of: fireDate)! != fireDates.endIndex - 1 {
                     fireTimesText += ", "
                 }
             }
-            
+
             selectedFireTimesLabel.text = fireTimesText
         } else {
             fireTimesAmountLabel.text = "No fire times selected."
             selectedFireTimesLabel.text = "--"
         }
     }
-    
+
     /// Creates and configures a new UIToolbar with a done button to be
     /// used as the name field's accessoryView.
     /// - Returns: An UIToolbar.
@@ -282,15 +282,15 @@ class HabitCreationTableViewController: UITableViewController, HabitDaysSelectio
             ],
             animated: false
         )
-        
+
         return toolBar
     }
 }
 
 extension HabitCreationTableViewController {
-    
+
     // MARK: HabitDaysSelectionViewController Delegate Methods
-    
+
     func didSelectDays(_ daysDates: [Date]) {
         // Associate the habit's days with the dates selected by the user.
         days = daysDates
@@ -300,9 +300,9 @@ extension HabitCreationTableViewController {
 }
 
 extension HabitCreationTableViewController {
-    
+
     // MARK: HabitNotificationsSelectionViewControllerDelegate Delegate Methods
-    
+
     func didSelectFireTimes(_ fireTimes: [FireTimesSelectionViewController.FireTime]) {
         // Associate the habit's fire dates with the fireDates selected by
         // the user.
@@ -314,7 +314,7 @@ extension HabitCreationTableViewController {
 
 /// Extension that adds UIColor capabilities to the Color model enum.
 extension HabitMO.Color {
-    
+
     /// Gets the UIColor representing the current enum instance.
     /// - Returns: The UIColor associated with the instance.
     func getColor() -> UIColor {

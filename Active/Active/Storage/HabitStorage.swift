@@ -11,24 +11,24 @@ import CoreData
 
 /// Class in charge of managing the storage of Habit entities.
 class HabitStorage {
-    
+
     // MARK: - Properties
-    
+
     /// The Notification storage used to create Notification entities
     /// associated with a given habit.
     private let notificationStorage: NotificationStorage
-    
+
     /// The days sequence storage used to create new sequences.
     private let daysSequenceStorage: DaysSequenceStorage
-    
+
     /// The user notifications scheduler.
     private let notificationScheduler: NotificationScheduler
-    
+
     /// The fire time used to create and associate the FireTimeMO entities.
     private let fireTimeStorage: FireTimeStorage
-    
+
     // MARK: - Initializers
-    
+
     /// Creates a new HabitStorage class using the provided persistent container.
     /// - Parameters:
     ///     - daysSequenceStorage: The storage used to manage the habit's
@@ -49,9 +49,9 @@ class HabitStorage {
         self.notificationScheduler = notificationScheduler
         self.fireTimeStorage = fireTimeStorage
     }
-    
+
     // MARK: - Imperatives
-    
+
     /// Creates a NSFetchedResultsController for fetching habit instances
     /// ordered by the creation date and score of each habit.
     /// - Parameter context: The context used to fetch the habits.
@@ -69,10 +69,10 @@ class HabitStorage {
             sectionNameKeyPath: nil,
             cacheName: nil
         )
-        
+
         return controller
     }
-    
+
     /// Creates and persists a new Habit instance with the provided info.
     /// - Parameter context: The context used to write the new habit into.
     /// - Parameter name: The name of the habit entity.
@@ -92,17 +92,17 @@ class HabitStorage {
         habit.name = name
         habit.createdAt = Date()
         habit.color = color.rawValue
-        
+
         // Associate its user.
         habit.user = user
-        
+
         // Create the sequence.
         _ = daysSequenceStorage.create(
             using: context,
             daysDates: days,
             and: habit
         )
-        
+
         // Create and associate the notifications to the habit being created.
         if let fireTimes = notificationFireTimes {
             // Create and associate the FireTimeMO entities with the habit.
@@ -113,7 +113,7 @@ class HabitStorage {
                     andHabit: habit
                 )
             }
-            
+
             // Create and schedule the notifications.
             _ = makeNotifications(
                 context: context,
@@ -121,10 +121,10 @@ class HabitStorage {
                 fireTimes: fireTimes
             )
         }
-        
+
         return habit
     }
-    
+
     /// Edits the passed habit instance with the provided info.
     /// - Parameter habit: The Habit entity to be changed.
     /// - Parameter context: The context used to change the habit and the associated entities.
@@ -138,18 +138,18 @@ class HabitStorage {
               color: HabitMO.Color? = nil,
               days: [Date]? = nil,
               and notificationFireTimes: [DateComponents]? = nil) -> HabitMO {
-        
+
         if let name = name {
             habit.name = name
         }
-        
+
         if let color = color {
             habit.color = color.rawValue
         }
-        
+
         if let days = days {
             assert(!days.isEmpty, "HabitStorage -- edit: days argument shouldn't be empty.")
-            
+
             // Get the current sequence.
             if let currentSequence = habit.getCurrentSequence() {
                 // Remove its future days.
@@ -160,11 +160,11 @@ class HabitStorage {
                     habit.removeFromDays(day)
                     context.delete(day)
                 }
-                
+
                 // Change its toDate to today.
                 currentSequence.toDate = Date().getBeginningOfDay()
             }
-            
+
             // Add a new sequence.
             _ = daysSequenceStorage.create(
                 using: context,
@@ -172,10 +172,10 @@ class HabitStorage {
                 and: habit
             )
         }
-        
+
         if let fireTimes = notificationFireTimes {
             assert(!fireTimes.isEmpty, "HabitStorage -- edit: notifications argument shouldn't be empty.")
-            
+
             // Remove the current fire time entities associated with the habit.
             if let currentFireTimes = habit.fireTimes as? Set<FireTimeMO> {
                 for fireTime in currentFireTimes {
@@ -183,7 +183,7 @@ class HabitStorage {
                     context.delete(fireTime)
                 }
             }
-            
+
             // Create and associate the FireTimeMO entities with the habit.
             for fireTime in fireTimes {
                 _ = fireTimeStorage.create(
@@ -193,20 +193,20 @@ class HabitStorage {
                 )
             }
         }
-        
+
         if days != nil || notificationFireTimes != nil {
             if let notifications = habit.notifications as? Set<NotificationMO> {
                 // Unschedule all user notifications associated with
                 // the entities.
                 notificationScheduler.unschedule(Array(notifications))
-                
+
                 // Remove the current notifications.
                 for notification in notifications {
                     habit.removeFromNotifications(notification)
                     context.delete(notification)
                 }
             }
-            
+
             // Create and schedule the notifications.
             _ = makeNotifications(
                 context: context,
@@ -214,16 +214,16 @@ class HabitStorage {
                 fireTimes: notificationFireTimes
             )
         }
-        
+
         return habit
     }
-    
+
     /// Removes the passed habit from the database.
     /// - Parameter context: The context used to delete the habit from.
     func delete(_ habit: HabitMO, from context: NSManagedObjectContext) {
         context.delete(habit)
     }
-    
+
     /// Creates a bunch of notification entities and schedule all of its
     /// related user notifications, if authorized to do so.
     /// - Parameters:
@@ -246,23 +246,23 @@ class HabitStorage {
             // usage of user notifications.
             return []
         }
-        
+
         // Get the notification fire dates.
         let fireDates = notificationStorage.createNotificationFireDatesFrom(
             habit: habit,
             and: fireTimes
         )
-        
+
         // Create the notification entities for the habit bein editted.
         let notifications = notificationStorage.createNotificationsFrom(
             habit: habit,
             using: context,
             and: fireDates
         )
-        
+
         // Schedule the user notifications.
         notificationScheduler.schedule(notifications)
-        
+
         return notifications
     }
 }

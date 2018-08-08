@@ -12,16 +12,16 @@ import UIKit
 class HabitTableViewCell: UITableViewCell {
 
     // MARK: Properties
-    
+
     /// The card looking view displayin the habit's details.
     @IBOutlet weak var cardView: UIView!
-    
+
     /// The habit's name label.
     @IBOutlet weak var nameLabel: UILabel!
-    
+
     /// The habit's progress label.
     @IBOutlet weak var progressLabel: UILabel!
-    
+
     /// The habit's days' progress view.
     @IBOutlet weak var progressBar: ProgressView!
 }

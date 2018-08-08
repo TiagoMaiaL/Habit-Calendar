@@ -12,14 +12,14 @@ import UIKit
 @IBDesignable class ProgressView: UIView {
 
     // MARK: Properties
-    
+
     /// The main color of the progress view.
     @IBInspectable public var tint: UIColor? {
         didSet {
             setNeedsDisplay()
         }
     }
-    
+
     /// A float from 0 to 1 indicating the progress being displayed
     /// by the view.
     @IBInspectable public var progress: CGFloat = 0 {
@@ -27,7 +27,7 @@ import UIKit
             setNeedsDisplay()
         }
     }
-    
+
     /// The rect used for drawing the progress shapes.
     private var drawableRect: CGRect {
         return CGRect(
@@ -37,25 +37,25 @@ import UIKit
             height: frame.size.height
         )
     }
-    
+
     // MARK: Life cycle
-    
+
     override func draw(_ rect: CGRect) {
         drawProgress()
     }
-    
+
     override func prepareForInterfaceBuilder() {
         super.prepareForInterfaceBuilder()
         drawProgress()
     }
-    
+
     // MARK: Imperatives
-    
+
     /// Draws the progress bar taking into account the color and
     /// the progress amount.
     private func drawProgress() {
         guard let tint = tint else { return }
-        
+
         // Create a RectPath for the view's background bar.
         let barPath = UIBezierPath(
             roundedRect: drawableRect,
@@ -63,11 +63,11 @@ import UIKit
         )
         tint.withAlphaComponent(0.5).setFill()
         barPath.fill()
-        
+
         // Create another rectPath for the view's progress bar.
         var progressPathRect = drawableRect
         progressPathRect.size.width *= progress
-        
+
         let progressBarPath = UIBezierPath(
             roundedRect: progressPathRect,
             cornerRadius: 10
@@ -75,6 +75,5 @@ import UIKit
         tint.setFill()
         progressBarPath.fill()
     }
-    
-    
+
 }

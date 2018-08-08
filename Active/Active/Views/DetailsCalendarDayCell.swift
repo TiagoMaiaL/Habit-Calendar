@@ -11,9 +11,9 @@ import JTAppleCalendar
 
 // TODO: Remove this cell's file. Use only one universal cell.
 class DetailsCalendarDayCell: JTAppleCell {
-    
+
     // MARK: Parameters
-    
+
     /// The day's title label.
     @IBOutlet weak var dayTitleLabel: UILabel!
 }

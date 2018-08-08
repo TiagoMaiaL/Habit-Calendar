@@ -9,10 +9,10 @@
 import JTAppleCalendar
 
 class CalendarDayCell: JTAppleCell {
-    
+
     // MARK: Parameters
-    
+
     /// The day's title label.
     @IBOutlet weak var dayTitleLabel: UILabel!
-    
+
 }
