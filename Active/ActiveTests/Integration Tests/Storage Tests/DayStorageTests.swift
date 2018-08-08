@@ -62,7 +62,7 @@ class DayStorageTests: IntegrationTestCase {
 
     func testTheCreationOfTheSameDayTwiceShouldThrow() {
         // Create a dummy day.
-        let dummyDay = factories.day.makeDummy()
+        let dummyDay = dayFactory.makeDummy()
 
         // Try to create another day with the same date.
         // Assert that the attempt throws an error.
@@ -74,7 +74,7 @@ class DayStorageTests: IntegrationTestCase {
 
     func testSpecificDayFetching() {
         // Create the dummy day and hold its date for comparision.
-        guard let date = factories.day.makeDummy().date else {
+        guard let date = dayFactory.makeDummy().date else {
             XCTFail("The day dummy lacks the date property.")
             return
         }
@@ -95,7 +95,7 @@ class DayStorageTests: IntegrationTestCase {
 
     func testDayDeletion() {
         // Create a dummy day and hold its date for fetching.
-        let dummyDay = factories.day.makeDummy()
+        let dummyDay = dayFactory.makeDummy()
         guard let date = dummyDay.date else {
             XCTFail("The day dummy lacks the date property.")
             return

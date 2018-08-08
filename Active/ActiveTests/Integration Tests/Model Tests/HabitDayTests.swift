@@ -17,7 +17,7 @@ class HabitDayTests: IntegrationTestCase {
 
     func testEditionToMarkHabitAsExecutedAtTheDay() {
         // 1. Generate a dummy HabitDay entity.
-        let dummyHabitDay = factories.habitDay.makeDummy()
+        let dummyHabitDay = habitDayFactory.makeDummy()
 
         // 2. Mark it as executed.
         dummyHabitDay.markAsExecuted()
@@ -35,7 +35,7 @@ class HabitDayTests: IntegrationTestCase {
 
     func testEditionToMarkHabitAsNotExecutedAtTheDay() {
         // 1. Generate a dummy HabitDay entity.
-        let dummyHabitDay = factories.habitDay.makeDummy()
+        let dummyHabitDay = habitDayFactory.makeDummy()
 
         // 2. Mark it as executed.
         dummyHabitDay.markAsExecuted()

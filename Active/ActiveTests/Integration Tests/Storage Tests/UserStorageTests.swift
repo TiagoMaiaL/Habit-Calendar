@@ -59,7 +59,7 @@ class UserStorageTests: IntegrationTestCase {
 
         // Generate an user dummy and Hold the userId to compare
         // with the retrieved one.
-        let userId = factories.user.makeDummy().id
+        let userId = userFactory.makeDummy().id
 
         // Get the previously created user.
         user = userStorage.getUser(using: context)
@@ -81,7 +81,7 @@ class UserStorageTests: IntegrationTestCase {
 
     func testUserDeletion() {
         // Create a dummy user to be deleted.
-        _ = factories.user.makeDummy()
+        _ = userFactory.makeDummy()
 
         // Delete the user.
         userStorage.delete(from: context)

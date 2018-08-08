@@ -24,13 +24,23 @@ class IntegrationTestCase: XCTestCase {
         return memoryPersistentContainer.viewContext
     }
 
-    /// The factories used to generate dummies from each core data entity.
-    var factories: (user: UserFactory,
-                    habit: HabitFactory,
-                    notification: NotificationFactory,
-                    day: DayFactory,
-                    habitDay: HabitDayFactory,
-                    daysSequence: DaysSequenceFactory)!
+    /// The user factory used by the tests.
+    var userFactory: UserFactory!
+
+    /// The habit factory used by the tests.
+    var habitFactory: HabitFactory!
+
+    /// The notification factory used by the tests.
+    var notificationFactory: NotificationFactory!
+
+    /// The day factory used by the tests.
+    var dayFactory: DayFactory!
+
+    /// The habitDay factory used by the tests.
+    var habitDayFactory: HabitDayFactory!
+
+    /// The daysSequence factory used by the tests.
+    var daysSequenceFactory: DaysSequenceFactory!
 
     // MARK: setup/tearDown
 
@@ -40,20 +50,23 @@ class IntegrationTestCase: XCTestCase {
         /// Create a brand new in-memory persistent container.
         memoryPersistentContainer = makeMemoryPersistentContainer()
 
-        /// Create the factories used to write the storage and model tests.
-        factories = (
-            user: UserFactory(context: context),
-            habit: HabitFactory(context: context),
-            notification: NotificationFactory(context: context),
-            day: DayFactory(context: context),
-            habitDay: HabitDayFactory(context: context),
-            daysSequence: DaysSequenceFactory(context: context)
-        )
-    }
+        // Instantiate all factories used in the tests.
+        userFactory = UserFactory(context: context)
+        habitFactory = HabitFactory(context: context)
+        notificationFactory = NotificationFactory(context: context)
+        dayFactory = DayFactory(context: context)
+        habitDayFactory = HabitDayFactory(context: context)
+        daysSequenceFactory = DaysSequenceFactory(context: context)
+}
 
     override func tearDown() {
         /// Remove the factories created.
-        factories = nil
+        userFactory = nil
+        habitFactory = nil
+        notificationFactory = nil
+        dayFactory = nil
+        habitDayFactory = nil
+        daysSequenceFactory = nil
 
         /// Remove the used in-memory persistent container.
         memoryPersistentContainer.viewContext.rollback()
@@ -94,14 +107,14 @@ class IntegrationTestCase: XCTestCase {
     /// - Returns: the dummy notification.
     func makeNotification() -> NotificationMO {
         // Declare the dummy habit.
-        let dummyHabit = factories.habit.makeDummy()
+        let dummyHabit = habitFactory.makeDummy()
 
         // Declare the dummy notification out of the passed habit.
         guard let dummyNotification = (dummyHabit.notifications as? Set<NotificationMO>)?.first else {
             assertionFailure(
                 "A notification object must be retrieved from a dummy Habit"
             )
-            return factories.notification.makeDummy()
+            return notificationFactory.makeDummy()
         }
 
         // The notification's fire

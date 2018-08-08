@@ -150,19 +150,18 @@ class HabitCreationTableViewController: UITableViewController,
             guard let user = self.userStore.getUser(using: context) else {
                 // It's a bug if there's no user. The user should be created on
                 // the first launch.
-                assertionFailure("Inconsistency: There's no user in the database. It should be set.")
+                assertionFailure("Inconsistency: There's no user in the database. It must be set.")
                 return
             }
 
-            // TODO: Pass the fire times as dateComponents.
             if self.habit == nil {
                 _ = self.habitStore.create(
                     using: context,
                     user: user,
                     name: self.name!,
                     color: HabitMO.Color.emerald, // TODO: Use a real enum value.
-                    days: self.days!//,
-//                    and: self.selectedNotificationFireTimes
+                    days: self.days!,
+                    and: self.selectedNotificationFireTimes
                 )
             } else {
                 // If there's a previous habit, update it with the new values.
@@ -170,13 +169,17 @@ class HabitCreationTableViewController: UITableViewController,
                     self.habit!,
                     using: context,
                     name: self.name,
-                    days: self.days//,
-//                    and: self.selectedNotificationFireTimes
+                    days: self.days,
+                    and: self.selectedNotificationFireTimes
                 )
             }
 
             // TODO: Report any errors to the user.
-            try! context.save()
+            do {
+                try context.save()
+            } catch {
+                assertionFailure("Error: Couldn't save the new habit entity.")
+            }
         }
 
         navigationController?.popViewController(

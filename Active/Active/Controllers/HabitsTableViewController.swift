@@ -79,8 +79,12 @@ class HabitsTableViewController: UITableViewController, NSFetchedResultsControll
         super.viewWillAppear(animated)
 
         // Start fetching for the habits.
-        // TODO: Check what errors are thrown by the fetch.
-        try! fetchedResultsController.performFetch()
+        // TODO: Check what errors are thrown by the fetch. Every error should be reported to the user.
+        do {
+            try fetchedResultsController.performFetch()
+        } catch {
+            assertionFailure("Error: Couldn't fetch the user's habits.")
+        }
 
         displayHabitsCount()
     }
@@ -133,9 +137,14 @@ class HabitsTableViewController: UITableViewController, NSFetchedResultsControll
     private func displayHabitsCount() {
         // Display the current amount of habits in the header.
         let countRequest: NSFetchRequest<HabitMO> = HabitMO.fetchRequest()
-        let count = try! container.viewContext.count(for: countRequest)
-        // TODO: Localize this.
-        habitsCountLabel.text = "\(count) habit\(count > 1 ? "s" : "")"
+        do {
+            let count = try container.viewContext.count(for: countRequest)
+            // TODO: Localize this.
+            habitsCountLabel.text = "\(count) habit\(count > 1 ? "s" : "")"
+        } catch {
+            // TODO: Any errors should be reported to the user.
+            habitsCountLabel.text = nil
+        }
     }
 
     // MARK: DataSource Methods

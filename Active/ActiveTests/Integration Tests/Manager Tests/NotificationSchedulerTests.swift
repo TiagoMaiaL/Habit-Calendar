@@ -168,7 +168,7 @@ class NotificationSchedulerTests: IntegrationTestCase {
         )
 
         // 2. Declare a dummy habit with n notifications.
-        let dummyHabit = factories.habit.makeDummy()
+        let dummyHabit = habitFactory.makeDummy()
 
         // 3. Schedule the notifications.
         guard let notificationsSet = dummyHabit.notifications as? Set<NotificationMO> else {
@@ -216,7 +216,7 @@ class NotificationSchedulerTests: IntegrationTestCase {
         )
 
         // 2. Declare a dummy habit and get its notifications.
-        let dummyHabit = factories.habit.makeDummy()
+        let dummyHabit = habitFactory.makeDummy()
 
         guard let notificationsSet = dummyHabit.notifications as? Set<NotificationMO> else {
             XCTFail("Error: Couldn't get the dummy habit's notifications.")

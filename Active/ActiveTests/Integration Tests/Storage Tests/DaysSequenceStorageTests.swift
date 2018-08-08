@@ -41,7 +41,7 @@ class DaysSequenceStorageTests: IntegrationTestCase {
 
     func testSequenceCreationWithTheProvidedDaysDates() {
         // 1. Declare a dummy habit. It'll be used to create the sequence.
-        let dummyHabit = factories.habit.makeDummy()
+        let dummyHabit = habitFactory.makeDummy()
         // 1.1 Clear its days and sequences.
         if let habitDays = dummyHabit.days as? Set<HabitDayMO> {
             for habitDay in habitDays {
@@ -134,7 +134,7 @@ class DaysSequenceStorageTests: IntegrationTestCase {
 
     func testSequenceDeletion() {
         // 1. Declare a dummy sequence.
-        let dummySequence = factories.daysSequence.makeDummy()
+        let dummySequence = daysSequenceFactory.makeDummy()
 
         // 2. Delete it using the storage.
         sequenceStorage.delete(dummySequence, from: context)

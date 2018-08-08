@@ -84,15 +84,16 @@ class HabitStorageTests: IntegrationTestCase {
         }
 
         // If there are no days in the array, the test shouldn't proceed.
-        if days.isEmpty {
+        guard !days.isEmpty else {
             XCTFail("FIX: The dates for the Habit creation can't be empty.")
+            return
         }
 
         // Create the habit.
         let color = HabitMO.Color.alizarin
         let joggingHabit = habitStorage.create(
             using: context,
-            user: factories.user.makeDummy(),
+            user: userFactory.makeDummy(),
             name: name,
             color: color,
             days: days
@@ -121,49 +122,20 @@ class HabitStorageTests: IntegrationTestCase {
             "The created habit should have the expected color."
         )
 
-        // Check the habit's days and sequence.
+        // Briefly check to see if there's the right amount of days in the created sequence:
+        // Check if the sequence were created.
         XCTAssertEqual(
             joggingHabit.daysSequences?.count,
             1,
             "The habit should have a sequence containing all habit days."
         )
+
+        // Check if the sequence has the right amount of days.
         guard let sequence = (joggingHabit.daysSequences as? Set<DaysSequenceMO>)?.first else {
             XCTFail("Couldn't get the generated days sequence.")
             return
         }
-
-        XCTAssertNotNil(
-            sequence.days,
-            "Created habit should have the HabitDays property."
-        )
-        XCTAssert(
-            sequence.days?.count == days.count,
-            "Created habit should have the expected amount of HabitDays."
-        )
-
-        guard let habitDays = sequence.days as? Set<HabitDayMO> else {
-            XCTFail("Couldn't cast the days property to a Set with HabitDay entities.")
-            return
-        }
-
-        for habitDay in habitDays {
-            // Check if the Day's date is in the provided dates.
-            // If it isn't, the HabitDays creation went wrong.
-            XCTAssertNotNil(
-                habitDay.day,
-                "The habitDay should have a valid Day relationship."
-            )
-            XCTAssertNotNil(
-                habitDay.day!.date,
-                "The habitDay's Day entity should have a valid date property."
-            )
-            XCTAssert(
-                days.map {
-                    $0.getBeginningOfDay().description
-                }.contains(habitDay.day!.date!.description),
-                "The Day's date should have a valid date (matching with the provided ones in the Habit creation)."
-            )
-        }
+        XCTAssertEqual(sequence.days?.count, days.count, "The sequence should have the correct amount of days")
     }
 
     func testHabitCreationByPassingFireTimes() {
@@ -186,7 +158,7 @@ class HabitStorageTests: IntegrationTestCase {
         // 2. Create the habit.
         let habit = habitStorage.create(
             using: context,
-            user: factories.user.makeDummy(),
+            user: userFactory.makeDummy(),
             name: "exercise",
             color: .alizarin,
             days: [Date().byAddingDays(10)!, Date().byAddingDays(15)!],
@@ -238,7 +210,7 @@ class HabitStorageTests: IntegrationTestCase {
         let habitName = "Fight Muay-Thai"
 
         // Declare a habit dummy.
-        let habitDummy = factories.habit.makeDummy()
+        let habitDummy = habitFactory.makeDummy()
 
         // Edit the Habit to change the name.
         let editedHabit = habitStorage.edit(
@@ -264,7 +236,7 @@ class HabitStorageTests: IntegrationTestCase {
 
     func testHabitEditionWithColorProperty() {
         // 1. Declare a dummy habit.
-        let dummyHabit = factories.habit.makeDummy()
+        let dummyHabit = habitFactory.makeDummy()
 
         // 2. Edit it with the desired color.
         let colorToEdit = HabitMO.Color.amethyst
@@ -284,7 +256,7 @@ class HabitStorageTests: IntegrationTestCase {
 
     func testHabitEditionWithDaysPropertyShouldCreateNewSequence() {
         // 1. Declare a dummy habit.
-        let dummyHabit = factories.habit.makeDummy()
+        let dummyHabit = habitFactory.makeDummy()
 
         // 2. Create a new array of days' dates.
         let daysDates = (1..<14).compactMap { dayIndex -> Date? in
@@ -336,7 +308,7 @@ class HabitStorageTests: IntegrationTestCase {
 
     func testHabitEditionWithFireTimesPropertyShouldCreateFireTimeEntities() {
         // 1. Create a dummy habit.
-        let dummyHabit = factories.habit.makeDummy()
+        let dummyHabit = habitFactory.makeDummy()
 
         // 2. Declare the fire times.
         let fireTimes = [
@@ -362,7 +334,7 @@ class HabitStorageTests: IntegrationTestCase {
 
     func testHabitEditionWithFireTimesPropertyShouldCreateNotifications() {
         // 1. Create a dummy habit.
-        let dummyHabit = factories.habit.makeDummy()
+        let dummyHabit = habitFactory.makeDummy()
 
         // 2. Declare the fire times.
         let fireTimes = [
@@ -395,7 +367,7 @@ class HabitStorageTests: IntegrationTestCase {
 
     func testHabitDeletion() {
         // Create a new habit.
-        let dummyHabit = factories.habit.makeDummy()
+        let dummyHabit = habitFactory.makeDummy()
 
         // Delete the created habit.
         habitStorage.delete(dummyHabit, from: context)
@@ -414,7 +386,7 @@ class HabitStorageTests: IntegrationTestCase {
         )
 
         // 1. Declare the habit attributes needed for creation:
-        let dummyUser = factories.user.makeDummy()
+        let dummyUser = userFactory.makeDummy()
         let days = (1..<Int.random(2..<50)).compactMap {
             Date().byAddingDays($0)
         }
@@ -485,7 +457,7 @@ class HabitStorageTests: IntegrationTestCase {
         notificationCenterMock.shouldAuthorize = true
 
         // 1. Declare the dummy habit.
-        let dummyHabit = factories.habit.makeDummy()
+        let dummyHabit = habitFactory.makeDummy()
 
         // 2. Declare the new days dates.
         let days = (1..<Int.random(2..<50)).compactMap {
@@ -545,7 +517,7 @@ class HabitStorageTests: IntegrationTestCase {
         notificationCenterMock.shouldAuthorize = true
 
         // 1. Declare the dummy habit.
-        let dummyHabit = factories.habit.makeDummy()
+        let dummyHabit = habitFactory.makeDummy()
 
         // 2. Declare the new fire tiems.
         let fireTimes = [
@@ -611,7 +583,7 @@ class HabitStorageTests: IntegrationTestCase {
         notificationCenterMock.shouldAuthorize = true
 
         // 1. Declare the dummy habit.
-        let dummyHabit = factories.habit.makeDummy()
+        let dummyHabit = habitFactory.makeDummy()
 
         // 2. Declare the new days and fire tiems.
         let days = (1..<Int.random(2..<50)).compactMap {

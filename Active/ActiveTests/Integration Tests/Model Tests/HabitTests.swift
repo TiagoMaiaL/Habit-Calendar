@@ -40,7 +40,7 @@ class HabitTests: IntegrationTestCase {
         let habitName = "Read more"
 
         // Create a dummy Habit.
-        let dummyHabit = factories.habit.makeDummy()
+        let dummyHabit = habitFactory.makeDummy()
         dummyHabit.name = habitName
 
         // Get the title text.
@@ -55,7 +55,7 @@ class HabitTests: IntegrationTestCase {
         let expectedSubtitle = "Have you practiced this activity?"
 
         // Create a dummy habit.
-        let dummyHabit = factories.habit.makeDummy()
+        let dummyHabit = habitFactory.makeDummy()
 
         // Assert the habit's subtitle is the expected one.
         XCTAssertEqual(dummyHabit.getSubtitleText(), expectedSubtitle)
@@ -63,7 +63,7 @@ class HabitTests: IntegrationTestCase {
 
     func testFetchForExecutedDays() {
         // 1. Declare a dummy habit.
-        let dummyHabit = factories.habit.makeDummy()
+        let dummyHabit = habitFactory.makeDummy()
 
         // 2. Declare the habitDays to be added to the habit.
         let dates = (1...63).compactMap { dayIndex -> Date? in
@@ -109,7 +109,7 @@ class HabitTests: IntegrationTestCase {
         let executionPercentage = (Double(numberOfExecutedDays) / Double(numberOfDays)) * 100
 
         // 2. Declare a dummy habit.
-        let dummyHabit = factories.habit.makeDummy()
+        let dummyHabit = habitFactory.makeDummy()
         // 2.1. Clear the dummy days that come with the habit.
         if let days = dummyHabit.days as? Set<HabitDayMO> {
             for habitDay in days {
@@ -156,8 +156,8 @@ class HabitTests: IntegrationTestCase {
         let dummyHabit = makeEmptyDummy()
 
         // Add a habit day to it.
-        let dummyDay = factories.day.makeDummy()
-        let dummyHabitDay = factories.habitDay.makeDummy()
+        let dummyDay = dayFactory.makeDummy()
+        let dummyHabitDay = habitDayFactory.makeDummy()
 
         dummyHabitDay.day = dummyDay
         dummyHabitDay.habit = dummyHabit
@@ -182,7 +182,7 @@ class HabitTests: IntegrationTestCase {
 
     func testFetchingFutureDays() {
         // Declare a dummy habit.
-        let dummyHabit = factories.habit.makeDummy()
+        let dummyHabit = habitFactory.makeDummy()
 
         // Get its future days by filtering through them.
         guard let futureDays = (dummyHabit.days as? Set<HabitDayMO>)?.filter({ $0.day?.date?.isFuture ?? false }) else {

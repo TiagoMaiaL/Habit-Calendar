@@ -44,7 +44,7 @@ class FireTimeStorageTests: IntegrationTestCase {
             hour: Int.random(0..<59),
             minute: Int.random(0..<59)
         )
-        let dummyHabit = factories.habit.makeDummy()
+        let dummyHabit = habitFactory.makeDummy()
 
         // 2. Create the entity.
         let fireTime = fireTimeStorage.create(

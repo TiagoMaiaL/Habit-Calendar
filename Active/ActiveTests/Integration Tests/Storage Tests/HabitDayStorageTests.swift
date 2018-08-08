@@ -44,7 +44,7 @@ class HabitDayStorageTests: IntegrationTestCase {
 
     func testCreationByPassingTheDayAndHabit() {
         // 1. Declare the dummy habit to be used.
-        let dummyHabit = factories.habit.makeDummy()
+        let dummyHabit = habitFactory.makeDummy()
 
         // 2. Declare the day's date.
         guard let date = Date().byAddingDays(3) else {
@@ -89,7 +89,7 @@ class HabitDayStorageTests: IntegrationTestCase {
 
     func testDaysCreationByPassingTheDaysDatesAndHabit() {
         // 1. Declare the habit dummy to be used.
-        let dummyHabit = factories.habit.makeDummy()
+        let dummyHabit = habitFactory.makeDummy()
 
         // 2. Declare the Day dates to be used.
         let days = (1...7).compactMap { dayIndex -> Date? in
@@ -142,12 +142,12 @@ class HabitDayStorageTests: IntegrationTestCase {
 
     func testRemovalFromHabit() {
         // 1. Create a dummy Habit with a dummy HabitDay.
-        let dummyHabit = factories.habit.makeDummy()
-        let dummyHabitDay = factories.habitDay.makeDummy()
+        let dummyHabit = habitFactory.makeDummy()
+        let dummyHabitDay = habitDayFactory.makeDummy()
 
         dummyHabitDay.habit = dummyHabit
 
-        // 2. Remove the created habit.
+        // 2. Remove the created habitDay.
         habitDayStorage.delete(
             dummyHabitDay,
             from: dummyHabit.managedObjectContext!

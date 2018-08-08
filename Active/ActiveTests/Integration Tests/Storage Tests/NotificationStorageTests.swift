@@ -45,7 +45,7 @@ The created notification needs to have a scheduled user notification request ass
         )
 
         // Create a dummy habit.
-        let dummyHabit = factories.habit.makeDummy()
+        let dummyHabit = habitFactory.makeDummy()
 
         // Create the notification.
         let fireDate = Date().byAddingMinutes(20)!
@@ -166,7 +166,7 @@ The created notification needs to have a scheduled user notification request ass
 
     func testFireDatesFactory() {
         // Create a dummy habit.
-        let dummyHabit = factories.habit.makeDummy()
+        let dummyHabit = habitFactory.makeDummy()
 
         // Declare the fire times to be used.
         let fireTime = DateComponents(hour: 12, minute: 55)
@@ -223,7 +223,7 @@ The created notification needs to have a scheduled user notification request ass
 
     func testNotificationsCreationFromFireDates() {
         // Create a dummy Habit.
-        let dummyHabit = factories.habit.makeDummy()
+        let dummyHabit = habitFactory.makeDummy()
 
         // Declare the fireTime to be used.
         let fireTime = DateComponents(hour: 07, minute: 45)
