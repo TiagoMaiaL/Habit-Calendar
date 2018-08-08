@@ -32,8 +32,20 @@ class FireTimesSelectionViewController: UIViewController {
         minutesInterval: interval
     )
     
+    /// The label displaying the number of fire times selected by the user.
+    @IBOutlet weak var fireTimesAmountLabel: UILabel?
+    
     /// The fire dates selected by the user.
-    var selectedFireTimes = Set<FireTime>()
+    var selectedFireTimes = Set<FireTime>() {
+        didSet {
+            guard doneButton != nil, fireTimesAmountLabel != nil else { return }
+            // Enable/disable the button according to the selection.
+            handleDoneButton()
+            // Update the views showing the amount of fire times
+            // selected so far.
+            displayFireTimesAmount()
+        }
+    }
     
     /// The habit color used in the cell's and
     /// button's style.
@@ -46,7 +58,8 @@ class FireTimesSelectionViewController: UIViewController {
         didSet {
             // Reload the table view to update the selected style.
             tableView.reloadData()
-            // TODO: Configure the button's background color.
+            // Change button's bg color.
+            doneButton.backgroundColor = habitColor
         }
     }
     
@@ -90,6 +103,18 @@ class FireTimesSelectionViewController: UIViewController {
             name: Notification.Name.UIApplicationDidBecomeActive,
             object: nil
         )
+        
+        // Configure the tableView's content insets.
+        tableView.contentInset = UIEdgeInsets(
+            top: 0,
+            left: 0,
+            bottom: 120,
+            right: 0
+        )
+        
+        // Configure the done button's initial state.
+        doneButton.isEnabled = false
+        doneButton.backgroundColor = habitColor
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -111,12 +136,22 @@ class FireTimesSelectionViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     
+    @IBAction func eraseSelection(_ sender: UIBarButtonItem) {
+        selectedFireTimes.removeAll()
+        tableView.reloadData()
+    }
+    
     // MARK: Imperatives
     
     /// Configures the state of the done button according
     /// to the selected fire dates.
     private func handleDoneButton() {
         doneButton.isEnabled = !selectedFireTimes.isEmpty
+    }
+    
+    /// Displays the amount of fire times selected by the user.
+    private func displayFireTimesAmount() {
+        fireTimesAmountLabel?.text = "\(selectedFireTimes.count) selected fire time\(selectedFireTimes.count == 1 ? "" : "s")"
     }
     
     /// Update the views according to the User's authorization.
@@ -234,9 +269,6 @@ extension FireTimesSelectionViewController: UITableViewDataSource, UITableViewDe
         
         // Reload the cell to display its selected state.
         tableView.reloadRows(at: [indexPath], with: .fade)
-        
-        // Enable the done button.
-        handleDoneButton()
     }
 }
 
