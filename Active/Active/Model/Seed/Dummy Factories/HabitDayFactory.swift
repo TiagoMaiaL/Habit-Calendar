@@ -11,18 +11,18 @@ import CoreData
 
 /// Factory in charge of generating HabitDayMO dummies.
 struct HabitDayFactory: DummyFactory {
-    
+
     // MARK: Types
-    
+
     // This factory generates entities of the HabitDay class.
     typealias Entity = HabitDayMO
-    
+
     // MARK: Properties
-    
+
     var context: NSManagedObjectContext
-    
+
     // MARK: Imperatives
-    
+
     /// Generates a new empty HabitDay dummy.
     /// - Note: The generated dummy doesn't have the associated Habit and
     ///         Day dummies.
@@ -30,11 +30,11 @@ struct HabitDayFactory: DummyFactory {
     func makeDummy() -> HabitDayMO {
         // Declare a new habitDay entity.
         let habitDay = Active.HabitDayMO(context: context)
-        
+
         // Associate it's properties (id, wasExecuted).
         habitDay.id = UUID().uuidString
         habitDay.wasExecuted = false
-        
+
         // Return the created HabitDay dummy object.
         return habitDay
     }

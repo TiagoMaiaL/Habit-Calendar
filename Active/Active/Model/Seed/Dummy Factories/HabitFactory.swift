@@ -11,19 +11,19 @@ import CoreData
 
 /// Factory in charge of generating DayMO dummies.
 struct HabitFactory: DummyFactory {
-    
+
     // MARK: Types
-    
+
     // This factory generates entities of the Habit class.
     typealias Entity = HabitMO
-    
+
     // MARK: Properties
-    
+
     var context: NSManagedObjectContext
-    
+
     /// The maximum number of days contained within the generated dummy.
     private let maxNumberOfDays = 61
-    
+
     /// A collection of dummy habit names.
     private let names = [
         "Play the guitar",
@@ -38,9 +38,9 @@ struct HabitFactory: DummyFactory {
         "Program",
         "Learn to dance"
     ]
-    
+
     // MARK: Imperatives
-    
+
     /// Generates and returns a Habit dummy entity.
     /// - Note: The dummy is related to other HabitDay
     ///         and Notification dummies.
@@ -48,7 +48,7 @@ struct HabitFactory: DummyFactory {
     func makeDummy() -> HabitMO {
         // Declare the habit entity.
         let habit = HabitMO(context: context)
-        
+
         // Associate its properties (id, created, name, color).
         habit.id = UUID().uuidString
         habit.createdAt = Date()
@@ -56,7 +56,7 @@ struct HabitFactory: DummyFactory {
         habit.color = HabitMO.Color(
             rawValue: Int16(Int.random(0..<HabitMO.Color.count))
         )!.rawValue
-        
+
         // Associate its relationships:
         let fireTimeFactory = FireTimeFactory(context: context)
         let fireTimes = [
@@ -64,19 +64,19 @@ struct HabitFactory: DummyFactory {
             fireTimeFactory.makeDummy()
         ]
         habit.addToFireTimes(Set(fireTimes) as NSSet)
-        
+
         let notificationFactory = NotificationFactory(context: context)
         let sequenceFactory = DaysSequenceFactory(context: context)
         let dummySequence = sequenceFactory.makeDummy()
         dummySequence.habit = habit
-        
+
         let habitDays = dummySequence.days as! Set<HabitDayMO>
-        
+
         // For each day, generate the notifications based on the fire times and
         // the habit's day.
         for habitDay in habitDays {
             habitDay.habit = habit
-            
+
             for fireTime in fireTimes {
                 // Create the fireDate by appending the date to the fireTime's
                 // components.
@@ -87,14 +87,14 @@ struct HabitFactory: DummyFactory {
                     if fireDate.isPast {
                         fireDate = Date().byAddingMinutes(60)!
                     }
-                    
+
                     let notification = notificationFactory.makeDummy()
                     notification.fireDate = fireDate
                     notification.habit = habit
                 }
             }
         }
-        
+
         assert(
             (habit.fireTimes?.count ?? 0) > 0,
             "The generated dummy must have fire times."
@@ -107,7 +107,7 @@ struct HabitFactory: DummyFactory {
             (habit.notifications?.count ?? 0) > 0,
             "The generated dummy habit must have notifications."
         )
-        
+
         return habit
     }
 }

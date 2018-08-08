@@ -13,9 +13,9 @@ import CoreData
 /// specific day and they continue until the user breaks a sequence of
 /// consecutive days.
 class OffensiveMO: NSManagedObject {
-    
+
     // MARK: Imperatives
-    
+
     /// Calculates the offensive's length
     /// (diffence between its boundary dates).
     /// - Returns: The offensive's length.
@@ -27,7 +27,7 @@ class OffensiveMO: NSManagedObject {
             )
             return 0
         }
-        
+
         // Get the difference.
         let difference = fromDate.getDifferenceInDays(from: toDate)
         return difference > 0 ? difference : 1

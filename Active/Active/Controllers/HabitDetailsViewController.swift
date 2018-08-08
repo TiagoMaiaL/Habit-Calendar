@@ -13,45 +13,45 @@ import JTAppleCalendar
 class HabitDetailsViewController: UIViewController {
 
     // MARK: Properties
-    
+
     /// The habit presented by this controller.
     var habit: HabitMO!
-    
+
     /// The ordered days for the passed habit.
     /// - Note: This array mustn't be empty. The existence of days is ensured
     ///         in the habit's creation and edition process.
     private var orderedHabitDays: [HabitDayMO]!
-    
+
     /// The habit storage used to manage the controller's habit.
     var habitStorage: HabitStorage!
-    
+
     /// The persistent container used by this store to manage the
     /// provided habit.
     var container: NSPersistentContainer!
-    
+
     /// View holding the prompt to ask the user if the activity
     /// was executed in the current day.
     @IBOutlet weak var promptView: UIView!
-    
+
     /// The positive prompt button.
     @IBOutlet weak var positivePromptButton: UIButton!
-    
+
     /// The negative prompt button.
     @IBOutlet weak var negativePromptButton: UIButton!
 
     /// The cell's reusable identifier.
     private let cellIdentifier = "Habit day cell id"
-    
+
     /// The calendar view showing the habit days.
     /// - Note: The collection view will show a range with
     ///         the Habit's first days until the last ones.
     @IBOutlet weak var calendarView: JTAppleCalendarView!
-    
+
     // MARK: ViewController Life Cycle
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         // Assert on the required properties to be injected
         // (habit, habitStorage, container):
         assert(
@@ -66,43 +66,43 @@ class HabitDetailsViewController: UIViewController {
             container != nil,
             "Error: the needed container wasn't injected."
         )
-        
+
         // Try to get the ordered days from the passed habit.
         let dateSorting = NSSortDescriptor(key: "day.date", ascending: true)
-        
+
         guard let orderedDays = habit.getCurrentSequence()?.days?.sortedArray(using: [dateSorting]) as? [HabitDayMO] else {
             assertionFailure("Inconsistency: Couldn't sort the habit's days by the date property.")
             return
         }
-        
+
         // All created habits must have associated habit days.
         assert(
             !orderedDays.isEmpty,
             "Inconsistency: the habit's days shouldn't be empty."
         )
-        
+
         // Assign the fetched days.
         orderedHabitDays = orderedDays
-        
+
         // Configure the calendar.
         calendarView.calendarDataSource = self
         calendarView.calendarDelegate = self
-        
+
         title = habit.name
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+
         // Configure the appearance of the prompt view.
         handlePrompt()
     }
-    
+
     // MARK: Actions
-    
+
     @IBAction func deleteHabit(_ sender: UIButton) {
         // Alert the user to see if the deletion is really wanted:
-        
+
         // Declare the alert.
         let alert = UIAlertController(
             title: "Delete",
@@ -120,11 +120,11 @@ class HabitDetailsViewController: UIViewController {
             self.navigationController?.popViewController(animated: true)
         })
         alert.addAction(UIAlertAction(title: "cancel", style: .default))
-        
+
         // Present it.
         present(alert, animated: true)
     }
-    
+
     @IBAction func savePromptResult(_ sender: UIButton) {
         guard let currentHabitDay = habit.getCurrentDay() else {
             assertionFailure(
@@ -132,7 +132,7 @@ class HabitDetailsViewController: UIViewController {
             )
             return
         }
-        
+
         currentHabitDay.managedObjectContext?.perform {
             if sender === self.positivePromptButton {
                 // Mark it as executed.
@@ -141,10 +141,10 @@ class HabitDetailsViewController: UIViewController {
                 // Mark is as non executed.
                 currentHabitDay.wasExecuted = false
             }
-            
+
             // Save the result.
             try? currentHabitDay.managedObjectContext?.save()
-            
+
             DispatchQueue.main.async {
                 // Hide the prompt header.
                 self.handlePrompt()
@@ -153,9 +153,9 @@ class HabitDetailsViewController: UIViewController {
             }
         }
     }
-    
+
     // MARK: Imperatives
-    
+
     /// Show the prompt view if today is a day(HabitDayMO) being tracked
     /// by the app.
     private func handlePrompt() {
@@ -171,14 +171,14 @@ class HabitDetailsViewController: UIViewController {
 }
 
 extension HabitDetailsViewController: JTAppleCalendarViewDataSource, JTAppleCalendarViewDelegate {
-    
+
     // MARK: JTAppleCalendarViewDataSource Methods
-    
+
     func configureCalendar(_ calendar: JTAppleCalendarView) -> ConfigurationParameters {
         // Get the oldest and newest habitDays.
         let oldestDay = orderedHabitDays.first!
         let newestDay = orderedHabitDays.last!
-        
+
         // It'd be a bug if there wasn't valid days with the HabitDay.
         assert(
             oldestDay.day?.date != nil,
@@ -188,24 +188,24 @@ extension HabitDetailsViewController: JTAppleCalendarViewDataSource, JTAppleCale
             newestDay.day?.date != nil,
             "Inconsistency: Couldn't get the last day's date property."
         )
-        
+
         return ConfigurationParameters(
             startDate: oldestDay.day!.date!,
             endDate: newestDay.day!.date!
         )
     }
-    
+
     // MARK: JTAppleCalendarViewDelegate Methods
-    
+
     func calendar(_ calendar: JTAppleCalendarView, cellForItemAt date: Date, cellState: CellState, indexPath: IndexPath) -> JTAppleCell {
         let cell = calendar.dequeueReusableJTAppleCell(
             withReuseIdentifier: cellIdentifier,
             for: indexPath
         ) as! DetailsCalendarDayCell
-        
+
         if cellState.dateBelongsTo == .thisMonth {
             // Set the cell's color if the date represents a habit day.
-            
+
             let predicate = NSPredicate(
                 format: "day.date >= %@ AND day.date < %@",
                 date.getBeginningOfDay() as NSDate,
@@ -216,17 +216,17 @@ extension HabitDetailsViewController: JTAppleCalendarViewDataSource, JTAppleCale
             } else {
                 cell.backgroundColor = .white
             }
-            
+
             cell.dayTitleLabel.text = cellState.text
         } else {
             cell.dayTitleLabel.text = ""
             cell.backgroundColor = .white
         }
-        
+
         return cell
     }
-    
+
     func calendar(_ calendar: JTAppleCalendarView, willDisplay cell: JTAppleCell, forItemAt date: Date, cellState: CellState, indexPath: IndexPath) {
-        
+
     }
 }

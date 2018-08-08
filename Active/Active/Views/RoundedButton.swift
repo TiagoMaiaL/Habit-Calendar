@@ -10,9 +10,9 @@ import UIKit
 
 /// A custom rounded button.
 @IBDesignable class RoundedButton: UIButton {
-    
+
     // MARK: Properties
-    
+
     override var isEnabled: Bool {
         didSet {
             // Set the button's alpha to show if it's enabled or not.
@@ -21,17 +21,17 @@ import UIKit
             }.startAnimation()
         }
     }
-    
+
     // MARK: Life Cycle
-    
+
     override func prepareForInterfaceBuilder() {
         super.prepareForInterfaceBuilder()
         layoutIfNeeded()
     }
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
-        
+
         // Configure the button's corner radius.
         layer.cornerRadius = frame.size.height / 2
     }

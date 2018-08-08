@@ -11,9 +11,9 @@ import CoreData
 /// Entity representing the fire times for the user notifications
 /// configured by the user.
 class FireTimeMO: NSManagedObject {
-    
+
     // MARK: Imperatives
-    
+
     /// Gets the fire time hour and minute as date components.
     /// - Returns: The date components related to the fire time entity.
     func getFireTimeComponents() -> DateComponents {
