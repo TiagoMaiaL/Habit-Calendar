@@ -15,8 +15,6 @@ import UIKit
     // The color applied to each day label.
     @IBInspectable var tint: UIColor?
 
-    @IBInspectable var font: UIFont?
-
     /// The labels of each day, ordered by sunday to saturday.
     private var daysLabels: [UILabel] = {
         // Declare the localized days' texts to be used.
@@ -45,7 +43,6 @@ import UIKit
         stackView.axis = .horizontal
         stackView.distribution = .fillEqually
         stackView.alignment = .center
-        //stackView.translatesAutoresizingMaskIntoConstraints = false
 
         return stackView
     }()
@@ -74,7 +71,6 @@ import UIKit
         for label in daysLabels {
             // Configure the label's attributes.
             label.textColor = tint ?? UIColor(red: 155/255, green: 155/255, blue: 155/255, alpha: 1)
-//            label.font =
 
             // Arrange the label within the horizontal stackView.
             daysStackView.addArrangedSubview(label)
@@ -93,8 +89,6 @@ import UIKit
 
     override func layoutSubviews() {
         super.layoutSubviews()
-
-        // TODO: Apply the layout to the stackView.
         daysStackView.frame = CGRect(x: 0, y: 0, width: frame.size.width, height: frame.size.height)
     }
 

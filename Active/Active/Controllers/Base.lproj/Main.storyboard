@@ -576,34 +576,10 @@ reminded about your habit?</string>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="lHy-2a-LaZ">
                                                 <rect key="frame" x="0.0" y="0.0" width="355" height="80"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KgN-56-97R">
-                                                        <rect key="frame" x="124" y="0.0" width="107.5" height="55"/>
-                                                        <attributedString key="attributedText">
-                                                            <fragment content="April">
-                                                                <attributes>
-                                                                    <color key="NSColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                    <font key="NSFont" size="20" name="SFProText-Bold"/>
-                                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                                </attributes>
-                                                            </fragment>
-                                                            <fragment content=",">
-                                                                <attributes>
-                                                                    <color key="NSColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                    <font key="NSFont" size="20" name="SFProText-Bold"/>
-                                                                    <font key="NSOriginalFont" size="20" name="SFProText-Bold"/>
-                                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                                </attributes>
-                                                            </fragment>
-                                                            <fragment content=" 2018">
-                                                                <attributes>
-                                                                    <color key="NSColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                    <font key="NSFont" size="20" name="SFProText-Regular"/>
-                                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                                </attributes>
-                                                            </fragment>
-                                                        </attributedString>
-                                                        <color key="highlightedColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    </label>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Mr-IT-1Zj" customClass="MonthHeaderView" customModule="Active" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="355" height="55"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tdF-7V-HZ5" customClass="DaysHeaderView" customModule="Active" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="55" width="355" height="25"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -613,6 +589,7 @@ reminded about your habit?</string>
                                                     </view>
                                                 </subviews>
                                                 <constraints>
+                                                    <constraint firstItem="8Mr-IT-1Zj" firstAttribute="width" secondItem="lHy-2a-LaZ" secondAttribute="width" id="Vfb-nx-6Uu"/>
                                                     <constraint firstItem="tdF-7V-HZ5" firstAttribute="width" secondItem="lHy-2a-LaZ" secondAttribute="width" id="rfi-R0-Ktb"/>
                                                 </constraints>
                                             </stackView>
@@ -629,7 +606,7 @@ reminded about your habit?</string>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ge3-Po-cVn" userLabel="Calendar" customClass="JTAppleCalendarView" customModule="JTAppleCalendar">
                                         <rect key="frame" x="0.0" y="90" width="355" height="423"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Qht-0H-FBg">
+                                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="Qht-0H-FBg">
                                             <size key="itemSize" width="64" height="64"/>
                                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -655,6 +632,7 @@ reminded about your habit?</string>
                                                     <constraint firstItem="4Qq-dg-9vt" firstAttribute="centerY" secondItem="T1l-R3-Y1U" secondAttribute="centerY" id="OjB-aZ-1Qq"/>
                                                     <constraint firstItem="4Qq-dg-9vt" firstAttribute="centerX" secondItem="T1l-R3-Y1U" secondAttribute="centerX" id="aZx-6R-iLu"/>
                                                 </constraints>
+                                                <size key="customSize" width="64" height="64"/>
                                                 <connections>
                                                     <outlet property="dayTitleLabel" destination="4Qq-dg-9vt" id="uEe-po-3cs"/>
                                                 </connections>
@@ -684,10 +662,12 @@ reminded about your habit?</string>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="jIC-fg-zIB"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Title" id="2Vo-cB-dmZ">
+                        <barButtonItem key="rightBarButtonItem" systemItem="trash" id="11t-ft-cFW"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="calendarView" destination="ge3-Po-cVn" id="cJ7-IJ-lwC"/>
                         <outlet property="doneButton" destination="Cqd-Qf-JuL" id="8tr-Hk-KmA"/>
-                        <outlet property="monthTitleLabel" destination="KgN-56-97R" id="SNf-4U-mgo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9zz-Nw-yjM" userLabel="First Responder" sceneMemberID="firstResponder"/>

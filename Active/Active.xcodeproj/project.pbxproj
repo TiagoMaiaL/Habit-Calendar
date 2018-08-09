@@ -56,6 +56,7 @@
 		4732CE7C2118DA8400E2770C /* UnderlinedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4732CE7B2118DA8400E2770C /* UnderlinedTextField.swift */; };
 		4732CE7E211A12B500E2770C /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4732CE7D211A12B500E2770C /* RoundedButton.swift */; };
 		4732CE81211C93B500E2770C /* DaysHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4732CE80211C93B500E2770C /* DaysHeaderView.swift */; };
+		4732CE83211CB89F00E2770C /* MonthHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4732CE82211CB89F00E2770C /* MonthHeaderView.swift */; };
 		4737312B20ED502800895DD2 /* HabitDaysSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4737312A20ED502800895DD2 /* HabitDaysSelectionViewController.swift */; };
 		4737312D20ED503B00895DD2 /* FireTimesSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4737312C20ED503B00895DD2 /* FireTimesSelectionViewController.swift */; };
 		4737313C20F3D7AD00895DD2 /* CalendarDayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4737313B20F3D7AD00895DD2 /* CalendarDayCell.swift */; };
@@ -169,6 +170,7 @@
 		4732CE7B2118DA8400E2770C /* UnderlinedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderlinedTextField.swift; sourceTree = "<group>"; };
 		4732CE7D211A12B500E2770C /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		4732CE80211C93B500E2770C /* DaysHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaysHeaderView.swift; sourceTree = "<group>"; };
+		4732CE82211CB89F00E2770C /* MonthHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthHeaderView.swift; sourceTree = "<group>"; };
 		4737312A20ED502800895DD2 /* HabitDaysSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitDaysSelectionViewController.swift; sourceTree = "<group>"; };
 		4737312C20ED503B00895DD2 /* FireTimesSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireTimesSelectionViewController.swift; sourceTree = "<group>"; };
 		4737313B20F3D7AD00895DD2 /* CalendarDayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CalendarDayCell.swift; path = Active/Views/CalendarDayCell.swift; sourceTree = SOURCE_ROOT; };
@@ -310,6 +312,7 @@
 				4732CE7B2118DA8400E2770C /* UnderlinedTextField.swift */,
 				4732CE7D211A12B500E2770C /* RoundedButton.swift */,
 				4732CE80211C93B500E2770C /* DaysHeaderView.swift */,
+				4732CE82211CB89F00E2770C /* MonthHeaderView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -741,6 +744,7 @@
 				47F635F820BB920900AC4555 /* Active.xcdatamodeld in Sources */,
 				47E6C21120EB129C003BDB4D /* DummyFactory.swift in Sources */,
 				470230D820E5250A003A1F6E /* Int+Utils.swift in Sources */,
+				4732CE83211CB89F00E2770C /* MonthHeaderView.swift in Sources */,
 				4732CE81211C93B500E2770C /* DaysHeaderView.swift in Sources */,
 				47F635F020BB920900AC4555 /* AppDelegate.swift in Sources */,
 				4737312D20ED503B00895DD2 /* FireTimesSelectionViewController.swift in Sources */,
