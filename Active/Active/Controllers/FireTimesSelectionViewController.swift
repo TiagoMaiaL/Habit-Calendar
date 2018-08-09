@@ -39,11 +39,7 @@ class FireTimesSelectionViewController: UIViewController {
     var selectedFireTimes = Set<FireTime>() {
         didSet {
             guard doneButton != nil, fireTimesAmountLabel != nil else { return }
-            // Enable/disable the button according to the selection.
-            handleDoneButton()
-            // Update the views showing the amount of fire times
-            // selected so far.
-            displayFireTimesAmount()
+            updateUI()
         }
     }
 
@@ -112,9 +108,11 @@ class FireTimesSelectionViewController: UIViewController {
             right: 0
         )
 
-        // Configure the done button's initial state.
-        doneButton.isEnabled = false
+        // Configure the done button's theme color.
         doneButton.backgroundColor = habitColor
+
+        // Set the initial state of the controller's views.
+        updateUI()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -154,6 +152,12 @@ class FireTimesSelectionViewController: UIViewController {
         fireTimesAmountLabel?.text = """
         \(selectedFireTimes.count) selected fire time\(selectedFireTimes.count == 1 ? "" : "s")
         """
+    }
+
+    /// Updates the UI components according to the selection of fire times.
+    private func updateUI() {
+        displayFireTimesAmount()
+        handleDoneButton()
     }
 
     /// Update the views according to the User's authorization.
