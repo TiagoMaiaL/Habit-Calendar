@@ -18,6 +18,13 @@ class HabitDaysSelectionViewController: UIViewController {
     // The cell's reusable identifier.
     private let cellIdentifier = "day collection view cell"
 
+    /// The calendar's header view.
+    @IBOutlet weak var monthHeaderView: MonthHeaderView! {
+        didSet {
+            monthTitleLabel = monthHeaderView.monthLabel
+        }
+    }
+
     /// The calendar view with the days to be selected.
     @IBOutlet weak var calendarView: JTAppleCalendarView!
 
@@ -25,7 +32,7 @@ class HabitDaysSelectionViewController: UIViewController {
     @IBOutlet weak var doneButton: UIButton!
 
     /// The title of the month being displayed by the calendar.
-    @IBOutlet weak var monthTitleLabel: UILabel!
+    weak var monthTitleLabel: UILabel!
 
     /// The delegate in charge of receiving days selected by the user.
     weak var delegate: HabitDaysSelectionViewControllerDelegate?

@@ -19,8 +19,8 @@ import UIKit
     /// The header's previous month button.
     private(set) lazy var previousButton: UIButton = {
         let previousButton = UIButton(type: .custom)
-        previousButton.setBackgroundImage(UIImage(named: "ic-previous"), for: .normal)
-        previousButton.backgroundColor = .green
+        previousButton.setImage(UIImage(named: "ic-previous"), for: .normal)
+        previousButton.imageView?.contentMode = .scaleAspectFit
 
         return previousButton
     }()
@@ -28,8 +28,8 @@ import UIKit
     /// The header's next month button.
     private(set) lazy var nextButton: UIButton = {
         let nextButton = UIButton(type: .custom)
-        nextButton.setBackgroundImage(UIImage(named: "ic-next"), for: .normal)
-        nextButton.backgroundColor = .green
+        nextButton.setImage(UIImage(named: "ic-next"), for: .normal)
+        nextButton.imageView?.contentMode = .scaleAspectFit
 
         return nextButton
     }()
@@ -99,10 +99,10 @@ import UIKit
         monthStackView.frame = CGRect(x: 0, y: 0, width: frame.size.width, height: frame.size.height)
 
         // Change the previous and next buttons to have an specific width by using auto layout.
-        previousButton.widthAnchor.constraint(equalToConstant: 100).isActive = true
-        previousButton.heightAnchor.constraint(equalTo: monthStackView.heightAnchor, multiplier: 1).isActive = true
+        previousButton.widthAnchor.constraint(equalToConstant: 33).isActive = true
+        previousButton.heightAnchor.constraint(equalToConstant: 33).isActive = true
 
-        nextButton.widthAnchor.constraint(equalToConstant: 100).isActive = true
-        nextButton.heightAnchor.constraint(equalTo: monthStackView.heightAnchor, multiplier: 1).isActive = true
+        nextButton.widthAnchor.constraint(equalToConstant: 33).isActive = true
+        nextButton.heightAnchor.constraint(equalToConstant: 33).isActive = true
     }
 }

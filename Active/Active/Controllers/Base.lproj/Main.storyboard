@@ -668,6 +668,7 @@ reminded about your habit?</string>
                     <connections>
                         <outlet property="calendarView" destination="ge3-Po-cVn" id="cJ7-IJ-lwC"/>
                         <outlet property="doneButton" destination="Cqd-Qf-JuL" id="8tr-Hk-KmA"/>
+                        <outlet property="monthHeaderView" destination="8Mr-IT-1Zj" id="nS9-Vu-4a0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9zz-Nw-yjM" userLabel="First Responder" sceneMemberID="firstResponder"/>
