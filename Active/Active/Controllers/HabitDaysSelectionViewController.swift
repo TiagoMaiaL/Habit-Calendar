@@ -26,6 +26,9 @@ class HabitDaysSelectionViewController: UIViewController {
     /// The cell's reusable identifier.
     private let cellIdentifier = "day collection view cell"
 
+    /// The pre-selected days to be displayed after the controller appears on screen.
+    var preSelectedDays: [Date]?
+
     /// The calendar view with the days to be selected.
     @IBOutlet weak var calendarView: JTAppleCalendarView!
 
@@ -79,6 +82,11 @@ class HabitDaysSelectionViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+
+        // Display the pre-selected days.
+        if let days = preSelectedDays {
+            calendarView.selectDates(days)
+        }
 
         // Configute the calendar's header initial state.
         handleCalendarHeader()

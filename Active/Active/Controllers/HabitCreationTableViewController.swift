@@ -69,6 +69,7 @@ class HabitCreationTableViewController: UITableViewController,
     // For now only one day is going to be added.
     private var days: [Date]? {
         didSet {
+            configureDaysLabels()
             configureCreationButton()
         }
     }
@@ -118,6 +119,7 @@ class HabitCreationTableViewController: UITableViewController,
             // Associate the DaysSelectionController's delegate.
             if let daysController = segue.destination as? HabitDaysSelectionViewController {
                 daysController.delegate = self
+                daysController.preSelectedDays = days
             } else {
                 assertionFailure("Error: Couldn't get the days selection controller.")
             }
@@ -299,8 +301,6 @@ extension HabitCreationTableViewController {
     func didSelectDays(_ daysDates: [Date]) {
         // Associate the habit's days with the dates selected by the user.
         days = daysDates
-        // Change the days labels to display the current sequence info.
-        configureDaysLabels()
     }
 }
 
