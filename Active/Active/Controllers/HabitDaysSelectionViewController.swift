@@ -15,6 +15,14 @@ class HabitDaysSelectionViewController: UIViewController {
 
     // MARK: Properties
 
+    // The calendar's startDate.
+    private lazy var calendarStartDate = Date().getBeginningOfMonth()?.getBeginningOfDay() ?? Date()
+
+    // The calendar's endDate.
+    private lazy var calendarEndDate: Date = {
+        return calendarStartDate.byAddingYears(2) ?? Date()
+    }()
+
     // The cell's reusable identifier.
     private let cellIdentifier = "day collection view cell"
 
@@ -88,15 +96,17 @@ class HabitDaysSelectionViewController: UIViewController {
 
     /// Goes to the previous month in the calendar.
     @objc private func goToPreviousMonth() {
-        if let currentDate = calendarView.visibleDates().monthDates.first?.date {
-
+        guard let previousMonth = getCurrentMonth().byAddingMonths(-1) else { return }
+        if canGoToPreviousMonth() {
+            calendarView.scrollToDate(previousMonth)
         }
     }
 
     /// Goes to the next month in the calendar.
     @objc private func goToNextMonth() {
-        if let currentDate = calendarView.visibleDates().monthDates.first?.date {
-            
+        guard let nextMonth = getCurrentMonth().byAddingMonths(1) else { return }
+        if canGoToNextMonth() {
+            calendarView.scrollToDate(nextMonth)
         }
     }
 
@@ -123,7 +133,32 @@ class HabitDaysSelectionViewController: UIViewController {
         // Change the title label to reflect it.
         monthTitleLabel.text = formatter.string(from: firstDate)
 
-        // TODO: enable/disable the header's next/previous buttons.
+        UIViewPropertyAnimator(duration: 0.2, curve: .easeIn) {
+            self.previousMonthButton.alpha = self.canGoToPreviousMonth() ? 1 : 0.3
+            self.nextMonthButton.alpha = self.canGoToNextMonth() ? 1 : 0.3
+        }.startAnimation()
+    }
+
+    /// Gets the calendar's current month.
+    /// - Returns: the current month date.
+    private func getCurrentMonth() -> Date {
+        return calendarView.visibleDates().monthDates.first?.date ?? Date()
+    }
+
+    /// Informs if its possible to go the next month.
+    private func canGoToPreviousMonth() -> Bool {
+        // Get the date for the previous month.
+        guard let previousMonth = getCurrentMonth().byAddingMonths(-1) else { return false }
+        // Ensure the previousMonth is later (or the same) than the calendar's startDate.
+        let comparison = calendarStartDate.compare(previousMonth)
+        return comparison == .orderedAscending || comparison == .orderedSame
+    }
+
+    /// Informs if its possible to go the previous month.
+    private func canGoToNextMonth() -> Bool {
+        guard let nextMonth = getCurrentMonth().byAddingMonths(1) else { return false }
+        // Ensure the nextMonth is before the calendar's endDate.
+        return calendarEndDate.compare(nextMonth) == .orderedDescending
     }
 }
 
@@ -132,28 +167,11 @@ extension HabitDaysSelectionViewController: JTAppleCalendarViewDataSource, JTApp
     // MARK: JTAppleCalendarViewDataSource Methods
 
     func configureCalendar(_ calendar: JTAppleCalendarView) -> ConfigurationParameters {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy MM dd"
-        formatter.timeZone = Calendar.current.timeZone
-        formatter.locale = Calendar.current.locale
-
-        let now = Date()
-        guard let endDate = now.byAddingYears(2) else {
-            assertionFailure(
-                "Couldn't get the date by adding two years from now."
-            )
-            return ConfigurationParameters(
-                startDate: now,
-                endDate: now
-            )
-        }
-
-        let parameters = ConfigurationParameters(
-            startDate: now,
-            endDate: endDate,
+        return ConfigurationParameters(
+            startDate: calendarStartDate,
+            endDate: calendarEndDate,
             hasStrictBoundaries: true
         )
-        return parameters
     }
 
     // MARK: JTAppleCalendarViewDelegate Methods
