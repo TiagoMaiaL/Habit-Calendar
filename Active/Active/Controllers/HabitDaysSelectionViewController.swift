@@ -15,15 +15,15 @@ class HabitDaysSelectionViewController: UIViewController {
 
     // MARK: Properties
 
-    // The calendar's startDate.
+    /// The calendar's startDate.
     private lazy var calendarStartDate = Date().getBeginningOfMonth()?.getBeginningOfDay() ?? Date()
 
-    // The calendar's endDate.
+    /// The calendar's endDate.
     private lazy var calendarEndDate: Date = {
         return calendarStartDate.byAddingYears(2) ?? Date()
     }()
 
-    // The cell's reusable identifier.
+    /// The cell's reusable identifier.
     private let cellIdentifier = "day collection view cell"
 
     /// The calendar view with the days to be selected.
@@ -56,7 +56,10 @@ class HabitDaysSelectionViewController: UIViewController {
         }
     }
 
-    /// The button the user uses to tell when he's done.
+    /// The label showing the number of currently selected days.
+    @IBOutlet weak var selectedDaysNumberLabel: UILabel!
+
+    /// The button the user uses to tell when the selection is done.
     @IBOutlet weak var doneButton: UIButton!
 
     /// The delegate in charge of receiving days selected by the user.
@@ -79,6 +82,9 @@ class HabitDaysSelectionViewController: UIViewController {
 
         // Configute the calendar's header initial state.
         handleCalendarHeader()
+
+        // Configure the footer's initial state.
+        handleFooter()
     }
 
     /// The user's first selected date.
@@ -114,9 +120,14 @@ class HabitDaysSelectionViewController: UIViewController {
 
     /// Handles the interaction of the done button according to
     /// the selected days.
-    private func handleDoneButton() {
+    private func handleFooter() {
         // Enable/Disable the button if the dates are selected or not.
         doneButton.isEnabled = !calendarView.selectedDates.isEmpty
+
+        // Display the number of selected days.
+        selectedDaysNumberLabel.text = """
+        \(calendarView.selectedDates.count) day\(calendarView.selectedDates.count == 1 ? "" : "s") selected
+        """
     }
 
     /// Handles the title of the calendar's header view.
@@ -238,7 +249,7 @@ extension HabitDaysSelectionViewController: JTAppleCalendarViewDataSource, JTApp
         }
 
         // Handle the done button's state.
-        handleDoneButton()
+        handleFooter()
     }
 
     func calendar(
@@ -253,7 +264,7 @@ extension HabitDaysSelectionViewController: JTAppleCalendarViewDataSource, JTApp
         }
 
         // Handle the done button's state.
-        handleDoneButton()
+        handleFooter()
     }
 
     func calendar(
