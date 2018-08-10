@@ -138,6 +138,34 @@ class DateUtilsTests: XCTestCase {
         )
     }
 
+    func testGettingDateByAddingMonths() {
+        // Declare a date at the beginning of the year.
+        let beginningOfYear = Calendar.current.date(
+            bySetting: .month,
+            value: 1,
+            // Get the first day of the month
+            of: Calendar.current.date(
+                bySetting: .day,
+                value: 1,
+                of: Date()
+            ) ?? Date()
+        )
+
+        // Get a new date by adding the years.
+        let sevenMonthsLater = beginningOfYear?.byAddingMonths(7)
+
+        // Compare the dates' day component.
+        XCTAssertNotNil(sevenMonthsLater)
+        XCTAssertEqual(beginningOfYear?.components.day, sevenMonthsLater?.components.day)
+
+        // Compare the components to check if the months were properly added.
+        XCTAssertEqual(
+            (beginningOfYear?.components.month ?? 0) + 7,
+            sevenMonthsLater?.components.month,
+            "The months weren't properly added."
+        )
+    }
+
     func testGettingDateByAddingYears() {
         // Get the current date.
         let now = Date()

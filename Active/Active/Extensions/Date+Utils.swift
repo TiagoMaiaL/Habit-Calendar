@@ -93,6 +93,17 @@ extension Date {
         )
     }
 
+    /// Creates a new date by adding the asked number of months.
+    /// - Parameter numberOfMonths: The number of months to be added to the date.
+    /// - Returns: A new date with the months added.
+    func byAddingMonths(_ numberOfMonths: Int) -> Date? {
+        return getCurrentCalendar().date(
+            byAdding: .month,
+            value: numberOfMonths,
+            to: self
+        )
+    }
+
     /// Creates a new date by adding the asked number of years.
     /// - Parameter numberOfYears: The number of years to be added.
     /// - Returns: A new date with the added years.
