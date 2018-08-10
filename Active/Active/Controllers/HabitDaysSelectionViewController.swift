@@ -18,21 +18,38 @@ class HabitDaysSelectionViewController: UIViewController {
     // The cell's reusable identifier.
     private let cellIdentifier = "day collection view cell"
 
-    /// The calendar's header view.
-    @IBOutlet weak var monthHeaderView: MonthHeaderView! {
-        didSet {
-            monthTitleLabel = monthHeaderView.monthLabel
-        }
-    }
-
     /// The calendar view with the days to be selected.
     @IBOutlet weak var calendarView: JTAppleCalendarView!
 
-    /// The button the user uses to tell when he's done.
-    @IBOutlet weak var doneButton: UIButton!
+    /// The calendar's header view.
+    @IBOutlet weak var monthHeaderView: MonthHeaderView! {
+        didSet {
+            // Hold each used view that comes with the header.
+            monthTitleLabel = monthHeaderView.monthLabel
+            previousMonthButton = monthHeaderView.previousButton
+            nextMonthButton = monthHeaderView.nextButton
+        }
+    }
 
     /// The title of the month being displayed by the calendar.
     weak var monthTitleLabel: UILabel!
+
+    /// The header's previous month button.
+    weak var previousMonthButton: UIButton! {
+        didSet {
+            previousMonthButton.addTarget(self, action: #selector(goToPreviousMonth), for: .touchUpInside)
+        }
+    }
+
+    /// The header's next month button.
+    weak var nextMonthButton: UIButton! {
+        didSet {
+            nextMonthButton.addTarget(self, action: #selector(goToNextMonth), for: .touchUpInside)
+        }
+    }
+
+    /// The button the user uses to tell when he's done.
+    @IBOutlet weak var doneButton: UIButton!
 
     /// The delegate in charge of receiving days selected by the user.
     weak var delegate: HabitDaysSelectionViewControllerDelegate?
@@ -69,6 +86,20 @@ class HabitDaysSelectionViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
 
+    /// Goes to the previous month in the calendar.
+    @objc private func goToPreviousMonth() {
+        if let currentDate = calendarView.visibleDates().monthDates.first?.date {
+
+        }
+    }
+
+    /// Goes to the next month in the calendar.
+    @objc private func goToNextMonth() {
+        if let currentDate = calendarView.visibleDates().monthDates.first?.date {
+            
+        }
+    }
+
     // MARK: Imperatives
 
     /// Handles the interaction of the done button according to
@@ -91,6 +122,8 @@ class HabitDaysSelectionViewController: UIViewController {
 
         // Change the title label to reflect it.
         monthTitleLabel.text = formatter.string(from: firstDate)
+
+        // TODO: enable/disable the header's next/previous buttons.
     }
 }
 

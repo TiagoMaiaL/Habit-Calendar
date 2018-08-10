@@ -38,7 +38,7 @@ import UIKit
     private(set) lazy var monthLabel: UILabel = {
         let monthLabel = UILabel()
         monthLabel.textAlignment = .center
-        monthLabel.font = UIFont(name: "SFProText-Regular", size: 15)
+        monthLabel.font = UIFont(name: "SFProText-Regular", size: 18)
         monthLabel.text = "August, 2018"
 
         return monthLabel
