@@ -276,4 +276,23 @@ class DateUtilsTests: XCTestCase {
             "The difference between the dates isn't the expected negative one."
         )
     }
+
+    func testGettingTheBeginningOfMonth() {
+        let today = Date()
+
+        // Get the beginning of the month.
+        let beginningOfMonth = today.getBeginningOfMonth()
+
+        // Compare the year and month components.
+        XCTAssertNotNil(beginningOfMonth)
+        XCTAssertEqual(today.components.year, beginningOfMonth?.components.year)
+        XCTAssertEqual(today.components.month, beginningOfMonth?.components.month)
+
+        // The day component must be equals to one.
+        XCTAssertEqual(
+            beginningOfMonth?.components.day,
+            1,
+            "The date should be at the beginning of the month."
+        )
+    }
 }

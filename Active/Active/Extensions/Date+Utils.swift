@@ -127,6 +127,13 @@ extension Date {
             to: date
         ).day ?? 0
     }
+
+    /// Creates a new date representing the beginning of the current date's month.
+    /// - Returns: the current date at the beginning of month (day 1).
+    func getBeginningOfMonth() -> Date? {
+        guard let day = components.day else { return nil }
+        return self.byAddingDays((day - 1) * -1)
+    }
 }
 
 /// Adds some common formatter factories used by the controllers
