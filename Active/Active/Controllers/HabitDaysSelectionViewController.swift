@@ -100,6 +100,10 @@ class HabitDaysSelectionViewController: UIViewController {
 
     // MARK: Actions
 
+    @IBAction func deselectDays(_ sender: UIBarButtonItem) {
+        calendarView.deselectAllDates()
+    }
+
     @IBAction func selectDays(_ sender: UIButton) {
         // Pass the selected dates to the delegate.
         delegate?.didSelectDays(calendarView.selectedDates)

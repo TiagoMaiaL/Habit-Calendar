@@ -717,7 +717,11 @@ reminded about your habit?</string>
                         <viewLayoutGuide key="safeArea" id="jIC-fg-zIB"/>
                     </view>
                     <navigationItem key="navigationItem" title="Title" id="2Vo-cB-dmZ">
-                        <barButtonItem key="rightBarButtonItem" systemItem="trash" id="11t-ft-cFW"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="trash" id="11t-ft-cFW">
+                            <connections>
+                                <action selector="deselectDays:" destination="zeZ-9t-rmb" id="adg-L0-oDR"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="calendarView" destination="ge3-Po-cVn" id="cJ7-IJ-lwC"/>
