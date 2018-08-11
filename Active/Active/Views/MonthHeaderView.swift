@@ -13,9 +13,6 @@ import UIKit
 
     // MARK: Properties
 
-    /// The label's color.
-    @IBInspectable var tint: UIColor?
-
     /// The header's previous month button.
     private(set) lazy var previousButton: UIButton = {
         let previousButton = UIButton(type: .custom)
@@ -38,8 +35,9 @@ import UIKit
     private(set) lazy var monthLabel: UILabel = {
         let monthLabel = UILabel()
         monthLabel.textAlignment = .center
-        monthLabel.font = UIFont(name: "SFProText-Regular", size: 18)
+        monthLabel.font = UIFont(name: "SFProText-Regular", size: 20)
         monthLabel.text = "August, 2018"
+        monthLabel.textColor = UIColor(red: 47/255, green: 54/255, blue: 64/255, alpha: 1)
 
         return monthLabel
     }()
@@ -93,8 +91,6 @@ import UIKit
 
     override func layoutSubviews() {
         super.layoutSubviews()
-
-        monthLabel.textColor = tint ?? UIColor(red: 155/255, green: 155/255, blue: 155/255, alpha: 1)
 
         monthStackView.frame = CGRect(x: 0, y: 0, width: frame.size.width, height: frame.size.height)
 

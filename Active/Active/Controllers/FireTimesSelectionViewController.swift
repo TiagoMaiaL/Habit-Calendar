@@ -43,19 +43,13 @@ class FireTimesSelectionViewController: UIViewController {
         }
     }
 
-    /// The habit color used in the cell's and
-    /// button's style.
-    var habitColor: UIColor = UIColor(
-        red: 47/255,
-        green: 54/255,
-        blue: 64/255,
-        alpha: 1
-    ) {
+    /// The controller's theme color.
+    var color = UIColor(red: 47/255, green: 54/255, blue: 64/255, alpha: 1) {
         didSet {
             // Reload the table view to update the selected style.
             tableView.reloadData()
             // Change button's bg color.
-            doneButton.backgroundColor = habitColor
+            doneButton.backgroundColor = color
         }
     }
 
@@ -109,7 +103,7 @@ class FireTimesSelectionViewController: UIViewController {
         )
 
         // Configure the done button's theme color.
-        doneButton.backgroundColor = habitColor
+        doneButton.backgroundColor = color
 
         // Set the initial state of the controller's views.
         updateUI()
@@ -248,7 +242,7 @@ extension FireTimesSelectionViewController: UITableViewDataSource, UITableViewDe
         // If this fire time is among the selected ones,
         // display the selected style in the cell.
         if selectedFireTimes.contains(currentFireTime) {
-            cell.backgroundColor = habitColor
+            cell.backgroundColor = color
             cell.textLabel?.textColor = .white
         } else {
             // Set the cell's style to be the default one.

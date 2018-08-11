@@ -68,6 +68,15 @@ class HabitDaysSelectionViewController: UIViewController {
     /// The delegate in charge of receiving days selected by the user.
     weak var delegate: HabitDaysSelectionViewControllerDelegate?
 
+    /// The controller's theme color.
+    var themeColor = UIColor(red: 47/255, green: 54/255, blue: 64/255, alpha: 1)
+
+    /// Flag indicating if the range selection between two dates should be applied.
+    /// - Note: The range selection normally takes place when an user selects one date and than
+    ///         another later than the first one. This flag controls the usage of this behavior.
+    ///         When pre-selecting dates, this behavior should be disabled.
+    private var shouldApplyRangeSelection = true
+
     // MARK: Life Cycle
 
     override func viewDidLoad() {
@@ -83,8 +92,17 @@ class HabitDaysSelectionViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
+        // Disable the pop gesture recognizer. It might conflict with the calendar's scroll gesture.
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+
+        // Apply the theme color to the controller.
+        doneButton.backgroundColor = themeColor
+        monthTitleLabel.textColor = themeColor
+
         // Display the pre-selected days.
         if let days = preSelectedDays {
+            // Temporarilly disable range selection.
+            shouldApplyRangeSelection = false
             calendarView.selectDates(days)
         }
 
@@ -93,6 +111,21 @@ class HabitDaysSelectionViewController: UIViewController {
 
         // Configure the footer's initial state.
         handleFooter()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+
+        if !shouldApplyRangeSelection {
+            shouldApplyRangeSelection = true
+        }
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        // Re-enable the navigationController's pop gesture recognizer.
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = true
     }
 
     /// The user's first selected date.
@@ -234,7 +267,7 @@ extension HabitDaysSelectionViewController: JTAppleCalendarViewDataSource, JTApp
         cellState: CellState
     ) -> Bool {
         // The user can only select a date in the future.
-        return date.isFuture || date.isInToday
+        return (date.isFuture || date.isInToday) && cellState.dateBelongsTo == .thisMonth
     }
 
     func calendar(
@@ -248,15 +281,17 @@ extension HabitDaysSelectionViewController: JTAppleCalendarViewDataSource, JTApp
             handleAppearanceOfCell(cell, using: cellState)
 
             // Configure the range according to the tap.
-            if let firstDay = firstSelectedDay {
-                calendar.selectDates(
-                    from: firstDay,
-                    to: date,
-                    triggerSelectionDelegate: false,
-                    keepSelectionIfMultiSelectionAllowed: true
-                )
-            } else {
-                firstSelectedDay = date
+            if shouldApplyRangeSelection {
+                if let firstDay = firstSelectedDay {
+                    calendar.selectDates(
+                        from: firstDay,
+                        to: date,
+                        triggerSelectionDelegate: false,
+                        keepSelectionIfMultiSelectionAllowed: true
+                    )
+                } else {
+                    firstSelectedDay = date
+                }
             }
         }
 
@@ -304,6 +339,13 @@ extension HabitDaysSelectionViewController: JTAppleCalendarViewDataSource, JTApp
             return
         }
 
+        // If the cell is not within the current month, don't display it.
+        if cellState.dateBelongsTo != .thisMonth {
+            cell.dayTitleLabel.text = ""
+            cell.backgroundColor = .clear
+            return
+        }
+
         // Set the cell's date text.
         cell.dayTitleLabel.text = cellState.text
 
@@ -314,24 +356,20 @@ extension HabitDaysSelectionViewController: JTAppleCalendarViewDataSource, JTApp
 
         // Change the cell's background color to match the selection state.
         if cellState.isSelected {
-            cell.backgroundColor = .green
+            cell.backgroundColor = themeColor
+            cell.dayTitleLabel.textColor = .white
         } else {
-            cell.backgroundColor = .white
-
-            switch cellState.dateBelongsTo {
-            case .thisMonth:
-                cell.dayTitleLabel.alpha = 1
-            default:
-                // Not in the month.
-                cell.dayTitleLabel.alpha = 0.5
-            }
-
             if cellState.date.isInToday {
-                cell.backgroundColor = .purple
+                cell.dayTitleLabel.textColor = .black
+                cell.backgroundColor = UIColor.black.withAlphaComponent(0.05)
+                return
             } else if cellState.date.isPast {
-                cell.backgroundColor = .gray
-                cell.alpha = 0.2
+                cell.dayTitleLabel.textColor = UIColor(red: 218/255, green: 218/255, blue: 218/255, alpha: 1)
+            } else {
+                cell.dayTitleLabel.textColor = UIColor(red: 74/255, green: 74/255, blue: 74/255, alpha: 1)
             }
+
+            cell.backgroundColor = .white
         }
     }
 }
