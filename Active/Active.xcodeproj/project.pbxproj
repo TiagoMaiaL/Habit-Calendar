@@ -70,6 +70,8 @@
 		4761DFD320DE692A003F772A /* UNUserNotificationCenterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4761DFD220DE692A003F772A /* UNUserNotificationCenterMock.swift */; };
 		4761F5B021209EED00A8D407 /* CalendarDayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4761F5AF21209EED00A8D407 /* CalendarDayCell.swift */; };
 		4761F5B32120A0F700A8D407 /* ColorsPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4761F5B22120A0F700A8D407 /* ColorsPickerView.swift */; };
+		4761F5B52120D06900A8D407 /* ColorsPickerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4761F5B42120D06900A8D407 /* ColorsPickerDataSource.swift */; };
+		4761F5B72120D7F900A8D407 /* ColorOptionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4761F5B62120D7F900A8D407 /* ColorOptionCollectionViewCell.swift */; };
 		4779588020D8ADA90080614F /* NotificationStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4779587F20D8ADA90080614F /* NotificationStorageTests.swift */; };
 		4779588320D8B2E10080614F /* UserNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4779588220D8B2E10080614F /* UserNotificationManager.swift */; };
 		4779588520D8B38B0080614F /* NotificationStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4779588420D8B38B0080614F /* NotificationStorage.swift */; };
@@ -191,6 +193,8 @@
 		4761DFD520DEEAA7003F772A /* UserFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFactory.swift; sourceTree = "<group>"; };
 		4761F5AF21209EED00A8D407 /* CalendarDayCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarDayCell.swift; sourceTree = "<group>"; };
 		4761F5B22120A0F700A8D407 /* ColorsPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsPickerView.swift; sourceTree = "<group>"; };
+		4761F5B42120D06900A8D407 /* ColorsPickerDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsPickerDataSource.swift; sourceTree = "<group>"; };
+		4761F5B62120D7F900A8D407 /* ColorOptionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorOptionCollectionViewCell.swift; sourceTree = "<group>"; };
 		4779587F20D8ADA90080614F /* NotificationStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationStorageTests.swift; sourceTree = "<group>"; };
 		4779588220D8B2E10080614F /* UserNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationManager.swift; sourceTree = "<group>"; };
 		4779588420D8B38B0080614F /* NotificationStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationStorage.swift; sourceTree = "<group>"; };
@@ -465,6 +469,8 @@
 			isa = PBXGroup;
 			children = (
 				4761F5B22120A0F700A8D407 /* ColorsPickerView.swift */,
+				4761F5B42120D06900A8D407 /* ColorsPickerDataSource.swift */,
+				4761F5B62120D7F900A8D407 /* ColorOptionCollectionViewCell.swift */,
 			);
 			path = ColorsPickerView;
 			sourceTree = "<group>";
@@ -764,6 +770,7 @@
 				47E6C21120EB129C003BDB4D /* DummyFactory.swift in Sources */,
 				470230D820E5250A003A1F6E /* Int+Utils.swift in Sources */,
 				4732CE83211CB89F00E2770C /* MonthHeaderView.swift in Sources */,
+				4761F5B72120D7F900A8D407 /* ColorOptionCollectionViewCell.swift in Sources */,
 				4732CE81211C93B500E2770C /* DaysHeaderView.swift in Sources */,
 				47F635F020BB920900AC4555 /* AppDelegate.swift in Sources */,
 				4737312D20ED503B00895DD2 /* FireTimesSelectionViewController.swift in Sources */,
@@ -776,6 +783,7 @@
 				4713A20420C16542008A13D2 /* NotificationMO.swift in Sources */,
 				4761F5B021209EED00A8D407 /* CalendarDayCell.swift in Sources */,
 				47AA365B2104D5E60008D2DC /* FireTimeFactory.swift in Sources */,
+				4761F5B52120D06900A8D407 /* ColorsPickerDataSource.swift in Sources */,
 				4725D06120CA06EE00C3B63F /* DayStorage.swift in Sources */,
 				4732CE7E211A12B500E2770C /* RoundedButton.swift in Sources */,
 				4725D05F20C97D9C00C3B63F /* UserStorage.swift in Sources */,
