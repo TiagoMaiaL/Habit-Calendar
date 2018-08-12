@@ -353,7 +353,6 @@ extension HabitDaysSelectionViewController: JTAppleCalendarViewDataSource, JTApp
         // 1. selection
         // 2. date is in the past or present.
         // 3. is the date in the current day or not.
-
         // Change the cell's background color to match the selection state.
         if cellState.isSelected {
             cell.backgroundColor = themeColor
