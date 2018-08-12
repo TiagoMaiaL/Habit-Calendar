@@ -13,11 +13,17 @@ import UIKit
 
     // MARK: Parameters
 
+    /// The number of colors to be displayed in the IB.
+    /// - Note: This code shouldn't be invoked, it's meant only for the
+    ///         interaction with storyboards.
+    @IBInspectable var colorNumber: Int = 0
+
     /// The collection view's flow layout object.
     private(set) lazy var flowLayout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 0
+
 
         return layout
     }()
@@ -41,6 +47,15 @@ import UIKit
     /// The collection view's delegate and data source in charge of displayin the
     /// color options.
     let colorPickerDataSource = ColorPickerViewDataSource()
+
+    var colorsToDisplay = [UIColor]() {
+        didSet {
+            // Pass the colors to the data source.
+            colorPickerDataSource.colors = colorsToDisplay
+            // Display each one of them.
+            collectionView.reloadData()
+        }
+    }
 
     // MARK: Initializers
 
@@ -68,8 +83,6 @@ import UIKit
             forCellWithReuseIdentifier: ColorPickerViewDataSource.cellId
         )
         // Configure the data source and delegate of the collection view.
-        // TODO: Put the right colors to be displayed.
-        colorPickerDataSource.colorOptions = [UIColor.black]
         collectionView.delegate = colorPickerDataSource
         collectionView.dataSource = colorPickerDataSource
     }
@@ -78,7 +91,13 @@ import UIKit
 
     override func prepareForInterfaceBuilder() {
         super.prepareForInterfaceBuilder()
-        collectionView.reloadData()
+
+        // If the number of colors was set, generated the random colors.
+        if colorNumber > 0 {
+            colorPickerDataSource.colors = makeRandomColors(number: colorNumber)
+            collectionView.reloadData()
+        }
+
         setNeedsLayout()
     }
 
@@ -91,4 +110,25 @@ import UIKit
         collectionView.frame = CGRect(x: 0, y: 0, width: frame.size.width, height: frame.size.height)
     }
 
+    // MARK: Imperatives
+
+    /// Generates an array of random colors.
+    /// - Parameter number: The number of random colors to be generated.
+    /// - Returns: The generated colors.
+    private func makeRandomColors(number: Int) -> [UIColor] {
+        assert(number > 0, "The number of colors to be generated should be greated than one.")
+
+        return (0...number).map { _ in
+            /// Generates a random amount of color.
+            func makeRandomColorAmount() -> CGFloat {
+                return CGFloat(Int.random(0..<256)) / 255
+            }
+            return UIColor(
+                red: makeRandomColorAmount(),
+                green: makeRandomColorAmount(),
+                blue: makeRandomColorAmount(),
+                alpha: 1
+            )
+        }
+    }
 }

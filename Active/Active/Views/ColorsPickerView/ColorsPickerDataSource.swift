@@ -20,7 +20,7 @@ extension ColorsPickerView {
         static let cellId = "color_option_cell"
 
         /// The colors to be displayed.
-        var colorOptions = [UIColor]()
+        var colors = [UIColor]()
 
         // MARK: CollectionView DataSource methods
 
@@ -28,7 +28,7 @@ extension ColorsPickerView {
             _ collectionView: UICollectionView,
             numberOfItemsInSection section: Int
         ) -> Int {
-            return colorOptions.count
+            return colors.count
         }
 
         func collectionView(
@@ -44,7 +44,7 @@ extension ColorsPickerView {
             }
 
             // Configure the cell's color option.
-            cell.optionColor = colorOptions[indexPath.item]
+            cell.optionColor = colors[indexPath.item]
 
             return cell
         }
