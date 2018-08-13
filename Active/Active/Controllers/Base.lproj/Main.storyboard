@@ -477,6 +477,7 @@ reminded about your habit?</string>
                     </tableView>
                     <size key="freeformSize" width="375" height="800"/>
                     <connections>
+                        <outlet property="colorPicker" destination="41k-RE-w2b" id="aSy-Ak-Arq"/>
                         <outlet property="daysAmountLabel" destination="GyR-VK-GCC" id="aqR-Rj-RRo"/>
                         <outlet property="doneButton" destination="D90-7S-rS4" id="hFv-tY-Ca2"/>
                         <outlet property="fireTimesAmountLabel" destination="OSf-bA-IA0" id="IfS-J8-2BV"/>

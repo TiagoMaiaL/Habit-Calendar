@@ -44,6 +44,9 @@ class HabitCreationTableViewController: UITableViewController,
     /// The label displaying the of fire time times selected.
     @IBOutlet weak var selectedFireTimesLabel: UILabel!
 
+    /// The color's field color picker view.
+    @IBOutlet weak var colorPicker: ColorsPickerView!
+    
     /// The container in which the habit is going to be persisted.
     var container: NSPersistentContainer!
 
@@ -100,6 +103,8 @@ class HabitCreationTableViewController: UITableViewController,
         )
         // Create a toolbar and add it as the field's accessory view.
         nameTextField.inputAccessoryView = makeToolbar()
+
+        configureColorPicker()
 
         // Display the initial text of the days labels.
         configureDaysLabels()
@@ -207,6 +212,14 @@ class HabitCreationTableViewController: UITableViewController,
     private func configureCreationButton() {
         // Check if the name and days are correctly set.
         doneButton.isEnabled = !(name ?? "").isEmpty && !(days ?? []).isEmpty
+    }
+
+    /// Configures the colors to be diplayed by the color picker view.
+    private func configureColorPicker() {
+        // Get the possible colors to be displayed.
+        let possibleColors = Array(HabitMO.Color.colors.values)
+        // Pass the to the picker.
+        colorPicker.colorsToDisplay = possibleColors
     }
 
     /// Configures the text being displayed by each label within the days
@@ -331,7 +344,7 @@ extension HabitMO.Color {
     }
 
     /// The UIColors associated with each enum constant.
-    private static let colors = [
+    static let colors = [
         midnightBlue: UIColor(red: 52/255, green: 73/255, blue: 94/255, alpha: 1),
         amethyst: UIColor(red: 155/255, green: 89/255, blue: 182/255, alpha: 1),
         pomegranate: UIColor(red: 192/255, green: 57/255, blue: 43/255, alpha: 1),
