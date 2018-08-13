@@ -11,6 +11,7 @@ import UIKit
 /// Adds the code necessary for the ColorPickerView to display each color option.
 extension ColorsPickerView {
 
+    /// The picker's delegate and datasource in charge of handling the color picker.
     class ColorPickerViewDataSource: NSObject, UICollectionViewDelegate,
         UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
@@ -18,6 +19,12 @@ extension ColorsPickerView {
 
         /// The color cell's reuse identifier.
         static let cellId = "color_option_cell"
+
+        /// How many items are to be displayed by a single row.
+        var itemsPerRow = 5
+
+        /// The expected height to display all picker's colors.
+        private(set) var expectedHeight = 0
 
         /// The colors to be displayed.
         var colors = [UIColor]()
@@ -47,16 +54,6 @@ extension ColorsPickerView {
             cell.optionColor = colors[indexPath.item]
 
             return cell
-        }
-
-        // MARK: CollectionView Layout Delegate methods
-
-        func collectionView(
-            _ collectionView: UICollectionView,
-            layout collectionViewLayout: UICollectionViewLayout,
-            sizeForItemAt indexPath: IndexPath
-        ) -> CGSize {
-            return CGSize(width: 30, height: 30)
         }
     }
 }

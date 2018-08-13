@@ -21,9 +21,8 @@ import UIKit
     /// The collection view's flow layout object.
     private(set) lazy var flowLayout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
-        layout.minimumLineSpacing = 0
-        layout.minimumInteritemSpacing = 0
-
+        layout.minimumLineSpacing = 10
+        layout.minimumInteritemSpacing = 10
 
         return layout
     }()
@@ -48,12 +47,29 @@ import UIKit
     /// color options.
     let colorPickerDataSource = ColorPickerViewDataSource()
 
+    /// The colors to be displayed by the picker view.
     var colorsToDisplay = [UIColor]() {
         didSet {
             // Pass the colors to the data source.
             colorPickerDataSource.colors = colorsToDisplay
             // Display each one of them.
             collectionView.reloadData()
+        }
+    }
+
+    /// How many colors per row should be displayed.
+    @IBInspectable var colorsPerRow: Int = 5 {
+        didSet {
+            flowLayout.itemSize = getItemsExpectedSize()
+        }
+    }
+
+    /// The space between each color (both horizontally and vertically).
+    @IBInspectable var spaceBetweenItems: CGFloat = 10 {
+        didSet {
+            flowLayout.minimumInteritemSpacing = spaceBetweenItems
+            flowLayout.minimumLineSpacing = spaceBetweenItems
+            flowLayout.itemSize = getItemsExpectedSize()
         }
     }
 
@@ -105,12 +121,40 @@ import UIKit
         super.layoutSubviews()
 
         if !subviews.contains(collectionView) {
+            // Calculate the size of each item and apply it to the layout.
+            flowLayout.itemSize = getItemsExpectedSize()
             addSubview(collectionView)
         }
         collectionView.frame = CGRect(x: 0, y: 0, width: frame.size.width, height: frame.size.height)
+
+        _ = getExpectedHeight()
     }
 
     // MARK: Imperatives
+
+    /// Calculates the expected height of the color picker.
+    /// - Note: The expected height is enough to display all picker's colors.
+    /// - Returns: The calculated height.
+    func getExpectedHeight() -> CGFloat {
+        // Get how many rows are going to be needed.
+        let rowsCount = ceil(CGFloat(colorsToDisplay.count) / CGFloat(colorsPerRow))
+        // Get the vertical space to be accounted.
+        let verticalSpace = (rowsCount - 1) * flowLayout.minimumLineSpacing
+
+        return (rowsCount * getItemsExpectedSize().height) + verticalSpace
+    }
+
+    /// Computes the expected size of each item, taking into account the expected
+    /// number of items per row.
+    /// - Returns: The calculated size.
+    func getItemsExpectedSize() -> CGSize {
+        // Compute the size based on the picker's width minus the horizontal space
+        // between the items to be displayed.
+        let spaceToBeAccounted: CGFloat = CGFloat(colorsPerRow - 1) * flowLayout.minimumInteritemSpacing
+        let sideLength = (collectionView.frame.size.width - spaceToBeAccounted) / CGFloat(colorsPerRow)
+
+        return CGSize(width: sideLength, height: sideLength)
+    }
 
     /// Generates an array of random colors.
     /// - Parameter number: The number of random colors to be generated.
