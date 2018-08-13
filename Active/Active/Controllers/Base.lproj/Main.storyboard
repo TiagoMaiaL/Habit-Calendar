@@ -665,7 +665,7 @@ reminded about your habit?</string>
                                         <rect key="frame" x="0.0" y="100" width="375" height="383"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="Qht-0H-FBg">
-                                            <size key="itemSize" width="64" height="64"/>
+                                            <size key="itemSize" width="50" height="50"/>
                                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -700,7 +700,6 @@ reminded about your habit?</string>
                                                     <constraint firstItem="4Qq-dg-9vt" firstAttribute="centerX" secondItem="T1l-R3-Y1U" secondAttribute="centerX" id="aZx-6R-iLu"/>
                                                     <constraint firstItem="pyh-MP-QcJ" firstAttribute="leading" secondItem="T1l-R3-Y1U" secondAttribute="leading" id="hcu-38-k6a"/>
                                                 </constraints>
-                                                <size key="customSize" width="50" height="50"/>
                                                 <connections>
                                                     <outlet property="dayTitleLabel" destination="4Qq-dg-9vt" id="uEe-po-3cs"/>
                                                 </connections>
