@@ -64,6 +64,7 @@ class HabitCreationTableViewController: UITableViewController,
     /// The habit's name being informed by the user.
     private var name: String? {
         didSet {
+            // Update the button state.
             configureCreationButton()
         }
     }
@@ -80,6 +81,8 @@ class HabitCreationTableViewController: UITableViewController,
     private var habitColor: HabitMO.Color? {
         didSet {
             displayThemeColor()
+            // Update the button state.
+            configureCreationButton()
         }
     }
 
@@ -87,6 +90,7 @@ class HabitCreationTableViewController: UITableViewController,
     private var days: [Date]? {
         didSet {
             configureDaysLabels()
+            // Update the button state.
             configureCreationButton()
         }
     }
@@ -256,7 +260,7 @@ class HabitCreationTableViewController: UITableViewController,
     /// Enables or disables the button depending on the habit's filled data.
     private func configureCreationButton() {
         // Check if the name and days are correctly set.
-        doneButton.isEnabled = !(name ?? "").isEmpty && !(days ?? []).isEmpty
+        doneButton.isEnabled = !(name ?? "").isEmpty && !(days ?? []).isEmpty && habitColor != nil
     }
 
     /// Configures the colors to be diplayed by the color picker view.
