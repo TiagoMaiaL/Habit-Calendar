@@ -181,6 +181,14 @@ class HabitCreationTableViewController: UITableViewController,
 
     /// Creates the habit.
     @IBAction func storeHabit(_ sender: UIButton) {
+        // Make assertions on the required values to create/update a habit.
+        assert(!(name ?? "").isEmpty, "Error: the habit's name must be a valid value.")
+        assert(habitColor != nil, "Error: the habit's color must be a valid value.")
+        assert(!(days ?? []).isEmpty, "Error: the habit's days must have a valid value.")
+        if fireTimes != nil {
+            assert(fireTimes!.isEmpty == false, "Error: the habit's fireTimes must have a valid value.")
+        }
+
         // If there's no previous habit, create and persist a new one.
         container.performBackgroundTask { context in
             // Retrieve the app's current user before using it.
@@ -196,7 +204,7 @@ class HabitCreationTableViewController: UITableViewController,
                     using: context,
                     user: user,
                     name: self.name!,
-                    color: HabitMO.Color.emerald, // TODO: Use a real enum value.
+                    color: self.habitColor!,
                     days: self.days!,
                     and: self.fireTimes
                 )
