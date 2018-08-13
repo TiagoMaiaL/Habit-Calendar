@@ -68,9 +68,18 @@ class HabitCreationTableViewController: UITableViewController,
         }
     }
 
-    private var color: HabitMO.Color? {
+    /// The color to be used as the theme one in case the user hasn't selected any.
+    private let defaultThemeColor = UIColor(
+        red: 47/255,
+        green: 54/255,
+        blue: 64/255,
+        alpha: 1
+    )
+
+    /// The habit's color selected by the user.
+    private var habitColor: HabitMO.Color? {
         didSet {
-            // TODO:
+            displayThemeColor()
         }
     }
 
@@ -121,15 +130,26 @@ class HabitCreationTableViewController: UITableViewController,
         configureCreationButton()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        // Display the theme color.
+        displayThemeColor()
+    }
+
     // MARK: Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Declare the theme color to be passed to the controllers.
+        let themeColor = self.habitColor?.getColor() ?? defaultThemeColor
+
         switch segue.identifier {
         case daysSelectionSegue:
             // Associate the DaysSelectionController's delegate.
             if let daysController = segue.destination as? HabitDaysSelectionViewController {
                 daysController.delegate = self
                 daysController.preSelectedDays = days
+                daysController.themeColor = themeColor
             } else {
                 assertionFailure("Error: Couldn't get the days selection controller.")
             }
@@ -144,6 +164,7 @@ class HabitCreationTableViewController: UITableViewController,
                 if let fireTimes = fireTimes {
                     notificationsController.selectedFireTimes = Set(fireTimes)
                 }
+                notificationsController.themeColor = themeColor
             } else {
                 assertionFailure("Error: Couldn't get the fire dates selection controller.")
             }
@@ -213,6 +234,25 @@ class HabitCreationTableViewController: UITableViewController,
         name = textField.text
     }
 
+    /// Applies the selected theme color to the controller's fields.
+    private func displayThemeColor() {
+        let themeColor = habitColor?.getColor() ?? defaultThemeColor
+        // Set the theme color of:
+        // the days field.
+        let daysFieldColor = (days?.isEmpty ?? true) ? UIColor.red : themeColor
+        daysAmountLabel.textColor = daysFieldColor
+        fromDayLabel.textColor = daysFieldColor
+        toDayLabel.textColor = daysFieldColor
+
+        // the Notifications field.
+        let notificationsFieldColor = (fireTimes?.isEmpty ?? true) ? UIColor.red : themeColor
+        fireTimesAmountLabel.textColor = notificationsFieldColor
+        selectedFireTimesLabel.textColor = notificationsFieldColor
+
+        // the done button.
+        doneButton.backgroundColor = themeColor
+    }
+
     /// Enables or disables the button depending on the habit's filled data.
     private func configureCreationButton() {
         // Check if the name and days are correctly set.
@@ -222,12 +262,12 @@ class HabitCreationTableViewController: UITableViewController,
     /// Configures the colors to be diplayed by the color picker view.
     private func configureColorPicker() {
         // Set the color change handler.
-        colorPicker.colorChangeHandler = { color in
+        colorPicker.colorChangeHandler = { uiColor in
             // Associate the selected color.
-            // TODO: Change the controller's theme color.
+            self.habitColor = HabitMO.Color.getInstanceFrom(color: uiColor)
         }
         // Get the possible colors to be displayed.
-        let possibleColors = Array(HabitMO.Color.colors.values)
+        let possibleColors = Array(HabitMO.Color.uiColors.values)
         // Pass the to the picker.
         colorPicker.colorsToDisplay = possibleColors
     }
@@ -370,32 +410,4 @@ extension HabitCreationTableViewController {
         // Change the labels to display the selected fire times.
         configureFireTimesLabels()
     }
-}
-
-/// Extension that adds UIColor capabilities to the Color model enum.
-extension HabitMO.Color {
-    /// Gets the UIColor representing the current enum instance.
-    /// - Returns: The UIColor associated with the instance.
-    func getColor() -> UIColor {
-        guard let color = HabitMO.Color.colors[self] else {
-            assertionFailure("Error: the current instance doesn't have a valid color associated with it.")
-            return .black
-        }
-        return color
-    }
-
-    /// The UIColors associated with each enum constant.
-    static let colors = [
-        midnightBlue: UIColor(red: 52/255, green: 73/255, blue: 94/255, alpha: 1),
-        amethyst: UIColor(red: 155/255, green: 89/255, blue: 182/255, alpha: 1),
-        pomegranate: UIColor(red: 192/255, green: 57/255, blue: 43/255, alpha: 1),
-        alizarin: UIColor(red: 231/255, green: 76/255, blue: 60/255, alpha: 1),
-        carrot: UIColor(red: 230/255, green: 126/255, blue: 34/255, alpha: 1),
-        orange: UIColor(red: 243/255, green: 156/255, blue: 18/255, alpha: 1),
-        blue: UIColor(red: 0/255, green: 168/255, blue: 255/255, alpha: 1.0),
-        peterRiver: UIColor(red: 52/255, green: 152/255, blue: 219/255, alpha: 1),
-        belizeRole: UIColor(red: 41/255, green: 128/255, blue: 185/255, alpha: 1),
-        turquoise: UIColor(red: 26/255, green: 188/255, blue: 156/255, alpha: 1),
-        emerald: UIColor(red: 46/255, green: 204/255, blue: 113/255, alpha: 1)
-    ]
 }

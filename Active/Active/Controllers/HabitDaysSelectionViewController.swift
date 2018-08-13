@@ -69,7 +69,7 @@ class HabitDaysSelectionViewController: UIViewController {
     weak var delegate: HabitDaysSelectionViewControllerDelegate?
 
     /// The controller's theme color.
-    var themeColor = UIColor(red: 47/255, green: 54/255, blue: 64/255, alpha: 1)
+    var themeColor: UIColor!
 
     /// Flag indicating if the range selection between two dates should be applied.
     /// - Note: The range selection normally takes place when an user selects one date and than
@@ -81,6 +81,9 @@ class HabitDaysSelectionViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        // Make assertions on the properties to be injected.
+        assert(themeColor != nil, "The controller's theme color should be properly injected.")
 
         // Configure the calendar view.
         calendarView.calendarDelegate = self
