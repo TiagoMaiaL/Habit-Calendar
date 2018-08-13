@@ -23,6 +23,14 @@ extension ColorsPickerView {
         /// The colors to be displayed.
         var colors = [UIColor]()
 
+        /// The color currently selected.
+        var selectedColor: UIColor? {
+            didSet {
+                // TODO: notifiy the view.
+                print("Color now is: \(selectedColor)")
+            }
+        }
+
         // MARK: CollectionView DataSource methods
 
         func collectionView(
@@ -48,6 +56,40 @@ extension ColorsPickerView {
             cell.optionColor = colors[indexPath.item]
 
             return cell
+        }
+
+        func collectionView(
+            _ collectionView: UICollectionView,
+            didSelectItemAt indexPath: IndexPath
+        ) {
+            /// Tries to get the color cell at the specified indexPath.
+            /// - Returns: The ColorOptionCollectionViewCell at the provided indexPath, if found.
+            func getCellAtIndexPath(
+                _ indexPath: IndexPath
+            ) -> ColorOptionCollectionViewCell? {
+                return collectionView.cellForItem(at: indexPath) as? ColorOptionCollectionViewCell
+            }
+
+            // Deselect the current color cell.
+            if let selectedColor = selectedColor {
+                // Try to get the index of the current selected cell.
+                if let index = colors.index(of: selectedColor),
+                    let selectedCell = getCellAtIndexPath(IndexPath(item: index, section: 0)) {
+                    selectedCell.animateDeselection()
+                } else {
+                    assertionFailure("Error: couldn't get the currently selected cell.")
+                }
+            }
+
+            // Select the new color.
+            selectedColor = colors[indexPath.item]
+
+            // Make it appear as the selected one.
+            if let cellToSelect = getCellAtIndexPath(indexPath) {
+                cellToSelect.animateSelection()
+            } else {
+                assertionFailure("Error: couldn't get the color selection cell.")
+            }
         }
     }
 }

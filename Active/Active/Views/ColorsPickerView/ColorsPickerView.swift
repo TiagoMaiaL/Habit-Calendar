@@ -39,6 +39,7 @@ import UIKit
             collectionViewLayout: flowLayout
         )
         collectionView.backgroundColor = .white
+        collectionView.clipsToBounds = false
 
         return collectionView
     }()
@@ -172,7 +173,7 @@ import UIKit
     /// - Parameter number: The number of random colors to be generated.
     /// - Returns: The generated colors.
     private func makeRandomColors(number: Int) -> [UIColor] {
-        assert(number > 0, "The number of colors to be generated should be greated than one.")
+        assert(number > 0, "The number of colors to be generated should at least be greater than one.")
 
         return (0...number).map { _ in
             /// Generates a random amount of color.
