@@ -38,7 +38,7 @@ import UIKit
             ),
             collectionViewLayout: flowLayout
         )
-        collectionView.backgroundColor = .blue
+        collectionView.backgroundColor = .white
 
         return collectionView
     }()
@@ -73,6 +73,11 @@ import UIKit
         }
     }
 
+    /// The content size taking into account the colors, margins, and the view's widht.
+    override var intrinsicContentSize: CGSize {
+        return CGSize(width: frame.size.width, height: getExpectedHeight())
+    }
+
     // MARK: Initializers
 
     override init(frame: CGRect) {
@@ -101,6 +106,14 @@ import UIKit
         // Configure the data source and delegate of the collection view.
         collectionView.delegate = colorPickerDataSource
         collectionView.dataSource = colorPickerDataSource
+
+        flowLayout.minimumInteritemSpacing = spaceBetweenItems
+        flowLayout.minimumLineSpacing = spaceBetweenItems
+
+        // If the number of colors was set, generated the random colors.
+        if colorNumber > 0 {
+            colorPickerDataSource.colors = makeRandomColors(number: colorNumber)
+        }
     }
 
     // MARK: Life Cycle
@@ -108,13 +121,10 @@ import UIKit
     override func prepareForInterfaceBuilder() {
         super.prepareForInterfaceBuilder()
 
-        // If the number of colors was set, generated the random colors.
-        if colorNumber > 0 {
-            colorPickerDataSource.colors = makeRandomColors(number: colorNumber)
-            collectionView.reloadData()
-        }
+        setup()
 
         setNeedsLayout()
+        setNeedsDisplay()
     }
 
     override func layoutSubviews() {
@@ -122,12 +132,14 @@ import UIKit
 
         if !subviews.contains(collectionView) {
             // Calculate the size of each item and apply it to the layout.
-            flowLayout.itemSize = getItemsExpectedSize()
             addSubview(collectionView)
         }
+
+        // The collectionView should occupy the whole view.
         collectionView.frame = CGRect(x: 0, y: 0, width: frame.size.width, height: frame.size.height)
 
-        _ = getExpectedHeight()
+        // Get the item size based on the previously setted collection's frame.
+        flowLayout.itemSize = getItemsExpectedSize()
     }
 
     // MARK: Imperatives
@@ -138,10 +150,10 @@ import UIKit
     func getExpectedHeight() -> CGFloat {
         // Get how many rows are going to be needed.
         let rowsCount = ceil(CGFloat(colorsToDisplay.count) / CGFloat(colorsPerRow))
-        // Get the vertical space to be accounted.
-        let verticalSpace = (rowsCount - 1) * flowLayout.minimumLineSpacing
+        // Get the vertical margins to be accounted.
+        let verticalMargins = (rowsCount - 1) * flowLayout.minimumLineSpacing
 
-        return (rowsCount * getItemsExpectedSize().height) + verticalSpace
+        return (rowsCount * getItemsExpectedSize().height) + verticalMargins
     }
 
     /// Computes the expected size of each item, taking into account the expected

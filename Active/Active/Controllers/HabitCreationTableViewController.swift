@@ -46,7 +46,7 @@ class HabitCreationTableViewController: UITableViewController,
 
     /// The color's field color picker view.
     @IBOutlet weak var colorPicker: ColorsPickerView!
-    
+
     /// The container in which the habit is going to be persisted.
     var container: NSPersistentContainer!
 
@@ -309,6 +309,39 @@ class HabitCreationTableViewController: UITableViewController,
 
 extension HabitCreationTableViewController {
 
+    // MARK: types
+
+    /// The fields used for creating a new habit.
+    private enum Field: Int {
+        case name = 0,
+            color,
+            days,
+            fireTimes
+    }
+
+    // MARK: TableView delegate methods
+
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if let field = Field(rawValue: indexPath.row) {
+            switch field {
+            case .name:
+                return 110
+            case .color:
+                // Compute the expected height for the color picker field.
+                return (10 * 2) + 40 + 10 + colorPicker.getExpectedHeight()
+            case .days:
+                return 160
+            case .fireTimes:
+                return 172
+            }
+        } else {
+            return 0
+        }
+    }
+}
+
+extension HabitCreationTableViewController {
+
     // MARK: HabitDaysSelectionViewController Delegate Methods
 
     func didSelectDays(_ daysDates: [Date]) {
@@ -332,7 +365,6 @@ extension HabitCreationTableViewController {
 
 /// Extension that adds UIColor capabilities to the Color model enum.
 extension HabitMO.Color {
-
     /// Gets the UIColor representing the current enum instance.
     /// - Returns: The UIColor associated with the instance.
     func getColor() -> UIColor {

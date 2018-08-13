@@ -20,12 +20,6 @@ extension ColorsPickerView {
         /// The color cell's reuse identifier.
         static let cellId = "color_option_cell"
 
-        /// How many items are to be displayed by a single row.
-        var itemsPerRow = 5
-
-        /// The expected height to display all picker's colors.
-        private(set) var expectedHeight = 0
-
         /// The colors to be displayed.
         var colors = [UIColor]()
 
