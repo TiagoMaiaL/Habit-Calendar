@@ -44,9 +44,19 @@ import UIKit
         return collectionView
     }()
 
+    /// The closure called when a color is selected.
+    var colorChangeHandler: ((UIColor) -> Void)?
+
     /// The collection view's delegate and data source in charge of displayin the
     /// color options.
-    let colorPickerDataSource = ColorPickerViewDataSource()
+    lazy var colorPickerDataSource: ColorPickerViewDataSource = {
+        let dataSource = ColorPickerViewDataSource()
+        dataSource.colorSelectionHandler = {
+            self.colorChangeHandler?($0)
+        }
+
+        return dataSource
+    }()
 
     /// The colors to be displayed by the picker view.
     var colorsToDisplay = [UIColor]() {

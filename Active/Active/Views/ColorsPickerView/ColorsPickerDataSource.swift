@@ -26,10 +26,15 @@ extension ColorsPickerView {
         /// The color currently selected.
         var selectedColor: UIColor? {
             didSet {
-                // TODO: notifiy the view.
-                print("Color now is: \(selectedColor)")
+                // Inform what's the selected color now.
+                if let color = selectedColor {
+                    colorSelectionHandler?(color)
+                }
             }
         }
+
+        /// The closure used to inform the selected color.
+        var colorSelectionHandler: ((UIColor) -> Void)?
 
         // MARK: CollectionView DataSource methods
 

@@ -68,8 +68,13 @@ class HabitCreationTableViewController: UITableViewController,
         }
     }
 
+    private var color: HabitMO.Color? {
+        didSet {
+            // TODO:
+        }
+    }
+
     /// The habit's days the user has selected.
-    // For now only one day is going to be added.
     private var days: [Date]? {
         didSet {
             configureDaysLabels()
@@ -77,8 +82,8 @@ class HabitCreationTableViewController: UITableViewController,
         }
     }
 
-    /// The habit's notification times the user has chosen.
-    private var selectedNotificationFireTimes: [FireTimesSelectionViewController.FireTime]?
+    /// The habit's notification fire times the user has selected.
+    private var fireTimes: [FireTimesSelectionViewController.FireTime]?
 
     // TODO: Show a cell indicating the user hasn't enabled local notifications.
 
@@ -136,7 +141,7 @@ class HabitCreationTableViewController: UITableViewController,
                 notificationsController.notificationManager = UserNotificationManager(
                     notificationCenter: UNUserNotificationCenter.current()
                 )
-                if let fireTimes = selectedNotificationFireTimes {
+                if let fireTimes = fireTimes {
                     notificationsController.selectedFireTimes = Set(fireTimes)
                 }
             } else {
@@ -168,7 +173,7 @@ class HabitCreationTableViewController: UITableViewController,
                     name: self.name!,
                     color: HabitMO.Color.emerald, // TODO: Use a real enum value.
                     days: self.days!,
-                    and: self.selectedNotificationFireTimes
+                    and: self.fireTimes
                 )
             } else {
                 // If there's a previous habit, update it with the new values.
@@ -177,7 +182,7 @@ class HabitCreationTableViewController: UITableViewController,
                     using: context,
                     name: self.name,
                     days: self.days,
-                    and: self.selectedNotificationFireTimes
+                    and: self.fireTimes
                 )
             }
 
@@ -216,6 +221,11 @@ class HabitCreationTableViewController: UITableViewController,
 
     /// Configures the colors to be diplayed by the color picker view.
     private func configureColorPicker() {
+        // Set the color change handler.
+        colorPicker.colorChangeHandler = { color in
+            // Associate the selected color.
+            // TODO: Change the controller's theme color.
+        }
         // Get the possible colors to be displayed.
         let possibleColors = Array(HabitMO.Color.colors.values)
         // Pass the to the picker.
@@ -250,7 +260,7 @@ class HabitCreationTableViewController: UITableViewController,
     /// Configures the text being displayed by each label within
     /// the notifications field.
     private func configureFireTimesLabels() {
-        if let fireTimes = selectedNotificationFireTimes, !fireTimes.isEmpty {
+        if let fireTimes = fireTimes, !fireTimes.isEmpty {
             // Set the text for the label displaying the amount of fire times.
             fireTimesAmountLabel.text = "\(fireTimes.count) fire time\(fireTimes.count == 1 ? "" : "s") selected."
 
@@ -355,9 +365,8 @@ extension HabitCreationTableViewController {
     // MARK: HabitNotificationsSelectionViewControllerDelegate Delegate Methods
 
     func didSelectFireTimes(_ fireTimes: [FireTimesSelectionViewController.FireTime]) {
-        // Associate the habit's fire dates with the fireDates selected by
-        // the user.
-        selectedNotificationFireTimes = fireTimes
+        // Associate the selected fire times.
+        self.fireTimes = fireTimes
         // Change the labels to display the selected fire times.
         configureFireTimesLabels()
     }
