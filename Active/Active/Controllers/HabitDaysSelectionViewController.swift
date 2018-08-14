@@ -298,7 +298,7 @@ extension HabitDaysSelectionViewController: JTAppleCalendarViewDataSource, JTApp
             }
         }
 
-        // Handle the done button's state.
+        // Configure footer according to the current selection.
         handleFooter()
     }
 
@@ -313,7 +313,7 @@ extension HabitDaysSelectionViewController: JTAppleCalendarViewDataSource, JTApp
             handleAppearanceOfCell(cell, using: cellState)
         }
 
-        // Handle the done button's state.
+        // Configure footer according to the current selection.
         handleFooter()
     }
 
