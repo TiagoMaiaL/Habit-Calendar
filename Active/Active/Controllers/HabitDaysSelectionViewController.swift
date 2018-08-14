@@ -286,12 +286,20 @@ extension HabitDaysSelectionViewController: JTAppleCalendarViewDataSource, JTApp
             // Configure the range according to the tap.
             if shouldApplyRangeSelection {
                 if let firstDay = firstSelectedDay {
-                    calendar.selectDates(
-                        from: firstDay,
-                        to: date,
-                        triggerSelectionDelegate: false,
-                        keepSelectionIfMultiSelectionAllowed: true
-                    )
+                    // If the date is lesser than the first selected date, make it the new start of the range.
+                    if date.compare(firstDay) == .orderedAscending {
+                        firstSelectedDay = date
+                    } else {
+                        // If not, continue with the range selection.
+                        calendar.selectDates(
+                            from: firstDay,
+                            to: date,
+                            triggerSelectionDelegate: false,
+                            keepSelectionIfMultiSelectionAllowed: true
+                        )
+                        // Begin a new range selection by removing the first selected day.
+                        firstSelectedDay = nil
+                    }
                 } else {
                     firstSelectedDay = date
                 }
