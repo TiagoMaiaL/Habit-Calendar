@@ -390,7 +390,11 @@ extension HabitCreationTableViewController {
                 return 110
             case .color:
                 // Compute the expected height for the color picker field.
-                return (10 * 2) + 40 + 10 + colorPicker.getExpectedHeight()
+                let marginsValue: CGFloat = 20
+                let titleExpectedHeight: CGFloat = 40
+                let stackVerticalSpace: CGFloat = 10
+
+                return marginsValue + titleExpectedHeight + stackVerticalSpace + colorPicker.getExpectedHeight()
             case .days:
                 return 160
             case .fireTimes:

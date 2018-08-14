@@ -121,7 +121,9 @@ import UIKit
         flowLayout.minimumInteritemSpacing = spaceBetweenItems
         flowLayout.minimumLineSpacing = spaceBetweenItems
 
-        // If the number of colors was set, generated the random colors.
+        // If the number of colors was set, it means that the view
+        // is being displayed by the storyboard, so random
+        // colors should be generated for display.
         if colorNumber > 0 {
             colorPickerDataSource.colors = makeRandomColors(number: colorNumber)
         }
