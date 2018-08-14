@@ -292,6 +292,8 @@ extension HabitDaysSelectionViewController: JTAppleCalendarViewDataSource, JTApp
                         triggerSelectionDelegate: false,
                         keepSelectionIfMultiSelectionAllowed: true
                     )
+                    // Begin a new range selection by removing the first selected day.
+                    firstSelectedDay = nil
                 } else {
                     firstSelectedDay = date
                 }
