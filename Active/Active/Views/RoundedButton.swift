@@ -17,7 +17,7 @@ import UIKit
         didSet {
             // Set the button's alpha to show if it's enabled or not.
             UIViewPropertyAnimator(duration: 0.5, curve: .easeOut) {
-                self.alpha = (self.isEnabled ? 1 : 0.5)
+                self.alpha = (self.isEnabled ? 1 : 0.3)
             }.startAnimation()
         }
     }

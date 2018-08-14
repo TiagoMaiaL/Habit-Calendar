@@ -36,7 +36,7 @@ import QuartzCore
     /// The card's shadow's opacity.
     @IBInspectable public var shadowOpacity: Float = 0.5
 
-    // MARK: Initializer
+    // MARK: InitializerC
 
     override init(frame: CGRect) {
         super.init(frame: frame)

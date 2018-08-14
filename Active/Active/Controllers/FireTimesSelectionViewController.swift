@@ -39,27 +39,17 @@ class FireTimesSelectionViewController: UIViewController {
     var selectedFireTimes = Set<FireTime>() {
         didSet {
             guard doneButton != nil, fireTimesAmountLabel != nil else { return }
-            // Enable/disable the button according to the selection.
-            handleDoneButton()
-            // Update the views showing the amount of fire times
-            // selected so far.
-            displayFireTimesAmount()
+            updateUI()
         }
     }
 
-    /// The habit color used in the cell's and
-    /// button's style.
-    var habitColor: UIColor = UIColor(
-        red: 47/255,
-        green: 54/255,
-        blue: 64/255,
-        alpha: 1
-    ) {
+    /// The controller's theme color.
+    var themeColor: UIColor! {
         didSet {
             // Reload the table view to update the selected style.
-            tableView.reloadData()
+            tableView?.reloadData()
             // Change button's bg color.
-            doneButton.backgroundColor = habitColor
+            doneButton?.backgroundColor = themeColor
         }
     }
 
@@ -92,6 +82,10 @@ class FireTimesSelectionViewController: UIViewController {
             notificationManager != nil,
             "Failed to inject the notification manager."
         )
+        assert(
+            themeColor != nil,
+            "The controller's theme color should be properly injected."
+        )
 
         // TODO: Put the observation events in the habit creation controller.
         // Start observing the app's active state event. This is made
@@ -112,9 +106,11 @@ class FireTimesSelectionViewController: UIViewController {
             right: 0
         )
 
-        // Configure the done button's initial state.
-        doneButton.isEnabled = false
-        doneButton.backgroundColor = habitColor
+        // Configure the done button's theme color.
+        doneButton.backgroundColor = themeColor
+
+        // Set the initial state of the controller's views.
+        updateUI()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -154,6 +150,12 @@ class FireTimesSelectionViewController: UIViewController {
         fireTimesAmountLabel?.text = """
         \(selectedFireTimes.count) selected fire time\(selectedFireTimes.count == 1 ? "" : "s")
         """
+    }
+
+    /// Updates the UI components according to the selection of fire times.
+    private func updateUI() {
+        displayFireTimesAmount()
+        handleDoneButton()
     }
 
     /// Update the views according to the User's authorization.
@@ -244,7 +246,7 @@ extension FireTimesSelectionViewController: UITableViewDataSource, UITableViewDe
         // If this fire time is among the selected ones,
         // display the selected style in the cell.
         if selectedFireTimes.contains(currentFireTime) {
-            cell.backgroundColor = habitColor
+            cell.backgroundColor = themeColor
             cell.textLabel?.textColor = .white
         } else {
             // Set the cell's style to be the default one.
