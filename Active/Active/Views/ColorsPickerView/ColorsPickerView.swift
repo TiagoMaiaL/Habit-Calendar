@@ -131,11 +131,7 @@ import UIKit
 
     override func prepareForInterfaceBuilder() {
         super.prepareForInterfaceBuilder()
-
         setup()
-
-        setNeedsLayout()
-        setNeedsDisplay()
     }
 
     override func layoutSubviews() {
