@@ -65,29 +65,23 @@
                                                     <rect key="frame" x="16" y="16" width="291" height="76"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Play guitar" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bjx-cs-62X">
-                                                            <rect key="frame" x="0.0" y="0.0" width="109" height="28"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="109" height="30"/>
                                                             <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="25"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="XUX-gI-rlJ">
-                                                            <rect key="frame" x="0.0" y="38" width="291" height="38"/>
+                                                            <rect key="frame" x="0.0" y="40" width="291" height="36"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="07 / 89 days" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hH7-d5-qyV">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="80.5" height="18"/>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="height" constant="18" id="2OC-yd-NQl"/>
-                                                                    </constraints>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="80.5" height="17"/>
                                                                     <fontDescription key="fontDescription" name="SFProText-Light" family="SF Pro Text" pointSize="14"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kQL-n5-UO9" userLabel="Progress view" customClass="ProgressView" customModule="Active" customModuleProvider="target">
-                                                                    <rect key="frame" x="0.0" y="26" width="291" height="12"/>
+                                                                    <rect key="frame" x="0.0" y="25" width="291" height="11"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="height" constant="12" id="Cty-pg-OVJ"/>
-                                                                    </constraints>
                                                                     <userDefinedRuntimeAttributes>
                                                                         <userDefinedRuntimeAttribute type="color" keyPath="tint">
                                                                             <color key="value" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>

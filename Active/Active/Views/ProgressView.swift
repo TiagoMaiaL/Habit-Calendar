@@ -38,6 +38,15 @@ import UIKit
         )
     }
 
+    override var intrinsicContentSize: CGSize {
+        // The minimum view's height is 10 points.
+        var minimumHeight = frame.size.height
+        if minimumHeight < 10 {
+            minimumHeight = 10
+        }
+        return CGSize(width: frame.size.width, height: minimumHeight)
+    }
+
     // MARK: Life cycle
 
     override func draw(_ rect: CGRect) {
