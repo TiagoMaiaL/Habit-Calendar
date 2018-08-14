@@ -151,11 +151,12 @@ class DateUtilsTests: XCTestCase {
             ) ?? Date()
         )
 
-        // Get a new date by adding the years.
+        // Get a new date by adding the months.
         let sevenMonthsLater = beginningOfYear?.byAddingMonths(7)
 
         // Compare the dates' day component.
         XCTAssertNotNil(sevenMonthsLater)
+        XCTAssertEqual(beginningOfYear?.components.year, sevenMonthsLater?.components.year)
         XCTAssertEqual(beginningOfYear?.components.day, sevenMonthsLater?.components.day)
 
         // Compare the components to check if the months were properly added.
