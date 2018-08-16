@@ -137,6 +137,26 @@ class DaysChallengeMO: NSManagedObject {
         return (getExecutedDays()?.count ?? 0, days?.count ?? 0)
     }
 
+    /// Closes the challenge.
+    /// - Note: Closing a challenge means that the challenge is no longer
+    ///         active and its future days are deleted, its toDate is also set to today.
+    func close() {
+        guard let context = managedObjectContext else { return }
+
+        // Remove its future days.
+        if let futureDays = getFutureDays() {
+            removeFromDays(futureDays as NSSet)
+            habit?.removeFromDays(futureDays as NSSet)
+
+            for day in futureDays {
+                context.delete(day)
+            }
+        }
+
+        // Change its toDate to today.
+        toDate = Date().getBeginningOfDay()
+    }
+
     /// Creates a new offensive entity and adds it to the current
     /// challenge instance.
     private func makeOffensive() {

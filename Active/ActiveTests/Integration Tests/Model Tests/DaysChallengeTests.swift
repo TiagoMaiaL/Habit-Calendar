@@ -373,6 +373,34 @@ class DaysChallengeTests: IntegrationTestCase {
         )
     }
 
+    func testClosingChallenge() {
+        // Declare a dummy challenge.
+        let dummyChallenge = daysChallengeFactory.makeDummy()
+
+        // Get its total number of days.
+        guard let daysNumber = dummyChallenge.days?.count else {
+            XCTFail("Couldn't get the number of days from the dummy challenge entity.")
+            return
+        }
+        // Get its number of future days.
+        guard let futureDaysNumber = dummyChallenge.getFutureDays()?.count else {
+            XCTFail("Couldn't get the number of future days from the dummy challenge entity.")
+            return
+        }
+
+        // Close it.
+        dummyChallenge.close()
+
+        // Assert its toDate is today (the date the user closed).
+        XCTAssertEqual(dummyChallenge.toDate, Date().getBeginningOfDay(), "The challenge's toDate should be today.")
+        // Assert the future days were properly deleted from the challenge.
+        XCTAssertEqual(
+            dummyChallenge.days?.count,
+            daysNumber - futureDaysNumber,
+            "The future days should be removed from the challenge."
+        )
+    }
+
     // MARK: Imperatives
 
     /// Generates habit days with its dates generated from the passed range.

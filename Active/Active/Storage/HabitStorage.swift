@@ -192,19 +192,8 @@ class HabitStorage {
         }
 
         // Close the current habit's days' challenge:
-        // TODO: Move this code to the model class.
         if let currentChallenge = habit.getCurrentChallenge() {
-            // Remove its future days.
-            for day in habit.getFutureDays() {
-                if day.challenge === currentChallenge {
-                    currentChallenge.removeFromDays(day)
-                }
-                habit.removeFromDays(day)
-                context.delete(day)
-            }
-
-            // Change its toDate to today.
-            currentChallenge.toDate = Date().getBeginningOfDay()
+            currentChallenge.close()
         }
 
         // Add a new challenge.
