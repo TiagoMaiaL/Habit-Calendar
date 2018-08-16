@@ -656,7 +656,7 @@ reminded about this habit?</string>
                                         </constraints>
                                     </view>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ge3-Po-cVn" userLabel="Calendar" customClass="JTAppleCalendarView" customModule="JTAppleCalendar">
-                                        <rect key="frame" x="0.0" y="100" width="375" height="383"/>
+                                        <rect key="frame" x="0.0" y="100" width="375" height="373"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="Qht-0H-FBg">
                                             <size key="itemSize" width="50" height="50"/>
@@ -673,13 +673,13 @@ reminded about this habit?</string>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Qq-dg-9vt">
-                                                            <rect key="frame" x="21" y="119.5" width="8" height="21"/>
+                                                            <rect key="frame" x="21" y="124.5" width="8" height="21"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pyh-MP-QcJ">
-                                                            <rect key="frame" x="0.0" y="259" width="50" height="1"/>
+                                                            <rect key="frame" x="0.0" y="269" width="50" height="1"/>
                                                             <color key="backgroundColor" red="0.92549019607843142" green="0.94117647058823528" blue="0.94509803921568625" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="1" id="sld-ab-REk"/>
@@ -701,29 +701,28 @@ reminded about this habit?</string>
                                         </cells>
                                     </collectionView>
                                     <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rgk-0r-iRX">
-                                        <rect key="frame" x="0.0" y="483" width="375" height="110"/>
+                                        <rect key="frame" x="0.0" y="473" width="375" height="120"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="KeP-ht-BXW" userLabel="Container view">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="110"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aof-B8-KQe" userLabel="Separator">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="1"/>
-                                                    <color key="backgroundColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.84705882349999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="1" id="Ojf-Ge-xBO"/>
-                                                    </constraints>
-                                                </view>
-                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="sLa-Kl-H3k">
-                                                    <rect key="frame" x="118" y="16" width="140" height="78"/>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="sLa-Kl-H3k">
+                                                    <rect key="frame" x="64" y="8.5" width="247" height="103.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 days selected" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oC3-Pu-dRa">
-                                                            <rect key="frame" x="15" y="0.0" width="110.5" height="18"/>
+                                                            <rect key="frame" x="68.5" y="0.0" width="110.5" height="18"/>
                                                             <fontDescription key="fontDescription" name="SFProText-Light" family="SF Pro Text" pointSize="15"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="From: 07/09/2018, to: 09/11/2018" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L7z-qI-NEn" userLabel="Days range label">
+                                                            <rect key="frame" x="0.0" y="26" width="247" height="19.5"/>
+                                                            <fontDescription key="fontDescription" name="SFProText-Light" family="SF Pro Text" pointSize="16"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
                                                         <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cqd-Qf-JuL" userLabel="Done" customClass="RoundedButton" customModule="Active" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="28" width="140" height="50"/>
+                                                            <rect key="frame" x="53.5" y="53.5" width="140" height="50"/>
                                                             <color key="backgroundColor" red="0.0" green="0.6588235294117647" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="140" id="AOZ-6U-NjB"/>
@@ -742,14 +741,11 @@ reminded about this habit?</string>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="sLa-Kl-H3k" firstAttribute="centerY" secondItem="KeP-ht-BXW" secondAttribute="centerY" id="Knc-M6-Bsu"/>
-                                                <constraint firstItem="aof-B8-KQe" firstAttribute="leading" secondItem="KeP-ht-BXW" secondAttribute="leading" id="LBI-Kt-8yE"/>
-                                                <constraint firstAttribute="trailing" secondItem="aof-B8-KQe" secondAttribute="trailing" id="T2w-fv-9SX"/>
                                                 <constraint firstItem="sLa-Kl-H3k" firstAttribute="centerX" secondItem="KeP-ht-BXW" secondAttribute="centerX" id="fgJ-M7-5YT"/>
-                                                <constraint firstItem="aof-B8-KQe" firstAttribute="top" secondItem="KeP-ht-BXW" secondAttribute="top" id="ivL-Yr-XjZ"/>
                                             </constraints>
                                         </view>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="110" id="2GM-0K-x4a"/>
+                                            <constraint firstAttribute="height" constant="120" id="2GM-0K-x4a"/>
                                         </constraints>
                                         <blurEffect style="extraLight"/>
                                     </visualEffectView>
@@ -781,6 +777,7 @@ reminded about this habit?</string>
                         <outlet property="doneButton" destination="Cqd-Qf-JuL" id="8tr-Hk-KmA"/>
                         <outlet property="monthHeaderView" destination="8Mr-IT-1Zj" id="nS9-Vu-4a0"/>
                         <outlet property="selectedDaysNumberLabel" destination="oC3-Pu-dRa" id="6yU-0S-eYr"/>
+                        <outlet property="selectedDaysRangeLabel" destination="L7z-qI-NEn" id="y3g-Oz-Jzc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9zz-Nw-yjM" userLabel="First Responder" sceneMemberID="firstResponder"/>

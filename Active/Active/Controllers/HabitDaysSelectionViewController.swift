@@ -62,6 +62,9 @@ class HabitDaysSelectionViewController: UIViewController {
     /// The label showing the number of currently selected days.
     @IBOutlet weak var selectedDaysNumberLabel: UILabel!
 
+    /// The label showing the selected range of days.
+    @IBOutlet weak var selectedDaysRangeLabel: UILabel!
+
     /// The button the user uses to tell when the selection is done.
     @IBOutlet weak var doneButton: UIButton!
 
