@@ -28,7 +28,7 @@ struct DaysChallengeFactory: DummyFactory {
     /// - Returns: The generated DaysChallengeMO.
     func makeDummy() -> DaysChallengeMO {
         // Declare the dates used to create the challenge.
-        let dates = (0..<Int.random(1..<50)).compactMap {
+        let dates = (0..<Int.random(2..<50)).compactMap {
             Date().byAddingDays($0)?.getBeginningOfDay()
         }
 
