@@ -174,12 +174,12 @@ class HabitsTableViewController: UITableViewController, NSFetchedResultsControll
             // Its name.
             cell.nameLabel?.text = habit.name
             // And its progress.
-            var pastCount = habit.getCurrentSequence()?.getPastDays()?.count ?? 0
-            let daysCount = habit.getCurrentSequence()?.days?.count ?? 1
+            var pastCount = habit.getCurrentChallenge()?.getPastDays()?.count ?? 0
+            let daysCount = habit.getCurrentChallenge()?.days?.count ?? 1
 
             // If the current day was marked as executed, account it as a past
             // day as well.
-            if habit.getCurrentSequence()?.getCurrentDay()?.wasExecuted ?? false {
+            if habit.getCurrentChallenge()?.getCurrentDay()?.wasExecuted ?? false {
                 pastCount += 1
             }
 

@@ -70,7 +70,7 @@ class HabitDetailsViewController: UIViewController {
         // Try to get the ordered days from the passed habit.
         let dateSorting = NSSortDescriptor(key: "day.date", ascending: true)
 
-        guard let orderedDays = habit.getCurrentSequence()?.days?.sortedArray(
+        guard let orderedDays = habit.getCurrentChallenge()?.days?.sortedArray(
             using: [dateSorting]
         ) as? [HabitDayMO] else {
             assertionFailure("Inconsistency: Couldn't sort the habit's days by the date property.")
@@ -226,7 +226,7 @@ extension HabitDetailsViewController: JTAppleCalendarViewDataSource, JTAppleCale
                 date.getBeginningOfDay() as NSDate,
                 date.getEndOfDay() as NSDate
             )
-            if let currentHabitDay = habit.getCurrentSequence()?.days?.filtered(using: predicate).first as? HabitDayMO {
+            if let currentHabitDay = habit.getCurrentChallenge()?.days?.filtered(using: predicate).first as? HabitDayMO {
                 cell.backgroundColor = currentHabitDay.wasExecuted ? .purple : .red
             } else {
                 cell.backgroundColor = .white

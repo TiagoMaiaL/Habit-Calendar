@@ -172,7 +172,7 @@ class HabitStorage {
                 }
             }
 
-            // Create and schedule the notifications.
+            // Create and schedule the new notifications.
             _ = makeNotifications(
                 context: context,
                 habit: habit,
@@ -195,19 +195,19 @@ class HabitStorage {
             return
         }
 
-        // Close the current habit's sequence of days:
-        if let currentSequence = habit.getCurrentSequence() {
+        // Close the current habit's days' challenge:
+        if let currentChallenge = habit.getCurrentChallenge() {
             // Remove its future days.
             for day in habit.getFutureDays() {
-                if day.sequence === currentSequence {
-                    currentSequence.removeFromDays(day)
+                if day.challenge === currentChallenge {
+                    currentChallenge.removeFromDays(day)
                 }
                 habit.removeFromDays(day)
                 context.delete(day)
             }
 
             // Change its toDate to today.
-            currentSequence.toDate = Date().getBeginningOfDay()
+            currentChallenge.toDate = Date().getBeginningOfDay()
         }
 
         // Add a new sequence.

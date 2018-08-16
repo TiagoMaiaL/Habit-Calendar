@@ -97,9 +97,9 @@ class SeedManager {
                         }
 
                         habit.addToDays(Set(pastHabitDays) as NSSet)
-                        habit.getCurrentSequence()?.addToDays(Set(pastHabitDays) as NSSet)
+                        habit.getCurrentChallenge()?.addToDays(Set(pastHabitDays) as NSSet)
                         // TODO: The from date should be changed automatically.
-                        habit.getCurrentSequence()?.fromDate = randomPastDays.first
+                        habit.getCurrentChallenge()?.fromDate = randomPastDays.first
                     }
                 }
             }
@@ -112,7 +112,7 @@ class SeedManager {
                 format: "fromDate < %@",
                 Date().getBeginningOfDay() as NSDate
             )
-            let sequencesRequest: NSFetchRequest<DaysSequenceMO> = DaysSequenceMO.fetchRequest()
+            let sequencesRequest: NSFetchRequest<DaysChallengeMO> = DaysChallengeMO.fetchRequest()
             sequencesRequest.predicate = pastPredicate
 
             if let sequences = try? context.fetch(sequencesRequest) {

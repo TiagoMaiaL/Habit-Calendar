@@ -112,7 +112,7 @@ class DaysSequenceTests: IntegrationTestCase {
 
     func testGettingEmptySequenceCurrentDayShouldBeNil() {
         // 1. Create an empty dummy sequence.
-        let emptyDummySequence = DaysSequenceMO(
+        let emptyDummySequence = DaysChallengeMO(
             context: context
         )
 
@@ -163,7 +163,7 @@ class DaysSequenceTests: IntegrationTestCase {
 
     func testGettingEmptySequenceCurrentOffensiveShouldReturnNil() {
         // 1. Make an empty sequence dummy.
-        let emptyDummySequence = DaysSequenceMO(context: context)
+        let emptyDummySequence = DaysChallengeMO(context: context)
 
         // 2. Assert that getting its current offensive should return nil.
         XCTAssertNil(

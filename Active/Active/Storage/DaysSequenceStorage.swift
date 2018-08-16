@@ -35,13 +35,13 @@ class DaysSequenceStorage {
         using context: NSManagedObjectContext,
         daysDates: [Date],
         and habit: HabitMO
-    ) -> DaysSequenceMO {
+    ) -> DaysChallengeMO {
         assert(
             daysDates.count > 1,
             "The provided days dates must have two or more dates."
         )
 
-        let sequence = DaysSequenceMO(context: context)
+        let sequence = DaysChallengeMO(context: context)
 
         // Configure its main properties:
         sequence.id = UUID().uuidString
@@ -69,7 +69,7 @@ class DaysSequenceStorage {
     ///     - sequence: The sequence to be deleted.
     ///     - context: The context in which the deletion takes place.
     func delete(
-        _ sequence: DaysSequenceMO,
+        _ sequence: DaysChallengeMO,
         from context: NSManagedObjectContext
     ) {
         context.delete(sequence)

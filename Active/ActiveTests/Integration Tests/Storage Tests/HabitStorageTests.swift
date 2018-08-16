@@ -131,7 +131,7 @@ class HabitStorageTests: IntegrationTestCase {
         )
 
         // Check if the sequence has the right amount of days.
-        guard let sequence = (joggingHabit.daysSequences as? Set<DaysSequenceMO>)?.first else {
+        guard let sequence = (joggingHabit.daysSequences as? Set<DaysChallengeMO>)?.first else {
             XCTFail("Couldn't get the generated days sequence.")
             return
         }

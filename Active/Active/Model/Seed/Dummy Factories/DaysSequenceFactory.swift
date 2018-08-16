@@ -15,7 +15,7 @@ struct DaysSequenceFactory: DummyFactory {
     // MARK: Types
 
     // This factory generates entities of the DaysSequenceMO class.
-    typealias Entity = DaysSequenceMO
+    typealias Entity = DaysChallengeMO
 
     // MARK: Properties
 
@@ -27,14 +27,14 @@ struct DaysSequenceFactory: DummyFactory {
     /// - Note: The generated dummy and its days don't have the an associated
     ///         Habit.
     /// - Returns: The generated DaysSequenceMO dummy as a NSManagedObject.
-    func makeDummy() -> DaysSequenceMO {
+    func makeDummy() -> DaysChallengeMO {
         // Declare the dates used to create the sequence.
         let dates = (0..<Int.random(1..<50)).compactMap {
             Date().byAddingDays($0)?.getBeginningOfDay()
         }
 
         // Declare the dummy and its main properties:
-        let dummySequence = DaysSequenceMO(context: context)
+        let dummySequence = DaysChallengeMO(context: context)
         dummySequence.id = UUID().uuidString
         dummySequence.createdAt = Date()
         dummySequence.fromDate = dates.first!

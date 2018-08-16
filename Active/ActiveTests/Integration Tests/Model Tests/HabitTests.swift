@@ -232,15 +232,15 @@ class HabitTests: IntegrationTestCase {
         let emptyHabit = makeEmptyDummy()
 
         // 2. Add 3 DaysSequence entities to it.
-        let sequence1 = DaysSequenceMO(context: context)
+        let sequence1 = DaysChallengeMO(context: context)
         sequence1.fromDate = Date().byAddingDays(-60)!.getBeginningOfDay()
         sequence1.toDate = Date().byAddingDays(-50)!.getBeginningOfDay()
 
-        let sequence2 = DaysSequenceMO(context: context)
+        let sequence2 = DaysChallengeMO(context: context)
         sequence2.fromDate = Date().byAddingDays(-48)!.getBeginningOfDay()
         sequence2.toDate = Date().byAddingDays(-30)!.getBeginningOfDay()
 
-        let currentSequence = DaysSequenceMO(context: context)
+        let currentSequence = DaysChallengeMO(context: context)
         currentSequence.fromDate = Date().getBeginningOfDay()
         currentSequence.toDate = Date().byAddingDays(10)!.getBeginningOfDay()
 
