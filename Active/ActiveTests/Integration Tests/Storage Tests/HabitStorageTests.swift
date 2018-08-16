@@ -17,7 +17,7 @@ class HabitStorageTests: IntegrationTestCase {
 
     var dayStorage: DayStorage!
     var habitDayStorage: HabitDayStorage!
-    var daysSequenceStorage: DaysChallengeStorage!
+    var daysChallengeStorage: DaysChallengeStorage!
     var notificationStorage: NotificationStorage!
     var notificationCenterMock: UserNotificationCenterMock!
     var notificationScheduler: NotificationScheduler!
@@ -36,7 +36,7 @@ class HabitStorageTests: IntegrationTestCase {
             calendarDayStorage: dayStorage
         )
 
-        daysSequenceStorage = DaysChallengeStorage(
+        daysChallengeStorage = DaysChallengeStorage(
             habitDayStorage: habitDayStorage
         )
 
@@ -55,7 +55,7 @@ class HabitStorageTests: IntegrationTestCase {
 
         // Initialize dayStorage using the persistent container created for tests.
         habitStorage = HabitStorage(
-            daysSequenceStorage: daysSequenceStorage,
+            daysChallengeStorage: daysChallengeStorage,
             notificationStorage: notificationStorage,
             notificationScheduler: notificationScheduler,
             fireTimeStorage: FireTimeStorage()
@@ -66,7 +66,7 @@ class HabitStorageTests: IntegrationTestCase {
         // Remove the initialized storages.
         dayStorage = nil
         habitDayStorage = nil
-        daysSequenceStorage = nil
+        daysChallengeStorage = nil
         notificationScheduler = nil
         notificationStorage = nil
         habitStorage = nil

@@ -1,5 +1,5 @@
 //
-//  DaysSequenceTests.swift
+//  DaysChallengeTests.swift
 //  ActiveTests
 //
 //  Created by Tiago Maia Lopes on 16/07/18.
@@ -10,18 +10,18 @@ import CoreData
 import XCTest
 @testable import Active
 
-/// Class in charge of testing the DaysSequencesMO methods.
-class DaysSequenceTests: IntegrationTestCase {
+/// Class in charge of testing the DaysChallengeMO methods.
+class DaysChallengeTests: IntegrationTestCase {
 
     // MARK: Tests
 
-    func testGettingSequenceExecutedDays() {
-        // 1. Declare a dummy sequence.
-        let sequenceDummy = daysChallengeFactory.makeDummy()
+    func testGettingChallengeExecutedDays() {
+        // 1. Declare a dummy challenge.
+        let dummyChallenge = daysChallengeFactory.makeDummy()
 
         // 2. Mark some days as executed.
-        guard let daysSet = sequenceDummy.days as? Set<HabitDayMO> else {
-            XCTFail("Error: Couldn't get the dummy sequence's days.")
+        guard let daysSet = dummyChallenge.days as? Set<HabitDayMO> else {
+            XCTFail("Error: Couldn't get the dummy challenge's days.")
             return
         }
         let habitDays = Array(daysSet)
@@ -35,18 +35,18 @@ class DaysSequenceTests: IntegrationTestCase {
         // Assert on the executed days count.
         XCTAssertEqual(
             executedCount,
-            sequenceDummy.getExecutedDays()?.count,
-            "The sequence's executed days don't have the expected count."
+            dummyChallenge.getExecutedDays()?.count,
+            "The challenge's executed days don't have the expected count."
         )
     }
 
-    func testGettingSequenceMissedDays() {
-        // 1. Declare a dummy sequence.
-        let sequenceDummy = daysChallengeFactory.makeDummy()
+    func testGettingChallengeMissedDays() {
+        // 1. Declare a dummy challenge.
+        let dummyChallenge = daysChallengeFactory.makeDummy()
 
         // 2. Mark some days as executed.
-        guard let daysSet = sequenceDummy.days as? Set<HabitDayMO> else {
-            XCTFail("Error: Couldn't get the dummy sequence's days.")
+        guard let daysSet = dummyChallenge.days as? Set<HabitDayMO> else {
+            XCTFail("Error: Couldn't get the dummy challenge's days.")
             return
         }
         let habitDays = Array(daysSet)
@@ -59,18 +59,18 @@ class DaysSequenceTests: IntegrationTestCase {
         // 3. Assert on the missed days.
         XCTAssertEqual(
             habitDays.count - executedCount,
-            sequenceDummy.getMissedDays()?.count,
-            "The sequence's missed days don't have the expected count."
+            dummyChallenge.getMissedDays()?.count,
+            "The challenge's missed days don't have the expected count."
         )
     }
 
-    func testGettingSequenceProgressInfo() {
-        // 1. Declare a dummy sequence.
-        let sequenceDummy = daysChallengeFactory.makeDummy()
+    func testGettingChallengeProgressInfo() {
+        // 1. Declare a dummy challenge.
+        let dummyChallenge = daysChallengeFactory.makeDummy()
 
         // 2. Mark some days as executed.
-        guard let daysSet = sequenceDummy.days as? Set<HabitDayMO> else {
-            XCTFail("Error: Couldn't get the dummy sequence's days.")
+        guard let daysSet = dummyChallenge.days as? Set<HabitDayMO> else {
+            XCTFail("Error: Couldn't get the dummy challenge's days.")
             return
         }
         let habitDays = Array(daysSet)
@@ -83,75 +83,75 @@ class DaysSequenceTests: IntegrationTestCase {
         // 3. Assert on the completionProgress.
         XCTAssertEqual(
             executedCount,
-            sequenceDummy.getCompletionProgress().executed,
-            "The sequence's executed days from the completion progrees don't have the expected count."
+            dummyChallenge.getCompletionProgress().executed,
+            "The challenge's executed days from the completion progrees don't have the expected count."
         )
         XCTAssertEqual(
             habitDays.count,
-            sequenceDummy.getCompletionProgress().total,
-            "The sequence's total days from the completion progress don't have the expected count."
+            dummyChallenge.getCompletionProgress().total,
+            "The challenge's total days from the completion progress don't have the expected count."
         )
     }
 
     func testGettingTheCurrentDay() {
-        // 1. Create a new dummy sequence.
-        let dummySequence = daysChallengeFactory.makeDummy()
+        // 1. Create a new dummy challenge.
+        let dummyChallenge = daysChallengeFactory.makeDummy()
 
         // 2. Get its current day and make assertions on its dates.
-        guard let currentDay = dummySequence.getCurrentDay() else {
-            XCTFail("Couldn't get the sequence's current day.")
+        guard let currentDay = dummyChallenge.getCurrentDay() else {
+            XCTFail("Couldn't get the challenge's current day.")
             return
         }
 
         XCTAssertEqual(
             Date().getBeginningOfDay().description,
             currentDay.day!.date!.description,
-            "The sequence's current day doesn't have the expected date."
+            "The challenge's current day doesn't have the expected date."
         )
     }
 
-    func testGettingEmptySequenceCurrentDayShouldBeNil() {
-        // 1. Create an empty dummy sequence.
-        let emptyDummySequence = DaysChallengeMO(
+    func testGettingEmptyChallengeCurrentDayShouldBeNil() {
+        // 1. Create an empty dummy challenge.
+        let emptyDummyChallenge = DaysChallengeMO(
             context: context
         )
 
         // 2. Assert its current day is nil.
         XCTAssertNil(
-            emptyDummySequence.getCurrentDay(),
-            "The empty sequence shouldn't return the current day."
+            emptyDummyChallenge.getCurrentDay(),
+            "The empty challenge shouldn't return the current day."
         )
     }
 
-    func testGettingSequenceCurrentDayShouldBeNil() {
-        // 1. Create a dummy sequence.
-        let dummySequence = daysChallengeFactory.makeDummy()
+    func testGettingChallengeCurrentDayShouldBeNil() {
+        // 1. Create a dummy challenge.
+        let dummyChallenge = daysChallengeFactory.makeDummy()
         // 1.1. Clear it by removing its current day.
-        guard let currentDay = dummySequence.getCurrentDay() else {
-            XCTFail("Couldn't get the sequence's current day.")
+        guard let currentDay = dummyChallenge.getCurrentDay() else {
+            XCTFail("Couldn't get the challenge's current day.")
             return
         }
-        dummySequence.removeFromDays(currentDay)
+        dummyChallenge.removeFromDays(currentDay)
         context.delete(currentDay)
 
         // 2. Assert its current day now is nil.
         XCTAssertNil(
-            dummySequence.getCurrentDay(),
-            "The sequence shouldn't return its current day."
+            dummyChallenge.getCurrentDay(),
+            "The challenge shouldn't return its current day."
         )
     }
 
     func testMarkingCurrentDayAsExecuted() {
-        // 1. Create a dummy sequence.
-        let dummySequence = daysChallengeFactory.makeDummy()
+        // 1. Create a dummy challenge.
+        let dummyChallenge = daysChallengeFactory.makeDummy()
 
         // 2. Mark its current day as executed.
-        dummySequence.markCurrentDayAsExecuted()
+        dummyChallenge.markCurrentDayAsExecuted()
 
         // 3. Fetch the current day and assert it was
         // marked as executed.
-        guard let currentDay = dummySequence.getCurrentDay() else {
-            XCTFail("Couldn't retrieve the sequence's current day.")
+        guard let currentDay = dummyChallenge.getCurrentDay() else {
+            XCTFail("Couldn't retrieve the challenge's current day.")
             return
         }
 
@@ -161,23 +161,23 @@ class DaysSequenceTests: IntegrationTestCase {
         )
     }
 
-    func testGettingEmptySequenceCurrentOffensiveShouldReturnNil() {
-        // 1. Make an empty sequence dummy.
-        let emptyDummySequence = DaysChallengeMO(context: context)
+    func testGettingEmptyChallengeCurrentOffensiveShouldReturnNil() {
+        // 1. Make an empty challenge dummy.
+        let emptyDummyChallenge = DaysChallengeMO(context: context)
 
         // 2. Assert that getting its current offensive should return nil.
         XCTAssertNil(
-            emptyDummySequence.getCurrentOffensive(),
-            "Trying to get the offensive of an empty sequence should return nil."
+            emptyDummyChallenge.getCurrentOffensive(),
+            "Trying to get the offensive of an empty challenge should return nil."
         )
     }
 
-    func testGettingSequenceCurrentOffensive() {
-        // 1. Declare a dummy sequence.
-        let dummySequence = daysChallengeFactory.makeDummy()
+    func testGettingChallengeCurrentOffensive() {
+        // 1. Declare a dummy challenge.
+        let dummyChallenge = daysChallengeFactory.makeDummy()
         // 1.1. Add some past days.
         let pastDays = makeHabitDays(from: -6 ..< 0)
-        dummySequence.addToDays(Set(pastDays) as NSSet)
+        dummyChallenge.addToDays(Set(pastDays) as NSSet)
 
         // 1.2. Add a current offensive to it.
         let offensive = OffensiveMO(context: context)
@@ -186,21 +186,21 @@ class DaysSequenceTests: IntegrationTestCase {
         offensive.fromDate = pastDays.first?.day?.date
         offensive.toDate = pastDays.last?.day?.date
 
-        dummySequence.addToOffensives(offensive)
+        dummyChallenge.addToOffensives(offensive)
 
-        // 2. Assert the sequence returns the current sequence.
+        // 2. Assert the challenge returns the current offensive.
         XCTAssertNotNil(
-            dummySequence.getCurrentOffensive(),
-            "The sequence should return the configured current offensive."
+            dummyChallenge.getCurrentOffensive(),
+            "The challenge should return the configured current offensive."
         )
     }
 
-    func testGettingSequenceCurrentOffensiveWhenToDateIsToday() {
-        // 1. Declare a dummy sequence.
-        let dummySequence = daysChallengeFactory.makeDummy()
+    func testGettingChallengeCurrentOffensiveWhenToDateIsToday() {
+        // 1. Declare a dummy challenge.
+        let dummyChallenge = daysChallengeFactory.makeDummy()
         // 1.1. Add some past days to it.
         let pastDays = makeHabitDays(from: -15 ..< 0)
-        dummySequence.addToDays(Set(pastDays) as NSSet)
+        dummyChallenge.addToDays(Set(pastDays) as NSSet)
 
         // 1.2. Add a current offensive to it. The offensive's toDate property
         // should be the current day. This is the scenario of the user marking
@@ -211,21 +211,21 @@ class DaysSequenceTests: IntegrationTestCase {
         offensive.fromDate = pastDays.first?.day?.date
         offensive.toDate = Date().getBeginningOfDay()
 
-        dummySequence.addToOffensives(offensive)
+        dummyChallenge.addToOffensives(offensive)
 
-        // 2. Assert the sequence returns the current sequence.
+        // 2. Assert the challenge returns the current offensive.
         XCTAssertNotNil(
-            dummySequence.getCurrentOffensive(),
-            "The sequence should return the configured offensive as its current one."
+            dummyChallenge.getCurrentOffensive(),
+            "The challenge should return the configured offensive as its current one."
         )
     }
 
-    func testGettingSequenceCurrentOffensiveShouldReturnNilWhenBrokenOffensivesExist() {
-        // 1. Declare a dummy sequence.
-        let dummySequence = daysChallengeFactory.makeDummy()
+    func testGettingChallengeCurrentOffensiveShouldReturnNilWhenBrokenOffensivesExist() {
+        // 1. Declare a dummy challenge.
+        let dummyChallenge = daysChallengeFactory.makeDummy()
         // 1.1. Add some past days.
         let pastDays = makeHabitDays(from: -12 ..< 0)
-        dummySequence.addToDays(Set(pastDays) as NSSet)
+        dummyChallenge.addToDays(Set(pastDays) as NSSet)
 
         // 1.2. Add some broken offensives related to those past days.
         // The broken offensives have begin and end dates that are not
@@ -238,31 +238,31 @@ class DaysSequenceTests: IntegrationTestCase {
             currentOffensive.fromDate = $0.from.day!.date!
             currentOffensive.toDate = $0.from.day!.date!
 
-            dummySequence.addToOffensives(currentOffensive)
+            dummyChallenge.addToOffensives(currentOffensive)
         }
 
-        guard (dummySequence.offensives?.count ?? 0) > 0 else {
+        guard (dummyChallenge.offensives?.count ?? 0) > 0 else {
             XCTFail("Couldn't properly configure the offensives to proceed with the tests.")
             return
         }
 
         // 2. Getting the current offensive should return nil.
         XCTAssertNil(
-            dummySequence.getCurrentOffensive(),
-            "The sequence shouldn't return any broken sequence as its current offensive."
+            dummyChallenge.getCurrentOffensive(),
+            "The challenge shouldn't return any broken offensive as its current offensive."
         )
     }
 
     func testMarkingCurrentDayAsExecutedShouldCreateNewOffensive() {
-        // 1. Declare a dummy sequence.
-        let dummySequence = daysChallengeFactory.makeDummy()
+        // 1. Declare a dummy challenge.
+        let dummyChallenge = daysChallengeFactory.makeDummy()
 
         // 2. Mark its current day as executed.
-        dummySequence.markCurrentDayAsExecuted()
+        dummyChallenge.markCurrentDayAsExecuted()
 
-        // 3. Try getting the sequence's current offensive.
-        guard let currentOffensive = dummySequence.getCurrentOffensive() else {
-            XCTFail("The sequence should have a new offensive added to it.")
+        // 3. Try getting the challenge's current offensive.
+        guard let currentOffensive = dummyChallenge.getCurrentOffensive() else {
+            XCTFail("The challenge should have a new offensive added to it.")
             return
         }
 
@@ -279,12 +279,12 @@ class DaysSequenceTests: IntegrationTestCase {
     }
 
     func testMarkingCurrentDayAsExecutedContinuesPreviousOffensive() {
-        // 1. Declare a dummy sequence.
-        let dummySequence = daysChallengeFactory.makeDummy()
+        // 1. Declare a dummy challenge.
+        let dummyChallenge = daysChallengeFactory.makeDummy()
 
         // 1.1. Add some past days to it.
         let pastDays = makeHabitDays(from: -20..<0)
-        dummySequence.addToDays(Set(pastDays) as NSSet)
+        dummyChallenge.addToDays(Set(pastDays) as NSSet)
 
         // 1.2. Add a current offensive to it.
         let offensive = OffensiveMO(context: context)
@@ -293,27 +293,27 @@ class DaysSequenceTests: IntegrationTestCase {
         offensive.fromDate = pastDays.first?.day?.date
         offensive.toDate = pastDays.last?.day?.date
 
-        dummySequence.addToOffensives(offensive)
+        dummyChallenge.addToOffensives(offensive)
 
         // 2. Mark it as executed.
-        dummySequence.markCurrentDayAsExecuted()
+        dummyChallenge.markCurrentDayAsExecuted()
 
         // 3. Assert the current offensive now has its toDate property
         // equal to the beginning of the day of the current date.
         XCTAssertEqual(
-            dummySequence.getCurrentOffensive()?.toDate?.description,
+            dummyChallenge.getCurrentOffensive()?.toDate?.description,
             Date().getBeginningOfDay().description,
             "The current offensive's toDate should be equal to today."
         )
     }
 
     func testBreakingPreviousOffensiveShouldCreateNewOffensive() {
-        // 1. Declare a dummy sequence.
-        let dummySequence = daysChallengeFactory.makeDummy()
+        // 1. Declare a dummy challenge.
+        let dummyChallenge = daysChallengeFactory.makeDummy()
 
         // 1.1. Add some past days to it.
         let pastDays = makeHabitDays(from: -26..<0)
-        dummySequence.addToDays(Set(pastDays) as NSSet)
+        dummyChallenge.addToDays(Set(pastDays) as NSSet)
 
         // 1.2. Configure a broken offensive and add to it.
         let offensive = OffensiveMO(context: context)
@@ -322,56 +322,54 @@ class DaysSequenceTests: IntegrationTestCase {
         offensive.fromDate = pastDays.first?.day?.date
         offensive.toDate = pastDays[pastDays.count - 2].day?.date
 
-        dummySequence.addToOffensives(offensive)
+        dummyChallenge.addToOffensives(offensive)
 
         // 2. Mark the current day as executed.
-        dummySequence.markCurrentDayAsExecuted()
+        dummyChallenge.markCurrentDayAsExecuted()
 
         // 3. Assert it now has a current offensive and its
         // fromDate and toDate are equal to the current date.
         XCTAssertEqual(
-            dummySequence.getCurrentOffensive()?.fromDate?.description,
+            dummyChallenge.getCurrentOffensive()?.fromDate?.description,
             Date().getBeginningOfDay().description,
-            "The current offensive's from date should be equals to the current date."
+            "The current offensive's from date should be equal to the current date."
         )
         XCTAssertEqual(
-            dummySequence.getCurrentOffensive()?.toDate?.description,
+            dummyChallenge.getCurrentOffensive()?.toDate?.description,
             Date().getBeginningOfDay().description,
-            "The current offensive's to date should be equals to the current date."
+            "The current offensive's to date should be equal to the current date."
         )
     }
 
-    func testGettingSequencePastDays() {
-        // 1. Declare a dummy sequence.
-        let dummySequence = daysChallengeFactory.makeDummy()
+    func testGettingChallengePastDays() {
+        // 1. Declare a dummy challenge.
+        let dummyChallenge = daysChallengeFactory.makeDummy()
 
         // 1.1 Add some past days to it.
         let pastAmount = -25
         let pastDays = makeHabitDays(from: pastAmount..<0)
-        dummySequence.addToDays(Set(pastDays) as NSSet)
+        dummyChallenge.addToDays(Set(pastDays) as NSSet)
 
         // 2. Assert the returned number of past days matches the added ones.
         XCTAssertEqual(
             abs(pastAmount),
-            dummySequence.getPastDays()?.count,
-            "The amount of past days returned by the sequence should be equal to the amount of added ones."
+            dummyChallenge.getPastDays()?.count,
+            "The amount of past days returned by the challenge should be equal to the amount of added ones."
         )
     }
 
-    func testGettingSequenceFutureDays() {
-        // 1. Declare a dummy sequence.
-        let dummySequence = daysChallengeFactory.makeDummy()
+    func testGettingChallengeFutureDays() {
+        // 1. Declare a dummy challenge.
+        let dummyChallenge = daysChallengeFactory.makeDummy()
 
-        // 1.1 Get its future days by getting its days count and
-        // subtracting 1 (the current one).
-        let futureAmount = dummySequence.days!.count - 1
+        // 1.1 Get its future days by getting its days count and subtracting 1 (the current one).
+        let futureAmount = dummyChallenge.days!.count - 1
 
-        // 2. Assert the returned number of future days matches the
-        // expected one.
+        // 2. Assert the returned number of future days matches the expected one.
         XCTAssertEqual(
             futureAmount,
-            dummySequence.getFutureDays()?.count,
-            "The amount of future days returned by the sequence should be equal to the expected amount."
+            dummyChallenge.getFutureDays()?.count,
+            "The amount of future days returned by the challenge should be equal to the expected amount."
         )
     }
 
