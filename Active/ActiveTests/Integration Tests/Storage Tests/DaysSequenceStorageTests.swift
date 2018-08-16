@@ -15,7 +15,7 @@ class DaysSequenceStorageTests: IntegrationTestCase {
 
     // MARK: Properties
 
-    var sequenceStorage: DaysSequenceStorage!
+    var sequenceStorage: DaysChallengeStorage!
 
     // MARK: Setup/TearDown
 
@@ -23,7 +23,7 @@ class DaysSequenceStorageTests: IntegrationTestCase {
         super.setUp()
 
         // Initialize a new DaysSequenceStorage instance.
-        sequenceStorage = DaysSequenceStorage(
+        sequenceStorage = DaysChallengeStorage(
             habitDayStorage: HabitDayStorage(
                 calendarDayStorage: DayStorage()
             )

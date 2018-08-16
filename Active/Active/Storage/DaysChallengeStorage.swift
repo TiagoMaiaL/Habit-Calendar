@@ -8,8 +8,8 @@
 
 import CoreData
 
-/// Class in charge of managing the DaysSequenceMO entities.
-class DaysSequenceStorage {
+/// Class in charge of managing the DaysChallengeMO entities.
+class DaysChallengeStorage {
 
     // MARK: Properties
 
@@ -24,13 +24,13 @@ class DaysSequenceStorage {
 
     // MARK: Imperatives
 
-    /// Creates a sequence entity by using the provided days' dates and the
+    /// Creates a challenge entity by using the provided days' dates and the
     /// associated habit.
     /// - Parameters:
     ///     - context: The context to which the entity is added.
-    ///     - daysDates: The days' dates used to create the sequence days.
+    ///     - daysDates: The days' dates used to create the challenge days.
     ///     - habit: The habit entity to which the sequence is added.
-    /// - Returns: A new sequence associated with the habit.
+    /// - Returns: A new days challenge associated with the habit.
     func create(
         using context: NSManagedObjectContext,
         daysDates: [Date],
@@ -41,16 +41,16 @@ class DaysSequenceStorage {
             "The provided days dates must have two or more dates."
         )
 
-        let sequence = DaysChallengeMO(context: context)
+        let challenge = DaysChallengeMO(context: context)
 
         // Configure its main properties:
-        sequence.id = UUID().uuidString
-        sequence.createdAt = Date()
-        sequence.fromDate = Date().getBeginningOfDay()
-        sequence.toDate = daysDates.sorted().last!
+        challenge.id = UUID().uuidString
+        challenge.createdAt = Date()
+        challenge.fromDate = Date().getBeginningOfDay()
+        challenge.toDate = daysDates.sorted().last!
 
         // Associate its habit entity.
-        sequence.habit = habit
+        challenge.habit = habit
 
         // Configure its days.
         // Create the days using the HabitDayStorage.
@@ -59,19 +59,19 @@ class DaysSequenceStorage {
             dates: daysDates,
             and: habit
         )
-        sequence.addToDays(Set<HabitDayMO>(habitDays) as NSSet)
+        challenge.addToDays(Set<HabitDayMO>(habitDays) as NSSet)
 
-        return sequence
+        return challenge
     }
 
     /// Deletes the provided entity from the given context.
     /// - Parameters:
-    ///     - sequence: The sequence to be deleted.
+    ///     - challenge: The challenge to be deleted.
     ///     - context: The context in which the deletion takes place.
     func delete(
-        _ sequence: DaysChallengeMO,
+        _ challenge: DaysChallengeMO,
         from context: NSManagedObjectContext
     ) {
-        context.delete(sequence)
+        context.delete(challenge)
     }
 }

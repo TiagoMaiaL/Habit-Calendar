@@ -17,7 +17,7 @@ class HabitStorageTests: IntegrationTestCase {
 
     var dayStorage: DayStorage!
     var habitDayStorage: HabitDayStorage!
-    var daysSequenceStorage: DaysSequenceStorage!
+    var daysSequenceStorage: DaysChallengeStorage!
     var notificationStorage: NotificationStorage!
     var notificationCenterMock: UserNotificationCenterMock!
     var notificationScheduler: NotificationScheduler!
@@ -36,7 +36,7 @@ class HabitStorageTests: IntegrationTestCase {
             calendarDayStorage: dayStorage
         )
 
-        daysSequenceStorage = DaysSequenceStorage(
+        daysSequenceStorage = DaysChallengeStorage(
             habitDayStorage: habitDayStorage
         )
 
