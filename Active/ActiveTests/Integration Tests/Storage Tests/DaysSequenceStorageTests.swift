@@ -49,9 +49,9 @@ class DaysSequenceStorageTests: IntegrationTestCase {
                 context.delete(habitDay)
             }
         }
-        if let sequences = dummyHabit.daysSequences as? Set<DaysChallengeMO> {
+        if let sequences = dummyHabit.challenges as? Set<DaysChallengeMO> {
             for sequence in sequences {
-                dummyHabit.removeFromDaysSequences(sequence)
+                dummyHabit.removeFromChallenges(sequence)
                 context.delete(sequence)
             }
         }

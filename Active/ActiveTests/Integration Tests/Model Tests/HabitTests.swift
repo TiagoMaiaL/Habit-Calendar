@@ -199,60 +199,60 @@ class HabitTests: IntegrationTestCase {
         )
     }
 
-    func testGettingCurrentSequenceShouldReturnNil() {
+    func testGettingCurrentChallengeShouldReturnNil() {
         // 1. Declare an empty habit.
         let emptyHabit = makeEmptyDummy()
 
-        // 2. Assert is current sequence is nil.
+        // 2. Assert is current challenge is nil.
         XCTAssertNil(
-            emptyHabit.getCurrentSequence(),
+            emptyHabit.getCurrentChallenge(),
             "An empty habit shouldn't return any current sequence."
         )
     }
 
-    func testGettingTheOnlyCurrentSequence() {
+    func testGettingTheOnlyCurrentChallenge() {
         // 1. Declare an empty habit.
         let emptyHabit = makeEmptyDummy()
 
-        // 2. Add a DaysSequence to it.
-        let sequenceFactory = DaysSequenceFactory(context: context)
-        let sequence = sequenceFactory.makeDummy()
-        emptyHabit.addToDaysSequences(sequence)
+        // 2. Add a DaysChallenge to it.
+        let daysChallenge = DaysSequenceFactory(context: context)
+        let challenge = daysChallenge.makeDummy()
+        emptyHabit.addToChallenges(challenge)
 
         // 3. Assert it's returned when getting the current sequence.
         XCTAssertEqual(
-            emptyHabit.getCurrentSequence(),
-            sequence,
-            "The current sequence should be correctly returned."
+            emptyHabit.getCurrentChallenge(),
+            challenge,
+            "The current challenge should be correctly returned."
         )
     }
 
-    func testGettingTheCurrentSequenceAmongMany() {
+    func testGettingTheCurrentChallengeAmongMany() {
         // 1. Declare an empty habit.
         let emptyHabit = makeEmptyDummy()
 
-        // 2. Add 3 DaysSequence entities to it.
-        let sequence1 = DaysChallengeMO(context: context)
-        sequence1.fromDate = Date().byAddingDays(-60)!.getBeginningOfDay()
-        sequence1.toDate = Date().byAddingDays(-50)!.getBeginningOfDay()
+        // 2. Add 3 DaysChallengesMO entities to it.
+        let challenge1 = DaysChallengeMO(context: context)
+        challenge1.fromDate = Date().byAddingDays(-60)!.getBeginningOfDay()
+        challenge1.toDate = Date().byAddingDays(-50)!.getBeginningOfDay()
 
-        let sequence2 = DaysChallengeMO(context: context)
-        sequence2.fromDate = Date().byAddingDays(-48)!.getBeginningOfDay()
-        sequence2.toDate = Date().byAddingDays(-30)!.getBeginningOfDay()
+        let challenge2 = DaysChallengeMO(context: context)
+        challenge2.fromDate = Date().byAddingDays(-48)!.getBeginningOfDay()
+        challenge2.toDate = Date().byAddingDays(-30)!.getBeginningOfDay()
 
-        let currentSequence = DaysChallengeMO(context: context)
-        currentSequence.fromDate = Date().getBeginningOfDay()
-        currentSequence.toDate = Date().byAddingDays(10)!.getBeginningOfDay()
+        let challenge3 = DaysChallengeMO(context: context)
+        challenge3.fromDate = Date().getBeginningOfDay()
+        challenge3.toDate = Date().byAddingDays(10)!.getBeginningOfDay()
 
-        emptyHabit.addToDaysSequences(
-            [sequence1, sequence2, currentSequence]
+        emptyHabit.addToChallenges (
+            [challenge1, challenge2, challenge3]
         )
 
         // 3. Assert it returns the current and correct one.
         XCTAssertEqual(
-            emptyHabit.getCurrentSequence(),
-            currentSequence,
-            "The habit should return its current sequence among all of the added ones."
+            emptyHabit.getCurrentChallenge(),
+            challenge3,
+            "The habit should return its current challenge among all of the added ones."
         )
     }
 

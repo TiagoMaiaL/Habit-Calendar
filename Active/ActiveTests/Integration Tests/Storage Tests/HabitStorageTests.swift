@@ -122,20 +122,20 @@ class HabitStorageTests: IntegrationTestCase {
             "The created habit should have the expected color."
         )
 
-        // Briefly check to see if there's the right amount of days in the created sequence:
-        // Check if the sequence were created.
+        // Briefly check to see if there's the right amount of days in the created challenge:
+        // Check if the challenge was created.
         XCTAssertEqual(
-            joggingHabit.daysSequences?.count,
+            joggingHabit.challenges?.count,
             1,
-            "The habit should have a sequence containing all habit days."
+            "The habit should have a challenge containing all habit days."
         )
 
-        // Check if the sequence has the right amount of days.
-        guard let sequence = (joggingHabit.daysSequences as? Set<DaysChallengeMO>)?.first else {
-            XCTFail("Couldn't get the generated days sequence.")
+        // Check if the challenge has the right amount of days.
+        guard let challenge = (joggingHabit.challenges as? Set<DaysChallengeMO>)?.first else {
+            XCTFail("Couldn't get the generated days challenge.")
             return
         }
-        XCTAssertEqual(sequence.days?.count, days.count, "The sequence should have the correct amount of days")
+        XCTAssertEqual(challenge.days?.count, days.count, "The challenge should have the correct amount of days")
     }
 
     func testHabitCreationByPassingFireTimes() {
@@ -254,7 +254,7 @@ class HabitStorageTests: IntegrationTestCase {
         )
     }
 
-    func testHabitEditionWithDaysPropertyShouldCreateNewSequence() {
+    func testHabitEditionWithDaysPropertyShouldCreateNewChallenge() {
         // 1. Declare a dummy habit.
         let dummyHabit = habitFactory.makeDummy()
 
@@ -270,28 +270,28 @@ class HabitStorageTests: IntegrationTestCase {
             days: daysDates
         )
 
-        // 4. Make assertions on the days and sequence:
-        // 4.1. Assert on the days sequence.
+        // 4. Make assertions on the days and challenge:
+        // 4.1. Assert on the days challenge.
         XCTAssertEqual(
-            dummyHabit.daysSequences?.count,
+            dummyHabit.challenges?.count,
             2,
-            "A new daysSequence should have been created after the days edition."
+            "A new challenge should have been created after the days edition."
         )
 
-        guard let sequence = dummyHabit.getCurrentSequence() else {
-            XCTFail("Couldn't get the current sequence.")
+        guard let challenge = dummyHabit.getCurrentChallenge() else {
+            XCTFail("Couldn't get the current challenge.")
             return
         }
 
         // 4.2. Assert on the days' count.
         XCTAssertEqual(
-            sequence.days?.count,
+            challenge.days?.count,
             daysDates.count,
             "The Habit days should be correctly set and have the expected count."
         )
 
         // 4.3. Assert on the days' dates.
-        guard let habitDays = sequence.days as? Set<HabitDayMO> else {
+        guard let habitDays = challenge.days as? Set<HabitDayMO> else {
             XCTFail("Couldn't get the edited habit days.")
             return
         }
@@ -471,8 +471,8 @@ class HabitStorageTests: IntegrationTestCase {
             days: days
         )
 
-        guard let sequence = dummyHabit.getCurrentSequence() else {
-            XCTFail("Couldn't get the added sequence of days.")
+        guard let challenge = dummyHabit.getCurrentChallenge() else {
+            XCTFail("Couldn't get the added days' challenge.")
             return
         }
 
@@ -480,7 +480,7 @@ class HabitStorageTests: IntegrationTestCase {
         // - assert on the number of notification entities:
         XCTAssertEqual(
             dummyHabit.notifications?.count,
-            sequence.days!.count * dummyHabit.fireTimes!.count,
+            challenge.days!.count * dummyHabit.fireTimes!.count,
             "The amount of notifications should be the number of future days * the fire times."
         )
 
