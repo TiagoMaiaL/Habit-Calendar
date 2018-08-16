@@ -1,5 +1,5 @@
 //
-//  DaysSequenceFactory.swift
+//  DaysChallengeFactory.swift
 //  Active
 //
 //  Created by Tiago Maia Lopes on 16/07/18.

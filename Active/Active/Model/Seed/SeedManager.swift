@@ -68,7 +68,7 @@ class SeedManager {
             context in
             print("Seeding past past days to some habits.")
 
-            // Seed a random amount of past habit days in the current sequences
+            // Seed a random amount of past habit days in the current challenges
             // of some habits.
             let habitsRequest: NSFetchRequest<HabitMO> = HabitMO.fetchRequest()
             if let habits = try? context.fetch(habitsRequest) {
@@ -107,16 +107,16 @@ class SeedManager {
             context in
             print("Seeding random offensives to the habits that have past days.")
 
-            // Get the sequences that have past habit days.
+            // Get the challenges that have past habit days.
             let pastPredicate = NSPredicate(
                 format: "fromDate < %@",
                 Date().getBeginningOfDay() as NSDate
             )
-            let sequencesRequest: NSFetchRequest<DaysChallengeMO> = DaysChallengeMO.fetchRequest()
-            sequencesRequest.predicate = pastPredicate
+            let challengesRequest: NSFetchRequest<DaysChallengeMO> = DaysChallengeMO.fetchRequest()
+            challengesRequest.predicate = pastPredicate
 
-            if let sequences = try? context.fetch(sequencesRequest) {
-                // Add an OffensiveMO to each sequence.
+            if let challenges = try? context.fetch(challengesRequest) {
+                // Add an OffensiveMO to each challenge.
                 // TODO:
             }
         }

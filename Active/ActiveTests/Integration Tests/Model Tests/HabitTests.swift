@@ -206,7 +206,7 @@ class HabitTests: IntegrationTestCase {
         // 2. Assert is current challenge is nil.
         XCTAssertNil(
             emptyHabit.getCurrentChallenge(),
-            "An empty habit shouldn't return any current sequence."
+            "An empty habit shouldn't return any current challenge."
         )
     }
 
@@ -219,7 +219,7 @@ class HabitTests: IntegrationTestCase {
         let challenge = daysChallenge.makeDummy()
         emptyHabit.addToChallenges(challenge)
 
-        // 3. Assert it's returned when getting the current sequence.
+        // 3. Assert it's returned when getting the current challenge.
         XCTAssertEqual(
             emptyHabit.getCurrentChallenge(),
             challenge,

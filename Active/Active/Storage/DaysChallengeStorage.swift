@@ -1,5 +1,5 @@
 //
-//  DaysSequenceStorage.swift
+//  DaysChallengeStorage.swift
 //  Active
 //
 //  Created by Tiago Maia Lopes on 16/07/18.
@@ -29,7 +29,7 @@ class DaysChallengeStorage {
     /// - Parameters:
     ///     - context: The context to which the entity is added.
     ///     - daysDates: The days' dates used to create the challenge days.
-    ///     - habit: The habit entity to which the sequence is added.
+    ///     - habit: The habit entity to which the challenge is added.
     /// - Returns: A new days challenge associated with the habit.
     func create(
         using context: NSManagedObjectContext,

@@ -50,9 +50,9 @@ class DaysChallengeStorageTests: IntegrationTestCase {
             }
         }
         if let challenges = dummyHabit.challenges as? Set<DaysChallengeMO> {
-            for sequence in challenges {
-                dummyHabit.removeFromChallenges(sequence)
-                context.delete(sequence)
+            for challenge in challenges {
+                dummyHabit.removeFromChallenges(challenge)
+                context.delete(challenge)
             }
         }
 
@@ -128,7 +128,7 @@ class DaysChallengeStorageTests: IntegrationTestCase {
         )
     }
 
-    func testSequenceDeletion() {
+    func testChallengeDeletion() {
         // 1. Declare a dummy challenge.
         let dummyChallenge = daysChallengeFactory.makeDummy()
 

@@ -1,5 +1,5 @@
 //
-//  DaysSequenceMO.swift
+//  DaysChallengeMO.swift
 //  Active
 //
 //  Created by Tiago Maia Lopes on 16/07/18.
@@ -18,7 +18,7 @@ class DaysChallengeMO: NSManagedObject {
         super.didChangeValue(forKey: key)
 
         // TODO: Change fromDate property.
-        print("Changing \(key) ------ DaysSequenceMO")
+        print("Changing \(key) ------ DaysChallengeMO")
     }
 
     // MARK: Imperatives
@@ -56,7 +56,7 @@ class DaysChallengeMO: NSManagedObject {
         }
 
         // Get the last offensive by filtering for the one with the toDate
-        // property being the last sequence's date (in ascending order).
+        // property being the last challenge's date (in ascending order).
         var toDatePredicate: NSPredicate!
 
         if let lastDay = lastDay {
@@ -77,7 +77,7 @@ class DaysChallengeMO: NSManagedObject {
 
     /// Marks the current day as executed, if one exists in the challenge.
     /// - Note: Marking the current day as executed creates or updates
-    ///         a related offensive entity associated with the sequence.
+    ///         a related offensive entity associated with the challenge.
     ///         If there's an unbreaked offensive being tracked, its updated,
     ///         but if the previous offensive was broken, it creates a new one.
     func markCurrentDayAsExecuted() {
@@ -95,7 +95,7 @@ class DaysChallengeMO: NSManagedObject {
             currentOffensive.updatedAt = Date()
         } else {
             // If there isn't a current offensive, add a new one to the
-            // current sequence and habit.
+            // current challenge and habit.
             makeOffensive()
         }
     }
