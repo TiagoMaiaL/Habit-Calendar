@@ -1,5 +1,5 @@
 //
-//  DaysSequenceMO.swift
+//  DaysChallengeMO.swift
 //  Active
 //
 //  Created by Tiago Maia Lopes on 16/07/18.
@@ -8,9 +8,9 @@
 
 import CoreData
 
-/// A sequence of n days a User has setup for an specific Habit entity to be
+/// A challenge of n days a User has setup for an specific Habit entity to be
 /// tracked and executed on.
-class DaysSequenceMO: NSManagedObject {
+class DaysChallengeMO: NSManagedObject {
 
     // MARK: Life cycle
 
@@ -18,14 +18,14 @@ class DaysSequenceMO: NSManagedObject {
         super.didChangeValue(forKey: key)
 
         // TODO: Change fromDate property.
-        print("Changing \(key) ------ DaysSequenceMO")
+        print("Changing \(key) ------ DaysChallengeMO")
     }
 
     // MARK: Imperatives
 
-    /// Returns the sequence's current day (associated with today's date),
+    /// Returns the challenge's current day (associated with today's date),
     /// if there's one.
-    /// - Returns: The habit day entity representing today's date.
+    /// - Returns: The HabitDayMO entity representing today's date.
     func getCurrentDay() -> HabitDayMO? {
         let todayPredicate = NSPredicate(
             format: "day.date >= %@ and day.date <= %@",
@@ -35,12 +35,12 @@ class DaysSequenceMO: NSManagedObject {
         return days?.filtered(using: todayPredicate).first as? HabitDayMO
     }
 
-    /// Returns the sequence's current offensive, if there's one.
+    /// Returns the challenge's current offensive, if there's one.
     /// - Note: The current offensive isn't broken and its toDate represents the
     ///         last habitDay before the current one.
     /// - Returns: The current OffensiveMO entity or nil.
     func getCurrentOffensive() -> OffensiveMO? {
-        // Get the last sequence's day.
+        // Get the last challenge's day.
         let pastDays = (days?.sortedArray(
             using: [NSSortDescriptor(key: "day.date", ascending: true)]
         ) as? [HabitDayMO])?.filter {
@@ -56,7 +56,7 @@ class DaysSequenceMO: NSManagedObject {
         }
 
         // Get the last offensive by filtering for the one with the toDate
-        // property being the last sequence's date (in ascending order).
+        // property being the last challenge's date (in ascending order).
         var toDatePredicate: NSPredicate!
 
         if let lastDay = lastDay {
@@ -75,11 +75,11 @@ class DaysSequenceMO: NSManagedObject {
         return offensives?.filtered(using: toDatePredicate).first as? OffensiveMO
     }
 
-    /// Marks the current day as executed, if one exists in the sequence.
+    /// Marks the current day as executed, if one exists in the challenge.
     /// - Note: Marking the current day as executed creates or updates
-    ///         a related offensive entity associated with the sequence.
+    ///         a related offensive entity associated with the challenge.
     ///         If there's an unbreaked offensive being tracked, its updated,
-    ///         but if the previous sequence was broken, it creates a new one.
+    ///         but if the previous offensive was broken, it creates a new one.
     func markCurrentDayAsExecuted() {
         guard let currentDay = getCurrentDay() else {
             return
@@ -95,24 +95,24 @@ class DaysSequenceMO: NSManagedObject {
             currentOffensive.updatedAt = Date()
         } else {
             // If there isn't a current offensive, add a new one to the
-            // current sequence and habit.
+            // current challenge and habit.
             makeOffensive()
         }
     }
 
-    /// Returns the executed days from the sequence.
+    /// Returns the executed days from the challenge.
     func getExecutedDays() -> Set<HabitDayMO>? {
         let executedPredicate = NSPredicate(format: "wasExecuted = true")
         return days?.filtered(using: executedPredicate) as? Set<HabitDayMO>
     }
 
-    /// Returns the missed days from the sequence.
+    /// Returns the missed days from the challenge.
     func getMissedDays() -> Set<HabitDayMO>? {
         let executedPredicate = NSPredicate(format: "wasExecuted = false")
         return days?.filtered(using: executedPredicate) as? Set<HabitDayMO>
     }
 
-    /// Returns the past days from the sequence.
+    /// Returns the past days from the challenge.
     func getPastDays() -> Set<HabitDayMO>? {
         let pastPredicate = NSPredicate(
             format: "day.date < %@",
@@ -121,7 +121,7 @@ class DaysSequenceMO: NSManagedObject {
         return days?.filtered(using: pastPredicate) as? Set<HabitDayMO>
     }
 
-    /// Returns the future days from the sequence.
+    /// Returns the future days from the challenge.
     func getFutureDays() -> Set<HabitDayMO>? {
         let futurePredicate = NSPredicate(
             format: "day.date > %@",
@@ -130,15 +130,35 @@ class DaysSequenceMO: NSManagedObject {
         return days?.filtered(using: futurePredicate) as? Set<HabitDayMO>
     }
 
-    /// Returns the sequence's completion progress.
+    /// Returns the challenge's completion progress.
     /// - Returns: A tuple containing the number of executed days and
-    ///            the total in the sequence.
+    ///            the total in the challenge.
     func getCompletionProgress() -> (executed: Int, total: Int) {
         return (getExecutedDays()?.count ?? 0, days?.count ?? 0)
     }
 
+    /// Closes the challenge.
+    /// - Note: Closing a challenge means that the challenge is no longer
+    ///         active and its future days are deleted, its toDate is also set to today.
+    func close() {
+        guard let context = managedObjectContext else { return }
+
+        // Remove its future days.
+        if let futureDays = getFutureDays() {
+            removeFromDays(futureDays as NSSet)
+            habit?.removeFromDays(futureDays as NSSet)
+
+            for day in futureDays {
+                context.delete(day)
+            }
+        }
+
+        // Change its toDate to today.
+        toDate = Date().getBeginningOfDay()
+    }
+
     /// Creates a new offensive entity and adds it to the current
-    /// sequence instance.
+    /// challenge instance.
     private func makeOffensive() {
         if let context = managedObjectContext {
             let currentOffensive = OffensiveMO(context: context)
@@ -148,7 +168,7 @@ class DaysSequenceMO: NSManagedObject {
             currentOffensive.toDate = Date().getBeginningOfDay()
 
             currentOffensive.habit = habit
-            currentOffensive.daysSequence = self
+            currentOffensive.challenge = self
         }
     }
 }

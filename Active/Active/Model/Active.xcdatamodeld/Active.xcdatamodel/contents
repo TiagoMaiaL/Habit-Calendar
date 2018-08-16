@@ -8,14 +8,14 @@
             <fetchIndexElement property="date" type="Binary" order="ascending"/>
         </fetchIndex>
     </entity>
-    <entity name="DaysSequence" representedClassName=".DaysSequenceMO" syncable="YES" codeGenerationType="category">
+    <entity name="DaysChallenge" representedClassName=".DaysChallengeMO" syncable="YES" codeGenerationType="category">
         <attribute name="createdAt" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="fromDate" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="id" attributeType="String" syncable="YES"/>
         <attribute name="toDate" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <relationship name="days" toMany="YES" deletionRule="Nullify" destinationEntity="HabitDay" inverseName="sequence" inverseEntity="HabitDay" syncable="YES"/>
-        <relationship name="habit" maxCount="1" deletionRule="Nullify" destinationEntity="Habit" inverseName="daysSequences" inverseEntity="Habit" syncable="YES"/>
-        <relationship name="offensives" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Offensive" inverseName="daysSequence" inverseEntity="Offensive" syncable="YES"/>
+        <relationship name="days" toMany="YES" deletionRule="Nullify" destinationEntity="HabitDay" inverseName="challenge" inverseEntity="HabitDay" syncable="YES"/>
+        <relationship name="habit" maxCount="1" deletionRule="Nullify" destinationEntity="Habit" inverseName="challenges" inverseEntity="Habit" syncable="YES"/>
+        <relationship name="offensives" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Offensive" inverseName="challenge" inverseEntity="Offensive" syncable="YES"/>
     </entity>
     <entity name="FireTime" representedClassName=".FireTimeMO" syncable="YES" codeGenerationType="category">
         <attribute name="createdAt" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
@@ -29,8 +29,8 @@
         <attribute name="createdAt" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="id" attributeType="String" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
+        <relationship name="challenges" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="DaysChallenge" inverseName="habit" inverseEntity="DaysChallenge" syncable="YES"/>
         <relationship name="days" toMany="YES" deletionRule="Cascade" destinationEntity="HabitDay" inverseName="habit" inverseEntity="HabitDay" syncable="YES"/>
-        <relationship name="daysSequences" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="DaysSequence" inverseName="habit" inverseEntity="DaysSequence" syncable="YES"/>
         <relationship name="fireTimes" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="FireTime" inverseName="habit" inverseEntity="FireTime" syncable="YES"/>
         <relationship name="notifications" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Notification" inverseName="habit" inverseEntity="Notification" syncable="YES"/>
         <relationship name="offensives" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Offensive" inverseName="habit" inverseEntity="Offensive" syncable="YES"/>
@@ -45,9 +45,9 @@
         <attribute name="id" attributeType="String" syncable="YES"/>
         <attribute name="updatedAt" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="wasExecuted" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="challenge" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DaysChallenge" inverseName="days" inverseEntity="DaysChallenge" syncable="YES"/>
         <relationship name="day" maxCount="1" deletionRule="Nullify" destinationEntity="Day" inverseName="habits" inverseEntity="Day" syncable="YES"/>
         <relationship name="habit" maxCount="1" deletionRule="Nullify" destinationEntity="Habit" inverseName="days" inverseEntity="Habit" syncable="YES"/>
-        <relationship name="sequence" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DaysSequence" inverseName="days" inverseEntity="DaysSequence" syncable="YES"/>
     </entity>
     <entity name="Notification" representedClassName=".NotificationMO" versionHashModifier="added index" syncable="YES" codeGenerationType="category">
         <attribute name="fireDate" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
@@ -65,7 +65,7 @@
         <attribute name="id" attributeType="String" syncable="YES"/>
         <attribute name="toDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="updatedAt" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <relationship name="daysSequence" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DaysSequence" inverseName="offensives" inverseEntity="DaysSequence" syncable="YES"/>
+        <relationship name="challenge" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DaysChallenge" inverseName="offensives" inverseEntity="DaysChallenge" syncable="YES"/>
         <relationship name="habit" maxCount="1" deletionRule="Nullify" destinationEntity="Habit" inverseName="offensives" inverseEntity="Habit" syncable="YES"/>
     </entity>
     <entity name="User" representedClassName=".UserMO" syncable="YES" codeGenerationType="category">
@@ -75,12 +75,12 @@
     </entity>
     <elements>
         <element name="Day" positionX="-3638" positionY="-4030" width="128" height="88"/>
-        <element name="DaysSequence" positionX="-3645" positionY="-3883" width="128" height="148"/>
-        <element name="Habit" positionX="-3215" positionY="-3922" width="128" height="193"/>
+        <element name="DaysChallenge" positionX="-3645" positionY="-3883" width="128" height="148"/>
+        <element name="FireTime" positionX="-2999" positionY="-3922" width="128" height="118"/>
+        <element name="Habit" positionX="-3215" positionY="-3915" width="128" height="193"/>
         <element name="HabitDay" positionX="-3438" positionY="-3978" width="128" height="133"/>
         <element name="Notification" positionX="-2997" positionY="-3745" width="128" height="118"/>
         <element name="Offensive" positionX="-3431" positionY="-3661" width="128" height="148"/>
         <element name="User" positionX="-3242" positionY="-4131" width="128" height="88"/>
-        <element name="FireTime" positionX="-2999" positionY="-3922" width="128" height="118"/>
     </elements>
 </model>

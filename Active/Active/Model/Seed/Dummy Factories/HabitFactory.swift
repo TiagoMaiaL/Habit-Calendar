@@ -66,12 +66,12 @@ struct HabitFactory: DummyFactory {
         habit.addToFireTimes(Set(fireTimes) as NSSet)
 
         let notificationFactory = NotificationFactory(context: context)
-        let sequenceFactory = DaysSequenceFactory(context: context)
-        let dummySequence = sequenceFactory.makeDummy()
-        dummySequence.habit = habit
+        let challengeFactory = DaysChallengeFactory(context: context)
+        let dummyChallenge = challengeFactory.makeDummy()
+        dummyChallenge.habit = habit
 
-        guard let habitDays = dummySequence.days as? Set<HabitDayMO> else {
-            assertionFailure("Error: The sequence dummy doesn't have valid days.")
+        guard let habitDays = dummyChallenge.days as? Set<HabitDayMO> else {
+            assertionFailure("Error: The challenge dummy doesn't have valid days.")
             return habit
         }
 
@@ -103,8 +103,8 @@ struct HabitFactory: DummyFactory {
             "The generated dummy must have fire times."
         )
         assert(
-            (habit.daysSequences?.count ?? 0) > 0,
-            "The generated dummy habit must have a sequence."
+            (habit.challenges?.count ?? 0) > 0,
+            "The generated dummy habit must have a challenge."
         )
         assert(
             (habit.notifications?.count ?? 0) > 0,

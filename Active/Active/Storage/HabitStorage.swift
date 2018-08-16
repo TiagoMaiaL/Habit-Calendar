@@ -18,8 +18,8 @@ class HabitStorage {
     /// associated with a given habit.
     private let notificationStorage: NotificationStorage
 
-    /// The days sequence storage used to create new sequences.
-    private let daysSequenceStorage: DaysSequenceStorage
+    /// The days challenge storage used to create new challenges.
+    private let daysChallengeStorage: DaysChallengeStorage
 
     /// The user notifications scheduler.
     private let notificationScheduler: NotificationScheduler
@@ -31,20 +31,16 @@ class HabitStorage {
 
     /// Creates a new HabitStorage class using the provided persistent container.
     /// - Parameters:
-    ///     - daysSequenceStorage: The storage used to manage the habit's
-    ///                            sequences.
-    ///     - notificationStorage: The notification storage used to edit
-    ///                            the entities' notifications.
-    ///     - notificationScheduler: The scheduler in charge of scheduling
-    ///                              the user notifications for the habit.
-    ///     - fireTimeStorage: The storage in charge of creating the fire time
-    ///                        entities.
-    init(daysSequenceStorage: DaysSequenceStorage,
+    ///     - daysChallengeStorage: The storage used to manage the habit's challenges.
+    ///     - notificationStorage: The notification storage used to edit the entities' notifications.
+    ///     - notificationScheduler: The scheduler in charge of scheduling the user notifications for the habit.
+    ///     - fireTimeStorage: The storage in charge of creating the fire time entities.
+    init(daysChallengeStorage: DaysChallengeStorage,
          notificationStorage: NotificationStorage,
          notificationScheduler: NotificationScheduler,
          fireTimeStorage: FireTimeStorage
     ) {
-        self.daysSequenceStorage = daysSequenceStorage
+        self.daysChallengeStorage = daysChallengeStorage
         self.notificationStorage = notificationStorage
         self.notificationScheduler = notificationScheduler
         self.fireTimeStorage = fireTimeStorage
@@ -76,7 +72,7 @@ class HabitStorage {
     /// Creates and persists a new Habit instance with the provided info.
     /// - Parameter context: The context used to write the new habit into.
     /// - Parameter name: The name of the habit entity.
-    /// - Parameter days: The dates of the days the habit will be tracked.
+    /// - Parameter days: The dates for the DaysChallenge associated with the habit being created.
     /// - Parameter notifications: The fire dates of each notification object
     ///                            to be added to the habit.
     /// - Returns: The created Habit entity object.
@@ -96,8 +92,8 @@ class HabitStorage {
         // Associate its user.
         habit.user = user
 
-        // Create the sequence.
-        _ = daysSequenceStorage.create(
+        // Create the challenge.
+        _ = daysChallengeStorage.create(
             using: context,
             daysDates: days,
             and: habit
@@ -129,7 +125,7 @@ class HabitStorage {
     /// - Parameter habit: The Habit entity to be changed.
     /// - Parameter context: The context used to change the habit and the associated entities.
     /// - Parameter name: The new name of the passed habit.
-    /// - Parameter days: The new days' dates of the passed habit.
+    /// - Parameter days: The dates of the new DaysChallenge to be added to the entity.
     /// - Parameter notifications: The new dates of each notification object
     ///                            to be added to the habit.
     func edit(
@@ -150,7 +146,7 @@ class HabitStorage {
         }
 
         if let days = days {
-            editDays(days, ofHabit: habit)
+            editDaysChallenge(days, ofHabit: habit)
         }
 
         if let fireTimes = notificationFireTimes {
@@ -172,7 +168,7 @@ class HabitStorage {
                 }
             }
 
-            // Create and schedule the notifications.
+            // Create and schedule the new notifications.
             _ = makeNotifications(
                 context: context,
                 habit: habit,
@@ -183,11 +179,11 @@ class HabitStorage {
         return habit
     }
 
-    /// Edits the habit's sequence of days by closing the current and adding a new one.
+    /// Edits the habit's daysChallenge by closing the current and adding a new one.
     /// - Parameters:
     ///     - days: The days to be added.
     ///     - habit: The habit to be edited.
-    private func editDays(_ days: [Date], ofHabit habit: HabitMO) {
+    private func editDaysChallenge(_ days: [Date], ofHabit habit: HabitMO) {
         assert(!days.isEmpty, "HabitStorage -- edit: days argument shouldn't be empty.")
 
         guard let context = habit.managedObjectContext else {
@@ -195,23 +191,13 @@ class HabitStorage {
             return
         }
 
-        // Close the current habit's sequence of days:
-        if let currentSequence = habit.getCurrentSequence() {
-            // Remove its future days.
-            for day in habit.getFutureDays() {
-                if day.sequence === currentSequence {
-                    currentSequence.removeFromDays(day)
-                }
-                habit.removeFromDays(day)
-                context.delete(day)
-            }
-
-            // Change its toDate to today.
-            currentSequence.toDate = Date().getBeginningOfDay()
+        // Close the current habit's days' challenge:
+        if let currentChallenge = habit.getCurrentChallenge() {
+            currentChallenge.close()
         }
 
-        // Add a new sequence.
-        _ = daysSequenceStorage.create(
+        // Add a new challenge.
+        _ = daysChallengeStorage.create(
             using: context,
             daysDates: days,
             and: habit

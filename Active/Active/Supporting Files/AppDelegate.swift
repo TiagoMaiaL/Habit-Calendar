@@ -49,8 +49,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         calendarDayStorage: dayStorage
     )
 
-    /// The app's DaysSequenceStorage.
-    private (set) lazy var daysSequenceStorage = DaysSequenceStorage(
+    /// The app's DaysChallengeStorage.
+    private (set) lazy var daysChallengeStorage = DaysChallengeStorage(
         habitDayStorage: habitDayStorage
     )
 
@@ -69,7 +69,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     /// The app's Habit storage that's going to be used by the controllers.
     private(set) lazy var habitStorage: HabitStorage = HabitStorage(
-        daysSequenceStorage: daysSequenceStorage,
+        daysChallengeStorage: daysChallengeStorage,
         notificationStorage: notificationStorage,
         notificationScheduler: notificationScheduler,
         fireTimeStorage: FireTimeStorage()
