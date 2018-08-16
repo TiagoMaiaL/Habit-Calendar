@@ -9,12 +9,12 @@
 import Foundation
 import CoreData
 
-/// Factory in charge of generating DaysSequenceMO dummies.
-struct DaysSequenceFactory: DummyFactory {
+/// Factory in charge of generating DaysChallengeMO dummies.
+struct DaysChallengeFactory: DummyFactory {
 
     // MARK: Types
 
-    // This factory generates entities of the DaysSequenceMO class.
+    // This factory generates entities of the DaysChallengeMO class.
     typealias Entity = DaysChallengeMO
 
     // MARK: Properties
@@ -23,22 +23,21 @@ struct DaysSequenceFactory: DummyFactory {
 
     // MARK: Imperatives
 
-    /// Generates a new DaysSequence dummy.
-    /// - Note: The generated dummy and its days don't have the an associated
-    ///         Habit.
-    /// - Returns: The generated DaysSequenceMO dummy as a NSManagedObject.
+    /// Generates a new DaysChallenge dummy.
+    /// - Note: The generated dummy and its days don't have an associated Habit.
+    /// - Returns: The generated DaysChallengeMO.
     func makeDummy() -> DaysChallengeMO {
-        // Declare the dates used to create the sequence.
+        // Declare the dates used to create the challenge.
         let dates = (0..<Int.random(1..<50)).compactMap {
             Date().byAddingDays($0)?.getBeginningOfDay()
         }
 
         // Declare the dummy and its main properties:
-        let dummySequence = DaysChallengeMO(context: context)
-        dummySequence.id = UUID().uuidString
-        dummySequence.createdAt = Date()
-        dummySequence.fromDate = dates.first!
-        dummySequence.toDate = dates.last!
+        let dummyChallenge = DaysChallengeMO(context: context)
+        dummyChallenge.id = UUID().uuidString
+        dummyChallenge.createdAt = Date()
+        dummyChallenge.fromDate = dates.first!
+        dummyChallenge.toDate = dates.last!
 
         // Associate its empty days:
         // Declare the DayFactory.
@@ -72,14 +71,14 @@ struct DaysSequenceFactory: DummyFactory {
             let habitDay = habitDayFactory.makeDummy()
             habitDay.day = day
 
-            dummySequence.addToDays(habitDay)
+            dummyChallenge.addToDays(habitDay)
         }
 
         assert(
-            (dummySequence.days?.count ?? 0) > 0,
-            "The generated dummy sequence must have empty habit days associated with it."
+            (dummyChallenge.days?.count ?? 0) > 0,
+            "The generated dummy challenge must have empty habit days associated with it."
         )
 
-        return dummySequence
+        return dummyChallenge
     }
 }

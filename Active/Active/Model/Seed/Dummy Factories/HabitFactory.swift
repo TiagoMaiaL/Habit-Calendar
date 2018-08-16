@@ -66,7 +66,7 @@ struct HabitFactory: DummyFactory {
         habit.addToFireTimes(Set(fireTimes) as NSSet)
 
         let notificationFactory = NotificationFactory(context: context)
-        let challengeFactory = DaysSequenceFactory(context: context)
+        let challengeFactory = DaysChallengeFactory(context: context)
         let dummyChallenge = challengeFactory.makeDummy()
         dummyChallenge.habit = habit
 

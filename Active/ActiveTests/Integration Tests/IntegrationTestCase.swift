@@ -39,8 +39,8 @@ class IntegrationTestCase: XCTestCase {
     /// The habitDay factory used by the tests.
     var habitDayFactory: HabitDayFactory!
 
-    /// The daysSequence factory used by the tests.
-    var daysSequenceFactory: DaysSequenceFactory!
+    /// The daysChallenge factory used by the tests.
+    var daysChallengeFactory: DaysChallengeFactory!
 
     // MARK: setup/tearDown
 
@@ -56,7 +56,7 @@ class IntegrationTestCase: XCTestCase {
         notificationFactory = NotificationFactory(context: context)
         dayFactory = DayFactory(context: context)
         habitDayFactory = HabitDayFactory(context: context)
-        daysSequenceFactory = DaysSequenceFactory(context: context)
+        daysChallengeFactory = DaysChallengeFactory(context: context)
 }
 
     override func tearDown() {
@@ -66,7 +66,7 @@ class IntegrationTestCase: XCTestCase {
         notificationFactory = nil
         dayFactory = nil
         habitDayFactory = nil
-        daysSequenceFactory = nil
+        daysChallengeFactory = nil
 
         /// Remove the used in-memory persistent container.
         memoryPersistentContainer.viewContext.rollback()

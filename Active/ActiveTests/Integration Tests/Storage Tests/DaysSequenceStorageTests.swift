@@ -134,7 +134,7 @@ class DaysSequenceStorageTests: IntegrationTestCase {
 
     func testSequenceDeletion() {
         // 1. Declare a dummy sequence.
-        let dummySequence = daysSequenceFactory.makeDummy()
+        let dummySequence = daysChallengeFactory.makeDummy()
 
         // 2. Delete it using the storage.
         sequenceStorage.delete(dummySequence, from: context)

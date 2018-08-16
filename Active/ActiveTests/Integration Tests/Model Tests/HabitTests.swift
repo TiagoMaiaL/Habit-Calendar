@@ -215,7 +215,7 @@ class HabitTests: IntegrationTestCase {
         let emptyHabit = makeEmptyDummy()
 
         // 2. Add a DaysChallenge to it.
-        let daysChallenge = DaysSequenceFactory(context: context)
+        let daysChallenge = DaysChallengeFactory(context: context)
         let challenge = daysChallenge.makeDummy()
         emptyHabit.addToChallenges(challenge)
 

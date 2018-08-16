@@ -17,7 +17,7 @@ class DaysSequenceTests: IntegrationTestCase {
 
     func testGettingSequenceExecutedDays() {
         // 1. Declare a dummy sequence.
-        let sequenceDummy = daysSequenceFactory.makeDummy()
+        let sequenceDummy = daysChallengeFactory.makeDummy()
 
         // 2. Mark some days as executed.
         guard let daysSet = sequenceDummy.days as? Set<HabitDayMO> else {
@@ -42,7 +42,7 @@ class DaysSequenceTests: IntegrationTestCase {
 
     func testGettingSequenceMissedDays() {
         // 1. Declare a dummy sequence.
-        let sequenceDummy = daysSequenceFactory.makeDummy()
+        let sequenceDummy = daysChallengeFactory.makeDummy()
 
         // 2. Mark some days as executed.
         guard let daysSet = sequenceDummy.days as? Set<HabitDayMO> else {
@@ -66,7 +66,7 @@ class DaysSequenceTests: IntegrationTestCase {
 
     func testGettingSequenceProgressInfo() {
         // 1. Declare a dummy sequence.
-        let sequenceDummy = daysSequenceFactory.makeDummy()
+        let sequenceDummy = daysChallengeFactory.makeDummy()
 
         // 2. Mark some days as executed.
         guard let daysSet = sequenceDummy.days as? Set<HabitDayMO> else {
@@ -95,7 +95,7 @@ class DaysSequenceTests: IntegrationTestCase {
 
     func testGettingTheCurrentDay() {
         // 1. Create a new dummy sequence.
-        let dummySequence = daysSequenceFactory.makeDummy()
+        let dummySequence = daysChallengeFactory.makeDummy()
 
         // 2. Get its current day and make assertions on its dates.
         guard let currentDay = dummySequence.getCurrentDay() else {
@@ -125,7 +125,7 @@ class DaysSequenceTests: IntegrationTestCase {
 
     func testGettingSequenceCurrentDayShouldBeNil() {
         // 1. Create a dummy sequence.
-        let dummySequence = daysSequenceFactory.makeDummy()
+        let dummySequence = daysChallengeFactory.makeDummy()
         // 1.1. Clear it by removing its current day.
         guard let currentDay = dummySequence.getCurrentDay() else {
             XCTFail("Couldn't get the sequence's current day.")
@@ -143,7 +143,7 @@ class DaysSequenceTests: IntegrationTestCase {
 
     func testMarkingCurrentDayAsExecuted() {
         // 1. Create a dummy sequence.
-        let dummySequence = daysSequenceFactory.makeDummy()
+        let dummySequence = daysChallengeFactory.makeDummy()
 
         // 2. Mark its current day as executed.
         dummySequence.markCurrentDayAsExecuted()
@@ -174,7 +174,7 @@ class DaysSequenceTests: IntegrationTestCase {
 
     func testGettingSequenceCurrentOffensive() {
         // 1. Declare a dummy sequence.
-        let dummySequence = daysSequenceFactory.makeDummy()
+        let dummySequence = daysChallengeFactory.makeDummy()
         // 1.1. Add some past days.
         let pastDays = makeHabitDays(from: -6 ..< 0)
         dummySequence.addToDays(Set(pastDays) as NSSet)
@@ -197,7 +197,7 @@ class DaysSequenceTests: IntegrationTestCase {
 
     func testGettingSequenceCurrentOffensiveWhenToDateIsToday() {
         // 1. Declare a dummy sequence.
-        let dummySequence = daysSequenceFactory.makeDummy()
+        let dummySequence = daysChallengeFactory.makeDummy()
         // 1.1. Add some past days to it.
         let pastDays = makeHabitDays(from: -15 ..< 0)
         dummySequence.addToDays(Set(pastDays) as NSSet)
@@ -222,7 +222,7 @@ class DaysSequenceTests: IntegrationTestCase {
 
     func testGettingSequenceCurrentOffensiveShouldReturnNilWhenBrokenOffensivesExist() {
         // 1. Declare a dummy sequence.
-        let dummySequence = daysSequenceFactory.makeDummy()
+        let dummySequence = daysChallengeFactory.makeDummy()
         // 1.1. Add some past days.
         let pastDays = makeHabitDays(from: -12 ..< 0)
         dummySequence.addToDays(Set(pastDays) as NSSet)
@@ -255,7 +255,7 @@ class DaysSequenceTests: IntegrationTestCase {
 
     func testMarkingCurrentDayAsExecutedShouldCreateNewOffensive() {
         // 1. Declare a dummy sequence.
-        let dummySequence = daysSequenceFactory.makeDummy()
+        let dummySequence = daysChallengeFactory.makeDummy()
 
         // 2. Mark its current day as executed.
         dummySequence.markCurrentDayAsExecuted()
@@ -280,7 +280,7 @@ class DaysSequenceTests: IntegrationTestCase {
 
     func testMarkingCurrentDayAsExecutedContinuesPreviousOffensive() {
         // 1. Declare a dummy sequence.
-        let dummySequence = daysSequenceFactory.makeDummy()
+        let dummySequence = daysChallengeFactory.makeDummy()
 
         // 1.1. Add some past days to it.
         let pastDays = makeHabitDays(from: -20..<0)
@@ -309,7 +309,7 @@ class DaysSequenceTests: IntegrationTestCase {
 
     func testBreakingPreviousOffensiveShouldCreateNewOffensive() {
         // 1. Declare a dummy sequence.
-        let dummySequence = daysSequenceFactory.makeDummy()
+        let dummySequence = daysChallengeFactory.makeDummy()
 
         // 1.1. Add some past days to it.
         let pastDays = makeHabitDays(from: -26..<0)
@@ -343,7 +343,7 @@ class DaysSequenceTests: IntegrationTestCase {
 
     func testGettingSequencePastDays() {
         // 1. Declare a dummy sequence.
-        let dummySequence = daysSequenceFactory.makeDummy()
+        let dummySequence = daysChallengeFactory.makeDummy()
 
         // 1.1 Add some past days to it.
         let pastAmount = -25
@@ -360,7 +360,7 @@ class DaysSequenceTests: IntegrationTestCase {
 
     func testGettingSequenceFutureDays() {
         // 1. Declare a dummy sequence.
-        let dummySequence = daysSequenceFactory.makeDummy()
+        let dummySequence = daysChallengeFactory.makeDummy()
 
         // 1.1 Get its future days by getting its days count and
         // subtracting 1 (the current one).

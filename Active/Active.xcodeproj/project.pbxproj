@@ -89,7 +89,7 @@
 		47D8308820FCE82F002D3A97 /* DaysChallengeMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D8308720FCE82F002D3A97 /* DaysChallengeMO.swift */; };
 		47D8308A20FCFDD6002D3A97 /* DaysSequenceStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D8308920FCFDD6002D3A97 /* DaysSequenceStorage.swift */; };
 		47D8308C20FD00E5002D3A97 /* DaysSequenceStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D8308B20FD00E5002D3A97 /* DaysSequenceStorageTests.swift */; };
-		47D8308E20FD1490002D3A97 /* DaysSequenceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D8308D20FD1490002D3A97 /* DaysSequenceFactory.swift */; };
+		47D8308E20FD1490002D3A97 /* DaysChallengeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D8308D20FD1490002D3A97 /* DaysChallengeFactory.swift */; };
 		47D8309020FD6288002D3A97 /* DaysSequenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D8308F20FD6288002D3A97 /* DaysSequenceTests.swift */; };
 		47D8FC9E20DC13990094026B /* UserNotificationManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D8FC9D20DC13990094026B /* UserNotificationManagerTests.swift */; };
 		47E6C20B20EAF550003BDB4D /* HabitCreationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E6C20A20EAF550003BDB4D /* HabitCreationTableViewController.swift */; };
@@ -213,7 +213,7 @@
 		47D8308720FCE82F002D3A97 /* DaysChallengeMO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaysChallengeMO.swift; sourceTree = "<group>"; };
 		47D8308920FCFDD6002D3A97 /* DaysSequenceStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaysSequenceStorage.swift; sourceTree = "<group>"; };
 		47D8308B20FD00E5002D3A97 /* DaysSequenceStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaysSequenceStorageTests.swift; sourceTree = "<group>"; };
-		47D8308D20FD1490002D3A97 /* DaysSequenceFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaysSequenceFactory.swift; sourceTree = "<group>"; };
+		47D8308D20FD1490002D3A97 /* DaysChallengeFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaysChallengeFactory.swift; sourceTree = "<group>"; };
 		47D8308F20FD6288002D3A97 /* DaysSequenceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaysSequenceTests.swift; sourceTree = "<group>"; };
 		47D8FC9D20DC13990094026B /* UserNotificationManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationManagerTests.swift; sourceTree = "<group>"; };
 		47E6C20A20EAF550003BDB4D /* HabitCreationTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitCreationTableViewController.swift; sourceTree = "<group>"; };
@@ -451,7 +451,7 @@
 				475C96A520DEFEBC00212E1F /* HabitFactory.swift */,
 				475C96A720DF20A500212E1F /* NotificationFactory.swift */,
 				475C96A920DF235000212E1F /* HabitDayFactory.swift */,
-				47D8308D20FD1490002D3A97 /* DaysSequenceFactory.swift */,
+				47D8308D20FD1490002D3A97 /* DaysChallengeFactory.swift */,
 				47AA365A2104D5E60008D2DC /* FireTimeFactory.swift */,
 			);
 			path = "Dummy Factories";
@@ -782,7 +782,7 @@
 				4713A20220C164FB008A13D2 /* DayMO.swift in Sources */,
 				47D7003D210179F600F4FE88 /* NotificationScheduler.swift in Sources */,
 				4779588320D8B2E10080614F /* UserNotificationManager.swift in Sources */,
-				47D8308E20FD1490002D3A97 /* DaysSequenceFactory.swift in Sources */,
+				47D8308E20FD1490002D3A97 /* DaysChallengeFactory.swift in Sources */,
 				47E6C21020EB1233003BDB4D /* SeedManager.swift in Sources */,
 				4713A20420C16542008A13D2 /* NotificationMO.swift in Sources */,
 				4761F5B021209EED00A8D407 /* CalendarDayCell.swift in Sources */,
