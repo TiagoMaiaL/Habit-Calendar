@@ -172,10 +172,34 @@ class HabitDaysSelectionViewController: UIViewController {
     private func handleFooter() {
         // Enable/Disable the button if the dates are selected or not.
         doneButton.isEnabled = calendarView.selectedDates.count > 1
+        // Declare the number of selected dates.
+        var datesCount = calendarView.selectedDates.count
+        if datesCount == 0 && firstSelectedDay != nil {
+            datesCount = 1
+        }
+        // Display the number of selected days.
+        selectedDaysNumberLabel.text = "\(datesCount) day\(datesCount == 1 ? "" : "s") selected"
 
-        selectedDaysNumberLabel.text = """
-        \(calendarView.selectedDates.count) day\(calendarView.selectedDates.count == 1 ? "" : "s") selected
-        """
+        // Display the range label.
+        let formatter = DateFormatter.shortCurrent
+
+        var firstDescription = ""
+        var lastDescription = ""
+
+        // If there's a first selected date, display it. Otherwise show a placeholder.
+        if let first = calendarView.selectedDates.first ?? firstSelectedDay {
+            firstDescription = formatter.string(from: first)
+        } else {
+            firstDescription = "--"
+        }
+        // If there's a last selected date, display it. Otherwise show a placeholder.
+        if let last = calendarView.selectedDates.last {
+            lastDescription = formatter.string(from: last)
+        } else {
+            lastDescription = "--"
+        }
+
+        selectedDaysRangeLabel.text = "From: \(firstDescription), to: \(lastDescription)"
     }
 
     /// Handles the title of the calendar's header view.

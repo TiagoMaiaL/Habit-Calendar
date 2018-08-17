@@ -288,20 +288,13 @@ class HabitCreationTableViewController: UITableViewController,
     /// field.
     private func configureDaysLabels() {
         if let days = days?.sorted(), !days.isEmpty {
-            let dayFormatter = ISO8601DateFormatter()
-            dayFormatter.formatOptions = [
-                .withDashSeparatorInDate,
-                .withYear,
-                .withMonth,
-                .withDay
-            ]
-
+            let formatter = DateFormatter.shortCurrent
             // Set the text for the label displaying the number of days.
             daysAmountLabel.text = "\(days.count) day\(days.count == 1 ? "" : "s") selected."
             // Set the text for the label displaying initial day in the sequence.
-            fromDayLabel.text = dayFormatter.string(from: days.first!)
+            fromDayLabel.text = formatter.string(from: days.first!)
             // Set the text for the label displaying final day in the sequence.
-            toDayLabel.text = dayFormatter.string(from: days.last!)
+            toDayLabel.text = formatter.string(from: days.last!)
         } else {
             daysAmountLabel.text = "No days were selected."
             fromDayLabel.text = "--"

@@ -62,6 +62,7 @@
 		474A209520D00AFA00E0EBD0 /* DayStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474A209420D00AFA00E0EBD0 /* DayStorageTests.swift */; };
 		474A209720D1B02700E0EBD0 /* HabitStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474A209620D1B02700E0EBD0 /* HabitStorageTests.swift */; };
 		474A209C20D1B51300E0EBD0 /* DateUtilsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474A209B20D1B51300E0EBD0 /* DateUtilsTests.swift */; };
+		474B7B9E212746BE00814A8E /* DateFormatter+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474B7B9D212746BE00814A8E /* DateFormatter+Utils.swift */; };
 		474F9C8620CC7E180094C19C /* Date+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474F9C8520CC7E180094C19C /* Date+Utils.swift */; };
 		474F9C8A20CE3F670094C19C /* IntegrationTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474F9C8920CE3F670094C19C /* IntegrationTestCase.swift */; };
 		474F9C8D20CEE2840094C19C /* UserStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474F9C8C20CEE2840094C19C /* UserStorageTests.swift */; };
@@ -180,6 +181,7 @@
 		474A209420D00AFA00E0EBD0 /* DayStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayStorageTests.swift; sourceTree = "<group>"; };
 		474A209620D1B02700E0EBD0 /* HabitStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitStorageTests.swift; sourceTree = "<group>"; };
 		474A209B20D1B51300E0EBD0 /* DateUtilsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtilsTests.swift; sourceTree = "<group>"; };
+		474B7B9D212746BE00814A8E /* DateFormatter+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Utils.swift"; sourceTree = "<group>"; };
 		474F9C8520CC7E180094C19C /* Date+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Utils.swift"; sourceTree = "<group>"; };
 		474F9C8920CE3F670094C19C /* IntegrationTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegrationTestCase.swift; sourceTree = "<group>"; };
 		474F9C8C20CEE2840094C19C /* UserStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStorageTests.swift; sourceTree = "<group>"; };
@@ -392,6 +394,7 @@
 				474F9C8520CC7E180094C19C /* Date+Utils.swift */,
 				470230D720E5250A003A1F6E /* Int+Utils.swift */,
 				47E6C21E20EC16C8003BDB4D /* UIViewController+Utils.swift */,
+				474B7B9D212746BE00814A8E /* DateFormatter+Utils.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -804,6 +807,7 @@
 				4779588520D8B38B0080614F /* NotificationStorage.swift in Sources */,
 				47D8308820FCE82F002D3A97 /* DaysChallengeMO.swift in Sources */,
 				47E6C20B20EAF550003BDB4D /* HabitCreationTableViewController.swift in Sources */,
+				474B7B9E212746BE00814A8E /* DateFormatter+Utils.swift in Sources */,
 				4725D05D20C8A96200C3B63F /* HabitStorage.swift in Sources */,
 				47E6C21320EB12A2003BDB4D /* DayFactory.swift in Sources */,
 				4732CE7C2118DA8400E2770C /* UnderlinedTextField.swift in Sources */,
