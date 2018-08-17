@@ -328,9 +328,9 @@
                                                     <rect key="frame" x="25" y="10" width="306" height="139.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pyb-N6-nac">
-                                                            <rect key="frame" x="0.0" y="0.0" width="61.5" height="31"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="158" height="31"/>
                                                             <attributedString key="attributedText">
-                                                                <fragment content="Days ">
+                                                                <fragment content="Days challenge ">
                                                                     <attributes>
                                                                         <font key="NSFont" size="20" name="SFProText-Regular"/>
                                                                         <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
@@ -346,7 +346,7 @@
                                                             </attributedString>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="At what days would you like to execute this habit?" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JOL-oE-7MJ">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="For how many days will you keep doing this activity?" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JOL-oE-7MJ">
                                                             <rect key="frame" x="0.0" y="41" width="306" height="41"/>
                                                             <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="17"/>
                                                             <nil key="textColor"/>
