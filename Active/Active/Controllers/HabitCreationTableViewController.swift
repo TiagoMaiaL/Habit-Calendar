@@ -380,7 +380,7 @@ extension HabitCreationTableViewController {
         if let field = Field(rawValue: indexPath.row) {
             switch field {
             case .name:
-                return 110
+                return 130
             case .color:
                 // Compute the expected height for the color picker field.
                 let marginsValue: CGFloat = 20
