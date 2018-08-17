@@ -9,8 +9,7 @@
 import UIKit
 import JTAppleCalendar
 
-/// The controller used to select the days in which the habit is
-/// going to be tracked.
+/// The controller used to select the days in which the habit is going to be tracked.
 class HabitDaysSelectionViewController: UIViewController {
 
     // MARK: Properties
@@ -169,13 +168,11 @@ class HabitDaysSelectionViewController: UIViewController {
 
     // MARK: Imperatives
 
-    /// Handles the interaction of the done button according to
-    /// the selected days.
+    /// Handles the interaction of the done button according to the selected days.
     private func handleFooter() {
         // Enable/Disable the button if the dates are selected or not.
-        doneButton.isEnabled = !calendarView.selectedDates.isEmpty
+        doneButton.isEnabled = calendarView.selectedDates.count > 1
 
-        // Display the number of selected days.
         selectedDaysNumberLabel.text = """
         \(calendarView.selectedDates.count) day\(calendarView.selectedDates.count == 1 ? "" : "s") selected
         """
@@ -284,13 +281,13 @@ extension HabitDaysSelectionViewController: JTAppleCalendarViewDataSource, JTApp
     ) {
         // Change the cell's appearance to show the selected state.
         if let cell = cell {
-            handleAppearanceOfCell(cell, using: cellState)
-
             // Configure the range according to the tap.
             if shouldApplyRangeSelection {
-                if let firstDay = firstSelectedDay {
+                if let firstDay = firstSelectedDay, date != firstDay {
                     // If the date is lesser than the first selected date, make it the new start of the range.
                     if date.compare(firstDay) == .orderedAscending {
+                        calendarView.deselect(dates: [firstDay])
+                        calendarView.reloadDates([firstDay])
                         firstSelectedDay = date
                     } else {
                         // If not, continue with the range selection.
@@ -304,9 +301,14 @@ extension HabitDaysSelectionViewController: JTAppleCalendarViewDataSource, JTApp
                         firstSelectedDay = nil
                     }
                 } else {
+                    // Only allow one range selection per challenge. If there was another range selected, clear it.
+                    calendarView.deselectAllDates()
+                    // Begin a new range selection.
                     firstSelectedDay = date
                 }
             }
+
+            handleAppearanceOfCell(cell, using: cellState)
         }
 
         // Configure footer according to the current selection.
@@ -338,8 +340,7 @@ extension HabitDaysSelectionViewController: JTAppleCalendarViewDataSource, JTApp
 
     // MARK: Imperatives
 
-    /// Configures the appearance of a given cell when
-    /// it's about to be displayed.
+    /// Configures the appearance of a given cell when it's about to be displayed.
     /// - Parameters:
     ///     - cell: The cell being displayed.
     ///     - cellState: The cell's state.
