@@ -586,7 +586,7 @@ class HabitStorageTests: IntegrationTestCase {
         let dummyHabit = habitFactory.makeDummy()
 
         // 2. Declare the new days and fire tiems.
-        let days = (1..<Int.random(2..<50)).compactMap {
+        let days = (1..<Int.random(3..<50)).compactMap {
             Date().byAddingDays($0)
         }
         let fireTimes = [
