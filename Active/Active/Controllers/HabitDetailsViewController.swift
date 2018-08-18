@@ -258,10 +258,12 @@ extension HabitDetailsViewController: JTAppleCalendarViewDataSource, JTAppleCale
             for: indexPath
         )
 
-        guard let dayCell = cell as? DetailsCalendarDayCell else {
+        guard let dayCell = cell as? CalendarDayCell else {
             assertionFailure("Couldn't get the expected details calendar cell.")
             return cell
         }
+
+        dayCell.dayTitleLabel.text = cellState.text
 
         if cellState.dateBelongsTo == .thisMonth {
             // Try to get the matching challenge for the current date.
@@ -276,10 +278,7 @@ extension HabitDetailsViewController: JTAppleCalendarViewDataSource, JTAppleCale
             } else {
                 cell.backgroundColor = .gray
             }
-
-            dayCell.dayTitleLabel.text = cellState.text
         } else {
-            dayCell.dayTitleLabel.text = ""
             dayCell.backgroundColor = .white
         }
 
@@ -293,4 +292,13 @@ extension HabitDetailsViewController: JTAppleCalendarViewDataSource, JTAppleCale
         cellState: CellState,
         indexPath: IndexPath
     ) {}
+
+    func calendar(
+        _ calendar: JTAppleCalendarView,
+        shouldSelectDate date: Date,
+        cell: JTAppleCell?,
+        cellState: CellState
+    ) -> Bool {
+        return false
+    }
 }
