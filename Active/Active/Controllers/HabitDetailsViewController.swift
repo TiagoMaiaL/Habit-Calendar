@@ -17,10 +17,22 @@ class HabitDetailsViewController: UIViewController {
     /// The habit presented by this controller.
     var habit: HabitMO!
 
-    /// The ordered days for the passed habit.
-    /// - Note: This array mustn't be empty. The existence of days is ensured
+    /// The habit's ordered challenge entities to be displayed.
+    /// - Note: This array mustn't be empty. The existence of challenges is ensured
     ///         in the habit's creation and edition process.
-    private var orderedHabitDays: [HabitDayMO]!
+    private var challenges: [DaysChallengeMO]! {
+        didSet {
+            // Store the initial and final calendar dates.
+            initialDate = challenges.first!.fromDate!
+            finalDate = challenges.last!.toDate!
+        }
+    }
+
+    /// The initial calendar date.
+    private var initialDate: Date!
+
+    /// The final calendar date.
+    private var finalDate: Date!
 
     /// The habit storage used to manage the controller's habit.
     var habitStorage: HabitStorage!
@@ -70,51 +82,25 @@ class HabitDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Assert on the required properties to be injected
-        // (habit, habitStorage, container and the calendar header views):
-        assert(
-            habit != nil,
-            "Error: the needed habit wasn't injected."
-        )
-        assert(
-            habitStorage != nil,
-            "Error: the needed habitStorage wasn't injected."
-        )
-        assert(
-            container != nil,
-            "Error: the needed container wasn't injected."
-        )
-        assert(
-            monthTitleLabel != nil,
-            "Error: the month title label wasn't set."
-        )
-        assert(
-            nextMonthButton != nil,
-            "Error: the next month button wasn't set."
-        )
-        assert(
-            previousMonthButton != nil,
-            "Error: the previous month button wasn't set."
-        )
+        checkDependencies()
+        // Get the habit's challenges to display in the calendar.
+        challenges = getChallenges(from: habit)
 
-        // Try to get the ordered days from the passed habit.
-        let dateSorting = NSSortDescriptor(key: "day.date", ascending: true)
-
-        guard let orderedDays = habit.getCurrentChallenge()?.days?.sortedArray(
-            using: [dateSorting]
-        ) as? [HabitDayMO] else {
-            assertionFailure("Inconsistency: Couldn't sort the habit's days by the date property.")
-            return
-        }
-
-        // All created habits must have associated habit days.
-        assert(
-            !orderedDays.isEmpty,
-            "Inconsistency: the habit's days shouldn't be empty."
-        )
-
-        // Assign the fetched days.
-        orderedHabitDays = orderedDays
+//        // Try to get the ordered days from the passed habit.
+//        let dateSorting = NSSortDescriptor(key: "day.date", ascending: true)
+//
+//        guard let orderedDays = habit.getCurrentChallenge()?.days?.sortedArray(
+//            using: [dateSorting]
+//        ) as? [HabitDayMO] else {
+//            assertionFailure("Inconsistency: Couldn't sort the habit's days by the date property.")
+//            return
+//        }
+//
+//        // All created habits must have associated habit days.
+//        assert(
+//            !orderedDays.isEmpty,
+//            "Inconsistency: the habit's days shouldn't be empty."
+//        )
 
         // Configure the calendar.
         calendarView.calendarDataSource = self
@@ -191,6 +177,53 @@ information unavailable.
 
     // MARK: Imperatives
 
+    /// Asserts on the values of the main controller's dependencies.
+    private func checkDependencies() {
+        // Assert on the required properties to be injected
+        // (habit, habitStorage, container and the calendar header views):
+        assert(
+            habit != nil,
+            "Error: the needed habit wasn't injected."
+        )
+        assert(
+            habitStorage != nil,
+            "Error: the needed habitStorage wasn't injected."
+        )
+        assert(
+            container != nil,
+            "Error: the needed container wasn't injected."
+        )
+        assert(
+            monthTitleLabel != nil,
+            "Error: the month title label wasn't set."
+        )
+        assert(
+            nextMonthButton != nil,
+            "Error: the next month button wasn't set."
+        )
+        assert(
+            previousMonthButton != nil,
+            "Error: the previous month button wasn't set."
+        )
+    }
+
+    /// Gets the challenges from the passed habit ordered by the fromDate property.
+    /// - Returns: The habit's ordered challenges.
+    private func getChallenges(from habit: HabitMO) -> [DaysChallengeMO] {
+        // Declare and configure the fetch request.
+        let request: NSFetchRequest<DaysChallengeMO> = DaysChallengeMO.fetchRequest()
+        request.predicate = NSPredicate(format: "habit = %@", habit)
+        request.sortDescriptors = [NSSortDescriptor(key: "fromDate", ascending: true)]
+
+        // Fetch the results.
+        let results = (try? container.viewContext.fetch(request)) ?? []
+
+        // Assert on the values, the habit must have at least one challenge entity.
+        assert(!results.isEmpty, "Inconsistency: A habit entity must always have at least one challenge entity.")
+
+        return results
+    }
+
     /// Show the prompt view if today is a day(HabitDayMO) being tracked
     /// by the app.
     private func handlePrompt() {
@@ -210,23 +243,9 @@ extension HabitDetailsViewController: JTAppleCalendarViewDataSource, JTAppleCale
     // MARK: JTAppleCalendarViewDataSource Methods
 
     func configureCalendar(_ calendar: JTAppleCalendarView) -> ConfigurationParameters {
-        // Get the oldest and newest habitDays.
-        let oldestDay = orderedHabitDays.first!
-        let newestDay = orderedHabitDays.last!
-
-        // It'd be a bug if there wasn't valid days with the HabitDay.
-        assert(
-            oldestDay.day?.date != nil,
-            "Inconsistency: Couldn't get the first day's date property."
-        )
-        assert(
-            newestDay.day?.date != nil,
-            "Inconsistency: Couldn't get the last day's date property."
-        )
-
         return ConfigurationParameters(
-            startDate: oldestDay.day!.date!,
-            endDate: newestDay.day!.date!
+            startDate: initialDate,
+            endDate: finalDate
         )
     }
 
