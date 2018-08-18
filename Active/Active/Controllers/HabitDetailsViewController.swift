@@ -29,7 +29,25 @@ class HabitDetailsViewController: UIViewController {
     /// provided habit.
     var container: NSPersistentContainer!
 
-//    /// View holding the prompt to ask the user if the activity
+    /// The month header view, with the month label and next/prev buttons.
+    @IBOutlet weak var monthHeader: MonthHeaderView! {
+        didSet {
+            monthTitleLabel = monthHeader.monthLabel
+            nextMonthButton = monthHeader.nextButton
+            previousMonthButton = monthHeader.previousButton
+        }
+    }
+
+    /// The month title label in the calendar's header.
+    private weak var monthTitleLabel: UILabel!
+
+    /// The next month header button.
+    private weak var nextMonthButton: UIButton!
+
+    /// The previous month header button.
+    private weak var previousMonthButton: UIButton!
+
+    //    /// View holding the prompt to ask the user if the activity
 //    /// was executed in the current day.
 //    @IBOutlet weak var promptView: UIView!
 
@@ -53,7 +71,7 @@ class HabitDetailsViewController: UIViewController {
         super.viewDidLoad()
 
         // Assert on the required properties to be injected
-        // (habit, habitStorage, container):
+        // (habit, habitStorage, container and the calendar header views):
         assert(
             habit != nil,
             "Error: the needed habit wasn't injected."
@@ -65,6 +83,18 @@ class HabitDetailsViewController: UIViewController {
         assert(
             container != nil,
             "Error: the needed container wasn't injected."
+        )
+        assert(
+            monthTitleLabel != nil,
+            "Error: the month title label wasn't set."
+        )
+        assert(
+            nextMonthButton != nil,
+            "Error: the next month button wasn't set."
+        )
+        assert(
+            previousMonthButton != nil,
+            "Error: the previous month button wasn't set."
         )
 
         // Try to get the ordered days from the passed habit.

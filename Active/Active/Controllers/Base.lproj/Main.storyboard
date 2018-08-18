@@ -800,47 +800,80 @@ reminded about this habit?</string>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BiK-vr-Hm9">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eOs-VQ-lGp" userLabel="content view">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eOs-VQ-lGp" userLabel="Content view">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="604"/>
                                         <subviews>
-                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="7Pe-pH-Udy" customClass="JTAppleCalendarView" customModule="JTAppleCalendar">
-                                                <rect key="frame" x="0.0" y="75" width="375" height="453"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="PNf-8b-lZW">
-                                                    <size key="itemSize" width="50" height="50"/>
-                                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                </collectionViewFlowLayout>
-                                                <cells>
-                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Habit day cell id" id="CWe-an-Y5t" customClass="DetailsCalendarDayCell" customModule="Active" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                                            <autoresizingMask key="autoresizingMask"/>
-                                                            <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UEo-Sq-0ja">
-                                                                    <rect key="frame" x="21" y="15" width="8" height="21"/>
-                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                    <nil key="textColor"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
-                                                            </subviews>
-                                                        </view>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="jve-z3-FPF" userLabel="Calendar">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="400"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="q8x-NZ-ZWP" userLabel="Header">
+                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+                                                        <subviews>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vRa-9V-RbT" userLabel="Calendar month" customClass="MonthHeaderView" customModule="Active" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
+                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mkN-C0-TmC" userLabel="Calendar days" customClass="DaysHeaderView" customModule="Active" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="70" width="375" height="30"/>
+                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="30" id="uPM-fB-mHQ"/>
+                                                                </constraints>
+                                                            </view>
+                                                        </subviews>
                                                         <constraints>
-                                                            <constraint firstItem="UEo-Sq-0ja" firstAttribute="centerX" secondItem="CWe-an-Y5t" secondAttribute="centerX" id="Ky2-HD-Kzz"/>
-                                                            <constraint firstItem="UEo-Sq-0ja" firstAttribute="centerY" secondItem="CWe-an-Y5t" secondAttribute="centerY" id="ZXz-DU-9bs"/>
+                                                            <constraint firstAttribute="height" constant="100" id="B67-wl-hAM"/>
                                                         </constraints>
-                                                        <connections>
-                                                            <outlet property="dayTitleLabel" destination="UEo-Sq-0ja" id="XSa-kO-T0Q"/>
-                                                        </connections>
-                                                    </collectionViewCell>
-                                                </cells>
-                                            </collectionView>
+                                                    </stackView>
+                                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" keyboardDismissMode="onDrag" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="7Pe-pH-Udy" userLabel="Body" customClass="JTAppleCalendarView" customModule="JTAppleCalendar">
+                                                        <rect key="frame" x="0.0" y="105" width="375" height="295"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="PNf-8b-lZW">
+                                                            <size key="itemSize" width="50" height="50"/>
+                                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                        </collectionViewFlowLayout>
+                                                        <cells>
+                                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" reuseIdentifier="Habit day cell id" id="CWe-an-Y5t" customClass="DetailsCalendarDayCell" customModule="Active" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                                    <autoresizingMask key="autoresizingMask"/>
+                                                                    <subviews>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UEo-Sq-0ja">
+                                                                            <rect key="frame" x="-4" y="-10.5" width="8" height="21"/>
+                                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                            <nil key="textColor"/>
+                                                                            <nil key="highlightedColor"/>
+                                                                        </label>
+                                                                    </subviews>
+                                                                </view>
+                                                                <constraints>
+                                                                    <constraint firstItem="UEo-Sq-0ja" firstAttribute="centerX" secondItem="CWe-an-Y5t" secondAttribute="centerX" id="Ky2-HD-Kzz"/>
+                                                                    <constraint firstItem="UEo-Sq-0ja" firstAttribute="centerY" secondItem="CWe-an-Y5t" secondAttribute="centerY" id="ZXz-DU-9bs"/>
+                                                                </constraints>
+                                                                <connections>
+                                                                    <outlet property="dayTitleLabel" destination="UEo-Sq-0ja" id="XSa-kO-T0Q"/>
+                                                                </connections>
+                                                            </collectionViewCell>
+                                                        </cells>
+                                                    </collectionView>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="q8x-NZ-ZWP" firstAttribute="width" secondItem="jve-z3-FPF" secondAttribute="width" id="nCC-GG-Gnn"/>
+                                                    <constraint firstAttribute="height" constant="400" id="vd0-bs-6dv"/>
+                                                    <constraint firstItem="7Pe-pH-Udy" firstAttribute="width" secondItem="jve-z3-FPF" secondAttribute="width" id="yYj-L8-N5S"/>
+                                                </constraints>
+                                            </stackView>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="jve-z3-FPF" firstAttribute="leading" secondItem="eOs-VQ-lGp" secondAttribute="leading" id="Spv-GI-Nc2"/>
+                                            <constraint firstItem="jve-z3-FPF" firstAttribute="top" secondItem="eOs-VQ-lGp" secondAttribute="top" id="VqU-Gr-E3L"/>
+                                            <constraint firstAttribute="trailing" secondItem="jve-z3-FPF" secondAttribute="trailing" id="u1F-Xs-06q"/>
+                                        </constraints>
                                     </view>
                                 </subviews>
                                 <constraints>
@@ -862,8 +895,10 @@ reminded about this habit?</string>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="tww-hp-589"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Play guitar" largeTitleDisplayMode="never" id="LZl-wy-YbF"/>
                     <connections>
                         <outlet property="calendarView" destination="7Pe-pH-Udy" id="dhu-6f-iLR"/>
+                        <outlet property="monthHeader" destination="vRa-9V-RbT" id="OBa-Ds-eoE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eer-Kp-wUj" userLabel="First Responder" sceneMemberID="firstResponder"/>
