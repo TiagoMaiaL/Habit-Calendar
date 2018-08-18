@@ -86,22 +86,6 @@ class HabitDetailsViewController: UIViewController {
         // Get the habit's challenges to display in the calendar.
         challenges = getChallenges(from: habit)
 
-//        // Try to get the ordered days from the passed habit.
-//        let dateSorting = NSSortDescriptor(key: "day.date", ascending: true)
-//
-//        guard let orderedDays = habit.getCurrentChallenge()?.days?.sortedArray(
-//            using: [dateSorting]
-//        ) as? [HabitDayMO] else {
-//            assertionFailure("Inconsistency: Couldn't sort the habit's days by the date property.")
-//            return
-//        }
-//
-//        // All created habits must have associated habit days.
-//        assert(
-//            !orderedDays.isEmpty,
-//            "Inconsistency: the habit's days shouldn't be empty."
-//        )
-
         // Configure the calendar.
         calendarView.calendarDataSource = self
         calendarView.calendarDelegate = self
@@ -224,6 +208,18 @@ information unavailable.
         return results
     }
 
+    /// Gets the challenge matching a given date.
+    /// - Note: The challenge is found if the date is in between or is it's begin or final.
+    /// - Returns: The challenge entity, if any.
+    private func getChallenge(from date: Date) -> DaysChallengeMO? {
+        // Try to get the matching challenge by filtering through the habit's fetched ones.
+        // The challenge matches when the passed date or is in between,
+        // or is one of the challenge's limit dates (begin or end).
+        return challenges.filter {
+            date.isInBetween($0.fromDate!, $0.toDate!) || date == $0.fromDate! || date == $0.toDate!
+        }.first
+    }
+
     /// Show the prompt view if today is a day(HabitDayMO) being tracked
     /// by the app.
     private func handlePrompt() {
@@ -268,17 +264,17 @@ extension HabitDetailsViewController: JTAppleCalendarViewDataSource, JTAppleCale
         }
 
         if cellState.dateBelongsTo == .thisMonth {
-            // Set the cell's color if the date represents a habit day.
+            // Try to get the matching challenge for the current date.
+            if let currentChallenge = getChallenge(from: date) {
 
-            let predicate = NSPredicate(
-                format: "day.date >= %@ AND day.date < %@",
-                date.getBeginningOfDay() as NSDate,
-                date.getEndOfDay() as NSDate
-            )
-            if let currentHabitDay = habit.getCurrentChallenge()?.days?.filtered(using: predicate).first as? HabitDayMO {
-                cell.backgroundColor = currentHabitDay.wasExecuted ? .purple : .red
+                if date.isInBetween(currentChallenge.fromDate!, currentChallenge.toDate!) {
+                    cell.backgroundColor = .purple
+                } else if date == currentChallenge.fromDate! || date == currentChallenge.toDate! {
+                    cell.backgroundColor = .green
+                }
+
             } else {
-                cell.backgroundColor = .white
+                cell.backgroundColor = .gray
             }
 
             dayCell.dayTitleLabel.text = cellState.text
