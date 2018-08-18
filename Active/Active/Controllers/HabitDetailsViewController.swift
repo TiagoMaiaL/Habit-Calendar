@@ -29,15 +29,15 @@ class HabitDetailsViewController: UIViewController {
     /// provided habit.
     var container: NSPersistentContainer!
 
-    /// View holding the prompt to ask the user if the activity
-    /// was executed in the current day.
-    @IBOutlet weak var promptView: UIView!
+//    /// View holding the prompt to ask the user if the activity
+//    /// was executed in the current day.
+//    @IBOutlet weak var promptView: UIView!
 
-    /// The positive prompt button.
-    @IBOutlet weak var positivePromptButton: UIButton!
+//    /// The positive prompt button.
+//    @IBOutlet weak var positivePromptButton: UIButton!
 
-    /// The negative prompt button.
-    @IBOutlet weak var negativePromptButton: UIButton!
+//    /// The negative prompt button.
+//    @IBOutlet weak var negativePromptButton: UIButton!
 
     /// The cell's reusable identifier.
     private let cellIdentifier = "Habit day cell id"
@@ -97,7 +97,7 @@ class HabitDetailsViewController: UIViewController {
         super.viewWillAppear(animated)
 
         // Configure the appearance of the prompt view.
-        handlePrompt()
+//        handlePrompt()
     }
 
     // MARK: Actions
@@ -139,13 +139,13 @@ information unavailable.
         }
 
         currentHabitDay.managedObjectContext?.perform {
-            if sender === self.positivePromptButton {
-                // Mark it as executed.
-                currentHabitDay.wasExecuted = true
-            } else if sender === self.negativePromptButton {
-                // Mark is as non executed.
-                currentHabitDay.wasExecuted = false
-            }
+//            if sender === self.positivePromptButton {
+//                // Mark it as executed.
+//                currentHabitDay.wasExecuted = true
+//            } else if sender === self.negativePromptButton {
+//                // Mark is as non executed.
+//                currentHabitDay.wasExecuted = false
+//            }
 
             // Save the result.
             try? currentHabitDay.managedObjectContext?.save()
@@ -168,9 +168,9 @@ information unavailable.
         if let currentDay = habit.getCurrentDay(),
             currentDay.wasExecuted == false {
             // Configure the appearance of the prompt.
-            promptView.isHidden = false
+//            promptView.isHidden = false
         } else {
-            promptView.isHidden = true
+//            promptView.isHidden = true
         }
     }
 }
