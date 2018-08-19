@@ -35,6 +35,20 @@ class DaysChallengeMO: NSManagedObject {
         return days?.filtered(using: todayPredicate).first as? HabitDayMO
     }
 
+    /// Returns the HabitDay associated with the passed date, if found.
+    /// - Parameter date: The date associated with the habit day.
+    func getDay(for date: Date) -> HabitDayMO? {
+        let beginningDate = date.getBeginningOfDay()
+
+        // Declare the predicate to filter for the specific day.
+        let dayPredicate = NSPredicate(
+            format: "day.date = %@",
+            beginningDate as NSDate
+        )
+
+        return days?.filtered(using: dayPredicate).first as? HabitDayMO
+    }
+
     /// Returns the challenge's current offensive, if there's one.
     /// - Note: The current offensive isn't broken and its toDate represents the
     ///         last habitDay before the current one.
