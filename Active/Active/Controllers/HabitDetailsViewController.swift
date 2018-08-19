@@ -262,25 +262,7 @@ extension HabitDetailsViewController: JTAppleCalendarViewDataSource, JTAppleCale
             assertionFailure("Couldn't get the expected details calendar cell.")
             return cell
         }
-
-        dayCell.dayTitleLabel.text = cellState.text
-
-        if cellState.dateBelongsTo == .thisMonth {
-            // Try to get the matching challenge for the current date.
-            if let currentChallenge = getChallenge(from: date) {
-
-                if date.isInBetween(currentChallenge.fromDate!, currentChallenge.toDate!) {
-                    cell.backgroundColor = .purple
-                } else if date == currentChallenge.fromDate! || date == currentChallenge.toDate! {
-                    cell.backgroundColor = .green
-                }
-
-            } else {
-                cell.backgroundColor = .gray
-            }
-        } else {
-            dayCell.backgroundColor = .white
-        }
+        handleAppearanceOfCell(dayCell, using: cellState)
 
         return dayCell
     }
@@ -291,7 +273,13 @@ extension HabitDetailsViewController: JTAppleCalendarViewDataSource, JTAppleCale
         forItemAt date: Date,
         cellState: CellState,
         indexPath: IndexPath
-    ) {}
+    ) {
+        guard let dayCell = cell as? CalendarDayCell else {
+            assertionFailure("Couldn't get the expected details calendar cell.")
+            return
+        }
+        handleAppearanceOfCell(dayCell, using: cellState)
+    }
 
     func calendar(
         _ calendar: JTAppleCalendarView,
@@ -300,5 +288,36 @@ extension HabitDetailsViewController: JTAppleCalendarViewDataSource, JTAppleCale
         cellState: CellState
     ) -> Bool {
         return false
+    }
+
+    /// Configures the appearance of a given cell when it's about to be displayed.
+    /// - Parameters:
+    ///     - cell: The cell being displayed.
+    ///     - cellState: The cell's state.
+    private func handleAppearanceOfCell(
+        _ cell: CalendarDayCell,
+        using cellState: CellState
+    ) {
+        if cellState.dateBelongsTo == .thisMonth {
+            cell.dayTitleLabel.text = cellState.text
+
+            // Try to get the matching challenge for the current date.
+            if getChallenge(from: cellState.date) != nil {
+                // If there's a challenge, show cell as being part of it.
+                cell.backgroundColor = HabitMO.Color(rawValue: habit.color)?.getColor()
+                cell.dayTitleLabel.textColor = .white
+
+                if cellState.date.isInToday {
+                    cell.circleView.backgroundColor = .white
+                    cell.dayTitleLabel.textColor = UIColor(red: 74/255, green: 74/255, blue: 74/255, alpha: 1)
+                } else if cellState.date.isFuture {
+                    // Days to be completed in the future should have a less bright color.
+                    cell.backgroundColor = cell.backgroundColor?.withAlphaComponent(0.5)
+                }
+            }
+        } else {
+            cell.dayTitleLabel.text = ""
+            cell.backgroundColor = .white
+        }
     }
 }
