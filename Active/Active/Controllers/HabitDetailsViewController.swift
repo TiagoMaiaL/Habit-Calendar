@@ -98,6 +98,10 @@ class HabitDetailsViewController: UIViewController {
 
         // Configure the appearance of the prompt view.
 //        handlePrompt()
+
+        // Show the current date in the calendar.
+        let today = Date().getBeginningOfDay()
+        calendarView.scrollToDate(today)
     }
 
     // MARK: Actions
