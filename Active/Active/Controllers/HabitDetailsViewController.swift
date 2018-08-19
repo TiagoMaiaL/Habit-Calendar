@@ -41,24 +41,6 @@ class HabitDetailsViewController: UIViewController {
     /// provided habit.
     var container: NSPersistentContainer!
 
-    /// The month header view, with the month label and next/prev buttons.
-    @IBOutlet weak var monthHeader: MonthHeaderView! {
-        didSet {
-            monthTitleLabel = monthHeader.monthLabel
-            nextMonthButton = monthHeader.nextButton
-            previousMonthButton = monthHeader.previousButton
-        }
-    }
-
-    /// The month title label in the calendar's header.
-    private weak var monthTitleLabel: UILabel!
-
-    /// The next month header button.
-    private weak var nextMonthButton: UIButton!
-
-    /// The previous month header button.
-    private weak var previousMonthButton: UIButton!
-
     //    /// View holding the prompt to ask the user if the activity
 //    /// was executed in the current day.
 //    @IBOutlet weak var promptView: UIView!
@@ -76,6 +58,24 @@ class HabitDetailsViewController: UIViewController {
     /// - Note: The collection view will show a range with
     ///         the Habit's first days until the last ones.
     @IBOutlet weak var calendarView: JTAppleCalendarView!
+
+    /// The month header view, with the month label and next/prev buttons.
+    @IBOutlet weak var monthHeader: MonthHeaderView! {
+        didSet {
+            monthTitleLabel = monthHeader.monthLabel
+            nextMonthButton = monthHeader.nextButton
+            previousMonthButton = monthHeader.previousButton
+        }
+    }
+
+    /// The month title label in the calendar's header.
+    private weak var monthTitleLabel: UILabel!
+
+    /// The next month header button.
+    private weak var nextMonthButton: UIButton!
+
+    /// The previous month header button.
+    private weak var previousMonthButton: UIButton!
 
     // MARK: ViewController Life Cycle
 
@@ -302,9 +302,18 @@ extension HabitDetailsViewController: JTAppleCalendarViewDataSource, JTAppleCale
             cell.dayTitleLabel.text = cellState.text
 
             // Try to get the matching challenge for the current date.
-            if getChallenge(from: cellState.date) != nil {
+            if let challenge = getChallenge(from: cellState.date) {
+                // Get the habitDay associated with the cell's date.
+                guard let habitDay = challenge.getDay(for: cellState.date) else {
+                    // If there isn't a day associated with the date, there's a bug.
+                    assertionFailure("Inconsistency: a day should be returned from the challenge.")
+                    return
+                }
+
                 // If there's a challenge, show cell as being part of it.
-                cell.backgroundColor = HabitMO.Color(rawValue: habit.color)?.getColor()
+                let habitColor = HabitMO.Color(rawValue: habit.color)?.getColor()
+
+                cell.backgroundColor = habitDay.wasExecuted ? habitColor : habitColor?.withAlphaComponent(0.5)
                 cell.dayTitleLabel.textColor = .white
 
                 if cellState.date.isInToday {
@@ -312,7 +321,7 @@ extension HabitDetailsViewController: JTAppleCalendarViewDataSource, JTAppleCale
                     cell.dayTitleLabel.textColor = UIColor(red: 74/255, green: 74/255, blue: 74/255, alpha: 1)
                 } else if cellState.date.isFuture {
                     // Days to be completed in the future should have a less bright color.
-                    cell.backgroundColor = cell.backgroundColor?.withAlphaComponent(0.5)
+                    cell.backgroundColor = cell.backgroundColor?.withAlphaComponent(0.3)
                 }
             }
         } else {
