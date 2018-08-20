@@ -282,6 +282,8 @@ information unavailable.
 
         promptContentView.isHidden = false
 
+        wasExecutedSwitch.onTintColor = habitColor
+
         let order = dayIndex + 1
         displayPromptViewTitle(withOrder: order)
 
@@ -312,7 +314,6 @@ information unavailable.
             orderTitle = "\(order)th"
         }
 
-        // TODO: Apply attributed string to the order.
         let attributedString = NSMutableAttributedString(string: "\(orderTitle) day")
         attributedString.addAttributes(
             [
