@@ -110,6 +110,37 @@ class DaysChallengeTests: IntegrationTestCase {
         )
     }
 
+    func testGettingDayFromDate() {
+        // 1. Create a dummy challenge.
+        let dummyChallenge = daysChallengeFactory.makeDummy()
+
+        // 2. Try to get the day associated with today.
+        let habitDay = dummyChallenge.getDay(for: Date())
+
+        // 3. Assert it returned the correct habit day.
+        XCTAssertNotNil(habitDay)
+        XCTAssertEqual(
+            Date().getBeginningOfDay(),
+            habitDay?.day?.date,
+            "The method should return the correct date."
+        )
+    }
+
+    func testGettingDayFromDateShouldReturnNil() {
+        // 1. Create a dummy challenge.
+        let dummyChallenge = daysChallengeFactory.makeDummy()
+
+        // 2. Try to get the day associated with yesterday.
+        guard let yesterday = Date().byAddingDays(-1) else {
+            XCTFail("Couldn't generate yesterday date.")
+            return
+        }
+        let habitDay = dummyChallenge.getDay(for: yesterday)
+
+        // 3. Assert it returned the correct habit day.
+        XCTAssertNil(habitDay)
+    }
+
     func testGettingEmptyChallengeCurrentDayShouldBeNil() {
         // 1. Create an empty dummy challenge.
         let emptyDummyChallenge = DaysChallengeMO(

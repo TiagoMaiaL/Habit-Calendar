@@ -296,4 +296,52 @@ class DateUtilsTests: XCTestCase {
             "The date should be at the beginning of the month."
         )
     }
+
+    func testIsDateInBetweenShouldReturnTrue() {
+        // Declare three dates: A past one, today, and a future one.
+        let today = Date()
+        guard let pastDate = today.byAddingDays(-34) else {
+            XCTFail("Error: couldn't generate the past date.")
+            return
+        }
+        guard let futureDate = today.byAddingDays(25) else {
+            XCTFail("Error: couldn't generate the future date.")
+            return
+        }
+
+        // Assert it returns true.
+        XCTAssertTrue(today.isInBetween(pastDate, futureDate))
+    }
+
+    func testIsDateInBetweenShouldReturnFalseWhenOtherDatesAreFuture() {
+        // Declare three dates: today, a future one, and another one in the future.
+        let today = Date()
+        guard let futureDate1 = today.byAddingDays(20) else {
+            XCTFail("Error: couldn't generate the future date.")
+            return
+        }
+        guard let futureDate2 = today.byAddingDays(25) else {
+            XCTFail("Error: couldn't generate the future date.")
+            return
+        }
+
+        // Assert it returns false.
+        XCTAssertFalse(today.isInBetween(futureDate1, futureDate2))
+    }
+
+    func testIsDateInBetweenShouldReturnFalseWhenOtherDatesArePast() {
+        // Declare three dates: today, a past one, and another one in the past.
+        let today = Date()
+        guard let pastDate1 = today.byAddingDays(-17) else {
+            XCTFail("Error: couldn't generate the past date.")
+            return
+        }
+        guard let pastDate2 = today.byAddingDays(-4) else {
+            XCTFail("Error: couldn't generate the past date.")
+            return
+        }
+
+        // Assert it returns false.
+        XCTAssertFalse(today.isInBetween(pastDate1, pastDate2))
+    }
 }

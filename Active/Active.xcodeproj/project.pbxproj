@@ -82,10 +82,10 @@
 		47AA3659210382AB0008D2DC /* FireTimeStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AA3658210382AB0008D2DC /* FireTimeStorage.swift */; };
 		47AA365B2104D5E60008D2DC /* FireTimeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AA365A2104D5E60008D2DC /* FireTimeFactory.swift */; };
 		47B2398A212203F9009CB25C /* HabitMOColor+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B23989212203F9009CB25C /* HabitMOColor+UIColor.swift */; };
+		47C1F3DE212A140F00DDA7BB /* CalendarDisplaying.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C1F3DD212A140F00DDA7BB /* CalendarDisplaying.swift */; };
 		47D7003B2100F72A00F4FE88 /* OffensiveTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D7003A2100F72A00F4FE88 /* OffensiveTests.swift */; };
 		47D7003D210179F600F4FE88 /* NotificationScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D7003C210179F600F4FE88 /* NotificationScheduler.swift */; };
 		47D7004121017D0A00F4FE88 /* NotificationSchedulerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D7004021017D0A00F4FE88 /* NotificationSchedulerTests.swift */; };
-		47D8308420F92553002D3A97 /* DetailsCalendarDayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D8308320F92553002D3A97 /* DetailsCalendarDayCell.swift */; };
 		47D8308620FCE820002D3A97 /* OffensiveMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D8308520FCE820002D3A97 /* OffensiveMO.swift */; };
 		47D8308820FCE82F002D3A97 /* DaysChallengeMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D8308720FCE82F002D3A97 /* DaysChallengeMO.swift */; };
 		47D8308A20FCFDD6002D3A97 /* DaysChallengeStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D8308920FCFDD6002D3A97 /* DaysChallengeStorage.swift */; };
@@ -207,10 +207,10 @@
 		47AA3658210382AB0008D2DC /* FireTimeStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireTimeStorage.swift; sourceTree = "<group>"; };
 		47AA365A2104D5E60008D2DC /* FireTimeFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireTimeFactory.swift; sourceTree = "<group>"; };
 		47B23989212203F9009CB25C /* HabitMOColor+UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HabitMOColor+UIColor.swift"; sourceTree = "<group>"; };
+		47C1F3DD212A140F00DDA7BB /* CalendarDisplaying.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDisplaying.swift; sourceTree = "<group>"; };
 		47D7003A2100F72A00F4FE88 /* OffensiveTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffensiveTests.swift; sourceTree = "<group>"; };
 		47D7003C210179F600F4FE88 /* NotificationScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationScheduler.swift; sourceTree = "<group>"; };
 		47D7004021017D0A00F4FE88 /* NotificationSchedulerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSchedulerTests.swift; sourceTree = "<group>"; };
-		47D8308320F92553002D3A97 /* DetailsCalendarDayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsCalendarDayCell.swift; sourceTree = "<group>"; };
 		47D8308520FCE820002D3A97 /* OffensiveMO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffensiveMO.swift; sourceTree = "<group>"; };
 		47D8308720FCE82F002D3A97 /* DaysChallengeMO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaysChallengeMO.swift; sourceTree = "<group>"; };
 		47D8308920FCFDD6002D3A97 /* DaysChallengeStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaysChallengeStorage.swift; sourceTree = "<group>"; };
@@ -308,6 +308,7 @@
 				4737312C20ED503B00895DD2 /* FireTimesSelectionViewController.swift */,
 				47E6C20C20EAF567003BDB4D /* HabitDetailsViewController.swift */,
 				47B23989212203F9009CB25C /* HabitMOColor+UIColor.swift */,
+				47C1F3DD212A140F00DDA7BB /* CalendarDisplaying.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -464,7 +465,6 @@
 			isa = PBXGroup;
 			children = (
 				4761F5AF21209EED00A8D407 /* CalendarDayCell.swift */,
-				47D8308320F92553002D3A97 /* DetailsCalendarDayCell.swift */,
 				4732CE80211C93B500E2770C /* DaysHeaderView.swift */,
 				4732CE82211CB89F00E2770C /* MonthHeaderView.swift */,
 			);
@@ -797,10 +797,10 @@
 				47E6C21620EB12B6003BDB4D /* NotificationFactory.swift in Sources */,
 				47AA365321037B0B0008D2DC /* FireTimeMO.swift in Sources */,
 				474F9C8620CC7E180094C19C /* Date+Utils.swift in Sources */,
-				47D8308420F92553002D3A97 /* DetailsCalendarDayCell.swift in Sources */,
 				4725D05B20C8A4BA00C3B63F /* HabitsTableViewController.swift in Sources */,
 				4725D06320CA14A600C3B63F /* HabitDayStorage.swift in Sources */,
 				4732CE782114F23200E2770C /* HabitTableViewCell.swift in Sources */,
+				47C1F3DE212A140F00DDA7BB /* CalendarDisplaying.swift in Sources */,
 				4713A1FE20C16459008A13D2 /* HabitMO.swift in Sources */,
 				47D8308620FCE820002D3A97 /* OffensiveMO.swift in Sources */,
 				4732CE7A2114FF5F00E2770C /* CardView.swift in Sources */,

@@ -134,6 +134,11 @@ extension Date {
         guard let day = components.day else { return nil }
         return self.byAddingDays((day - 1) * -1)
     }
+
+    /// Indicates if the date is in between two dates or not.
+    func isInBetween(_ lower: Date, _ greater: Date) -> Bool {
+        return compare(lower) == .orderedDescending && compare(greater) == .orderedAscending
+    }
 }
 
 /// Adds some common formatter factories used by the controllers
