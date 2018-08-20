@@ -15,7 +15,14 @@ class HabitDetailsViewController: UIViewController {
     // MARK: Properties
 
     /// The habit presented by this controller.
-    var habit: HabitMO!
+    var habit: HabitMO! {
+        didSet {
+            habitColor = HabitMO.Color(rawValue: habit.color)?.getColor()
+        }
+    }
+
+    /// The current habit's color.
+    private var habitColor: UIColor!
 
     /// The habit's ordered challenge entities to be displayed.
     /// - Note: This array mustn't be empty. The existence of challenges is ensured
@@ -149,7 +156,7 @@ information unavailable.
         present(alert, animated: true)
     }
 
-    
+
 
     @IBAction func savePromptResult(_ sender: UIButton) {
         guard let currentHabitDay = habit.getCurrentDay() else {
@@ -280,6 +287,22 @@ information unavailable.
         promptContentView.isHidden = false
 
         let order = dayIndex + 1
+        displayPromptViewTitle(withOrder: order)
+
+        if currentDay.wasExecuted {
+            wasExecutedSwitch.isOn = true
+            promptAnswerLabel.text = "Yes, I did it."
+            promptAnswerLabel.textColor = habitColor
+        } else {
+            wasExecutedSwitch.isOn = false
+            promptAnswerLabel.text = "No, not yet."
+            promptAnswerLabel.textColor = UIColor(red: 47/255, green: 54/255, blue: 64/255, alpha: 1)
+        }
+    }
+
+    /// Configures the prompt view title text.
+    /// - Parameter order: the order of day in the current challenge.
+    private func displayPromptViewTitle(withOrder order: Int) {
         var orderTitle = ""
 
         switch order {
@@ -294,17 +317,16 @@ information unavailable.
         }
 
         // TODO: Apply attributed string to the order.
-        currentDayTitleLabel.text = "\(orderTitle) day"
+        let attributedString = NSMutableAttributedString(string: "\(orderTitle) day")
+        attributedString.addAttributes(
+            [
+                NSAttributedStringKey.font: UIFont(name: "SFProText-Semibold", size: 20)!,
+                NSAttributedStringKey.foregroundColor: habitColor
+            ],
+            range: NSRange(location: 0, length: orderTitle.count)
+        )
 
-        if currentDay.wasExecuted {
-            wasExecutedSwitch.isOn = true
-            promptAnswerLabel.text = "Yes, I did it."
-            promptAnswerLabel.textColor = HabitMO.Color(rawValue: habit.color)?.getColor()
-        } else {
-            wasExecutedSwitch.isOn = false
-            promptAnswerLabel.text = "No, not yet."
-            promptAnswerLabel.textColor = UIColor(red: 47/255, green: 54/255, blue: 64/255, alpha: 1)
-        }
+        currentDayTitleLabel.attributedText = attributedString
     }
 }
 
