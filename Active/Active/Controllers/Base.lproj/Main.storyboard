@@ -847,7 +847,7 @@ reminded about this habit?</string>
                                                             <constraint firstItem="7Pe-pH-Udy" firstAttribute="width" secondItem="jve-z3-FPF" secondAttribute="width" id="yYj-L8-N5S"/>
                                                         </constraints>
                                                     </stackView>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YIt-bU-XNv" userLabel="Current challenge prompt">
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YIt-bU-XNv" userLabel="Current challenge day prompt">
                                                         <rect key="frame" x="0.0" y="400" width="375" height="184"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="i7W-kR-TMU" userLabel="Content">
@@ -897,7 +897,7 @@ reminded about this habit?</string>
                                                                                         <nil key="textColor"/>
                                                                                         <nil key="highlightedColor"/>
                                                                                     </label>
-                                                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="FEJ-uZ-PcK">
+                                                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FEJ-uZ-PcK">
                                                                                         <rect key="frame" x="275" y="8" width="62" height="31"/>
                                                                                         <constraints>
                                                                                             <constraint firstAttribute="width" constant="60" id="04V-5V-cUH"/>
@@ -965,7 +965,11 @@ reminded about this habit?</string>
                     <navigationItem key="navigationItem" title="Play guitar" largeTitleDisplayMode="never" id="LZl-wy-YbF"/>
                     <connections>
                         <outlet property="calendarView" destination="7Pe-pH-Udy" id="dhu-6f-iLR"/>
+                        <outlet property="currentDayTitleLabel" destination="B0i-n0-rre" id="XR2-JS-EI5"/>
                         <outlet property="monthHeaderView" destination="vRa-9V-RbT" id="OBa-Ds-eoE"/>
+                        <outlet property="promptAnswerLabel" destination="AkU-5d-3Oh" id="aEl-wg-Png"/>
+                        <outlet property="promptContentView" destination="YIt-bU-XNv" id="10m-rT-ZCX"/>
+                        <outlet property="wasExecutedSwitch" destination="FEJ-uZ-PcK" id="ZZ1-xn-daV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eer-Kp-wUj" userLabel="First Responder" sceneMemberID="firstResponder"/>

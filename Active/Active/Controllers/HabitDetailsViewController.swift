@@ -79,6 +79,19 @@ class HabitDetailsViewController: UIViewController {
         }
     }
 
+    /// The view holding the prompt for the current day.
+    /// - Note: This view is only displayed if today is a challenge day to be accounted.
+    @IBOutlet weak var promptContentView: UIView!
+
+    /// The title displaying what challenge's day is today.
+    @IBOutlet weak var currentDayTitleLabel: UILabel!
+
+    /// The switch the user uses to mark the current habit's day as executed.
+    @IBOutlet weak var wasExecutedSwitch: UISwitch!
+
+    /// The supporting label informing the user that the activity was executed.
+    @IBOutlet weak var promptAnswerLabel: UILabel!
+
     // MARK: ViewController Life Cycle
 
     override func viewDidLoad() {
@@ -98,12 +111,12 @@ class HabitDetailsViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        // Configure the appearance of the prompt view.
-//        handlePrompt()
-
         // Show the current date in the calendar.
         let today = Date().getBeginningOfDay()
         calendarView.scrollToDate(today)
+
+        // Configure the appearance of the prompt view.
+        displayPromptView()
     }
 
     // MARK: Actions
@@ -136,6 +149,8 @@ information unavailable.
         present(alert, animated: true)
     }
 
+    
+
     @IBAction func savePromptResult(_ sender: UIButton) {
         guard let currentHabitDay = habit.getCurrentDay() else {
             assertionFailure(
@@ -158,7 +173,7 @@ information unavailable.
 
             DispatchQueue.main.async {
                 // Hide the prompt header.
-                self.handlePrompt()
+                self.displayPromptView()
                 // Reload calendar to show the executed day.
                 self.calendarView.reloadData()
             }
@@ -236,16 +251,59 @@ information unavailable.
         }.first
     }
 
-    /// Show the prompt view if today is a day(HabitDayMO) being tracked
-    /// by the app.
-    private func handlePrompt() {
-        // Try to get a habit day for today.
-        if let currentDay = habit.getCurrentDay(),
-            currentDay.wasExecuted == false {
-            // Configure the appearance of the prompt.
-//            promptView.isHidden = false
+    /// Displays the prompt view if today is a challenge's day.
+    private func displayPromptView() {
+        // ContentView is hidden by default.
+        promptContentView.isHidden = true
+
+        // Check if there's a current challenge for the habit.
+        guard let currentChallenge = habit.getCurrentChallenge() else {
+            return
+        }
+        // Check if today is a challenge's HabitDay.
+        guard let currentDay = currentChallenge.getCurrentDay() else {
+            return
+        }
+
+        // Get the order of the day in the challenge.
+        guard let orderedChallengeDays = currentChallenge.days?.sortedArray(
+            using: [NSSortDescriptor(key: "day.date", ascending: true)]
+            ) as? [HabitDayMO] else {
+                assertionFailure("Error: Couldn't get the challenge's sorted habit days.")
+                return
+        }
+        guard let dayIndex = orderedChallengeDays.index(of: currentDay) else {
+            assertionFailure("Error: Couldn't get the current day's index.")
+            return
+        }
+
+        promptContentView.isHidden = false
+
+        let order = dayIndex + 1
+        var orderTitle = ""
+
+        switch order {
+        case 1:
+            orderTitle = "1st"
+        case 2:
+            orderTitle = "2nd"
+        case 3:
+            orderTitle = "3rd"
+        default:
+            orderTitle = "\(order)th"
+        }
+
+        // TODO: Apply attributed string to the order.
+        currentDayTitleLabel.text = "\(orderTitle) day"
+
+        if currentDay.wasExecuted {
+            wasExecutedSwitch.isOn = true
+            promptAnswerLabel.text = "Yes, I did it."
+            promptAnswerLabel.textColor = HabitMO.Color(rawValue: habit.color)?.getColor()
         } else {
-//            promptView.isHidden = true
+            wasExecutedSwitch.isOn = false
+            promptAnswerLabel.text = "No, not yet."
+            promptAnswerLabel.textColor = UIColor(red: 47/255, green: 54/255, blue: 64/255, alpha: 1)
         }
     }
 }
