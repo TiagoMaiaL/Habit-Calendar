@@ -15,15 +15,15 @@ class HabitDaysSelectionViewController: UIViewController {
     // MARK: Properties
 
     /// The calendar's startDate.
-    private lazy var calendarStartDate = Date().getBeginningOfMonth()?.getBeginningOfDay() ?? Date()
+    internal lazy var startDate = Date().getBeginningOfMonth()?.getBeginningOfDay() ?? Date()
 
     /// The calendar's endDate.
-    private lazy var calendarEndDate: Date = {
-        return calendarStartDate.byAddingYears(2) ?? Date()
+    internal lazy var finalDate: Date = {
+        return startDate.byAddingYears(2) ?? Date()
     }()
 
     /// The cell's reusable identifier.
-    private let cellIdentifier = "day collection view cell"
+    internal let cellIdentifier = "day collection view cell"
 
     /// The pre-selected days to be displayed after the controller appears on screen.
     var preSelectedDays: [Date]?
@@ -47,14 +47,14 @@ class HabitDaysSelectionViewController: UIViewController {
     /// The header's previous month button.
     weak var previousMonthButton: UIButton! {
         didSet {
-            previousMonthButton.addTarget(self, action: #selector(goToPreviousMonth), for: .touchUpInside)
+            previousMonthButton.addTarget(self, action: #selector(goPrevious), for: .touchUpInside)
         }
     }
 
     /// The header's next month button.
     weak var nextMonthButton: UIButton! {
         didSet {
-            nextMonthButton.addTarget(self, action: #selector(goToNextMonth), for: .touchUpInside)
+            nextMonthButton.addTarget(self, action: #selector(goNext), for: .touchUpInside)
         }
     }
 
@@ -150,20 +150,14 @@ class HabitDaysSelectionViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
 
-    /// Goes to the previous month in the calendar.
-    @objc private func goToPreviousMonth() {
-        guard let previousMonth = getCurrentMonth().byAddingMonths(-1) else { return }
-        if canGoToPreviousMonth() {
-            calendarView.scrollToDate(previousMonth)
-        }
+    /// Makes the calendar display the previous month.
+    @objc private func goPrevious() {
+        goToPreviousMonth()
     }
 
-    /// Goes to the next month in the calendar.
-    @objc private func goToNextMonth() {
-        guard let nextMonth = getCurrentMonth().byAddingMonths(1) else { return }
-        if canGoToNextMonth() {
-            calendarView.scrollToDate(nextMonth)
-        }
+    /// Makes the calendar display the next month.
+    @objc private func goNext() {
+        goToNextMonth()
     }
 
     // MARK: Imperatives
@@ -201,47 +195,57 @@ class HabitDaysSelectionViewController: UIViewController {
 
         selectedDaysRangeLabel.text = "From: \(firstDescription), to: \(lastDescription)"
     }
+}
 
-    /// Handles the title of the calendar's header view.
-    private func handleCalendarHeader() {
-        // Get the first month's date or today.
-        let firstDate = calendarView.visibleDates().monthDates.first?.date ?? Date()
+extension HabitDaysSelectionViewController: CalendarDisplaying {
 
-        // Declare a date formatter to get the month and year.
-        let formatter = DateFormatter()
-        formatter.locale = Locale.current
-        formatter.timeZone = TimeZone.current
-        formatter.dateFormat = "MMMM, yyyy"
+    // MARK: Imperatives
 
-        // Change the title label to reflect it.
-        monthTitleLabel.text = formatter.string(from: firstDate)
+    /// Configures the appearance of a given cell when it's about to be displayed.
+    /// - Parameters:
+    ///     - cell: The cell being displayed.
+    ///     - cellState: The cell's state.
+    internal func handleAppearanceOfCell(
+        _ cell: JTAppleCell,
+        using cellState: CellState
+    ) {
+        // Cast it to the expected instance.
+        guard let cell = cell as? CalendarDayCell else {
+            assertionFailure("Couldn't cast the cell to a CalendarDayCell's instance.")
+            return
+        }
 
-        UIViewPropertyAnimator(duration: 0.2, curve: .easeIn) {
-            self.previousMonthButton.alpha = self.canGoToPreviousMonth() ? 1 : 0.3
-            self.nextMonthButton.alpha = self.canGoToNextMonth() ? 1 : 0.3
-        }.startAnimation()
-    }
+        // If the cell is not within the current month, don't display it.
+        if cellState.dateBelongsTo != .thisMonth {
+            cell.dayTitleLabel.text = ""
+            cell.backgroundColor = .clear
+            return
+        }
 
-    /// Gets the calendar's current month.
-    /// - Returns: the current month date.
-    private func getCurrentMonth() -> Date {
-        return calendarView.visibleDates().monthDates.first?.date ?? Date()
-    }
+        // Set the cell's date text.
+        cell.dayTitleLabel.text = cellState.text
 
-    /// Informs if its possible to go the next month.
-    private func canGoToPreviousMonth() -> Bool {
-        // Get the date for the previous month.
-        guard let previousMonth = getCurrentMonth().byAddingMonths(-1) else { return false }
-        // Ensure the previousMonth is later (or the same) than the calendar's startDate.
-        let comparison = calendarStartDate.compare(previousMonth)
-        return comparison == .orderedAscending || comparison == .orderedSame
-    }
+        // Change the appearance according to:
+        // 1. selection
+        // 2. date is in the past or present.
+        // 3. is the date in the current day or not.
+        // Change the cell's background color to match the selection state.
+        if cellState.isSelected {
+            cell.backgroundColor = themeColor
+            cell.dayTitleLabel.textColor = .white
+        } else {
+            if cellState.date.isInToday {
+                cell.dayTitleLabel.textColor = .black
+                cell.backgroundColor = UIColor.black.withAlphaComponent(0.05)
+                return
+            } else if cellState.date.isPast {
+                cell.dayTitleLabel.textColor = UIColor(red: 218/255, green: 218/255, blue: 218/255, alpha: 1)
+            } else {
+                cell.dayTitleLabel.textColor = UIColor(red: 74/255, green: 74/255, blue: 74/255, alpha: 1)
+            }
 
-    /// Informs if its possible to go the previous month.
-    private func canGoToNextMonth() -> Bool {
-        guard let nextMonth = getCurrentMonth().byAddingMonths(1) else { return false }
-        // Ensure the nextMonth is before the calendar's endDate.
-        return calendarEndDate.compare(nextMonth) == .orderedDescending
+            cell.backgroundColor = .white
+        }
     }
 }
 
@@ -251,8 +255,8 @@ extension HabitDaysSelectionViewController: JTAppleCalendarViewDataSource, JTApp
 
     func configureCalendar(_ calendar: JTAppleCalendarView) -> ConfigurationParameters {
         return ConfigurationParameters(
-            startDate: calendarStartDate,
-            endDate: calendarEndDate,
+            startDate: startDate,
+            endDate: finalDate,
             hasStrictBoundaries: true
         )
     }
@@ -360,55 +364,6 @@ extension HabitDaysSelectionViewController: JTAppleCalendarViewDataSource, JTApp
     ) {
         // Set the calendar's header's current state.
         handleCalendarHeader()
-    }
-
-    // MARK: Imperatives
-
-    /// Configures the appearance of a given cell when it's about to be displayed.
-    /// - Parameters:
-    ///     - cell: The cell being displayed.
-    ///     - cellState: The cell's state.
-    private func handleAppearanceOfCell(
-        _ cell: JTAppleCell,
-        using cellState: CellState
-    ) {
-        // Cast it to the expected instance.
-        guard let cell = cell as? CalendarDayCell else {
-            assertionFailure("Couldn't cast the cell to a CalendarDayCell's instance.")
-            return
-        }
-
-        // If the cell is not within the current month, don't display it.
-        if cellState.dateBelongsTo != .thisMonth {
-            cell.dayTitleLabel.text = ""
-            cell.backgroundColor = .clear
-            return
-        }
-
-        // Set the cell's date text.
-        cell.dayTitleLabel.text = cellState.text
-
-        // Change the appearance according to:
-        // 1. selection
-        // 2. date is in the past or present.
-        // 3. is the date in the current day or not.
-        // Change the cell's background color to match the selection state.
-        if cellState.isSelected {
-            cell.backgroundColor = themeColor
-            cell.dayTitleLabel.textColor = .white
-        } else {
-            if cellState.date.isInToday {
-                cell.dayTitleLabel.textColor = .black
-                cell.backgroundColor = UIColor.black.withAlphaComponent(0.05)
-                return
-            } else if cellState.date.isPast {
-                cell.dayTitleLabel.textColor = UIColor(red: 218/255, green: 218/255, blue: 218/255, alpha: 1)
-            } else {
-                cell.dayTitleLabel.textColor = UIColor(red: 74/255, green: 74/255, blue: 74/255, alpha: 1)
-            }
-
-            cell.backgroundColor = .white
-        }
     }
 }
 
