@@ -867,7 +867,7 @@ reminded about this habit?</string>
                     <navigationItem key="navigationItem" title="Play guitar" largeTitleDisplayMode="never" id="LZl-wy-YbF"/>
                     <connections>
                         <outlet property="calendarView" destination="7Pe-pH-Udy" id="dhu-6f-iLR"/>
-                        <outlet property="monthHeader" destination="vRa-9V-RbT" id="OBa-Ds-eoE"/>
+                        <outlet property="monthHeaderView" destination="vRa-9V-RbT" id="OBa-Ds-eoE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eer-Kp-wUj" userLabel="First Responder" sceneMemberID="firstResponder"/>

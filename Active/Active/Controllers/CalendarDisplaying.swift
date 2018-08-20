@@ -14,10 +14,10 @@ protocol CalendarDisplaying: JTAppleCalendarViewDelegate, JTAppleCalendarViewDat
     // MARK: Properties
 
     /// The initial calendar's date.
-    var startDate: Date { get }
+    var startDate: Date! { get }
 
     /// The calendar's final date.
-    var finalDate: Date { get }
+    var finalDate: Date! { get }
 
     /// The cell's reusable identifier.
     var cellIdentifier: String { get }
@@ -99,6 +99,14 @@ extension CalendarDisplaying {
         if canGoToNextMonth() {
             calendarView.scrollToDate(nextMonth)
         }
+    }
+
+    func calendar(
+        _ calendar: JTAppleCalendarView,
+        didScrollToDateSegmentWith visibleDates: DateSegmentInfo
+    ) {
+        // Set the calendar's header's current state.
+        handleCalendarHeader()
     }
 
     /// Handles the title of the calendar's header view.

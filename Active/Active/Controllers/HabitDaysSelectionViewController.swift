@@ -15,10 +15,10 @@ class HabitDaysSelectionViewController: UIViewController {
     // MARK: Properties
 
     /// The calendar's startDate.
-    internal lazy var startDate = Date().getBeginningOfMonth()?.getBeginningOfDay() ?? Date()
+    internal lazy var startDate: Date! = Date().getBeginningOfMonth()?.getBeginningOfDay() ?? Date()
 
     /// The calendar's endDate.
-    internal lazy var finalDate: Date = {
+    internal lazy var finalDate: Date! = {
         return startDate.byAddingYears(2) ?? Date()
     }()
 
@@ -356,14 +356,6 @@ extension HabitDaysSelectionViewController: JTAppleCalendarViewDataSource, JTApp
 
         // Configure footer according to the current selection.
         handleFooter()
-    }
-
-    func calendar(
-        _ calendar: JTAppleCalendarView,
-        didScrollToDateSegmentWith visibleDates: DateSegmentInfo
-    ) {
-        // Set the calendar's header's current state.
-        handleCalendarHeader()
     }
 }
 

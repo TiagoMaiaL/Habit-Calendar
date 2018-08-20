@@ -23,16 +23,16 @@ class HabitDetailsViewController: UIViewController {
     private var challenges: [DaysChallengeMO]! {
         didSet {
             // Store the initial and final calendar dates.
-            initialDate = challenges.first!.fromDate!
+            startDate = challenges.first!.fromDate!.getBeginningOfMonth()!
             finalDate = challenges.last!.toDate!
         }
     }
 
     /// The initial calendar date.
-    private var initialDate: Date!
+    internal var startDate: Date!
 
     /// The final calendar date.
-    private var finalDate: Date!
+    internal var finalDate: Date!
 
     /// The habit storage used to manage the controller's habit.
     var habitStorage: HabitStorage!
@@ -45,14 +45,8 @@ class HabitDetailsViewController: UIViewController {
 //    /// was executed in the current day.
 //    @IBOutlet weak var promptView: UIView!
 
-//    /// The positive prompt button.
-//    @IBOutlet weak var positivePromptButton: UIButton!
-
-//    /// The negative prompt button.
-//    @IBOutlet weak var negativePromptButton: UIButton!
-
     /// The cell's reusable identifier.
-    private let cellIdentifier = "Habit day cell id"
+    internal let cellIdentifier = "Habit day cell id"
 
     /// The calendar view showing the habit days.
     /// - Note: The collection view will show a range with
@@ -60,22 +54,30 @@ class HabitDetailsViewController: UIViewController {
     @IBOutlet weak var calendarView: JTAppleCalendarView!
 
     /// The month header view, with the month label and next/prev buttons.
-    @IBOutlet weak var monthHeader: MonthHeaderView! {
+    @IBOutlet weak var monthHeaderView: MonthHeaderView! {
         didSet {
-            monthTitleLabel = monthHeader.monthLabel
-            nextMonthButton = monthHeader.nextButton
-            previousMonthButton = monthHeader.previousButton
+            monthTitleLabel = monthHeaderView.monthLabel
+            nextMonthButton = monthHeaderView.nextButton
+            previousMonthButton = monthHeaderView.previousButton
         }
     }
 
     /// The month title label in the calendar's header.
-    private weak var monthTitleLabel: UILabel!
+    internal weak var monthTitleLabel: UILabel!
 
     /// The next month header button.
-    private weak var nextMonthButton: UIButton!
+    internal weak var nextMonthButton: UIButton! {
+        didSet {
+            nextMonthButton.addTarget(self, action: #selector(goNext), for: .touchUpInside)
+        }
+    }
 
     /// The previous month header button.
-    private weak var previousMonthButton: UIButton!
+    internal weak var previousMonthButton: UIButton! {
+        didSet {
+            previousMonthButton.addTarget(self, action: #selector(goPrevious), for: .touchUpInside)
+        }
+    }
 
     // MARK: ViewController Life Cycle
 
@@ -163,6 +165,16 @@ information unavailable.
         }
     }
 
+    /// Makes the calendar display the next month.
+    @objc private func goNext() {
+        goToNextMonth()
+    }
+
+    /// Makes the calendar display the previous month.
+    @objc private func goPrevious() {
+        goToPreviousMonth()
+    }
+
     // MARK: Imperatives
 
     /// Asserts on the values of the main controller's dependencies.
@@ -238,13 +250,64 @@ information unavailable.
     }
 }
 
+extension HabitDetailsViewController: CalendarDisplaying {
+
+    // MARK: Imperatives
+
+    /// Configures the appearance of a given cell when it's about to be displayed.
+    /// - Parameters:
+    ///     - cell: The cell being displayed.
+    ///     - cellState: The cell's state.
+    internal func handleAppearanceOfCell(
+        _ cell: JTAppleCell,
+        using cellState: CellState
+    ) {
+        // Cast it to the expected instance.
+        guard let cell = cell as? CalendarDayCell else {
+            assertionFailure("Couldn't cast the cell to a CalendarDayCell's instance.")
+            return
+        }
+
+        if cellState.dateBelongsTo == .thisMonth {
+            cell.dayTitleLabel.text = cellState.text
+
+            // Try to get the matching challenge for the current date.
+            if let challenge = getChallenge(from: cellState.date) {
+                // Get the habitDay associated with the cell's date.
+                guard let habitDay = challenge.getDay(for: cellState.date) else {
+                    // If there isn't a day associated with the date, there's a bug.
+                    assertionFailure("Inconsistency: a day should be returned from the challenge.")
+                    return
+                }
+
+                // If there's a challenge, show cell as being part of it.
+                let habitColor = HabitMO.Color(rawValue: habit.color)?.getColor()
+
+                cell.backgroundColor = habitDay.wasExecuted ? habitColor : habitColor?.withAlphaComponent(0.5)
+                cell.dayTitleLabel.textColor = .white
+
+                if cellState.date.isInToday {
+                    cell.circleView.backgroundColor = .white
+                    cell.dayTitleLabel.textColor = UIColor(red: 74/255, green: 74/255, blue: 74/255, alpha: 1)
+                } else if cellState.date.isFuture {
+                    // Days to be completed in the future should have a less bright color.
+                    cell.backgroundColor = cell.backgroundColor?.withAlphaComponent(0.3)
+                }
+            }
+        } else {
+            cell.dayTitleLabel.text = ""
+            cell.backgroundColor = .white
+        }
+    }
+}
+
 extension HabitDetailsViewController: JTAppleCalendarViewDataSource, JTAppleCalendarViewDelegate {
 
     // MARK: JTAppleCalendarViewDataSource Methods
 
     func configureCalendar(_ calendar: JTAppleCalendarView) -> ConfigurationParameters {
         return ConfigurationParameters(
-            startDate: initialDate,
+            startDate: startDate,
             endDate: finalDate
         )
     }
@@ -292,45 +355,5 @@ extension HabitDetailsViewController: JTAppleCalendarViewDataSource, JTAppleCale
         cellState: CellState
     ) -> Bool {
         return false
-    }
-
-    /// Configures the appearance of a given cell when it's about to be displayed.
-    /// - Parameters:
-    ///     - cell: The cell being displayed.
-    ///     - cellState: The cell's state.
-    private func handleAppearanceOfCell(
-        _ cell: CalendarDayCell,
-        using cellState: CellState
-    ) {
-        if cellState.dateBelongsTo == .thisMonth {
-            cell.dayTitleLabel.text = cellState.text
-
-            // Try to get the matching challenge for the current date.
-            if let challenge = getChallenge(from: cellState.date) {
-                // Get the habitDay associated with the cell's date.
-                guard let habitDay = challenge.getDay(for: cellState.date) else {
-                    // If there isn't a day associated with the date, there's a bug.
-                    assertionFailure("Inconsistency: a day should be returned from the challenge.")
-                    return
-                }
-
-                // If there's a challenge, show cell as being part of it.
-                let habitColor = HabitMO.Color(rawValue: habit.color)?.getColor()
-
-                cell.backgroundColor = habitDay.wasExecuted ? habitColor : habitColor?.withAlphaComponent(0.5)
-                cell.dayTitleLabel.textColor = .white
-
-                if cellState.date.isInToday {
-                    cell.circleView.backgroundColor = .white
-                    cell.dayTitleLabel.textColor = UIColor(red: 74/255, green: 74/255, blue: 74/255, alpha: 1)
-                } else if cellState.date.isFuture {
-                    // Days to be completed in the future should have a less bright color.
-                    cell.backgroundColor = cell.backgroundColor?.withAlphaComponent(0.3)
-                }
-            }
-        } else {
-            cell.dayTitleLabel.text = ""
-            cell.backgroundColor = .white
-        }
     }
 }
