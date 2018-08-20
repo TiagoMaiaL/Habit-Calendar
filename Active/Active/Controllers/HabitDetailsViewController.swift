@@ -156,30 +156,26 @@ information unavailable.
         present(alert, animated: true)
     }
 
-
-
-    @IBAction func savePromptResult(_ sender: UIButton) {
-        guard let currentHabitDay = habit.getCurrentDay() else {
+    /// Sets the current as executed or not, depending on the user's action.
+    @IBAction func informActivityExecution(_ sender: UISwitch) {
+        guard let challenge = habit.getCurrentChallenge(), let day = challenge.getCurrentDay() else {
             assertionFailure(
                 "Inconsistency: There isn't a current habit day but the prompt is being displayed."
             )
             return
         }
 
-        currentHabitDay.managedObjectContext?.perform {
-//            if sender === self.positivePromptButton {
-//                // Mark it as executed.
-//                currentHabitDay.wasExecuted = true
-//            } else if sender === self.negativePromptButton {
-//                // Mark is as non executed.
-//                currentHabitDay.wasExecuted = false
-//            }
+        // Get the user's answer.
+        let wasExecuted = sender.isOn
 
-            // Save the result.
-            try? currentHabitDay.managedObjectContext?.save()
+        day.managedObjectContext?.perform {
+            day.wasExecuted = wasExecuted
+
+            // TODO: Display an error to the user.
+            try? day.managedObjectContext?.save()
 
             DispatchQueue.main.async {
-                // Hide the prompt header.
+                // Update the prompt view.
                 self.displayPromptView()
                 // Reload calendar to show the executed day.
                 self.calendarView.reloadData()

@@ -883,6 +883,9 @@ reminded about this habit?</string>
                                                                                             <constraint firstAttribute="width" constant="60" id="04V-5V-cUH"/>
                                                                                         </constraints>
                                                                                         <color key="onTintColor" red="0.0" green="0.6588235294" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                                                        <connections>
+                                                                                            <action selector="informActivityExecution:" destination="wZd-FS-1mH" eventType="valueChanged" id="sUG-Cu-zZZ"/>
+                                                                                        </connections>
                                                                                     </switch>
                                                                                 </subviews>
                                                                             </stackView>
