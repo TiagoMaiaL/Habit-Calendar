@@ -15,7 +15,14 @@ class HabitDetailsViewController: UIViewController {
     // MARK: Properties
 
     /// The habit presented by this controller.
-    var habit: HabitMO!
+    var habit: HabitMO! {
+        didSet {
+            habitColor = HabitMO.Color(rawValue: habit.color)?.getColor()
+        }
+    }
+
+    /// The current habit's color.
+    private var habitColor: UIColor!
 
     /// The habit's ordered challenge entities to be displayed.
     /// - Note: This array mustn't be empty. The existence of challenges is ensured
@@ -79,6 +86,19 @@ class HabitDetailsViewController: UIViewController {
         }
     }
 
+    /// The view holding the prompt for the current day.
+    /// - Note: This view is only displayed if today is a challenge day to be accounted.
+    @IBOutlet weak var promptContentView: UIView!
+
+    /// The title displaying what challenge's day is today.
+    @IBOutlet weak var currentDayTitleLabel: UILabel!
+
+    /// The switch the user uses to mark the current habit's day as executed.
+    @IBOutlet weak var wasExecutedSwitch: UISwitch!
+
+    /// The supporting label informing the user that the activity was executed.
+    @IBOutlet weak var promptAnswerLabel: UILabel!
+
     // MARK: ViewController Life Cycle
 
     override func viewDidLoad() {
@@ -98,12 +118,12 @@ class HabitDetailsViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        // Configure the appearance of the prompt view.
-//        handlePrompt()
-
         // Show the current date in the calendar.
         let today = Date().getBeginningOfDay()
         calendarView.scrollToDate(today)
+
+        // Configure the appearance of the prompt view.
+        displayPromptView()
     }
 
     // MARK: Actions
@@ -136,29 +156,27 @@ information unavailable.
         present(alert, animated: true)
     }
 
-    @IBAction func savePromptResult(_ sender: UIButton) {
-        guard let currentHabitDay = habit.getCurrentDay() else {
+    /// Sets the current as executed or not, depending on the user's action.
+    @IBAction func informActivityExecution(_ sender: UISwitch) {
+        guard let challenge = habit.getCurrentChallenge(), let day = challenge.getCurrentDay() else {
             assertionFailure(
                 "Inconsistency: There isn't a current habit day but the prompt is being displayed."
             )
             return
         }
 
-        currentHabitDay.managedObjectContext?.perform {
-//            if sender === self.positivePromptButton {
-//                // Mark it as executed.
-//                currentHabitDay.wasExecuted = true
-//            } else if sender === self.negativePromptButton {
-//                // Mark is as non executed.
-//                currentHabitDay.wasExecuted = false
-//            }
+        // Get the user's answer.
+        let wasExecuted = sender.isOn
 
-            // Save the result.
-            try? currentHabitDay.managedObjectContext?.save()
+        day.managedObjectContext?.perform {
+            day.wasExecuted = wasExecuted
+
+            // TODO: Display an error to the user.
+            try? day.managedObjectContext?.save()
 
             DispatchQueue.main.async {
-                // Hide the prompt header.
-                self.handlePrompt()
+                // Update the prompt view.
+                self.displayPromptView()
                 // Reload calendar to show the executed day.
                 self.calendarView.reloadData()
             }
@@ -236,17 +254,76 @@ information unavailable.
         }.first
     }
 
-    /// Show the prompt view if today is a day(HabitDayMO) being tracked
-    /// by the app.
-    private func handlePrompt() {
-        // Try to get a habit day for today.
-        if let currentDay = habit.getCurrentDay(),
-            currentDay.wasExecuted == false {
-            // Configure the appearance of the prompt.
-//            promptView.isHidden = false
-        } else {
-//            promptView.isHidden = true
+    /// Displays the prompt view if today is a challenge's day.
+    private func displayPromptView() {
+        // ContentView is hidden by default.
+        promptContentView.isHidden = true
+
+        // Check if there's a current challenge for the habit.
+        guard let currentChallenge = habit.getCurrentChallenge() else {
+            return
         }
+        // Check if today is a challenge's HabitDay.
+        guard let currentDay = currentChallenge.getCurrentDay() else {
+            return
+        }
+
+        // Get the order of the day in the challenge.
+        guard let orderedChallengeDays = currentChallenge.days?.sortedArray(
+            using: [NSSortDescriptor(key: "day.date", ascending: true)]
+            ) as? [HabitDayMO] else {
+                assertionFailure("Error: Couldn't get the challenge's sorted habit days.")
+                return
+        }
+        guard let dayIndex = orderedChallengeDays.index(of: currentDay) else {
+            assertionFailure("Error: Couldn't get the current day's index.")
+            return
+        }
+
+        promptContentView.isHidden = false
+
+        wasExecutedSwitch.onTintColor = habitColor
+
+        let order = dayIndex + 1
+        displayPromptViewTitle(withOrder: order)
+
+        if currentDay.wasExecuted {
+            wasExecutedSwitch.isOn = true
+            promptAnswerLabel.text = "Yes, I did it."
+            promptAnswerLabel.textColor = habitColor
+        } else {
+            wasExecutedSwitch.isOn = false
+            promptAnswerLabel.text = "No, not yet."
+            promptAnswerLabel.textColor = UIColor(red: 47/255, green: 54/255, blue: 64/255, alpha: 1)
+        }
+    }
+
+    /// Configures the prompt view title text.
+    /// - Parameter order: the order of day in the current challenge.
+    private func displayPromptViewTitle(withOrder order: Int) {
+        var orderTitle = ""
+
+        switch order {
+        case 1:
+            orderTitle = "1st"
+        case 2:
+            orderTitle = "2nd"
+        case 3:
+            orderTitle = "3rd"
+        default:
+            orderTitle = "\(order)th"
+        }
+
+        let attributedString = NSMutableAttributedString(string: "\(orderTitle) day")
+        attributedString.addAttributes(
+            [
+                NSAttributedStringKey.font: UIFont(name: "SFProText-Semibold", size: 20)!,
+                NSAttributedStringKey.foregroundColor: habitColor
+            ],
+            range: NSRange(location: 0, length: orderTitle.count)
+        )
+
+        currentDayTitleLabel.attributedText = attributedString
     }
 }
 

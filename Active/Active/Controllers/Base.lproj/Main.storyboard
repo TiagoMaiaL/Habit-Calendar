@@ -22,6 +22,9 @@
         <array key="SF-Pro-Text-Regular.otf">
             <string>SFProText-Regular</string>
         </array>
+        <array key="SF-Pro-Text-Semibold.otf">
+            <string>SFProText-Semibold</string>
+        </array>
     </customFonts>
     <scenes>
         <!--Habits-->
@@ -172,12 +175,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="900"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <view key="tableFooterView" contentMode="scaleToFill" misplaced="YES" id="U4g-rN-Yvd">
+                        <view key="tableFooterView" contentMode="scaleToFill" id="U4g-rN-Yvd">
                             <rect key="frame" x="0.0" y="743" width="375" height="104"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D90-7S-rS4" customClass="RoundedButton" customModule="Active" customModuleProvider="target">
-                                    <rect key="frame" x="117.5" y="143.5" width="140" height="50"/>
+                                    <rect key="frame" x="117.5" y="27" width="140" height="50"/>
                                     <color key="backgroundColor" red="0.18431372549019609" green="0.21176470588235294" blue="0.25098039215686274" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="140" id="EpX-yy-wTD"/>
@@ -782,71 +785,144 @@ reminded about this habit?</string>
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eOs-VQ-lGp" userLabel="Content view">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="604"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="584"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="jve-z3-FPF" userLabel="Calendar">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="400"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="jfc-bo-dXq">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="584"/>
                                                 <subviews>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="q8x-NZ-ZWP" userLabel="Header">
-                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="jve-z3-FPF" userLabel="Calendar">
+                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="400"/>
                                                         <subviews>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vRa-9V-RbT" userLabel="Calendar month" customClass="MonthHeaderView" customModule="Active" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="0.0" width="375" height="69"/>
-                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            </view>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mkN-C0-TmC" userLabel="Calendar days" customClass="DaysHeaderView" customModule="Active" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="69" width="375" height="30"/>
-                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="q8x-NZ-ZWP" userLabel="Header">
+                                                                <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+                                                                <subviews>
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vRa-9V-RbT" userLabel="Calendar month" customClass="MonthHeaderView" customModule="Active" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="69"/>
+                                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    </view>
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mkN-C0-TmC" userLabel="Calendar days" customClass="DaysHeaderView" customModule="Active" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="69" width="375" height="30"/>
+                                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="30" id="uPM-fB-mHQ"/>
+                                                                        </constraints>
+                                                                    </view>
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tdi-AA-BI9" userLabel="Separator">
+                                                                        <rect key="frame" x="0.0" y="99" width="375" height="1"/>
+                                                                        <color key="backgroundColor" red="0.92549019610000005" green="0.94117647059999998" blue="0.94509803920000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="1" id="EQf-Iz-h5z"/>
+                                                                        </constraints>
+                                                                    </view>
+                                                                </subviews>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="height" constant="30" id="uPM-fB-mHQ"/>
+                                                                    <constraint firstAttribute="height" constant="100" id="B67-wl-hAM"/>
+                                                                    <constraint firstItem="tdi-AA-BI9" firstAttribute="width" secondItem="q8x-NZ-ZWP" secondAttribute="width" id="PDK-SU-yuh"/>
                                                                 </constraints>
-                                                            </view>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tdi-AA-BI9" userLabel="Separator">
-                                                                <rect key="frame" x="0.0" y="99" width="375" height="1"/>
-                                                                <color key="backgroundColor" red="0.92549019610000005" green="0.94117647059999998" blue="0.94509803920000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="height" constant="1" id="EQf-Iz-h5z"/>
-                                                                </constraints>
-                                                            </view>
+                                                            </stackView>
+                                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" keyboardDismissMode="onDrag" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="7Pe-pH-Udy" userLabel="Body" customClass="JTAppleCalendarView" customModule="JTAppleCalendar">
+                                                                <rect key="frame" x="0.0" y="100" width="375" height="300"/>
+                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="PNf-8b-lZW">
+                                                                    <size key="itemSize" width="50" height="50"/>
+                                                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                                </collectionViewFlowLayout>
+                                                                <cells>
+                                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" reuseIdentifier="Habit day cell id" id="CWe-an-Y5t" customClass="CalendarDayCell" customModule="Active" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                                            <autoresizingMask key="autoresizingMask"/>
+                                                                        </view>
+                                                                    </collectionViewCell>
+                                                                </cells>
+                                                            </collectionView>
                                                         </subviews>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="100" id="B67-wl-hAM"/>
-                                                            <constraint firstItem="tdi-AA-BI9" firstAttribute="width" secondItem="q8x-NZ-ZWP" secondAttribute="width" id="PDK-SU-yuh"/>
+                                                            <constraint firstItem="q8x-NZ-ZWP" firstAttribute="width" secondItem="jve-z3-FPF" secondAttribute="width" id="nCC-GG-Gnn"/>
+                                                            <constraint firstAttribute="height" constant="400" id="vd0-bs-6dv"/>
+                                                            <constraint firstItem="7Pe-pH-Udy" firstAttribute="width" secondItem="jve-z3-FPF" secondAttribute="width" id="yYj-L8-N5S"/>
                                                         </constraints>
                                                     </stackView>
-                                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" keyboardDismissMode="onDrag" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="7Pe-pH-Udy" userLabel="Body" customClass="JTAppleCalendarView" customModule="JTAppleCalendar">
-                                                        <rect key="frame" x="0.0" y="100" width="375" height="300"/>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YIt-bU-XNv" userLabel="Current challenge day prompt">
+                                                        <rect key="frame" x="0.0" y="400" width="375" height="184"/>
+                                                        <subviews>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="i7W-kR-TMU" userLabel="Content">
+                                                                <rect key="frame" x="20" y="20" width="335" height="144"/>
+                                                                <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current challenge" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HNV-Ys-NMS">
+                                                                        <rect key="frame" x="79.5" y="0.0" width="176" height="24"/>
+                                                                        <fontDescription key="fontDescription" name="SFProText-Semibold" family="SF Pro Text" pointSize="20"/>
+                                                                        <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="o6T-yK-vKI" userLabel="Prompt">
+                                                                        <rect key="frame" x="0.0" y="34" width="335" height="110"/>
+                                                                        <subviews>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="30th day" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B0i-n0-rre">
+                                                                                <rect key="frame" x="0.0" y="0.0" width="79" height="21.5"/>
+                                                                                <fontDescription key="fontDescription" name="SFProText-Semibold" family="SF Pro Text" pointSize="18"/>
+                                                                                <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
+                                                                                <nil key="highlightedColor"/>
+                                                                            </label>
+                                                                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="lwa-9h-pWa" userLabel="Question">
+                                                                                <rect key="frame" x="0.0" y="31.5" width="335" height="49"/>
+                                                                                <subviews>
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Did you execute this activity today?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FXo-XX-A07">
+                                                                                        <rect key="frame" x="0.0" y="4" width="265" height="41"/>
+                                                                                        <fontDescription key="fontDescription" name="SFProText-Light" family="SF Pro Text" pointSize="17"/>
+                                                                                        <nil key="textColor"/>
+                                                                                        <nil key="highlightedColor"/>
+                                                                                    </label>
+                                                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FEJ-uZ-PcK">
+                                                                                        <rect key="frame" x="275" y="9" width="62" height="31"/>
+                                                                                        <constraints>
+                                                                                            <constraint firstAttribute="width" constant="60" id="04V-5V-cUH"/>
+                                                                                        </constraints>
+                                                                                        <color key="onTintColor" red="0.0" green="0.6588235294" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                                                        <connections>
+                                                                                            <action selector="informActivityExecution:" destination="wZd-FS-1mH" eventType="valueChanged" id="sUG-Cu-zZZ"/>
+                                                                                        </connections>
+                                                                                    </switch>
+                                                                                </subviews>
+                                                                            </stackView>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Yes, I did it." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AkU-5d-3Oh">
+                                                                                <rect key="frame" x="0.0" y="90.5" width="91.5" height="19.5"/>
+                                                                                <fontDescription key="fontDescription" name="SFProText-Semibold" family="SF Pro Text" pointSize="16"/>
+                                                                                <color key="textColor" red="0.0" green="0.6588235294117647" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                                                <nil key="highlightedColor"/>
+                                                                            </label>
+                                                                        </subviews>
+                                                                        <constraints>
+                                                                            <constraint firstItem="lwa-9h-pWa" firstAttribute="width" secondItem="o6T-yK-vKI" secondAttribute="width" id="6TG-Pv-IhR"/>
+                                                                        </constraints>
+                                                                    </stackView>
+                                                                </subviews>
+                                                                <constraints>
+                                                                    <constraint firstItem="o6T-yK-vKI" firstAttribute="width" secondItem="i7W-kR-TMU" secondAttribute="width" id="ilR-NG-XlX"/>
+                                                                </constraints>
+                                                            </stackView>
+                                                        </subviews>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="PNf-8b-lZW">
-                                                            <size key="itemSize" width="50" height="50"/>
-                                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                        </collectionViewFlowLayout>
-                                                        <cells>
-                                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" reuseIdentifier="Habit day cell id" id="CWe-an-Y5t" customClass="CalendarDayCell" customModule="Active" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                                                    <autoresizingMask key="autoresizingMask"/>
-                                                                </view>
-                                                            </collectionViewCell>
-                                                        </cells>
-                                                    </collectionView>
+                                                        <constraints>
+                                                            <constraint firstAttribute="bottom" secondItem="i7W-kR-TMU" secondAttribute="bottom" constant="20" symbolic="YES" id="D5A-Iw-n3f"/>
+                                                            <constraint firstItem="i7W-kR-TMU" firstAttribute="top" secondItem="YIt-bU-XNv" secondAttribute="top" constant="20" symbolic="YES" id="HYh-dh-t0E"/>
+                                                            <constraint firstItem="i7W-kR-TMU" firstAttribute="leading" secondItem="YIt-bU-XNv" secondAttribute="leading" constant="20" symbolic="YES" id="MXw-zD-LJy"/>
+                                                            <constraint firstAttribute="trailing" secondItem="i7W-kR-TMU" secondAttribute="trailing" constant="20" symbolic="YES" id="eNj-qh-PYH"/>
+                                                        </constraints>
+                                                    </view>
                                                 </subviews>
-                                                <constraints>
-                                                    <constraint firstItem="q8x-NZ-ZWP" firstAttribute="width" secondItem="jve-z3-FPF" secondAttribute="width" id="nCC-GG-Gnn"/>
-                                                    <constraint firstAttribute="height" constant="400" id="vd0-bs-6dv"/>
-                                                    <constraint firstItem="7Pe-pH-Udy" firstAttribute="width" secondItem="jve-z3-FPF" secondAttribute="width" id="yYj-L8-N5S"/>
-                                                </constraints>
                                             </stackView>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstItem="jve-z3-FPF" firstAttribute="leading" secondItem="eOs-VQ-lGp" secondAttribute="leading" id="Spv-GI-Nc2"/>
-                                            <constraint firstItem="jve-z3-FPF" firstAttribute="top" secondItem="eOs-VQ-lGp" secondAttribute="top" id="VqU-Gr-E3L"/>
-                                            <constraint firstAttribute="trailing" secondItem="jve-z3-FPF" secondAttribute="trailing" id="u1F-Xs-06q"/>
+                                            <constraint firstAttribute="bottom" secondItem="jfc-bo-dXq" secondAttribute="bottom" id="14i-BC-X2c"/>
+                                            <constraint firstItem="jfc-bo-dXq" firstAttribute="top" secondItem="eOs-VQ-lGp" secondAttribute="top" id="W6I-eb-sfz"/>
+                                            <constraint firstItem="jfc-bo-dXq" firstAttribute="leading" secondItem="eOs-VQ-lGp" secondAttribute="leading" id="deL-Sn-Ivq"/>
+                                            <constraint firstAttribute="trailing" secondItem="jfc-bo-dXq" secondAttribute="trailing" id="msp-Oa-2hh"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -872,7 +948,11 @@ reminded about this habit?</string>
                     <navigationItem key="navigationItem" title="Play guitar" largeTitleDisplayMode="never" id="LZl-wy-YbF"/>
                     <connections>
                         <outlet property="calendarView" destination="7Pe-pH-Udy" id="dhu-6f-iLR"/>
+                        <outlet property="currentDayTitleLabel" destination="B0i-n0-rre" id="XR2-JS-EI5"/>
                         <outlet property="monthHeaderView" destination="vRa-9V-RbT" id="OBa-Ds-eoE"/>
+                        <outlet property="promptAnswerLabel" destination="AkU-5d-3Oh" id="aEl-wg-Png"/>
+                        <outlet property="promptContentView" destination="YIt-bU-XNv" id="10m-rT-ZCX"/>
+                        <outlet property="wasExecutedSwitch" destination="FEJ-uZ-PcK" id="ZZ1-xn-daV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eer-Kp-wUj" userLabel="First Responder" sceneMemberID="firstResponder"/>
