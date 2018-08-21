@@ -72,7 +72,6 @@ struct DaysChallengeFactory: DummyFactory {
             let habitDay = habitDayFactory.makeDummy()
             habitDay.day = dayFactory.makeDummy(with: date)
             dummyChallenge.addToDays(habitDay)
-            print("\(habitDay.day!.date!)")
         }
 
         assert(
