@@ -22,7 +22,7 @@ class HabitDetailsViewController: UIViewController {
     }
 
     /// The current habit's color.
-    private var habitColor: UIColor!
+    private(set) var habitColor: UIColor!
 
     /// The habit's ordered challenge entities to be displayed.
     /// - Note: This array mustn't be empty. The existence of challenges is ensured
@@ -47,10 +47,6 @@ class HabitDetailsViewController: UIViewController {
     /// The persistent container used by this store to manage the
     /// provided habit.
     var container: NSPersistentContainer!
-
-    //    /// View holding the prompt to ask the user if the activity
-//    /// was executed in the current day.
-//    @IBOutlet weak var promptView: UIView!
 
     /// The cell's reusable identifier.
     internal let cellIdentifier = "Habit day cell id"
@@ -99,6 +95,22 @@ class HabitDetailsViewController: UIViewController {
     /// The supporting label informing the user that the activity was executed.
     @IBOutlet weak var promptAnswerLabel: UILabel!
 
+    /// The view holding the habit's current active challenge's progress section.
+    /// - Note: This view is only displayed if there's an active challenge for the habit.
+    @IBOutlet weak var challengeProgressContentView: UIView!
+
+    /// The label displaying how many days to finish the current days' challenge.
+    @IBOutlet weak var daysToFinishLabel: UILabel!
+
+    /// The label displaying how many days were executed in the current days' challenge.
+    @IBOutlet weak var executedDaysLabel: UILabel!
+
+    /// The label displaying how many days were missed in the current days' challenge.
+    @IBOutlet weak var missedDaysLabel: UILabel!
+
+    /// The bar view displaying the current challenge's progress.
+    @IBOutlet weak var progressBar: ProgressView!
+
     // MARK: ViewController Life Cycle
 
     override func viewDidLoad() {
@@ -122,8 +134,11 @@ class HabitDetailsViewController: UIViewController {
         let today = Date().getBeginningOfDay()
         calendarView.scrollToDate(today)
 
-        // Configure the appearance of the prompt view.
+        // Configure the appearance of the prompt section.
         displayPromptView()
+
+        // Configure the appearance of the challenge's progress section.
+        displayProgressSection()
     }
 
     // MARK: Actions
@@ -177,6 +192,8 @@ information unavailable.
             DispatchQueue.main.async {
                 // Update the prompt view.
                 self.displayPromptView()
+                // Update the progress view.
+                self.displayProgressSection()
                 // Reload calendar to show the executed day.
                 self.calendarView.reloadData()
             }

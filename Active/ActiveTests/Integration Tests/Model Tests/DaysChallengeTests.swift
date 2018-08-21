@@ -44,21 +44,27 @@ class DaysChallengeTests: IntegrationTestCase {
         // 1. Declare a dummy challenge.
         let dummyChallenge = daysChallengeFactory.makeDummy()
 
-        // 2. Mark some days as executed.
-        guard let daysSet = dummyChallenge.days as? Set<HabitDayMO> else {
+        // 2. Declare some new past habit days.
+        let pastHabitDays = makeHabitDays(from: -36..<0)
+
+        // 2.1 Add them to the challenge.
+        dummyChallenge.addToDays(Set(pastHabitDays) as NSSet)
+
+        // 3. Mark some of them as executed.
+        guard let pastDaysSet = dummyChallenge.getPastDays() else {
             XCTFail("Error: Couldn't get the dummy challenge's days.")
             return
         }
-        let habitDays = Array(daysSet)
-        let executedCount = habitDays.count / 3
+        let pastDays = Array(pastDaysSet)
+        let executedCount = pastDays.count / 3
 
         for index in 0..<executedCount {
-            habitDays[index].markAsExecuted()
+            pastDays[index].markAsExecuted()
         }
 
-        // 3. Assert on the missed days.
+        // 4. Assert on the missed days.
         XCTAssertEqual(
-            habitDays.count - executedCount,
+            pastDays.count - executedCount,
             dummyChallenge.getMissedDays()?.count,
             "The challenge's missed days don't have the expected count."
         )

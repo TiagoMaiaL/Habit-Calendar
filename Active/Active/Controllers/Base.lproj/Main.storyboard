@@ -283,7 +283,7 @@
                                                     <rect key="frame" x="26" y="21" width="323" height="239"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JUM-W9-3bo">
-                                                            <rect key="frame" x="0.0" y="0.0" width="65.5" height="24"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="65.5" height="23.5"/>
                                                             <attributedString key="attributedText">
                                                                 <fragment content="Color ">
                                                                     <attributes>
@@ -302,7 +302,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <view contentMode="scaleToFill" verticalHuggingPriority="249" translatesAutoresizingMaskIntoConstraints="NO" id="41k-RE-w2b" customClass="ColorsPickerView" customModule="Active" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="34" width="323" height="205"/>
+                                                            <rect key="frame" x="0.0" y="33.5" width="323" height="205.5"/>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <userDefinedRuntimeAttributes>
                                                                 <userDefinedRuntimeAttribute type="number" keyPath="colorNumber">
@@ -548,7 +548,7 @@ reminded about this habit?</string>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="zJ1-bL-rA4">
-                                            <rect key="frame" x="117" y="16" width="142.5" height="78"/>
+                                            <rect key="frame" x="116.5" y="16.5" width="142.5" height="78"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 fire times selected" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nz0-4c-Qss">
                                                     <rect key="frame" x="0.0" y="0.0" width="142.5" height="18"/>
@@ -785,10 +785,10 @@ reminded about this habit?</string>
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eOs-VQ-lGp" userLabel="Content view">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="584"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="724"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="jfc-bo-dXq">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="584"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="724"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="jve-z3-FPF" userLabel="Calendar">
                                                         <rect key="frame" x="0.0" y="0.0" width="375" height="400"/>
@@ -914,6 +914,84 @@ reminded about this habit?</string>
                                                             <constraint firstAttribute="trailing" secondItem="i7W-kR-TMU" secondAttribute="trailing" constant="20" symbolic="YES" id="eNj-qh-PYH"/>
                                                         </constraints>
                                                     </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R4F-r4-Nta" userLabel="Current challenge progress">
+                                                        <rect key="frame" x="0.0" y="584" width="375" height="140"/>
+                                                        <subviews>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aD8-G3-tBi" userLabel="Separator">
+                                                                <rect key="frame" x="0.0" y="0.0" width="375" height="1"/>
+                                                                <color key="backgroundColor" red="0.84705882352941175" green="0.84705882352941175" blue="0.84705882352941175" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="1" id="G3S-dj-lcs"/>
+                                                                </constraints>
+                                                            </view>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="y1n-vB-8Jr" userLabel="Content">
+                                                                <rect key="frame" x="20" y="10" width="335" height="120"/>
+                                                                <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Progress" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tit-Hr-iPN" userLabel="Title">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="92" height="30"/>
+                                                                        <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="22"/>
+                                                                        <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="RxK-1G-Xoa" userLabel="Progress labels">
+                                                                        <rect key="frame" x="0.0" y="40" width="212" height="60"/>
+                                                                        <subviews>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="8 days to finish the challenge." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sDl-b5-BNm">
+                                                                                <rect key="frame" x="0.0" y="0.0" width="212" height="16.5"/>
+                                                                                <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="15"/>
+                                                                                <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
+                                                                                <nil key="highlightedColor"/>
+                                                                            </label>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="25 days executed." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qf6-KL-TXJ">
+                                                                                <rect key="frame" x="0.0" y="21.5" width="129" height="17"/>
+                                                                                <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="15"/>
+                                                                                <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
+                                                                                <nil key="highlightedColor"/>
+                                                                            </label>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5 days missed." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ACk-Cd-HNW">
+                                                                                <rect key="frame" x="0.0" y="43.5" width="105.5" height="16.5"/>
+                                                                                <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="15"/>
+                                                                                <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
+                                                                                <nil key="highlightedColor"/>
+                                                                            </label>
+                                                                        </subviews>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="60" id="zLC-gm-8ZN"/>
+                                                                        </constraints>
+                                                                    </stackView>
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IYl-LM-LDu" userLabel="Progress Bar" customClass="ProgressView" customModule="Active" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="110" width="335" height="10"/>
+                                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="10" id="fDp-CK-ONl"/>
+                                                                        </constraints>
+                                                                        <userDefinedRuntimeAttributes>
+                                                                            <userDefinedRuntimeAttribute type="color" keyPath="tint">
+                                                                                <color key="value" red="0.0" green="0.6588235294" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                                            </userDefinedRuntimeAttribute>
+                                                                            <userDefinedRuntimeAttribute type="number" keyPath="progress">
+                                                                                <real key="value" value="0.5"/>
+                                                                            </userDefinedRuntimeAttribute>
+                                                                        </userDefinedRuntimeAttributes>
+                                                                    </view>
+                                                                </subviews>
+                                                                <constraints>
+                                                                    <constraint firstItem="IYl-LM-LDu" firstAttribute="width" secondItem="y1n-vB-8Jr" secondAttribute="width" id="5jc-fH-9vU"/>
+                                                                </constraints>
+                                                            </stackView>
+                                                        </subviews>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstItem="aD8-G3-tBi" firstAttribute="leading" secondItem="R4F-r4-Nta" secondAttribute="leading" id="1PW-Co-Mkr"/>
+                                                            <constraint firstItem="aD8-G3-tBi" firstAttribute="top" secondItem="R4F-r4-Nta" secondAttribute="top" id="FRe-e2-bX6"/>
+                                                            <constraint firstItem="y1n-vB-8Jr" firstAttribute="top" secondItem="R4F-r4-Nta" secondAttribute="top" constant="10" id="GfM-G4-mCw"/>
+                                                            <constraint firstItem="y1n-vB-8Jr" firstAttribute="leading" secondItem="R4F-r4-Nta" secondAttribute="leading" constant="20" symbolic="YES" id="PD5-d3-Pr2"/>
+                                                            <constraint firstAttribute="height" constant="140" id="PY1-VN-4Hk"/>
+                                                            <constraint firstAttribute="trailing" secondItem="aD8-G3-tBi" secondAttribute="trailing" id="Uxi-o8-3N5"/>
+                                                            <constraint firstAttribute="trailing" secondItem="y1n-vB-8Jr" secondAttribute="trailing" constant="20" symbolic="YES" id="onl-aS-ff0"/>
+                                                            <constraint firstAttribute="bottom" secondItem="y1n-vB-8Jr" secondAttribute="bottom" constant="10" id="sEg-bo-WFf"/>
+                                                        </constraints>
+                                                    </view>
                                                 </subviews>
                                             </stackView>
                                         </subviews>
@@ -948,8 +1026,13 @@ reminded about this habit?</string>
                     <navigationItem key="navigationItem" title="Play guitar" largeTitleDisplayMode="never" id="LZl-wy-YbF"/>
                     <connections>
                         <outlet property="calendarView" destination="7Pe-pH-Udy" id="dhu-6f-iLR"/>
+                        <outlet property="challengeProgressContentView" destination="R4F-r4-Nta" id="eY8-Ig-i56"/>
                         <outlet property="currentDayTitleLabel" destination="B0i-n0-rre" id="XR2-JS-EI5"/>
+                        <outlet property="daysToFinishLabel" destination="sDl-b5-BNm" id="dYL-gv-JUe"/>
+                        <outlet property="executedDaysLabel" destination="qf6-KL-TXJ" id="BQ3-23-40P"/>
+                        <outlet property="missedDaysLabel" destination="ACk-Cd-HNW" id="ilS-mQ-Xag"/>
                         <outlet property="monthHeaderView" destination="vRa-9V-RbT" id="OBa-Ds-eoE"/>
+                        <outlet property="progressBar" destination="IYl-LM-LDu" id="zRX-dh-QEN"/>
                         <outlet property="promptAnswerLabel" destination="AkU-5d-3Oh" id="aEl-wg-Png"/>
                         <outlet property="promptContentView" destination="YIt-bU-XNv" id="10m-rT-ZCX"/>
                         <outlet property="wasExecutedSwitch" destination="FEJ-uZ-PcK" id="ZZ1-xn-daV"/>
