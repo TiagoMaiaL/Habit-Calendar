@@ -28,50 +28,51 @@ struct DaysChallengeFactory: DummyFactory {
     /// - Returns: The generated DaysChallengeMO.
     func makeDummy() -> DaysChallengeMO {
         // Declare the dates used to create the challenge.
-        let dates = (0..<Int.random(2..<50)).compactMap {
+        let futureDates = (0..<Int.random(2..<50)).compactMap {
             Date().byAddingDays($0)?.getBeginningOfDay()
         }
+        return makeDummy(using: futureDates)
+    }
+
+    /// Makes a completed days' challenge (it's days are in the past and were executed).
+    /// - Returns: A completed dummy days' challenge.
+    func makeCompletedDummy() -> DaysChallengeMO {
+        let randomNegative = Int.random(-100 ..< -2)
+
+        // Declare the dates used to create the challenge.
+        let pastDates = (randomNegative..<0).compactMap {
+            Date().byAddingDays($0)?.getBeginningOfDay()
+        }
+        return makeDummy(using: pastDates)
+    }
+
+    /// Creates and configures a dummy challenge by using the passed dates.
+    /// - Parameter dates: The days' dates.
+    /// - Returns: A configured dummy challenge.
+    func makeDummy(using dates: [Date]) -> DaysChallengeMO {
+        assert(!dates.isEmpty, "The dates mustn't be empty.")
+        let sortedDates = dates.sorted()
 
         // Declare the dummy and its main properties:
         let dummyChallenge = DaysChallengeMO(context: context)
         dummyChallenge.id = UUID().uuidString
-        dummyChallenge.createdAt = Date()
-        dummyChallenge.fromDate = dates.first!
-        dummyChallenge.toDate = dates.last!
+        dummyChallenge.createdAt = sortedDates.first!
+        dummyChallenge.fromDate = dummyChallenge.createdAt!
+        dummyChallenge.toDate = sortedDates.last!
 
-        // Associate its empty days:
+        // Associate its days according to the provided dates:
         // Declare the DayFactory.
         let dayFactory = DayFactory(context: context)
         // Declare the HabitDayFactory.
         let habitDayFactory = HabitDayFactory(context: context)
 
-        for date in dates {
-            // Declare the current Day entity:
-            var day: DayMO!
-
-            // Try to fetch it from the current day date.
-            let request: NSFetchRequest<DayMO> = DayMO.fetchRequest()
-            let predicate = NSPredicate(format: "date >= %@ && date <= %@",
-                                        date.getBeginningOfDay() as NSDate,
-                                        date.getEndOfDay() as NSDate)
-            request.predicate = predicate
-            let results = try? context.fetch(request)
-
-            if results?.isEmpty ?? true {
-                // If none was found, create a new one with the date.
-                day = dayFactory.makeDummy()
-                day.date = date
-            } else {
-                day = results?.first!
-            }
-
+        for date in sortedDates {
             // Generate the dummy HabitDayMO and
             // associate it with the dummy Day.
-
             let habitDay = habitDayFactory.makeDummy()
-            habitDay.day = day
-
+            habitDay.day = dayFactory.makeDummy(with: date)
             dummyChallenge.addToDays(habitDay)
+            print("\(habitDay.day!.date!)")
         }
 
         assert(
