@@ -92,6 +92,7 @@ class SeedManager {
                             let habitDay = HabitDayMO(context: context)
                             habitDay.id = UUID().uuidString
                             habitDay.day = day
+                            habitDay.wasExecuted = false
 
                             return habitDay
                         }
