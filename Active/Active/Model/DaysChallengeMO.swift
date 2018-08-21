@@ -122,8 +122,11 @@ class DaysChallengeMO: NSManagedObject {
 
     /// Returns the missed days from the challenge.
     func getMissedDays() -> Set<HabitDayMO>? {
-        let executedPredicate = NSPredicate(format: "wasExecuted = false")
-        return days?.filtered(using: executedPredicate) as? Set<HabitDayMO>
+        let missedPredicate = NSPredicate(
+            format: "wasExecuted = false AND day.date < %@",
+            Date().getBeginningOfDay() as NSDate
+        )
+        return days?.filtered(using: missedPredicate) as? Set<HabitDayMO>
     }
 
     /// Returns the past days from the challenge.
