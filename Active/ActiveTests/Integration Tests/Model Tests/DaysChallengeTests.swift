@@ -449,9 +449,7 @@ class DaysChallengeTests: IntegrationTestCase {
         return range.compactMap { (index: Int) -> HabitDayMO in
             let dayDate = Date().byAddingDays(index)!.getBeginningOfDay()
 
-            let day = dayFactory.makeDummy()
-            day.date = dayDate
-
+            let day = dayFactory.makeDummy(with: dayDate)
             let habitDay = habitDayFactory.makeDummy()
             habitDay.day = day
 

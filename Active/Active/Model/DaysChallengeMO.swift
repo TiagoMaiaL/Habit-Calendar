@@ -12,15 +12,6 @@ import CoreData
 /// tracked and executed on.
 class DaysChallengeMO: NSManagedObject {
 
-    // MARK: Life cycle
-
-    override func didChangeValue(forKey key: String) {
-        super.didChangeValue(forKey: key)
-
-        // TODO: Change fromDate property.
-        print("Changing \(key) ------ DaysChallengeMO")
-    }
-
     // MARK: Imperatives
 
     /// Returns the challenge's current day (associated with today's date),

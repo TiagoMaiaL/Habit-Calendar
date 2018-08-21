@@ -46,7 +46,7 @@ class SeedManager {
             _ = userFactory.makeDummy()
         }, {
             context in
-            print("Seeding habits.")
+            print("Seeding habits to begin.")
 
             // Get the previously seeded user.
             guard let user = try? context.fetch(UserMO.fetchRequest()).first as? UserMO else {
@@ -54,10 +54,12 @@ class SeedManager {
                 return
             }
 
+            let habitsCount = 7
+
             // Instantiate a new Habit factory using the context.
             let habitFactory = HabitFactory(context: context)
 
-            for _ in 1...7 {
+            for _ in 1...habitsCount {
                 // Make a new dummy.
                 let habit = habitFactory.makeDummy()
 
@@ -66,59 +68,82 @@ class SeedManager {
             }
         }, {
             context in
-            print("Seeding past past days to some habits.")
+            print("Seeding habits in progress.")
 
-            // Seed a random amount of past habit days in the current challenges
-            // of some habits.
+            // Make some of the habits in the set become habits in progress.
+            // Habits in progress are habits that have an active days' challenge with some days already executed.
             let habitsRequest: NSFetchRequest<HabitMO> = HabitMO.fetchRequest()
             if let habits = try? context.fetch(habitsRequest) {
-                for habit in habits {
-                    // Get a random bool to decide if the past days should be
-                    // added to the current habit or not.
-                    if arc4random_uniform(2) == 0 {
-                        // Append a random amount of past days to the current
-                        // habit.
-                        let randomPastDays = (Int.random(-30 ..< -2) ..< 0).compactMap {
-                            Date().getBeginningOfDay().byAddingDays($0)
-                        }
-                        let pastHabitDays = randomPastDays.map { date -> DayMO in
-                            let day = DayMO(context: context)
-                            day.date = date
-                            day.id = UUID().uuidString
-
-                            return day
-                        }.map { day -> HabitDayMO in
-
-                            let habitDay = HabitDayMO(context: context)
-                            habitDay.id = UUID().uuidString
-                            habitDay.day = day
-                            habitDay.wasExecuted = false
-
-                            return habitDay
-                        }
-
-                        habit.addToDays(Set(pastHabitDays) as NSSet)
-                        habit.getCurrentChallenge()?.addToDays(Set(pastHabitDays) as NSSet)
-                        // TODO: The from date should be changed automatically.
-                        habit.getCurrentChallenge()?.fromDate = randomPastDays.first
+                // Get only the first two
+                for index in 0...3 {
+                    // Append a random amount of past days to the current habit.
+                    let randomPastDays = (Int.random(-30 ..< -2) ..< 0).compactMap {
+                        Date().getBeginningOfDay().byAddingDays($0)
                     }
+                    let pastHabitDays = randomPastDays.map { date -> DayMO in
+                        let day = DayMO(context: context)
+                        day.date = date
+                        day.id = UUID().uuidString
+
+                        return day
+                    }.map { day -> HabitDayMO in
+                        let habitDay = HabitDayMO(context: context)
+                        habitDay.id = UUID().uuidString
+                        habitDay.day = day
+                        // The wasExecuted property will be a random boolean.
+                        habitDay.wasExecuted = arc4random_uniform(2) == 0
+
+                        return habitDay
+                    }
+
+                    let habit = habits[index]
+                    habit.addToDays(Set(pastHabitDays) as NSSet)
+                    habit.getCurrentChallenge()?.addToDays(Set(pastHabitDays) as NSSet)
+                    habit.getCurrentChallenge()?.fromDate = randomPastDays.first
                 }
             }
         }, {
             context in
-            print("Seeding random offensives to the habits that have past days.")
+            print("Seeding completed habits.")
 
-            // Get the challenges that have past habit days.
-            let pastPredicate = NSPredicate(
-                format: "fromDate < %@",
-                Date().getBeginningOfDay() as NSDate
-            )
-            let challengesRequest: NSFetchRequest<DaysChallengeMO> = DaysChallengeMO.fetchRequest()
-            challengesRequest.predicate = pastPredicate
+            // Get the previously seeded user.
+            guard let user = try? context.fetch(UserMO.fetchRequest()).first as? UserMO else {
+                assertionFailure("Couldn't get the seeded user.")
+                return
+            }
 
-            if let challenges = try? context.fetch(challengesRequest) {
-                // Add an OffensiveMO to each challenge.
-                // TODO:
+            // Completed habits are habits that don't have any active days' challenge.
+
+            // Declare two new dummies, add past ones.
+            let habitFactory = HabitFactory(context: context)
+            let challengeFactory = DaysChallengeFactory(context: context)
+            for _ in 0..<2 {
+                let dummyHabit = habitFactory.makeDummy()
+
+                // Remove their current challenges.
+                if let challengesSet = dummyHabit.challenges as? Set<DaysChallengeMO> {
+                    for challenge in challengesSet {
+                        // Remove the challenge's days.
+                        if let daysSet = challenge.days as? Set<HabitDayMO> {
+                            for day in daysSet {
+                                dummyHabit.removeFromDays(day)
+                                context.delete(day)
+                            }
+                        }
+
+                        dummyHabit.removeFromChallenges(challenge)
+                        context.delete(challenge)
+                    }
+                }
+
+                let completedChallenge = challengeFactory.makeCompletedDummy()
+                for day in completedChallenge.days! {
+                    if let day = day as? HabitDayMO {
+                        day.habit = dummyHabit
+                    }
+                }
+                dummyHabit.addToChallenges(completedChallenge)
+                dummyHabit.user = user
             }
         }
     ]
