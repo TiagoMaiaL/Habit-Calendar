@@ -111,6 +111,13 @@ class HabitDetailsViewController: UIViewController {
     /// The bar view displaying the current challenge's progress.
     @IBOutlet weak var progressBar: ProgressView!
 
+    /// The view holding the "No active challenge" section.
+    @IBOutlet weak var noChallengeContentView: UIView!
+
+    /// The new challenge button displayed for the habits that don't have an active days'
+    /// challenge at the moment.
+    @IBOutlet weak var newChallengeButton: RoundedButton!
+
     // MARK: ViewController Life Cycle
 
     override func viewDidLoad() {
@@ -139,6 +146,9 @@ class HabitDetailsViewController: UIViewController {
 
         // Configure the appearance of the challenge's progress section.
         displayProgressSection()
+
+        // Display the no challenge view, if there's no active challenge for the habit.
+        displayNoChallengesView()
     }
 
     // MARK: Actions

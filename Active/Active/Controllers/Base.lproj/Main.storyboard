@@ -1077,6 +1077,8 @@ you think of adding a new one?</string>
                         <outlet property="executedDaysLabel" destination="qf6-KL-TXJ" id="BQ3-23-40P"/>
                         <outlet property="missedDaysLabel" destination="ACk-Cd-HNW" id="ilS-mQ-Xag"/>
                         <outlet property="monthHeaderView" destination="vRa-9V-RbT" id="OBa-Ds-eoE"/>
+                        <outlet property="newChallengeButton" destination="kvL-AD-FIe" id="wZl-cP-0i7"/>
+                        <outlet property="noChallengeContentView" destination="4dM-YJ-d58" id="cEL-kR-7Ya"/>
                         <outlet property="progressBar" destination="IYl-LM-LDu" id="zRX-dh-QEN"/>
                         <outlet property="promptAnswerLabel" destination="AkU-5d-3Oh" id="aEl-wg-Png"/>
                         <outlet property="promptContentView" destination="YIt-bU-XNv" id="10m-rT-ZCX"/>
