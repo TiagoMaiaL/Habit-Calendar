@@ -86,6 +86,7 @@
 		47C32029212C57D10094BBF8 /* HabitDetailsViewController+ProgressSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C32028212C57D10094BBF8 /* HabitDetailsViewController+ProgressSection.swift */; };
 		47C3202B212DCC230094BBF8 /* HabitDetailsViewController+NoChallengesSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C3202A212DCC230094BBF8 /* HabitDetailsViewController+NoChallengesSection.swift */; };
 		47C3202D212DD59A0094BBF8 /* HabitDetailsViewController+Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C3202C212DD59A0094BBF8 /* HabitDetailsViewController+Calendar.swift */; };
+		47C3202F212DD7C80094BBF8 /* HabitDetailsViewController+PromptSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C3202E212DD7C80094BBF8 /* HabitDetailsViewController+PromptSection.swift */; };
 		47D7003B2100F72A00F4FE88 /* OffensiveTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D7003A2100F72A00F4FE88 /* OffensiveTests.swift */; };
 		47D7003D210179F600F4FE88 /* NotificationScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D7003C210179F600F4FE88 /* NotificationScheduler.swift */; };
 		47D7004121017D0A00F4FE88 /* NotificationSchedulerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D7004021017D0A00F4FE88 /* NotificationSchedulerTests.swift */; };
@@ -214,6 +215,7 @@
 		47C32028212C57D10094BBF8 /* HabitDetailsViewController+ProgressSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HabitDetailsViewController+ProgressSection.swift"; sourceTree = "<group>"; };
 		47C3202A212DCC230094BBF8 /* HabitDetailsViewController+NoChallengesSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HabitDetailsViewController+NoChallengesSection.swift"; sourceTree = "<group>"; };
 		47C3202C212DD59A0094BBF8 /* HabitDetailsViewController+Calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HabitDetailsViewController+Calendar.swift"; sourceTree = "<group>"; };
+		47C3202E212DD7C80094BBF8 /* HabitDetailsViewController+PromptSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HabitDetailsViewController+PromptSection.swift"; sourceTree = "<group>"; };
 		47D7003A2100F72A00F4FE88 /* OffensiveTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffensiveTests.swift; sourceTree = "<group>"; };
 		47D7003C210179F600F4FE88 /* NotificationScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationScheduler.swift; sourceTree = "<group>"; };
 		47D7004021017D0A00F4FE88 /* NotificationSchedulerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSchedulerTests.swift; sourceTree = "<group>"; };
@@ -501,6 +503,7 @@
 			children = (
 				47E6C20C20EAF567003BDB4D /* HabitDetailsViewController.swift */,
 				47C3202C212DD59A0094BBF8 /* HabitDetailsViewController+Calendar.swift */,
+				47C3202E212DD7C80094BBF8 /* HabitDetailsViewController+PromptSection.swift */,
 				47C32028212C57D10094BBF8 /* HabitDetailsViewController+ProgressSection.swift */,
 				47C3202A212DCC230094BBF8 /* HabitDetailsViewController+NoChallengesSection.swift */,
 			);
@@ -812,6 +815,7 @@
 				4761F5B52120D06900A8D407 /* ColorsPickerDataSource.swift in Sources */,
 				47C32029212C57D10094BBF8 /* HabitDetailsViewController+ProgressSection.swift in Sources */,
 				4725D06120CA06EE00C3B63F /* DayStorage.swift in Sources */,
+				47C3202F212DD7C80094BBF8 /* HabitDetailsViewController+PromptSection.swift in Sources */,
 				4732CE7E211A12B500E2770C /* RoundedButton.swift in Sources */,
 				4725D05F20C97D9C00C3B63F /* UserStorage.swift in Sources */,
 				47E6C21620EB12B6003BDB4D /* NotificationFactory.swift in Sources */,
