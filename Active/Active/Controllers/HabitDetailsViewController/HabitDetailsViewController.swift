@@ -111,6 +111,13 @@ class HabitDetailsViewController: UIViewController {
     /// The bar view displaying the current challenge's progress.
     @IBOutlet weak var progressBar: ProgressView!
 
+    /// The view holding the "No active challenge" section.
+    @IBOutlet weak var noChallengeContentView: UIView!
+
+    /// The new challenge button displayed for the habits that don't have an active days'
+    /// challenge at the moment.
+    @IBOutlet weak var newChallengeButton: RoundedButton!
+
     // MARK: ViewController Life Cycle
 
     override func viewDidLoad() {
@@ -139,6 +146,9 @@ class HabitDetailsViewController: UIViewController {
 
         // Configure the appearance of the challenge's progress section.
         displayProgressSection()
+
+        // Display the no challenge view, if there's no active challenge for the habit.
+        displayNoChallengesView()
     }
 
     // MARK: Actions
@@ -171,34 +181,7 @@ information unavailable.
         present(alert, animated: true)
     }
 
-    /// Sets the current as executed or not, depending on the user's action.
-    @IBAction func informActivityExecution(_ sender: UISwitch) {
-        guard let challenge = habit.getCurrentChallenge(), let day = challenge.getCurrentDay() else {
-            assertionFailure(
-                "Inconsistency: There isn't a current habit day but the prompt is being displayed."
-            )
-            return
-        }
 
-        // Get the user's answer.
-        let wasExecuted = sender.isOn
-
-        day.managedObjectContext?.perform {
-            day.wasExecuted = wasExecuted
-
-            // TODO: Display an error to the user.
-            try? day.managedObjectContext?.save()
-
-            DispatchQueue.main.async {
-                // Update the prompt view.
-                self.displayPromptView()
-                // Update the progress view.
-                self.displayProgressSection()
-                // Reload calendar to show the executed day.
-                self.calendarView.reloadData()
-            }
-        }
-    }
 
     /// Makes the calendar display the next month.
     @objc private func goNext() {
@@ -244,7 +227,7 @@ information unavailable.
 
     /// Gets the challenges from the passed habit ordered by the fromDate property.
     /// - Returns: The habit's ordered challenges.
-    private func getChallenges(from habit: HabitMO) -> [DaysChallengeMO] {
+    func getChallenges(from habit: HabitMO) -> [DaysChallengeMO] {
         // Declare and configure the fetch request.
         let request: NSFetchRequest<DaysChallengeMO> = DaysChallengeMO.fetchRequest()
         request.predicate = NSPredicate(format: "habit = %@", habit)
@@ -262,192 +245,12 @@ information unavailable.
     /// Gets the challenge matching a given date.
     /// - Note: The challenge is found if the date is in between or is it's begin or final.
     /// - Returns: The challenge entity, if any.
-    private func getChallenge(from date: Date) -> DaysChallengeMO? {
+    func getChallenge(from date: Date) -> DaysChallengeMO? {
         // Try to get the matching challenge by filtering through the habit's fetched ones.
         // The challenge matches when the passed date or is in between,
         // or is one of the challenge's limit dates (begin or end).
         return challenges.filter {
             date.isInBetween($0.fromDate!, $0.toDate!) || date == $0.fromDate! || date == $0.toDate!
         }.first
-    }
-
-    /// Displays the prompt view if today is a challenge's day.
-    private func displayPromptView() {
-        // ContentView is hidden by default.
-        promptContentView.isHidden = true
-
-        // Check if there's a current challenge for the habit.
-        guard let currentChallenge = habit.getCurrentChallenge() else {
-            return
-        }
-        // Check if today is a challenge's HabitDay.
-        guard let currentDay = currentChallenge.getCurrentDay() else {
-            return
-        }
-
-        // Get the order of the day in the challenge.
-        guard let orderedChallengeDays = currentChallenge.days?.sortedArray(
-            using: [NSSortDescriptor(key: "day.date", ascending: true)]
-            ) as? [HabitDayMO] else {
-                assertionFailure("Error: Couldn't get the challenge's sorted habit days.")
-                return
-        }
-        guard let dayIndex = orderedChallengeDays.index(of: currentDay) else {
-            assertionFailure("Error: Couldn't get the current day's index.")
-            return
-        }
-
-        promptContentView.isHidden = false
-
-        wasExecutedSwitch.onTintColor = habitColor
-
-        let order = dayIndex + 1
-        displayPromptViewTitle(withOrder: order)
-
-        if currentDay.wasExecuted {
-            wasExecutedSwitch.isOn = true
-            promptAnswerLabel.text = "Yes, I did it."
-            promptAnswerLabel.textColor = habitColor
-        } else {
-            wasExecutedSwitch.isOn = false
-            promptAnswerLabel.text = "No, not yet."
-            promptAnswerLabel.textColor = UIColor(red: 47/255, green: 54/255, blue: 64/255, alpha: 1)
-        }
-    }
-
-    /// Configures the prompt view title text.
-    /// - Parameter order: the order of day in the current challenge.
-    private func displayPromptViewTitle(withOrder order: Int) {
-        var orderTitle = ""
-
-        switch order {
-        case 1:
-            orderTitle = "1st"
-        case 2:
-            orderTitle = "2nd"
-        case 3:
-            orderTitle = "3rd"
-        default:
-            orderTitle = "\(order)th"
-        }
-
-        let attributedString = NSMutableAttributedString(string: "\(orderTitle) day")
-        attributedString.addAttributes(
-            [
-                NSAttributedStringKey.font: UIFont(name: "SFProText-Semibold", size: 20)!,
-                NSAttributedStringKey.foregroundColor: habitColor
-            ],
-            range: NSRange(location: 0, length: orderTitle.count)
-        )
-
-        currentDayTitleLabel.attributedText = attributedString
-    }
-}
-
-extension HabitDetailsViewController: CalendarDisplaying {
-
-    // MARK: Imperatives
-
-    /// Configures the appearance of a given cell when it's about to be displayed.
-    /// - Parameters:
-    ///     - cell: The cell being displayed.
-    ///     - cellState: The cell's state.
-    internal func handleAppearanceOfCell(
-        _ cell: JTAppleCell,
-        using cellState: CellState
-    ) {
-        // Cast it to the expected instance.
-        guard let cell = cell as? CalendarDayCell else {
-            assertionFailure("Couldn't cast the cell to a CalendarDayCell's instance.")
-            return
-        }
-
-        if cellState.dateBelongsTo == .thisMonth {
-            cell.dayTitleLabel.text = cellState.text
-
-            // Try to get the matching challenge for the current date.
-            if let challenge = getChallenge(from: cellState.date) {
-                // Get the habitDay associated with the cell's date.
-                guard let habitDay = challenge.getDay(for: cellState.date) else {
-                    // If there isn't a day associated with the date, there's a bug.
-                    assertionFailure("Inconsistency: a day should be returned from the challenge.")
-                    return
-                }
-
-                // If there's a challenge, show cell as being part of it.
-                let habitColor = HabitMO.Color(rawValue: habit.color)?.getColor()
-
-                cell.backgroundColor = habitDay.wasExecuted ? habitColor : habitColor?.withAlphaComponent(0.5)
-                cell.dayTitleLabel.textColor = .white
-
-                if cellState.date.isInToday {
-                    cell.circleView.backgroundColor = .white
-                    cell.dayTitleLabel.textColor = UIColor(red: 74/255, green: 74/255, blue: 74/255, alpha: 1)
-                } else if cellState.date.isFuture {
-                    // Days to be completed in the future should have a less bright color.
-                    cell.backgroundColor = cell.backgroundColor?.withAlphaComponent(0.3)
-                }
-            }
-        } else {
-            cell.dayTitleLabel.text = ""
-            cell.backgroundColor = .white
-        }
-    }
-}
-
-extension HabitDetailsViewController: JTAppleCalendarViewDataSource, JTAppleCalendarViewDelegate {
-
-    // MARK: JTAppleCalendarViewDataSource Methods
-
-    func configureCalendar(_ calendar: JTAppleCalendarView) -> ConfigurationParameters {
-        return ConfigurationParameters(
-            startDate: startDate,
-            endDate: finalDate
-        )
-    }
-
-    // MARK: JTAppleCalendarViewDelegate Methods
-
-    func calendar(
-        _ calendar: JTAppleCalendarView,
-        cellForItemAt date: Date,
-        cellState: CellState,
-        indexPath: IndexPath
-    ) -> JTAppleCell {
-        let cell = calendar.dequeueReusableJTAppleCell(
-            withReuseIdentifier: cellIdentifier,
-            for: indexPath
-        )
-
-        guard let dayCell = cell as? CalendarDayCell else {
-            assertionFailure("Couldn't get the expected details calendar cell.")
-            return cell
-        }
-        handleAppearanceOfCell(dayCell, using: cellState)
-
-        return dayCell
-    }
-
-    func calendar(
-        _ calendar: JTAppleCalendarView,
-        willDisplay cell: JTAppleCell,
-        forItemAt date: Date,
-        cellState: CellState,
-        indexPath: IndexPath
-    ) {
-        guard let dayCell = cell as? CalendarDayCell else {
-            assertionFailure("Couldn't get the expected details calendar cell.")
-            return
-        }
-        handleAppearanceOfCell(dayCell, using: cellState)
-    }
-
-    func calendar(
-        _ calendar: JTAppleCalendarView,
-        shouldSelectDate date: Date,
-        cell: JTAppleCell?,
-        cellState: CellState
-    ) -> Bool {
-        return false
     }
 }
