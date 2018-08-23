@@ -138,11 +138,22 @@ class DaysChallengeMO: NSManagedObject {
         return days?.filtered(using: futurePredicate) as? Set<HabitDayMO>
     }
 
-    /// Returns the challenge's completion progress.
+    /// Gets the challenge's completion progress.
     /// - Returns: A tuple containing the number of executed days and
     ///            the total in the challenge.
     func getCompletionProgress() -> (executed: Int, total: Int) {
         return (getExecutedDays()?.count ?? 0, days?.count ?? 0)
+    }
+
+    /// Gets the challenge's notification text for an specific HabitDayMO entity.
+    /// - Parameter day: the HabitDayMO entity to get the notification text.
+    /// - Returns: The notification text including the day's order.
+    func getNotificationText(for day: HabitDayMO) -> String? {
+        guard days?.contains(day) ?? false else {
+            return nil
+        }
+
+        return ""
     }
 
     /// Closes the challenge.
