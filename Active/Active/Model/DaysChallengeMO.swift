@@ -168,11 +168,23 @@ class DaysChallengeMO: NSManagedObject {
     /// - Parameter day: the HabitDayMO entity to get the notification text.
     /// - Returns: The notification text including the day's order.
     func getNotificationText(for day: HabitDayMO) -> String? {
-        guard days?.contains(day) ?? false else {
+        guard let dayOrder = getOrder(of: day) else {
             return nil
         }
+        var dayOrderText = String(dayOrder)
 
-        return ""
+        switch dayOrder {
+        case 1:
+            dayOrderText += "st"
+        case 2:
+            dayOrderText += "nd"
+        case 3:
+            dayOrderText += "rd"
+        default:
+            dayOrderText += "th"
+        }
+
+        return "Today is your \(dayOrderText) day, did you execute this activity?"
     }
 
     /// Closes the challenge.

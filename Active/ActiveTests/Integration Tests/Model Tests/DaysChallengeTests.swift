@@ -208,8 +208,6 @@ class DaysChallengeTests: IntegrationTestCase {
     }
 
     func testGettingNotificationTextForDay() {
-        XCTMarkNotImplemented()
-
         // 1. Declare a dummy challenge.
         let dummyChallenge = daysChallengeFactory.makeDummy()
 
@@ -222,10 +220,15 @@ class DaysChallengeTests: IntegrationTestCase {
             XCTFail("Couldn't get the first habit day from the challenge dummy.")
             return
         }
+        guard let order = dummyChallenge.getOrder(of: habitDay) else {
+            XCTFail("Couldn't get the day's order.")
+            return
+        }
 
         // 3. Assert that the notification text for the passed day will return a valid text.
-        XCTAssertNotNil(dummyChallenge.getNotificationText(for: habitDay))
-        // TODO: Complete test by making assertions about the order.
+        let text = dummyChallenge.getNotificationText(for: habitDay)
+        XCTAssertNotNil(text)
+        XCTAssertNotNil(text?.range(of: String(order)))
     }
 
     func testGettingNotificationTextForDayShouldReturnNil() {
