@@ -118,6 +118,18 @@ class HabitDetailsViewController: UIViewController {
     /// challenge at the moment.
     @IBOutlet weak var newChallengeButton: RoundedButton!
 
+    /// The view containing the fire time labels.
+    @IBOutlet weak var fireTimesContentView: UIView!
+
+    /// The label displaying the habit's fire times.
+    @IBOutlet weak var fireTimesLabel: UILabel!
+
+    /// The view containing information for when there are no fire times set for the habit.
+    @IBOutlet weak var noFireTimesContentView: UIView!
+
+    /// The button that takes to the fire times controller.
+    @IBOutlet weak var newFireTimesButton: RoundedButton!
+
     // MARK: ViewController Life Cycle
 
     override func viewDidLoad() {
@@ -141,14 +153,8 @@ class HabitDetailsViewController: UIViewController {
         let today = Date().getBeginningOfDay()
         calendarView.scrollToDate(today)
 
-        // Configure the appearance of the prompt section.
-        displayPromptView()
-
-        // Configure the appearance of the challenge's progress section.
-        displayProgressSection()
-
-        // Display the no challenge view, if there's no active challenge for the habit.
-        displayNoChallengesView()
+        // Display the initial state of the sections.
+        displaySections()
     }
 
     // MARK: Actions
@@ -180,8 +186,6 @@ information unavailable.
         // Present it.
         present(alert, animated: true)
     }
-
-
 
     /// Makes the calendar display the next month.
     @objc private func goNext() {
@@ -223,6 +227,21 @@ information unavailable.
             previousMonthButton != nil,
             "Error: the previous month button wasn't set."
         )
+    }
+
+    /// Updates and handles the display of each controller's section.
+    private func displaySections() {
+        // Configure the appearance of the prompt section.
+        displayPromptView()
+
+        // Configure the appearance of the challenge's progress section.
+        displayProgressSection()
+
+        // Display the no challenge view, if there's no active challenge for the habit.
+        displayNoChallengesView()
+
+        // Display the fire times section.
+        displayFireTimesSection()
     }
 
     /// Gets the challenges from the passed habit ordered by the fromDate property.

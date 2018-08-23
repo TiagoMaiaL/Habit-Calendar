@@ -313,7 +313,7 @@ class HabitCreationTableViewController: UITableViewController,
             // selected fire times:
             let fireTimeFormatter = DateFormatter.makeFireTimeDateFormatter()
             let fireDates = fireTimes.compactMap {
-                return Calendar.current.date(from: $0)
+                Calendar.current.date(from: $0)
             }.sorted()
             var fireTimesText = ""
 
