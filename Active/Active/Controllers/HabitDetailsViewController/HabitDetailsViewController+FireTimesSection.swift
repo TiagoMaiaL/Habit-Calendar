@@ -15,12 +15,24 @@ extension HabitDetailsViewController {
 
     /// Displays the fire times section, if there's an active days' challenge for the habit being presented.
     func displayFireTimesSection() {
-        guard habit.getCurrentChallenge() != nil, let fireTimesText = habit.getFireTimesText() else {
-            // Display the "No fire times" section.
+        guard habit.getCurrentChallenge() != nil else {
+            // Hide all sections.
+            noFireTimesContentView.isHidden = true
             fireTimesContentView.isHidden = true
             return
         }
 
+        guard let fireTimesText = habit.getFireTimesText() else {
+            fireTimesContentView.isHidden = true
+
+            // Display the "No fire times" section.
+            noFireTimesContentView.isHidden = false
+            newFireTimesButton.backgroundColor = habitColor
+            return
+        }
+
+        // Display the section showing the fire times.
+        noFireTimesContentView.isHidden = true
         fireTimesContentView.isHidden = false
 
         fireTimesLabel.textColor = habitColor
