@@ -23,5 +23,4 @@ extension HabitDetailsViewController {
 
         fireTimesContentView.isHidden = false
     }
-
 }

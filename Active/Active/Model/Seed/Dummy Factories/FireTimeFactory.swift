@@ -28,7 +28,7 @@ struct FireTimeFactory: DummyFactory {
         let fireTime = FireTimeMO(context: context)
         fireTime.id = UUID().uuidString
         fireTime.createdAt = Date()
-        fireTime.hour = Int16(Int.random(0..<59))
+        fireTime.hour = Int16(Int.random(0..<24))
         fireTime.minute = Int16(Int.random(0..<59))
 
         return fireTime
