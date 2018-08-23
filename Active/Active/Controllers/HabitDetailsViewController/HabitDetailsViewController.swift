@@ -155,6 +155,9 @@ class HabitDetailsViewController: UIViewController {
 
         // Display the no challenge view, if there's no active challenge for the habit.
         displayNoChallengesView()
+
+        // Display the fire times section.
+        displayFireTimesSection()
     }
 
     // MARK: Actions
