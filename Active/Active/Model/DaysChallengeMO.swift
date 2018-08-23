@@ -138,11 +138,53 @@ class DaysChallengeMO: NSManagedObject {
         return days?.filtered(using: futurePredicate) as? Set<HabitDayMO>
     }
 
-    /// Returns the challenge's completion progress.
+    /// Gets the challenge's completion progress.
     /// - Returns: A tuple containing the number of executed days and
     ///            the total in the challenge.
     func getCompletionProgress() -> (executed: Int, total: Int) {
         return (getExecutedDays()?.count ?? 0, days?.count ?? 0)
+    }
+
+    /// Gets the order (related to the date) of a given habitDay entity.
+    /// - Parameter day: The habitDayMO entity to get the order from.
+    /// - Returns: The order as an Int, if the days is present in the challenge.
+    func getOrder(of day: HabitDayMO) -> Int? {
+        guard days?.contains(day) ?? false else {
+            return nil
+        }
+        let sortedByDate = NSSortDescriptor(key: "day.date", ascending: true)
+        guard let orderedDays = days?.sortedArray(using: [sortedByDate]) as? [HabitDayMO] else {
+            return nil
+        }
+
+        if let index = orderedDays.index(of: day) {
+            return index + 1
+        } else {
+            return nil
+        }
+    }
+
+    /// Gets the challenge's notification text for an specific HabitDayMO entity.
+    /// - Parameter day: the HabitDayMO entity to get the notification text.
+    /// - Returns: The notification text including the day's order.
+    func getNotificationText(for day: HabitDayMO) -> String? {
+        guard let dayOrder = getOrder(of: day) else {
+            return nil
+        }
+        var dayOrderText = String(dayOrder)
+
+        switch dayOrder {
+        case 1:
+            dayOrderText += "st"
+        case 2:
+            dayOrderText += "nd"
+        case 3:
+            dayOrderText += "rd"
+        default:
+            dayOrderText += "th"
+        }
+
+        return "Today is your \(dayOrderText) day, did you execute this activity?"
     }
 
     /// Closes the challenge.

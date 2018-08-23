@@ -178,6 +178,70 @@ class DaysChallengeTests: IntegrationTestCase {
         )
     }
 
+    func testGettingDayOrderSortedByDate() {
+        // 1. Declare a dummy challenge.
+        let dummyChallenge = daysChallengeFactory.makeDummy()
+
+        // 2. Get one of it's days at a random index.
+        let sortedByDate = NSSortDescriptor(key: "day.date", ascending: true)
+        guard let orderedDays = dummyChallenge.days?.sortedArray(using: [sortedByDate]) as? [HabitDayMO] else {
+            XCTFail("Couldn't get the days sorted by date.")
+            return
+        }
+        let randomIndex = Int.random(0..<orderedDays.count)
+        let randomDay = orderedDays[randomIndex]
+
+        // 3. Try getting the day's order in the challenge, it should return the expected result.
+        XCTAssertNotNil(dummyChallenge.getOrder(of: randomDay))
+        XCTAssertEqual(randomIndex + 1, dummyChallenge.getOrder(of: randomDay))
+    }
+
+    func testGettingDayOrderSortedByDateShouldReturnNil() {
+        // 1. Declare a dummy challenge.
+        let dummyChallenge = daysChallengeFactory.makeDummy()
+
+        // 2. Declare a dummy habit day.
+        let dummyHabitDay = habitDayFactory.makeDummy()
+
+        // 3. Try getting the day's order in the challenge, it should return nil.
+        XCTAssertNil(dummyChallenge.getOrder(of: dummyHabitDay))
+    }
+
+    func testGettingNotificationTextForDay() {
+        // 1. Declare a dummy challenge.
+        let dummyChallenge = daysChallengeFactory.makeDummy()
+
+        // 2. Get one of its habit days.
+        guard let daysSet = dummyChallenge.days as? Set<HabitDayMO> else {
+            XCTFail("Couldn't get the habit days set from the challenge dummy.")
+            return
+        }
+        guard let habitDay = daysSet.first else {
+            XCTFail("Couldn't get the first habit day from the challenge dummy.")
+            return
+        }
+        guard let order = dummyChallenge.getOrder(of: habitDay) else {
+            XCTFail("Couldn't get the day's order.")
+            return
+        }
+
+        // 3. Assert that the notification text for the passed day will return a valid text.
+        let text = dummyChallenge.getNotificationText(for: habitDay)
+        XCTAssertNotNil(text)
+        XCTAssertNotNil(text?.range(of: String(order)))
+    }
+
+    func testGettingNotificationTextForDayShouldReturnNil() {
+        // 1. Declare a dummy challenge.
+        let dummyChallenge = daysChallengeFactory.makeDummy()
+
+        // 2. Declare a habitDayMO not included in the challenge.
+        let dummyHabitDay = habitDayFactory.makeDummy()
+
+        // 3. Assert that the notification text for the passed day will be nil.
+        XCTAssertNil(dummyChallenge.getNotificationText(for: dummyHabitDay))
+    }
+
     func testMarkingCurrentDayAsExecuted() {
         // 1. Create a dummy challenge.
         let dummyChallenge = daysChallengeFactory.makeDummy()

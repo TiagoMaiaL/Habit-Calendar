@@ -147,10 +147,6 @@ class HabitTests: IntegrationTestCase {
         )
     }
 
-    func testDescriptionText() {
-        XCTMarkNotImplemented()
-    }
-
     func testGettingCurrentHabitDay() {
         // Create an empty dummy habit.
         let dummyHabit = makeEmptyDummy()
