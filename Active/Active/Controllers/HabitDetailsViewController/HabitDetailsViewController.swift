@@ -118,6 +118,12 @@ class HabitDetailsViewController: UIViewController {
     /// challenge at the moment.
     @IBOutlet weak var newChallengeButton: RoundedButton!
 
+    /// The view containing the fire time labels.
+    @IBOutlet weak var fireTimesContentView: UIView!
+
+    /// The label displaying the habit's fire times.
+    @IBOutlet weak var fireTimesLabel: UILabel!
+
     // MARK: ViewController Life Cycle
 
     override func viewDidLoad() {
