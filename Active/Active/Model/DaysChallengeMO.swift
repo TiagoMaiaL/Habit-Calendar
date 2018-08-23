@@ -145,6 +145,25 @@ class DaysChallengeMO: NSManagedObject {
         return (getExecutedDays()?.count ?? 0, days?.count ?? 0)
     }
 
+    /// Gets the order (related to the date) of a given habitDay entity.
+    /// - Parameter day: The habitDayMO entity to get the order from.
+    /// - Returns: The order as an Int, if the days is present in the challenge.
+    func getOrder(of day: HabitDayMO) -> Int? {
+        guard days?.contains(day) ?? false else {
+            return nil
+        }
+        let sortedByDate = NSSortDescriptor(key: "day.date", ascending: true)
+        guard let orderedDays = days?.sortedArray(using: [sortedByDate]) as? [HabitDayMO] else {
+            return nil
+        }
+
+        if let index = orderedDays.index(of: day) {
+            return index + 1
+        } else {
+            return nil
+        }
+    }
+
     /// Gets the challenge's notification text for an specific HabitDayMO entity.
     /// - Parameter day: the HabitDayMO entity to get the notification text.
     /// - Returns: The notification text including the day's order.

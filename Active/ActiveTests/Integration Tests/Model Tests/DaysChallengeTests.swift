@@ -178,6 +178,35 @@ class DaysChallengeTests: IntegrationTestCase {
         )
     }
 
+    func testGettingDayOrderSortedByDate() {
+        // 1. Declare a dummy challenge.
+        let dummyChallenge = daysChallengeFactory.makeDummy()
+
+        // 2. Get one of it's days at a random index.
+        let sortedByDate = NSSortDescriptor(key: "day.date", ascending: true)
+        guard let orderedDays = dummyChallenge.days?.sortedArray(using: [sortedByDate]) as? [HabitDayMO] else {
+            XCTFail("Couldn't get the days sorted by date.")
+            return
+        }
+        let randomIndex = Int.random(0..<orderedDays.count)
+        let randomDay = orderedDays[randomIndex]
+
+        // 3. Try getting the day's order in the challenge, it should return the expected result.
+        XCTAssertNotNil(dummyChallenge.getOrder(of: randomDay))
+        XCTAssertEqual(randomIndex + 1, dummyChallenge.getOrder(of: randomDay))
+    }
+
+    func testGettingDayOrderSortedByDateShouldReturnNil() {
+        // 1. Declare a dummy challenge.
+        let dummyChallenge = daysChallengeFactory.makeDummy()
+
+        // 2. Declare a dummy habit day.
+        let dummyHabitDay = habitDayFactory.makeDummy()
+
+        // 3. Try getting the day's order in the challenge, it should return nil.
+        XCTAssertNil(dummyChallenge.getOrder(of: dummyHabitDay))
+    }
+
     func testGettingNotificationTextForDay() {
         XCTMarkNotImplemented()
 
