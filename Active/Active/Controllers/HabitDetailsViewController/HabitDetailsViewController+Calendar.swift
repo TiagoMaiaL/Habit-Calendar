@@ -41,9 +41,11 @@ extension HabitDetailsViewController: CalendarDisplaying {
                 }
 
                 // If there's a challenge, show cell as being part of it.
-                let habitColor = HabitMO.Color(rawValue: habit.color)?.getColor()
+                let habitColor = habit.getColor()
 
-                cell.backgroundColor = habitDay.wasExecuted ? habitColor : habitColor?.withAlphaComponent(0.5)
+                cell.backgroundColor = habitDay.wasExecuted ?
+                    habitColor.uiColor :
+                    habitColor.uiColor.withAlphaComponent(0.5)
                 cell.dayTitleLabel.textColor = .white
 
                 if cellState.date.isInToday {

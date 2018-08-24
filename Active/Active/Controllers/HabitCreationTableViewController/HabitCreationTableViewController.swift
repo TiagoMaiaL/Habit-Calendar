@@ -144,7 +144,7 @@ class HabitCreationTableViewController: UITableViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Declare the theme color to be passed to the controllers.
-        let themeColor = self.habitColor?.getColor() ?? defaultThemeColor
+        let themeColor = self.habitColor?.uiColor ?? defaultThemeColor
 
         switch segue.identifier {
         case daysSelectionSegue:
@@ -266,8 +266,7 @@ information unavailable.
 
             // Check if anything changed.
             let isNameDifferent = !(name ?? "").isEmpty && name != habitToEdit.name
-            // TODO: Add method to get the enum color from the entity.
-            let isColorDifferent = habitColor != nil && habitColor != HabitMO.Color(rawValue: habitToEdit.color)
+            let isColorDifferent = habitColor != nil && habitColor != habitToEdit.getColor()
             let isChallengeDifferent = days != nil && !days!.isEmpty
             let areFireTimesDifferent = fireTimes != nil && !fireTimes!.isEmpty
 
@@ -284,8 +283,8 @@ information unavailable.
         nameTextField.text = habit!.name
 
         // Display the habit's color.
-        habitColor = HabitMO.Color(rawValue: habit!.color)
-        colorPicker.selectedColor = habitColor!.getColor()
+        habitColor = habit!.getColor()
+        colorPicker.selectedColor = habitColor!.uiColor
 
         // Display the habit's current days' challenge.
 

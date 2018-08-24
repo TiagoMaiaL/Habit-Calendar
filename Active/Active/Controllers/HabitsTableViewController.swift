@@ -184,7 +184,7 @@ class HabitsTableViewController: UITableViewController, NSFetchedResultsControll
             }
 
             cell.progressLabel?.text = "\(pastCount) / \(daysCount) completed days"
-            cell.progressBar.tint = HabitMO.Color(rawValue: habit.color)?.getColor()
+            cell.progressBar.tint = habit.getColor().uiColor
             // Change the bar's progress (past days / total).
             cell.progressBar.progress = CGFloat(Double(pastCount) / Double(daysCount))
         }

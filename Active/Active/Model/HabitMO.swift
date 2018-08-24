@@ -153,4 +153,10 @@ class HabitMO: NSManagedObject {
         )
         return challenges?.filtered(using: currentPredicate).first as? DaysChallengeMO
     }
+
+    /// Gets the habit's color enum value.
+    /// - Returns: The color case.
+    func getColor() -> Color {
+        return Color(rawValue: color)!
+    }
 }

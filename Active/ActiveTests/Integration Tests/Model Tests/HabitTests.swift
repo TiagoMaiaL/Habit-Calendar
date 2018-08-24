@@ -294,6 +294,17 @@ class HabitTests: IntegrationTestCase {
         }
     }
 
+    func testGettingColorAsEnum() {
+        // 1. Declare a dummy habit.
+        let dummyHabit = habitFactory.makeDummy()
+
+        // 2. Get its enum color.
+        let color = HabitMO.Color(rawValue: dummyHabit.color)
+
+        // 3. Assert it's equal to the returned.
+        XCTAssertEqual(color, dummyHabit.getColor())
+    }
+
     // MARK: Imperatives
 
     private func makeEmptyDummy() -> HabitMO {

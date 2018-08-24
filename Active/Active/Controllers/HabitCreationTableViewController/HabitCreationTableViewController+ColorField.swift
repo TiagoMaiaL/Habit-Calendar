@@ -15,7 +15,7 @@ extension HabitCreationTableViewController {
 
     /// Applies the selected theme color to the controller's fields.
     func displayThemeColor() {
-        let themeColor = habitColor?.getColor() ?? defaultThemeColor
+        let themeColor = habitColor?.uiColor ?? defaultThemeColor
         // Set the theme color of:
         // the days field.
         let daysFieldColor = (days?.isEmpty ?? true) ? UIColor.red : themeColor

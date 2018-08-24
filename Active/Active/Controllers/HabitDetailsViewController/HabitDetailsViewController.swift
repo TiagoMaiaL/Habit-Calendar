@@ -17,7 +17,7 @@ class HabitDetailsViewController: UIViewController {
     /// The habit presented by this controller.
     var habit: HabitMO! {
         didSet {
-            habitColor = HabitMO.Color(rawValue: habit.color)?.getColor()
+            habitColor = habit.getColor().uiColor
         }
     }
 
