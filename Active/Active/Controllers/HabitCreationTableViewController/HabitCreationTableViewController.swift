@@ -63,7 +63,7 @@ class HabitCreationTableViewController: UITableViewController {
     var name: String? {
         didSet {
             // Update the button state.
-            configureCreationButton()
+            configureDoneButton()
         }
     }
 
@@ -75,7 +75,7 @@ class HabitCreationTableViewController: UITableViewController {
         didSet {
             displayThemeColor()
             // Update the button state.
-            configureCreationButton()
+            configureDoneButton()
         }
     }
 
@@ -84,7 +84,7 @@ class HabitCreationTableViewController: UITableViewController {
         didSet {
             configureDaysLabels()
             // Update the button state.
-            configureCreationButton()
+            configureDoneButton()
         }
     }
 
@@ -124,7 +124,7 @@ class HabitCreationTableViewController: UITableViewController {
         configureFireTimesLabels()
 
         // Set the done button's initial state.
-        configureCreationButton()
+        configureDoneButton()
 
         // If there's a passed habit, it means that the controller should edit it.
         if habit != nil {
@@ -233,9 +233,23 @@ class HabitCreationTableViewController: UITableViewController {
     // MARK: Imperatives
 
     /// Enables or disables the button depending on the habit's filled data.
-    private func configureCreationButton() {
-        // Check if the name and days are correctly set.
-        doneButton.isEnabled = !(name ?? "").isEmpty && !(days ?? []).isEmpty && habitColor != nil
+    private func configureDoneButton() {
+        if let habitToEdit = habit {
+            // Change the button's title if there's a habit to be editted.
+            doneButton.setTitle("Edit", for: .normal)
+
+            // Check if anything changed.
+            let isNameDifferent = !(name ?? "").isEmpty && name != habitToEdit.name
+            // TODO: Add method to get the enum color from the entity.
+            let isColorDifferent = habitColor != nil && habitColor != HabitMO.Color(rawValue: habitToEdit.color)
+            let isChallengeDifferent = days != nil && !days!.isEmpty
+            let areFireTimesDifferent = fireTimes != nil && !fireTimes!.isEmpty
+
+            doneButton.isEnabled = isNameDifferent || isColorDifferent || isChallengeDifferent || areFireTimesDifferent
+        } else {
+            // Check if the name and days are correctly set.
+            doneButton.isEnabled = !(name ?? "").isEmpty && !(days ?? []).isEmpty && habitColor != nil
+        }
     }
 
     /// Display the provided habit's data for edittion.
