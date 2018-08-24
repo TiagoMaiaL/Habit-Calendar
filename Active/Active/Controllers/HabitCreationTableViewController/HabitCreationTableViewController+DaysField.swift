@@ -41,4 +41,3 @@ extension HabitCreationTableViewController: HabitDaysSelectionViewControllerDele
         days = daysDates
     }
 }
-

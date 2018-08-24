@@ -157,6 +157,17 @@ class HabitDetailsViewController: UIViewController {
         displaySections()
     }
 
+    // MARK: Navigation
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "Edit the habit",
+            let editionController = segue.destination as? HabitCreationTableViewController {
+            editionController.container = container
+            editionController.habitStore = habitStorage
+            editionController.habit = habit
+        }
+    }
+
     // MARK: Actions
 
     @IBAction func deleteHabit(_ sender: UIButton) {

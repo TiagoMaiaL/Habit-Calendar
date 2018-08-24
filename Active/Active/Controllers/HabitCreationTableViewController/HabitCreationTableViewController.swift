@@ -125,6 +125,11 @@ class HabitCreationTableViewController: UITableViewController {
 
         // Set the done button's initial state.
         configureCreationButton()
+
+        // If there's a passed habit, it means that the controller should edit it.
+        if habit != nil {
+            displayHabitProperties()
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -231,6 +236,20 @@ class HabitCreationTableViewController: UITableViewController {
     private func configureCreationButton() {
         // Check if the name and days are correctly set.
         doneButton.isEnabled = !(name ?? "").isEmpty && !(days ?? []).isEmpty && habitColor != nil
+    }
+
+    /// Display the provided habit's data for edittion.
+    private func displayHabitProperties() {
+        // Display the habit's name.
+        nameTextField.text = habit!.name
+
+        // Display the habit's color.
+        habitColor = HabitMO.Color(rawValue: habit!.color)
+        colorPicker.colorPickerDataSource.selectedColor = habitColor!.getColor()
+
+        // Display the habit's current days' challenge.
+
+        // Display the habit's fire times.
     }
 }
 

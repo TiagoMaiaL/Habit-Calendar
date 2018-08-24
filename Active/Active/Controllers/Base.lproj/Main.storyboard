@@ -499,7 +499,7 @@ reminded about this habit?</string>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bag-g3-dbf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2028" y="-465.96701649175418"/>
+            <point key="canvasLocation" x="2966" y="-180"/>
         </scene>
         <!--Notifications-->
         <scene sceneID="e0g-by-TQS">
@@ -614,7 +614,7 @@ reminded about this habit?</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rE2-W1-pId" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2980" y="-861"/>
+            <point key="canvasLocation" x="3918" y="-575"/>
         </scene>
         <!--Days-->
         <scene sceneID="LN7-wK-ThL">
@@ -771,7 +771,7 @@ reminded about this habit?</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9zz-Nw-yjM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2980" y="-89"/>
+            <point key="canvasLocation" x="3918" y="197"/>
         </scene>
         <!--Read-->
         <scene sceneID="xFu-io-JbZ">
@@ -1174,7 +1174,13 @@ you think of adding a new one?</string>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="tww-hp-589"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Play guitar" largeTitleDisplayMode="never" id="LZl-wy-YbF"/>
+                    <navigationItem key="navigationItem" title="Play guitar" largeTitleDisplayMode="never" id="LZl-wy-YbF">
+                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="pjh-NV-abD">
+                            <connections>
+                                <segue destination="e07-lh-rVp" kind="show" identifier="Edit the habit" id="5mV-Cj-rFr"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <size key="freeformSize" width="375" height="1300"/>
                     <connections>
                         <outlet property="calendarView" destination="7Pe-pH-Udy" id="dhu-6f-iLR"/>
@@ -1198,7 +1204,7 @@ you think of adding a new one?</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eer-Kp-wUj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2028" y="637"/>
+            <point key="canvasLocation" x="2028" y="647"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="GVs-QO-GaP">
@@ -1219,4 +1225,7 @@ you think of adding a new one?</string>
             <point key="canvasLocation" x="192.80000000000001" y="-60.719640179910051"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="5mV-Cj-rFr"/>
+    </inferredMetricsTieBreakers>
 </document>
