@@ -245,7 +245,7 @@ class HabitCreationTableViewController: UITableViewController {
 
         // Display the habit's color.
         habitColor = HabitMO.Color(rawValue: habit!.color)
-        colorPicker.colorPickerDataSource.selectedColor = habitColor!.getColor()
+        colorPicker.selectedColor = habitColor!.getColor()
 
         // Display the habit's current days' challenge.
 

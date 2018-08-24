@@ -68,6 +68,14 @@ import UIKit
         }
     }
 
+    /// The currently selected color.
+    var selectedColor: UIColor? {
+        didSet {
+            colorPickerDataSource.selectedColor = selectedColor
+            collectionView.reloadData()
+        }
+    }
+
     /// How many colors per row should be displayed.
     @IBInspectable var colorsPerRow: Int = 5 {
         didSet {
