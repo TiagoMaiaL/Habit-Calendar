@@ -11,9 +11,7 @@ import CoreData
 import UserNotifications
 
 /// Controller used to allow the user to create/edit habits.
-class HabitCreationTableViewController: UITableViewController,
-    HabitDaysSelectionViewControllerDelegate,
-    FireTimesSelectionViewControllerDelegate {
+class HabitCreationTableViewController: UITableViewController {
 
     // MARK: Properties
 
@@ -62,7 +60,7 @@ class HabitCreationTableViewController: UITableViewController,
     var habit: HabitMO?
 
     /// The habit's name being informed by the user.
-    private var name: String? {
+    var name: String? {
         didSet {
             // Update the button state.
             configureCreationButton()
@@ -70,15 +68,10 @@ class HabitCreationTableViewController: UITableViewController,
     }
 
     /// The color to be used as the theme one in case the user hasn't selected any.
-    private let defaultThemeColor = UIColor(
-        red: 47/255,
-        green: 54/255,
-        blue: 64/255,
-        alpha: 1
-    )
+    let defaultThemeColor = UIColor(red: 47/255, green: 54/255, blue: 64/255, alpha: 1)
 
     /// The habit's color selected by the user.
-    private var habitColor: HabitMO.Color? {
+    var habitColor: HabitMO.Color? {
         didSet {
             displayThemeColor()
             // Update the button state.
@@ -87,7 +80,7 @@ class HabitCreationTableViewController: UITableViewController,
     }
 
     /// The habit's days the user has selected.
-    private var days: [Date]? {
+    var days: [Date]? {
         didSet {
             configureDaysLabels()
             // Update the button state.
@@ -96,7 +89,7 @@ class HabitCreationTableViewController: UITableViewController,
     }
 
     /// The habit's notification fire times the user has selected.
-    private var fireTimes: [FireTimesSelectionViewController.FireTime]?
+    var fireTimes: [FireTimesSelectionViewController.FireTime]?
 
     // TODO: Show a cell indicating the user hasn't enabled local notifications.
 
@@ -232,133 +225,12 @@ class HabitCreationTableViewController: UITableViewController,
         )
     }
 
-    /// Finishes editing the name's textField.
-    @objc private func endNameEdition() {
-        nameTextField.resignFirstResponder()
-    }
-
     // MARK: Imperatives
-
-    /// Listens to the change events emmited the name text field.
-    /// - Paramter textField: The textField being editted.
-    @objc private func nameChanged(textField: UITextField) {
-        // Associate the name with the field's text.
-        name = textField.text
-    }
-
-    /// Applies the selected theme color to the controller's fields.
-    private func displayThemeColor() {
-        let themeColor = habitColor?.getColor() ?? defaultThemeColor
-        // Set the theme color of:
-        // the days field.
-        let daysFieldColor = (days?.isEmpty ?? true) ? UIColor.red : themeColor
-        daysAmountLabel.textColor = daysFieldColor
-        fromDayLabel.textColor = daysFieldColor
-        toDayLabel.textColor = daysFieldColor
-
-        // the Notifications field.
-        let notificationsFieldColor = (fireTimes?.isEmpty ?? true) ? UIColor.red : themeColor
-        fireTimesAmountLabel.textColor = notificationsFieldColor
-        selectedFireTimesLabel.textColor = notificationsFieldColor
-
-        // the done button.
-        doneButton.backgroundColor = themeColor
-    }
 
     /// Enables or disables the button depending on the habit's filled data.
     private func configureCreationButton() {
         // Check if the name and days are correctly set.
         doneButton.isEnabled = !(name ?? "").isEmpty && !(days ?? []).isEmpty && habitColor != nil
-    }
-
-    /// Configures the colors to be diplayed by the color picker view.
-    private func configureColorPicker() {
-        // Set the color change handler.
-        colorPicker.colorChangeHandler = { uiColor in
-            // Associate the selected color.
-            self.habitColor = HabitMO.Color.getInstanceFrom(color: uiColor)
-        }
-        // Get the possible colors to be displayed.
-        let possibleColors = Array(HabitMO.Color.uiColors.values)
-        // Pass the to the picker.
-        colorPicker.colorsToDisplay = possibleColors
-    }
-
-    /// Configures the text being displayed by each label within the days
-    /// field.
-    private func configureDaysLabels() {
-        if let days = days?.sorted(), !days.isEmpty {
-            let formatter = DateFormatter.shortCurrent
-            // Set the text for the label displaying the number of days.
-            daysAmountLabel.text = "\(days.count) day\(days.count == 1 ? "" : "s") selected."
-            // Set the text for the label displaying initial day in the sequence.
-            fromDayLabel.text = formatter.string(from: days.first!)
-            // Set the text for the label displaying final day in the sequence.
-            toDayLabel.text = formatter.string(from: days.last!)
-        } else {
-            daysAmountLabel.text = "No days were selected."
-            fromDayLabel.text = "--"
-            toDayLabel.text = "--"
-        }
-    }
-
-    /// Configures the text being displayed by each label within
-    /// the notifications field.
-    private func configureFireTimesLabels() {
-        if let fireTimes = fireTimes, !fireTimes.isEmpty {
-            // Set the text for the label displaying the amount of fire times.
-            fireTimesAmountLabel.text = "\(fireTimes.count) fire time\(fireTimes.count == 1 ? "" : "s") selected."
-
-            // Set the text for the label displaying some of the
-            // selected fire times:
-            let fireTimeFormatter = DateFormatter.makeFireTimeDateFormatter()
-            let fireDates = fireTimes.compactMap {
-                Calendar.current.date(from: $0)
-            }.sorted()
-            var fireTimesText = ""
-
-            for fireDate in fireDates {
-                fireTimesText += fireTimeFormatter.string(from: fireDate)
-
-                // If the current fire time isn't the last one,
-                // include a colon to separate it from the next.
-                if fireDates.index(of: fireDate)! != fireDates.endIndex - 1 {
-                    fireTimesText += ", "
-                }
-            }
-
-            selectedFireTimesLabel.text = fireTimesText
-        } else {
-            fireTimesAmountLabel.text = "No fire times selected."
-            selectedFireTimesLabel.text = "--"
-        }
-    }
-
-    /// Creates and configures a new UIToolbar with a done button to be
-    /// used as the name field's accessoryView.
-    /// - Returns: An UIToolbar.
-    private func makeToolbar() -> UIToolbar {
-        let toolBar = UIToolbar(
-            frame: CGRect(
-                x: 0,
-                y: 0,
-                width: UIScreen.main.bounds.size.width,
-                height: 50
-            )
-        )
-        toolBar.setItems(
-            [
-                UIBarButtonItem(
-                    title: "Done",
-                    style: .done,
-                    target: self,
-                    action: #selector(endNameEdition)
-                )
-            ],
-            animated: false
-        )
-
-        return toolBar
     }
 }
 
@@ -396,27 +268,5 @@ extension HabitCreationTableViewController {
         } else {
             return 0
         }
-    }
-}
-
-extension HabitCreationTableViewController {
-
-    // MARK: HabitDaysSelectionViewController Delegate Methods
-
-    func didSelectDays(_ daysDates: [Date]) {
-        // Associate the habit's days with the dates selected by the user.
-        days = daysDates
-    }
-}
-
-extension HabitCreationTableViewController {
-
-    // MARK: HabitNotificationsSelectionViewControllerDelegate Delegate Methods
-
-    func didSelectFireTimes(_ fireTimes: [FireTimesSelectionViewController.FireTime]) {
-        // Associate the selected fire times.
-        self.fireTimes = fireTimes
-        // Change the labels to display the selected fire times.
-        configureFireTimesLabels()
     }
 }

@@ -88,6 +88,10 @@
 		47C3202D212DD59A0094BBF8 /* HabitDetailsViewController+Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C3202C212DD59A0094BBF8 /* HabitDetailsViewController+Calendar.swift */; };
 		47C3202F212DD7C80094BBF8 /* HabitDetailsViewController+PromptSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C3202E212DD7C80094BBF8 /* HabitDetailsViewController+PromptSection.swift */; };
 		47C32031212EFD380094BBF8 /* HabitDetailsViewController+FireTimesSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C32030212EFD380094BBF8 /* HabitDetailsViewController+FireTimesSection.swift */; };
+		47C320342130793A0094BBF8 /* HabitCreationTableViewController+DaysField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C320332130793A0094BBF8 /* HabitCreationTableViewController+DaysField.swift */; };
+		47C32036213079770094BBF8 /* HabitCreationTableViewController+FireTimesField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C32035213079770094BBF8 /* HabitCreationTableViewController+FireTimesField.swift */; };
+		47C320382130799D0094BBF8 /* HabitCreationTableViewController+ColorField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C320372130799C0094BBF8 /* HabitCreationTableViewController+ColorField.swift */; };
+		47C3203A213079AD0094BBF8 /* HabitCreationTableViewController+NameField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C32039213079AD0094BBF8 /* HabitCreationTableViewController+NameField.swift */; };
 		47D7003B2100F72A00F4FE88 /* OffensiveTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D7003A2100F72A00F4FE88 /* OffensiveTests.swift */; };
 		47D7003D210179F600F4FE88 /* NotificationScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D7003C210179F600F4FE88 /* NotificationScheduler.swift */; };
 		47D7004121017D0A00F4FE88 /* NotificationSchedulerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D7004021017D0A00F4FE88 /* NotificationSchedulerTests.swift */; };
@@ -218,6 +222,10 @@
 		47C3202C212DD59A0094BBF8 /* HabitDetailsViewController+Calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HabitDetailsViewController+Calendar.swift"; sourceTree = "<group>"; };
 		47C3202E212DD7C80094BBF8 /* HabitDetailsViewController+PromptSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HabitDetailsViewController+PromptSection.swift"; sourceTree = "<group>"; };
 		47C32030212EFD380094BBF8 /* HabitDetailsViewController+FireTimesSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HabitDetailsViewController+FireTimesSection.swift"; sourceTree = "<group>"; };
+		47C320332130793A0094BBF8 /* HabitCreationTableViewController+DaysField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HabitCreationTableViewController+DaysField.swift"; sourceTree = "<group>"; };
+		47C32035213079770094BBF8 /* HabitCreationTableViewController+FireTimesField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HabitCreationTableViewController+FireTimesField.swift"; sourceTree = "<group>"; };
+		47C320372130799C0094BBF8 /* HabitCreationTableViewController+ColorField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HabitCreationTableViewController+ColorField.swift"; sourceTree = "<group>"; };
+		47C32039213079AD0094BBF8 /* HabitCreationTableViewController+NameField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HabitCreationTableViewController+NameField.swift"; sourceTree = "<group>"; };
 		47D7003A2100F72A00F4FE88 /* OffensiveTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffensiveTests.swift; sourceTree = "<group>"; };
 		47D7003C210179F600F4FE88 /* NotificationScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationScheduler.swift; sourceTree = "<group>"; };
 		47D7004021017D0A00F4FE88 /* NotificationSchedulerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSchedulerTests.swift; sourceTree = "<group>"; };
@@ -313,7 +321,7 @@
 			children = (
 				47F635F320BB920900AC4555 /* Main.storyboard */,
 				4725D05A20C8A4BA00C3B63F /* HabitsTableViewController.swift */,
-				47E6C20A20EAF550003BDB4D /* HabitCreationTableViewController.swift */,
+				47C32032213078B40094BBF8 /* HabitCreationTableViewController */,
 				4737312A20ED502800895DD2 /* HabitDaysSelectionViewController.swift */,
 				4737312C20ED503B00895DD2 /* FireTimesSelectionViewController.swift */,
 				47C32027212C578C0094BBF8 /* HabitDetailsViewController */,
@@ -511,6 +519,18 @@
 				47C32030212EFD380094BBF8 /* HabitDetailsViewController+FireTimesSection.swift */,
 			);
 			path = HabitDetailsViewController;
+			sourceTree = "<group>";
+		};
+		47C32032213078B40094BBF8 /* HabitCreationTableViewController */ = {
+			isa = PBXGroup;
+			children = (
+				47E6C20A20EAF550003BDB4D /* HabitCreationTableViewController.swift */,
+				47C320332130793A0094BBF8 /* HabitCreationTableViewController+DaysField.swift */,
+				47C32035213079770094BBF8 /* HabitCreationTableViewController+FireTimesField.swift */,
+				47C320372130799C0094BBF8 /* HabitCreationTableViewController+ColorField.swift */,
+				47C32039213079AD0094BBF8 /* HabitCreationTableViewController+NameField.swift */,
+			);
+			path = HabitCreationTableViewController;
 			sourceTree = "<group>";
 		};
 		47D8FC9C20DB28350094026B /* Manager Tests */ = {
@@ -816,7 +836,9 @@
 				4761F5B021209EED00A8D407 /* CalendarDayCell.swift in Sources */,
 				47AA365B2104D5E60008D2DC /* FireTimeFactory.swift in Sources */,
 				4761F5B52120D06900A8D407 /* ColorsPickerDataSource.swift in Sources */,
+				47C320382130799D0094BBF8 /* HabitCreationTableViewController+ColorField.swift in Sources */,
 				47C32029212C57D10094BBF8 /* HabitDetailsViewController+ProgressSection.swift in Sources */,
+				47C320342130793A0094BBF8 /* HabitCreationTableViewController+DaysField.swift in Sources */,
 				4725D06120CA06EE00C3B63F /* DayStorage.swift in Sources */,
 				47C3202F212DD7C80094BBF8 /* HabitDetailsViewController+PromptSection.swift in Sources */,
 				4732CE7E211A12B500E2770C /* RoundedButton.swift in Sources */,
@@ -837,10 +859,12 @@
 				47E6C20B20EAF550003BDB4D /* HabitCreationTableViewController.swift in Sources */,
 				474B7B9E212746BE00814A8E /* DateFormatter+Utils.swift in Sources */,
 				4725D05D20C8A96200C3B63F /* HabitStorage.swift in Sources */,
+				47C32036213079770094BBF8 /* HabitCreationTableViewController+FireTimesField.swift in Sources */,
 				47E6C21320EB12A2003BDB4D /* DayFactory.swift in Sources */,
 				4732CE7C2118DA8400E2770C /* UnderlinedTextField.swift in Sources */,
 				4713A20020C164E6008A13D2 /* HabitDayMO.swift in Sources */,
 				47E6C20D20EAF567003BDB4D /* HabitDetailsViewController.swift in Sources */,
+				47C3203A213079AD0094BBF8 /* HabitCreationTableViewController+NameField.swift in Sources */,
 				4737312B20ED502800895DD2 /* HabitDaysSelectionViewController.swift in Sources */,
 				47D8308A20FCFDD6002D3A97 /* DaysChallengeStorage.swift in Sources */,
 				4713A1FC20C1643E008A13D2 /* UserMO.swift in Sources */,
