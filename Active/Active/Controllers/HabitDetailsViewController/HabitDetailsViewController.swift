@@ -170,34 +170,6 @@ class HabitDetailsViewController: UIViewController {
 
     // MARK: Actions
 
-    @IBAction func deleteHabit(_ sender: UIButton) {
-        // Alert the user to see if the deletion is really wanted:
-
-        // Declare the alert.
-        let alert = UIAlertController(
-            title: "Delete",
-            message: """
-Are you sure you want to delete this habit? Deleting this habit makes all the history \
-information unavailable.
-""",
-            preferredStyle: .alert
-        )
-        // Declare its actions.
-        alert.addAction(UIAlertAction(title: "delete", style: .destructive) { _ in
-            // If so, delete the habit using the container's viewContext.
-            // Pop the current controller.
-            self.habitStorage.delete(
-                self.habit, from:
-                self.container.viewContext
-            )
-            self.navigationController?.popViewController(animated: true)
-        })
-        alert.addAction(UIAlertAction(title: "cancel", style: .default))
-
-        // Present it.
-        present(alert, animated: true)
-    }
-
     /// Makes the calendar display the next month.
     @objc private func goNext() {
         goToNextMonth()

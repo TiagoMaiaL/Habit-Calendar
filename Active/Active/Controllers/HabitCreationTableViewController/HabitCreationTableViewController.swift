@@ -129,6 +129,7 @@ class HabitCreationTableViewController: UITableViewController {
         // If there's a passed habit, it means that the controller should edit it.
         if habit != nil {
             displayHabitProperties()
+            configureDeletionButton()
         }
     }
 
@@ -230,6 +231,31 @@ class HabitCreationTableViewController: UITableViewController {
         )
     }
 
+    /// Displays the deletion alert.
+    @objc private func deleteHabit(sender: UIBarButtonItem) {
+        // Alert the user to see if the deletion is really wanted:
+        // Declare the alert.
+        let alert = UIAlertController(
+            title: "Delete",
+            message: """
+Are you sure you want to delete this habit? Deleting this habit makes all the history \
+information unavailable.
+""",
+            preferredStyle: .alert
+        )
+        // Declare its actions.
+        alert.addAction(UIAlertAction(title: "Delete", style: .destructive) { _ in
+            // If so, delete the habit using the container's viewContext.
+            // Pop the current controller.
+            self.habitStore.delete(self.habit!, from: self.container.viewContext)
+            self.navigationController?.popToRootViewController(animated: true)
+        })
+        alert.addAction(UIAlertAction(title: "Cancel", style: .default))
+
+        // Present it.
+        present(alert, animated: true)
+    }
+
     // MARK: Imperatives
 
     /// Enables or disables the button depending on the habit's filled data.
@@ -264,6 +290,17 @@ class HabitCreationTableViewController: UITableViewController {
         // Display the habit's current days' challenge.
 
         // Display the habit's fire times.
+    }
+
+    /// Configures and displays the deletion nav bar button.
+    private func configureDeletionButton() {
+        let trashButton = UIBarButtonItem(
+            barButtonSystemItem: .trash,
+            target: self,
+            action: #selector(deleteHabit(sender:))
+        )
+        trashButton.tintColor = .red
+        navigationItem.setRightBarButton(trashButton, animated: false)
     }
 }
 
