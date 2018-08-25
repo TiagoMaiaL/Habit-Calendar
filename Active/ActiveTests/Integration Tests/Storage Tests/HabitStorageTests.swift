@@ -589,16 +589,11 @@ class HabitStorageTests: IntegrationTestCase {
         let days = (1..<Int.random(3..<50)).compactMap {
             Date().byAddingDays($0)
         }
+        let fireTimeFactory = FireTimeFactory(context: context)
         let fireTimes = [
-            DateComponents(
-                hour: Int.random(0..<23),
-                minute: Int.random(0..<59)
-            ),
-            DateComponents(
-                hour: Int.random(0..<23),
-                minute: Int.random(0..<59)
-            )
-        ]
+            fireTimeFactory.makeDummy(),
+            fireTimeFactory.makeDummy()
+        ].map { $0.getFireTimeComponents() }
 
         // 3. Edit the habit.
         _ = habitStorage.edit(
@@ -616,7 +611,7 @@ class HabitStorageTests: IntegrationTestCase {
             "The amount of notifications should be the number of future days * the fire times."
         )
 
-        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { _ in
+        Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) { _ in
 
             // - assert on the number of user notifications
             self.notificationCenterMock.getPendingNotificationRequests { requests in
@@ -637,6 +632,6 @@ class HabitStorageTests: IntegrationTestCase {
             }
         }
 
-        wait(for: [rescheduleExpectation], timeout: 0.2)
+        wait(for: [rescheduleExpectation], timeout: 0.21)
     }
 }

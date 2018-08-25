@@ -289,6 +289,13 @@ information unavailable.
         // Display the habit's current days' challenge.
 
         // Display the habit's fire times.
+        if habit!.fireTimes!.count > 0 {
+            guard let fireTimesSet = habit?.fireTimes as? Set<FireTimeMO> else {
+                assertionFailure("Error: couldn't get the FireTimeMO entities.")
+                return
+            }
+            didSelectFireTimes(fireTimesSet.map { $0.getFireTimeComponents() })
+        }
     }
 
     /// Configures and displays the deletion nav bar button.
