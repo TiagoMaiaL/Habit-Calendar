@@ -252,48 +252,6 @@ class HabitTests: IntegrationTestCase {
         )
     }
 
-    func testGettingFireTimesDescriptionShouldReturnNil() {
-        // 1. Declare an empty dummy habit.
-        let emptyDummyHabit = makeEmptyDummy()
-
-        // 2. Try to get its fireTimes' description, it should be nil.
-        XCTAssertNil(emptyDummyHabit.getFireTimesText())
-    }
-
-    func testGettingFireTimesDescription() {
-        // 1. Declare a habit dummy.
-        let dummyHabit = habitFactory.makeDummy()
-        guard let fireTimesSet = dummyHabit.fireTimes as? Set<FireTimeMO> else {
-            XCTFail("Couldn't get the fire times entities.")
-            return
-        }
-
-        // 2. Get its description text. Assert it's not nil.
-        guard let fireTimesDescription = dummyHabit.getFireTimesText() else {
-            XCTFail("Couldn't get the fire times description text")
-            return
-        }
-
-        // 3. Split it to get each fire time.
-        let fireTimesText = fireTimesDescription.split(separator: ",").compactMap {
-            $0.trimmingCharacters(in: .whitespaces)
-        }
-        // 3.1 Assert on the count.
-        XCTAssertEqual(dummyHabit.fireTimes?.count, fireTimesText.count)
-        // 3.2 Assert on each string, if it has a corresponding fire time.
-        for fireTimeText in fireTimesText {
-            let fireTimeComponents = fireTimeText.split(separator: ":").map {
-                Int($0) ?? 0
-            }
-            XCTAssertEqual(fireTimeComponents.count, 2)
-
-            let matchingFireTime = fireTimesSet.filter {
-                Int($0.hour) == fireTimeComponents.first! && Int($0.minute) == fireTimeComponents.last!
-            }
-            XCTAssertTrue(matchingFireTime.count == 1)
-        }
-    }
-
     func testGettingColorAsEnum() {
         // 1. Declare a dummy habit.
         let dummyHabit = habitFactory.makeDummy()

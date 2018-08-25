@@ -21,36 +21,43 @@ protocol FireTimesDisplayable {
 
     // MARK: Imperatives
 
+    /// Generates the text associated with the fire times.
+    /// - Returns: The fire times' text.
+    func getText(from fireTimes: [FireTime]) -> String
+
     /// Displays the passed fire times.
     func displayFireTimes(_ fireTimes: [FireTime])
 }
 
 extension FireTimesDisplayable {
 
+    func getText(from fireTimes: [FireTime]) -> String {
+        // Set the text for the label displaying some of the
+        // selected fire times:
+        let fireTimeFormatter = DateFormatter.makeFireTimeDateFormatter()
+        let fireDates = fireTimes.compactMap {
+            Calendar.current.date(from: $0)
+            }.sorted()
+        var fireTimesText = ""
+
+        for fireDate in fireDates {
+            fireTimesText += fireTimeFormatter.string(from: fireDate)
+
+            // If the current fire time isn't the last one,
+            // include a colon to separate it from the next.
+            if fireDates.index(of: fireDate)! != fireDates.endIndex - 1 {
+                fireTimesText += ", "
+            }
+        }
+
+        return fireTimesText
+    }
+
     func displayFireTimes(_ fireTimes: [FireTime]) {
         if !fireTimes.isEmpty {
             // Set the text for the label displaying the amount of fire times.
             fireTimesAmountLabel.text = "\(fireTimes.count) fire time\(fireTimes.count == 1 ? "" : "s") selected."
-
-            // Set the text for the label displaying some of the
-            // selected fire times:
-            let fireTimeFormatter = DateFormatter.makeFireTimeDateFormatter()
-            let fireDates = fireTimes.compactMap {
-                Calendar.current.date(from: $0)
-                }.sorted()
-            var fireTimesText = ""
-
-            for fireDate in fireDates {
-                fireTimesText += fireTimeFormatter.string(from: fireDate)
-
-                // If the current fire time isn't the last one,
-                // include a colon to separate it from the next.
-                if fireDates.index(of: fireDate)! != fireDates.endIndex - 1 {
-                    fireTimesText += ", "
-                }
-            }
-
-            fireTimesLabel.text = fireTimesText
+            fireTimesLabel.text = getText(from: fireTimes)
         } else {
             fireTimesAmountLabel.text = "No fire times selected."
             fireTimesLabel.text = "--"
