@@ -259,7 +259,7 @@ class HabitStorageTests: IntegrationTestCase {
         let dummyHabit = habitFactory.makeDummy()
 
         // 2. Create a new array of days' dates.
-        let daysDates = (1..<14).compactMap { dayIndex -> Date? in
+        let daysDates = (0..<14).compactMap { dayIndex -> Date? in
             Date().byAddingDays(dayIndex)
         }
 
@@ -471,7 +471,15 @@ class HabitStorageTests: IntegrationTestCase {
             days: days
         )
 
-        guard let challenge = dummyHabit.getCurrentChallenge() else {
+        // Get the habit's added challenge.
+        let challengePredicate = NSPredicate(
+            format: "fromDate >= %@ AND fromDate <= %@",
+            days.first!.getBeginningOfDay() as NSDate,
+            days.first!.getEndOfDay() as NSDate
+        )
+        guard let challenge = dummyHabit.challenges?.filtered(
+            using: challengePredicate
+        ).first as? DaysChallengeMO else {
             XCTFail("Couldn't get the added days' challenge.")
             return
         }

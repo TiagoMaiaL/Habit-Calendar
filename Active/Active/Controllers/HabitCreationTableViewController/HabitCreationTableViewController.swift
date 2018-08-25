@@ -223,7 +223,7 @@ class HabitCreationTableViewController: UITableViewController {
                 // If there's a previous habit, update it with the new values.
                 _ = self.habitStore.edit(
                     self.habit!,
-                    using: context,
+                    using: self.habit!.managedObjectContext!,
                     name: self.name,
                     color: self.habitColor,
                     days: self.days,

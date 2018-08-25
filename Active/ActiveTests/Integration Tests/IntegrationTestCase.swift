@@ -117,8 +117,6 @@ class IntegrationTestCase: XCTestCase {
             return notificationFactory.makeDummy()
         }
 
-        // The notification's fire
-
         // Make assertions to ensure that the habit and
         // fireDate properties are set.
         assert(

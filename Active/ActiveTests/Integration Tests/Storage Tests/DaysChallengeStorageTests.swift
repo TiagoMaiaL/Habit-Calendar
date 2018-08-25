@@ -128,6 +128,24 @@ class DaysChallengeStorageTests: IntegrationTestCase {
         )
     }
 
+    func testChallengeCreationWithFutureDays() {
+        // 1. Declare dummy habit.
+        let dummyHabit = habitFactory.makeDummy()
+
+        // 2. Declare the future days' dates.
+        let days = [
+            Date().byAddingDays(5)!.getBeginningOfDay(),
+            Date().byAddingDays(9)!.getBeginningOfDay()
+        ]
+
+        // 3. Create the challenge.
+        let challenge = challengeStorage.create(using: context, daysDates: days, and: dummyHabit)
+
+        // 4. Assert on its fromDate and toDate properties.
+        XCTAssertEqual(challenge.fromDate, days.first, "The fromDate should match with the passed one.")
+        XCTAssertEqual(challenge.toDate, days.last, "The toDate should match with the passed one.")
+    }
+
     func testChallengeDeletion() {
         // 1. Declare a dummy challenge.
         let dummyChallenge = daysChallengeFactory.makeDummy()
