@@ -75,7 +75,7 @@ class FireTimeTests: IntegrationTestCase {
             let matchingFireTime = dummyFireTimes.filter {
                 Int($0.hour) == components.first! && Int($0.minute) == components.last!
             }
-            XCTAssertTrue(matchingFireTime.count == 1)
+            XCTAssertTrue(!matchingFireTime.isEmpty)
         }
     }
 }
