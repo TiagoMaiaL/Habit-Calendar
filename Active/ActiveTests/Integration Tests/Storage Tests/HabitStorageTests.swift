@@ -259,7 +259,7 @@ class HabitStorageTests: IntegrationTestCase {
         let dummyHabit = habitFactory.makeDummy()
 
         // 2. Create a new array of days' dates.
-        let daysDates = (1..<14).compactMap { dayIndex -> Date? in
+        let daysDates = (0..<14).compactMap { dayIndex -> Date? in
             Date().byAddingDays(dayIndex)
         }
 
@@ -471,7 +471,15 @@ class HabitStorageTests: IntegrationTestCase {
             days: days
         )
 
-        guard let challenge = dummyHabit.getCurrentChallenge() else {
+        // Get the habit's added challenge.
+        let challengePredicate = NSPredicate(
+            format: "fromDate >= %@ AND fromDate <= %@",
+            days.first!.getBeginningOfDay() as NSDate,
+            days.first!.getEndOfDay() as NSDate
+        )
+        guard let challenge = dummyHabit.challenges?.filtered(
+            using: challengePredicate
+        ).first as? DaysChallengeMO else {
             XCTFail("Couldn't get the added days' challenge.")
             return
         }
@@ -589,16 +597,11 @@ class HabitStorageTests: IntegrationTestCase {
         let days = (1..<Int.random(3..<50)).compactMap {
             Date().byAddingDays($0)
         }
+        let fireTimeFactory = FireTimeFactory(context: context)
         let fireTimes = [
-            DateComponents(
-                hour: Int.random(0..<23),
-                minute: Int.random(0..<59)
-            ),
-            DateComponents(
-                hour: Int.random(0..<23),
-                minute: Int.random(0..<59)
-            )
-        ]
+            fireTimeFactory.makeDummy(),
+            fireTimeFactory.makeDummy()
+        ].map { $0.getFireTimeComponents() }
 
         // 3. Edit the habit.
         _ = habitStorage.edit(
@@ -616,7 +619,7 @@ class HabitStorageTests: IntegrationTestCase {
             "The amount of notifications should be the number of future days * the fire times."
         )
 
-        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { _ in
+        Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) { _ in
 
             // - assert on the number of user notifications
             self.notificationCenterMock.getPendingNotificationRequests { requests in
@@ -637,6 +640,6 @@ class HabitStorageTests: IntegrationTestCase {
             }
         }
 
-        wait(for: [rescheduleExpectation], timeout: 0.2)
+        wait(for: [rescheduleExpectation], timeout: 0.21)
     }
 }

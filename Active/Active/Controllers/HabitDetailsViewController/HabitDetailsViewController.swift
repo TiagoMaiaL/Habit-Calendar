@@ -17,7 +17,7 @@ class HabitDetailsViewController: UIViewController {
     /// The habit presented by this controller.
     var habit: HabitMO! {
         didSet {
-            habitColor = HabitMO.Color(rawValue: habit.color)?.getColor()
+            habitColor = habit.getColor().uiColor
         }
     }
 
@@ -121,6 +121,9 @@ class HabitDetailsViewController: UIViewController {
     /// The view containing the fire time labels.
     @IBOutlet weak var fireTimesContentView: UIView!
 
+    /// The label displaying the number of selected fire times.
+    @IBOutlet weak var fireTimesAmountLabel: UILabel!
+
     /// The label displaying the habit's fire times.
     @IBOutlet weak var fireTimesLabel: UILabel!
 
@@ -157,35 +160,19 @@ class HabitDetailsViewController: UIViewController {
         displaySections()
     }
 
-    // MARK: Actions
+    // MARK: Navigation
 
-    @IBAction func deleteHabit(_ sender: UIButton) {
-        // Alert the user to see if the deletion is really wanted:
-
-        // Declare the alert.
-        let alert = UIAlertController(
-            title: "Delete",
-            message: """
-Are you sure you want to delete this habit? Deleting this habit makes all the history \
-information unavailable.
-""",
-            preferredStyle: .alert
-        )
-        // Declare its actions.
-        alert.addAction(UIAlertAction(title: "delete", style: .destructive) { _ in
-            // If so, delete the habit using the container's viewContext.
-            // Pop the current controller.
-            self.habitStorage.delete(
-                self.habit, from:
-                self.container.viewContext
-            )
-            self.navigationController?.popViewController(animated: true)
-        })
-        alert.addAction(UIAlertAction(title: "cancel", style: .default))
-
-        // Present it.
-        present(alert, animated: true)
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "Edit the habit",
+            let editionController = segue.destination as? HabitCreationTableViewController {
+            editionController.container = container
+            editionController.userStore = UserStorage()
+            editionController.habitStore = habitStorage
+            editionController.habit = habit
+        }
     }
+
+    // MARK: Actions
 
     /// Makes the calendar display the next month.
     @objc private func goNext() {

@@ -29,7 +29,9 @@ struct FireTimeFactory: DummyFactory {
         fireTime.id = UUID().uuidString
         fireTime.createdAt = Date()
         fireTime.hour = Int16(Int.random(0..<24))
-        fireTime.minute = Int16(Int.random(0..<59))
+        // Get a minute value that's or 30 or 00.
+        let randomMinute = arc4random_uniform(2) == 0 ? 0 : 30
+        fireTime.minute = Int16(randomMinute)
 
         return fireTime
     }

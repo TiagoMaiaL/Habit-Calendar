@@ -59,10 +59,17 @@ struct HabitFactory: DummyFactory {
 
         // Associate its relationships:
         let fireTimeFactory = FireTimeFactory(context: context)
-        let fireTimes = [
-            fireTimeFactory.makeDummy(),
+        var fireTimes = [
             fireTimeFactory.makeDummy()
         ]
+        // Add a second fire time, making sure its different from the
+        // first one (to avoid errors, since there's a requirement of only one notification per date).
+        let secondFireTime = fireTimeFactory.makeDummy()
+        if secondFireTime.hour == fireTimes.first!.hour {
+            secondFireTime.minute = 1
+        }
+        fireTimes.append(secondFireTime)
+
         habit.addToFireTimes(Set(fireTimes) as NSSet)
 
         let notificationFactory = NotificationFactory(context: context)

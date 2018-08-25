@@ -80,34 +80,6 @@ class HabitMO: NSManagedObject {
         return ""
     }
 
-    /// Gets the fire times description text.
-    /// - Returns: The fire times description text to be display to the user, if there are fire times.
-    func getFireTimesText() -> String? {
-        guard let fireTimes = fireTimes as? Set<FireTimeMO>, !fireTimes.isEmpty else {
-            return nil
-        }
-
-        let fireTimeFormatter = DateFormatter.makeFireTimeDateFormatter()
-        let fireDates = fireTimes.compactMap {
-            Calendar.current.date(
-                from: DateComponents(hour: Int($0.hour), minute: Int($0.minute))
-            )
-        }.sorted()
-        var fireTimesText = ""
-
-        for fireDate in fireDates {
-            fireTimesText += fireTimeFormatter.string(from: fireDate)
-
-            // If the current fire time isn't the last one,
-            // include a colon to separate it from the next.
-            if fireDates.index(of: fireDate)! != fireDates.endIndex - 1 {
-                fireTimesText += ", "
-            }
-        }
-
-        return fireTimesText
-    }
-
     /// Returns the current habit day for today (the current date),
     /// if there's one being tracked.
     func getCurrentDay() -> HabitDayMO? {
@@ -152,5 +124,11 @@ class HabitMO: NSManagedObject {
             today as NSDate
         )
         return challenges?.filtered(using: currentPredicate).first as? DaysChallengeMO
+    }
+
+    /// Gets the habit's color enum value.
+    /// - Returns: The color case.
+    func getColor() -> Color {
+        return Color(rawValue: color)!
     }
 }

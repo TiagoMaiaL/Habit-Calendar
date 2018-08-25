@@ -175,12 +175,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="900"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <view key="tableFooterView" contentMode="scaleToFill" misplaced="YES" id="U4g-rN-Yvd">
+                        <view key="tableFooterView" contentMode="scaleToFill" id="U4g-rN-Yvd" userLabel="Footer">
                             <rect key="frame" x="0.0" y="743" width="375" height="104"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D90-7S-rS4" customClass="RoundedButton" customModule="Active" customModuleProvider="target">
-                                    <rect key="frame" x="117.5" y="143.5" width="140" height="50"/>
+                                    <rect key="frame" x="117.5" y="27" width="140" height="50"/>
                                     <color key="backgroundColor" red="0.18431372549019609" green="0.21176470588235294" blue="0.25098039215686274" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="140" id="EpX-yy-wTD"/>
@@ -487,19 +487,23 @@ reminded about this habit?</string>
                     </tableView>
                     <size key="freeformSize" width="375" height="900"/>
                     <connections>
+                        <outlet property="challengeFieldQuestionTitle" destination="JOL-oE-7MJ" id="174-Uz-IZF"/>
+                        <outlet property="challengeFieldTitleLabel" destination="pyb-N6-nac" id="ZJ8-Dr-TG8"/>
+                        <outlet property="colorFieldTitleLabel" destination="JUM-W9-3bo" id="i4o-UI-onH"/>
                         <outlet property="colorPicker" destination="41k-RE-w2b" id="aSy-Ak-Arq"/>
                         <outlet property="daysAmountLabel" destination="GyR-VK-GCC" id="aqR-Rj-RRo"/>
                         <outlet property="doneButton" destination="D90-7S-rS4" id="hFv-tY-Ca2"/>
                         <outlet property="fireTimesAmountLabel" destination="OSf-bA-IA0" id="IfS-J8-2BV"/>
+                        <outlet property="fireTimesLabel" destination="4Ii-SK-90P" id="maA-aC-dqy"/>
                         <outlet property="fromDayLabel" destination="qIT-Tk-yq9" id="Xvb-pW-3Au"/>
+                        <outlet property="nameFieldTitleLabel" destination="0AK-r5-sfZ" id="gtS-sB-ofZ"/>
                         <outlet property="nameTextField" destination="IGr-WJ-mRM" id="KLh-ua-2fN"/>
-                        <outlet property="selectedFireTimesLabel" destination="4Ii-SK-90P" id="maA-aC-dqy"/>
                         <outlet property="toDayLabel" destination="qbf-Ac-7Ay" id="DRe-Ft-XTm"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bag-g3-dbf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2028" y="-465.96701649175418"/>
+            <point key="canvasLocation" x="2966" y="-180"/>
         </scene>
         <!--Notifications-->
         <scene sceneID="e0g-by-TQS">
@@ -614,7 +618,7 @@ reminded about this habit?</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rE2-W1-pId" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2980" y="-861"/>
+            <point key="canvasLocation" x="3918" y="-575"/>
         </scene>
         <!--Days-->
         <scene sceneID="LN7-wK-ThL">
@@ -771,7 +775,7 @@ reminded about this habit?</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9zz-Nw-yjM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2980" y="-89"/>
+            <point key="canvasLocation" x="3918" y="197"/>
         </scene>
         <!--Read-->
         <scene sceneID="xFu-io-JbZ">
@@ -1174,7 +1178,13 @@ you think of adding a new one?</string>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="tww-hp-589"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Play guitar" largeTitleDisplayMode="never" id="LZl-wy-YbF"/>
+                    <navigationItem key="navigationItem" title="Play guitar" largeTitleDisplayMode="never" id="LZl-wy-YbF">
+                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="pjh-NV-abD">
+                            <connections>
+                                <segue destination="e07-lh-rVp" kind="show" identifier="Edit the habit" id="5mV-Cj-rFr"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <size key="freeformSize" width="375" height="1300"/>
                     <connections>
                         <outlet property="calendarView" destination="7Pe-pH-Udy" id="dhu-6f-iLR"/>
@@ -1182,6 +1192,7 @@ you think of adding a new one?</string>
                         <outlet property="currentDayTitleLabel" destination="B0i-n0-rre" id="XR2-JS-EI5"/>
                         <outlet property="daysToFinishLabel" destination="sDl-b5-BNm" id="dYL-gv-JUe"/>
                         <outlet property="executedDaysLabel" destination="qf6-KL-TXJ" id="BQ3-23-40P"/>
+                        <outlet property="fireTimesAmountLabel" destination="C8L-3d-lkg" id="jBU-Sz-scc"/>
                         <outlet property="fireTimesContentView" destination="ELQ-9e-pIF" id="niM-5o-GfV"/>
                         <outlet property="fireTimesLabel" destination="aGK-JJ-zui" id="ANX-x1-Liz"/>
                         <outlet property="missedDaysLabel" destination="ACk-Cd-HNW" id="ilS-mQ-Xag"/>
@@ -1198,7 +1209,7 @@ you think of adding a new one?</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eer-Kp-wUj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2028" y="637"/>
+            <point key="canvasLocation" x="2028" y="647"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="GVs-QO-GaP">
@@ -1219,4 +1230,7 @@ you think of adding a new one?</string>
             <point key="canvasLocation" x="192.80000000000001" y="-60.719640179910051"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="5mV-Cj-rFr"/>
+    </inferredMetricsTieBreakers>
 </document>

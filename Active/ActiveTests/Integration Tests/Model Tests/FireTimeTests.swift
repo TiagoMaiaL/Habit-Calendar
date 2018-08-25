@@ -43,4 +43,39 @@ class FireTimeTests: IntegrationTestCase {
         XCTAssertNil(fireTimeComponents.day, "The day should be nil.")
     }
 
+    /// Class used to test the protocol methods.
+    private class FireTimesDisplayer: FireTimesDisplayable {
+        var fireTimesAmountLabel: UILabel!
+        var fireTimesLabel: UILabel!
+    }
+
+    func testGettingFireTimesDisplayText() {
+        let factory = FireTimeFactory(context: context)
+
+        // 1. Declare the dummy fire times.
+        let dummyFireTimes = [factory.makeDummy(), factory.makeDummy(), factory.makeDummy()]
+
+        // 2. Get the text from the displayer.
+        let displayer = FireTimesDisplayer()
+        let description = displayer.getText(from: dummyFireTimes.map { $0.getFireTimeComponents() })
+
+        // 3. Split the text to get each fire time's text.
+        let fireTimesText = description.split(separator: ",").compactMap {
+            $0.trimmingCharacters(in: .whitespaces)
+        }
+        // 3.1 Assert on the count.
+        XCTAssertEqual(dummyFireTimes.count, fireTimesText.count)
+        // 3.2 Assert on each string, if it has a corresponding fire time.
+        for fireTimeText in fireTimesText {
+            let components = fireTimeText.split(separator: ":").map {
+                Int($0) ?? 0
+            }
+            XCTAssertEqual(components.count, 2)
+
+            let matchingFireTime = dummyFireTimes.filter {
+                Int($0.hour) == components.first! && Int($0.minute) == components.last!
+            }
+            XCTAssertTrue(!matchingFireTime.isEmpty)
+        }
+    }
 }

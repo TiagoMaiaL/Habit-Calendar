@@ -28,17 +28,16 @@ extension HabitMO.Color {
         emerald: UIColor(red: 46/255, green: 204/255, blue: 113/255, alpha: 1)
     ]
 
-    // MARK: Imperatives
-
-    /// Gets the UIColor representing the current enum instance.
-    /// - Returns: The UIColor associated with the instance.
-    func getColor() -> UIColor {
+    /// The UIColor associated with the enum.
+    var uiColor: UIColor {
         guard let color = HabitMO.Color.uiColors[self] else {
             assertionFailure("Error: the current instance doesn't have a valid color associated with it.")
             return .black
         }
         return color
     }
+
+    // MARK: Imperatives
 
     /// Searches for the enum instance associated with the passed UIColor.
     /// - Parameter color: the color associated with an instance.

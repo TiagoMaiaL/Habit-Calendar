@@ -31,19 +31,17 @@ extension HabitDetailsViewController: CalendarDisplaying {
         if cellState.dateBelongsTo == .thisMonth {
             cell.dayTitleLabel.text = cellState.text
 
-            // Try to get the matching challenge for the current date.
-            if let challenge = getChallenge(from: cellState.date) {
-                // Get the habitDay associated with the cell's date.
-                guard let habitDay = challenge.getDay(for: cellState.date) else {
-                    // If there isn't a day associated with the date, there's a bug.
-                    assertionFailure("Inconsistency: a day should be returned from the challenge.")
-                    return
-                }
+            // Try to get the matching challenge and day for the current date.
+            // The challenge may not contain certain days in between, that's fine.
+            if let challenge = getChallenge(from: cellState.date),
+                let habitDay = challenge.getDay(for: cellState.date) {
 
                 // If there's a challenge, show cell as being part of it.
-                let habitColor = HabitMO.Color(rawValue: habit.color)?.getColor()
+                let habitColor = habit.getColor()
 
-                cell.backgroundColor = habitDay.wasExecuted ? habitColor : habitColor?.withAlphaComponent(0.5)
+                cell.backgroundColor = habitDay.wasExecuted ?
+                    habitColor.uiColor :
+                    habitColor.uiColor.withAlphaComponent(0.5)
                 cell.dayTitleLabel.textColor = .white
 
                 if cellState.date.isInToday {
