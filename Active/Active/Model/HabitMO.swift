@@ -90,7 +90,7 @@ class HabitMO: NSManagedObject {
         let fireTimeFormatter = DateFormatter.makeFireTimeDateFormatter()
         let fireDates = fireTimes.compactMap {
             Calendar.current.date(
-                from: DateComponents(hour: Int($0.hour), minute: Int($0.minute))
+                from: $0.getFireTimeComponents()
             )
         }.sorted()
         var fireTimesText = ""

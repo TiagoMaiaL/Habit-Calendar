@@ -26,7 +26,7 @@ extension HabitCreationTableViewController {
         // the Notifications field.
         let notificationsFieldColor = (fireTimes?.isEmpty ?? true) ? UIColor.red : themeColor
         fireTimesAmountLabel.textColor = notificationsFieldColor
-        selectedFireTimesLabel.textColor = notificationsFieldColor
+        fireTimesLabel.textColor = notificationsFieldColor
 
         // the done button.
         doneButton.backgroundColor = themeColor

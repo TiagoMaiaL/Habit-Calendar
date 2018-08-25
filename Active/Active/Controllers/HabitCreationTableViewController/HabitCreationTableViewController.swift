@@ -40,7 +40,7 @@ class HabitCreationTableViewController: UITableViewController {
     @IBOutlet weak var fireTimesAmountLabel: UILabel!
 
     /// The label displaying the of fire time times selected.
-    @IBOutlet weak var selectedFireTimesLabel: UILabel!
+    @IBOutlet weak var fireTimesLabel: UILabel!
 
     /// The color's field color picker view.
     @IBOutlet weak var colorPicker: ColorsPickerView!
@@ -89,7 +89,7 @@ class HabitCreationTableViewController: UITableViewController {
     }
 
     /// The habit's notification fire times the user has selected.
-    var fireTimes: [FireTimesSelectionViewController.FireTime]?
+    var fireTimes: [FireTimesDisplayable.FireTime]?
 
     // TODO: Show a cell indicating the user hasn't enabled local notifications.
 
@@ -121,7 +121,7 @@ class HabitCreationTableViewController: UITableViewController {
         configureDaysLabels()
 
         // Display the initial text of the notifications labels.
-        configureFireTimesLabels()
+        displayFireTimes(fireTimes ?? [])
 
         // Set the done button's initial state.
         configureDoneButton()

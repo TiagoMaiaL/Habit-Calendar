@@ -8,6 +8,9 @@
 
 import UIKit
 
+/// Adds the code to display the fire times.
+extension HabitDetailsViewController: FireTimesDisplayable {}
+
 /// Adds code to manage the fire times section.
 extension HabitDetailsViewController {
 
@@ -22,7 +25,7 @@ extension HabitDetailsViewController {
             return
         }
 
-        guard let fireTimesText = habit.getFireTimesText() else {
+        guard let fireTimesSet = habit.fireTimes as? Set<FireTimeMO>, !fireTimesSet.isEmpty else {
             fireTimesContentView.isHidden = true
 
             // Display the "No fire times" section.
@@ -36,6 +39,6 @@ extension HabitDetailsViewController {
         fireTimesContentView.isHidden = false
 
         fireTimesLabel.textColor = habitColor
-        fireTimesLabel.text = fireTimesText
+        displayFireTimes(fireTimesSet.map { $0.getFireTimeComponents() })
     }
 }

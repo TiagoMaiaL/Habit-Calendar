@@ -121,6 +121,9 @@ class HabitDetailsViewController: UIViewController {
     /// The view containing the fire time labels.
     @IBOutlet weak var fireTimesContentView: UIView!
 
+    /// The label displaying the number of selected fire times.
+    @IBOutlet weak var fireTimesAmountLabel: UILabel!
+
     /// The label displaying the habit's fire times.
     @IBOutlet weak var fireTimesLabel: UILabel!
 
