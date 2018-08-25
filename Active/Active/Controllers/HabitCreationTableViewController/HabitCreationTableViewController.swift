@@ -101,7 +101,12 @@ class HabitCreationTableViewController: UITableViewController {
     }
 
     /// The habit's notification fire times the user has selected.
-    var fireTimes: [FireTimesDisplayable.FireTime]?
+    var fireTimes: [FireTimesDisplayable.FireTime]? {
+        didSet {
+            // Update the button state.
+            configureDoneButton()
+        }
+    }
 
     // TODO: Show a cell indicating the user hasn't enabled local notifications.
 
@@ -281,7 +286,7 @@ information unavailable.
             let isNameDifferent = !(name ?? "").isEmpty && name != habitToEdit.name
             let isColorDifferent = habitColor != nil && habitColor != habitToEdit.getColor()
             let isChallengeDifferent = days != nil && !days!.isEmpty
-            let areFireTimesDifferent = fireTimes != nil && !fireTimes!.isEmpty
+            let areFireTimesDifferent = fireTimes != nil
 
             doneButton.isEnabled = isNameDifferent || isColorDifferent || isChallengeDifferent || areFireTimesDifferent
         } else {
