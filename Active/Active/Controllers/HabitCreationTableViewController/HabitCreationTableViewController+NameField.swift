@@ -25,6 +25,23 @@ extension HabitCreationTableViewController {
         name = textField.text
     }
 
+    /// Configures the name field.
+    func configureNameField() {
+        // If the habit is being editted, change the title to not required.
+        if habit != nil {
+            nameFieldTitleLabel.text = "Name"
+        }
+
+        // Associate the event listener to the textField.
+        nameTextField.addTarget(
+            self,
+            action: #selector(nameChanged(textField:)),
+            for: .editingChanged
+        )
+        // Create a toolbar and add it as the field's accessory view.
+        nameTextField.inputAccessoryView = makeToolbar()
+    }
+
     /// Creates and configures a new UIToolbar with a done button to be
     /// used as the name field's accessoryView.
     /// - Returns: An UIToolbar.

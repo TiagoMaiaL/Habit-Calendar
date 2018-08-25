@@ -21,6 +21,9 @@ class HabitCreationTableViewController: UITableViewController {
     /// The segue identifier for the NotificationsSelection controller.
     private let notificationSelectionSegue = "Show fire dates selection controller"
 
+    /// The label displaying the name field's title.
+    @IBOutlet weak var nameFieldTitleLabel: UILabel!
+
     /// The text field used to give the habit a name.
     @IBOutlet weak var nameTextField: UITextField!
 
@@ -29,6 +32,12 @@ class HabitCreationTableViewController: UITableViewController {
 
     /// The label displaying the number of selected days.
     @IBOutlet weak var daysAmountLabel: UILabel!
+
+    /// The title label of the days' challenge field.
+    @IBOutlet weak var challengeFieldTitleLabel: UILabel!
+
+    /// The question label of the days' challenge field.
+    @IBOutlet weak var challengeFieldQuestionTitle: UILabel!
 
     /// The label displaying the first day in the selected sequence.
     @IBOutlet weak var fromDayLabel: UILabel!
@@ -41,6 +50,9 @@ class HabitCreationTableViewController: UITableViewController {
 
     /// The label displaying the of fire time times selected.
     @IBOutlet weak var fireTimesLabel: UILabel!
+
+    /// The label displaying the color field's title.
+    @IBOutlet weak var colorFieldTitleLabel: UILabel!
 
     /// The color's field color picker view.
     @IBOutlet weak var colorPicker: ColorsPickerView!
@@ -106,16 +118,8 @@ class HabitCreationTableViewController: UITableViewController {
         // large titles.
         navigationItem.largeTitleDisplayMode = .never
 
-        // Associate the event listener to the textField.
-        nameTextField.addTarget(
-            self,
-            action: #selector(nameChanged(textField:)),
-            for: .editingChanged
-        )
-        // Create a toolbar and add it as the field's accessory view.
-        nameTextField.inputAccessoryView = makeToolbar()
-
-        configureColorPicker()
+        configureNameField()
+        configureColorField()
 
         // Display the initial text of the days labels.
         configureDaysLabels()

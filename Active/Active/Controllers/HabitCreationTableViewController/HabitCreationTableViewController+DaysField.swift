@@ -16,6 +16,12 @@ extension HabitCreationTableViewController {
     /// Configures the text being displayed by each label within the days
     /// field.
     func configureDaysLabels() {
+        if habit != nil {
+            // If the habit is being editted, change the field's title and question texts.
+            challengeFieldTitleLabel.text = "New days' challenge"
+            challengeFieldQuestionTitle.text = "Would you like to begin a new days' challenge?"
+        }
+
         if let days = days?.sorted(), !days.isEmpty {
             let formatter = DateFormatter.shortCurrent
             // Set the text for the label displaying the number of days.

@@ -18,22 +18,26 @@ extension HabitCreationTableViewController {
         let themeColor = habitColor?.uiColor ?? defaultThemeColor
         // Set the theme color of:
         // the days field.
-        let daysFieldColor = (days?.isEmpty ?? true) ? UIColor.red : themeColor
+        let daysFieldColor = ((days?.isEmpty ?? true) && habit == nil) ? UIColor.red : themeColor
         daysAmountLabel.textColor = daysFieldColor
         fromDayLabel.textColor = daysFieldColor
         toDayLabel.textColor = daysFieldColor
 
         // the Notifications field.
-        let notificationsFieldColor = (fireTimes?.isEmpty ?? true) ? UIColor.red : themeColor
-        fireTimesAmountLabel.textColor = notificationsFieldColor
-        fireTimesLabel.textColor = notificationsFieldColor
+        fireTimesAmountLabel.textColor = themeColor
+        fireTimesLabel.textColor = themeColor
 
         // the done button.
         doneButton.backgroundColor = themeColor
     }
 
     /// Configures the colors to be diplayed by the color picker view.
-    func configureColorPicker() {
+    func configureColorField() {
+        // Set the field's title to show it isn't required in case of edition.
+        if habit != nil {
+            colorFieldTitleLabel.text = "Color"
+        }
+
         // Set the color change handler.
         colorPicker.colorChangeHandler = { uiColor in
             // Associate the selected color.
