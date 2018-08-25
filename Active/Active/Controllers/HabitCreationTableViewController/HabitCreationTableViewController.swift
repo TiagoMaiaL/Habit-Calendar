@@ -111,8 +111,9 @@ class HabitCreationTableViewController: UITableViewController {
         super.viewDidLoad()
 
         // Assert on the values of the injected dependencies (implicitly unwrapped).
+        assert(userStore != nil, "Error: Failed to inject the user store.")
         assert(container != nil, "Error: failed to inject the persistent container.")
-        assert(habitStore != nil, "Error: failed to inject the habit store")
+        assert(habitStore != nil, "Error: failed to inject the habit store.")
 
         // Configure the appearance of the navigation bar to never use the
         // large titles.
@@ -170,6 +171,9 @@ class HabitCreationTableViewController: UITableViewController {
                 )
                 if let fireTimes = fireTimes {
                     notificationsController.selectedFireTimes = Set(fireTimes)
+                } else if let fireTimes = (habit?.fireTimes as? Set<FireTimeMO>)?.map({ $0.getFireTimeComponents() }) {
+                    // In case the habit is being editted and has some fire times to be displayed.
+                    notificationsController.selectedFireTimes = Set(fireTimes)
                 }
                 notificationsController.themeColor = themeColor
             } else {
@@ -185,11 +189,15 @@ class HabitCreationTableViewController: UITableViewController {
     /// Creates the habit.
     @IBAction func storeHabit(_ sender: UIButton) {
         // Make assertions on the required values to create/update a habit.
-        assert(!(name ?? "").isEmpty, "Error: the habit's name must be a valid value.")
-        assert(habitColor != nil, "Error: the habit's color must be a valid value.")
-        assert(!(days ?? []).isEmpty, "Error: the habit's days must have a valid value.")
-        if fireTimes != nil {
-            assert(fireTimes!.isEmpty == false, "Error: the habit's fireTimes must have a valid value.")
+        // If the habit is being created, make the assertions.
+        if habit == nil {
+            assert(!(name ?? "").isEmpty, "Error: the habit's name must be a valid value.")
+            assert(habitColor != nil, "Error: the habit's color must be a valid value.")
+            assert(!(days ?? []).isEmpty, "Error: the habit's days must have a valid value.")
+            // TODO: This will no longer be necessary, the controller will allow deselection.
+            if fireTimes != nil {
+                assert(!fireTimes!.isEmpty, "Error: the habit's fireTimes must have a valid value.")
+            }
         }
 
         // If there's no previous habit, create and persist a new one.
@@ -217,6 +225,7 @@ class HabitCreationTableViewController: UITableViewController {
                     self.habit!,
                     using: context,
                     name: self.name,
+                    color: self.habitColor,
                     days: self.days,
                     and: self.fireTimes
                 )
@@ -298,7 +307,7 @@ information unavailable.
                 assertionFailure("Error: couldn't get the FireTimeMO entities.")
                 return
             }
-            didSelectFireTimes(fireTimesSet.map { $0.getFireTimeComponents() })
+            displayFireTimes(fireTimesSet.map { $0.getFireTimeComponents() })
         }
     }
 

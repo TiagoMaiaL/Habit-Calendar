@@ -166,6 +166,7 @@ class HabitDetailsViewController: UIViewController {
         if segue.identifier == "Edit the habit",
             let editionController = segue.destination as? HabitCreationTableViewController {
             editionController.container = container
+            editionController.userStore = UserStorage()
             editionController.habitStore = habitStorage
             editionController.habit = habit
         }
