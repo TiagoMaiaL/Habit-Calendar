@@ -173,7 +173,7 @@ class HabitDaysSelectionViewController: UIViewController {
         doneButton.isEnabled = calendarView.selectedDates.count > 1
 
         // Declare the number of selected dates.
-        var datesCount = calendarView.selectedDates.count
+        let datesCount = calendarView.selectedDates.count
         // Display the number of selected days.
         selectedDaysNumberLabel.text = "\(datesCount) day\(datesCount == 1 ? "" : "s") selected"
 

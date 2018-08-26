@@ -484,9 +484,13 @@ class DaysChallengeTests: IntegrationTestCase {
             return
         }
         // Get its number of future days.
-        guard let futureDaysNumber = dummyChallenge.getFutureDays()?.count else {
+        guard var dayNumber = dummyChallenge.getFutureDays()?.count else {
             XCTFail("Couldn't get the number of future days from the dummy challenge entity.")
             return
+        }
+
+        if dummyChallenge.getCurrentDay() != nil {
+            dayNumber += 1
         }
 
         // Close it.
@@ -497,7 +501,7 @@ class DaysChallengeTests: IntegrationTestCase {
         // Assert the future days were properly deleted from the challenge.
         XCTAssertEqual(
             dummyChallenge.days?.count,
-            daysNumber - futureDaysNumber,
+            daysNumber - daysNumber,
             "The future days should be removed from the challenge."
         )
     }
