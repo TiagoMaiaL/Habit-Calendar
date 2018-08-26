@@ -59,8 +59,7 @@ class HabitsTableViewController: UITableViewController, NSFetchedResultsControll
         assert(container != nil, "The persistent container must be injected.")
         assert(habitStorage != nil, "The habit storage must be injected.")
 
-        // Register to possible notifications thrown by changes in
-        // other managed contexts.
+        // Register to possible notifications thrown by changes in other managed contexts.
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(handleContextChanges(notification:)),
@@ -132,8 +131,7 @@ class HabitsTableViewController: UITableViewController, NSFetchedResultsControll
 
     // MARK: Imperatives
 
-    /// Displays the current amount of the user's habits in the table header
-    /// view.
+    /// Displays the current amount of the user's habits in the table header view.
     private func displayHabitsCount() {
         // Display the current amount of habits in the header.
         let countRequest: NSFetchRequest<HabitMO> = HabitMO.fetchRequest()
@@ -205,8 +203,7 @@ class HabitsTableViewController: UITableViewController, NSFetchedResultsControll
             }
         }
 
-        // Refresh the current view context by using the payloads
-        // in the notifications.
+        // Refresh the current view context by using the payloads in the notifications.
         container.viewContext.mergeChanges(fromContextDidSave: notification)
     }
 }

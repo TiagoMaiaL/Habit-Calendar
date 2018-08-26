@@ -138,6 +138,14 @@ class HabitDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // Register to possible notifications thrown by changes in other managed contexts.
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handleContextChanges(notification:)),
+            name: Notification.Name.NSManagedObjectContextDidSave,
+            object: nil
+        )
+
         checkDependencies()
         // Get the habit's challenges to display in the calendar.
         challenges = getChallenges(from: habit)
@@ -182,6 +190,36 @@ class HabitDetailsViewController: UIViewController {
     /// Makes the calendar display the previous month.
     @objc private func goPrevious() {
         goToPreviousMonth()
+    }
+
+    /// Listens to any saved changes happening in other contexts and refreshes
+    /// the viewContext.
+    /// - Parameter notification: The thrown notification
+    @objc private func handleContextChanges(notification: Notification) {
+        // If there's an update in the habit being displayed, update the controller's view.
+        if (notification.userInfo?["updated"] as? Set<NSManagedObject>) != nil {
+            DispatchQueue.main.async {
+                // Update the title, if changed.
+                if self.title != self.habit.name {
+                    self.title = self.habit.name
+                }
+
+                // Update the habit's color.
+                self.habitColor = self.habit.getColor().uiColor
+
+                // Update the challenges.
+                self.challenges = self.getChallenges(from: self.habit)
+
+                // Update the calendar.
+                self.calendarView.reloadData()
+
+                // Update the sections.
+                self.displaySections()
+            }
+        }
+
+        // Merge the changes from the habit's edition.
+        container.viewContext.mergeChanges(fromContextDidSave: notification)
     }
 
     // MARK: Imperatives
