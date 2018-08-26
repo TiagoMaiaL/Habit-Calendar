@@ -73,14 +73,14 @@ class HabitDaysSelectionViewController: UIViewController {
     /// The controller's theme color.
     var themeColor: UIColor!
 
-    /// The user's first selected date.
-    var firstSelectedDay: Date?
-
     /// Flag indicating if the range selection between two dates should be applied.
     /// - Note: The range selection normally takes place when an user selects one date and than
     ///         another later than the first one. This flag controls the usage of this behavior.
     ///         When pre-selecting dates, this behavior should be disabled.
     private(set) var shouldApplyRangeSelection = true
+
+    /// The user's first selected date.
+    let firstSelectedDay = Date().getBeginningOfDay()
 
     // MARK: Life Cycle
 
@@ -108,10 +108,15 @@ class HabitDaysSelectionViewController: UIViewController {
         monthTitleLabel.textColor = themeColor
 
         // Display the pre-selected days.
-        if let days = preSelectedDays {
+        if let days = preSelectedDays?.sorted() {
+            // Assert the first date is today.
+            assert(days.first == firstSelectedDay, "Error: the first selected date must be today.")
+
             // Temporarilly disable range selection.
             shouldApplyRangeSelection = false
             calendarView.selectDates(days)
+        } else {
+            calendarView.selectDates([firstSelectedDay])
         }
 
         // Configute the calendar's header initial state.
@@ -139,7 +144,7 @@ class HabitDaysSelectionViewController: UIViewController {
     // MARK: Actions
 
     @IBAction func deselectDays(_ sender: UIBarButtonItem) {
-        calendarView.deselectAllDates()
+        clearSelection()
     }
 
     @IBAction func selectDays(_ sender: UIButton) {
@@ -166,11 +171,9 @@ class HabitDaysSelectionViewController: UIViewController {
     func handleFooter() {
         // Enable/Disable the button if the dates are selected or not.
         doneButton.isEnabled = calendarView.selectedDates.count > 1
+
         // Declare the number of selected dates.
         var datesCount = calendarView.selectedDates.count
-        if datesCount == 0 && firstSelectedDay != nil {
-            datesCount = 1
-        }
         // Display the number of selected days.
         selectedDaysNumberLabel.text = "\(datesCount) day\(datesCount == 1 ? "" : "s") selected"
 
@@ -180,12 +183,9 @@ class HabitDaysSelectionViewController: UIViewController {
         var firstDescription = ""
         var lastDescription = ""
 
-        // If there's a first selected date, display it. Otherwise show a placeholder.
-        if let first = calendarView.selectedDates.first ?? firstSelectedDay {
-            firstDescription = formatter.string(from: first)
-        } else {
-            firstDescription = "--"
-        }
+        // Display the first selected day (from label).
+        firstDescription = formatter.string(from: firstSelectedDay)
+
         // If there's a last selected date, display it. Otherwise show a placeholder.
         if let last = calendarView.selectedDates.last {
             lastDescription = formatter.string(from: last)

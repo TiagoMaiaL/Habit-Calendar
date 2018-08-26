@@ -9,6 +9,41 @@
 import UIKit
 import JTAppleCalendar
 
+/// Adds the code to handle the selection of dates.
+extension HabitDaysSelectionViewController {
+
+    /// Handles the selection of dates within the calendar.
+    /// - Parameter date: the Date being selected.
+    func select(_ date: Date) {
+        if shouldApplyRangeSelection && date != firstSelectedDay {
+            calendarView.selectDates(
+                from: firstSelectedDay, to: date,
+                triggerSelectionDelegate: false,
+                keepSelectionIfMultiSelectionAllowed: true
+            )
+        }
+    }
+
+    /// Checks if the passed date should be deselected or not.
+    /// - Parameter date: The date to be deselected.
+    /// - Returns: a Bool indicating if the date should be deselected.
+    func shouldDeselect(_ date: Date) -> Bool {
+        // Only allow deselection if the date isn't today.
+        return !date.isInToday
+    }
+
+    /// Deselects all dates, except today (which must be always the first challenge's day).
+    func clearSelection() {
+        calendarView.deselectAllDates()
+    }
+
+    /// Checks if the current selected dates in the calendar are valid dates for the challenge to be created.
+    /// - Returns: a Bool indicating if the selection is a valid one.
+    func isCurrentSelectionValid() -> Bool {
+        return calendarView.selectedDates.count >= 2
+    }
+}
+
 extension HabitDaysSelectionViewController: CalendarDisplaying {
 
     // MARK: Imperatives
@@ -45,12 +80,13 @@ extension HabitDaysSelectionViewController: CalendarDisplaying {
         if cellState.isSelected {
             cell.backgroundColor = themeColor
             cell.dayTitleLabel.textColor = .white
-        } else {
+
             if cellState.date.isInToday {
+                cell.circleView.backgroundColor = .white
                 cell.dayTitleLabel.textColor = .black
-                cell.backgroundColor = UIColor.black.withAlphaComponent(0.05)
-                return
-            } else if cellState.date.isPast {
+            }
+        } else {
+            if cellState.date.isPast {
                 cell.dayTitleLabel.textColor = UIColor(red: 218/255, green: 218/255, blue: 218/255, alpha: 1)
             } else {
                 cell.dayTitleLabel.textColor = UIColor(red: 74/255, green: 74/255, blue: 74/255, alpha: 1)
@@ -115,39 +151,22 @@ extension HabitDaysSelectionViewController: JTAppleCalendarViewDataSource, JTApp
 
     func calendar(
         _ calendar: JTAppleCalendarView,
+        shouldDeselectDate date: Date,
+        cell: JTAppleCell?, cellState:
+        CellState
+    ) -> Bool {
+        return shouldDeselect(date)
+    }
+
+    func calendar(
+        _ calendar: JTAppleCalendarView,
         didSelectDate date: Date,
         cell: JTAppleCell?,
         cellState: CellState
         ) {
         // Change the cell's appearance to show the selected state.
         if let cell = cell {
-            // Configure the range according to the tap.
-            if shouldApplyRangeSelection {
-                if let firstDay = firstSelectedDay, date != firstDay {
-                    // If the date is lesser than the first selected date, make it the new start of the range.
-                    if date.compare(firstDay) == .orderedAscending {
-                        calendarView.deselect(dates: [firstDay])
-                        calendarView.reloadDates([firstDay])
-                        firstSelectedDay = date
-                    } else {
-                        // If not, continue with the range selection.
-                        calendar.selectDates(
-                            from: firstDay,
-                            to: date,
-                            triggerSelectionDelegate: false,
-                            keepSelectionIfMultiSelectionAllowed: true
-                        )
-                        // Begin a new range selection by removing the first selected day.
-                        firstSelectedDay = nil
-                    }
-                } else {
-                    // Only allow one range selection per challenge. If there was another range selected, clear it.
-                    calendarView.deselectAllDates()
-                    // Begin a new range selection.
-                    firstSelectedDay = date
-                }
-            }
-
+            select(date)
             handleAppearanceOfCell(cell, using: cellState)
         }
 
@@ -170,4 +189,3 @@ extension HabitDaysSelectionViewController: JTAppleCalendarViewDataSource, JTApp
         handleFooter()
     }
 }
-
