@@ -15,9 +15,15 @@ extension HabitDaysSelectionViewController {
     /// Handles the selection of dates within the calendar.
     /// - Parameter date: the Date being selected.
     func select(_ date: Date) {
-        if shouldApplyRangeSelection && date != firstSelectedDay {
+        if shouldApplyRangeSelection {
+            // The range should continue from the last selected date.
+            var lastDate = firstSelectedDay
+            if calendarView.selectedDates.count > 1 {
+                lastDate = calendarView.selectedDates.sorted()[calendarView.selectedDates.endIndex - 2]
+            }
             calendarView.selectDates(
-                from: firstSelectedDay, to: date,
+                from: lastDate,
+                to: date,
                 triggerSelectionDelegate: false,
                 keepSelectionIfMultiSelectionAllowed: true
             )
