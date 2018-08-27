@@ -318,8 +318,15 @@ class HabitDetailsViewController: UIViewController {
         // Try to get the matching challenge by filtering through the habit's fetched ones.
         // The challenge matches when the passed date or is in between,
         // or is one of the challenge's limit dates (begin or end).
-        return challenges.filter {
+        let filteredChallenges = challenges.filter {
             date.isInBetween($0.fromDate!, $0.toDate!) || date == $0.fromDate! || date == $0.toDate!
-        }.first
+        }
+
+        // If there's more than one challenge, filter by the ones that are open.
+        if filteredChallenges.count > 1 {
+            return filteredChallenges.filter { !$0.isClosed }.first
+        } else {
+            return filteredChallenges.last
+        }
     }
 }

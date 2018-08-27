@@ -193,6 +193,9 @@ class DaysChallengeMO: NSManagedObject {
     func close() {
         guard let context = managedObjectContext else { return }
 
+        // Mark challenge as closed.
+        isClosed = true
+
         // Declare the days to be deleted.
         var daysToDelete = [HabitDayMO]()
 
@@ -213,8 +216,8 @@ class DaysChallengeMO: NSManagedObject {
             context.delete(day)
         }
 
-        // Change its toDate to today.
-        toDate = Date().getBeginningOfDay()
+        // Change its toDate to yesterday, ignore the current day.
+        toDate = Date().byAddingDays(-1)?.getBeginningOfDay()
     }
 
     /// Creates a new offensive entity and adds it to the current
