@@ -26,3 +26,21 @@ extension HabitDetailsViewController {
     }
 
 }
+
+extension HabitDetailsViewController: HabitDaysSelectionViewControllerDelegate {
+
+    // MARK: HabitDaysSelectionViewControllerDelegate methods.
+
+    func didSelectDays(_ daysDates: [Date]) {
+        assert(!daysDates.isEmpty, "The selected days must not be empty.")
+
+        // Edit the habit being displayed by adding a new days challenge to it.
+        _ = habitStorage.edit(
+            habit, using:
+            container.viewContext,
+            days: daysDates
+        )
+        // TODO: Check the possible errors thrown by the save.
+        try? container.viewContext.save()
+    }
+}

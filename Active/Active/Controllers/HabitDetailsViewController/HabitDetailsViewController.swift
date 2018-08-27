@@ -48,6 +48,12 @@ class HabitDetailsViewController: UIViewController {
     /// provided habit.
     var container: NSPersistentContainer!
 
+    /// The edit segue identifier taking to the HabitCreationViewController.
+    private let editSegueIdentifier = "Edit the habit"
+
+    /// The "new challenge" segue identifier taking to the HabitDaysSelectionViewController.
+    private let newChallengeSegueIdentifier = "Add new challenge to the habit"
+
     /// The cell's reusable identifier.
     internal let cellIdentifier = "Habit day cell id"
 
@@ -171,12 +177,26 @@ class HabitDetailsViewController: UIViewController {
     // MARK: Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "Edit the habit",
-            let editionController = segue.destination as? HabitCreationTableViewController {
+        switch segue.identifier {
+        case editSegueIdentifier:
+            guard let editionController = segue.destination as? HabitCreationTableViewController else {
+                assertionFailure("Error: Couldn't get the HabitCreationController.")
+                return
+            }
             editionController.container = container
             editionController.userStore = UserStorage()
             editionController.habitStore = habitStorage
             editionController.habit = habit
+
+        case newChallengeSegueIdentifier:
+            guard let daysSelectionController = segue.destination as? HabitDaysSelectionViewController else {
+                assertionFailure("Error: Couldn't get the HabitDaysSelectionController")
+                return
+            }
+            daysSelectionController.themeColor = habitColor
+            daysSelectionController.delegate = self
+        default:
+            break
         }
     }
 
@@ -211,7 +231,12 @@ class HabitDetailsViewController: UIViewController {
                 self.challenges = self.getChallenges(from: self.habit)
 
                 // Update the calendar.
-                self.calendarView.reloadData()
+                Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { _ in
+                    self.calendarView.reloadData()
+                    self.calendarView.scrollToDate(
+                        Date().getBeginningOfDay() // Today
+                    )
+                }
 
                 // Update the sections.
                 self.displaySections()
