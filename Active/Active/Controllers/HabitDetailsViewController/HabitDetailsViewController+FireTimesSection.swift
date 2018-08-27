@@ -42,3 +42,12 @@ extension HabitDetailsViewController {
         displayFireTimes(fireTimesSet.map { $0.getFireTimeComponents() })
     }
 }
+
+extension HabitDetailsViewController: FireTimesSelectionViewControllerDelegate {
+
+    // MARK: FireTimesSelectionViewControllerDelegate methods
+
+    func didSelectFireTimes(_ fireTimes: [FireTimesDisplayable.FireTime]) {
+        habitStorage.edit(habit, using: container.viewContext, and: fireTimes)
+    }
+}

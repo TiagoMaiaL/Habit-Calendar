@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import JTAppleCalendar
+import UserNotifications
 
 class HabitDetailsViewController: UIViewController {
 
@@ -51,8 +52,11 @@ class HabitDetailsViewController: UIViewController {
     /// The edit segue identifier taking to the HabitCreationViewController.
     private let editSegueIdentifier = "Edit the habit"
 
-    /// The "new challenge" segue identifier taking to the HabitDaysSelectionViewController.
+    /// The identifier of the "new challenge" segue taking to the HabitDaysSelectionViewController.
     private let newChallengeSegueIdentifier = "Add new challenge to the habit"
+
+    /// The identifier of the segue taking to the FireTimesSelectionController.
+    private let newFireTimesSegueIdentifier = "Add fire times to habit"
 
     /// The cell's reusable identifier.
     internal let cellIdentifier = "Habit day cell id"
@@ -195,6 +199,16 @@ class HabitDetailsViewController: UIViewController {
             }
             daysSelectionController.themeColor = habitColor
             daysSelectionController.delegate = self
+        case newFireTimesSegueIdentifier:
+            guard let fireTimesSelectionController = segue.destination as? FireTimesSelectionViewController else {
+                assertionFailure("Error: Couldn't get the FireTimesSelectionController")
+                return
+            }
+            fireTimesSelectionController.delegate = self
+            fireTimesSelectionController.themeColor = habitColor
+            fireTimesSelectionController.notificationManager = UserNotificationManager(
+                notificationCenter: UNUserNotificationCenter.current()
+            )
         default:
             break
         }

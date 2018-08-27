@@ -618,7 +618,7 @@ reminded about this habit?</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rE2-W1-pId" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3918" y="-575"/>
+            <point key="canvasLocation" x="3857" y="-180"/>
         </scene>
         <!--Days-->
         <scene sceneID="LN7-wK-ThL">
@@ -775,7 +775,7 @@ reminded about this habit?</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9zz-Nw-yjM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3918" y="197"/>
+            <point key="canvasLocation" x="3857" y="647"/>
         </scene>
         <!--Read-->
         <scene sceneID="xFu-io-JbZ">
@@ -1089,6 +1089,9 @@ reminded about this habit?</string>
                                                                                 <state key="normal" title="New fire times">
                                                                                     <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                 </state>
+                                                                                <connections>
+                                                                                    <segue destination="hr1-dK-bvy" kind="show" identifier="Add fire times to habit" id="43l-ZQ-AR3"/>
+                                                                                </connections>
                                                                             </button>
                                                                         </subviews>
                                                                     </stackView>
@@ -1235,6 +1238,7 @@ you think of adding a new one?</string>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="G29-rb-isc"/>
+        <segue reference="43l-ZQ-AR3"/>
         <segue reference="5mV-Cj-rFr"/>
     </inferredMetricsTieBreakers>
 </document>
