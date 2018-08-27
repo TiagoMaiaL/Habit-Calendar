@@ -205,6 +205,26 @@ class HabitStorageTests: IntegrationTestCase {
         )
     }
 
+    func testHabitFetch() {
+        // 1. Make a dummy habit.
+        let dummyHabit = habitFactory.makeDummy()
+
+        // 2. Try to fetch.
+        let fetchedHabit = habitStorage.habit(using: context, and: dummyHabit.id!)
+
+        // 3. Assert it isn't nil and has the same id.
+        XCTAssertNotNil(fetchedHabit)
+        XCTAssertEqual(dummyHabit.id, fetchedHabit?.id)
+    }
+
+    func testHabitFetchShouldReturnNil() {
+        // 1. Try to fetch by using an arbitrary id.
+        let fetchAttempt = habitStorage.habit(using: context, and: "invalid id")
+
+        // 2. Assert it's nil.
+        XCTAssertNil(fetchAttempt)
+    }
+
     func testHabitEditionWithNameProperty() {
         // Declare the name to be set.
         let habitName = "Fight Muay-Thai"
