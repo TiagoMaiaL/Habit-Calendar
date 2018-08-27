@@ -43,17 +43,8 @@ extension HabitMO.Color {
     /// - Parameter color: the color associated with an instance.
     /// - Returns: An enum instance associated with the UIColor, if found.
     static func getInstanceFrom(color: UIColor) -> HabitMO.Color? {
-        var instance: HabitMO.Color? = nil
-
-        // Search for the instance associated with the color.
-        for (currentInstance, uiColor) in HabitMO.Color.uiColors {
-            // If the color is equals to the passed one, the instance was found and can be returned.
-            if uiColor == color {
-                instance = currentInstance
-                break
-            }
-        }
-
-        return instance
+        return HabitMO.Color.uiColors.enumerated().filter {
+            $1.value == color
+        }.first?.element.key
     }
 }

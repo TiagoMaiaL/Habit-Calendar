@@ -38,6 +38,7 @@ extension HabitDetailsViewController {
                 self.displayProgressSection()
                 // Reload calendar to show the executed day.
                 self.calendarView.reloadData()
+                self.calendarView.scrollToDate(Date().getBeginningOfDay())
             }
         }
     }

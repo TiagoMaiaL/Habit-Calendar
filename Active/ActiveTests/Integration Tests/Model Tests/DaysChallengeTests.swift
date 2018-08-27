@@ -497,13 +497,18 @@ class DaysChallengeTests: IntegrationTestCase {
         dummyChallenge.close()
 
         // Assert its toDate is today (the date the user closed).
-        XCTAssertEqual(dummyChallenge.toDate, Date().getBeginningOfDay(), "The challenge's toDate should be today.")
+        XCTAssertEqual(
+            dummyChallenge.toDate,
+            Date().byAddingDays(-1)?.getBeginningOfDay(),
+            "The challenge's toDate should be yesterday."
+        )
         // Assert the future days were properly deleted from the challenge.
         XCTAssertEqual(
             dummyChallenge.days?.count,
             daysNumber - daysNumber,
             "The future days should be removed from the challenge."
         )
+        XCTAssertTrue(dummyChallenge.isClosed)
     }
 
     // MARK: Imperatives

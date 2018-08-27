@@ -21,7 +21,7 @@ extension HabitDetailsViewController: CalendarDisplaying {
     internal func handleAppearanceOfCell(
         _ cell: JTAppleCell,
         using cellState: CellState
-        ) {
+    ) {
         // Cast it to the expected instance.
         guard let cell = cell as? CalendarDayCell else {
             assertionFailure("Couldn't cast the cell to a CalendarDayCell's instance.")

@@ -121,6 +121,22 @@ class HabitStorage {
         return habit
     }
 
+    /// Fetches the habit with the passed id, if it exists.
+    /// - Parameters:
+    ///     - context: NSManagedObjectContext executing the fetch.
+    ///     - identifier: The id of the habit to be fetched.
+    /// - Returns: The habitMO with the provided id, if found.
+    func habit(using context: NSManagedObjectContext, and identifier: String) -> HabitMO? {
+        // Declare the filter predicate and the request.
+        let filterPredicate = NSPredicate(format: "id = %@", identifier)
+        let request: NSFetchRequest<HabitMO> = HabitMO.fetchRequest()
+        request.predicate = filterPredicate
+
+        let result = try? context.fetch(request)
+
+        return result?.first
+    }
+
     /// Edits the passed habit instance with the provided info.
     /// - Parameter habit: The Habit entity to be changed.
     /// - Parameter context: The context used to change the habit and the associated entities.

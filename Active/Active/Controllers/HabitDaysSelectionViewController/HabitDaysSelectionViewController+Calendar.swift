@@ -158,8 +158,8 @@ extension HabitDaysSelectionViewController: JTAppleCalendarViewDataSource, JTApp
     func calendar(
         _ calendar: JTAppleCalendarView,
         shouldDeselectDate date: Date,
-        cell: JTAppleCell?, cellState:
-        CellState
+        cell: JTAppleCell?,
+        cellState: CellState
     ) -> Bool {
         return shouldDeselect(date)
     }

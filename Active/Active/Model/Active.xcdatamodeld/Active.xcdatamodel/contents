@@ -12,6 +12,7 @@
         <attribute name="createdAt" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="fromDate" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="id" attributeType="String" syncable="YES"/>
+        <attribute name="isClosed" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="toDate" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="days" toMany="YES" deletionRule="Nullify" destinationEntity="HabitDay" inverseName="challenge" inverseEntity="HabitDay" syncable="YES"/>
         <relationship name="habit" maxCount="1" deletionRule="Nullify" destinationEntity="Habit" inverseName="challenges" inverseEntity="Habit" syncable="YES"/>
@@ -75,7 +76,7 @@
     </entity>
     <elements>
         <element name="Day" positionX="-3638" positionY="-4030" width="128" height="88"/>
-        <element name="DaysChallenge" positionX="-3645" positionY="-3883" width="128" height="148"/>
+        <element name="DaysChallenge" positionX="-3645" positionY="-3883" width="128" height="163"/>
         <element name="FireTime" positionX="-2999" positionY="-3922" width="128" height="118"/>
         <element name="Habit" positionX="-3215" positionY="-3915" width="128" height="193"/>
         <element name="HabitDay" positionX="-3438" positionY="-3978" width="128" height="133"/>

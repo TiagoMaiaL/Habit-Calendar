@@ -782,11 +782,11 @@ reminded about this habit?</string>
             <objects>
                 <viewController title="Read" id="wZd-FS-1mH" customClass="HabitDetailsViewController" customModule="Active" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="MZ9-hX-HsL">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="1300"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="1350"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BiK-vr-Hm9">
-                                <rect key="frame" x="0.0" y="64" width="375" height="1236"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="1286"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eOs-VQ-lGp" userLabel="Content view">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="1281.5"/>
@@ -1132,6 +1132,9 @@ you think of adding a new one?</string>
                                                                         <state key="normal" title="New challenge">
                                                                             <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         </state>
+                                                                        <connections>
+                                                                            <segue destination="zeZ-9t-rmb" kind="show" identifier="Add new challenge to the habit" id="G29-rb-isc"/>
+                                                                        </connections>
                                                                     </button>
                                                                 </subviews>
                                                                 <constraints>
@@ -1185,7 +1188,7 @@ you think of adding a new one?</string>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <size key="freeformSize" width="375" height="1300"/>
+                    <size key="freeformSize" width="375" height="1350"/>
                     <connections>
                         <outlet property="calendarView" destination="7Pe-pH-Udy" id="dhu-6f-iLR"/>
                         <outlet property="challengeProgressContentView" destination="R4F-r4-Nta" id="eY8-Ig-i56"/>
@@ -1231,6 +1234,7 @@ you think of adding a new one?</string>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="G29-rb-isc"/>
         <segue reference="5mV-Cj-rFr"/>
     </inferredMetricsTieBreakers>
 </document>

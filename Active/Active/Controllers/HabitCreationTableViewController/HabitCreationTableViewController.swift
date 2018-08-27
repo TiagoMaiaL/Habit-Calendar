@@ -226,9 +226,14 @@ class HabitCreationTableViewController: UITableViewController {
                 )
             } else {
                 // If there's a previous habit, update it with the new values.
+                guard let habitToEdit = self.habitStore.habit(using: context, and: self.habit!.id!) else {
+                    assertionFailure("The habit should be correclty fetched.")
+                    return
+                }
+
                 _ = self.habitStore.edit(
-                    self.habit!,
-                    using: self.habit!.managedObjectContext!,
+                    habitToEdit,
+                    using: context,
                     name: self.name,
                     color: self.habitColor,
                     days: self.days,
