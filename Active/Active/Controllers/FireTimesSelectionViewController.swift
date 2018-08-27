@@ -111,10 +111,19 @@ class FireTimesSelectionViewController: UIViewController {
     // MARK: Actions
 
     @IBAction func selectFireTimes(_ sender: UIButton) {
-        // Call the delegate passing the fire dates selected
-        // by the user.
-        delegate?.didSelectFireTimes(Array(selectedFireTimes))
-        navigationController?.popViewController(animated: true)
+        if selectedFireTimes.isEmpty {
+            let alert = UIAlertController(
+                title: "No fire times selected",
+                message: "Are you sure you don't want to be reminded about your habit?",
+                preferredStyle: .alert
+            )
+            alert.addAction(UIAlertAction(title: "Yes", style: .default) { _ in self.endSelection() })
+            alert.addAction(UIAlertAction(title: "Cancel", style: .default))
+
+            present(alert, animated: true)
+        } else {
+            endSelection()
+        }
     }
 
     @IBAction func eraseSelection(_ sender: UIBarButtonItem) {
@@ -123,6 +132,14 @@ class FireTimesSelectionViewController: UIViewController {
     }
 
     // MARK: Imperatives
+
+    /// Passes the selected fire times to the delegate and pops the view controller.
+    private func endSelection() {
+        // Call the delegate passing the fire dates selected
+        // by the user.
+        delegate?.didSelectFireTimes(Array(selectedFireTimes))
+        navigationController?.popViewController(animated: true)
+    }
 
     /// Displays the amount of fire times selected by the user.
     private func displayFireTimesAmount() {
