@@ -66,6 +66,7 @@
 		474F9C8620CC7E180094C19C /* Date+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474F9C8520CC7E180094C19C /* Date+Utils.swift */; };
 		474F9C8A20CE3F670094C19C /* IntegrationTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474F9C8920CE3F670094C19C /* IntegrationTestCase.swift */; };
 		474F9C8D20CEE2840094C19C /* UserStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474F9C8C20CEE2840094C19C /* UserStorageTests.swift */; };
+		475197D62132F4E1009F959C /* HabitDaysSelectionViewController+Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475197D52132F4E1009F959C /* HabitDaysSelectionViewController+Calendar.swift */; };
 		4752FDC120FE623900116F1A /* XCTUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4752FDC020FE623900116F1A /* XCTUtils.swift */; };
 		475C96AD20E1216D00212E1F /* HabitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475C96AC20E1216D00212E1F /* HabitTests.swift */; };
 		4761DFD320DE692A003F772A /* UNUserNotificationCenterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4761DFD220DE692A003F772A /* UNUserNotificationCenterMock.swift */; };
@@ -195,6 +196,7 @@
 		474F9C8520CC7E180094C19C /* Date+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Utils.swift"; sourceTree = "<group>"; };
 		474F9C8920CE3F670094C19C /* IntegrationTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegrationTestCase.swift; sourceTree = "<group>"; };
 		474F9C8C20CEE2840094C19C /* UserStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStorageTests.swift; sourceTree = "<group>"; };
+		475197D52132F4E1009F959C /* HabitDaysSelectionViewController+Calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HabitDaysSelectionViewController+Calendar.swift"; sourceTree = "<group>"; };
 		4752FDC020FE623900116F1A /* XCTUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCTUtils.swift; sourceTree = "<group>"; };
 		475C96A120DEFB4C00212E1F /* DummyFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyFactory.swift; sourceTree = "<group>"; };
 		475C96A320DEFC9500212E1F /* DayFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayFactory.swift; sourceTree = "<group>"; };
@@ -323,8 +325,8 @@
 			children = (
 				47F635F320BB920900AC4555 /* Main.storyboard */,
 				4725D05A20C8A4BA00C3B63F /* HabitsTableViewController.swift */,
-				4737312A20ED502800895DD2 /* HabitDaysSelectionViewController.swift */,
 				4737312C20ED503B00895DD2 /* FireTimesSelectionViewController.swift */,
+				475197D42132F4A7009F959C /* HabitDaysSelectionViewController */,
 				47C32032213078B40094BBF8 /* HabitCreationTableViewController */,
 				47C32027212C578C0094BBF8 /* HabitDetailsViewController */,
 				47B23989212203F9009CB25C /* HabitMOColor+UIColor.swift */,
@@ -433,6 +435,15 @@
 				47AA3656210382380008D2DC /* FireTimeStorageTests.swift */,
 			);
 			path = "Storage Tests";
+			sourceTree = "<group>";
+		};
+		475197D42132F4A7009F959C /* HabitDaysSelectionViewController */ = {
+			isa = PBXGroup;
+			children = (
+				4737312A20ED502800895DD2 /* HabitDaysSelectionViewController.swift */,
+				475197D52132F4E1009F959C /* HabitDaysSelectionViewController+Calendar.swift */,
+			);
+			path = HabitDaysSelectionViewController;
 			sourceTree = "<group>";
 		};
 		475C96AB20E0832A00212E1F /* Model Tests */ = {
@@ -850,6 +861,7 @@
 				47AA365321037B0B0008D2DC /* FireTimeMO.swift in Sources */,
 				474F9C8620CC7E180094C19C /* Date+Utils.swift in Sources */,
 				4725D05B20C8A4BA00C3B63F /* HabitsTableViewController.swift in Sources */,
+				475197D62132F4E1009F959C /* HabitDaysSelectionViewController+Calendar.swift in Sources */,
 				4725D06320CA14A600C3B63F /* HabitDayStorage.swift in Sources */,
 				4732CE782114F23200E2770C /* HabitTableViewCell.swift in Sources */,
 				47C1F3DE212A140F00DDA7BB /* CalendarDisplaying.swift in Sources */,

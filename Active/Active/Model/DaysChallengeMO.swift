@@ -193,14 +193,24 @@ class DaysChallengeMO: NSManagedObject {
     func close() {
         guard let context = managedObjectContext else { return }
 
-        // Remove its future days.
-        if let futureDays = getFutureDays() {
-            removeFromDays(futureDays as NSSet)
-            habit?.removeFromDays(futureDays as NSSet)
+        // Declare the days to be deleted.
+        var daysToDelete = [HabitDayMO]()
 
-            for day in futureDays {
-                context.delete(day)
-            }
+        // Remove its future and current days.
+        if let futureDays = getFutureDays() {
+            daysToDelete.append(contentsOf: futureDays)
+        }
+
+        if let currentDay = getCurrentDay() {
+            daysToDelete.append(currentDay)
+        }
+
+        // Remove the days.
+        removeFromDays(Set(daysToDelete) as NSSet)
+        habit?.removeFromDays(Set(daysToDelete) as NSSet)
+
+        for day in daysToDelete {
+            context.delete(day)
         }
 
         // Change its toDate to today.
