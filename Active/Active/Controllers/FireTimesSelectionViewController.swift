@@ -34,7 +34,7 @@ class FireTimesSelectionViewController: UIViewController {
     /// The fire dates selected by the user.
     var selectedFireTimes = Set<FireTimesDisplayable.FireTime>() {
         didSet {
-            guard doneButton != nil, fireTimesAmountLabel != nil else { return }
+            guard fireTimesAmountLabel != nil else { return }
             updateUI()
         }
     }
@@ -61,12 +61,6 @@ class FireTimesSelectionViewController: UIViewController {
 
     /// The delegate in charge of receiving the selected fire dates.
     weak var delegate: FireTimesSelectionViewControllerDelegate?
-
-    // MARK: Deinitializers
-
-    deinit {
-        // Remove any observers.
-    }
 
     // MARK: Life Cycle
 
@@ -117,15 +111,19 @@ class FireTimesSelectionViewController: UIViewController {
     // MARK: Actions
 
     @IBAction func selectFireTimes(_ sender: UIButton) {
-        assert(
-            !selectedFireTimes.isEmpty,
-            "Inconsistency: the selected fire dates shouldn't be empty."
-        )
+        if selectedFireTimes.isEmpty {
+            let alert = UIAlertController(
+                title: "No fire times selected",
+                message: "Are you sure you don't want to be reminded about your habit?",
+                preferredStyle: .alert
+            )
+            alert.addAction(UIAlertAction(title: "Yes", style: .default) { _ in self.endSelection() })
+            alert.addAction(UIAlertAction(title: "Cancel", style: .default))
 
-        // Call the delegate passing the fire dates selected
-        // by the user.
-        delegate?.didSelectFireTimes(Array(selectedFireTimes))
-        navigationController?.popViewController(animated: true)
+            present(alert, animated: true)
+        } else {
+            endSelection()
+        }
     }
 
     @IBAction func eraseSelection(_ sender: UIBarButtonItem) {
@@ -135,10 +133,12 @@ class FireTimesSelectionViewController: UIViewController {
 
     // MARK: Imperatives
 
-    /// Configures the state of the done button according
-    /// to the selected fire dates.
-    private func handleDoneButton() {
-        doneButton.isEnabled = !selectedFireTimes.isEmpty
+    /// Passes the selected fire times to the delegate and pops the view controller.
+    private func endSelection() {
+        // Call the delegate passing the fire dates selected
+        // by the user.
+        delegate?.didSelectFireTimes(Array(selectedFireTimes))
+        navigationController?.popViewController(animated: true)
     }
 
     /// Displays the amount of fire times selected by the user.
@@ -151,7 +151,6 @@ class FireTimesSelectionViewController: UIViewController {
     /// Updates the UI components according to the selection of fire times.
     private func updateUI() {
         displayFireTimesAmount()
-        handleDoneButton()
     }
 
     /// Update the views according to the User's authorization.

@@ -225,8 +225,6 @@ class HabitStorage {
     ///     - fireTimes: The fire times to be added.
     ///     - habit: The habit to be edited.
     private func editFireTimes(_ fireTimes: [DateComponents], ofHabit habit: HabitMO) {
-        assert(!fireTimes.isEmpty, "HabitStorage -- edit: notifications argument shouldn't be empty.")
-
         guard let context = habit.managedObjectContext else {
             assertionFailure("The habit being edited must have a context.")
             return
@@ -281,6 +279,10 @@ class HabitStorage {
             // The habit doesn't have any fire times associated with it.
             // This case is possible, since the user can deny the
             // usage of user notifications.
+            return []
+        }
+        guard !fireTimes.isEmpty else {
+            // If the fire times are empty, just return nil because no notifications should be scheduled.
             return []
         }
 
