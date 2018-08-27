@@ -56,13 +56,14 @@ extension Date {
     /// - Returns: the current date at the end of the day (23:59 PM).
     func getEndOfDay() -> Date {
         // Declare the components to calculate the end of the current date's day.
-        var components = DateComponents()
-        components.day = 1
-        // One day (24:00:00) minus one second (23:59:59). Resulting in the end
-        // of the previous day.
-        components.second = -1
+        var endOfDayComponents = components
 
-        let dayAtEnd = getCurrentCalendar().date(byAdding: components, to: getBeginningOfDay())
+        // The end of the day would be equivalent to "23:59:59".
+        endOfDayComponents.hour = 23
+        endOfDayComponents.minute = 59
+        endOfDayComponents.second = 59
+
+        let dayAtEnd = getCurrentCalendar().date(from: endOfDayComponents)
 
         // Is there a mistake with the computation of the date?
         assert(dayAtEnd != nil, "The computation of the end of the day couldn't be performed.")
