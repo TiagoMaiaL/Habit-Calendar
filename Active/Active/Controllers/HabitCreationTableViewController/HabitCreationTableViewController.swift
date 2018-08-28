@@ -8,7 +8,6 @@
 
 import UIKit
 import CoreData
-import UserNotifications
 
 /// Controller used to allow the user to create/edit habits.
 class HabitCreationTableViewController: UITableViewController {
@@ -114,8 +113,6 @@ class HabitCreationTableViewController: UITableViewController {
     /// Flag indicating if notifications are authorized or not.
     var areNotificationsAuthorized: Bool = true
 
-    // TODO: Show a cell indicating the user hasn't enabled local notifications.
-
     // MARK: Deinitializers
 
     deinit {
@@ -190,9 +187,7 @@ class HabitCreationTableViewController: UITableViewController {
             // Associate the NotificationsSelectionController's delegate.
             if let notificationsController = segue.destination as? FireTimesSelectionViewController {
                 notificationsController.delegate = self
-                notificationsController.notificationManager = UserNotificationManager(
-                    notificationCenter: UNUserNotificationCenter.current()
-                )
+
                 if let fireTimes = fireTimes {
                     notificationsController.selectedFireTimes = Set(fireTimes)
                 } else if let fireTimes = (habit?.fireTimes as? Set<FireTimeMO>)?.map({ $0.getFireTimeComponents() }) {
@@ -218,10 +213,6 @@ class HabitCreationTableViewController: UITableViewController {
             assert(!(name ?? "").isEmpty, "Error: the habit's name must be a valid value.")
             assert(habitColor != nil, "Error: the habit's color must be a valid value.")
             assert(!(days ?? []).isEmpty, "Error: the habit's days must have a valid value.")
-            // TODO: This will no longer be necessary, the controller will allow deselection.
-            if fireTimes != nil {
-                assert(!fireTimes!.isEmpty, "Error: the habit's fireTimes must have a valid value.")
-            }
         }
 
         // If there's no previous habit, create and persist a new one.

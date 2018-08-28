@@ -75,8 +75,9 @@ extension HabitDetailsViewController: NotificationAvailabilityDisplayable {
     }
 
     func displayNotificationAvailability(_ isAuthorized: Bool) {
-        // If notifications aren't authorized, show it to the user.
-        if !isAuthorized {
+        // If notifications aren't authorized, and the habit has an active challenge,
+        // show it to the user.
+        if !isAuthorized && habit.getCurrentChallenge() != nil {
             notificationsAuthContentView.isHidden = false
             fireTimesContentView.isHidden = true
         } else {

@@ -55,10 +55,6 @@ class FireTimesSelectionViewController: UIViewController {
     /// The button used to finish the selection.
     @IBOutlet weak var doneButton: UIButton!
 
-    /// The notification manager used to get the authorization status and
-    /// reflect the result in the view.
-    var notificationManager: UserNotificationManager!
-
     /// The delegate in charge of receiving the selected fire dates.
     weak var delegate: FireTimesSelectionViewControllerDelegate?
 
@@ -69,23 +65,8 @@ class FireTimesSelectionViewController: UIViewController {
 
         // Make assertions on the required dependencies.
         assert(
-            notificationManager != nil,
-            "Failed to inject the notification manager."
-        )
-        assert(
             themeColor != nil,
             "The controller's theme color should be properly injected."
-        )
-
-        // TODO: Put the observation events in the habit creation controller.
-        // Start observing the app's active state event. This is made
-        // to check if the user notifications are now allowed and update
-        // the views accordingly.
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(updateViews(_:)),
-            name: Notification.Name.UIApplicationDidBecomeActive,
-            object: nil
         )
 
         // Configure the tableView's content insets.
@@ -101,11 +82,6 @@ class FireTimesSelectionViewController: UIViewController {
 
         // Set the initial state of the controller's views.
         updateUI()
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        updateViews()
     }
 
     // MARK: Actions
@@ -151,26 +127,6 @@ class FireTimesSelectionViewController: UIViewController {
     /// Updates the UI components according to the selection of fire times.
     private func updateUI() {
         displayFireTimesAmount()
-    }
-
-    /// Update the views according to the User's authorization.
-    @objc private func updateViews(_ notification: Notification? = nil) {
-        // Check if the local notifications are authorized by the user.
-        notificationManager.getAuthorizationStatus { isAuthorized in
-            // If it's not authorized, change the view informing it.
-            DispatchQueue.main.async {
-                if isAuthorized {
-                    // Enable the button and the tableView selection.
-                    // Change the controller's appearance.
-                } else {
-                    // Change information label, and disable
-                    // the button and the tableView selection.
-                    // Change the controller's appearance to represent
-                    // that there's no authorization to use
-                    // local notifications.
-                }
-            }
-        }
     }
 }
 

@@ -226,10 +226,7 @@ class HabitDetailsViewController: UIViewController {
             }
             fireTimesSelectionController.delegate = self
             fireTimesSelectionController.themeColor = habitColor
-            fireTimesSelectionController.notificationManager = UserNotificationManager(
-                notificationCenter: UNUserNotificationCenter.current()
-            )
-            
+
         default:
             break
         }
