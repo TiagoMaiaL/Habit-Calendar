@@ -128,6 +128,9 @@ class HabitDetailsViewController: UIViewController {
     /// challenge at the moment.
     @IBOutlet weak var newChallengeButton: RoundedButton!
 
+    /// The notification manager used to get the authorization status.
+    var notificationManager: UserNotificationManager!
+
     /// The view containing the fire time labels.
     @IBOutlet weak var fireTimesContentView: UIView!
 
@@ -140,8 +143,17 @@ class HabitDetailsViewController: UIViewController {
     /// The view containing information for when there are no fire times set for the habit.
     @IBOutlet weak var noFireTimesContentView: UIView!
 
+    /// The content view showing that notifications aren't authorized by the user.
+    @IBOutlet weak var notificationsAuthContentView: UIView!
+
     /// The button that takes to the fire times controller.
     @IBOutlet weak var newFireTimesButton: RoundedButton!
+
+    // MARK: Deinitializers
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
 
     // MARK: ViewController Life Cycle
 
@@ -155,6 +167,9 @@ class HabitDetailsViewController: UIViewController {
             name: Notification.Name.NSManagedObjectContextDidSave,
             object: nil
         )
+
+        // Refresh the user notifications authorization view every time the app become active.
+        observeForegroundEvent()
 
         checkDependencies()
         // Get the habit's challenges to display in the calendar.
@@ -176,6 +191,9 @@ class HabitDetailsViewController: UIViewController {
 
         // Display the initial state of the sections.
         displaySections()
+
+        // Check the auth status and update the fire times section accordingly.
+        getAuthStatus()
     }
 
     // MARK: Navigation
@@ -190,6 +208,7 @@ class HabitDetailsViewController: UIViewController {
             editionController.container = container
             editionController.userStore = UserStorage()
             editionController.habitStore = habitStorage
+            editionController.notificationManager = notificationManager
             editionController.habit = habit
 
         case newChallengeSegueIdentifier:
@@ -199,6 +218,7 @@ class HabitDetailsViewController: UIViewController {
             }
             daysSelectionController.themeColor = habitColor
             daysSelectionController.delegate = self
+
         case newFireTimesSegueIdentifier:
             guard let fireTimesSelectionController = segue.destination as? FireTimesSelectionViewController else {
                 assertionFailure("Error: Couldn't get the FireTimesSelectionController")
@@ -206,9 +226,7 @@ class HabitDetailsViewController: UIViewController {
             }
             fireTimesSelectionController.delegate = self
             fireTimesSelectionController.themeColor = habitColor
-            fireTimesSelectionController.notificationManager = UserNotificationManager(
-                notificationCenter: UNUserNotificationCenter.current()
-            )
+
         default:
             break
         }
@@ -290,6 +308,10 @@ class HabitDetailsViewController: UIViewController {
         assert(
             previousMonthButton != nil,
             "Error: the previous month button wasn't set."
+        )
+        assert(
+            notificationManager != nil,
+            "Error: the notification manager wasn't injected."
         )
     }
 

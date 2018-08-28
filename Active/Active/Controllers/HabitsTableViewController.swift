@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import UserNotifications
 
 /// Controller in charge of displaying the list of tracked habits.
 class HabitsTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
@@ -91,6 +92,10 @@ class HabitsTableViewController: UITableViewController, NSFetchedResultsControll
     // MARK: Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let notificationManager = UserNotificationManager(
+            notificationCenter: UNUserNotificationCenter.current()
+        )
+
         switch segue.identifier {
         case newHabitSegueIdentifier:
             // Inject the controller's habit storage, user storage,
@@ -99,6 +104,7 @@ class HabitsTableViewController: UITableViewController, NSFetchedResultsControll
                 habitCreationController.container = container
                 habitCreationController.habitStore = habitStorage
                 habitCreationController.userStore = AppDelegate.current.userStorage
+                habitCreationController.notificationManager = notificationManager
             } else {
                 assertionFailure(
                     "Error: Couldn't get the habit creation controller."
@@ -109,6 +115,7 @@ class HabitsTableViewController: UITableViewController, NSFetchedResultsControll
             if let habitDetailsController = segue.destination as? HabitDetailsViewController {
                 habitDetailsController.container = container
                 habitDetailsController.habitStorage = habitStorage
+                habitDetailsController.notificationManager = notificationManager
 
                 // Get the selected habit for injection.
                 guard let indexPath = tableView.indexPathForSelectedRow else {

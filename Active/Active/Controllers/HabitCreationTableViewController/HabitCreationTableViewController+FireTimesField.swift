@@ -22,3 +22,31 @@ extension HabitCreationTableViewController: FireTimesSelectionViewControllerDele
         displayFireTimes(fireTimes)
     }
 }
+
+/// Adds code to inform the user if user notifications are authorized or not.
+extension HabitCreationTableViewController: NotificationAvailabilityDisplayable {
+
+    // MARK: Imperatives
+
+    func observeForegroundEvent() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(getAuthStatus(_:)),
+            name: Notification.Name.UIApplicationDidBecomeActive,
+            object: nil
+        )
+    }
+
+    @objc func getAuthStatus(_ notification: NSNotification? = nil) {
+        notificationManager.getAuthorizationStatus { isAuthorized in
+            DispatchQueue.main.async {
+                self.displayNotificationAvailability(isAuthorized)
+            }
+        }
+    }
+
+    func displayNotificationAvailability(_ isAuthorized: Bool) {
+        areNotificationsAuthorized = isAuthorized
+        tableView.reloadData()
+    }
+}
