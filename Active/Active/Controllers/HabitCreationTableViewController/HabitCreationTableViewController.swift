@@ -70,6 +70,11 @@ class HabitCreationTableViewController: UITableViewController {
     /// The habit entity being editted.
     var habit: HabitMO?
 
+    /// Flag indicating if there's a habit being created or editted.
+    var isEditingHabit: Bool {
+        return habit != nil
+    }
+
     /// The habit's name being informed by the user.
     var name: String? {
         didSet {
@@ -150,7 +155,8 @@ class HabitCreationTableViewController: UITableViewController {
         configureDoneButton()
 
         // If there's a passed habit, it means that the controller should edit it.
-        if habit != nil {
+        if isEditingHabit {
+            title = "Edit habit"
             displayHabitProperties()
             configureDeletionButton()
         }
@@ -209,7 +215,7 @@ class HabitCreationTableViewController: UITableViewController {
     @IBAction func storeHabit(_ sender: UIButton) {
         // Make assertions on the required values to create/update a habit.
         // If the habit is being created, make the assertions.
-        if habit == nil {
+        if !isEditingHabit {
             assert(!(name ?? "").isEmpty, "Error: the habit's name must be a valid value.")
             assert(habitColor != nil, "Error: the habit's color must be a valid value.")
             assert(!(days ?? []).isEmpty, "Error: the habit's days must have a valid value.")
@@ -225,7 +231,7 @@ class HabitCreationTableViewController: UITableViewController {
                 return
             }
 
-            if self.habit == nil {
+            if !self.isEditingHabit {
                 _ = self.habitStore.create(
                     using: context,
                     user: user,
