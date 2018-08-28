@@ -48,6 +48,42 @@ extension HabitDetailsViewController: FireTimesSelectionViewControllerDelegate {
     // MARK: FireTimesSelectionViewControllerDelegate methods
 
     func didSelectFireTimes(_ fireTimes: [FireTimesDisplayable.FireTime]) {
-        habitStorage.edit(habit, using: container.viewContext, and: fireTimes)
+        _ = habitStorage.edit(habit, using: container.viewContext, and: fireTimes)
+    }
+}
+
+/// Adds code to inform the user if user notifications are authorized or not.
+extension HabitDetailsViewController: NotificationAvailabilityDisplayable {
+
+    // MARK: Imperatives
+
+    func observeForegroundEvent() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(getAuthStatus(_:)),
+            name: Notification.Name.UIApplicationDidBecomeActive,
+            object: nil
+        )
+    }
+
+    @objc func getAuthStatus(_ notification: NSNotification? = nil) {
+        notificationManager.getAuthorizationStatus { isAuthorized in
+            DispatchQueue.main.async {
+                self.displayNotificationAvailability(isAuthorized)
+            }
+        }
+    }
+
+    func displayNotificationAvailability(_ isAuthorized: Bool) {
+        // If notifications aren't authorized, show it to the user.
+        if !isAuthorized {
+            notificationsAuthContentView.isHidden = false
+            fireTimesContentView.isHidden = true
+        } else {
+            // If they are, continue with the normal flow.
+            notificationsAuthContentView.isHidden = true
+            // Reload the sections related to the fire times.
+            displayFireTimesSection()
+        }
     }
 }

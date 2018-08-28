@@ -108,7 +108,19 @@ class HabitCreationTableViewController: UITableViewController {
         }
     }
 
+    /// The notification manager used to get the app's authorization status.
+    var notificationManager: UserNotificationManager!
+
+    /// Flag indicating if notifications are authorized or not.
+    var areNotificationsAuthorized: Bool = true
+
     // TODO: Show a cell indicating the user hasn't enabled local notifications.
+
+    // MARK: Deinitializers
+
+    deinit {
+        removeObserver()
+    }
 
     // MARK: ViewController Life Cycle
 
@@ -119,6 +131,10 @@ class HabitCreationTableViewController: UITableViewController {
         assert(userStore != nil, "Error: Failed to inject the user store.")
         assert(container != nil, "Error: failed to inject the persistent container.")
         assert(habitStore != nil, "Error: failed to inject the habit store.")
+        assert(notificationManager != nil, "Error: failed to inject the notification manager.")
+
+        // Observe the app's active event to display if the user notifications are allowed.
+        observeForegroundEvent()
 
         // Configure the appearance of the navigation bar to never use the
         // large titles.
@@ -148,6 +164,9 @@ class HabitCreationTableViewController: UITableViewController {
 
         // Display the theme color.
         displayThemeColor()
+
+        // Display information about the authorization status.
+        getAuthStatus()
     }
 
     // MARK: Navigation
@@ -342,7 +361,8 @@ extension HabitCreationTableViewController {
         case name = 0,
             color,
             days,
-            fireTimes
+            fireTimes,
+            notificationsNotAuthorized
     }
 
     // MARK: TableView delegate methods
@@ -362,7 +382,9 @@ extension HabitCreationTableViewController {
             case .days:
                 return 160
             case .fireTimes:
-                return 172
+                return areNotificationsAuthorized ? 172 : 0
+            case .notificationsNotAuthorized:
+                return !areNotificationsAuthorized ? 140 : 0
             }
         } else {
             return 0

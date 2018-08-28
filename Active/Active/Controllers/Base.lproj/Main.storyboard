@@ -172,11 +172,11 @@
             <objects>
                 <tableViewController title="New Habit" id="e07-lh-rVp" customClass="HabitCreationTableViewController" customModule="Active" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="igq-vq-9s7">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="900"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="1000"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="U4g-rN-Yvd" userLabel="Footer">
-                            <rect key="frame" x="0.0" y="743" width="375" height="104"/>
+                            <rect key="frame" x="0.0" y="883" width="375" height="104"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D90-7S-rS4" customClass="RoundedButton" customModule="Active" customModuleProvider="target">
@@ -477,6 +477,45 @@ reminded about this habit?</string>
                                             <segue destination="hr1-dK-bvy" kind="show" identifier="Show fire dates selection controller" id="J1H-vQ-s49"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="140" id="5Ae-bq-t7z" userLabel="Notifications Cell">
+                                        <rect key="frame" x="0.0" y="743" width="375" height="140"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5Ae-bq-t7z" id="iaZ-Rc-R0A">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="139.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="At8-YD-oiI" userLabel="Layout">
+                                                    <rect key="frame" x="26" y="21" width="323" height="98"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Notifications" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lr3-PR-xA7">
+                                                            <rect key="frame" x="0.0" y="0.0" width="119.5" height="24"/>
+                                                            <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="20"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="User notifications are not authorized." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qed-rw-VaE">
+                                                            <rect key="frame" x="0.0" y="34" width="262.5" height="18"/>
+                                                            <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="15"/>
+                                                            <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enable the user notifications to be reminded about your habits" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dNs-4f-fKj">
+                                                            <rect key="frame" x="0.0" y="62" width="317" height="36"/>
+                                                            <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="15"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="At8-YD-oiI" firstAttribute="top" secondItem="iaZ-Rc-R0A" secondAttribute="topMargin" constant="10" id="Af7-rv-tYo"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="At8-YD-oiI" secondAttribute="trailing" constant="10" id="Mbj-Gj-2lJ"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="At8-YD-oiI" secondAttribute="bottom" constant="10" id="UQl-95-cIY"/>
+                                                <constraint firstItem="At8-YD-oiI" firstAttribute="leading" secondItem="iaZ-Rc-R0A" secondAttribute="leadingMargin" constant="10" id="wwB-IC-Cax"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -485,7 +524,7 @@ reminded about this habit?</string>
                             <outlet property="delegate" destination="e07-lh-rVp" id="OBG-N0-E7A"/>
                         </connections>
                     </tableView>
-                    <size key="freeformSize" width="375" height="900"/>
+                    <size key="freeformSize" width="375" height="1000"/>
                     <connections>
                         <outlet property="challengeFieldQuestionTitle" destination="JOL-oE-7MJ" id="174-Uz-IZF"/>
                         <outlet property="challengeFieldTitleLabel" destination="pyb-N6-nac" id="ZJ8-Dr-TG8"/>
@@ -789,10 +828,10 @@ reminded about this habit?</string>
                                 <rect key="frame" x="0.0" y="64" width="375" height="1286"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eOs-VQ-lGp" userLabel="Content view">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1281.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1422"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="jfc-bo-dXq">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="1281.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="1422"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="jve-z3-FPF" userLabel="Calendar">
                                                         <rect key="frame" x="0.0" y="0.0" width="375" height="400"/>
@@ -1000,7 +1039,7 @@ reminded about this habit?</string>
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ELQ-9e-pIF" userLabel="Habit fire times">
-                                                        <rect key="frame" x="0.0" y="775" width="375" height="117.5"/>
+                                                        <rect key="frame" x="0.0" y="775" width="375" height="118"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ugp-uJ-K1k" userLabel="Separator">
                                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="1"/>
@@ -1010,16 +1049,16 @@ reminded about this habit?</string>
                                                                 </constraints>
                                                             </view>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="TFX-LK-6Ij" userLabel="Content">
-                                                                <rect key="frame" x="20" y="20" width="335" height="77.5"/>
+                                                                <rect key="frame" x="20" y="20" width="335" height="78"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fire times" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wUQ-bj-3jO" userLabel="Title">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="101.5" height="26.5"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="101.5" height="27"/>
                                                                         <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="22"/>
                                                                         <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="D14-mG-fKY" userLabel="labels">
-                                                                        <rect key="frame" x="0.0" y="36.5" width="176" height="41"/>
+                                                                        <rect key="frame" x="0.0" y="37" width="176" height="41"/>
                                                                         <subviews>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="two times were selected:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C8L-3d-lkg">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="176" height="18"/>
@@ -1049,8 +1088,58 @@ reminded about this habit?</string>
                                                             <constraint firstItem="TFX-LK-6Ij" firstAttribute="top" secondItem="ELQ-9e-pIF" secondAttribute="top" constant="20" symbolic="YES" id="vC2-OD-jay"/>
                                                         </constraints>
                                                     </view>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Nu-Y6-GF2" userLabel="Habit fire times">
-                                                        <rect key="frame" x="0.0" y="892.5" width="375" height="223"/>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fEU-7k-LGt" userLabel="User notifications not authorized">
+                                                        <rect key="frame" x="0.0" y="893" width="375" height="140"/>
+                                                        <subviews>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CeL-m6-wqL" userLabel="Separator">
+                                                                <rect key="frame" x="0.0" y="0.0" width="375" height="1"/>
+                                                                <color key="backgroundColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="1" id="dQH-WN-fQ9"/>
+                                                                </constraints>
+                                                            </view>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="bF7-yP-hzn" userLabel="Content">
+                                                                <rect key="frame" x="20" y="20" width="335" height="100"/>
+                                                                <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fire times" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sAk-0M-OS2" userLabel="Title">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="101.5" height="31"/>
+                                                                        <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="22"/>
+                                                                        <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="G6M-72-CPh" userLabel="labels">
+                                                                        <rect key="frame" x="0.0" y="41" width="312" height="59"/>
+                                                                        <subviews>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User notifications are not authorized." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qBa-YY-9xH">
+                                                                                <rect key="frame" x="0.0" y="0.0" width="312" height="18"/>
+                                                                                <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="15"/>
+                                                                                <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                <nil key="highlightedColor"/>
+                                                                            </label>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enable the user notifications in the Settings app to be reminded of your habits." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="48O-rX-eeq">
+                                                                                <rect key="frame" x="0.0" y="23" width="312" height="36"/>
+                                                                                <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="15"/>
+                                                                                <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                <nil key="highlightedColor"/>
+                                                                            </label>
+                                                                        </subviews>
+                                                                    </stackView>
+                                                                </subviews>
+                                                            </stackView>
+                                                        </subviews>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="trailing" secondItem="bF7-yP-hzn" secondAttribute="trailing" constant="20" symbolic="YES" id="13q-cT-sga"/>
+                                                            <constraint firstItem="bF7-yP-hzn" firstAttribute="top" secondItem="fEU-7k-LGt" secondAttribute="top" constant="20" symbolic="YES" id="GXZ-mc-Knx"/>
+                                                            <constraint firstAttribute="bottom" secondItem="bF7-yP-hzn" secondAttribute="bottom" constant="20" symbolic="YES" id="NcT-tY-xDu"/>
+                                                            <constraint firstItem="CeL-m6-wqL" firstAttribute="leading" secondItem="fEU-7k-LGt" secondAttribute="leading" id="Pmk-Wb-0sK"/>
+                                                            <constraint firstItem="bF7-yP-hzn" firstAttribute="leading" secondItem="fEU-7k-LGt" secondAttribute="leading" constant="20" symbolic="YES" id="rTW-CN-noq"/>
+                                                            <constraint firstItem="CeL-m6-wqL" firstAttribute="top" secondItem="fEU-7k-LGt" secondAttribute="top" id="saf-GD-iob"/>
+                                                            <constraint firstAttribute="trailing" secondItem="CeL-m6-wqL" secondAttribute="trailing" id="vuf-0a-I85"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Nu-Y6-GF2" userLabel="No habit fire times">
+                                                        <rect key="frame" x="0.0" y="1033" width="375" height="223"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mh6-dY-OHA" userLabel="Separator">
                                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="1"/>
@@ -1110,7 +1199,7 @@ reminded about this habit?</string>
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4dM-YJ-d58" userLabel="No challenge">
-                                                        <rect key="frame" x="0.0" y="1115.5" width="375" height="166"/>
+                                                        <rect key="frame" x="0.0" y="1256" width="375" height="166"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="sgi-jh-yVq" userLabel="Contents">
                                                                 <rect key="frame" x="20" y="0.0" width="335" height="146"/>
@@ -1207,6 +1296,7 @@ you think of adding a new one?</string>
                         <outlet property="newFireTimesButton" destination="iwj-aA-khj" id="Waa-aT-Axv"/>
                         <outlet property="noChallengeContentView" destination="4dM-YJ-d58" id="cEL-kR-7Ya"/>
                         <outlet property="noFireTimesContentView" destination="3Nu-Y6-GF2" id="joG-Kn-z2h"/>
+                        <outlet property="notificationsAuthContentView" destination="fEU-7k-LGt" id="YRR-yI-v7Y"/>
                         <outlet property="progressBar" destination="IYl-LM-LDu" id="zRX-dh-QEN"/>
                         <outlet property="promptAnswerLabel" destination="AkU-5d-3Oh" id="aEl-wg-Png"/>
                         <outlet property="promptContentView" destination="YIt-bU-XNv" id="10m-rT-ZCX"/>
@@ -1215,7 +1305,7 @@ you think of adding a new one?</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eer-Kp-wUj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2028" y="647"/>
+            <point key="canvasLocation" x="2028" y="646.77661169415296"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="GVs-QO-GaP">
@@ -1237,8 +1327,8 @@ you think of adding a new one?</string>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="G29-rb-isc"/>
-        <segue reference="43l-ZQ-AR3"/>
+        <segue reference="y7q-nn-pWX"/>
+        <segue reference="J1H-vQ-s49"/>
         <segue reference="5mV-Cj-rFr"/>
     </inferredMetricsTieBreakers>
 </document>
