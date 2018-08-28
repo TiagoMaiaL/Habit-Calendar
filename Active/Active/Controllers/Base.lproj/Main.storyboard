@@ -175,12 +175,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="1000"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <view key="tableFooterView" contentMode="scaleToFill" id="U4g-rN-Yvd" userLabel="Footer">
+                        <view key="tableFooterView" contentMode="scaleToFill" misplaced="YES" id="U4g-rN-Yvd" userLabel="Footer">
                             <rect key="frame" x="0.0" y="883" width="375" height="104"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D90-7S-rS4" customClass="RoundedButton" customModule="Active" customModuleProvider="target">
-                                    <rect key="frame" x="117.5" y="27" width="140" height="50"/>
+                                    <rect key="frame" x="117.5" y="193.5" width="140" height="50"/>
                                     <color key="backgroundColor" red="0.18431372549019609" green="0.21176470588235294" blue="0.25098039215686274" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="140" id="EpX-yy-wTD"/>
