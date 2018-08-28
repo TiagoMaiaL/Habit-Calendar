@@ -41,9 +41,6 @@ class HabitsTableViewController: UITableViewController, NSFetchedResultsControll
         return fetchedController
     }()
 
-    /// The label displaying the number of the user's habits.
-    @IBOutlet weak var habitsCountLabel: UILabel!
-
     // MARK: Deinitialization
 
     deinit {
@@ -85,8 +82,6 @@ class HabitsTableViewController: UITableViewController, NSFetchedResultsControll
         } catch {
             assertionFailure("Error: Couldn't fetch the user's habits.")
         }
-
-        displayHabitsCount()
     }
 
     // MARK: Navigation
@@ -133,22 +128,6 @@ class HabitsTableViewController: UITableViewController, NSFetchedResultsControll
             }
         default:
             break
-        }
-    }
-
-    // MARK: Imperatives
-
-    /// Displays the current amount of the user's habits in the table header view.
-    private func displayHabitsCount() {
-        // Display the current amount of habits in the header.
-        let countRequest: NSFetchRequest<HabitMO> = HabitMO.fetchRequest()
-        do {
-            let count = try container.viewContext.count(for: countRequest)
-            // TODO: Localize this.
-            habitsCountLabel.text = "\(count) habit\(count > 1 ? "s" : "")"
-        } catch {
-            // TODO: Any errors should be reported to the user.
-            habitsCountLabel.text = nil
         }
     }
 
@@ -256,9 +235,6 @@ extension HabitsTableViewController {
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         // End the tableView updates.
         tableView.endUpdates()
-
-        // Update the header.
-        displayHabitsCount()
     }
 
 }
