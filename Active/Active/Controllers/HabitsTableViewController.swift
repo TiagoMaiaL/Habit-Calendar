@@ -13,6 +13,14 @@ import UserNotifications
 /// Controller in charge of displaying the list of tracked habits.
 class HabitsTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
 
+    // MARK: Types
+
+    /// The segments displayed by this controller, which show habits in progress and habits that were completed.
+    enum Segment: Int {
+        case inProgress
+        case completed
+    }
+
     // MARK: Properties
 
     /// The identifier for the habit creation controller's segue.
@@ -30,16 +38,37 @@ class HabitsTableViewController: UITableViewController, NSFetchedResultsControll
     /// The Habit storage used to fetch the tracked habits.
     var habitStorage: HabitStorage!
 
-    /// The fetched results controller used to get the habits and
-    /// display them with the tableView.
-    private lazy var fetchedResultsController: NSFetchedResultsController<HabitMO> = {
-        let fetchedController = habitStorage.makeFetchedResultsController(
-            context: container.viewContext
-        )
+    /// The segmented control used to change the habits being displayed, based on its stage (completed or in progress).
+    @IBOutlet weak var habitsSegmentedControl: UISegmentedControl!
+
+    /// The fetched results controller used to get the habits that are in progress and display them with the tableView.
+    private lazy var progressfetchedResultsController: NSFetchedResultsController<HabitMO> = {
+        let fetchedController = habitStorage.makeFetchedResultsController(context: container.viewContext)
         fetchedController.delegate = self
 
         return fetchedController
     }()
+
+    /// The fetched results controller used to get the habits that are completed and display them with the tableView.
+    private lazy var completedfetchedResultsController: NSFetchedResultsController<HabitMO> = {
+        let fetchedController = habitStorage.makeCompletedFetchedResultsController(context: container.viewContext)
+        fetchedController.delegate = self
+
+        return fetchedController
+    }()
+
+    /// The fetched results controller for the selected segment (in progress or completed habits).
+    /// - Note: This is the fetched results controller used by the tableView's data source, which is chosen based
+    ///         on the currently selected segmented.
+    private var selectedFetchedResultsController: NSFetchedResultsController<HabitMO> {
+        switch Segment(rawValue: habitsSegmentedControl.selectedSegmentIndex)! {
+        case .inProgress:
+            return progressfetchedResultsController
+
+        case .completed:
+            return completedfetchedResultsController
+        }
+    }
 
     // MARK: Deinitialization
 
@@ -78,7 +107,7 @@ class HabitsTableViewController: UITableViewController, NSFetchedResultsControll
         // Start fetching for the habits.
         // TODO: Check what errors are thrown by the fetch. Every error should be reported to the user.
         do {
-            try fetchedResultsController.performFetch()
+            try selectedFetchedResultsController.performFetch()
         } catch {
             assertionFailure("Error: Couldn't fetch the user's habits.")
         }
@@ -117,7 +146,7 @@ class HabitsTableViewController: UITableViewController, NSFetchedResultsControll
                     assertionFailure("Error: couldn't get the user's selected row.")
                     return
                 }
-                let selectedHabit = fetchedResultsController.object(at: indexPath)
+                let selectedHabit = selectedFetchedResultsController.object(at: indexPath)
 
                 // Inject the selected habit.
                 habitDetailsController.habit = selectedHabit
@@ -131,14 +160,22 @@ class HabitsTableViewController: UITableViewController, NSFetchedResultsControll
         }
     }
 
+    // MARK: Actions
+
+    @IBAction func switchSegment(_ sender: UISegmentedControl) {
+        // TODO: Alert the user in case of errors.
+        try? selectedFetchedResultsController.performFetch()
+        tableView.reloadData()
+    }
+
     // MARK: DataSource Methods
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return fetchedResultsController.sections?.count ?? 1
+        return selectedFetchedResultsController.sections?.count ?? 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let sections = fetchedResultsController.sections, sections.count > 0 {
+        if let sections = selectedFetchedResultsController.sections, sections.count > 0 {
             return sections[section].numberOfObjects
         }
 
@@ -151,7 +188,7 @@ class HabitsTableViewController: UITableViewController, NSFetchedResultsControll
         )
 
         // Get the current habit object.
-        let habit = fetchedResultsController.object(at: indexPath)
+        let habit = selectedFetchedResultsController.object(at: indexPath)
 
         if let cell = cell as? HabitTableViewCell {
             // Display the habit properties:

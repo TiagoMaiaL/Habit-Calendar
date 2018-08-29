@@ -38,7 +38,23 @@
                         <view key="tableHeaderView" contentMode="scaleToFill" id="Lu7-sl-vj6" userLabel="Header View">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="qVn-Re-KHh">
+                                    <rect key="frame" x="105" y="20.5" width="165" height="29"/>
+                                    <segments>
+                                        <segment title="In progress"/>
+                                        <segment title="Completed"/>
+                                    </segments>
+                                    <connections>
+                                        <action selector="switchSegment:" destination="QhD-k9-yHg" eventType="valueChanged" id="fM4-Eo-Hqg"/>
+                                    </connections>
+                                </segmentedControl>
+                            </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="qVn-Re-KHh" firstAttribute="centerX" secondItem="Lu7-sl-vj6" secondAttribute="centerX" id="c7n-oF-ZAI"/>
+                                <constraint firstItem="qVn-Re-KHh" firstAttribute="centerY" secondItem="Lu7-sl-vj6" secondAttribute="centerY" id="eE5-zQ-PFS"/>
+                            </constraints>
                         </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="Habit table view cell" rowHeight="150" id="96w-aW-Ru5" customClass="HabitTableViewCell" customModule="Active" customModuleProvider="target">
@@ -147,6 +163,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="habitsSegmentedControl" destination="qVn-Re-KHh" id="bFV-wi-O93"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H47-uN-Gy5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
