@@ -39,21 +39,25 @@
                             <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="8 habits" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8F3-OJ-S3H">
-                                    <rect key="frame" x="150" y="33" width="76.5" height="24"/>
-                                    <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="20"/>
-                                    <color key="textColor" red="0.18431372549019609" green="0.21176470588235294" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
+                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="qVn-Re-KHh">
+                                    <rect key="frame" x="105" y="20.5" width="165" height="29"/>
+                                    <segments>
+                                        <segment title="In progress"/>
+                                        <segment title="Completed"/>
+                                    </segments>
+                                    <connections>
+                                        <action selector="switchSegment:" destination="QhD-k9-yHg" eventType="valueChanged" id="fM4-Eo-Hqg"/>
+                                    </connections>
+                                </segmentedControl>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstItem="8F3-OJ-S3H" firstAttribute="centerX" secondItem="Lu7-sl-vj6" secondAttribute="centerX" id="aj7-wq-c3p"/>
-                                <constraint firstItem="8F3-OJ-S3H" firstAttribute="centerY" secondItem="Lu7-sl-vj6" secondAttribute="centerY" constant="10" id="hRo-gQ-Elp"/>
+                                <constraint firstItem="qVn-Re-KHh" firstAttribute="centerX" secondItem="Lu7-sl-vj6" secondAttribute="centerX" id="c7n-oF-ZAI"/>
+                                <constraint firstItem="qVn-Re-KHh" firstAttribute="centerY" secondItem="Lu7-sl-vj6" secondAttribute="centerY" id="eE5-zQ-PFS"/>
                             </constraints>
                         </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="Habit table view cell" rowHeight="150" id="96w-aW-Ru5" customClass="HabitTableViewCell" customModule="Active" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="In progress habit table view cell" rowHeight="150" id="96w-aW-Ru5" userLabel="In progress habit table view cell" customClass="HabitTableViewCell" customModule="Active" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="98" width="375" height="150"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="96w-aW-Ru5" id="qFl-HC-SWT">
@@ -69,7 +73,7 @@
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Play guitar" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bjx-cs-62X">
                                                             <rect key="frame" x="0.0" y="0.0" width="109" height="30"/>
                                                             <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="25"/>
-                                                            <nil key="textColor"/>
+                                                            <color key="textColor" red="0.30196078431372547" green="0.28235294117647058" blue="0.32156862745098042" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="XUX-gI-rlJ">
@@ -143,7 +147,79 @@
                                     <outlet property="nameLabel" destination="Bjx-cs-62X" id="PRe-Gq-fcB"/>
                                     <outlet property="progressBar" destination="kQL-n5-UO9" id="tl0-jn-udE"/>
                                     <outlet property="progressLabel" destination="hH7-d5-qyV" id="ZCy-jz-BUe"/>
-                                    <segue destination="wZd-FS-1mH" kind="show" identifier="Show habit details" id="1cB-T8-RhX"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="Completed habit table view cell" rowHeight="100" id="Z0i-Rg-g5D" userLabel="Completed habit table view cell" customClass="CompletedHabitTableViewCell" customModule="Active" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="248" width="375" height="100"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Z0i-Rg-g5D" id="SBF-n5-w77">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9N9-18-8er" userLabel="Card view" customClass="CardView" customModule="Active" customModuleProvider="target">
+                                            <rect key="frame" x="26" y="21" width="323" height="58"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="LnA-oU-OZ1">
+                                                    <rect key="frame" x="20" y="0.0" width="283" height="58"/>
+                                                    <subviews>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qnR-on-qQU" customClass="RoundedView" customModule="Active" customModuleProvider="target">
+                                                            <rect key="frame" x="0.0" y="14" width="30" height="30"/>
+                                                            <color key="backgroundColor" red="0.6470588235294118" green="0.36862745098039218" blue="0.91764705882352937" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="30" id="8n8-g5-rgw"/>
+                                                                <constraint firstAttribute="width" constant="30" id="rya-cQ-LFR"/>
+                                                            </constraints>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                    <real key="value" value="15"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                            </userDefinedRuntimeAttributes>
+                                                        </view>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Design" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A55-Nz-kvc">
+                                                            <rect key="frame" x="50" y="14" width="233" height="30"/>
+                                                            <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="25"/>
+                                                            <color key="textColor" red="0.30196078431372547" green="0.28235294117647058" blue="0.32156862745098036" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                            <color key="backgroundColor" red="0.92549019610000005" green="0.94117647059999998" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstItem="LnA-oU-OZ1" firstAttribute="top" secondItem="9N9-18-8er" secondAttribute="top" id="Cfj-LJ-ibl"/>
+                                                <constraint firstItem="LnA-oU-OZ1" firstAttribute="leading" secondItem="9N9-18-8er" secondAttribute="leading" constant="20" symbolic="YES" id="aGD-Kf-1Ul"/>
+                                                <constraint firstAttribute="bottom" secondItem="LnA-oU-OZ1" secondAttribute="bottom" id="fv0-hz-CvQ"/>
+                                                <constraint firstAttribute="trailing" secondItem="LnA-oU-OZ1" secondAttribute="trailing" constant="20" symbolic="YES" id="pOa-Lk-0Ba"/>
+                                            </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                    <real key="value" value="10"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                                    <real key="value" value="5"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                                    <real key="value" value="0.29999999999999999"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                                                    <size key="value" width="0.0" height="2"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                                    <color key="value" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                        </view>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottomMargin" secondItem="9N9-18-8er" secondAttribute="bottom" constant="10" id="Eu0-9k-sOs"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="9N9-18-8er" secondAttribute="trailing" constant="10" id="OxK-iC-2LF"/>
+                                        <constraint firstItem="9N9-18-8er" firstAttribute="top" secondItem="SBF-n5-w77" secondAttribute="topMargin" constant="10" id="arr-yb-aUn"/>
+                                        <constraint firstItem="9N9-18-8er" firstAttribute="leading" secondItem="SBF-n5-w77" secondAttribute="leadingMargin" constant="10" id="xdB-z6-vPM"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="colorView" destination="qnR-on-qQU" id="YHa-Vu-bub"/>
+                                    <outlet property="nameLabel" destination="A55-Nz-kvc" id="cYj-ha-jGR"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -160,7 +236,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="habitsCountLabel" destination="8F3-OJ-S3H" id="T3n-mo-O1V"/>
+                        <outlet property="habitsSegmentedControl" destination="qVn-Re-KHh" id="bFV-wi-O93"/>
+                        <segue destination="wZd-FS-1mH" kind="show" identifier="Show habit details" id="chO-bF-Fvm"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H47-uN-Gy5" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -175,12 +252,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="1000"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <view key="tableFooterView" contentMode="scaleToFill" misplaced="YES" id="U4g-rN-Yvd" userLabel="Footer">
+                        <view key="tableFooterView" contentMode="scaleToFill" id="U4g-rN-Yvd" userLabel="Footer">
                             <rect key="frame" x="0.0" y="883" width="375" height="104"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D90-7S-rS4" customClass="RoundedButton" customModule="Active" customModuleProvider="target">
-                                    <rect key="frame" x="117.5" y="193.5" width="140" height="50"/>
+                                    <rect key="frame" x="117.5" y="27" width="140" height="50"/>
                                     <color key="backgroundColor" red="0.18431372549019609" green="0.21176470588235294" blue="0.25098039215686274" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="140" id="EpX-yy-wTD"/>
@@ -1329,6 +1406,6 @@ you think of adding a new one?</string>
     <inferredMetricsTieBreakers>
         <segue reference="y7q-nn-pWX"/>
         <segue reference="J1H-vQ-s49"/>
-        <segue reference="5mV-Cj-rFr"/>
+        <segue reference="Xkx-Wi-bYR"/>
     </inferredMetricsTieBreakers>
 </document>

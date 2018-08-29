@@ -48,12 +48,45 @@ class HabitStorage {
 
     // MARK: - Imperatives
 
-    /// Creates a NSFetchedResultsController for fetching habit instances
+    /// Creates a NSFetchedResultsController for fetching completed habit instances
     /// ordered by the creation date and score of each habit.
+    /// - Note: Completed habits are habits that don't have any active days' challenge. All challenges were completed.
+    /// - Parameter context: The context used to fetch the habits.
+    /// - Returns: The created fetched results controller.
+    func makeCompletedFetchedResultsController(context: NSManagedObjectContext) -> NSFetchedResultsController<HabitMO> {
+        // Filter for habits that don't have an active days' challenge (aren't closed yet).
+        let completedPredicate = NSPredicate(
+            format: "SUBQUERY(challenges, $challenge, $challenge.isClosed == false).@count == 0"
+        )
+        let request: NSFetchRequest<HabitMO> = HabitMO.fetchRequest()
+        request.predicate = completedPredicate
+        // The request should order the habits by the creation date and score.
+        request.sortDescriptors = [
+            NSSortDescriptor(key: "createdAt", ascending: false)
+        ]
+
+        let controller = NSFetchedResultsController(
+            fetchRequest: request,
+            managedObjectContext: context,
+            sectionNameKeyPath: nil,
+            cacheName: nil
+        )
+
+        return controller
+    }
+
+    /// Creates a NSFetchedResultsController for fetching in progress habit instances
+    /// ordered by the creation date and score of each habit.
+    /// - Note: Habits in progress are habits that have an active days' challenge.
     /// - Parameter context: The context used to fetch the habits.
     /// - Returns: The created fetched results controller.
     func makeFetchedResultsController(context: NSManagedObjectContext) -> NSFetchedResultsController<HabitMO> {
+        // Filter for habits that have an active days' challenge.
+        let inProgressPredicate = NSPredicate(
+            format: "SUBQUERY(challenges, $challenge, $challenge.isClosed == false).@count == 1"
+        )
         let request: NSFetchRequest<HabitMO> = HabitMO.fetchRequest()
+        request.predicate = inProgressPredicate
         // The request should order the habits by the creation date and score.
         request.sortDescriptors = [
             NSSortDescriptor(key: "createdAt", ascending: false)

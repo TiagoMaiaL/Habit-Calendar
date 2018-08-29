@@ -172,37 +172,40 @@ class HabitStorageTests: IntegrationTestCase {
         )
     }
 
-    func testHabitFetchedResultsControllerFactory() {
-        // Get the fetched results controller.
+    func testInProgressFetchedResultsController() {
+        // 1. Get the fetched results controller.
         let fetchedResultsController = habitStorage.makeFetchedResultsController(context: context)
 
-        // Assert on its fetch request.
-        XCTAssertEqual(
-            "Habit",
-            fetchedResultsController.fetchRequest.entityName,
-            "Only Habit entities should be fetched by the controller."
-        )
+        // 2. Add some dummy habits.
+        let dummyHabits = [habitFactory.makeDummy(), habitFactory.makeDummy(), habitFactory.makeDummy()]
 
-        // Assert on its sort descriptors.
-        guard let sortDescriptors = fetchedResultsController.fetchRequest.sortDescriptors else {
-            XCTFail(
-                "The fetched Habit entities should be sorted."
-            )
-            return
+        // 3. Perform the fetch.
+        try? fetchedResultsController.performFetch()
+
+        // 4. Assert that the count of fetched habits is the same as the declared one.
+        XCTAssertEqual(dummyHabits.count, fetchedResultsController.fetchedObjects?.count)
+    }
+
+    func testCompletedFetchedResultsController() {
+        // 1. Get the fetched results controller.
+        let fetchedResultsController = habitStorage.makeCompletedFetchedResultsController(context: context)
+
+        // 2. Add some completed dummy habits.
+        let dummyHabits = [habitFactory.makeDummy(), habitFactory.makeDummy(), habitFactory.makeDummy()]
+
+        for habit in dummyHabits {
+            if let challenge = habit.getCurrentChallenge() {
+                habit.removeFromChallenges(challenge)
+                context.delete(challenge)
+                habit.addToChallenges(daysChallengeFactory.makeCompletedDummy())
+            }
         }
 
-        // The sort descriptors should sort in both
-        // the created or score properties.
-        XCTAssertEqual(
-            1,
-            sortDescriptors.count,
-            "The Habits should be sorted by the created and score properties."
-        )
-        XCTAssertEqual(
-            sortDescriptors[0].key,
-            "createdAt",
-            "Should sort by the Habit entity's created property."
-        )
+        // 3. Perform the fetch.
+        try? fetchedResultsController.performFetch()
+
+        // 4. Assert that the count of fetched habits is the same as the declared one.
+        XCTAssertEqual(dummyHabits.count, fetchedResultsController.fetchedObjects?.count)
     }
 
     func testHabitFetch() {

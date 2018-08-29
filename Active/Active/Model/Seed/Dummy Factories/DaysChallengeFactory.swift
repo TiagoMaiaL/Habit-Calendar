@@ -31,7 +31,9 @@ struct DaysChallengeFactory: DummyFactory {
         let futureDates = (0..<Int.random(2..<50)).compactMap {
             Date().byAddingDays($0)?.getBeginningOfDay()
         }
-        return makeDummy(using: futureDates)
+        let futureDummy = makeDummy(using: futureDates)
+
+        return futureDummy
     }
 
     /// Makes a completed days' challenge (it's days are in the past and were executed).
@@ -43,7 +45,10 @@ struct DaysChallengeFactory: DummyFactory {
         let pastDates = (randomNegative..<0).compactMap {
             Date().byAddingDays($0)?.getBeginningOfDay()
         }
-        return makeDummy(using: pastDates)
+        let completedDummy = makeDummy(using: pastDates)
+        completedDummy.isClosed = true
+
+        return completedDummy
     }
 
     /// Creates and configures a dummy challenge by using the passed dates.
