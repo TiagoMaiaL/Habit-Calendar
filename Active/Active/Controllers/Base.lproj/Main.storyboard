@@ -147,7 +147,6 @@
                                     <outlet property="nameLabel" destination="Bjx-cs-62X" id="PRe-Gq-fcB"/>
                                     <outlet property="progressBar" destination="kQL-n5-UO9" id="tl0-jn-udE"/>
                                     <outlet property="progressLabel" destination="hH7-d5-qyV" id="ZCy-jz-BUe"/>
-                                    <segue destination="wZd-FS-1mH" kind="show" identifier="Show habit details" id="1cB-T8-RhX"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="Completed habit table view cell" rowHeight="100" id="Z0i-Rg-g5D" userLabel="Completed habit table view cell" customClass="CompletedHabitTableViewCell" customModule="Active" customModuleProvider="target">
@@ -219,7 +218,6 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="cardView" destination="9N9-18-8er" id="sCy-Ij-vbM"/>
                                     <outlet property="colorView" destination="qnR-on-qQU" id="YHa-Vu-bub"/>
                                     <outlet property="nameLabel" destination="A55-Nz-kvc" id="cYj-ha-jGR"/>
                                 </connections>
@@ -239,6 +237,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="habitsSegmentedControl" destination="qVn-Re-KHh" id="bFV-wi-O93"/>
+                        <segue destination="wZd-FS-1mH" kind="show" identifier="Show habit details" id="chO-bF-Fvm"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H47-uN-Gy5" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -60,11 +60,16 @@ class HabitsTableViewController: UITableViewController, NSFetchedResultsControll
         return fetchedController
     }()
 
+    /// The currently selected segment.
+    private var selectedSegment: Segment {
+        return Segment(rawValue: habitsSegmentedControl.selectedSegmentIndex)!
+    }
+
     /// The fetched results controller for the selected segment (in progress or completed habits).
     /// - Note: This is the fetched results controller used by the tableView's data source, which is chosen based
     ///         on the currently selected segmented.
     private var selectedFetchedResultsController: NSFetchedResultsController<HabitMO> {
-        switch Segment(rawValue: habitsSegmentedControl.selectedSegmentIndex)! {
+        switch selectedSegment {
         case .inProgress:
             return progressfetchedResultsController
 
@@ -185,35 +190,63 @@ class HabitsTableViewController: UITableViewController, NSFetchedResultsControll
         return 0
     }
      override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(
-            withIdentifier: inProgressHabitCellIdentifier,
-            for: indexPath
-        )
+        var cell: UITableViewCell? = nil
 
         // Get the current habit object.
         let habit = selectedFetchedResultsController.object(at: indexPath)
 
-        if let cell = cell as? HabitTableViewCell {
-            // Display the habit properties:
-            // Its name.
-            cell.nameLabel?.text = habit.name
-            // And its progress.
-            var pastCount = habit.getCurrentChallenge()?.getPastDays()?.count ?? 0
-            let daysCount = habit.getCurrentChallenge()?.days?.count ?? 1
+        switch selectedSegment {
+        case .inProgress:
+            cell = tableView.dequeueReusableCell(
+                withIdentifier: inProgressHabitCellIdentifier,
+                for: indexPath
+            )
+            if let cell = cell as? HabitTableViewCell {
+                // Display the habit properties:
+                // Its name.
+                cell.nameLabel?.text = habit.name
+                // And its progress.
+                var pastCount = habit.getCurrentChallenge()?.getPastDays()?.count ?? 0
+                let daysCount = habit.getCurrentChallenge()?.days?.count ?? 1
 
-            // If the current day was marked as executed, account it as a past
-            // day as well.
-            if habit.getCurrentChallenge()?.getCurrentDay()?.wasExecuted ?? false {
-                pastCount += 1
+                // If the current day was marked as executed, account it as a past day as well.
+                if habit.getCurrentChallenge()?.getCurrentDay()?.wasExecuted ?? false {
+                    pastCount += 1
+                }
+
+                cell.progressLabel?.text = "\(pastCount) / \(daysCount) completed days"
+                cell.progressBar.tint = habit.getColor().uiColor
+                // Change the bar's progress (past days / total).
+                cell.progressBar.progress = CGFloat(Double(pastCount) / Double(daysCount))
             }
-
-            cell.progressLabel?.text = "\(pastCount) / \(daysCount) completed days"
-            cell.progressBar.tint = habit.getColor().uiColor
-            // Change the bar's progress (past days / total).
-            cell.progressBar.progress = CGFloat(Double(pastCount) / Double(daysCount))
+        case .completed:
+            cell = tableView.dequeueReusableCell(
+                withIdentifier: completedHabitCellIdentifier,
+                for: indexPath
+            )
+            if let cell = cell as? CompletedHabitTableViewCell {
+                // Display the habit's name and color.
+                cell.nameLabel.text = habit.name
+                cell.colorView.backgroundColor = habit.getColor().uiColor
+            }
         }
 
-        return cell
+        return cell!
+    }
+
+    // MARK: Delegate methods
+
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        switch selectedSegment {
+        case .inProgress:
+            return 145
+        case .completed:
+            return 100
+        }
+    }
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: detailsSegueIdentifier, sender: self)
     }
 
     // MARK: Actions
@@ -276,5 +309,4 @@ extension HabitsTableViewController {
         // End the tableView updates.
         tableView.endUpdates()
     }
-
 }
