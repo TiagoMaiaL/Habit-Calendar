@@ -29,8 +29,11 @@ class HabitsTableViewController: UITableViewController, NSFetchedResultsControll
     /// The identifier for the habit details controller's segue.
     private let detailsSegueIdentifier = "Show habit details"
 
-    /// The Habit cell's reuse identifier.
-    private let habitCellIdentifier = "Habit table view cell"
+    /// The in progress habit cell's reuse identifier.
+    private let inProgressHabitCellIdentifier = "In progress habit table view cell"
+
+    /// The completed habit cell's reuse identifier.
+    private let completedHabitCellIdentifier = "Completed habit table view cell"
 
     /// The used persistence container.
     var container: NSPersistentContainer!
@@ -183,7 +186,7 @@ class HabitsTableViewController: UITableViewController, NSFetchedResultsControll
     }
      override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(
-            withIdentifier: habitCellIdentifier,
+            withIdentifier: inProgressHabitCellIdentifier,
             for: indexPath
         )
 

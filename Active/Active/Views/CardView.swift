@@ -10,19 +10,9 @@ import UIKit
 import QuartzCore
 
 /// A view used to contain other views in a card based design.
-@IBDesignable class CardView: UIView {
+@IBDesignable class CardView: RoundedView {
 
     // MARK: Properties
-
-    /// The card's corner radius.
-    @IBInspectable public var cornerRadius: CGFloat {
-        get {
-            return layer.cornerRadius
-        }
-        set {
-            layer.cornerRadius = newValue
-        }
-    }
 
     /// The card's shadow's color.
     @IBInspectable public var shadowColor: UIColor = .black
