@@ -25,7 +25,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Wd-Ii-Co5" customClass="RoundedButton" customModule="Active" customModuleProvider="target">
-                    <rect key="frame" x="112" y="378" width="150" height="50"/>
+                    <rect key="frame" x="112" y="408.5" width="150" height="50"/>
                     <color key="backgroundColor" red="0.0" green="0.47843137254901957" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="gjB-aQ-XPL"/>
@@ -37,7 +37,7 @@
                     </state>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You don't have any habits yet. Let's begin by adding a new one!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="avh-sT-5XP">
-                    <rect key="frame" x="19" y="260.5" width="337.5" height="87.5"/>
+                    <rect key="frame" x="19" y="288.5" width="337.5" height="90"/>
                     <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="25"/>
                     <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
@@ -49,7 +49,7 @@
                 <constraint firstItem="avh-sT-5XP" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.9" id="XpY-uM-HQA"/>
                 <constraint firstItem="avh-sT-5XP" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="g9W-NN-xed"/>
                 <constraint firstItem="7Wd-Ii-Co5" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="gYb-X0-QuK"/>
-                <constraint firstItem="avh-sT-5XP" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" constant="-30" id="sMd-1F-P1s"/>
+                <constraint firstItem="avh-sT-5XP" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="sMd-1F-P1s"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>

@@ -78,6 +78,9 @@ class HabitsTableViewController: UITableViewController, NSFetchedResultsControll
         }
     }
 
+    /// The empty state view showing the controller's initial states (no habits, or no habits in the segments)
+    private var emptyStateView: EmptyStateView!
+
     // MARK: Deinitialization
 
     deinit {
@@ -107,6 +110,12 @@ class HabitsTableViewController: UITableViewController, NSFetchedResultsControll
 
         // Remove the empty separators from the table view.
         tableView.tableFooterView = UIView()
+
+        // Load the empty state view and add it as the tableView's background view.
+        emptyStateView = makeEmptyStateView()
+        emptyStateView.callToActionButton.addTarget(self, action: #selector(createNewHabit), for: .touchUpInside)
+
+        tableView.backgroundView = emptyStateView
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -115,6 +124,7 @@ class HabitsTableViewController: UITableViewController, NSFetchedResultsControll
         // Start fetching for the habits.
         // TODO: Check what errors are thrown by the fetch. Every error should be reported to the user.
         do {
+            displayEmptyStateIfNeeded()
             try selectedFetchedResultsController.performFetch()
         } catch {
             assertionFailure("Error: Couldn't fetch the user's habits.")
@@ -173,7 +183,78 @@ class HabitsTableViewController: UITableViewController, NSFetchedResultsControll
     @IBAction func switchSegment(_ sender: UISegmentedControl) {
         // TODO: Alert the user in case of errors.
         try? selectedFetchedResultsController.performFetch()
+        displayEmptyStateIfNeeded()
         tableView.reloadData()
+    }
+
+    @objc private func createNewHabit() {
+        performSegue(withIdentifier: newHabitSegueIdentifier, sender: self)
+    }
+
+    /// Listens to any saved changes happening in other contexts and refreshes
+    /// the viewContext.
+    /// - Parameter notification: The thrown notification
+    @objc private func handleContextChanges(notification: Notification) {
+        // If the changes were only updates, reload the tableView.
+        if (notification.userInfo?["updated"] as? Set<NSManagedObject>) != nil {
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+
+        // Refresh the current view context by using the payloads in the notifications.
+        container.viewContext.mergeChanges(fromContextDidSave: notification)
+    }
+
+    // MARK: Imperatives
+
+    /// Instantiates a new EmptyStateView for usage.
+    /// - Returns: The instantiated EmptyStateView.
+    private func makeEmptyStateView() -> EmptyStateView {
+        // Load the nib, get its root view and return it.
+        let nibContents = Bundle.main.loadNibNamed("EmptyStateView", owner: nil, options: nil)
+
+        guard let emptyStateView = nibContents!.first as? EmptyStateView else {
+            assertionFailure("Couldn't load the empty state view from the nib file.")
+            return EmptyStateView()
+        }
+
+        return emptyStateView
+    }
+
+    /// Display the controller's empty state depending on the user's added habits.
+    private func displayEmptyStateIfNeeded() {
+        // Check if the user has any habits, if he doesn't, display the empty state.
+        if let count = try? container.viewContext.count(for: HabitMO.fetchRequest()), count == 0 {
+            habitsSegmentedControl.isHidden = true
+            emptyStateView.isHidden = false
+            emptyStateView.callToActionButton.isHidden = false
+            emptyStateView.emptyLabel.text = "You don't have any habits yet. Let's begin by adding a new one!"
+
+            return
+        }
+
+        // Check if the selected segment has habits, if it doesn't, display an appropriated message.
+        if selectedFetchedResultsController.fetchedObjects?.count == 0 {
+            habitsSegmentedControl.isHidden = false
+            emptyStateView.isHidden = false
+            emptyStateView.callToActionButton.isHidden = true
+
+            switch selectedSegment {
+            case .inProgress:
+                emptyStateView.emptyLabel.text = """
+                You don't have any habits in progress at the moment, what do you think of new challenges?
+                """
+            case .completed:
+                emptyStateView.emptyLabel.text = "You don't have any completed habits yet."
+            }
+
+            return
+        }
+
+        // If there're habits, just hide the empty state view.
+        habitsSegmentedControl.isHidden = false
+        emptyStateView.isHidden = true
     }
 
     // MARK: DataSource Methods
@@ -248,23 +329,6 @@ class HabitsTableViewController: UITableViewController, NSFetchedResultsControll
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: detailsSegueIdentifier, sender: self)
     }
-
-    // MARK: Actions
-
-    /// Listens to any saved changes happening in other contexts and refreshes
-    /// the viewContext.
-    /// - Parameter notification: The thrown notification
-    @objc private func handleContextChanges(notification: Notification) {
-        // If the changes were only updates, reload the tableView.
-        if (notification.userInfo?["updated"] as? Set<NSManagedObject>) != nil {
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-        }
-
-        // Refresh the current view context by using the payloads in the notifications.
-        container.viewContext.mergeChanges(fromContextDidSave: notification)
-    }
 }
 
 extension HabitsTableViewController {
@@ -326,5 +390,7 @@ extension HabitsTableViewController {
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         // End the tableView updates.
         tableView.endUpdates()
+
+        displayEmptyStateIfNeeded()
     }
 }
