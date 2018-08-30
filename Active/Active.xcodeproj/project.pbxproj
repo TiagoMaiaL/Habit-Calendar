@@ -17,6 +17,8 @@
 		4713A20420C16542008A13D2 /* NotificationMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4713A20320C16542008A13D2 /* NotificationMO.swift */; };
 		47160A3F2137275B00E717C9 /* CompletedHabitTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47160A3E2137275B00E717C9 /* CompletedHabitTableViewCell.swift */; };
 		47160A4121372B2F00E717C9 /* RoundedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47160A4021372B2F00E717C9 /* RoundedView.swift */; };
+		47160A4421387AAE00E717C9 /* EmptyStateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47160A4321387AAE00E717C9 /* EmptyStateView.xib */; };
+		47160A4621387AC300E717C9 /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47160A4521387AC300E717C9 /* EmptyStateView.swift */; };
 		4725D05B20C8A4BA00C3B63F /* HabitsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4725D05A20C8A4BA00C3B63F /* HabitsTableViewController.swift */; };
 		4725D05D20C8A96200C3B63F /* HabitStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4725D05C20C8A96200C3B63F /* HabitStorage.swift */; };
 		4725D05F20C97D9C00C3B63F /* UserStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4725D05E20C97D9C00C3B63F /* UserStorage.swift */; };
@@ -150,6 +152,8 @@
 		4713A20320C16542008A13D2 /* NotificationMO.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = NotificationMO.swift; sourceTree = "<group>"; tabWidth = 4; };
 		47160A3E2137275B00E717C9 /* CompletedHabitTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedHabitTableViewCell.swift; sourceTree = "<group>"; };
 		47160A4021372B2F00E717C9 /* RoundedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedView.swift; sourceTree = "<group>"; };
+		47160A4321387AAE00E717C9 /* EmptyStateView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmptyStateView.xib; sourceTree = "<group>"; };
+		47160A4521387AC300E717C9 /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
 		4725D05A20C8A4BA00C3B63F /* HabitsTableViewController.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = HabitsTableViewController.swift; sourceTree = "<group>"; tabWidth = 4; };
 		4725D05C20C8A96200C3B63F /* HabitStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitStorage.swift; sourceTree = "<group>"; };
 		4725D05E20C97D9C00C3B63F /* UserStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStorage.swift; sourceTree = "<group>"; };
@@ -321,6 +325,15 @@
 			path = "Habit cells";
 			sourceTree = "<group>";
 		};
+		47160A4221387A4900E717C9 /* EmptyStateView */ = {
+			isa = PBXGroup;
+			children = (
+				47160A4321387AAE00E717C9 /* EmptyStateView.xib */,
+				47160A4521387AC300E717C9 /* EmptyStateView.swift */,
+			);
+			path = EmptyStateView;
+			sourceTree = "<group>";
+		};
 		4725D05720C8A42400C3B63F /* Storage */ = {
 			isa = PBXGroup;
 			children = (
@@ -355,6 +368,7 @@
 		4725D05920C8A43B00C3B63F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				47160A4221387A4900E717C9 /* EmptyStateView */,
 				47160A3D2137271000E717C9 /* Habit cells */,
 				4761F5B12120A0BD00A8D407 /* ColorsPickerView */,
 				4761F5AE21209E7900A8D407 /* Calendar */,
@@ -726,6 +740,7 @@
 			files = (
 				4732CE692114D9D100E2770C /* SF-Pro-Display-Semibold.otf in Resources */,
 				4732CE5B2114D9D100E2770C /* SF-Pro-Text-MediumItalic.otf in Resources */,
+				47160A4421387AAE00E717C9 /* EmptyStateView.xib in Resources */,
 				4732CE622114D9D100E2770C /* SF-Pro-Display-BlackItalic.otf in Resources */,
 				47F635FD20BB920D00AC4555 /* LaunchScreen.storyboard in Resources */,
 				4732CE6F2114D9D100E2770C /* SF-Pro-Text-SemiboldItalic.otf in Resources */,
@@ -902,6 +917,7 @@
 				47C3203A213079AD0094BBF8 /* HabitCreationTableViewController+NameField.swift in Sources */,
 				47C3203C2130E91F0094BBF8 /* FireTimesDisplayable.swift in Sources */,
 				4737312B20ED502800895DD2 /* HabitDaysSelectionViewController.swift in Sources */,
+				47160A4621387AC300E717C9 /* EmptyStateView.swift in Sources */,
 				47D8308A20FCFDD6002D3A97 /* DaysChallengeStorage.swift in Sources */,
 				4713A1FC20C1643E008A13D2 /* UserMO.swift in Sources */,
 				47E6C21420EB12A5003BDB4D /* UserFactory.swift in Sources */,

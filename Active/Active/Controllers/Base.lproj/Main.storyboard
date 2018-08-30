@@ -252,12 +252,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="1000"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <view key="tableFooterView" contentMode="scaleToFill" misplaced="YES" id="U4g-rN-Yvd" userLabel="Footer">
+                        <view key="tableFooterView" contentMode="scaleToFill" id="U4g-rN-Yvd" userLabel="Footer">
                             <rect key="frame" x="0.0" y="883" width="375" height="104"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D90-7S-rS4" customClass="RoundedButton" customModule="Active" customModuleProvider="target">
-                                    <rect key="frame" x="117.5" y="193.5" width="140" height="50"/>
+                                    <rect key="frame" x="117.5" y="27" width="140" height="50"/>
                                     <color key="backgroundColor" red="0.18431372549019609" green="0.21176470588235294" blue="0.25098039215686274" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="140" id="EpX-yy-wTD"/>
@@ -668,7 +668,7 @@ reminded about this habit?</string>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="zJ1-bL-rA4">
-                                            <rect key="frame" x="116.5" y="16.5" width="142.5" height="78"/>
+                                            <rect key="frame" x="117" y="16" width="142.5" height="78"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 fire times selected" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nz0-4c-Qss">
                                                     <rect key="frame" x="0.0" y="0.0" width="142.5" height="18"/>
@@ -1404,8 +1404,8 @@ you think of adding a new one?</string>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="G29-rb-isc"/>
-        <segue reference="43l-ZQ-AR3"/>
-        <segue reference="5mV-Cj-rFr"/>
+        <segue reference="y7q-nn-pWX"/>
+        <segue reference="J1H-vQ-s49"/>
+        <segue reference="Xkx-Wi-bYR"/>
     </inferredMetricsTieBreakers>
 </document>
