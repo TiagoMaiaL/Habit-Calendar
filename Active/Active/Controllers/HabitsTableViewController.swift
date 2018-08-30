@@ -283,6 +283,11 @@ extension HabitsTableViewController {
         for type: NSFetchedResultsChangeType,
         newIndexPath: IndexPath?
     ) {
+        // Only execute the updates if the segment being shown is handled by the passed controller.
+        // There're two fetchedResultsController instances managing different segments of the table view,
+        // One for the in progress habits and another for the completed ones. Only update the one being displayed.
+        guard shouldUpdateSegmentFrom(controller: controller) else { return }
+
         // Add or remove rows based on the kind of changes:
         switch type {
         case .delete:
@@ -302,6 +307,19 @@ extension HabitsTableViewController {
             if let indexPath = indexPath {
                 tableView.reloadRows(at: [indexPath], with: .automatic)
             }
+        }
+    }
+
+    /// Informs if the changed fetched results controller should update the current segment being displayed
+    /// by the table view.
+    /// - Parameter fetchedResultsController: The updated fetched results controller.
+    /// - Returns: True if the update should be displayed by the segment, false otherwise.
+    private func shouldUpdateSegmentFrom(controller: NSFetchedResultsController<NSFetchRequestResult>) -> Bool {
+        switch selectedSegment {
+        case .inProgress:
+            return controller == progressfetchedResultsController
+        case .completed:
+            return controller == completedfetchedResultsController
         }
     }
 
