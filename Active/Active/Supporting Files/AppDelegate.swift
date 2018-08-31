@@ -102,6 +102,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             #endif
         }
 
+        // Close any past challenges that are open.
+        persistentContainer.performBackgroundTask { context in
+            self.daysChallengeStorage.closePastChallenges(using: context)
+            try? context.save()
+        }
+
         // Inject the main dependencies into the initial HabitTableViewController:
         if let habitsListingController = window?.rootViewController?.contents as? HabitsTableViewController {
             // Inject its container.
