@@ -511,6 +511,35 @@ class DaysChallengeTests: IntegrationTestCase {
         XCTAssertTrue(dummyChallenge.isClosed)
     }
 
+    func testMarkingLastDayAsExecutedClosesTheChallenge() {
+        // 1. Declare a challenge that's about to be completed (its last day is now).
+        let dates = [
+            Date().byAddingDays(-1)!.getBeginningOfDay(),
+            Date().getBeginningOfDay()
+        ]
+        let challenge = daysChallengeFactory.makeDummy(using: dates)
+
+        // 2. Mark current day as executed.
+        challenge.markCurrentDayAsExecuted()
+
+        // 3. The challenge now should be marked as closed.
+        XCTAssertTrue(
+            challenge.isClosed,
+            "The challenge should get closed after marking its last day as executed."
+        )
+    }
+
+    func testMarkingSomeDayAsExecutedShouldNotCloseTheChallenge() {
+        // 1. Declare a challenge.
+        let challenge = daysChallengeFactory.makeDummy()
+
+        // 2. Mark its current day as executed.
+        challenge.markCurrentDayAsExecuted()
+
+        // 3. The challenge shouldn't be closed.
+        XCTAssertFalse(challenge.isClosed)
+    }
+
     // MARK: Imperatives
 
     /// Generates habit days with its dates generated from the passed range.

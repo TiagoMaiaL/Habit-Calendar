@@ -93,14 +93,17 @@ class DaysChallengeMO: NSManagedObject {
         // Mark the current day as executed.
         currentDay.markAsExecuted()
 
-        // Try fetching the current offensive. If we can get it,
-        // update it.
+        // If the current day is the last challenge's day, close the challenge.
+        if let order = getOrder(of: currentDay), order == days?.count {
+            isClosed = true
+        }
+
+        // Try fetching the current offensive. If we can get it, update it.
         if let currentOffensive = getCurrentOffensive() {
             currentOffensive.toDate = Date().getBeginningOfDay()
             currentOffensive.updatedAt = Date()
         } else {
-            // If there isn't a current offensive, add a new one to the
-            // current challenge and habit.
+            // If there isn't a current offensive, add a new one to the current challenge and habit.
             makeOffensive()
         }
     }
