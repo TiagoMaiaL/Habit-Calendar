@@ -160,4 +160,23 @@ class DaysChallengeStorageTests: IntegrationTestCase {
         )
     }
 
+    func testClosingPastChallenges() {
+        // 1. Declare some past challenges that aren't closed yet.
+        let pastChallenges = [
+            daysChallengeFactory.makeCompletedDummy(),
+            daysChallengeFactory.makeCompletedDummy(),
+            daysChallengeFactory.makeCompletedDummy()
+        ]
+        pastChallenges.forEach { $0.isClosed = false }
+
+        // 2. Use the storage to close all past challenges.
+        challengeStorage.closePastChallenges(using: context)
+
+        // 3. Check if the challenges are closed.
+        XCTAssertTrue(
+            pastChallenges.filter { !$0.isClosed }.isEmpty,
+            "All challenges should be marked as closed."
+        )
+    }
+
 }

@@ -74,4 +74,21 @@ class DaysChallengeStorage {
     ) {
         context.delete(challenge)
     }
+
+    /// Closes all challenges that are now past and aren't marked as closed.
+    /// - Parameter context: The context used to fetch and update the challenges.
+    func closePastChallenges(using context: NSManagedObjectContext) {
+        let openPastPredicate = NSPredicate(
+            format: "toDate < %@ AND isClosed == false",
+            Date().getBeginningOfDay() as NSDate
+        )
+        let request: NSFetchRequest<DaysChallengeMO> = DaysChallengeMO.fetchRequest()
+        request.predicate = openPastPredicate
+
+        if let challenges = try? context.fetch(request) {
+            for challenge in challenges {
+                challenge.isClosed = true
+            }
+        }
+    }
 }

@@ -85,23 +85,29 @@ class DaysChallengeMO: NSManagedObject {
     ///         a related offensive entity associated with the challenge.
     ///         If there's an unbreaked offensive being tracked, its updated,
     ///         but if the previous offensive was broken, it creates a new one.
-    func markCurrentDayAsExecuted() {
+    /// - Parameter wasExecuted: Bool indicating if the day was executed, default is true.
+    func markCurrentDayAsExecuted(_ wasExecuted: Bool = true) {
         guard let currentDay = getCurrentDay() else {
             return
         }
 
-        // Mark the current day as executed.
-        currentDay.markAsExecuted()
+        // Mark the current day as executed or not.
+        currentDay.markAsExecuted(wasExecuted)
 
-        // Try fetching the current offensive. If we can get it,
-        // update it.
-        if let currentOffensive = getCurrentOffensive() {
-            currentOffensive.toDate = Date().getBeginningOfDay()
-            currentOffensive.updatedAt = Date()
-        } else {
-            // If there isn't a current offensive, add a new one to the
-            // current challenge and habit.
-            makeOffensive()
+        // If the current day is the last challenge's day, close the challenge.
+        if let order = getOrder(of: currentDay), order == days?.count {
+            isClosed = wasExecuted
+        }
+
+        if wasExecuted {
+            // Try fetching the current offensive. If we can get it, update it.
+            if let currentOffensive = getCurrentOffensive() {
+                currentOffensive.toDate = Date().getBeginningOfDay()
+                currentOffensive.updatedAt = Date()
+            } else {
+                // If there isn't a current offensive, add a new one to the current challenge and habit.
+                makeOffensive()
+            }
         }
     }
 
