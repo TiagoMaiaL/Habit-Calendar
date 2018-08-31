@@ -169,7 +169,7 @@ class HabitCreationTableViewController: UITableViewController {
         displayThemeColor()
 
         // Display information about the authorization status.
-        getAuthStatus()
+        displayNotificationAvailability()
     }
 
     // MARK: Navigation

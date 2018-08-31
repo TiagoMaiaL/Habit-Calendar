@@ -26,11 +26,8 @@ protocol NotificationAvailabilityDisplayable {
     /// Unregisters any observer.
     func removeObserver()
 
-    /// Gets the authorization status from the notification manager.
-    func getAuthStatus(_ notification: NSNotification?)
-
     /// Displays information about the local user notifications authorization status.
-    func displayNotificationAvailability(_ isAuthorized: Bool)
+    func displayNotificationAvailability(_ notification: NSNotification?)
 }
 
 /// Adds default implementations to some of the protocol's methods.

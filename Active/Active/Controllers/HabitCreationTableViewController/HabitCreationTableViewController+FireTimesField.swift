@@ -31,22 +31,18 @@ extension HabitCreationTableViewController: NotificationAvailabilityDisplayable 
     func observeForegroundEvent() {
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(getAuthStatus(_:)),
+            selector: #selector(displayNotificationAvailability(_:)),
             name: Notification.Name.UIApplicationDidBecomeActive,
             object: nil
         )
     }
 
-    @objc func getAuthStatus(_ notification: NSNotification? = nil) {
+    @objc func displayNotificationAvailability(_ notification: NSNotification? = nil) {
         notificationManager.getAuthorizationStatus { isAuthorized in
             DispatchQueue.main.async {
-                self.displayNotificationAvailability(isAuthorized)
+                self.areNotificationsAuthorized = isAuthorized
+                self.tableView.reloadData()
             }
         }
-    }
-
-    func displayNotificationAvailability(_ isAuthorized: Bool) {
-        areNotificationsAuthorized = isAuthorized
-        tableView.reloadData()
     }
 }

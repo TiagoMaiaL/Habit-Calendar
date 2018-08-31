@@ -191,9 +191,6 @@ class HabitDetailsViewController: UIViewController {
 
         // Display the initial state of the sections.
         displaySections()
-
-        // Check the auth status and update the fire times section accordingly.
-        getAuthStatus()
     }
 
     // MARK: Navigation
