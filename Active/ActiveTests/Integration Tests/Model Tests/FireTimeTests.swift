@@ -53,11 +53,17 @@ class FireTimeTests: IntegrationTestCase {
         let factory = FireTimeFactory(context: context)
 
         // 1. Declare the dummy fire times.
-        let dummyFireTimes = [factory.makeDummy(), factory.makeDummy(), factory.makeDummy()]
+        let dummyFireTimes: [FireTimeMO] = (0..<3).map { index in
+            let fireTime = factory.makeDummy()
+            fireTime.hour = Int16(index)
+            return fireTime
+        }
 
         // 2. Get the text from the displayer.
         let displayer = FireTimesDisplayer()
         let description = displayer.getText(from: dummyFireTimes.map { $0.getFireTimeComponents() })
+
+        print(description)
 
         // 3. Split the text to get each fire time's text.
         let fireTimesText = description.split(separator: ",").compactMap {

@@ -115,20 +115,6 @@ class HabitStorageNotificationTests: IntegrationTestCase {
         )
     }
 
-    func testHabitDeletion() {
-        // Create a new habit.
-        let dummyHabit = habitFactory.makeDummy()
-
-        // Delete the created habit.
-        habitStorage.delete(dummyHabit, from: context)
-
-        // Assert it was deleted.
-        XCTAssertTrue(
-            dummyHabit.isDeleted,
-            "The habit entity should be marked as deleted."
-        )
-    }
-
     func testCreatingHabitShouldScheduleUserNotifications() {
         notificationCenterMock.shouldAuthorize = true
         let scheduleExpectation = XCTestExpectation(
@@ -137,7 +123,7 @@ class HabitStorageNotificationTests: IntegrationTestCase {
 
         // 1. Declare the habit attributes needed for creation:
         let dummyUser = userFactory.makeDummy()
-        let days = (1..<Int.random(2..<50)).compactMap {
+        let days = (1...Int.random(2..<50)).compactMap {
             Date().byAddingDays($0)
         }
         let fireTimes = [
@@ -157,21 +143,16 @@ class HabitStorageNotificationTests: IntegrationTestCase {
 
         // Use a timer to make the assertions on the scheduling of user
         // notifications. Scheduling notifications is an async operation.
-        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { _ in
+        Timer.scheduledTimer(withTimeInterval: 0.01, repeats: false) { _ in
             // 3. Assert that the habit's notifications were scheduled:
             // - Assert on the count of notifications and user notifications.
-            XCTAssertEqual(
-                createdHabit.notifications?.count,
-                days.count * fireTimes.count
-            )
-            self.notificationCenterMock.getPendingNotificationRequests { requests in
-                XCTAssertEqual(
-                    requests.count,
-                    days.count * fireTimes.count
-                )
+            let notificationsCount = days.count * fireTimes.count
+            XCTAssertEqual(createdHabit.notifications?.count, notificationsCount)
 
-                // - Assert on the identifiers of each notificationMO and
-                //   user notifications.
+            self.notificationCenterMock.getPendingNotificationRequests { requests in
+                XCTAssertEqual(requests.count, notificationsCount)
+
+                // - Assert on the identifiers of each notificationMO and user notifications.
                 let identifiers = requests.map { $0.identifier }
                 guard let notificationsSet = createdHabit.notifications as? Set<NotificationMO> else {
                     XCTFail("The notifications weren't properly created.")
@@ -180,9 +161,7 @@ class HabitStorageNotificationTests: IntegrationTestCase {
                 let notifications = Array(notificationsSet)
 
                 XCTAssertTrue(
-                    notifications.filter {
-                        return !identifiers.contains( $0.userNotificationId! )
-                        }.count == 0,
+                    notifications.filter { !identifiers.contains( $0.userNotificationId! ) }.count == 0,
                     "All notifications should have been properly scheduled."
                 )
 
@@ -210,7 +189,7 @@ class HabitStorageNotificationTests: IntegrationTestCase {
         let dummyHabit = habitFactory.makeDummy()
 
         // 2. Declare the new days dates.
-        let days = (1..<Int.random(2..<50)).compactMap {
+        let days = (1...Int.random(2..<50)).compactMap {
             Date().byAddingDays($0)
         }
 
@@ -242,7 +221,7 @@ class HabitStorageNotificationTests: IntegrationTestCase {
             "The amount of notifications should be the number of future days * the fire times."
         )
 
-        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { _ in
+        Timer.scheduledTimer(withTimeInterval: 0.01, repeats: false) { _ in
 
             // - assert on the number of user notifications
             self.notificationCenterMock.getPendingNotificationRequests { requests in
@@ -308,7 +287,7 @@ class HabitStorageNotificationTests: IntegrationTestCase {
             "The amount of notifications should be the number of future days * the fire times."
         )
 
-        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { _ in
+        Timer.scheduledTimer(withTimeInterval: 0.01, repeats: false) { _ in
 
             // - assert on the number of user notifications
             self.notificationCenterMock.getPendingNotificationRequests { requests in
@@ -344,14 +323,16 @@ class HabitStorageNotificationTests: IntegrationTestCase {
         let dummyHabit = habitFactory.makeDummy()
 
         // 2. Declare the new days and fire tiems.
-        let days = (1..<Int.random(3..<50)).compactMap {
+        let days = (1...Int.random(2..<50)).compactMap {
             Date().byAddingDays($0)
         }
         let fireTimeFactory = FireTimeFactory(context: context)
-        let fireTimes = [
-            fireTimeFactory.makeDummy(),
-            fireTimeFactory.makeDummy()
-            ].map { $0.getFireTimeComponents() }
+        let firstFireTime = fireTimeFactory.makeDummy()
+        let secondFireTime = fireTimeFactory.makeDummy()
+        // In order to avoid equal fire times, always switch the minutes.
+        secondFireTime.minute = firstFireTime.minute == 30 ? 0 : 30
+
+        let fireTimes = [firstFireTime, secondFireTime].map { $0.getFireTimeComponents() }
 
         // 3. Edit the habit.
         _ = habitStorage.edit(
@@ -369,7 +350,7 @@ class HabitStorageNotificationTests: IntegrationTestCase {
             "The amount of notifications should be the number of future days * the fire times."
         )
 
-        Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) { _ in
+        Timer.scheduledTimer(withTimeInterval: 0.01, repeats: false) { _ in
 
             // - assert on the number of user notifications
             self.notificationCenterMock.getPendingNotificationRequests { requests in
@@ -390,6 +371,6 @@ class HabitStorageNotificationTests: IntegrationTestCase {
             }
         }
 
-        wait(for: [rescheduleExpectation], timeout: 0.21)
+        wait(for: [rescheduleExpectation], timeout: 0.2)
     }
 }
