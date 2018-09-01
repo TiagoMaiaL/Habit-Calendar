@@ -90,7 +90,7 @@ The created notification needs to have a scheduled user notification request ass
             "The created notification has an invalid habit."
         )
 
-        Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) { _ in
+        Timer.scheduledTimer(withTimeInterval: 0.01, repeats: false) { _ in
             // Check if the entity has a user notification request
             // associated with it.
             XCTAssertNotNil(
@@ -100,7 +100,7 @@ The created notification needs to have a scheduled user notification request ass
             requestExpectation.fulfill()
         }
 
-        wait(for: [requestExpectation], timeout: 0.5)
+        wait(for: [requestExpectation], timeout: 0.2)
     }
 
     func testNotificationFetch() {

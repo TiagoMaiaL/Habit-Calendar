@@ -28,7 +28,7 @@ struct DaysChallengeFactory: DummyFactory {
     /// - Returns: The generated DaysChallengeMO.
     func makeDummy() -> DaysChallengeMO {
         // Declare the dates used to create the challenge.
-        let futureDates = (0..<Int.random(2..<50)).compactMap {
+        let futureDates = (0..<Int.random(2..<15)).compactMap {
             Date().byAddingDays($0)?.getBeginningOfDay()
         }
         let futureDummy = makeDummy(using: futureDates)
@@ -36,10 +36,10 @@ struct DaysChallengeFactory: DummyFactory {
         return futureDummy
     }
 
-    /// Makes a completed days' challenge (it's days are in the past and were executed).
+    /// Makes a completed days' challenge (its days are in the past and were executed).
     /// - Returns: A completed dummy days' challenge.
     func makeCompletedDummy() -> DaysChallengeMO {
-        let randomNegative = Int.random(-100 ..< -2)
+        let randomNegative = Int.random(-15 ..< -2)
 
         // Declare the dates used to create the challenge.
         let pastDates = (randomNegative..<0).compactMap {

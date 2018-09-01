@@ -123,7 +123,7 @@ class HabitStorageNotificationTests: IntegrationTestCase {
 
         // 1. Declare the habit attributes needed for creation:
         let dummyUser = userFactory.makeDummy()
-        let days = (1...Int.random(2..<50)).compactMap {
+        let days = (1...Int.random(2..<10)).compactMap {
             Date().byAddingDays($0)
         }
         let fireTimes = [
@@ -189,7 +189,7 @@ class HabitStorageNotificationTests: IntegrationTestCase {
         let dummyHabit = habitFactory.makeDummy()
 
         // 2. Declare the new days dates.
-        let days = (1...Int.random(2..<50)).compactMap {
+        let days = (1...Int.random(2..<10)).compactMap {
             Date().byAddingDays($0)
         }
 
@@ -323,7 +323,7 @@ class HabitStorageNotificationTests: IntegrationTestCase {
         let dummyHabit = habitFactory.makeDummy()
 
         // 2. Declare the new days and fire tiems.
-        let days = (1...Int.random(2..<50)).compactMap {
+        let days = (1...Int.random(2..<10)).compactMap {
             Date().byAddingDays($0)
         }
         let fireTimeFactory = FireTimeFactory(context: context)

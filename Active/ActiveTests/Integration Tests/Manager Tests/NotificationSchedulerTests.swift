@@ -187,7 +187,7 @@ class NotificationSchedulerTests: IntegrationTestCase {
             // executed. Since they're marked within the managed object
             // context's thread, they aren't marked immediatelly,
             // that's why a timer is needed here.
-            Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { _ in
+            Timer.scheduledTimer(withTimeInterval: 0.01, repeats: false) { _ in
                 for notification in notifications {
                     // Assert on the wasExecuted property.
                     XCTAssertTrue(
@@ -229,7 +229,7 @@ class NotificationSchedulerTests: IntegrationTestCase {
         notificationScheduler.schedule(notifications)
 
         // 4. Fire a timer to delete all of them.
-        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { _ in
+        Timer.scheduledTimer(withTimeInterval: 0.01, repeats: false) { _ in
             self.notificationScheduler.unschedule(notifications)
 
             // 5. Assert they were deleted by trying to fetch them from the
