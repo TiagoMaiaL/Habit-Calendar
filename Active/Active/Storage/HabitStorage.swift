@@ -185,7 +185,6 @@ class HabitStorage {
         days: [Date]? = nil,
         and notificationFireTimes: [DateComponents]? = nil
     ) -> HabitMO {
-
         if let name = name {
             habit.name = name
         }
@@ -304,14 +303,12 @@ class HabitStorage {
         habit: HabitMO,
         fireTimes: [DateComponents]?
     ) -> [NotificationMO] {
-        // If the passed fire times are nil, try getting the habit's
-        // current ones.
+        // If the passed fire times are nil, try getting the habit's current ones.
         guard let fireTimes = fireTimes ?? (habit.fireTimes as? Set<FireTimeMO>)?.map({
             $0.getFireTimeComponents()
         }) else {
-            // The habit doesn't have any fire times associated with it.
-            // This case is possible, since the user can deny the
-            // usage of user notifications.
+            // The habit doesn't have any fire times associated with it. This case is possible,
+            // since the user can deny the usage of user notifications.
             return []
         }
         guard !fireTimes.isEmpty else {
@@ -336,5 +333,5 @@ class HabitStorage {
         notificationScheduler.schedule(notifications)
 
         return notifications
-    }
+     }
 }
