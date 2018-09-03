@@ -221,7 +221,38 @@ The created notification needs to have a scheduled user notification request ass
         }
     }
 
+    func testFireDateFactory() {
+        // 1. Create a dummy habit.
+        let dummyHabit = habitFactory.makeDummy()
+
+        // 2. Get its current challenge and current day.
+        guard let currentDay = dummyHabit.getCurrentChallenge()?.getCurrentDay() else {
+            XCTFail("Couldn't get the current challenge's day.")
+            return
+        }
+        guard let dayDate = currentDay.day?.date else {
+            XCTFail("Couldn't get the day's date.")
+            return
+        }
+        guard let fireTime = (dummyHabit.fireTimes as? Set<FireTimeMO>)?.first else {
+            XCTFail("Couldn't get the challenge's fire time.")
+            return
+        }
+
+        // 3. Make the fire date by using a fire time and the day entity.
+        let fireDate = notificationStorage.makeFireDate(from: currentDay, and: fireTime.getFireTimeComponents())
+
+        // 4. Assert it was correclty created.
+        XCTAssertNotNil(fireDate)
+        XCTAssertEqual(fireDate?.components.year, dayDate.components.year)
+        XCTAssertEqual(fireDate?.components.month, dayDate.components.month)
+        XCTAssertEqual(fireDate?.components.day, dayDate.components.day)
+        XCTAssertEqual(fireDate?.components.hour, Int(fireTime.hour))
+        XCTAssertEqual(fireDate?.components.minute, Int(fireTime.minute))
+    }
+
     func testNotificationsCreationFromFireDates() {
+        XCTMarkNotImplemented()
         // Create a dummy Habit.
         let dummyHabit = habitFactory.makeDummy()
 
