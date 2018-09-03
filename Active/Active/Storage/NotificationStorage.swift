@@ -32,13 +32,15 @@ class NotificationStorage {
         andFireTime fireTimeComponents: DateComponents
     ) throws -> NotificationMO? {
         guard let habit = habitDay.habit,
-            let challenge = habit.getCurrentChallenge(),
-            let order = challenge.getOrder(of: habitDay) else {
-            assertionFailure("The passed habitDay must have a valid habit entity.")
+            let challenge = habit.getCurrentChallenge() else {
             return nil
         }
-        guard let fireDate = makeFireDate(from: habitDay, and: fireTimeComponents) else {
-            assertionFailure("Couldn't generate the fire date.")
+        guard let order = challenge.getOrder(of: habitDay) else {
+            assertionFailure("Error: the order should be correclty returned.")
+            return nil
+        }
+        guard let fireDate = makeFireDate(from: habitDay, and: fireTimeComponents),
+            fireDate.isFuture else {
             return nil
         }
 
@@ -58,63 +60,50 @@ class NotificationStorage {
         return notification
     }
 
-    /// Creates and stores a new Notification entity
-    /// with a scheduled UserNotification object.
-    /// - Parameter context: The context used to create the notification.
-    /// - Parameter fireDate: Date used to schedule an user notification.
-    /// - Parameter habit: The habit entity associated with the notification.
-    /// - Returns: a new Notification entity.
-    func create(using context: NSManagedObjectContext,
-                with fireDate: Date,
-                and habit: HabitMO) throws -> NotificationMO {
-
-        // Check if there's a notification with the same attributes already stored.
-        if self.notification(from: context, habit: habit, and: fireDate) != nil {
-            throw NotificationStorageError.notificationAlreadyCreated
-        }
-
-        // Declare a new Notification instance.
-        let notification = NotificationMO(context: context)
-        notification.id = UUID().uuidString
-        notification.fireDate = fireDate
-        notification.userNotificationId = UUID().uuidString
-        notification.habit = habit
-
-        return notification
-    }
-
     /// Creates the notification entities associated with the provided habit.
     /// - Parameters:
     ///     - habit: The habit to which the notifications are added.
     ///     - context: The managed object context.
-    ///     - notificationDates: The dates for each one of the notifications.
     /// - Returns: The created notifications now associated with the habit.
     func createNotificationsFrom(
         habit: HabitMO,
-        using context: NSManagedObjectContext,
-        and fireDates: [Date]
-        ) -> [NotificationMO] {
-        var notifications = [NotificationMO?]()
-
-        for fireDate in fireDates {
-            notifications.append(
-                try? create(
-                    using: context,
-                    with: fireDate,
-                    and: habit
-                )
-            )
+        using context: NSManagedObjectContext
+    ) -> [NotificationMO] {
+        guard let challenge = habit.getCurrentChallenge() else {
+            assertionFailure("The habit must have an active days' challenge.")
+            return []
+        }
+        guard let futureDays = challenge.getFutureDays() else {
+            assertionFailure("The challenge must have future days.")
+            return []
+        }
+        guard let fireTimes = habit.fireTimes as? Set<FireTimeMO>, !fireTimes.isEmpty else {
+            return []
         }
 
-        return notifications.compactMap { $0 }
+        var notifications = [NotificationMO?]()
+
+        for habitDay in futureDays {
+            for fireTime in fireTimes {
+                do {
+                    let notification = try create(
+                        using: context,
+                        habitDay: habitDay,
+                        andFireTime: fireTime.getFireTimeComponents()
+                    )
+                    notifications.append(notification)
+                } catch {}
+            }
+        }
+
+        return notifications.compactMap {$0}
     }
 
-    /// Fetches the stored notification by using the provided
-    /// habit and fireDate.
-    /// - Parameter context: The context used to fetch the entities from.
-    /// - Parameter forHabit: one of the habits associated with
-    ///                       the notification entity to be searched.
-    /// - Parameter andDate: the scheduled fire date.
+    /// Fetches the stored notification by using the provided habit and fireDate.
+    /// - Parameters:
+    ///     - context: The context used to fetch the entities from.
+    ///     - forHabit: one of the habits associated with the notification entity to be searched.
+    ///     - andDate: the scheduled fire date.
     /// - Returns: a notification entity matching the provided arguments,
     ///            if one is fetched.
     func notification(
@@ -144,8 +133,9 @@ class NotificationStorage {
     }
 
     /// Deletes from storage the passed notification.
-    /// - Parameter context: The context used to delete the notification from.
-    /// - Parameter notification: the notification to be removed.
+    /// - Parameters:
+    ///     - context: The context used to delete the notification from.
+    ///     - notification: the notification to be removed.
     func delete(_ notification: NotificationMO, from context: NSManagedObjectContext) {
         context.delete(notification)
     }

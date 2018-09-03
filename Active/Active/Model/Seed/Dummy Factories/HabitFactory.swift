@@ -82,14 +82,12 @@ struct HabitFactory: DummyFactory {
             return habit
         }
 
-        // For each day, generate the notifications based on the fire times and
-        // the habit's day.
+        // For each day, generate the notifications based on the fire times and the habit's day.
         for habitDay in habitDays {
             habitDay.habit = habit
 
             for fireTime in fireTimes {
-                // Create the fireDate by appending the date to the fireTime's
-                // components.
+                // Create the fireDate by appending the date to the fireTime's components.
                 if var fireDate = Calendar.current.date(
                     byAdding: fireTime.getFireTimeComponents(),
                     to: habitDay.day!.date!
@@ -101,6 +99,9 @@ struct HabitFactory: DummyFactory {
                     let notification = notificationFactory.makeDummy()
                     notification.fireDate = fireDate
                     notification.habit = habit
+                    if let order = dummyChallenge.getOrder(of: habitDay) {
+                        notification.dayOrder = Int64(order)
+                    }
                 }
             }
         }
