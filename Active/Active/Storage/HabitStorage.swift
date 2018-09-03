@@ -317,21 +317,22 @@ class HabitStorage {
         }
 
         // Get the notification fire dates.
-        let fireDates = notificationStorage.createNotificationFireDatesFrom(
-            habit: habit,
-            and: fireTimes
-        )
+//        let fireDates = notificationStorage.createNotificationFireDatesFrom(
+//            habit: habit,
+//            and: fireTimes
+//        )
 
         // Create the notification entities for the habit bein editted.
-        let notifications = notificationStorage.createNotificationsFrom(
-            habit: habit,
-            using: context,
-            and: fireDates
-        )
+//        let notifications = notificationStorage.createNotificationsFrom(
+//            habit: habit,
+//            using: context,
+//            and: fireDates
+//        )
+//
+//        // Schedule the user notifications.
+//        notificationScheduler.schedule(notifications)
 
-        // Schedule the user notifications.
-        notificationScheduler.schedule(notifications)
-
-        return notifications
+//        return notifications
+        return []
      }
 }
