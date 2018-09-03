@@ -20,6 +20,44 @@ class NotificationStorage {
 
     // MARK: Imperatives
 
+    /// Creates and stores a new Notification entity.
+    /// - Parameters:
+    ///     - context: The context used to create the entity.
+    ///     - habitDay: The habit day entity used to create the notification.
+    ///     - fireTime: The date components (hour and minute) to fire the notification at the specified day.
+    /// - Returns: a new Notification entity.
+    func create(
+        using context: NSManagedObjectContext,
+        habitDay: HabitDayMO,
+        andFireTime fireTimeComponents: DateComponents
+    ) throws -> NotificationMO? {
+        guard let habit = habitDay.habit,
+            let challenge = habit.getCurrentChallenge(),
+            let order = challenge.getOrder(of: habitDay) else {
+            assertionFailure("The passed habitDay must have a valid habit entity.")
+            return nil
+        }
+        guard let fireDate = makeFireDate(from: habitDay, and: fireTimeComponents) else {
+            assertionFailure("Couldn't generate the fire date.")
+            return nil
+        }
+
+        // Check if there's a notification with the same attributes already stored.
+        if self.notification(from: context, habit: habit, and: fireDate) != nil {
+            throw NotificationStorageError.notificationAlreadyCreated
+        }
+
+        // Declare a new Notification instance.
+        let notification = NotificationMO(context: context)
+        notification.id = UUID().uuidString
+        notification.fireDate = fireDate
+        notification.userNotificationId = UUID().uuidString
+        notification.habit = habit
+        notification.dayOrder = Int64(order)
+
+        return notification
+    }
+
     /// Creates and stores a new Notification entity
     /// with a scheduled UserNotification object.
     /// - Parameter context: The context used to create the notification.

@@ -38,69 +38,41 @@ class NotificationStorageTests: IntegrationTestCase {
     // MARK: Tests
 
     func testNotificationCreation() {
-        let requestExpectation = XCTestExpectation(
-            description: """
-The created notification needs to have a scheduled user notification request associated with it.
-"""
-        )
-
-        // Create a dummy habit.
+        // 1. Create a dummy habit.
         let dummyHabit = habitFactory.makeDummy()
+        // 1.1 Remove its notifications.
+        if let notifications = dummyHabit.notifications {
+            dummyHabit.removeFromNotifications(notifications)
+        }
 
-        // Create the notification.
-        let fireDate = Date().byAddingMinutes(20)!
+        guard let daysSet = dummyHabit.days as? Set<HabitDayMO>,
+            let habitDay = Array(daysSet).last else {
+            XCTFail("Couldn't get a habit day to create the notification.")
+            return
+        }
+        guard let fireTime = (dummyHabit.fireTimes as? Set<FireTimeMO>)?.first else {
+            XCTFail("Couldn't get a fire time to create the notification.")
+            return
+        }
+
+        // 2. Create the notification.
         guard let notification = try? notificationStorage.create(
             using: context,
-            with: fireDate,
-            and: dummyHabit
+            habitDay: habitDay,
+            andFireTime: fireTime.getFireTimeComponents()
         ) else {
             XCTFail("The storage's creation should return a valid Notification entity.")
             return
         }
 
-        XCTAssertNotNil(
-            notification,
-            "The Notification entity shouldn't be nil."
-        )
-        // Check for id
-        XCTAssertNotNil(
-            notification.id,
-            "Notification id shouldn't be nil."
-        )
-        // Check for the correct fire date.
-        XCTAssertEqual(
-            fireDate,
-            notification.fireDate,
-            "Notification should have the correct fire date."
-        )
-        // Check for the userNotificationId.
-        XCTAssertNotNil(
-            notification.userNotificationId,
-            "The user notification id must be set in advance."
-        )
-        // Check for the wasScheduled property.
-        XCTAssertFalse(
-            notification.wasScheduled,
-            "The user notification wasn't scheduled yet."
-        )
-        // Check for the habits property
-        XCTAssertEqual(
-            dummyHabit,
-            notification.habit,
-            "The created notification has an invalid habit."
-        )
-
-        Timer.scheduledTimer(withTimeInterval: 0.01, repeats: false) { _ in
-            // Check if the entity has a user notification request
-            // associated with it.
-            XCTAssertNotNil(
-                notification.userNotificationId,
-                "The created notification should have an associated and scheduled user notification id."
-            )
-            requestExpectation.fulfill()
-        }
-
-        wait(for: [requestExpectation], timeout: 0.2)
+        // 3. Assert on the notification values.
+        XCTAssertNotNil(notification, "The Notification entity shouldn't be nil.")
+        XCTAssertNotNil(notification?.id)
+        XCTAssertNotNil(notification?.fireDate)
+        XCTAssertNotNil(notification?.userNotificationId)
+        XCTAssertTrue((notification?.dayOrder ?? 0) > 0)
+        XCTAssertFalse(notification?.wasScheduled ?? true)
+        XCTAssertEqual(dummyHabit, notification?.habit)
     }
 
     func testNotificationFetch() {
@@ -128,6 +100,8 @@ The created notification needs to have a scheduled user notification request ass
     }
 
     func testNotificationCreationTwiceShouldThrow() {
+        XCTMarkNotImplemented()
+
         // Trying to create the same notification entity should throw an error.
         let dummyNotification = makeNotification()
 
@@ -142,6 +116,8 @@ The created notification needs to have a scheduled user notification request ass
     }
 
     func testNotificationDeletion() {
+        XCTMarkNotImplemented()
+
         // Declare a dummy notification
         let dummyNotification = makeNotification()
 
