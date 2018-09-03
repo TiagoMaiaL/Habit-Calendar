@@ -100,24 +100,58 @@ class NotificationStorageTests: IntegrationTestCase {
     }
 
     func testNotificationCreationTwiceShouldThrow() {
-        XCTMarkNotImplemented()
+        // 1. Declare a dummy habit with dummy notifications already created.
+        // 1. Get its day and fire time.
+        let dummyHabit = habitFactory.makeDummy()
+        guard let habitDay = (dummyHabit.days as? Set<HabitDayMO>)?.first else {
+            XCTFail("Couldn't get the habit day to create a new notification.")
+            return
+        }
+        guard let fireTime = (dummyHabit.fireTimes as? Set<FireTimeMO>)?.first else {
+            XCTFail("Couldn't get the fire time to create a new notification.")
+            return
+        }
 
-        // Trying to create the same notification entity should throw an error.
-        let dummyNotification = makeNotification()
-
-        // Try to create another notification with the same data
-        // and check to see if it throws the expected exception.
+        // 2. Creating a notification from the day and fire time should throw an error,
+        //    since there's already a dummy notification with those attributes.
         XCTAssertThrowsError(
             _ = try notificationStorage.create(
                 using: context,
-                with: dummyNotification.fireDate!,
-                and: dummyNotification.habit!
-            ), "Trying to create the same notification twice should throw an error.")
+                habitDay: habitDay,
+                andFireTime: fireTime.getFireTimeComponents()
+            ), "Trying to create the same notification twice should throw an error."
+        )
+    }
+
+    func testCreationWithPastHabitDay() {
+        // 1. Declare a dummy habit.
+        let dummyHabit = habitFactory.makeDummy()
+        // 1.1 Get its first day.
+        guard let firstDay = dummyHabit.getCurrentChallenge()?.getDay(for: Date()) else {
+            XCTFail("Couldn't get the day corresponding to today.")
+            return
+        }
+        // 1.2 Declare a fire time at the beginning of the day.
+        let fireTime = DateComponents(hour: 0, minute: 0)
+
+        // 2. Try to create a notification, but it should return nil.
+        do {
+            let notification = try notificationStorage.create(
+                using: context,
+                habitDay: firstDay,
+                andFireTime: fireTime
+            )
+            XCTAssertNil(notification)
+        } catch {
+            XCTFail("Exception when trying to create a notification.")
+        }
+    }
+
+    func testCreationOfMultipleNotifications() {
+        XCTMarkNotImplemented()
     }
 
     func testNotificationDeletion() {
-        XCTMarkNotImplemented()
-
         // Declare a dummy notification
         let dummyNotification = makeNotification()
 
