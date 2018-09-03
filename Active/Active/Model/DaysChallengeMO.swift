@@ -170,29 +170,6 @@ class DaysChallengeMO: NSManagedObject {
         }
     }
 
-    /// Gets the challenge's notification text for an specific HabitDayMO entity.
-    /// - Parameter day: the HabitDayMO entity to get the notification text.
-    /// - Returns: The notification text including the day's order.
-    func getNotificationText(for day: HabitDayMO) -> String? {
-        guard let dayOrder = getOrder(of: day) else {
-            return nil
-        }
-        var dayOrderText = String(dayOrder)
-
-        switch dayOrder {
-        case 1:
-            dayOrderText += "st"
-        case 2:
-            dayOrderText += "nd"
-        case 3:
-            dayOrderText += "rd"
-        default:
-            dayOrderText += "th"
-        }
-
-        return "Today is your \(dayOrderText) day, did you execute this activity?"
-    }
-
     /// Closes the challenge.
     /// - Note: Closing a challenge means that the challenge is no longer
     ///         active and its future days are deleted, its toDate is also set to today.

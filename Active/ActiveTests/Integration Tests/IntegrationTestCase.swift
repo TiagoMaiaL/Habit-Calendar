@@ -127,6 +127,7 @@ class IntegrationTestCase: XCTestCase {
             dummyNotification.habit != nil,
             "The habit property from the generated notification dummy should be set."
         )
+        assert(dummyNotification.dayOrder > 0, "The notification should have an order.")
 
         return dummyNotification
     }
