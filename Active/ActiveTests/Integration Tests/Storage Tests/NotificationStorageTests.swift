@@ -147,7 +147,43 @@ class NotificationStorageTests: IntegrationTestCase {
         }
     }
 
-    func testCreationOfMultipleNotifications() {
+    func testCreationOfMultipleNotificationsWithoutToday() {
+        // 1. Declare a dummy habit.
+        let dummyHabit = HabitMO(context: context)
+
+        // 1.1 Add a new challenge to it.
+        let days = (0..<10).map {
+            Date().byAddingDays($0)?.getBeginningOfDay()
+        }.compactMap { $0 }
+
+        let challenge = daysChallengeFactory.makeDummy(using: days)
+        if let days = challenge.days as? Set<HabitDayMO> {
+            for day in days {
+                day.habit = dummyHabit
+            }
+        }
+
+        dummyHabit.addToChallenges(challenge)
+
+        // 1.2 Add a fire time to it.
+        let fireTimeFactory = FireTimeFactory(context: context)
+        let dummyFireTime = fireTimeFactory.makeDummy()
+        // At the beginning of the day.
+        dummyFireTime.hour = 0
+        dummyFireTime.minute = 0
+
+        dummyHabit.addToFireTimes(dummyFireTime)
+
+        // 2. Create its notifications.
+        let notifications = notificationStorage.createNotificationsFrom(habit: dummyHabit, using: context)
+
+        // 3. Assert on the count.
+        // Only notifications with fire dates in the future are scheduled. Since the
+        // fire time is on midnight, today doesn't count.
+        XCTAssertEqual(notifications.count, days.count - 1)
+    }
+
+    func testCreationOfMultipleNotificationsWithToday() {
         XCTMarkNotImplemented()
     }
 
