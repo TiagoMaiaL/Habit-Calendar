@@ -36,6 +36,8 @@ struct NotificationScheduler {
             content.subtitle = habit.getSubtitleText()
             content.body = makeBodyText(from: notification)
             content.badge = 1
+            // TODO: Add habit ID.
+            // TODO: Add category.
         } else {
             assertionFailure("The passed notification must have a valid habit entity.")
         }

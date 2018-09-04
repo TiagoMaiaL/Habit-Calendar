@@ -102,6 +102,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             #endif
         }
 
+        // Register the app for any UserNotification's events.
+        UNUserNotificationCenter.current().delegate = self
+
         // Close any past challenges that are open.
         persistentContainer.performBackgroundTask { context in
             self.daysChallengeStorage.closePastChallenges(using: context)
@@ -193,5 +196,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
+}
 
+extension AppDelegate: UNUserNotificationCenterDelegate {
+
+    // MARK: UserNotificationCenter Delegate methods
+
+    func userNotificationCenter(
+        _ center: UNUserNotificationCenter,
+        didReceive response: UNNotificationResponse,
+        withCompletionHandler completionHandler: @escaping () -> Void
+    ) {
+        // TODO:
+    }
 }
