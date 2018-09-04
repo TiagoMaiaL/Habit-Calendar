@@ -92,6 +92,16 @@ class NotificationSchedulerTests: IntegrationTestCase {
             ),
             "The day's order should be informed in the notification."
         )
+        XCTAssertEqual(
+            userNotificationOptions.content.userInfo["habitIdentifier"] as? String,
+            dummyNotification.habit?.id,
+            "The notification id should be passed within the user info."
+        )
+        XCTAssertEqual(
+            userNotificationOptions.content.categoryIdentifier,
+            "habitDayPrompt",
+            "The category identifier should be informed."
+        )
 
         // Declare the trigger as a UNTitmeIntervalNotificationTrigger.
         guard let dateTrigger = userNotificationOptions.trigger as? UNTimeIntervalNotificationTrigger else {
