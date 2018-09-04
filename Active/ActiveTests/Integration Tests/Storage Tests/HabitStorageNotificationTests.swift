@@ -84,7 +84,7 @@ class HabitStorageNotificationTests: IntegrationTestCase {
 
     func testHabitEditionWithFireTimesPropertyShouldCreateNotifications() {
         // 1. Create a dummy habit.
-        let dummyHabit = habitFactory.makeDummy()
+        let dummy = habitFactory.makeDummy()
 
         // 2. Declare the fire times.
         let fireTimes = [
@@ -94,23 +94,16 @@ class HabitStorageNotificationTests: IntegrationTestCase {
 
         // 3. Create the notifications by providing the components.
         _ = habitStorage.edit(
-            dummyHabit,
+            dummy,
             using: context,
             and: fireTimes
         )
 
         // 4. Fetch the dummy's notifications and make assertions on it.
         // 4.1. Check if the count is the expected one.
-
-        // Get only the future days for counting.
-        guard let futureDays = (dummyHabit.days as? Set<HabitDayMO>)?.filter({ $0.day?.date?.isFuture ?? false }) else {
-            XCTFail("Couldn't get the dummy habit's future days for comparision.")
-            return
-        }
-
         XCTAssertEqual(
-            dummyHabit.notifications?.count,
-            futureDays.count * fireTimes.count,
+            dummy.notifications?.count,
+            getExpectedNotificationsCount(from: dummy),
             "The added notifications should have the expected count of the passed fire times * days."
         )
     }
@@ -145,7 +138,7 @@ class HabitStorageNotificationTests: IntegrationTestCase {
         Timer.scheduledTimer(withTimeInterval: 0.01, repeats: false) { _ in
             // 3. Assert that the habit's notifications were scheduled:
             // - Assert on the count of notifications and user notifications.
-            let notificationsCount = days.count * fireTimes.count
+            let notificationsCount = self.getExpectedNotificationsCount(from: createdHabit)
             XCTAssertEqual(createdHabit.notifications?.count, notificationsCount)
 
             self.notificationCenterMock.getPendingNotificationRequests { requests in
@@ -199,31 +192,11 @@ class HabitStorageNotificationTests: IntegrationTestCase {
             days: days
         )
 
-        // Get the habit's added challenge.
-        guard let challenge = dummyHabit.getCurrentChallenge() else {
-            XCTFail("Couldn't get the added days' challenge.")
-            return
-        }
-
-        // Calculate the expected notifications count.
-        var expectedNotificationsCount = challenge.days!.count * dummyHabit.fireTimes!.count
-
-        let storage = NotificationStorage()
-        if let currentDay = challenge.getCurrentDay(),
-            let fireTimes = dummyHabit.fireTimes as? Set<FireTimeMO> {
-            // Notifications with past fire dates aren't scheduled, the count should reflect that.
-            for fireTime in fireTimes {
-                if storage.makeFireDate(from: currentDay, and: fireTime.getFireTimeComponents())!.isPast {
-                    expectedNotificationsCount -= 1
-                }
-            }
-        }
-
         // 4. Make the appropriated assertions:
         // - assert on the number of notification entities:
         XCTAssertEqual(
             dummyHabit.notifications?.count,
-            expectedNotificationsCount,
+            getExpectedNotificationsCount(from: dummyHabit),
             "The amount of notifications should be the number of future days * the fire times."
         )
 
@@ -288,7 +261,7 @@ class HabitStorageNotificationTests: IntegrationTestCase {
         // - assert on the number of notification entities:
         XCTAssertEqual(
             dummyHabit.notifications?.count,
-            dummyHabit.getFutureDays().count * fireTimes.count,
+            getExpectedNotificationsCount(from: dummyHabit),
             "The amount of notifications should be the number of future days * the fire times."
         )
 
@@ -351,7 +324,7 @@ class HabitStorageNotificationTests: IntegrationTestCase {
         // - assert on the number of notification entities:
         XCTAssertEqual(
             dummyHabit.notifications?.count,
-            dummyHabit.getFutureDays().count * fireTimes.count,
+            getExpectedNotificationsCount(from: dummyHabit),
             "The amount of notifications should be the number of future days * the fire times."
         )
 
@@ -377,5 +350,39 @@ class HabitStorageNotificationTests: IntegrationTestCase {
         }
 
         wait(for: [rescheduleExpectation], timeout: 0.2)
+    }
+
+    // MARK: Imperatives
+
+    /// Calculates the expected number of created notifications.
+    /// - Note: Only notifications with future fire dates are created and scheduled.
+    /// - Parameter habit: The habit used to calculate the amount of created notifications.
+    /// - Returns: The count to be compared.
+    private func getExpectedNotificationsCount(from habit: HabitMO) -> Int {
+        // Get all days and check if their fire dates would be in the future and could be accounted.
+        guard let days = habit.days as? Set<HabitDayMO> else {
+            assertionFailure("Couldn't get the days to calculate the notifications count.")
+            return 0
+        }
+        guard let fireTimes = habit.fireTimes as? Set<FireTimeMO> else {
+            assertionFailure("Couldn't get the fireTimes to calculate the notifications count.")
+            return 0
+        }
+        let notificationStorage = NotificationStorage()
+
+        var expectedCount = 0
+
+        for day in days {
+            for fireTime in fireTimes {
+                if let fireDate = notificationStorage.makeFireDate(
+                    from: day,
+                    and: fireTime.getFireTimeComponents()
+                ), fireDate.isFuture {
+                    expectedCount += 1
+                }
+            }
+        }
+
+        return expectedCount
     }
 }
