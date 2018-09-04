@@ -51,6 +51,7 @@
         <relationship name="habit" maxCount="1" deletionRule="Nullify" destinationEntity="Habit" inverseName="days" inverseEntity="Habit" syncable="YES"/>
     </entity>
     <entity name="Notification" representedClassName=".NotificationMO" versionHashModifier="added index" syncable="YES" codeGenerationType="category">
+        <attribute name="dayOrder" attributeType="Integer 64" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="fireDate" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="id" attributeType="String" syncable="YES"/>
         <attribute name="userNotificationId" attributeType="String" syncable="YES"/>
@@ -80,7 +81,7 @@
         <element name="FireTime" positionX="-2999" positionY="-3922" width="128" height="118"/>
         <element name="Habit" positionX="-3215" positionY="-3915" width="128" height="193"/>
         <element name="HabitDay" positionX="-3438" positionY="-3978" width="128" height="133"/>
-        <element name="Notification" positionX="-2997" positionY="-3745" width="128" height="118"/>
+        <element name="Notification" positionX="-2997" positionY="-3745" width="128" height="133"/>
         <element name="Offensive" positionX="-3431" positionY="-3661" width="128" height="148"/>
         <element name="User" positionX="-3242" positionY="-4131" width="128" height="88"/>
     </elements>

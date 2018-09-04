@@ -38,69 +38,40 @@ class NotificationStorageTests: IntegrationTestCase {
     // MARK: Tests
 
     func testNotificationCreation() {
-        let requestExpectation = XCTestExpectation(
-            description: """
-The created notification needs to have a scheduled user notification request associated with it.
-"""
-        )
-
-        // Create a dummy habit.
+        // 1. Create a dummy habit.
         let dummyHabit = habitFactory.makeDummy()
+        // 1.1 Remove its notifications.
+        if let notifications = dummyHabit.notifications {
+            dummyHabit.removeFromNotifications(notifications)
+        }
 
-        // Create the notification.
-        let fireDate = Date().byAddingMinutes(20)!
+        guard let habitDay = dummyHabit.getCurrentChallenge()?.getFutureDays()?.first else {
+            XCTFail("Couldn't get a habit day to create the notification.")
+            return
+        }
+        guard let fireTime = (dummyHabit.fireTimes as? Set<FireTimeMO>)?.first else {
+            XCTFail("Couldn't get a fire time to create the notification.")
+            return
+        }
+
+        // 2. Create the notification.
         guard let notification = try? notificationStorage.create(
             using: context,
-            with: fireDate,
-            and: dummyHabit
+            habitDay: habitDay,
+            andFireTime: fireTime.getFireTimeComponents()
         ) else {
             XCTFail("The storage's creation should return a valid Notification entity.")
             return
         }
 
-        XCTAssertNotNil(
-            notification,
-            "The Notification entity shouldn't be nil."
-        )
-        // Check for id
-        XCTAssertNotNil(
-            notification.id,
-            "Notification id shouldn't be nil."
-        )
-        // Check for the correct fire date.
-        XCTAssertEqual(
-            fireDate,
-            notification.fireDate,
-            "Notification should have the correct fire date."
-        )
-        // Check for the userNotificationId.
-        XCTAssertNotNil(
-            notification.userNotificationId,
-            "The user notification id must be set in advance."
-        )
-        // Check for the wasScheduled property.
-        XCTAssertFalse(
-            notification.wasScheduled,
-            "The user notification wasn't scheduled yet."
-        )
-        // Check for the habits property
-        XCTAssertEqual(
-            dummyHabit,
-            notification.habit,
-            "The created notification has an invalid habit."
-        )
-
-        Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) { _ in
-            // Check if the entity has a user notification request
-            // associated with it.
-            XCTAssertNotNil(
-                notification.userNotificationId,
-                "The created notification should have an associated and scheduled user notification id."
-            )
-            requestExpectation.fulfill()
-        }
-
-        wait(for: [requestExpectation], timeout: 0.5)
+        // 3. Assert on the notification values.
+        XCTAssertNotNil(notification, "The Notification entity shouldn't be nil.")
+        XCTAssertNotNil(notification?.id)
+        XCTAssertNotNil(notification?.fireDate)
+        XCTAssertNotNil(notification?.userNotificationId)
+        XCTAssertTrue((notification?.dayOrder ?? 0) > 0)
+        XCTAssertFalse(notification?.wasScheduled ?? true)
+        XCTAssertEqual(dummyHabit, notification?.habit)
     }
 
     func testNotificationFetch() {
@@ -128,17 +99,123 @@ The created notification needs to have a scheduled user notification request ass
     }
 
     func testNotificationCreationTwiceShouldThrow() {
-        // Trying to create the same notification entity should throw an error.
-        let dummyNotification = makeNotification()
+        // 1. Declare a dummy habit with dummy notifications already created.
+        // 1.1 Get its day and fire time.
+        let dummyHabit = habitFactory.makeDummy()
+        guard let habitDay = dummyHabit.getCurrentChallenge()?.getFutureDays()?.first else {
+            XCTFail("Couldn't get the habit day to create a new notification.")
+            return
+        }
+        guard let fireTime = (dummyHabit.fireTimes as? Set<FireTimeMO>)?.first else {
+            XCTFail("Couldn't get the fire time to create a new notification.")
+            return
+        }
 
-        // Try to create another notification with the same data
-        // and check to see if it throws the expected exception.
+        // 2. Creating a notification from the day and fire time should throw an error,
+        //    since there's already a dummy notification with those attributes.
         XCTAssertThrowsError(
             _ = try notificationStorage.create(
                 using: context,
-                with: dummyNotification.fireDate!,
-                and: dummyNotification.habit!
-            ), "Trying to create the same notification twice should throw an error.")
+                habitDay: habitDay,
+                andFireTime: fireTime.getFireTimeComponents()
+            ), "Trying to create the same notification twice should throw an error."
+        )
+    }
+
+    func testCreationWithPastHabitDay() {
+        // 1. Declare a dummy habit.
+        let dummyHabit = habitFactory.makeDummy()
+        // 1.1 Get its first day.
+        guard let firstDay = dummyHabit.getCurrentChallenge()?.getDay(for: Date()) else {
+            XCTFail("Couldn't get the day corresponding to today.")
+            return
+        }
+        // 1.2 Declare a fire time at the beginning of the day.
+        let fireTime = DateComponents(hour: 0, minute: 0)
+
+        // 2. Try to create a notification, but it should return nil.
+        do {
+            let notification = try notificationStorage.create(
+                using: context,
+                habitDay: firstDay,
+                andFireTime: fireTime
+            )
+            XCTAssertNil(notification)
+        } catch {
+            XCTFail("Exception when trying to create a notification.")
+        }
+    }
+
+    func testCreationOfMultipleNotificationsWithoutToday() {
+        // 1. Declare a dummy habit.
+        let dummyHabit = HabitMO(context: context)
+
+        // 1.1 Add a new challenge to it.
+        let days = (0..<10).map {
+            Date().byAddingDays($0)?.getBeginningOfDay()
+        }.compactMap { $0 }
+
+        let challenge = daysChallengeFactory.makeDummy(using: days)
+        if let days = challenge.days as? Set<HabitDayMO> {
+            for day in days {
+                day.habit = dummyHabit
+            }
+        }
+
+        dummyHabit.addToChallenges(challenge)
+
+        // 1.2 Add a fire time to it.
+        let fireTimeFactory = FireTimeFactory(context: context)
+        let dummyFireTime = fireTimeFactory.makeDummy()
+        // At the beginning of the day.
+        dummyFireTime.hour = 0
+        dummyFireTime.minute = 0
+
+        dummyHabit.addToFireTimes(dummyFireTime)
+
+        // 2. Create its notifications.
+        let notifications = notificationStorage.createNotificationsFrom(habit: dummyHabit, using: context)
+
+        // 3. Assert on the count.
+        // Only notifications with fire dates in the future are scheduled. Since the
+        // fire time is on midnight, today doesn't count.
+        XCTAssertEqual(notifications.count, days.count - 1)
+    }
+
+    func testCreationOfMultipleNotificationsWithToday() {
+        // 1. Declare a dummy habit.
+        let dummyHabit = HabitMO(context: context)
+
+        // 1.1 Add a new challenge to it.
+        let days = (0..<10).map {
+            Date().byAddingDays($0)?.getBeginningOfDay()
+        }.compactMap { $0 }
+
+        let challenge = daysChallengeFactory.makeDummy(using: days)
+        if let days = challenge.days as? Set<HabitDayMO> {
+            for day in days {
+                day.habit = dummyHabit
+            }
+        }
+
+        dummyHabit.addToChallenges(challenge)
+
+        // 1.2 Add a fire time to it.
+        let fireTimeFactory = FireTimeFactory(context: context)
+        let dummyFireTime = fireTimeFactory.makeDummy()
+        // At the beginning of the day.
+        dummyFireTime.hour = 23
+        dummyFireTime.minute = 59
+
+        dummyHabit.addToFireTimes(dummyFireTime)
+
+        // 2. Create its notifications.
+        let notifications = notificationStorage.createNotificationsFrom(habit: dummyHabit, using: context)
+
+        // 3. Assert on the count.
+        // All days should have a notification, because the fire time is marked for the
+        // last minute of the day.
+        XCTAssertEqual(notifications.count, days.count)
     }
 
     func testNotificationDeletion() {
@@ -164,95 +241,33 @@ The created notification needs to have a scheduled user notification request ass
         ), "The deleted notification shouldn't be fetched.")
     }
 
-    func testFireDatesFactory() {
-        // Create a dummy habit.
+    func testFireDateFactory() {
+        // 1. Create a dummy habit.
         let dummyHabit = habitFactory.makeDummy()
 
-        // Declare the fire times to be used.
-        let fireTime = DateComponents(hour: 12, minute: 55)
-
-        // Create the fire dates by calling the factory.
-        let fireDates = notificationStorage.createNotificationFireDatesFrom(
-            habit: dummyHabit,
-            and: [fireTime]
-        )
-
-        // Assert on the generated fire dates:
-        // The amount of dates -> days.count * fireTimes.count
-        XCTAssertEqual(
-            dummyHabit.getFutureDays().count,
-            fireDates.count,
-            "The fire dates don't have the expected count -> days.count * fireTimes.Count."
-        )
-
-        // Assert on the days:
-        // Each fire date needs to have the same minutes and hours as the fire
-        // time, and it also needs to have a corresponding day, with the month
-        // and year.
-        for fireDate in fireDates {
-            // Assert on the time components (minute and hours).
-            XCTAssertEqual(
-                fireDate.components.minute,
-                fireTime.minute,
-                "The generated fire date doesn't have the correct minutes."
-            )
-            XCTAssertEqual(
-                fireDate.components.hour,
-                fireTime.hour,
-                "The generated fire date doesn't have the correct hours."
-            )
-
-            // Get the corresponding day by using the day, month and
-            // year components. There should be a unique corresponding
-            // date.
-            guard let days = (dummyHabit.days as? Set<HabitDayMO>) else {
-                XCTFail("Couldn't get the dummy days.")
-                return
-            }
-
-            XCTAssertEqual(
-                1, // The number of days corresponding to the fire date.
-                days.compactMap { $0.day?.date }.filter {
-                    $0.components.day == fireDate.components.day &&
-                    $0.components.month == fireDate.components.month &&
-                    $0.components.year == fireDate.components.year
-                }.count
-            )
+        // 2. Get its current challenge and current day.
+        guard let currentDay = dummyHabit.getCurrentChallenge()?.getCurrentDay() else {
+            XCTFail("Couldn't get the current challenge's day.")
+            return
         }
-    }
-
-    func testNotificationsCreationFromFireDates() {
-        // Create a dummy Habit.
-        let dummyHabit = habitFactory.makeDummy()
-
-        // Declare the fireTime to be used.
-        let fireTime = DateComponents(hour: 07, minute: 45)
-
-        // Create the fire dates for the habit.
-        let fireDates = notificationStorage.createNotificationFireDatesFrom(
-            habit: dummyHabit,
-            and: [fireTime]
-        )
-
-        // Create the notifications.
-        let notifications = notificationStorage.createNotificationsFrom(
-            habit: dummyHabit,
-            using: context,
-            and: fireDates
-        )
-
-        // Assert on the count.
-        XCTAssertEqual(
-            notifications.count,
-            fireDates.count,
-            "The number of created notifications isn't correct."
-        )
-        // Assert on the fire dates.
-        for notification in notifications {
-            XCTAssertTrue(
-                fireDates.contains(notification.fireDate!),
-                "The notification doesn't have a corresponding fire date."
-            )
+        guard let dayDate = currentDay.day?.date else {
+            XCTFail("Couldn't get the day's date.")
+            return
         }
+        guard let fireTime = (dummyHabit.fireTimes as? Set<FireTimeMO>)?.first else {
+            XCTFail("Couldn't get the challenge's fire time.")
+            return
+        }
+
+        // 3. Make the fire date by using a fire time and the day entity.
+        let fireDate = notificationStorage.makeFireDate(from: currentDay, and: fireTime.getFireTimeComponents())
+
+        // 4. Assert it was correclty created.
+        XCTAssertNotNil(fireDate)
+        XCTAssertEqual(fireDate?.components.year, dayDate.components.year)
+        XCTAssertEqual(fireDate?.components.month, dayDate.components.month)
+        XCTAssertEqual(fireDate?.components.day, dayDate.components.day)
+        XCTAssertEqual(fireDate?.components.hour, Int(fireTime.hour))
+        XCTAssertEqual(fireDate?.components.minute, Int(fireTime.minute))
     }
 }

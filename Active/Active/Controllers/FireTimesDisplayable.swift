@@ -22,6 +22,7 @@ protocol FireTimesDisplayable {
     // MARK: Imperatives
 
     /// Generates the text associated with the fire times.
+    /// - Parameter fireTimes: The fire times to be described.
     /// - Returns: The fire times' text.
     func getText(from fireTimes: [FireTime]) -> String
 
@@ -32,12 +33,11 @@ protocol FireTimesDisplayable {
 extension FireTimesDisplayable {
 
     func getText(from fireTimes: [FireTime]) -> String {
-        // Set the text for the label displaying some of the
-        // selected fire times:
+        // Set the text for the label displaying some of the selected fire times:
         let fireTimeFormatter = DateFormatter.makeFireTimeDateFormatter()
         let fireDates = fireTimes.compactMap {
             Calendar.current.date(from: $0)
-            }.sorted()
+        }.sorted()
         var fireTimesText = ""
 
         for fireDate in fireDates {

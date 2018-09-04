@@ -45,13 +45,25 @@ class NotificationSchedulerTests: IntegrationTestCase {
 
     // MARK: Tests
 
+    func testBodyTextFactory() {
+        // 1. Declare a dummy notification.
+        let dummyNotification = notificationFactory.makeDummy()
+
+        // 1.1 Change its dayOrder to a random value.
+        let dayOrder = Int.random(1..<51)
+        dummyNotification.dayOrder = Int64(dayOrder)
+
+        // 2. Get the body text and assert on its content.
+        let text = notificationScheduler.makeBodyText(from: dummyNotification)
+        XCTAssertNotNil(text.range(of: String(dayOrder)))
+    }
+
     func testContentAndTriggerFactory() {
         // Test the factories for the user notification's trigger and content
         // options when a Notification entity is passed and the authorization
         // was fully granted by the user.
 
-        // Declare the notification (associated with a Habit dummy)
-        // that needs to be passed.
+        // Declare the notification (associated with a Habit dummy) that needs to be passed.
         let dummyNotification = makeNotification()
 
         // Make the content and trigger options out of the passed habit.
@@ -74,10 +86,11 @@ class NotificationSchedulerTests: IntegrationTestCase {
             dummyNotification.habit!.getSubtitleText(),
             "The user notification content should have the correct subtitle text."
         )
-        XCTAssertEqual(
-            userNotificationOptions.content.body,
-            dummyNotification.habit!.getDescriptionText(),
-            "The user notification content should have the correct description text."
+        XCTAssertNotNil(
+            userNotificationOptions.content.body.range(
+                of: String(Int(dummyNotification.dayOrder))
+            ),
+            "The day's order should be informed in the notification."
         )
 
         // Declare the trigger as a UNTitmeIntervalNotificationTrigger.
@@ -187,7 +200,7 @@ class NotificationSchedulerTests: IntegrationTestCase {
             // executed. Since they're marked within the managed object
             // context's thread, they aren't marked immediatelly,
             // that's why a timer is needed here.
-            Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { _ in
+            Timer.scheduledTimer(withTimeInterval: 0.01, repeats: false) { _ in
                 for notification in notifications {
                     // Assert on the wasExecuted property.
                     XCTAssertTrue(
@@ -229,7 +242,7 @@ class NotificationSchedulerTests: IntegrationTestCase {
         notificationScheduler.schedule(notifications)
 
         // 4. Fire a timer to delete all of them.
-        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { _ in
+        Timer.scheduledTimer(withTimeInterval: 0.01, repeats: false) { _ in
             self.notificationScheduler.unschedule(notifications)
 
             // 5. Assert they were deleted by trying to fetch them from the

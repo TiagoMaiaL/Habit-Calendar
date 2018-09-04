@@ -19,6 +19,7 @@
 		47160A4121372B2F00E717C9 /* RoundedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47160A4021372B2F00E717C9 /* RoundedView.swift */; };
 		47160A4421387AAE00E717C9 /* EmptyStateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47160A4321387AAE00E717C9 /* EmptyStateView.xib */; };
 		47160A4621387AC300E717C9 /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47160A4521387AC300E717C9 /* EmptyStateView.swift */; };
+		47160A48213B18F900E717C9 /* HabitStorageNotificationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47160A47213B18F900E717C9 /* HabitStorageNotificationTests.swift */; };
 		4725D05B20C8A4BA00C3B63F /* HabitsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4725D05A20C8A4BA00C3B63F /* HabitsTableViewController.swift */; };
 		4725D05D20C8A96200C3B63F /* HabitStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4725D05C20C8A96200C3B63F /* HabitStorage.swift */; };
 		4725D05F20C97D9C00C3B63F /* UserStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4725D05E20C97D9C00C3B63F /* UserStorage.swift */; };
@@ -154,6 +155,7 @@
 		47160A4021372B2F00E717C9 /* RoundedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedView.swift; sourceTree = "<group>"; };
 		47160A4321387AAE00E717C9 /* EmptyStateView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmptyStateView.xib; sourceTree = "<group>"; };
 		47160A4521387AC300E717C9 /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
+		47160A47213B18F900E717C9 /* HabitStorageNotificationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitStorageNotificationTests.swift; sourceTree = "<group>"; };
 		4725D05A20C8A4BA00C3B63F /* HabitsTableViewController.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = HabitsTableViewController.swift; sourceTree = "<group>"; tabWidth = 4; };
 		4725D05C20C8A96200C3B63F /* HabitStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitStorage.swift; sourceTree = "<group>"; };
 		4725D05E20C97D9C00C3B63F /* UserStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStorage.swift; sourceTree = "<group>"; };
@@ -464,6 +466,7 @@
 				470230D320E28A56003A1F6E /* HabitDayStorageTests.swift */,
 				47D8308B20FD00E5002D3A97 /* DaysChallengeStorageTests.swift */,
 				47AA3656210382380008D2DC /* FireTimeStorageTests.swift */,
+				47160A47213B18F900E717C9 /* HabitStorageNotificationTests.swift */,
 			);
 			path = "Storage Tests";
 			sourceTree = "<group>";
@@ -942,6 +945,7 @@
 				47D7003B2100F72A00F4FE88 /* OffensiveTests.swift in Sources */,
 				470230D420E28A56003A1F6E /* HabitDayStorageTests.swift in Sources */,
 				47D7004121017D0A00F4FE88 /* NotificationSchedulerTests.swift in Sources */,
+				47160A48213B18F900E717C9 /* HabitStorageNotificationTests.swift in Sources */,
 				4752FDC120FE623900116F1A /* XCTUtils.swift in Sources */,
 				474A209720D1B02700E0EBD0 /* HabitStorageTests.swift in Sources */,
 				47D8FC9E20DC13990094026B /* UserNotificationManagerTests.swift in Sources */,

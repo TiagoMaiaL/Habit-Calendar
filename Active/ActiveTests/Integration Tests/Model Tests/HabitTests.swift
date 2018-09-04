@@ -52,7 +52,7 @@ class HabitTests: IntegrationTestCase {
 
     func testSubtitleText() {
         // Declare the expected subtitle message.
-        let expectedSubtitle = "Have you practiced this activity?"
+        let expectedSubtitle = "Did you practice this activity today?"
 
         // Create a dummy habit.
         let dummyHabit = habitFactory.makeDummy()

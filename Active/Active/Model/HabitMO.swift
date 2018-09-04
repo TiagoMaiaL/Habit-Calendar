@@ -69,7 +69,7 @@ class HabitMO: NSManagedObject {
     /// - Returns: The habit's subtitle string.
     func getSubtitleText() -> String {
         // TODO: Make this localized.
-        return "Have you practiced this activity?"
+        return "Did you practice this activity today?"
     }
 
     /// Gets the habit description text.
