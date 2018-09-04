@@ -161,7 +161,7 @@ class HabitStorageTests: IntegrationTestCase {
             user: userFactory.makeDummy(),
             name: "exercise",
             color: .alizarin,
-            days: [Date().byAddingDays(10)!, Date().byAddingDays(15)!],
+            days: [Date(), Date().byAddingDays(10)!, Date().byAddingDays(15)!],
             and: fireTimes
         )
 

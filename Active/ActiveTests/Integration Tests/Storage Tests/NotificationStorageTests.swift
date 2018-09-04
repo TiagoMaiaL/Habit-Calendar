@@ -38,9 +38,6 @@ class NotificationStorageTests: IntegrationTestCase {
     // MARK: Tests
 
     func testNotificationCreation() {
-        // Sometimes its failing.
-        XCTMarkNotImplemented()
-
         // 1. Create a dummy habit.
         let dummyHabit = habitFactory.makeDummy()
         // 1.1 Remove its notifications.
@@ -48,8 +45,7 @@ class NotificationStorageTests: IntegrationTestCase {
             dummyHabit.removeFromNotifications(notifications)
         }
 
-        guard let daysSet = dummyHabit.days as? Set<HabitDayMO>,
-            let habitDay = Array(daysSet).last else {
+        guard let habitDay = dummyHabit.getCurrentChallenge()?.getFutureDays()?.first else {
             XCTFail("Couldn't get a habit day to create the notification.")
             return
         }
@@ -103,13 +99,10 @@ class NotificationStorageTests: IntegrationTestCase {
     }
 
     func testNotificationCreationTwiceShouldThrow() {
-        // Sometimes it's failing.
-        XCTMarkNotImplemented()
-
         // 1. Declare a dummy habit with dummy notifications already created.
         // 1.1 Get its day and fire time.
         let dummyHabit = habitFactory.makeDummy()
-        guard let habitDay = (dummyHabit.days as? Set<HabitDayMO>)?.first else {
+        guard let habitDay = dummyHabit.getCurrentChallenge()?.getFutureDays()?.first else {
             XCTFail("Couldn't get the habit day to create a new notification.")
             return
         }
@@ -222,7 +215,7 @@ class NotificationStorageTests: IntegrationTestCase {
         // 3. Assert on the count.
         // All days should have a notification, because the fire time is marked for the
         // last minute of the day.
-        XCTAssertEqual(notifications.count, days.count - 1)
+        XCTAssertEqual(notifications.count, days.count)
     }
 
     func testNotificationDeletion() {

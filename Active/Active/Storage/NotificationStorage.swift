@@ -73,7 +73,7 @@ class NotificationStorage {
             assertionFailure("The habit must have an active days' challenge.")
             return []
         }
-        guard let futureDays = challenge.getFutureDays() else {
+        guard var days = challenge.getFutureDays() else {
             assertionFailure("The challenge must have future days.")
             return []
         }
@@ -81,9 +81,13 @@ class NotificationStorage {
             return []
         }
 
+        if let currentDay = challenge.getCurrentDay() {
+            days.insert(currentDay)
+        }
+
         var notifications = [NotificationMO?]()
 
-        for habitDay in futureDays {
+        for habitDay in days {
             for fireTime in fireTimes {
                 do {
                     let notification = try create(
