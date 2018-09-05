@@ -102,6 +102,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             #endif
         }
 
+        // Register the app for any UserNotification's events.
+        UNUserNotificationCenter.current().delegate = self
+
         // Close any past challenges that are open.
         persistentContainer.performBackgroundTask { context in
             self.daysChallengeStorage.closePastChallenges(using: context)
@@ -193,5 +196,46 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
+}
 
+extension AppDelegate: UNUserNotificationCenterDelegate {
+
+    // MARK: Imperatives
+
+    /// Takes the user to the habit details controller.
+    private func showHabitDetails(_ habit: HabitMO) {
+        guard let navigationController = window?.rootViewController as? UINavigationController else { return }
+
+        guard let detailsController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(
+            withIdentifier: "HabitDetails"
+        ) as? HabitDetailsViewController else {
+            return
+        }
+
+        detailsController.habit = habit
+        detailsController.container = persistentContainer
+        detailsController.habitStorage = habitStorage
+        detailsController.notificationManager = notificationManager
+
+        navigationController.pushViewController(detailsController, animated: true)
+    }
+
+    // MARK: UserNotificationCenter Delegate methods
+
+    func userNotificationCenter(
+        _ center: UNUserNotificationCenter,
+        didReceive response: UNNotificationResponse,
+        withCompletionHandler completionHandler: @escaping () -> Void
+    ) {
+        guard let category = response.notification.request.content.getCategory() else { return }
+
+        switch category {
+        case .dayPrompt(let habitId):
+            if let habit = habitStorage.habit(using: persistentContainer.viewContext, and: habitId) {
+                if response.actionIdentifier == UNNotificationDefaultActionIdentifier {
+                    showHabitDetails(habit)
+                }
+            }
+        }
+    }
 }

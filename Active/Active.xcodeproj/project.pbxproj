@@ -10,6 +10,7 @@
 		470230D420E28A56003A1F6E /* HabitDayStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470230D320E28A56003A1F6E /* HabitDayStorageTests.swift */; };
 		470230D620E2A696003A1F6E /* HabitDayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470230D520E2A696003A1F6E /* HabitDayTests.swift */; };
 		470230D820E5250A003A1F6E /* Int+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470230D720E5250A003A1F6E /* Int+Utils.swift */; };
+		470C4170213EE70D007F6F35 /* UNNotificationContent+Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470C416F213EE70D007F6F35 /* UNNotificationContent+Category.swift */; };
 		4713A1FC20C1643E008A13D2 /* UserMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4713A1FB20C1643E008A13D2 /* UserMO.swift */; };
 		4713A1FE20C16459008A13D2 /* HabitMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4713A1FD20C16459008A13D2 /* HabitMO.swift */; };
 		4713A20020C164E6008A13D2 /* HabitDayMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4713A1FF20C164E6008A13D2 /* HabitDayMO.swift */; };
@@ -146,6 +147,7 @@
 		470230D320E28A56003A1F6E /* HabitDayStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitDayStorageTests.swift; sourceTree = "<group>"; };
 		470230D520E2A696003A1F6E /* HabitDayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitDayTests.swift; sourceTree = "<group>"; };
 		470230D720E5250A003A1F6E /* Int+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Utils.swift"; sourceTree = "<group>"; };
+		470C416F213EE70D007F6F35 /* UNNotificationContent+Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UNNotificationContent+Category.swift"; sourceTree = "<group>"; };
 		4713A1FB20C1643E008A13D2 /* UserMO.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = UserMO.swift; sourceTree = "<group>"; tabWidth = 4; };
 		4713A1FD20C16459008A13D2 /* HabitMO.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = HabitMO.swift; sourceTree = "<group>"; tabWidth = 4; };
 		4713A1FF20C164E6008A13D2 /* HabitDayMO.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = HabitDayMO.swift; sourceTree = "<group>"; tabWidth = 4; };
@@ -452,6 +454,7 @@
 				470230D720E5250A003A1F6E /* Int+Utils.swift */,
 				47E6C21E20EC16C8003BDB4D /* UIViewController+Utils.swift */,
 				474B7B9D212746BE00814A8E /* DateFormatter+Utils.swift */,
+				470C416F213EE70D007F6F35 /* UNNotificationContent+Category.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -865,6 +868,7 @@
 			files = (
 				47E6C21520EB12B2003BDB4D /* HabitFactory.swift in Sources */,
 				47F635F820BB920900AC4555 /* Active.xcdatamodeld in Sources */,
+				470C4170213EE70D007F6F35 /* UNNotificationContent+Category.swift in Sources */,
 				47E6C21120EB129C003BDB4D /* DummyFactory.swift in Sources */,
 				470230D820E5250A003A1F6E /* Int+Utils.swift in Sources */,
 				4732CE83211CB89F00E2770C /* MonthHeaderView.swift in Sources */,
