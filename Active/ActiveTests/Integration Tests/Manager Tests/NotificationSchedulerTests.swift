@@ -99,7 +99,7 @@ class NotificationSchedulerTests: IntegrationTestCase {
         )
         XCTAssertEqual(
             userNotificationOptions.content.categoryIdentifier,
-            "habitDayPrompt",
+            UNNotificationCategory.Kind.dayPrompt(habitId: nil).identifier,
             "The category identifier should be informed."
         )
 

@@ -102,6 +102,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             #endif
         }
 
+        // Register the user notification categories.
+        registerNotificationCategories()
+
         // Register the app for any UserNotification's events.
         UNUserNotificationCenter.current().delegate = self
 
@@ -121,14 +124,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         return true
     }
-
-    func applicationWillResignActive(_ application: UIApplication) {}
-
-    func applicationDidEnterBackground(_ application: UIApplication) {}
-
-    func applicationWillEnterForeground(_ application: UIApplication) {}
-
-    func applicationDidBecomeActive(_ application: UIApplication) {}
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Save the view context.
@@ -202,6 +197,32 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 
     // MARK: Imperatives
 
+    /// Registers the user notifications' categories with its corresponding actions.
+    private func registerNotificationCategories() {
+        let categoryKind = UNNotificationCategory.Kind.dayPrompt(habitId: nil)
+        let (yesActionIdentifier, notActionIdentifier) = categoryKind.getActionIdentifiers()
+
+        let yesAction = UNNotificationAction(
+            identifier: yesActionIdentifier,
+            title: "Yes, i did",
+            options: UNNotificationActionOptions(rawValue: 0)
+        )
+        let noAction = UNNotificationAction(
+            identifier: notActionIdentifier,
+            title: "No, not yet",
+            options: UNNotificationActionOptions(rawValue: 0)
+        )
+        let dayPromptCategory = UNNotificationCategory(
+            identifier: categoryKind.identifier,
+            actions: [yesAction, noAction],
+            intentIdentifiers: [],
+            hiddenPreviewsBodyPlaceholder: "",
+            options: .customDismissAction
+        )
+
+        UNUserNotificationCenter.current().setNotificationCategories([dayPromptCategory])
+    }
+
     /// Takes the user to the habit details controller.
     private func showHabitDetails(_ habit: HabitMO) {
         guard let navigationController = window?.rootViewController as? UINavigationController else { return }
@@ -231,11 +252,33 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 
         switch category {
         case .dayPrompt(let habitId):
-            if let habit = habitStorage.habit(using: persistentContainer.viewContext, and: habitId) {
-                if response.actionIdentifier == UNNotificationDefaultActionIdentifier {
-                    showHabitDetails(habit)
-                }
+            guard let habitId = habitId else {
+                assertionFailure("Couldn't get the habit's id from the notification payload.")
+                return
+            }
+            guard let habit = habitStorage.habit(using: persistentContainer.viewContext, and: habitId) else {
+                assertionFailure("Couldn't get the habit using the passed identifier.")
+                return
+            }
+            let (yesAction, noAction) = category.getActionIdentifiers()
+
+            switch response.actionIdentifier {
+            case UNNotificationDefaultActionIdentifier:
+                showHabitDetails(habit)
+
+            case yesAction:
+                habit.getCurrentChallenge()?.markCurrentDayAsExecuted()
+                saveContext()
+
+            case noAction:
+                habit.getCurrentChallenge()?.markCurrentDayAsExecuted(false)
+                saveContext()
+
+            default:
+                break
             }
         }
+
+        completionHandler()
     }
 }
