@@ -252,12 +252,33 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 
         switch category {
         case .dayPrompt(let habitId):
-            if let identifier = habitId,
-                let habit = habitStorage.habit(using: persistentContainer.viewContext, and: identifier) {
-                if response.actionIdentifier == UNNotificationDefaultActionIdentifier {
-                    showHabitDetails(habit)
-                }
+            guard let habitId = habitId else {
+                assertionFailure("Couldn't get the habit's id from the notification payload.")
+                return
+            }
+            guard let habit = habitStorage.habit(using: persistentContainer.viewContext, and: habitId) else {
+                assertionFailure("Couldn't get the habit using the passed identifier.")
+                return
+            }
+            let (yesAction, noAction) = category.getActionIdentifiers()
+
+            switch response.actionIdentifier {
+            case UNNotificationDefaultActionIdentifier:
+                showHabitDetails(habit)
+
+            case yesAction:
+                habit.getCurrentChallenge()?.markCurrentDayAsExecuted()
+                saveContext()
+
+            case noAction:
+                habit.getCurrentChallenge()?.markCurrentDayAsExecuted(false)
+                saveContext()
+
+            default:
+                break
             }
         }
+
+        completionHandler()
     }
 }
