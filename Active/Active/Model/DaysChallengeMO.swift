@@ -40,46 +40,6 @@ class DaysChallengeMO: NSManagedObject {
         return days?.filtered(using: dayPredicate).first as? HabitDayMO
     }
 
-    /// Returns the challenge's current offensive, if there's one.
-    /// - Note: The current offensive isn't broken and its toDate represents the
-    ///         last habitDay before the current one.
-    /// - Returns: The current OffensiveMO entity or nil.
-    func getCurrentOffensive() -> OffensiveMO? {
-        // Get the last challenge's day.
-        let pastDays = (days?.sortedArray(
-            using: [NSSortDescriptor(key: "day.date", ascending: true)]
-        ) as? [HabitDayMO])?.filter {
-            $0.day?.date?.getEndOfDay().isPast ?? false
-        }
-        let lastDay = pastDays?.last
-
-        if lastDay != nil {
-            assert(
-                lastDay!.day != nil && lastDay!.day!.date != nil,
-                "Inconsistency: The habitDay must have a valid day."
-            )
-        }
-
-        // Get the last offensive by filtering for the one with the toDate
-        // property being the last challenge's date (in ascending order).
-        var toDatePredicate: NSPredicate!
-
-        if let lastDay = lastDay {
-            toDatePredicate = NSPredicate(
-                format: "toDate = %@ OR toDate = %@",
-                lastDay.day!.date! as NSDate,
-                Date().getBeginningOfDay() as NSDate
-            )
-        } else {
-            toDatePredicate = NSPredicate(
-                format: "toDate = %@",
-                Date().getBeginningOfDay() as NSDate
-            )
-        }
-
-        return offensives?.filtered(using: toDatePredicate).first as? OffensiveMO
-    }
-
     /// Marks the current day as executed, if one exists in the challenge.
     /// - Note: Marking the current day as executed creates or updates
     ///         a related offensive entity associated with the challenge.
@@ -97,17 +57,6 @@ class DaysChallengeMO: NSManagedObject {
         // If the current day is the last challenge's day, close the challenge.
         if let order = getOrder(of: currentDay), order == days?.count {
             isClosed = wasExecuted
-        }
-
-        if wasExecuted {
-            // Try fetching the current offensive. If we can get it, update it.
-            if let currentOffensive = getCurrentOffensive() {
-                currentOffensive.toDate = Date().getBeginningOfDay()
-                currentOffensive.updatedAt = Date()
-            } else {
-                // If there isn't a current offensive, add a new one to the current challenge and habit.
-                makeOffensive()
-            }
         }
     }
 
@@ -201,20 +150,5 @@ class DaysChallengeMO: NSManagedObject {
 
         // Change its toDate to yesterday, ignore the current day.
         toDate = Date().byAddingDays(-1)?.getBeginningOfDay()
-    }
-
-    /// Creates a new offensive entity and adds it to the current
-    /// challenge instance.
-    private func makeOffensive() {
-        if let context = managedObjectContext {
-            let currentOffensive = OffensiveMO(context: context)
-            currentOffensive.id = UUID().uuidString
-            currentOffensive.createdAt = Date()
-            currentOffensive.fromDate = Date().getBeginningOfDay()
-            currentOffensive.toDate = Date().getBeginningOfDay()
-
-            currentOffensive.habit = habit
-            currentOffensive.challenge = self
-        }
     }
 }
