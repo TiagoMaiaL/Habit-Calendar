@@ -101,7 +101,6 @@
 		47C320382130799D0094BBF8 /* HabitCreationTableViewController+ColorField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C320372130799C0094BBF8 /* HabitCreationTableViewController+ColorField.swift */; };
 		47C3203A213079AD0094BBF8 /* HabitCreationTableViewController+NameField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C32039213079AD0094BBF8 /* HabitCreationTableViewController+NameField.swift */; };
 		47C3203C2130E91F0094BBF8 /* FireTimesDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C3203B2130E91F0094BBF8 /* FireTimesDisplayable.swift */; };
-		47D7003B2100F72A00F4FE88 /* OffensiveTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D7003A2100F72A00F4FE88 /* OffensiveTests.swift */; };
 		47D7003D210179F600F4FE88 /* NotificationScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D7003C210179F600F4FE88 /* NotificationScheduler.swift */; };
 		47D7004121017D0A00F4FE88 /* NotificationSchedulerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D7004021017D0A00F4FE88 /* NotificationSchedulerTests.swift */; };
 		47D8308820FCE82F002D3A97 /* DaysChallengeMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D8308720FCE82F002D3A97 /* DaysChallengeMO.swift */; };
@@ -243,7 +242,6 @@
 		47C320372130799C0094BBF8 /* HabitCreationTableViewController+ColorField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HabitCreationTableViewController+ColorField.swift"; sourceTree = "<group>"; };
 		47C32039213079AD0094BBF8 /* HabitCreationTableViewController+NameField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HabitCreationTableViewController+NameField.swift"; sourceTree = "<group>"; };
 		47C3203B2130E91F0094BBF8 /* FireTimesDisplayable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireTimesDisplayable.swift; sourceTree = "<group>"; };
-		47D7003A2100F72A00F4FE88 /* OffensiveTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffensiveTests.swift; sourceTree = "<group>"; };
 		47D7003C210179F600F4FE88 /* NotificationScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationScheduler.swift; sourceTree = "<group>"; };
 		47D7004021017D0A00F4FE88 /* NotificationSchedulerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSchedulerTests.swift; sourceTree = "<group>"; };
 		47D8308720FCE82F002D3A97 /* DaysChallengeMO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaysChallengeMO.swift; sourceTree = "<group>"; };
@@ -486,7 +484,6 @@
 				475C96AC20E1216D00212E1F /* HabitTests.swift */,
 				470230D520E2A696003A1F6E /* HabitDayTests.swift */,
 				47D8308F20FD6288002D3A97 /* DaysChallengeTests.swift */,
-				47D7003A2100F72A00F4FE88 /* OffensiveTests.swift */,
 				47AA365421037B8B0008D2DC /* FireTimeTests.swift */,
 			);
 			path = "Model Tests";
@@ -942,7 +939,6 @@
 				4761DFD320DE692A003F772A /* UNUserNotificationCenterMock.swift in Sources */,
 				474A209C20D1B51300E0EBD0 /* DateUtilsTests.swift in Sources */,
 				47D8309020FD6288002D3A97 /* DaysChallengeTests.swift in Sources */,
-				47D7003B2100F72A00F4FE88 /* OffensiveTests.swift in Sources */,
 				470230D420E28A56003A1F6E /* HabitDayStorageTests.swift in Sources */,
 				47D7004121017D0A00F4FE88 /* NotificationSchedulerTests.swift in Sources */,
 				47160A48213B18F900E717C9 /* HabitStorageNotificationTests.swift in Sources */,

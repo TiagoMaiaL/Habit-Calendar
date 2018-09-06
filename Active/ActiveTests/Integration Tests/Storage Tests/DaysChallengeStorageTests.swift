@@ -62,22 +62,12 @@ class DaysChallengeStorageTests: IntegrationTestCase {
         }
 
         // 3. Create a new challenge for the habit with the generated dates.
-        let createdChallenge = challengeStorage.create(
-            using: context,
-            daysDates: dates,
-            and: dummyHabit
-        )
+        let createdChallenge = challengeStorage.create(using: context, daysDates: dates, and: dummyHabit)
 
         // 4. Make assertions on the newly created challenge:
         // 4.1. Assert on its main properties.
-        XCTAssertNotNil(
-            createdChallenge.id,
-            "The created challenge doesn't have an id."
-        )
-        XCTAssertNotNil(
-            createdChallenge.createdAt,
-            "The created challenge doesn't have a createdAt property."
-        )
+        XCTAssertNotNil(createdChallenge.id)
+        XCTAssertNotNil(createdChallenge.createdAt)
 
         // The fromDate should correspond to the first day in the previously generated dates.
         XCTAssertEqual(
@@ -94,11 +84,7 @@ class DaysChallengeStorageTests: IntegrationTestCase {
         )
 
         // 4.2. Check if the challenge's habit is the expected dummy one.
-        XCTAssertEqual(
-            createdChallenge.habit,
-            dummyHabit,
-            "The created challenge should have the correct habit (the dummy one) associated with it."
-        )
+        XCTAssertEqual(createdChallenge.habit, dummyHabit)
 
         // 4.3. Check the amount of days.
         XCTAssertEqual(
@@ -120,12 +106,6 @@ class DaysChallengeStorageTests: IntegrationTestCase {
                 "The challenge's day's date is not within the expected ones."
             )
         }
-
-        // 4.5. Assert the challenge comes clean of offensives.
-        XCTAssertTrue(
-            (createdChallenge.offensives?.count ?? 0) == 0,
-            "The created challenge shouldn't have any offensives, it should be clean."
-        )
     }
 
     func testChallengeCreationWithFutureDays() {
