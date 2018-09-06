@@ -16,7 +16,6 @@
         <attribute name="toDate" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="days" toMany="YES" deletionRule="Nullify" destinationEntity="HabitDay" inverseName="challenge" inverseEntity="HabitDay" syncable="YES"/>
         <relationship name="habit" maxCount="1" deletionRule="Nullify" destinationEntity="Habit" inverseName="challenges" inverseEntity="Habit" syncable="YES"/>
-        <relationship name="offensives" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Offensive" inverseName="challenge" inverseEntity="Offensive" syncable="YES"/>
     </entity>
     <entity name="FireTime" representedClassName=".FireTimeMO" syncable="YES" codeGenerationType="category">
         <attribute name="createdAt" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
@@ -34,7 +33,6 @@
         <relationship name="days" toMany="YES" deletionRule="Cascade" destinationEntity="HabitDay" inverseName="habit" inverseEntity="HabitDay" syncable="YES"/>
         <relationship name="fireTimes" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="FireTime" inverseName="habit" inverseEntity="FireTime" syncable="YES"/>
         <relationship name="notifications" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Notification" inverseName="habit" inverseEntity="Notification" syncable="YES"/>
-        <relationship name="offensives" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Offensive" inverseName="habit" inverseEntity="Offensive" syncable="YES"/>
         <relationship name="user" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="habits" inverseEntity="User" syncable="YES"/>
         <fetchIndex name="byCreatedNameAndIdIndex">
             <fetchIndexElement property="createdAt" type="Binary" order="descending"/>
@@ -61,15 +59,6 @@
             <fetchIndexElement property="fireDate" type="Binary" order="ascending"/>
         </fetchIndex>
     </entity>
-    <entity name="Offensive" representedClassName=".OffensiveMO" syncable="YES" codeGenerationType="category">
-        <attribute name="createdAt" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="fromDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="id" attributeType="String" syncable="YES"/>
-        <attribute name="toDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="updatedAt" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <relationship name="challenge" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DaysChallenge" inverseName="offensives" inverseEntity="DaysChallenge" syncable="YES"/>
-        <relationship name="habit" maxCount="1" deletionRule="Nullify" destinationEntity="Habit" inverseName="offensives" inverseEntity="Habit" syncable="YES"/>
-    </entity>
     <entity name="User" representedClassName=".UserMO" syncable="YES" codeGenerationType="category">
         <attribute name="createdAt" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="id" attributeType="String" syncable="YES"/>
@@ -77,12 +66,11 @@
     </entity>
     <elements>
         <element name="Day" positionX="-3638" positionY="-4030" width="128" height="88"/>
-        <element name="DaysChallenge" positionX="-3645" positionY="-3883" width="128" height="163"/>
+        <element name="DaysChallenge" positionX="-3645" positionY="-3883" width="128" height="148"/>
         <element name="FireTime" positionX="-2999" positionY="-3922" width="128" height="118"/>
-        <element name="Habit" positionX="-3215" positionY="-3915" width="128" height="193"/>
+        <element name="Habit" positionX="-3215" positionY="-3915" width="128" height="178"/>
         <element name="HabitDay" positionX="-3438" positionY="-3978" width="128" height="133"/>
         <element name="Notification" positionX="-2997" positionY="-3745" width="128" height="133"/>
-        <element name="Offensive" positionX="-3431" positionY="-3661" width="128" height="148"/>
         <element name="User" positionX="-3242" positionY="-4131" width="128" height="88"/>
     </elements>
 </model>
