@@ -40,7 +40,7 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="qVn-Re-KHh">
-                                    <rect key="frame" x="105" y="20.5" width="165" height="29"/>
+                                    <rect key="frame" x="105" y="32" width="165" height="29"/>
                                     <segments>
                                         <segment title="In progress"/>
                                         <segment title="Completed"/>
@@ -52,8 +52,8 @@
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
+                                <constraint firstAttribute="bottom" secondItem="qVn-Re-KHh" secondAttribute="bottom" constant="10" id="2iX-XB-piR"/>
                                 <constraint firstItem="qVn-Re-KHh" firstAttribute="centerX" secondItem="Lu7-sl-vj6" secondAttribute="centerX" id="c7n-oF-ZAI"/>
-                                <constraint firstItem="qVn-Re-KHh" firstAttribute="centerY" secondItem="Lu7-sl-vj6" secondAttribute="centerY" id="eE5-zQ-PFS"/>
                             </constraints>
                         </view>
                         <prototypes>
@@ -252,12 +252,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="1000"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <view key="tableFooterView" contentMode="scaleToFill" misplaced="YES" id="U4g-rN-Yvd" userLabel="Footer">
+                        <view key="tableFooterView" contentMode="scaleToFill" id="U4g-rN-Yvd" userLabel="Footer">
                             <rect key="frame" x="0.0" y="883" width="375" height="104"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D90-7S-rS4" customClass="RoundedButton" customModule="Active" customModuleProvider="target">
-                                    <rect key="frame" x="117.5" y="193.5" width="140" height="50"/>
+                                    <rect key="frame" x="117.5" y="27" width="140" height="50"/>
                                     <color key="backgroundColor" red="0.18431372549019609" green="0.21176470588235294" blue="0.25098039215686274" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="140" id="EpX-yy-wTD"/>
@@ -918,7 +918,7 @@ reminded about this habit?</string>
                                                                 <subviews>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vRa-9V-RbT" userLabel="Calendar month" customClass="MonthHeaderView" customModule="Active" customModuleProvider="target">
                                                                         <rect key="frame" x="0.0" y="0.0" width="375" height="69"/>
-                                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        <color key="backgroundColor" red="0.99215686274509807" green="0.99215686274509807" blue="0.99607843137254903" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     </view>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mkN-C0-TmC" userLabel="Calendar days" customClass="DaysHeaderView" customModule="Active" customModuleProvider="target">
                                                                         <rect key="frame" x="0.0" y="69" width="375" height="30"/>
@@ -1406,6 +1406,6 @@ you think of adding a new one?</string>
     <inferredMetricsTieBreakers>
         <segue reference="G29-rb-isc"/>
         <segue reference="43l-ZQ-AR3"/>
-        <segue reference="5mV-Cj-rFr"/>
+        <segue reference="Xkx-Wi-bYR"/>
     </inferredMetricsTieBreakers>
 </document>
