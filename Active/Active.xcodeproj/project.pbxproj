@@ -11,6 +11,7 @@
 		470230D620E2A696003A1F6E /* HabitDayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470230D520E2A696003A1F6E /* HabitDayTests.swift */; };
 		470230D820E5250A003A1F6E /* Int+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470230D720E5250A003A1F6E /* Int+Utils.swift */; };
 		470C4170213EE70D007F6F35 /* UNNotificationContent+Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470C416F213EE70D007F6F35 /* UNNotificationContent+Category.swift */; };
+		470C41B02144A4B9007F6F35 /* DevelopmentSeeder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470C41AF2144A4B9007F6F35 /* DevelopmentSeeder.swift */; };
 		4713A1FC20C1643E008A13D2 /* UserMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4713A1FB20C1643E008A13D2 /* UserMO.swift */; };
 		4713A1FE20C16459008A13D2 /* HabitMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4713A1FD20C16459008A13D2 /* HabitMO.swift */; };
 		4713A20020C164E6008A13D2 /* HabitDayMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4713A1FF20C164E6008A13D2 /* HabitDayMO.swift */; };
@@ -111,7 +112,7 @@
 		47D8FC9E20DC13990094026B /* UserNotificationManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D8FC9D20DC13990094026B /* UserNotificationManagerTests.swift */; };
 		47E6C20B20EAF550003BDB4D /* HabitCreationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E6C20A20EAF550003BDB4D /* HabitCreationTableViewController.swift */; };
 		47E6C20D20EAF567003BDB4D /* HabitDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E6C20C20EAF567003BDB4D /* HabitDetailsViewController.swift */; };
-		47E6C21020EB1233003BDB4D /* SeedManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E6C20F20EB1233003BDB4D /* SeedManager.swift */; };
+		47E6C21020EB1233003BDB4D /* Seeder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E6C20F20EB1233003BDB4D /* Seeder.swift */; };
 		47E6C21120EB129C003BDB4D /* DummyFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475C96A120DEFB4C00212E1F /* DummyFactory.swift */; };
 		47E6C21320EB12A2003BDB4D /* DayFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475C96A320DEFC9500212E1F /* DayFactory.swift */; };
 		47E6C21420EB12A5003BDB4D /* UserFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4761DFD520DEEAA7003F772A /* UserFactory.swift */; };
@@ -146,6 +147,7 @@
 		470230D520E2A696003A1F6E /* HabitDayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitDayTests.swift; sourceTree = "<group>"; };
 		470230D720E5250A003A1F6E /* Int+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Utils.swift"; sourceTree = "<group>"; };
 		470C416F213EE70D007F6F35 /* UNNotificationContent+Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UNNotificationContent+Category.swift"; sourceTree = "<group>"; };
+		470C41AF2144A4B9007F6F35 /* DevelopmentSeeder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevelopmentSeeder.swift; sourceTree = "<group>"; };
 		4713A1FB20C1643E008A13D2 /* UserMO.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = UserMO.swift; sourceTree = "<group>"; tabWidth = 4; };
 		4713A1FD20C16459008A13D2 /* HabitMO.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = HabitMO.swift; sourceTree = "<group>"; tabWidth = 4; };
 		4713A1FF20C164E6008A13D2 /* HabitDayMO.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = HabitDayMO.swift; sourceTree = "<group>"; tabWidth = 4; };
@@ -252,7 +254,7 @@
 		47D8FC9D20DC13990094026B /* UserNotificationManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationManagerTests.swift; sourceTree = "<group>"; };
 		47E6C20A20EAF550003BDB4D /* HabitCreationTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitCreationTableViewController.swift; sourceTree = "<group>"; };
 		47E6C20C20EAF567003BDB4D /* HabitDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitDetailsViewController.swift; sourceTree = "<group>"; };
-		47E6C20F20EB1233003BDB4D /* SeedManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedManager.swift; sourceTree = "<group>"; };
+		47E6C20F20EB1233003BDB4D /* Seeder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Seeder.swift; sourceTree = "<group>"; };
 		47E6C21E20EC16C8003BDB4D /* UIViewController+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Utils.swift"; sourceTree = "<group>"; };
 		47F635EC20BB920900AC4555 /* Active.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Active.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		47F635EF20BB920900AC4555 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -591,7 +593,8 @@
 			isa = PBXGroup;
 			children = (
 				4761DFD420DEB8D3003F772A /* Dummy Factories */,
-				47E6C20F20EB1233003BDB4D /* SeedManager.swift */,
+				47E6C20F20EB1233003BDB4D /* Seeder.swift */,
+				470C41AF2144A4B9007F6F35 /* DevelopmentSeeder.swift */,
 			);
 			path = Seed;
 			sourceTree = "<group>";
@@ -878,7 +881,7 @@
 				47D7003D210179F600F4FE88 /* NotificationScheduler.swift in Sources */,
 				4779588320D8B2E10080614F /* UserNotificationManager.swift in Sources */,
 				47D8308E20FD1490002D3A97 /* DaysChallengeFactory.swift in Sources */,
-				47E6C21020EB1233003BDB4D /* SeedManager.swift in Sources */,
+				47E6C21020EB1233003BDB4D /* Seeder.swift in Sources */,
 				475197D821359516009F959C /* NotificationAvailabilityDisplayable.swift in Sources */,
 				4713A20420C16542008A13D2 /* NotificationMO.swift in Sources */,
 				47160A3F2137275B00E717C9 /* CompletedHabitTableViewCell.swift in Sources */,
@@ -917,6 +920,7 @@
 				47C3203A213079AD0094BBF8 /* HabitCreationTableViewController+NameField.swift in Sources */,
 				47C3203C2130E91F0094BBF8 /* FireTimesDisplayable.swift in Sources */,
 				4737312B20ED502800895DD2 /* HabitDaysSelectionViewController.swift in Sources */,
+				470C41B02144A4B9007F6F35 /* DevelopmentSeeder.swift in Sources */,
 				47160A4621387AC300E717C9 /* EmptyStateView.swift in Sources */,
 				47D8308A20FCFDD6002D3A97 /* DaysChallengeStorage.swift in Sources */,
 				4713A1FC20C1643E008A13D2 /* UserMO.swift in Sources */,
@@ -1111,7 +1115,6 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				"OTHER_SWIFT_FLAGS[arch=*]" = "-D DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = tiago.maia.Active;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

@@ -29,7 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     /// The app's seed manager.
     /// - Note: The seed takes place between each app launches.
-    private lazy var seedManager: SeedManager = SeedManager(
+    private lazy var seedManager: Seeder = Seeder(
         container: persistentContainer
     )
 
