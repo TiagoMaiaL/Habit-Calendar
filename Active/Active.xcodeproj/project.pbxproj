@@ -357,9 +357,9 @@
 		470C416F213EE70D007F6F35 /* UNNotificationContent+Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UNNotificationContent+Category.swift"; sourceTree = "<group>"; };
 		470C41AF2144A4B9007F6F35 /* DevelopmentSeeder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevelopmentSeeder.swift; sourceTree = "<group>"; };
 		470C42202144B091007F6F35 /* Active-Dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Active-Dev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		470C42212144B091007F6F35 /* Active copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Active copy-Info.plist"; path = "/Users/knowledgetemple/Profession/studies/ios/ios-apps/Active/Active/Active copy-Info.plist"; sourceTree = "<absolute>"; };
+		470C42212144B091007F6F35 /* Active-Dev-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Active-Dev-Info.plist"; path = "/Users/knowledgetemple/Profession/studies/ios/ios-apps/Active/Active/Active-Dev-Info.plist"; sourceTree = "<absolute>"; };
 		470C42912144B164007F6F35 /* Active-Stg.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Active-Stg.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		470C42922144B164007F6F35 /* Active copy2-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Active copy2-Info.plist"; path = "/Users/knowledgetemple/Profession/studies/ios/ios-apps/Active/Active/Active copy2-Info.plist"; sourceTree = "<absolute>"; };
+		470C42922144B164007F6F35 /* Active-Stg-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Active-Stg-Info.plist"; path = "/Users/knowledgetemple/Profession/studies/ios/ios-apps/Active/Active/Active-Stg-Info.plist"; sourceTree = "<absolute>"; };
 		470C42932145A52C007F6F35 /* UIColor+Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Palette.swift"; sourceTree = "<group>"; };
 		4713A1FB20C1643E008A13D2 /* UserMO.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = UserMO.swift; sourceTree = "<group>"; tabWidth = 4; };
 		4713A1FD20C16459008A13D2 /* HabitMO.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = HabitMO.swift; sourceTree = "<group>"; tabWidth = 4; };
@@ -848,8 +848,6 @@
 				47F635ED20BB920900AC4555 /* Products */,
 				4737313420F3D34E00895DD2 /* Frameworks */,
 				335795761CD482CBF7709D4D /* Pods */,
-				470C42212144B091007F6F35 /* Active copy-Info.plist */,
-				470C42922144B164007F6F35 /* Active copy2-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -875,6 +873,8 @@
 				474F9C8420CC7DEF0094C19C /* Extensions */,
 				47F6361220BB924100AC4555 /* Supporting Files */,
 				47F635FE20BB920D00AC4555 /* Info.plist */,
+				470C42212144B091007F6F35 /* Active-Dev-Info.plist */,
+				470C42922144B164007F6F35 /* Active-Stg-Info.plist */,
 			);
 			path = Active;
 			sourceTree = "<group>";
@@ -1619,7 +1619,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 79964U8894;
-				INFOPLIST_FILE = "Active copy-Info.plist";
+				INFOPLIST_FILE = "Active-Dev-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1642,7 +1642,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 79964U8894;
-				INFOPLIST_FILE = "Active copy-Info.plist";
+				INFOPLIST_FILE = "Active-Dev-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1665,7 +1665,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 79964U8894;
-				INFOPLIST_FILE = "Active copy2-Info.plist";
+				INFOPLIST_FILE = "Active-Stg-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1688,7 +1688,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 79964U8894;
-				INFOPLIST_FILE = "Active copy2-Info.plist";
+				INFOPLIST_FILE = "Active-Stg-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
