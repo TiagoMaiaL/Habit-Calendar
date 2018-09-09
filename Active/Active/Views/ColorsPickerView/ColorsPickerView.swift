@@ -38,7 +38,7 @@ import UIKit
             ),
             collectionViewLayout: flowLayout
         )
-        collectionView.backgroundColor = .white
+        collectionView.backgroundColor = .clear
         collectionView.clipsToBounds = false
 
         return collectionView

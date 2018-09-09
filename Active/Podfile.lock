@@ -1,20 +1,24 @@
 PODS:
   - JTAppleCalendar (7.1.5)
   - SwiftLint (0.26.0)
+  - UIColor_Hex_Swift (4.0.2)
 
 DEPENDENCIES:
   - JTAppleCalendar (~> 7.1.5)
   - SwiftLint
+  - UIColor_Hex_Swift (~> 4.0.2)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - JTAppleCalendar
     - SwiftLint
+    - UIColor_Hex_Swift
 
 SPEC CHECKSUMS:
   JTAppleCalendar: 2d4f974f9f3c8b4964d51ca1f6e004883c031fbe
   SwiftLint: f6b83e8d95ee1e91e11932d843af4fdcbf3fc764
+  UIColor_Hex_Swift: 2fb123c7d864994a5137ef57c4dc55e17a657d29
 
-PODFILE CHECKSUM: a7e5f27e71948d45e834083a12487aebdc011adc
+PODFILE CHECKSUM: 106359ae884ce7265ef8c6688538fd6695702683
 
 COCOAPODS: 1.5.3
