@@ -6,4 +6,14 @@
 //  Copyright © 2018 Tiago Maia Lopes. All rights reserved.
 //
 
-import Foundation
+import UIKit
+import UIColor_Hex_Swift
+
+extension UIColor {
+
+    /// The base background color applied to all controllers.
+    static var baseBgColor: UIColor {
+        return UIColor("FDFDFE")
+    }
+
+}
