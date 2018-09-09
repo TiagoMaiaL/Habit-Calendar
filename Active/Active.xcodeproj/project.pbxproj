@@ -12,6 +12,208 @@
 		470230D820E5250A003A1F6E /* Int+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470230D720E5250A003A1F6E /* Int+Utils.swift */; };
 		470C4170213EE70D007F6F35 /* UNNotificationContent+Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470C416F213EE70D007F6F35 /* UNNotificationContent+Category.swift */; };
 		470C41B02144A4B9007F6F35 /* DevelopmentSeeder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470C41AF2144A4B9007F6F35 /* DevelopmentSeeder.swift */; };
+		470C41B42144B091007F6F35 /* HabitFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475C96A520DEFEBC00212E1F /* HabitFactory.swift */; };
+		470C41B52144B091007F6F35 /* Active.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 47F635F620BB920900AC4555 /* Active.xcdatamodeld */; };
+		470C41B62144B091007F6F35 /* UNNotificationContent+Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470C416F213EE70D007F6F35 /* UNNotificationContent+Category.swift */; };
+		470C41B72144B091007F6F35 /* DummyFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475C96A120DEFB4C00212E1F /* DummyFactory.swift */; };
+		470C41B82144B091007F6F35 /* Int+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470230D720E5250A003A1F6E /* Int+Utils.swift */; };
+		470C41B92144B091007F6F35 /* MonthHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4732CE82211CB89F00E2770C /* MonthHeaderView.swift */; };
+		470C41BA2144B091007F6F35 /* ColorOptionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4761F5B62120D7F900A8D407 /* ColorOptionCollectionViewCell.swift */; };
+		470C41BB2144B091007F6F35 /* DaysHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4732CE80211C93B500E2770C /* DaysHeaderView.swift */; };
+		470C41BC2144B091007F6F35 /* HabitDetailsViewController+NoChallengesSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C3202A212DCC230094BBF8 /* HabitDetailsViewController+NoChallengesSection.swift */; };
+		470C41BD2144B091007F6F35 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F635EF20BB920900AC4555 /* AppDelegate.swift */; };
+		470C41BE2144B091007F6F35 /* HabitDetailsViewController+Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C3202C212DD59A0094BBF8 /* HabitDetailsViewController+Calendar.swift */; };
+		470C41BF2144B091007F6F35 /* HabitMOColor+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B23989212203F9009CB25C /* HabitMOColor+UIColor.swift */; };
+		470C41C02144B091007F6F35 /* FireTimesSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4737312C20ED503B00895DD2 /* FireTimesSelectionViewController.swift */; };
+		470C41C12144B091007F6F35 /* ColorsPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4761F5B22120A0F700A8D407 /* ColorsPickerView.swift */; };
+		470C41C22144B091007F6F35 /* DayMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4713A20120C164FB008A13D2 /* DayMO.swift */; };
+		470C41C32144B091007F6F35 /* NotificationScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D7003C210179F600F4FE88 /* NotificationScheduler.swift */; };
+		470C41C42144B091007F6F35 /* UserNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4779588220D8B2E10080614F /* UserNotificationManager.swift */; };
+		470C41C52144B091007F6F35 /* DaysChallengeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D8308D20FD1490002D3A97 /* DaysChallengeFactory.swift */; };
+		470C41C62144B091007F6F35 /* Seeder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E6C20F20EB1233003BDB4D /* Seeder.swift */; };
+		470C41C72144B091007F6F35 /* NotificationAvailabilityDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475197D721359516009F959C /* NotificationAvailabilityDisplayable.swift */; };
+		470C41C82144B091007F6F35 /* NotificationMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4713A20320C16542008A13D2 /* NotificationMO.swift */; };
+		470C41C92144B091007F6F35 /* CompletedHabitTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47160A3E2137275B00E717C9 /* CompletedHabitTableViewCell.swift */; };
+		470C41CA2144B091007F6F35 /* CalendarDayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4761F5AF21209EED00A8D407 /* CalendarDayCell.swift */; };
+		470C41CB2144B091007F6F35 /* FireTimeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AA365A2104D5E60008D2DC /* FireTimeFactory.swift */; };
+		470C41CC2144B091007F6F35 /* ColorsPickerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4761F5B42120D06900A8D407 /* ColorsPickerDataSource.swift */; };
+		470C41CD2144B091007F6F35 /* RoundedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47160A4021372B2F00E717C9 /* RoundedView.swift */; };
+		470C41CE2144B091007F6F35 /* HabitCreationTableViewController+ColorField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C320372130799C0094BBF8 /* HabitCreationTableViewController+ColorField.swift */; };
+		470C41CF2144B091007F6F35 /* HabitDetailsViewController+ProgressSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C32028212C57D10094BBF8 /* HabitDetailsViewController+ProgressSection.swift */; };
+		470C41D02144B091007F6F35 /* HabitCreationTableViewController+DaysField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C320332130793A0094BBF8 /* HabitCreationTableViewController+DaysField.swift */; };
+		470C41D12144B091007F6F35 /* DayStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4725D06020CA06EE00C3B63F /* DayStorage.swift */; };
+		470C41D22144B091007F6F35 /* HabitDetailsViewController+PromptSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C3202E212DD7C80094BBF8 /* HabitDetailsViewController+PromptSection.swift */; };
+		470C41D32144B091007F6F35 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4732CE7D211A12B500E2770C /* RoundedButton.swift */; };
+		470C41D42144B091007F6F35 /* UserStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4725D05E20C97D9C00C3B63F /* UserStorage.swift */; };
+		470C41D52144B091007F6F35 /* NotificationFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475C96A720DF20A500212E1F /* NotificationFactory.swift */; };
+		470C41D62144B091007F6F35 /* FireTimeMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AA365221037B0B0008D2DC /* FireTimeMO.swift */; };
+		470C41D72144B091007F6F35 /* Date+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474F9C8520CC7E180094C19C /* Date+Utils.swift */; };
+		470C41D82144B091007F6F35 /* HabitsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4725D05A20C8A4BA00C3B63F /* HabitsTableViewController.swift */; };
+		470C41D92144B091007F6F35 /* HabitDaysSelectionViewController+Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475197D52132F4E1009F959C /* HabitDaysSelectionViewController+Calendar.swift */; };
+		470C41DA2144B091007F6F35 /* HabitDayStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4725D06220CA14A600C3B63F /* HabitDayStorage.swift */; };
+		470C41DB2144B091007F6F35 /* HabitTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4732CE772114F23200E2770C /* HabitTableViewCell.swift */; };
+		470C41DC2144B091007F6F35 /* CalendarDisplaying.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C1F3DD212A140F00DDA7BB /* CalendarDisplaying.swift */; };
+		470C41DD2144B091007F6F35 /* HabitMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4713A1FD20C16459008A13D2 /* HabitMO.swift */; };
+		470C41DE2144B091007F6F35 /* HabitDetailsViewController+FireTimesSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C32030212EFD380094BBF8 /* HabitDetailsViewController+FireTimesSection.swift */; };
+		470C41DF2144B091007F6F35 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4732CE792114FF5F00E2770C /* CardView.swift */; };
+		470C41E02144B091007F6F35 /* NotificationStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4779588420D8B38B0080614F /* NotificationStorage.swift */; };
+		470C41E12144B091007F6F35 /* DaysChallengeMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D8308720FCE82F002D3A97 /* DaysChallengeMO.swift */; };
+		470C41E22144B091007F6F35 /* HabitCreationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E6C20A20EAF550003BDB4D /* HabitCreationTableViewController.swift */; };
+		470C41E32144B091007F6F35 /* DateFormatter+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474B7B9D212746BE00814A8E /* DateFormatter+Utils.swift */; };
+		470C41E42144B091007F6F35 /* HabitStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4725D05C20C8A96200C3B63F /* HabitStorage.swift */; };
+		470C41E52144B091007F6F35 /* HabitCreationTableViewController+FireTimesField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C32035213079770094BBF8 /* HabitCreationTableViewController+FireTimesField.swift */; };
+		470C41E62144B091007F6F35 /* DayFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475C96A320DEFC9500212E1F /* DayFactory.swift */; };
+		470C41E72144B091007F6F35 /* UnderlinedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4732CE7B2118DA8400E2770C /* UnderlinedTextField.swift */; };
+		470C41E82144B091007F6F35 /* HabitDayMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4713A1FF20C164E6008A13D2 /* HabitDayMO.swift */; };
+		470C41E92144B091007F6F35 /* HabitDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E6C20C20EAF567003BDB4D /* HabitDetailsViewController.swift */; };
+		470C41EA2144B091007F6F35 /* HabitCreationTableViewController+NameField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C32039213079AD0094BBF8 /* HabitCreationTableViewController+NameField.swift */; };
+		470C41EB2144B091007F6F35 /* FireTimesDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C3203B2130E91F0094BBF8 /* FireTimesDisplayable.swift */; };
+		470C41EC2144B091007F6F35 /* HabitDaysSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4737312A20ED502800895DD2 /* HabitDaysSelectionViewController.swift */; };
+		470C41ED2144B091007F6F35 /* DevelopmentSeeder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470C41AF2144A4B9007F6F35 /* DevelopmentSeeder.swift */; };
+		470C41EE2144B091007F6F35 /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47160A4521387AC300E717C9 /* EmptyStateView.swift */; };
+		470C41EF2144B091007F6F35 /* DaysChallengeStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D8308920FCFDD6002D3A97 /* DaysChallengeStorage.swift */; };
+		470C41F02144B091007F6F35 /* UserMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4713A1FB20C1643E008A13D2 /* UserMO.swift */; };
+		470C41F12144B091007F6F35 /* UserFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4761DFD520DEEAA7003F772A /* UserFactory.swift */; };
+		470C41F22144B091007F6F35 /* UIViewController+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E6C21E20EC16C8003BDB4D /* UIViewController+Utils.swift */; };
+		470C41F32144B091007F6F35 /* FireTimeStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AA3658210382AB0008D2DC /* FireTimeStorage.swift */; };
+		470C41F42144B091007F6F35 /* HabitDayFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475C96A920DF235000212E1F /* HabitDayFactory.swift */; };
+		470C41F52144B091007F6F35 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4732CE752114E8A200E2770C /* ProgressView.swift */; };
+		470C41F72144B091007F6F35 /* Pods_Active.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02FAEBDB1FE70AE5CDC59193 /* Pods_Active.framework */; };
+		470C41F92144B091007F6F35 /* SF-Pro-Display-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4732CE4B2114D9C100E2770C /* SF-Pro-Display-Semibold.otf */; };
+		470C41FA2144B091007F6F35 /* SF-Pro-Text-MediumItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4732CE3D2114D9B000E2770C /* SF-Pro-Text-MediumItalic.otf */; };
+		470C41FB2144B091007F6F35 /* EmptyStateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47160A4321387AAE00E717C9 /* EmptyStateView.xib */; };
+		470C41FC2144B091007F6F35 /* SF-Pro-Display-BlackItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4732CE442114D9B900E2770C /* SF-Pro-Display-BlackItalic.otf */; };
+		470C41FD2144B091007F6F35 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47F635FB20BB920D00AC4555 /* LaunchScreen.storyboard */; };
+		470C41FE2144B091007F6F35 /* SF-Pro-Text-SemiboldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4732CE512114D9C900E2770C /* SF-Pro-Text-SemiboldItalic.otf */; };
+		470C41FF2144B091007F6F35 /* SF-Pro-Display-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4732CE4D2114D9C400E2770C /* SF-Pro-Display-Light.otf */; };
+		470C42002144B091007F6F35 /* SF-Pro-Display-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4732CE542114D9CD00E2770C /* SF-Pro-Display-Medium.otf */; };
+		470C42012144B091007F6F35 /* SF-Pro-Text-Heavy.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4732CE492114D9BF00E2770C /* SF-Pro-Text-Heavy.otf */; };
+		470C42022144B091007F6F35 /* SF-Pro-Text-RegularItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4732CE432114D9B700E2770C /* SF-Pro-Text-RegularItalic.otf */; };
+		470C42032144B091007F6F35 /* SF-Pro-Display-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4732CE532114D9CC00E2770C /* SF-Pro-Display-Thin.otf */; };
+		470C42042144B091007F6F35 /* SF-Pro-Display-ThinItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4732CE452114D9BA00E2770C /* SF-Pro-Display-ThinItalic.otf */; };
+		470C42052144B091007F6F35 /* SF-Pro-Text-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4732CE482114D9BD00E2770C /* SF-Pro-Text-Light.otf */; };
+		470C42062144B091007F6F35 /* SF-Pro-Display-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4732CE422114D9B600E2770C /* SF-Pro-Display-Black.otf */; };
+		470C42072144B091007F6F35 /* SF-Pro-Text-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4732CE472114D9BC00E2770C /* SF-Pro-Text-Bold.otf */; };
+		470C42082144B091007F6F35 /* SF-Pro-Text-LightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4732CE412114D9B500E2770C /* SF-Pro-Text-LightItalic.otf */; };
+		470C42092144B091007F6F35 /* SF-Pro-Display-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4732CE4A2114D9C000E2770C /* SF-Pro-Display-Bold.otf */; };
+		470C420A2144B091007F6F35 /* SF-Pro-Display-UltralightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4732CE462114D9BB00E2770C /* SF-Pro-Display-UltralightItalic.otf */; };
+		470C420B2144B091007F6F35 /* SF-Pro-Text-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4732CE4C2114D9C300E2770C /* SF-Pro-Text-Medium.otf */; };
+		470C420C2144B091007F6F35 /* SF-Pro-Text-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4732CE502114D9C800E2770C /* SF-Pro-Text-Regular.otf */; };
+		470C420D2144B091007F6F35 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 47F635F920BB920D00AC4555 /* Assets.xcassets */; };
+		470C420E2144B091007F6F35 /* SF-Pro-Display-Ultralight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4732CE3F2114D9B300E2770C /* SF-Pro-Display-Ultralight.otf */; };
+		470C420F2144B091007F6F35 /* SF-Pro-Display-SemiboldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4732CE402114D9B400E2770C /* SF-Pro-Display-SemiboldItalic.otf */; };
+		470C42102144B091007F6F35 /* SF-Pro-Display-RegularItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4732CE3A2114D9AB00E2770C /* SF-Pro-Display-RegularItalic.otf */; };
+		470C42112144B091007F6F35 /* SF-Pro-Text-HeavyItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4732CE3B2114D9AD00E2770C /* SF-Pro-Text-HeavyItalic.otf */; };
+		470C42122144B091007F6F35 /* SF-Pro-Text-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4732CE4F2114D9C600E2770C /* SF-Pro-Text-Semibold.otf */; };
+		470C42132144B091007F6F35 /* SF-Pro-Display-MediumItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4732CE3C2114D9AF00E2770C /* SF-Pro-Display-MediumItalic.otf */; };
+		470C42142144B091007F6F35 /* SF-Pro-Display-LightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4732CE392114D9AA00E2770C /* SF-Pro-Display-LightItalic.otf */; };
+		470C42152144B091007F6F35 /* SF-Pro-Display-BoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4732CE3E2114D9B200E2770C /* SF-Pro-Display-BoldItalic.otf */; };
+		470C42162144B091007F6F35 /* SF-Pro-Text-BoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4732CE372114D9A700E2770C /* SF-Pro-Text-BoldItalic.otf */; };
+		470C42172144B091007F6F35 /* SF-Pro-Display-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4732CE382114D9A900E2770C /* SF-Pro-Display-Regular.otf */; };
+		470C42182144B091007F6F35 /* SF-Pro-Display-HeavyItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4732CE4E2114D9C500E2770C /* SF-Pro-Display-HeavyItalic.otf */; };
+		470C42192144B091007F6F35 /* SF-Pro-Display-Heavy.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4732CE522114D9CA00E2770C /* SF-Pro-Display-Heavy.otf */; };
+		470C421A2144B091007F6F35 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47F635F320BB920900AC4555 /* Main.storyboard */; };
+		470C42252144B164007F6F35 /* HabitFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475C96A520DEFEBC00212E1F /* HabitFactory.swift */; };
+		470C42262144B164007F6F35 /* Active.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 47F635F620BB920900AC4555 /* Active.xcdatamodeld */; };
+		470C42272144B164007F6F35 /* UNNotificationContent+Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470C416F213EE70D007F6F35 /* UNNotificationContent+Category.swift */; };
+		470C42282144B164007F6F35 /* DummyFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475C96A120DEFB4C00212E1F /* DummyFactory.swift */; };
+		470C42292144B164007F6F35 /* Int+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470230D720E5250A003A1F6E /* Int+Utils.swift */; };
+		470C422A2144B164007F6F35 /* MonthHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4732CE82211CB89F00E2770C /* MonthHeaderView.swift */; };
+		470C422B2144B164007F6F35 /* ColorOptionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4761F5B62120D7F900A8D407 /* ColorOptionCollectionViewCell.swift */; };
+		470C422C2144B164007F6F35 /* DaysHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4732CE80211C93B500E2770C /* DaysHeaderView.swift */; };
+		470C422D2144B164007F6F35 /* HabitDetailsViewController+NoChallengesSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C3202A212DCC230094BBF8 /* HabitDetailsViewController+NoChallengesSection.swift */; };
+		470C422E2144B164007F6F35 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F635EF20BB920900AC4555 /* AppDelegate.swift */; };
+		470C422F2144B164007F6F35 /* HabitDetailsViewController+Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C3202C212DD59A0094BBF8 /* HabitDetailsViewController+Calendar.swift */; };
+		470C42302144B164007F6F35 /* HabitMOColor+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B23989212203F9009CB25C /* HabitMOColor+UIColor.swift */; };
+		470C42312144B164007F6F35 /* FireTimesSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4737312C20ED503B00895DD2 /* FireTimesSelectionViewController.swift */; };
+		470C42322144B164007F6F35 /* ColorsPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4761F5B22120A0F700A8D407 /* ColorsPickerView.swift */; };
+		470C42332144B164007F6F35 /* DayMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4713A20120C164FB008A13D2 /* DayMO.swift */; };
+		470C42342144B164007F6F35 /* NotificationScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D7003C210179F600F4FE88 /* NotificationScheduler.swift */; };
+		470C42352144B164007F6F35 /* UserNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4779588220D8B2E10080614F /* UserNotificationManager.swift */; };
+		470C42362144B164007F6F35 /* DaysChallengeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D8308D20FD1490002D3A97 /* DaysChallengeFactory.swift */; };
+		470C42372144B164007F6F35 /* Seeder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E6C20F20EB1233003BDB4D /* Seeder.swift */; };
+		470C42382144B164007F6F35 /* NotificationAvailabilityDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475197D721359516009F959C /* NotificationAvailabilityDisplayable.swift */; };
+		470C42392144B164007F6F35 /* NotificationMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4713A20320C16542008A13D2 /* NotificationMO.swift */; };
+		470C423A2144B164007F6F35 /* CompletedHabitTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47160A3E2137275B00E717C9 /* CompletedHabitTableViewCell.swift */; };
+		470C423B2144B164007F6F35 /* CalendarDayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4761F5AF21209EED00A8D407 /* CalendarDayCell.swift */; };
+		470C423C2144B164007F6F35 /* FireTimeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AA365A2104D5E60008D2DC /* FireTimeFactory.swift */; };
+		470C423D2144B164007F6F35 /* ColorsPickerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4761F5B42120D06900A8D407 /* ColorsPickerDataSource.swift */; };
+		470C423E2144B164007F6F35 /* RoundedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47160A4021372B2F00E717C9 /* RoundedView.swift */; };
+		470C423F2144B164007F6F35 /* HabitCreationTableViewController+ColorField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C320372130799C0094BBF8 /* HabitCreationTableViewController+ColorField.swift */; };
+		470C42402144B164007F6F35 /* HabitDetailsViewController+ProgressSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C32028212C57D10094BBF8 /* HabitDetailsViewController+ProgressSection.swift */; };
+		470C42412144B164007F6F35 /* HabitCreationTableViewController+DaysField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C320332130793A0094BBF8 /* HabitCreationTableViewController+DaysField.swift */; };
+		470C42422144B164007F6F35 /* DayStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4725D06020CA06EE00C3B63F /* DayStorage.swift */; };
+		470C42432144B164007F6F35 /* HabitDetailsViewController+PromptSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C3202E212DD7C80094BBF8 /* HabitDetailsViewController+PromptSection.swift */; };
+		470C42442144B164007F6F35 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4732CE7D211A12B500E2770C /* RoundedButton.swift */; };
+		470C42452144B164007F6F35 /* UserStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4725D05E20C97D9C00C3B63F /* UserStorage.swift */; };
+		470C42462144B164007F6F35 /* NotificationFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475C96A720DF20A500212E1F /* NotificationFactory.swift */; };
+		470C42472144B164007F6F35 /* FireTimeMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AA365221037B0B0008D2DC /* FireTimeMO.swift */; };
+		470C42482144B164007F6F35 /* Date+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474F9C8520CC7E180094C19C /* Date+Utils.swift */; };
+		470C42492144B164007F6F35 /* HabitsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4725D05A20C8A4BA00C3B63F /* HabitsTableViewController.swift */; };
+		470C424A2144B164007F6F35 /* HabitDaysSelectionViewController+Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475197D52132F4E1009F959C /* HabitDaysSelectionViewController+Calendar.swift */; };
+		470C424B2144B164007F6F35 /* HabitDayStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4725D06220CA14A600C3B63F /* HabitDayStorage.swift */; };
+		470C424C2144B164007F6F35 /* HabitTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4732CE772114F23200E2770C /* HabitTableViewCell.swift */; };
+		470C424D2144B164007F6F35 /* CalendarDisplaying.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C1F3DD212A140F00DDA7BB /* CalendarDisplaying.swift */; };
+		470C424E2144B164007F6F35 /* HabitMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4713A1FD20C16459008A13D2 /* HabitMO.swift */; };
+		470C424F2144B164007F6F35 /* HabitDetailsViewController+FireTimesSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C32030212EFD380094BBF8 /* HabitDetailsViewController+FireTimesSection.swift */; };
+		470C42502144B164007F6F35 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4732CE792114FF5F00E2770C /* CardView.swift */; };
+		470C42512144B164007F6F35 /* NotificationStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4779588420D8B38B0080614F /* NotificationStorage.swift */; };
+		470C42522144B164007F6F35 /* DaysChallengeMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D8308720FCE82F002D3A97 /* DaysChallengeMO.swift */; };
+		470C42532144B164007F6F35 /* HabitCreationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E6C20A20EAF550003BDB4D /* HabitCreationTableViewController.swift */; };
+		470C42542144B164007F6F35 /* DateFormatter+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474B7B9D212746BE00814A8E /* DateFormatter+Utils.swift */; };
+		470C42552144B164007F6F35 /* HabitStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4725D05C20C8A96200C3B63F /* HabitStorage.swift */; };
+		470C42562144B164007F6F35 /* HabitCreationTableViewController+FireTimesField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C32035213079770094BBF8 /* HabitCreationTableViewController+FireTimesField.swift */; };
+		470C42572144B164007F6F35 /* DayFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475C96A320DEFC9500212E1F /* DayFactory.swift */; };
+		470C42582144B164007F6F35 /* UnderlinedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4732CE7B2118DA8400E2770C /* UnderlinedTextField.swift */; };
+		470C42592144B164007F6F35 /* HabitDayMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4713A1FF20C164E6008A13D2 /* HabitDayMO.swift */; };
+		470C425A2144B164007F6F35 /* HabitDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E6C20C20EAF567003BDB4D /* HabitDetailsViewController.swift */; };
+		470C425B2144B164007F6F35 /* HabitCreationTableViewController+NameField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C32039213079AD0094BBF8 /* HabitCreationTableViewController+NameField.swift */; };
+		470C425C2144B164007F6F35 /* FireTimesDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C3203B2130E91F0094BBF8 /* FireTimesDisplayable.swift */; };
+		470C425D2144B164007F6F35 /* HabitDaysSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4737312A20ED502800895DD2 /* HabitDaysSelectionViewController.swift */; };
+		470C425E2144B164007F6F35 /* DevelopmentSeeder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470C41AF2144A4B9007F6F35 /* DevelopmentSeeder.swift */; };
+		470C425F2144B164007F6F35 /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47160A4521387AC300E717C9 /* EmptyStateView.swift */; };
+		470C42602144B164007F6F35 /* DaysChallengeStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D8308920FCFDD6002D3A97 /* DaysChallengeStorage.swift */; };
+		470C42612144B164007F6F35 /* UserMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4713A1FB20C1643E008A13D2 /* UserMO.swift */; };
+		470C42622144B164007F6F35 /* UserFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4761DFD520DEEAA7003F772A /* UserFactory.swift */; };
+		470C42632144B164007F6F35 /* UIViewController+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E6C21E20EC16C8003BDB4D /* UIViewController+Utils.swift */; };
+		470C42642144B164007F6F35 /* FireTimeStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AA3658210382AB0008D2DC /* FireTimeStorage.swift */; };
+		470C42652144B164007F6F35 /* HabitDayFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475C96A920DF235000212E1F /* HabitDayFactory.swift */; };
+		470C42662144B164007F6F35 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4732CE752114E8A200E2770C /* ProgressView.swift */; };
+		470C42682144B164007F6F35 /* Pods_Active.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02FAEBDB1FE70AE5CDC59193 /* Pods_Active.framework */; };
+		470C426A2144B164007F6F35 /* SF-Pro-Display-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4732CE4B2114D9C100E2770C /* SF-Pro-Display-Semibold.otf */; };
+		470C426B2144B164007F6F35 /* SF-Pro-Text-MediumItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4732CE3D2114D9B000E2770C /* SF-Pro-Text-MediumItalic.otf */; };
+		470C426C2144B164007F6F35 /* EmptyStateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47160A4321387AAE00E717C9 /* EmptyStateView.xib */; };
+		470C426D2144B164007F6F35 /* SF-Pro-Display-BlackItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4732CE442114D9B900E2770C /* SF-Pro-Display-BlackItalic.otf */; };
+		470C426E2144B164007F6F35 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47F635FB20BB920D00AC4555 /* LaunchScreen.storyboard */; };
+		470C426F2144B164007F6F35 /* SF-Pro-Text-SemiboldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4732CE512114D9C900E2770C /* SF-Pro-Text-SemiboldItalic.otf */; };
+		470C42702144B164007F6F35 /* SF-Pro-Display-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4732CE4D2114D9C400E2770C /* SF-Pro-Display-Light.otf */; };
+		470C42712144B164007F6F35 /* SF-Pro-Display-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4732CE542114D9CD00E2770C /* SF-Pro-Display-Medium.otf */; };
+		470C42722144B164007F6F35 /* SF-Pro-Text-Heavy.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4732CE492114D9BF00E2770C /* SF-Pro-Text-Heavy.otf */; };
+		470C42732144B164007F6F35 /* SF-Pro-Text-RegularItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4732CE432114D9B700E2770C /* SF-Pro-Text-RegularItalic.otf */; };
+		470C42742144B164007F6F35 /* SF-Pro-Display-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4732CE532114D9CC00E2770C /* SF-Pro-Display-Thin.otf */; };
+		470C42752144B164007F6F35 /* SF-Pro-Display-ThinItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4732CE452114D9BA00E2770C /* SF-Pro-Display-ThinItalic.otf */; };
+		470C42762144B164007F6F35 /* SF-Pro-Text-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4732CE482114D9BD00E2770C /* SF-Pro-Text-Light.otf */; };
+		470C42772144B164007F6F35 /* SF-Pro-Display-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4732CE422114D9B600E2770C /* SF-Pro-Display-Black.otf */; };
+		470C42782144B164007F6F35 /* SF-Pro-Text-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4732CE472114D9BC00E2770C /* SF-Pro-Text-Bold.otf */; };
+		470C42792144B164007F6F35 /* SF-Pro-Text-LightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4732CE412114D9B500E2770C /* SF-Pro-Text-LightItalic.otf */; };
+		470C427A2144B164007F6F35 /* SF-Pro-Display-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4732CE4A2114D9C000E2770C /* SF-Pro-Display-Bold.otf */; };
+		470C427B2144B164007F6F35 /* SF-Pro-Display-UltralightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4732CE462114D9BB00E2770C /* SF-Pro-Display-UltralightItalic.otf */; };
+		470C427C2144B164007F6F35 /* SF-Pro-Text-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4732CE4C2114D9C300E2770C /* SF-Pro-Text-Medium.otf */; };
+		470C427D2144B164007F6F35 /* SF-Pro-Text-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4732CE502114D9C800E2770C /* SF-Pro-Text-Regular.otf */; };
+		470C427E2144B164007F6F35 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 47F635F920BB920D00AC4555 /* Assets.xcassets */; };
+		470C427F2144B164007F6F35 /* SF-Pro-Display-Ultralight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4732CE3F2114D9B300E2770C /* SF-Pro-Display-Ultralight.otf */; };
+		470C42802144B164007F6F35 /* SF-Pro-Display-SemiboldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4732CE402114D9B400E2770C /* SF-Pro-Display-SemiboldItalic.otf */; };
+		470C42812144B164007F6F35 /* SF-Pro-Display-RegularItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4732CE3A2114D9AB00E2770C /* SF-Pro-Display-RegularItalic.otf */; };
+		470C42822144B164007F6F35 /* SF-Pro-Text-HeavyItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4732CE3B2114D9AD00E2770C /* SF-Pro-Text-HeavyItalic.otf */; };
+		470C42832144B164007F6F35 /* SF-Pro-Text-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4732CE4F2114D9C600E2770C /* SF-Pro-Text-Semibold.otf */; };
+		470C42842144B164007F6F35 /* SF-Pro-Display-MediumItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4732CE3C2114D9AF00E2770C /* SF-Pro-Display-MediumItalic.otf */; };
+		470C42852144B164007F6F35 /* SF-Pro-Display-LightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4732CE392114D9AA00E2770C /* SF-Pro-Display-LightItalic.otf */; };
+		470C42862144B164007F6F35 /* SF-Pro-Display-BoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4732CE3E2114D9B200E2770C /* SF-Pro-Display-BoldItalic.otf */; };
+		470C42872144B164007F6F35 /* SF-Pro-Text-BoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4732CE372114D9A700E2770C /* SF-Pro-Text-BoldItalic.otf */; };
+		470C42882144B164007F6F35 /* SF-Pro-Display-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4732CE382114D9A900E2770C /* SF-Pro-Display-Regular.otf */; };
+		470C42892144B164007F6F35 /* SF-Pro-Display-HeavyItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4732CE4E2114D9C500E2770C /* SF-Pro-Display-HeavyItalic.otf */; };
+		470C428A2144B164007F6F35 /* SF-Pro-Display-Heavy.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4732CE522114D9CA00E2770C /* SF-Pro-Display-Heavy.otf */; };
+		470C428B2144B164007F6F35 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47F635F320BB920900AC4555 /* Main.storyboard */; };
 		4713A1FC20C1643E008A13D2 /* UserMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4713A1FB20C1643E008A13D2 /* UserMO.swift */; };
 		4713A1FE20C16459008A13D2 /* HabitMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4713A1FD20C16459008A13D2 /* HabitMO.swift */; };
 		4713A20020C164E6008A13D2 /* HabitDayMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4713A1FF20C164E6008A13D2 /* HabitDayMO.swift */; };
@@ -148,6 +350,10 @@
 		470230D720E5250A003A1F6E /* Int+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Utils.swift"; sourceTree = "<group>"; };
 		470C416F213EE70D007F6F35 /* UNNotificationContent+Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UNNotificationContent+Category.swift"; sourceTree = "<group>"; };
 		470C41AF2144A4B9007F6F35 /* DevelopmentSeeder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevelopmentSeeder.swift; sourceTree = "<group>"; };
+		470C42202144B091007F6F35 /* Active-Dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Active-Dev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		470C42212144B091007F6F35 /* Active copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Active copy-Info.plist"; path = "/Users/knowledgetemple/Profession/studies/ios/ios-apps/Active/Active/Active copy-Info.plist"; sourceTree = "<absolute>"; };
+		470C42912144B164007F6F35 /* Active-Stg.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Active-Stg.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		470C42922144B164007F6F35 /* Active copy2-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Active copy2-Info.plist"; path = "/Users/knowledgetemple/Profession/studies/ios/ios-apps/Active/Active/Active copy2-Info.plist"; sourceTree = "<absolute>"; };
 		4713A1FB20C1643E008A13D2 /* UserMO.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = UserMO.swift; sourceTree = "<group>"; tabWidth = 4; };
 		4713A1FD20C16459008A13D2 /* HabitMO.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = HabitMO.swift; sourceTree = "<group>"; tabWidth = 4; };
 		4713A1FF20C164E6008A13D2 /* HabitDayMO.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = HabitDayMO.swift; sourceTree = "<group>"; tabWidth = 4; };
@@ -271,6 +477,22 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		470C41F62144B091007F6F35 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				470C41F72144B091007F6F35 /* Pods_Active.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		470C42672144B164007F6F35 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				470C42682144B164007F6F35 /* Pods_Active.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		47F635E920BB920900AC4555 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -607,6 +829,8 @@
 				47F635ED20BB920900AC4555 /* Products */,
 				4737313420F3D34E00895DD2 /* Frameworks */,
 				335795761CD482CBF7709D4D /* Pods */,
+				470C42212144B091007F6F35 /* Active copy-Info.plist */,
+				470C42922144B164007F6F35 /* Active copy2-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -615,6 +839,8 @@
 			children = (
 				47F635EC20BB920900AC4555 /* Active.app */,
 				47F6360320BB920D00AC4555 /* ActiveTests.xctest */,
+				470C42202144B091007F6F35 /* Active-Dev.app */,
+				470C42912144B164007F6F35 /* Active-Stg.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -659,6 +885,46 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		470C41B12144B091007F6F35 /* Active-Dev */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 470C421D2144B091007F6F35 /* Build configuration list for PBXNativeTarget "Active-Dev" */;
+			buildPhases = (
+				470C41B22144B091007F6F35 /* [CP] Check Pods Manifest.lock */,
+				470C41B32144B091007F6F35 /* Sources */,
+				470C41F62144B091007F6F35 /* Frameworks */,
+				470C41F82144B091007F6F35 /* Resources */,
+				470C421B2144B091007F6F35 /* [CP] Embed Pods Frameworks */,
+				470C421C2144B091007F6F35 /* Swift lint */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Active-Dev";
+			productName = Active;
+			productReference = 470C42202144B091007F6F35 /* Active-Dev.app */;
+			productType = "com.apple.product-type.application";
+		};
+		470C42222144B164007F6F35 /* Active-Stg */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 470C428E2144B164007F6F35 /* Build configuration list for PBXNativeTarget "Active-Stg" */;
+			buildPhases = (
+				470C42232144B164007F6F35 /* [CP] Check Pods Manifest.lock */,
+				470C42242144B164007F6F35 /* Sources */,
+				470C42672144B164007F6F35 /* Frameworks */,
+				470C42692144B164007F6F35 /* Resources */,
+				470C428C2144B164007F6F35 /* [CP] Embed Pods Frameworks */,
+				470C428D2144B164007F6F35 /* Swift lint */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Active-Stg";
+			productName = Active;
+			productReference = 470C42912144B164007F6F35 /* Active-Stg.app */;
+			productType = "com.apple.product-type.application";
+		};
 		47F635EB20BB920900AC4555 /* Active */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 47F6360C20BB920D00AC4555 /* Build configuration list for PBXNativeTarget "Active" */;
@@ -732,11 +998,95 @@
 			targets = (
 				47F635EB20BB920900AC4555 /* Active */,
 				47F6360220BB920D00AC4555 /* ActiveTests */,
+				470C41B12144B091007F6F35 /* Active-Dev */,
+				470C42222144B164007F6F35 /* Active-Stg */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		470C41F82144B091007F6F35 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				470C41F92144B091007F6F35 /* SF-Pro-Display-Semibold.otf in Resources */,
+				470C41FA2144B091007F6F35 /* SF-Pro-Text-MediumItalic.otf in Resources */,
+				470C41FB2144B091007F6F35 /* EmptyStateView.xib in Resources */,
+				470C41FC2144B091007F6F35 /* SF-Pro-Display-BlackItalic.otf in Resources */,
+				470C41FD2144B091007F6F35 /* LaunchScreen.storyboard in Resources */,
+				470C41FE2144B091007F6F35 /* SF-Pro-Text-SemiboldItalic.otf in Resources */,
+				470C41FF2144B091007F6F35 /* SF-Pro-Display-Light.otf in Resources */,
+				470C42002144B091007F6F35 /* SF-Pro-Display-Medium.otf in Resources */,
+				470C42012144B091007F6F35 /* SF-Pro-Text-Heavy.otf in Resources */,
+				470C42022144B091007F6F35 /* SF-Pro-Text-RegularItalic.otf in Resources */,
+				470C42032144B091007F6F35 /* SF-Pro-Display-Thin.otf in Resources */,
+				470C42042144B091007F6F35 /* SF-Pro-Display-ThinItalic.otf in Resources */,
+				470C42052144B091007F6F35 /* SF-Pro-Text-Light.otf in Resources */,
+				470C42062144B091007F6F35 /* SF-Pro-Display-Black.otf in Resources */,
+				470C42072144B091007F6F35 /* SF-Pro-Text-Bold.otf in Resources */,
+				470C42082144B091007F6F35 /* SF-Pro-Text-LightItalic.otf in Resources */,
+				470C42092144B091007F6F35 /* SF-Pro-Display-Bold.otf in Resources */,
+				470C420A2144B091007F6F35 /* SF-Pro-Display-UltralightItalic.otf in Resources */,
+				470C420B2144B091007F6F35 /* SF-Pro-Text-Medium.otf in Resources */,
+				470C420C2144B091007F6F35 /* SF-Pro-Text-Regular.otf in Resources */,
+				470C420D2144B091007F6F35 /* Assets.xcassets in Resources */,
+				470C420E2144B091007F6F35 /* SF-Pro-Display-Ultralight.otf in Resources */,
+				470C420F2144B091007F6F35 /* SF-Pro-Display-SemiboldItalic.otf in Resources */,
+				470C42102144B091007F6F35 /* SF-Pro-Display-RegularItalic.otf in Resources */,
+				470C42112144B091007F6F35 /* SF-Pro-Text-HeavyItalic.otf in Resources */,
+				470C42122144B091007F6F35 /* SF-Pro-Text-Semibold.otf in Resources */,
+				470C42132144B091007F6F35 /* SF-Pro-Display-MediumItalic.otf in Resources */,
+				470C42142144B091007F6F35 /* SF-Pro-Display-LightItalic.otf in Resources */,
+				470C42152144B091007F6F35 /* SF-Pro-Display-BoldItalic.otf in Resources */,
+				470C42162144B091007F6F35 /* SF-Pro-Text-BoldItalic.otf in Resources */,
+				470C42172144B091007F6F35 /* SF-Pro-Display-Regular.otf in Resources */,
+				470C42182144B091007F6F35 /* SF-Pro-Display-HeavyItalic.otf in Resources */,
+				470C42192144B091007F6F35 /* SF-Pro-Display-Heavy.otf in Resources */,
+				470C421A2144B091007F6F35 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		470C42692144B164007F6F35 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				470C426A2144B164007F6F35 /* SF-Pro-Display-Semibold.otf in Resources */,
+				470C426B2144B164007F6F35 /* SF-Pro-Text-MediumItalic.otf in Resources */,
+				470C426C2144B164007F6F35 /* EmptyStateView.xib in Resources */,
+				470C426D2144B164007F6F35 /* SF-Pro-Display-BlackItalic.otf in Resources */,
+				470C426E2144B164007F6F35 /* LaunchScreen.storyboard in Resources */,
+				470C426F2144B164007F6F35 /* SF-Pro-Text-SemiboldItalic.otf in Resources */,
+				470C42702144B164007F6F35 /* SF-Pro-Display-Light.otf in Resources */,
+				470C42712144B164007F6F35 /* SF-Pro-Display-Medium.otf in Resources */,
+				470C42722144B164007F6F35 /* SF-Pro-Text-Heavy.otf in Resources */,
+				470C42732144B164007F6F35 /* SF-Pro-Text-RegularItalic.otf in Resources */,
+				470C42742144B164007F6F35 /* SF-Pro-Display-Thin.otf in Resources */,
+				470C42752144B164007F6F35 /* SF-Pro-Display-ThinItalic.otf in Resources */,
+				470C42762144B164007F6F35 /* SF-Pro-Text-Light.otf in Resources */,
+				470C42772144B164007F6F35 /* SF-Pro-Display-Black.otf in Resources */,
+				470C42782144B164007F6F35 /* SF-Pro-Text-Bold.otf in Resources */,
+				470C42792144B164007F6F35 /* SF-Pro-Text-LightItalic.otf in Resources */,
+				470C427A2144B164007F6F35 /* SF-Pro-Display-Bold.otf in Resources */,
+				470C427B2144B164007F6F35 /* SF-Pro-Display-UltralightItalic.otf in Resources */,
+				470C427C2144B164007F6F35 /* SF-Pro-Text-Medium.otf in Resources */,
+				470C427D2144B164007F6F35 /* SF-Pro-Text-Regular.otf in Resources */,
+				470C427E2144B164007F6F35 /* Assets.xcassets in Resources */,
+				470C427F2144B164007F6F35 /* SF-Pro-Display-Ultralight.otf in Resources */,
+				470C42802144B164007F6F35 /* SF-Pro-Display-SemiboldItalic.otf in Resources */,
+				470C42812144B164007F6F35 /* SF-Pro-Display-RegularItalic.otf in Resources */,
+				470C42822144B164007F6F35 /* SF-Pro-Text-HeavyItalic.otf in Resources */,
+				470C42832144B164007F6F35 /* SF-Pro-Text-Semibold.otf in Resources */,
+				470C42842144B164007F6F35 /* SF-Pro-Display-MediumItalic.otf in Resources */,
+				470C42852144B164007F6F35 /* SF-Pro-Display-LightItalic.otf in Resources */,
+				470C42862144B164007F6F35 /* SF-Pro-Display-BoldItalic.otf in Resources */,
+				470C42872144B164007F6F35 /* SF-Pro-Text-BoldItalic.otf in Resources */,
+				470C42882144B164007F6F35 /* SF-Pro-Display-Regular.otf in Resources */,
+				470C42892144B164007F6F35 /* SF-Pro-Display-HeavyItalic.otf in Resources */,
+				470C428A2144B164007F6F35 /* SF-Pro-Display-Heavy.otf in Resources */,
+				470C428B2144B164007F6F35 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		47F635EA20BB920900AC4555 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -788,6 +1138,106 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		470C41B22144B091007F6F35 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Active-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		470C421B2144B091007F6F35 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Active/Pods-Active-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/JTAppleCalendar/JTAppleCalendar.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JTAppleCalendar.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Active/Pods-Active-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		470C421C2144B091007F6F35 /* Swift lint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Swift lint";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"";
+		};
+		470C42232144B164007F6F35 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Active-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		470C428C2144B164007F6F35 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Active/Pods-Active-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/JTAppleCalendar/JTAppleCalendar.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JTAppleCalendar.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Active/Pods-Active-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		470C428D2144B164007F6F35 /* Swift lint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Swift lint";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"";
+		};
 		4732CE7F211B342C00E2770C /* Swift lint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -859,6 +1309,152 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		470C41B32144B091007F6F35 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				470C41B42144B091007F6F35 /* HabitFactory.swift in Sources */,
+				470C41B52144B091007F6F35 /* Active.xcdatamodeld in Sources */,
+				470C41B62144B091007F6F35 /* UNNotificationContent+Category.swift in Sources */,
+				470C41B72144B091007F6F35 /* DummyFactory.swift in Sources */,
+				470C41B82144B091007F6F35 /* Int+Utils.swift in Sources */,
+				470C41B92144B091007F6F35 /* MonthHeaderView.swift in Sources */,
+				470C41BA2144B091007F6F35 /* ColorOptionCollectionViewCell.swift in Sources */,
+				470C41BB2144B091007F6F35 /* DaysHeaderView.swift in Sources */,
+				470C41BC2144B091007F6F35 /* HabitDetailsViewController+NoChallengesSection.swift in Sources */,
+				470C41BD2144B091007F6F35 /* AppDelegate.swift in Sources */,
+				470C41BE2144B091007F6F35 /* HabitDetailsViewController+Calendar.swift in Sources */,
+				470C41BF2144B091007F6F35 /* HabitMOColor+UIColor.swift in Sources */,
+				470C41C02144B091007F6F35 /* FireTimesSelectionViewController.swift in Sources */,
+				470C41C12144B091007F6F35 /* ColorsPickerView.swift in Sources */,
+				470C41C22144B091007F6F35 /* DayMO.swift in Sources */,
+				470C41C32144B091007F6F35 /* NotificationScheduler.swift in Sources */,
+				470C41C42144B091007F6F35 /* UserNotificationManager.swift in Sources */,
+				470C41C52144B091007F6F35 /* DaysChallengeFactory.swift in Sources */,
+				470C41C62144B091007F6F35 /* Seeder.swift in Sources */,
+				470C41C72144B091007F6F35 /* NotificationAvailabilityDisplayable.swift in Sources */,
+				470C41C82144B091007F6F35 /* NotificationMO.swift in Sources */,
+				470C41C92144B091007F6F35 /* CompletedHabitTableViewCell.swift in Sources */,
+				470C41CA2144B091007F6F35 /* CalendarDayCell.swift in Sources */,
+				470C41CB2144B091007F6F35 /* FireTimeFactory.swift in Sources */,
+				470C41CC2144B091007F6F35 /* ColorsPickerDataSource.swift in Sources */,
+				470C41CD2144B091007F6F35 /* RoundedView.swift in Sources */,
+				470C41CE2144B091007F6F35 /* HabitCreationTableViewController+ColorField.swift in Sources */,
+				470C41CF2144B091007F6F35 /* HabitDetailsViewController+ProgressSection.swift in Sources */,
+				470C41D02144B091007F6F35 /* HabitCreationTableViewController+DaysField.swift in Sources */,
+				470C41D12144B091007F6F35 /* DayStorage.swift in Sources */,
+				470C41D22144B091007F6F35 /* HabitDetailsViewController+PromptSection.swift in Sources */,
+				470C41D32144B091007F6F35 /* RoundedButton.swift in Sources */,
+				470C41D42144B091007F6F35 /* UserStorage.swift in Sources */,
+				470C41D52144B091007F6F35 /* NotificationFactory.swift in Sources */,
+				470C41D62144B091007F6F35 /* FireTimeMO.swift in Sources */,
+				470C41D72144B091007F6F35 /* Date+Utils.swift in Sources */,
+				470C41D82144B091007F6F35 /* HabitsTableViewController.swift in Sources */,
+				470C41D92144B091007F6F35 /* HabitDaysSelectionViewController+Calendar.swift in Sources */,
+				470C41DA2144B091007F6F35 /* HabitDayStorage.swift in Sources */,
+				470C41DB2144B091007F6F35 /* HabitTableViewCell.swift in Sources */,
+				470C41DC2144B091007F6F35 /* CalendarDisplaying.swift in Sources */,
+				470C41DD2144B091007F6F35 /* HabitMO.swift in Sources */,
+				470C41DE2144B091007F6F35 /* HabitDetailsViewController+FireTimesSection.swift in Sources */,
+				470C41DF2144B091007F6F35 /* CardView.swift in Sources */,
+				470C41E02144B091007F6F35 /* NotificationStorage.swift in Sources */,
+				470C41E12144B091007F6F35 /* DaysChallengeMO.swift in Sources */,
+				470C41E22144B091007F6F35 /* HabitCreationTableViewController.swift in Sources */,
+				470C41E32144B091007F6F35 /* DateFormatter+Utils.swift in Sources */,
+				470C41E42144B091007F6F35 /* HabitStorage.swift in Sources */,
+				470C41E52144B091007F6F35 /* HabitCreationTableViewController+FireTimesField.swift in Sources */,
+				470C41E62144B091007F6F35 /* DayFactory.swift in Sources */,
+				470C41E72144B091007F6F35 /* UnderlinedTextField.swift in Sources */,
+				470C41E82144B091007F6F35 /* HabitDayMO.swift in Sources */,
+				470C41E92144B091007F6F35 /* HabitDetailsViewController.swift in Sources */,
+				470C41EA2144B091007F6F35 /* HabitCreationTableViewController+NameField.swift in Sources */,
+				470C41EB2144B091007F6F35 /* FireTimesDisplayable.swift in Sources */,
+				470C41EC2144B091007F6F35 /* HabitDaysSelectionViewController.swift in Sources */,
+				470C41ED2144B091007F6F35 /* DevelopmentSeeder.swift in Sources */,
+				470C41EE2144B091007F6F35 /* EmptyStateView.swift in Sources */,
+				470C41EF2144B091007F6F35 /* DaysChallengeStorage.swift in Sources */,
+				470C41F02144B091007F6F35 /* UserMO.swift in Sources */,
+				470C41F12144B091007F6F35 /* UserFactory.swift in Sources */,
+				470C41F22144B091007F6F35 /* UIViewController+Utils.swift in Sources */,
+				470C41F32144B091007F6F35 /* FireTimeStorage.swift in Sources */,
+				470C41F42144B091007F6F35 /* HabitDayFactory.swift in Sources */,
+				470C41F52144B091007F6F35 /* ProgressView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		470C42242144B164007F6F35 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				470C42252144B164007F6F35 /* HabitFactory.swift in Sources */,
+				470C42262144B164007F6F35 /* Active.xcdatamodeld in Sources */,
+				470C42272144B164007F6F35 /* UNNotificationContent+Category.swift in Sources */,
+				470C42282144B164007F6F35 /* DummyFactory.swift in Sources */,
+				470C42292144B164007F6F35 /* Int+Utils.swift in Sources */,
+				470C422A2144B164007F6F35 /* MonthHeaderView.swift in Sources */,
+				470C422B2144B164007F6F35 /* ColorOptionCollectionViewCell.swift in Sources */,
+				470C422C2144B164007F6F35 /* DaysHeaderView.swift in Sources */,
+				470C422D2144B164007F6F35 /* HabitDetailsViewController+NoChallengesSection.swift in Sources */,
+				470C422E2144B164007F6F35 /* AppDelegate.swift in Sources */,
+				470C422F2144B164007F6F35 /* HabitDetailsViewController+Calendar.swift in Sources */,
+				470C42302144B164007F6F35 /* HabitMOColor+UIColor.swift in Sources */,
+				470C42312144B164007F6F35 /* FireTimesSelectionViewController.swift in Sources */,
+				470C42322144B164007F6F35 /* ColorsPickerView.swift in Sources */,
+				470C42332144B164007F6F35 /* DayMO.swift in Sources */,
+				470C42342144B164007F6F35 /* NotificationScheduler.swift in Sources */,
+				470C42352144B164007F6F35 /* UserNotificationManager.swift in Sources */,
+				470C42362144B164007F6F35 /* DaysChallengeFactory.swift in Sources */,
+				470C42372144B164007F6F35 /* Seeder.swift in Sources */,
+				470C42382144B164007F6F35 /* NotificationAvailabilityDisplayable.swift in Sources */,
+				470C42392144B164007F6F35 /* NotificationMO.swift in Sources */,
+				470C423A2144B164007F6F35 /* CompletedHabitTableViewCell.swift in Sources */,
+				470C423B2144B164007F6F35 /* CalendarDayCell.swift in Sources */,
+				470C423C2144B164007F6F35 /* FireTimeFactory.swift in Sources */,
+				470C423D2144B164007F6F35 /* ColorsPickerDataSource.swift in Sources */,
+				470C423E2144B164007F6F35 /* RoundedView.swift in Sources */,
+				470C423F2144B164007F6F35 /* HabitCreationTableViewController+ColorField.swift in Sources */,
+				470C42402144B164007F6F35 /* HabitDetailsViewController+ProgressSection.swift in Sources */,
+				470C42412144B164007F6F35 /* HabitCreationTableViewController+DaysField.swift in Sources */,
+				470C42422144B164007F6F35 /* DayStorage.swift in Sources */,
+				470C42432144B164007F6F35 /* HabitDetailsViewController+PromptSection.swift in Sources */,
+				470C42442144B164007F6F35 /* RoundedButton.swift in Sources */,
+				470C42452144B164007F6F35 /* UserStorage.swift in Sources */,
+				470C42462144B164007F6F35 /* NotificationFactory.swift in Sources */,
+				470C42472144B164007F6F35 /* FireTimeMO.swift in Sources */,
+				470C42482144B164007F6F35 /* Date+Utils.swift in Sources */,
+				470C42492144B164007F6F35 /* HabitsTableViewController.swift in Sources */,
+				470C424A2144B164007F6F35 /* HabitDaysSelectionViewController+Calendar.swift in Sources */,
+				470C424B2144B164007F6F35 /* HabitDayStorage.swift in Sources */,
+				470C424C2144B164007F6F35 /* HabitTableViewCell.swift in Sources */,
+				470C424D2144B164007F6F35 /* CalendarDisplaying.swift in Sources */,
+				470C424E2144B164007F6F35 /* HabitMO.swift in Sources */,
+				470C424F2144B164007F6F35 /* HabitDetailsViewController+FireTimesSection.swift in Sources */,
+				470C42502144B164007F6F35 /* CardView.swift in Sources */,
+				470C42512144B164007F6F35 /* NotificationStorage.swift in Sources */,
+				470C42522144B164007F6F35 /* DaysChallengeMO.swift in Sources */,
+				470C42532144B164007F6F35 /* HabitCreationTableViewController.swift in Sources */,
+				470C42542144B164007F6F35 /* DateFormatter+Utils.swift in Sources */,
+				470C42552144B164007F6F35 /* HabitStorage.swift in Sources */,
+				470C42562144B164007F6F35 /* HabitCreationTableViewController+FireTimesField.swift in Sources */,
+				470C42572144B164007F6F35 /* DayFactory.swift in Sources */,
+				470C42582144B164007F6F35 /* UnderlinedTextField.swift in Sources */,
+				470C42592144B164007F6F35 /* HabitDayMO.swift in Sources */,
+				470C425A2144B164007F6F35 /* HabitDetailsViewController.swift in Sources */,
+				470C425B2144B164007F6F35 /* HabitCreationTableViewController+NameField.swift in Sources */,
+				470C425C2144B164007F6F35 /* FireTimesDisplayable.swift in Sources */,
+				470C425D2144B164007F6F35 /* HabitDaysSelectionViewController.swift in Sources */,
+				470C425E2144B164007F6F35 /* DevelopmentSeeder.swift in Sources */,
+				470C425F2144B164007F6F35 /* EmptyStateView.swift in Sources */,
+				470C42602144B164007F6F35 /* DaysChallengeStorage.swift in Sources */,
+				470C42612144B164007F6F35 /* UserMO.swift in Sources */,
+				470C42622144B164007F6F35 /* UserFactory.swift in Sources */,
+				470C42632144B164007F6F35 /* UIViewController+Utils.swift in Sources */,
+				470C42642144B164007F6F35 /* FireTimeStorage.swift in Sources */,
+				470C42652144B164007F6F35 /* HabitDayFactory.swift in Sources */,
+				470C42662144B164007F6F35 /* ProgressView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		47F635E820BB920900AC4555 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -987,6 +1583,98 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		470C421E2144B091007F6F35 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BD7BBB4E1546734012225042 /* Pods-Active.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Dev";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 79964U8894;
+				INFOPLIST_FILE = "Active copy-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D DEVELOPMENT";
+				PRODUCT_BUNDLE_IDENTIFIER = tiago.maia.development.Active;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		470C421F2144B091007F6F35 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0C9EFDE364DAD13EC01C4932 /* Pods-Active.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Dev";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 79964U8894;
+				INFOPLIST_FILE = "Active copy-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D DEVELOPMENT";
+				PRODUCT_BUNDLE_IDENTIFIER = tiago.maia.development.Active;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		470C428F2144B164007F6F35 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BD7BBB4E1546734012225042 /* Pods-Active.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Stg";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 79964U8894;
+				INFOPLIST_FILE = "Active copy2-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D STAGING";
+				PRODUCT_BUNDLE_IDENTIFIER = tiago.maia.staging.Active;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		470C42902144B164007F6F35 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0C9EFDE364DAD13EC01C4932 /* Pods-Active.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Stg";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 79964U8894;
+				INFOPLIST_FILE = "Active copy2-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D STAGING";
+				PRODUCT_BUNDLE_IDENTIFIER = tiago.maia.staging.Active;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
 		47F6360A20BB920D00AC4555 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1115,6 +1803,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D PRODUCTION";
 				PRODUCT_BUNDLE_IDENTIFIER = tiago.maia.Active;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1137,6 +1826,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D PRODUCTION";
 				PRODUCT_BUNDLE_IDENTIFIER = tiago.maia.Active;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1192,6 +1882,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		470C421D2144B091007F6F35 /* Build configuration list for PBXNativeTarget "Active-Dev" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				470C421E2144B091007F6F35 /* Debug */,
+				470C421F2144B091007F6F35 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		470C428E2144B164007F6F35 /* Build configuration list for PBXNativeTarget "Active-Stg" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				470C428F2144B164007F6F35 /* Debug */,
+				470C42902144B164007F6F35 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		47F635E720BB920900AC4555 /* Build configuration list for PBXProject "Active" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

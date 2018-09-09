@@ -117,4 +117,42 @@ class DevelopmentSeeder: Seeder {
             }
         }
     ]
+
+    override var seedProcedures: [Seeder.SeedProcedure] {
+        return _seedProcedures
+    }
+
+    // MARK: Imperatives
+
+    override func erase() {
+        print("Removing seeded entities.")
+
+        // Declare the context to be used for the seed erase.
+        let context = container.viewContext
+
+        // Delete all DayMO entities.
+        let daysRequest: NSFetchRequest<DayMO> = DayMO.fetchRequest()
+
+        if let days = try? context.fetch(daysRequest) {
+            for day in days {
+                context.delete(day)
+            }
+        }
+
+        // Get a new user storage instance.
+        let userStorage = UserStorage()
+
+        // Get the current user.
+        if let user = userStorage.getUser(using: context) {
+            // Delete it.
+            context.delete(user)
+        }
+
+        // Save the context.
+        do {
+            try context.save()
+        } catch {
+            assertionFailure("Error when erasing the seed.")
+        }
+    }
 }

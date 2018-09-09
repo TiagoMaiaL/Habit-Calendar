@@ -19,7 +19,7 @@ class Seeder {
     // MARK: Properties
 
     /// The container in which the entities are going to be seeded.
-    private let container: NSPersistentContainer
+    let container: NSPersistentContainer
 
     /// The basic seeds to be applied in any kind of environment and situation.
     /// - Note: An User entity is always needed, so the base Seeder class always seeds it.
@@ -44,11 +44,12 @@ class Seeder {
         _ = userFactory.makeDummy()
     }]
 
-    /// An array of blocks containing the seeding code in the correct order.
+    /// An array of blocks containing the seeding code in the desired order.
     /// - Note: Every time a new entity needs to be seeded, add a new block
     ///         containing the code in charge of the seed. This array will
     ///         be iterated and the blocks run with a given managed context.
     var seedProcedures: [SeedProcedure] {
+        // The base seeder doesn't apply any specific seeds.
         return []
     }
 
@@ -92,35 +93,7 @@ class Seeder {
 
     /// Removes all previously seeded entities from the persistent stores.
     func erase() {
-        print("Removing seeded entities.")
-
-        // Declare the context to be used for the seed erase.
-        let context = container.viewContext
-
-        // Delete all DayMO entities.
-        let daysRequest: NSFetchRequest<DayMO> = DayMO.fetchRequest()
-
-        if let days = try? context.fetch(daysRequest) {
-            for day in days {
-                context.delete(day)
-            }
-        }
-
-        // Get a new user storage instance.
-        let userStorage = UserStorage()
-
-        // Get the current user.
-        if let user = userStorage.getUser(using: context) {
-            // Delete it.
-            context.delete(user)
-        }
-
-        // Save the context.
-        do {
-            try context.save()
-        } catch {
-            assertionFailure("Error when erasing the seed.")
-        }
+        assertionFailure("Error: erase() shouldn't be called in the base seeder instances.")
     }
 
     /// Prints the number of entities within the database after the seed.
