@@ -27,12 +27,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return delegate
     }
 
-    /// The app's seed manager.
-    /// - Note: The seed takes place between each app launches.
-    private lazy var seedManager: SeedManager = SeedManager(
-        container: persistentContainer
-    )
-
     /// The app's UserMO storage.
     private(set) lazy var userStorage = UserStorage()
 
@@ -85,21 +79,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let isTesting = ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] != nil
 
         if !isTesting {
+            // Declare the seeder to be used based on the environemnt.
+            var seeder: Seeder!
+
+            #if DEVELOPMENT
+            seeder = DevelopmentSeeder(container: persistentContainer)
+            // Only erase in the development evironment.
+            seeder.erase()
+            #else
+            seeder = Seeder(container: persistentContainer)
+            #endif
+
+            // Seed the approriate procedures.
+            seeder.seed()
+
             // TODO: Move this authorization request to the appropriate controller.
             // Request the user's authorization to schedule local notifications.
             notificationManager.requestAuthorization { authorized in
                 print("User \(authorized ? "authorized" : "denied").")
             }
-
-            // Only run the seed in the debug mode and when the process's
-            // environment isn't the test one.
-            #if DEBUG
-            // Remove the previously seeded entities.
-            seedManager.erase()
-
-            // Begin again by seeding the app's database with new dummy entities.
-            seedManager.seed()
-            #endif
         }
 
         // Register the user notification categories.

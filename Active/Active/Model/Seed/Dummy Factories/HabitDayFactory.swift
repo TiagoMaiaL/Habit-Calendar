@@ -29,7 +29,7 @@ struct HabitDayFactory: DummyFactory {
     /// - Returns: The generated HabitDay dummy as a NSManagedObject.
     func makeDummy() -> HabitDayMO {
         // Declare a new habitDay entity.
-        let habitDay = Active.HabitDayMO(context: context)
+        let habitDay = HabitDayMO(context: context)
 
         // Associate it's properties (id, wasExecuted).
         habitDay.id = UUID().uuidString
