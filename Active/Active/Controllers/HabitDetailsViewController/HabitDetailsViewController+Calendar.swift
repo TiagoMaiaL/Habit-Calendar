@@ -23,7 +23,7 @@ extension HabitDetailsViewController: CalendarDisplaying {
         using cellState: CellState
     ) {
         // Cast it to the expected instance.
-        guard let cell = cell as? CalendarDayCell else {
+        guard let cell = cell as? CalendarChallengeDayCell else {
             assertionFailure("Couldn't cast the cell to a CalendarDayCell's instance.")
             return
         }
@@ -36,23 +36,36 @@ extension HabitDetailsViewController: CalendarDisplaying {
             if let challenge = getChallenge(from: cellState.date),
                 let habitDay = challenge.getDay(for: cellState.date) {
 
-                // If there's a challenge, show cell as being part of it.
                 let habitColor = habit.getColor()
 
-                cell.backgroundColor = habitDay.wasExecuted ?
+                // Change the cell's color showing if the day was executed or not.
+                cell.rangeBackgroundView.backgroundColor = habitDay.wasExecuted ?
                     habitColor.uiColor :
                     habitColor.uiColor.withAlphaComponent(0.5)
                 cell.dayTitleLabel.textColor = .white
 
+                // Change the cell's range type, if it's the challenge's begin date, end date, or if it's in between.
+                if cellState.date == challenge.fromDate {
+                    cell.position = .begin
+                } else if cellState.date.isInBetween(challenge.fromDate!, challenge.toDate!) {
+                    cell.position = .inBetween
+                } else if cellState.date == challenge.toDate {
+                    cell.position = .end
+                }
+
                 if cellState.date.isInToday {
+                    // Show the day as today.
                     cell.circleView.backgroundColor = .white
                     cell.dayTitleLabel.textColor = UIColor(red: 74/255, green: 74/255, blue: 74/255, alpha: 1)
                 } else if cellState.date.isFuture {
                     // Days to be completed in the future should have a less bright color.
-                    cell.backgroundColor = cell.backgroundColor?.withAlphaComponent(0.3)
+                    cell.rangeBackgroundView.backgroundColor = habitColor.uiColor.withAlphaComponent(0.3)
                 }
+            } else {
+                cell.position = .none
             }
         } else {
+            cell.position = .none
             cell.dayTitleLabel.text = ""
             cell.backgroundColor = .white
         }
@@ -83,7 +96,7 @@ extension HabitDetailsViewController: JTAppleCalendarViewDataSource, JTAppleCale
             for: indexPath
         )
 
-        guard let dayCell = cell as? CalendarDayCell else {
+        guard let dayCell = cell as? CalendarChallengeDayCell else {
             assertionFailure("Couldn't get the expected details calendar cell.")
             return cell
         }

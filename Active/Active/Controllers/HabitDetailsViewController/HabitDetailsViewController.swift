@@ -59,7 +59,7 @@ class HabitDetailsViewController: UIViewController {
     private let newFireTimesSegueIdentifier = "Add fire times to habit"
 
     /// The cell's reusable identifier.
-    internal let cellIdentifier = "Habit day cell id"
+    internal let cellIdentifier = "challenge day cell id"
 
     /// The calendar view showing the habit days.
     /// - Note: The collection view will show a range with

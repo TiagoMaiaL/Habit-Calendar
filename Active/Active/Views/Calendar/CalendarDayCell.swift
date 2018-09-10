@@ -69,22 +69,20 @@ import JTAppleCalendar
     // MARK: Imperatives
 
     /// Handles the cell's main views, if they should be added as a subview or not.
-    private func handleSubviews() {
-        if !contentView.subviews.contains(circleView) {
-            contentView.addSubview(circleView)
+    func handleSubviews() {
+        guard !contentView.subviews.contains(circleView),
+            !contentView.subviews.contains(dayTitleLabel),
+            bottomSeparator.superlayer == nil else {
+                return
         }
+        contentView.addSubview(circleView)
+        contentView.addSubview(dayTitleLabel)
+        contentView.layer.addSublayer(bottomSeparator)
 
-        if !contentView.subviews.contains(dayTitleLabel) {
-            contentView.addSubview(dayTitleLabel)
-        }
-
-        if let sublayers = contentView.layer.sublayers, !sublayers.contains(bottomSeparator) {
-            contentView.layer.addSublayer(bottomSeparator)
-        }
     }
 
     /// Applies the layout to the subviews, if appropriate.
-    private func applyLayout() {
+    func applyLayout() {
         dayTitleLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         dayTitleLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
 
