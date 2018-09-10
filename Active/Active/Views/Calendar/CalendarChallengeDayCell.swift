@@ -9,7 +9,7 @@
 import UIKit
 
 /// Cell in charge of displaying the challenge's dates.
-@IBDesignable class CalendarChallengeDayCell: CalendarDayCell {
+class CalendarChallengeDayCell: CalendarDayCell {
 
     // MARK: Types
 
@@ -84,6 +84,17 @@ import UIKit
         beginHorizontalConstraint.isActive = false
         inBetweenHorizontalConstraint.isActive = false
         endHorizontalConstraint.isActive = false
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        switch position {
+        case .begin, .inBetween, .end:
+            rangeBackgroundView.layer.cornerRadius = (dayTitleLabel.intrinsicContentSize.height + 10) / 2
+        default:
+            rangeBackgroundView.layer.cornerRadius = 0
+        }
     }
 
     // MARK: Imperatives
