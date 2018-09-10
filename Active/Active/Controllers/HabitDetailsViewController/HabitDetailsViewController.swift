@@ -96,6 +96,9 @@ class HabitDetailsViewController: UIViewController {
     /// - Note: This view is only displayed if today is a challenge day to be accounted.
     @IBOutlet weak var promptContentView: UIView!
 
+    /// The label displaying the current challenge's from and to dates.
+    @IBOutlet weak var currentChallengeDurationLabel: UILabel!
+
     /// The title displaying what challenge's day is today.
     @IBOutlet weak var currentDayTitleLabel: UILabel!
 
