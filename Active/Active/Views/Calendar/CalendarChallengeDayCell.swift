@@ -15,24 +15,71 @@ import UIKit
 
     /// The kind of challenge day being displayed within the challenge's range of days.
     enum RangePosition {
-        case begin, inBetween, end
+        case begin, inBetween, end, none
     }
 
     // MARK: Properties
 
     /// The day's position within the challenge's days.
-    /// Default value is inBetween.
-    var position: RangePosition = .inBetween
+    /// Default value is none.
+    var position: RangePosition = .none
 
     /// The background view displaying the day's position in the challenge.
     lazy var rangeBackgroundView: UIView = {
-        return UIView()
+        let rangeView = UIView()
+        rangeView.translatesAutoresizingMaskIntoConstraints = false
+        rangeView.backgroundColor = .red
+
+        return rangeView
+    }()
+
+    /// The range view's vertical constraint applied to all situations.
+    private lazy var verticalConstraint: NSLayoutConstraint = {
+        return rangeBackgroundView.centerYAnchor.constraint(equalTo: dayTitleLabel.centerYAnchor)
+    }()
+
+    /// The range view's height constraint applied to all situations.
+    private lazy var heightConstraint: NSLayoutConstraint = {
+        return rangeBackgroundView.heightAnchor.constraint(
+            equalTo: dayTitleLabel.heightAnchor,
+            multiplier: 1,
+            constant: 10
+        )
+    }()
+
+    /// The range view's width constraint applied to all situations.
+    private lazy var widthConstraint: NSLayoutConstraint = {
+        return rangeBackgroundView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 2, constant: 0)
+    }()
+
+    /// The range view's begin horizontal constraint.
+    private lazy var beginHorizontalConstraint: NSLayoutConstraint = {
+        return rangeBackgroundView.leadingAnchor.constraint(equalTo: dayTitleLabel.leadingAnchor, constant: -10)
+    }()
+
+    /// The range view's inBetween horizontal constraint.
+    private lazy var inBetweenHorizontalConstraint: NSLayoutConstraint = {
+        return rangeBackgroundView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor)
+    }()
+
+    /// The range view's end horizontal constraint.
+    private lazy var endHorizontalConstraint: NSLayoutConstraint = {
+        return rangeBackgroundView.trailingAnchor.constraint(equalTo: dayTitleLabel.trailingAnchor, constant: 10)
     }()
 
     // MARK: Life Cycle
 
     override func prepareForInterfaceBuilder() {
         super.prepareForInterfaceBuilder()
+    }
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+
+        // Deactivate all horizontal constraints (specific constraints for each position type).
+        beginHorizontalConstraint.isActive = false
+        inBetweenHorizontalConstraint.isActive = false
+        endHorizontalConstraint.isActive = false
     }
 
     // MARK: Imperatives
@@ -54,14 +101,23 @@ import UIKit
 
         bottomSeparator.isHidden = true
 
+        verticalConstraint.isActive = true
+        heightConstraint.isActive = true
+        widthConstraint.isActive = true
+
         // Apply the rangeBgView's layout, according to the current position.
         switch position {
         case .begin:
-            break
+            beginHorizontalConstraint.isActive = true
+
         case .inBetween:
-            break
+            inBetweenHorizontalConstraint.isActive = true
+
         case .end:
-            break
+            endHorizontalConstraint.isActive = true
+
+        case .none:
+            rangeBackgroundView.isHidden = true
         }
     }
 }
