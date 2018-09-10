@@ -22,10 +22,14 @@ import UIKit
 
     /// The day's position within the challenge's days.
     /// Default value is none.
-    var position: RangePosition = .none
+    var position: RangePosition = .none {
+        didSet {
+            setNeedsLayout()
+        }
+    }
 
     /// The background view displaying the day's position in the challenge.
-    lazy var rangeBackgroundView: UIView = {
+    private(set) lazy var rangeBackgroundView: UIView = {
         let rangeView = UIView()
         rangeView.translatesAutoresizingMaskIntoConstraints = false
         rangeView.backgroundColor = .red
@@ -49,7 +53,7 @@ import UIKit
 
     /// The range view's width constraint applied to all situations.
     private lazy var widthConstraint: NSLayoutConstraint = {
-        return rangeBackgroundView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 2, constant: 0)
+        return rangeBackgroundView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 2, constant: 0)
     }()
 
     /// The range view's begin horizontal constraint.
@@ -88,11 +92,8 @@ import UIKit
     override func handleSubviews() {
         super.handleSubviews()
 
-        guard !subviews.contains(rangeBackgroundView), !subviews.contains(dayTitleLabel) else {
-            return
-        }
-        addSubview(rangeBackgroundView)
-        addSubview(dayTitleLabel)
+        guard !contentView.subviews.contains(rangeBackgroundView) else { return }
+        contentView.addSubview(rangeBackgroundView)
     }
 
     /// Applies the cell's layout.
@@ -100,6 +101,12 @@ import UIKit
         super.applyLayout()
 
         bottomSeparator.isHidden = true
+
+        // The circle view should always be in the front.
+        contentView.bringSubview(toFront: circleView)
+        contentView.bringSubview(toFront: dayTitleLabel)
+
+        rangeBackgroundView.isHidden = false
 
         verticalConstraint.isActive = true
         heightConstraint.isActive = true
