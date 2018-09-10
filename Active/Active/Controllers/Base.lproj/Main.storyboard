@@ -952,17 +952,17 @@ reminded about this habit?</string>
                                                                 <rect key="frame" x="0.0" y="100" width="375" height="300"/>
                                                                 <color key="backgroundColor" red="0.99215686270000003" green="0.99215686270000003" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="PNf-8b-lZW">
-                                                                    <size key="itemSize" width="50" height="50"/>
+                                                                    <size key="itemSize" width="57" height="55"/>
                                                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                                 </collectionViewFlowLayout>
                                                                 <cells>
-                                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" reuseIdentifier="Habit day cell id" id="CWe-an-Y5t" customClass="CalendarDayCell" customModule="Active" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" reuseIdentifier="challenge day cell id" id="CWe-an-Y5t" customClass="CalendarChallengeDayCell" customModule="Active" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="57" height="55"/>
                                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="57" height="55"/>
                                                                             <autoresizingMask key="autoresizingMask"/>
                                                                         </view>
                                                                     </collectionViewCell>

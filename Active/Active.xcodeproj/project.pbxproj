@@ -215,6 +215,9 @@
 		470C42942145A52C007F6F35 /* UIColor+Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470C42932145A52C007F6F35 /* UIColor+Palette.swift */; };
 		470C42952145A85B007F6F35 /* UIColor+Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470C42932145A52C007F6F35 /* UIColor+Palette.swift */; };
 		470C42962145A85B007F6F35 /* UIColor+Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470C42932145A52C007F6F35 /* UIColor+Palette.swift */; };
+		470C42982146E194007F6F35 /* CalendarChallengeDayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470C42972146E194007F6F35 /* CalendarChallengeDayCell.swift */; };
+		470C42992146E93E007F6F35 /* CalendarChallengeDayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470C42972146E194007F6F35 /* CalendarChallengeDayCell.swift */; };
+		470C429A2146E93E007F6F35 /* CalendarChallengeDayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470C42972146E194007F6F35 /* CalendarChallengeDayCell.swift */; };
 		4713A1FC20C1643E008A13D2 /* UserMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4713A1FB20C1643E008A13D2 /* UserMO.swift */; };
 		4713A1FE20C16459008A13D2 /* HabitMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4713A1FD20C16459008A13D2 /* HabitMO.swift */; };
 		4713A20020C164E6008A13D2 /* HabitDayMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4713A1FF20C164E6008A13D2 /* HabitDayMO.swift */; };
@@ -361,6 +364,7 @@
 		470C42912144B164007F6F35 /* Active-Stg.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Active-Stg.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		470C42922144B164007F6F35 /* Active-Stg-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Active-Stg-Info.plist"; path = "/Users/knowledgetemple/Profession/studies/ios/ios-apps/Active/Active/Active-Stg-Info.plist"; sourceTree = "<absolute>"; };
 		470C42932145A52C007F6F35 /* UIColor+Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Palette.swift"; sourceTree = "<group>"; };
+		470C42972146E194007F6F35 /* CalendarChallengeDayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarChallengeDayCell.swift; sourceTree = "<group>"; };
 		4713A1FB20C1643E008A13D2 /* UserMO.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = UserMO.swift; sourceTree = "<group>"; tabWidth = 4; };
 		4713A1FD20C16459008A13D2 /* HabitMO.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = HabitMO.swift; sourceTree = "<group>"; tabWidth = 4; };
 		4713A1FF20C164E6008A13D2 /* HabitDayMO.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = HabitDayMO.swift; sourceTree = "<group>"; tabWidth = 4; };
@@ -773,6 +777,7 @@
 				4761F5AF21209EED00A8D407 /* CalendarDayCell.swift */,
 				4732CE80211C93B500E2770C /* DaysHeaderView.swift */,
 				4732CE82211CB89F00E2770C /* MonthHeaderView.swift */,
+				470C42972146E194007F6F35 /* CalendarChallengeDayCell.swift */,
 			);
 			path = Calendar;
 			sourceTree = "<group>";
@@ -1398,6 +1403,7 @@
 				470C41ED2144B091007F6F35 /* DevelopmentSeeder.swift in Sources */,
 				470C41EE2144B091007F6F35 /* EmptyStateView.swift in Sources */,
 				470C41EF2144B091007F6F35 /* DaysChallengeStorage.swift in Sources */,
+				470C42992146E93E007F6F35 /* CalendarChallengeDayCell.swift in Sources */,
 				470C41F02144B091007F6F35 /* UserMO.swift in Sources */,
 				470C41F12144B091007F6F35 /* UserFactory.swift in Sources */,
 				470C42952145A85B007F6F35 /* UIColor+Palette.swift in Sources */,
@@ -1472,6 +1478,7 @@
 				470C425E2144B164007F6F35 /* DevelopmentSeeder.swift in Sources */,
 				470C425F2144B164007F6F35 /* EmptyStateView.swift in Sources */,
 				470C42602144B164007F6F35 /* DaysChallengeStorage.swift in Sources */,
+				470C429A2146E93E007F6F35 /* CalendarChallengeDayCell.swift in Sources */,
 				470C42612144B164007F6F35 /* UserMO.swift in Sources */,
 				470C42622144B164007F6F35 /* UserFactory.swift in Sources */,
 				470C42962145A85B007F6F35 /* UIColor+Palette.swift in Sources */,
@@ -1491,6 +1498,7 @@
 				470C4170213EE70D007F6F35 /* UNNotificationContent+Category.swift in Sources */,
 				47E6C21120EB129C003BDB4D /* DummyFactory.swift in Sources */,
 				470230D820E5250A003A1F6E /* Int+Utils.swift in Sources */,
+				470C42982146E194007F6F35 /* CalendarChallengeDayCell.swift in Sources */,
 				4732CE83211CB89F00E2770C /* MonthHeaderView.swift in Sources */,
 				4761F5B72120D7F900A8D407 /* ColorOptionCollectionViewCell.swift in Sources */,
 				4732CE81211C93B500E2770C /* DaysHeaderView.swift in Sources */,
