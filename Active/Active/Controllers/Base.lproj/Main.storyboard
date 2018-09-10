@@ -949,7 +949,7 @@ reminded about this habit?</string>
                                                                 </constraints>
                                                             </stackView>
                                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" keyboardDismissMode="onDrag" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="7Pe-pH-Udy" userLabel="Body" customClass="JTAppleCalendarView" customModule="JTAppleCalendar">
-                                                                <rect key="frame" x="0.0" y="100" width="375" height="300"/>
+                                                                <rect key="frame" x="0.0" y="100" width="375" height="299"/>
                                                                 <color key="backgroundColor" red="0.99215686270000003" green="0.99215686270000003" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="PNf-8b-lZW">
                                                                     <size key="itemSize" width="57" height="55"/>
@@ -968,8 +968,16 @@ reminded about this habit?</string>
                                                                     </collectionViewCell>
                                                                 </cells>
                                                             </collectionView>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dER-ce-nPb" userLabel="Separator">
+                                                                <rect key="frame" x="0.0" y="399" width="375" height="1"/>
+                                                                <color key="backgroundColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="1" id="LKe-pN-DS3"/>
+                                                                </constraints>
+                                                            </view>
                                                         </subviews>
                                                         <constraints>
+                                                            <constraint firstItem="dER-ce-nPb" firstAttribute="width" secondItem="7Pe-pH-Udy" secondAttribute="width" id="L87-x9-2sw"/>
                                                             <constraint firstItem="q8x-NZ-ZWP" firstAttribute="width" secondItem="jve-z3-FPF" secondAttribute="width" id="nCC-GG-Gnn"/>
                                                             <constraint firstAttribute="height" constant="400" id="vd0-bs-6dv"/>
                                                             <constraint firstItem="7Pe-pH-Udy" firstAttribute="width" secondItem="jve-z3-FPF" secondAttribute="width" id="yYj-L8-N5S"/>
@@ -1413,8 +1421,8 @@ you think of adding a new one?</string>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="G29-rb-isc"/>
-        <segue reference="43l-ZQ-AR3"/>
-        <segue reference="Xkx-Wi-bYR"/>
+        <segue reference="y7q-nn-pWX"/>
+        <segue reference="J1H-vQ-s49"/>
+        <segue reference="5mV-Cj-rFr"/>
     </inferredMetricsTieBreakers>
 </document>
