@@ -59,6 +59,13 @@ extension HabitDetailsViewController {
             return
         }
 
+        // Display the current challenge's duration.
+        let formatter = DateFormatter.shortCurrent
+        currentChallengeDurationLabel.text = """
+        From \(formatter.string(from: currentChallenge.fromDate!)), \
+        to \(formatter.string(from: currentChallenge.toDate!))
+        """
+
         // Get the order of the day in the challenge.
         guard let orderedChallengeDays = currentChallenge.days?.sortedArray(
             using: [NSSortDescriptor(key: "day.date", ascending: true)]
