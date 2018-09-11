@@ -92,6 +92,12 @@ class HabitDetailsViewController: UIViewController {
         }
     }
 
+    /// The notificationStorage used to get the notifications for the current day.
+    var notificationStorage: NotificationStorage!
+
+    /// The notificationScheduler used to unschedule the current day's notifications, in case it's marked as executed.
+    var notificationScheduler: NotificationScheduler!
+
     /// The view holding the prompt for the current day.
     /// - Note: This view is only displayed if today is a challenge day to be accounted.
     @IBOutlet weak var promptContentView: UIView!
@@ -312,6 +318,14 @@ class HabitDetailsViewController: UIViewController {
         assert(
             notificationManager != nil,
             "Error: the notification manager wasn't injected."
+        )
+        assert(
+            notificationStorage != nil,
+            "Error: the notification storage wasn't injected."
+        )
+        assert(
+            notificationScheduler != nil,
+            "Error: the notification scheduler wasn't injected."
         )
     }
 
