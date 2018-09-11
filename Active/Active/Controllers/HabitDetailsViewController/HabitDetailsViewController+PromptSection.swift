@@ -15,7 +15,7 @@ extension HabitDetailsViewController {
 
     /// Sets the current as executed or not, depending on the user's action.
     @IBAction func informActivityExecution(_ sender: UISwitch) {
-        guard let challenge = habit.getCurrentChallenge(), let day = challenge.getCurrentDay() else {
+        guard let challenge = habit.getCurrentChallenge() else {
             assertionFailure(
                 "Inconsistency: There isn't a current habit day but the prompt is being displayed."
             )
@@ -25,11 +25,11 @@ extension HabitDetailsViewController {
         // Get the user's answer.
         let wasExecuted = sender.isOn
 
-        day.managedObjectContext?.perform {
-            day.wasExecuted = wasExecuted
+        challenge.managedObjectContext?.perform {
+            challenge.markCurrentDayAsExecuted(wasExecuted)
 
             // TODO: Display an error to the user.
-            try? day.managedObjectContext?.save()
+            try? challenge.managedObjectContext?.save()
 
             DispatchQueue.main.async {
                 // Update the prompt view.
