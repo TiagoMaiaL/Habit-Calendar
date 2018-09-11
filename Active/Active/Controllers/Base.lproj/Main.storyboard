@@ -13,6 +13,9 @@
         <array key="SF-Pro-Display-Regular.otf">
             <string>SFProDisplay-Regular</string>
         </array>
+        <array key="SF-Pro-Display-Semibold.otf">
+            <string>SFProDisplay-Semibold</string>
+        </array>
         <array key="SF-Pro-Text-Bold.otf">
             <string>SFProText-Bold</string>
         </array>
@@ -901,6 +904,171 @@ reminded about this habit?</string>
             </objects>
             <point key="canvasLocation" x="3857" y="647"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="qCv-o2-KFV">
+            <objects>
+                <viewController id="GU5-6E-1X1" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="7er-CB-qOP">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fil-nG-Ozz">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tT2-Go-XsQ" userLabel="Content view">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="727"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="8kz-Ld-lX0" userLabel="Texts">
+                                                <rect key="frame" x="20" y="20" width="335" height="582"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="67e-Jj-j0e">
+                                                        <rect key="frame" x="0.0" y="0.0" width="297" height="187.5"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x7D-ar-eCD">
+                                                                <rect key="frame" x="0.0" y="0.0" width="250" height="95.5"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="250" id="pa5-2b-PRn"/>
+                                                                </constraints>
+                                                                <attributedString key="attributedText">
+                                                                    <fragment content="Start new ">
+                                                                        <attributes>
+                                                                            <color key="NSColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
+                                                                            <font key="NSFont" size="40" name="SFProDisplay-Bold"/>
+                                                                        </attributes>
+                                                                    </fragment>
+                                                                    <fragment content="habits">
+                                                                        <attributes>
+                                                                            <color key="NSColor" red="0.0" green="0.47843137254901957" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                                            <font key="NSFont" size="40" name="SFProDisplay-Bold"/>
+                                                                        </attributes>
+                                                                    </fragment>
+                                                                </attributedString>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DM9-ag-tED">
+                                                                <rect key="frame" x="0.0" y="115.5" width="297" height="72"/>
+                                                                <string key="text">Change your lifestyle by building 
+new habits and getting things done.
+Add as many habits as you wish.</string>
+                                                                <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="20"/>
+                                                                <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="6JK-0u-PFw">
+                                                        <rect key="frame" x="0.0" y="227.5" width="330.5" height="194.5"/>
+                                                        <subviews>
+                                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic-calendar" translatesAutoresizingMaskIntoConstraints="NO" id="EpP-2q-irp">
+                                                                <rect key="frame" x="0.0" y="0.0" width="45" height="47"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="45" id="lir-Kj-aCZ"/>
+                                                                </constraints>
+                                                            </imageView>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="wvE-26-2EX">
+                                                                <rect key="frame" x="60" y="0.0" width="270.5" height="194.5"/>
+                                                                <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Challenge yourself" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fMA-0Y-9jl">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="165" height="24"/>
+                                                                        <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="20"/>
+                                                                        <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Commit to a habit by beginning a new challenge of days and  checking your daily accomplishments." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MLS-wP-bUS">
+                                                                        <rect key="frame" x="0.0" y="34" width="270.5" height="86"/>
+                                                                        <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="18"/>
+                                                                        <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Keep track of the challenge’s progress, and the days you missed." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dX3-aK-wEC">
+                                                                        <rect key="frame" x="0.0" y="130" width="251.5" height="64.5"/>
+                                                                        <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="18"/>
+                                                                        <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                </subviews>
+                                                            </stackView>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="IEk-fO-rZ9">
+                                                        <rect key="frame" x="0.0" y="462" width="321" height="120"/>
+                                                        <subviews>
+                                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic-notification" translatesAutoresizingMaskIntoConstraints="NO" id="Lng-2y-Vmd">
+                                                                <rect key="frame" x="0.0" y="0.0" width="41" height="46"/>
+                                                            </imageView>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="5v2-KJ-ArW">
+                                                                <rect key="frame" x="56" y="0.0" width="265" height="120"/>
+                                                                <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Get notified" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7gs-8L-Lmk">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="103.5" height="24"/>
+                                                                        <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="20"/>
+                                                                        <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Receive daily notifications by configuring the times you wish to get reminded about your habits." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hbQ-cV-prp">
+                                                                        <rect key="frame" x="0.0" y="34" width="265" height="86"/>
+                                                                        <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="18"/>
+                                                                        <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                </subviews>
+                                                            </stackView>
+                                                        </subviews>
+                                                    </stackView>
+                                                </subviews>
+                                            </stackView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hvo-EF-j3D" customClass="RoundedButton" customModule="Active" customModuleProvider="target">
+                                                <rect key="frame" x="117" y="642" width="140" height="50"/>
+                                                <color key="backgroundColor" red="0.0" green="0.47843137254901957" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="140" id="2qn-MP-frN"/>
+                                                    <constraint firstAttribute="height" constant="50" id="ZcQ-eq-iFL"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="SFProText-Bold" family="SF Pro Text" pointSize="20"/>
+                                                <inset key="titleEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
+                                                <state key="normal" title="Got it">
+                                                    <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="storeHabit:" destination="e07-lh-rVp" eventType="touchUpInside" id="59E-oM-7M4"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.99215686274509807" green="0.99215686274509807" blue="0.99607843137254903" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="Hvo-EF-j3D" firstAttribute="top" relation="greaterThanOrEqual" secondItem="8kz-Ld-lX0" secondAttribute="bottom" constant="40" id="1md-Kf-n33"/>
+                                            <constraint firstAttribute="trailing" secondItem="8kz-Ld-lX0" secondAttribute="trailing" constant="20" symbolic="YES" id="3ZL-Yo-DR8"/>
+                                            <constraint firstItem="Hvo-EF-j3D" firstAttribute="centerX" secondItem="tT2-Go-XsQ" secondAttribute="centerX" id="Oav-6W-xdZ"/>
+                                            <constraint firstAttribute="bottom" secondItem="Hvo-EF-j3D" secondAttribute="bottom" constant="35" id="SwB-4x-Rlc"/>
+                                            <constraint firstItem="8kz-Ld-lX0" firstAttribute="top" secondItem="tT2-Go-XsQ" secondAttribute="top" constant="20" symbolic="YES" id="cx1-cp-nVw"/>
+                                            <constraint firstItem="8kz-Ld-lX0" firstAttribute="leading" secondItem="tT2-Go-XsQ" secondAttribute="leading" constant="20" symbolic="YES" id="qbm-pY-Qf7"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="tT2-Go-XsQ" firstAttribute="height" secondItem="Fil-nG-Ozz" secondAttribute="height" priority="250" constant="1" id="CJU-qY-2ZY"/>
+                                    <constraint firstItem="tT2-Go-XsQ" firstAttribute="top" secondItem="Fil-nG-Ozz" secondAttribute="top" id="JXl-3W-g8W"/>
+                                    <constraint firstAttribute="bottom" secondItem="tT2-Go-XsQ" secondAttribute="bottom" id="PMF-o9-ZcL"/>
+                                    <constraint firstItem="tT2-Go-XsQ" firstAttribute="width" secondItem="Fil-nG-Ozz" secondAttribute="width" id="eC0-At-Bir"/>
+                                    <constraint firstItem="tT2-Go-XsQ" firstAttribute="leading" secondItem="Fil-nG-Ozz" secondAttribute="leading" id="h7n-0t-f2y"/>
+                                    <constraint firstAttribute="trailing" secondItem="tT2-Go-XsQ" secondAttribute="trailing" id="u0Z-f5-4Nj"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.99215686274509807" green="0.99215686274509807" blue="0.99607843137254903" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="Fil-nG-Ozz" firstAttribute="top" secondItem="y8a-AU-dj2" secondAttribute="top" id="6LA-MK-c7Z"/>
+                            <constraint firstItem="y8a-AU-dj2" firstAttribute="bottom" secondItem="Fil-nG-Ozz" secondAttribute="bottom" id="92z-2c-Stv"/>
+                            <constraint firstItem="y8a-AU-dj2" firstAttribute="trailing" secondItem="Fil-nG-Ozz" secondAttribute="trailing" id="AaE-OR-fJX"/>
+                            <constraint firstItem="Fil-nG-Ozz" firstAttribute="leading" secondItem="y8a-AU-dj2" secondAttribute="leading" id="WCa-Eb-qQ3"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="y8a-AU-dj2"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fax-CU-dEM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="669.60000000000002" y="687.7061469265368"/>
+        </scene>
         <!--Read-->
         <scene sceneID="xFu-io-JbZ">
             <objects>
@@ -1427,9 +1595,13 @@ you think of adding a new one?</string>
             <point key="canvasLocation" x="192.80000000000001" y="-60.719640179910051"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="ic-calendar" width="42" height="47"/>
+        <image name="ic-notification" width="41" height="46"/>
+    </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="G29-rb-isc"/>
-        <segue reference="43l-ZQ-AR3"/>
+        <segue reference="y7q-nn-pWX"/>
+        <segue reference="J1H-vQ-s49"/>
         <segue reference="5mV-Cj-rFr"/>
     </inferredMetricsTieBreakers>
 </document>
