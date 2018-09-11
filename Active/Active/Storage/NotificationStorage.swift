@@ -136,6 +136,30 @@ class NotificationStorage {
         return results?.first
     }
 
+    /// Fetches the stored notifications within the specific day's date.
+    /// - Parameters:
+    ///     - context: The context used to fetch the entities from.
+    ///     - habit: one of the habits associated with the notification entity to be searched.
+    ///     - day: the day's date to look for notifications.
+    /// - Returns: the notifications within the passed day.
+    func notifications(
+        from context: NSManagedObjectContext,
+        habit: HabitMO,
+        andDay dayDate: Date
+    ) -> [NotificationMO] {
+        // Declare the day's filter predicate. The fire dates must be in between the day's begin and end.
+        let dayPredicate = NSPredicate(
+            format: "%@ <= fireDate AND fireDate <= %@",
+            dayDate.getBeginningOfDay() as NSDate,
+            dayDate.getEndOfDay() as NSDate
+        )
+        if let notificationsSet = habit.notifications?.filtered(using: dayPredicate) as? Set<NotificationMO> {
+            return [NotificationMO](notificationsSet)
+        } else {
+            return []
+        }
+    }
+
     /// Deletes from storage the passed notification.
     /// - Parameters:
     ///     - context: The context used to delete the notification from.

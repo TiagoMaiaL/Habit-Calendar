@@ -352,6 +352,46 @@ class HabitStorageNotificationTests: IntegrationTestCase {
         wait(for: [rescheduleExpectation], timeout: 0.2)
     }
 
+    func testNotificationsAreRemovedWhenDeletingHabit() {
+        // 1. Declare a dummy habit.
+        let dummyHabit = habitFactory.makeDummy()
+
+        // 2. Delete the habit.
+        habitStorage.delete(dummyHabit, from: context)
+        try? context.save()
+
+        // 3. Check if the notifications are also marked as removed.
+        XCTAssertEqual(0, try? context.count(for: NotificationMO.fetchRequest()))
+    }
+
+    func testPendingRequestsAreRemovedWhenDeletingHabit() {
+        let expectation = XCTestExpectation(description: "The habit's pending requests should be deleted as well.")
+
+        // 1. Declare a dummy habit.
+        let dummyHabit = habitFactory.makeDummy()
+
+        // 2. Schedule its notifications.
+        guard let set = dummyHabit.notifications as? Set<NotificationMO> else {
+            XCTFail("Couldn't get the dummy habit's notifications.")
+            return
+        }
+
+        let notifications = [NotificationMO](set)
+        notificationCenterMock.shouldAuthorize = true
+        notificationScheduler.schedule(notifications)
+
+        // 3. Delete the habit.
+        habitStorage.delete(dummyHabit, from: context)
+
+        // 4. Assert its pending requests were removed as well.
+        notificationCenterMock.getPendingNotificationRequests { requests in
+            XCTAssertEqual(0, requests.count, "The pending notification requests should also have been removed.")
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 0.2)
+    }
+
     // MARK: Imperatives
 
     /// Calculates the expected number of created notifications.

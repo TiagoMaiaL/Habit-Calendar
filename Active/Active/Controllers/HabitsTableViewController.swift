@@ -158,6 +158,10 @@ class HabitsTableViewController: UITableViewController, NSFetchedResultsControll
                 habitDetailsController.container = container
                 habitDetailsController.habitStorage = habitStorage
                 habitDetailsController.notificationManager = notificationManager
+                habitDetailsController.notificationStorage = NotificationStorage()
+                habitDetailsController.notificationScheduler = NotificationScheduler(
+                    notificationManager: notificationManager
+                )
 
                 // Get the selected habit for injection.
                 guard let indexPath = tableView.indexPathForSelectedRow else {

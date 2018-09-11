@@ -98,6 +98,42 @@ class NotificationStorageTests: IntegrationTestCase {
         )
     }
 
+    func testFetchingNotificationsByDate() {
+        // 1. Declare some dummy notifications.
+        let dummyHabit = habitFactory.makeDummy()
+        if let notificationsSet = dummyHabit.notifications as? Set<NotificationMO> {
+            dummyHabit.removeFromNotifications(notificationsSet as NSSet)
+        }
+
+        let notifications = [
+            notificationFactory.makeDummy(),
+            notificationFactory.makeDummy(),
+            notificationFactory.makeDummy()
+        ]
+        let fireDates = (0..<3).compactMap { Date().getBeginningOfDay().byAddingMinutes($0) }
+
+        for notification in notifications {
+            let index = notifications.index(of: notification)!
+            let fireDate = fireDates[index]
+
+            notification.habit = dummyHabit
+            notification.fireDate = fireDate
+        }
+
+        // 2. Fetch them by using today's date.
+        let fetchedNotifications = notificationStorage.notifications(
+            from: context,
+            habit: dummyHabit,
+            andDay: Date()
+        )
+
+        // 3. Assert the notifications were correclty returned.
+        XCTAssertEqual(notifications.count, fetchedNotifications.count)
+        for notification in fetchedNotifications {
+            XCTAssertNotNil(notifications.index(of: notification))
+        }
+    }
+
     func testNotificationCreationTwiceShouldThrow() {
         // 1. Declare a dummy habit with dummy notifications already created.
         // 1.1 Get its day and fire time.

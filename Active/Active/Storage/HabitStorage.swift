@@ -280,14 +280,13 @@ class HabitStorage {
         }
     }
 
-    /// Edits the habit's fire times by removing the old entities and adding the new ones.
-    /// - Parameters:
-    ///     - fireTimes: The fire times to be added.
-    ///     - habit: The habit to be edited.
-
     /// Removes the passed habit from the database.
     /// - Parameter context: The context used to delete the habit from.
     func delete(_ habit: HabitMO, from context: NSManagedObjectContext) {
+        if let notifications = habit.notifications as? Set<NotificationMO> {
+            notificationScheduler.unschedule([NotificationMO](notifications))
+        }
+
         context.delete(habit)
     }
 
