@@ -41,6 +41,9 @@ class HabitsTableViewController: UITableViewController, NSFetchedResultsControll
     /// The Habit storage used to fetch the tracked habits.
     var habitStorage: HabitStorage!
 
+    /// The user notification manager used to check or request the user's authorization.
+    var notificationManager: UserNotificationManager!
+
     /// The segmented control used to change the habits being displayed, based on its stage (completed or in progress).
     @IBOutlet weak var habitsSegmentedControl: UISegmentedControl!
 
@@ -96,6 +99,7 @@ class HabitsTableViewController: UITableViewController, NSFetchedResultsControll
         // Assert if the dependencies were properly injected.
         assert(container != nil, "The persistent container must be injected.")
         assert(habitStorage != nil, "The habit storage must be injected.")
+        assert(notificationManager != nil, "The notification manager must be injected.")
 
         // Register to possible notifications thrown by changes in other managed contexts.
         NotificationCenter.default.addObserver(
@@ -116,6 +120,8 @@ class HabitsTableViewController: UITableViewController, NSFetchedResultsControll
         emptyStateView.callToActionButton.addTarget(self, action: #selector(createNewHabit), for: .touchUpInside)
 
         tableView.backgroundView = emptyStateView
+
+        displayPresentationIfNeeded()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -134,10 +140,6 @@ class HabitsTableViewController: UITableViewController, NSFetchedResultsControll
     // MARK: Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let notificationManager = UserNotificationManager(
-            notificationCenter: UNUserNotificationCenter.current()
-        )
-
         switch segue.identifier {
         case newHabitSegueIdentifier:
             // Inject the controller's habit storage, user storage,
@@ -259,6 +261,21 @@ class HabitsTableViewController: UITableViewController, NSFetchedResultsControll
         // If there're habits, just hide the empty state view.
         habitsSegmentedControl.isHidden = false
         emptyStateView.isHidden = true
+    }
+
+    /// Displays the onBoarding controllers if necessary (Is it first login? Is the environment dev?).
+    private func displayPresentationIfNeeded() {
+        // Get the controller from the storyboard.
+        guard let presentationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(
+            withIdentifier: "On Boarding"
+            ) as? OnBoardingViewController else {
+                assertionFailure("Couldn't get the onBoarding controller.")
+                return
+        }
+        presentationController.notificationManager = notificationManager
+
+        // Present it on top of the window's root controller.
+        present(presentationController, animated: true)
     }
 
     // MARK: DataSource Methods

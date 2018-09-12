@@ -904,10 +904,10 @@ reminded about this habit?</string>
             </objects>
             <point key="canvasLocation" x="3857" y="647"/>
         </scene>
-        <!--View Controller-->
+        <!--On Boarding View Controller-->
         <scene sceneID="qCv-o2-KFV">
             <objects>
-                <viewController id="GU5-6E-1X1" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="On Boarding" id="GU5-6E-1X1" customClass="OnBoardingViewController" customModule="Active" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7er-CB-qOP">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1030,6 +1030,7 @@ Add as many habits as you wish.</string>
                                                     <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                                 <connections>
+                                                    <action selector="closeController:" destination="GU5-6E-1X1" eventType="touchUpInside" id="Jfu-aC-Ndz"/>
                                                     <action selector="storeHabit:" destination="e07-lh-rVp" eventType="touchUpInside" id="59E-oM-7M4"/>
                                                 </connections>
                                             </button>
