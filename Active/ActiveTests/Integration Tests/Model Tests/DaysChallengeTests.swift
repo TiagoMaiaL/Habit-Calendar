@@ -70,33 +70,51 @@ class DaysChallengeTests: IntegrationTestCase {
         )
     }
 
-    func testGettingChallengeProgressInfo() {
+    func testGettingInitialProgress() {
         // 1. Declare a dummy challenge.
         let dummyChallenge = daysChallengeFactory.makeDummy()
 
-        // 2. Mark some days as executed.
-        guard let daysSet = dummyChallenge.days as? Set<HabitDayMO> else {
-            XCTFail("Error: Couldn't get the dummy challenge's days.")
-            return
-        }
-        let habitDays = Array(daysSet)
-        let executedCount = habitDays.count / 4
+        // 2. Assert the past is 0.
+        XCTAssertEqual(0, dummyChallenge.getCompletionProgress().past)
+    }
 
-        for index in 0..<executedCount {
-            habitDays[index].markAsExecuted()
-        }
+    func testGettingCurrentProgressWithCurrentDayNotExecuted() {
+        // 1. Declare a dummy challenge with some past dates.
+        let dates = [
+            Date().byAddingDays(-2),
+            Date().byAddingDays(-1),
+            Date(),
+            Date().byAddingDays(1)
+            ].compactMap { $0 }
+        let dummyChallenge = daysChallengeFactory.makeDummy(using: dates)
 
-        // 3. Assert on the completionProgress.
-        XCTAssertEqual(
-            executedCount,
-            dummyChallenge.getCompletionProgress().executed,
-            "The challenge's executed days from the completion progrees don't have the expected count."
-        )
-        XCTAssertEqual(
-            habitDays.count,
-            dummyChallenge.getCompletionProgress().total,
-            "The challenge's total days from the completion progress don't have the expected count."
-        )
+        // 2. Assert the past count is correct.
+        let progress = dummyChallenge.getCompletionProgress()
+        XCTAssertEqual(2, progress.past)
+        XCTAssertEqual(4, progress.total)
+    }
+
+    func testGettingCurrentProgressWithCurrentDayExecuted() {
+        // 1. Declare a dummy challenge with some past dates.
+        let dates = [
+            Date().byAddingDays(-2),
+            Date(),
+            Date().byAddingDays(1)
+            ].compactMap { $0 }
+        let dummyChallenge = daysChallengeFactory.makeDummy(using: dates)
+        dummyChallenge.markCurrentDayAsExecuted()
+
+        // 2. Assert on the past count.
+        XCTAssertEqual(2, dummyChallenge.getCompletionProgress().past)
+    }
+
+    func testGettingPastProgress() {
+        // 1. Declare a dummy challenge in the past.
+        let pastChallengeDummy = daysChallengeFactory.makeCompletedDummy()
+
+        // 2. Assert its past dates are equal to the total one.
+        let progress = pastChallengeDummy.getCompletionProgress()
+        XCTAssertEqual(progress.past, progress.total)
     }
 
     func testGettingTheCurrentDay() {
