@@ -329,6 +329,9 @@
 		47EE82E9214875050093A6D6 /* OnBoardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47EE82E8214875050093A6D6 /* OnBoardingViewController.swift */; };
 		47EE82EA21497DDB0093A6D6 /* OnBoardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47EE82E8214875050093A6D6 /* OnBoardingViewController.swift */; };
 		47EE82EB21497DDC0093A6D6 /* OnBoardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47EE82E8214875050093A6D6 /* OnBoardingViewController.swift */; };
+		47EE82ED214988270093A6D6 /* UserDefaults+Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47EE82EC214988270093A6D6 /* UserDefaults+Login.swift */; };
+		47EE82EE214988270093A6D6 /* UserDefaults+Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47EE82EC214988270093A6D6 /* UserDefaults+Login.swift */; };
+		47EE82EF214988270093A6D6 /* UserDefaults+Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47EE82EC214988270093A6D6 /* UserDefaults+Login.swift */; };
 		47F635F020BB920900AC4555 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F635EF20BB920900AC4555 /* AppDelegate.swift */; };
 		47F635F520BB920900AC4555 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47F635F320BB920900AC4555 /* Main.storyboard */; };
 		47F635F820BB920900AC4555 /* Active.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 47F635F620BB920900AC4555 /* Active.xcdatamodeld */; };
@@ -477,6 +480,7 @@
 		47E6C20F20EB1233003BDB4D /* Seeder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Seeder.swift; sourceTree = "<group>"; };
 		47E6C21E20EC16C8003BDB4D /* UIViewController+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Utils.swift"; sourceTree = "<group>"; };
 		47EE82E8214875050093A6D6 /* OnBoardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingViewController.swift; sourceTree = "<group>"; };
+		47EE82EC214988270093A6D6 /* UserDefaults+Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Login.swift"; sourceTree = "<group>"; };
 		47F635EC20BB920900AC4555 /* Active.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Active.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		47F635EF20BB920900AC4555 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		47F635F420BB920900AC4555 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -702,6 +706,7 @@
 				474B7B9D212746BE00814A8E /* DateFormatter+Utils.swift */,
 				470C416F213EE70D007F6F35 /* UNNotificationContent+Category.swift */,
 				470C42932145A52C007F6F35 /* UIColor+Palette.swift */,
+				47EE82EC214988270093A6D6 /* UserDefaults+Login.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1408,6 +1413,7 @@
 				470C41EC2144B091007F6F35 /* HabitDaysSelectionViewController.swift in Sources */,
 				470C41ED2144B091007F6F35 /* DevelopmentSeeder.swift in Sources */,
 				470C41EE2144B091007F6F35 /* EmptyStateView.swift in Sources */,
+				47EE82EE214988270093A6D6 /* UserDefaults+Login.swift in Sources */,
 				470C41EF2144B091007F6F35 /* DaysChallengeStorage.swift in Sources */,
 				470C42992146E93E007F6F35 /* CalendarChallengeDayCell.swift in Sources */,
 				470C41F02144B091007F6F35 /* UserMO.swift in Sources */,
@@ -1484,6 +1490,7 @@
 				470C425D2144B164007F6F35 /* HabitDaysSelectionViewController.swift in Sources */,
 				470C425E2144B164007F6F35 /* DevelopmentSeeder.swift in Sources */,
 				470C425F2144B164007F6F35 /* EmptyStateView.swift in Sources */,
+				47EE82EF214988270093A6D6 /* UserDefaults+Login.swift in Sources */,
 				470C42602144B164007F6F35 /* DaysChallengeStorage.swift in Sources */,
 				470C429A2146E93E007F6F35 /* CalendarChallengeDayCell.swift in Sources */,
 				470C42612144B164007F6F35 /* UserMO.swift in Sources */,
@@ -1560,6 +1567,7 @@
 				47C3203C2130E91F0094BBF8 /* FireTimesDisplayable.swift in Sources */,
 				4737312B20ED502800895DD2 /* HabitDaysSelectionViewController.swift in Sources */,
 				470C41B02144A4B9007F6F35 /* DevelopmentSeeder.swift in Sources */,
+				47EE82ED214988270093A6D6 /* UserDefaults+Login.swift in Sources */,
 				47160A4621387AC300E717C9 /* EmptyStateView.swift in Sources */,
 				47D8308A20FCFDD6002D3A97 /* DaysChallengeStorage.swift in Sources */,
 				4713A1FC20C1643E008A13D2 /* UserMO.swift in Sources */,

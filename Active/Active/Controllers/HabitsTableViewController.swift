@@ -265,6 +265,7 @@ class HabitsTableViewController: UITableViewController, NSFetchedResultsControll
 
     /// Displays the onBoarding controllers if necessary (Is it first login? Is the environment dev?).
     private func displayPresentationIfNeeded() {
+        guard UserDefaults.standard.isFirstLaunch else { return }
         // Get the controller from the storyboard.
         guard let presentationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(
             withIdentifier: "On Boarding"
@@ -274,6 +275,7 @@ class HabitsTableViewController: UITableViewController, NSFetchedResultsControll
         }
         presentationController.notificationManager = notificationManager
 
+        UserDefaults.standard.setFirstLaunchPassed()
         // Present it on top of the window's root controller.
         present(presentationController, animated: true)
     }
