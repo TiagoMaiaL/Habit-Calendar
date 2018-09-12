@@ -309,19 +309,13 @@ class HabitsTableViewController: UITableViewController, NSFetchedResultsControll
                 // Display the habit properties:
                 // Its name.
                 cell.nameLabel?.text = habit.name
+
                 // And its progress.
-                var pastCount = habit.getCurrentChallenge()?.getPastDays()?.count ?? 0
-                let daysCount = habit.getCurrentChallenge()?.days?.count ?? 1
-
-                // If the current day was marked as executed, account it as a past day as well.
-                if habit.getCurrentChallenge()?.getCurrentDay()?.wasExecuted ?? false {
-                    pastCount += 1
-                }
-
-                cell.progressLabel?.text = "\(pastCount) / \(daysCount) completed days"
+                let progress = habit.getCurrentChallenge()?.getCompletionProgress() ?? (0, 0)
+                cell.progressLabel?.text = "\(progress.0) / \(progress.1) completed days"
                 cell.progressBar.tint = habit.getColor().uiColor
                 // Change the bar's progress (past days / total).
-                cell.progressBar.progress = CGFloat(Double(pastCount) / Double(daysCount))
+                cell.progressBar.progress = CGFloat(Double(progress.0) / Double(progress.1))
             }
         case .completed:
             cell = tableView.dequeueReusableCell(
