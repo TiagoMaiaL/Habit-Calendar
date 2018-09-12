@@ -35,6 +35,6 @@ extension HabitDetailsViewController {
         // Display the challenge's progress bar.
         let progressInfo = challenge.getCompletionProgress()
         progressBar.tint = habitColor
-        progressBar.progress = CGFloat(progressInfo.executed) / CGFloat(progressInfo.total)
+        progressBar.progress = CGFloat(progressInfo.past) / CGFloat(progressInfo.total)
     }
 }

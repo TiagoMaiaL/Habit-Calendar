@@ -96,8 +96,16 @@ class DaysChallengeMO: NSManagedObject {
     /// Gets the challenge's completion progress.
     /// - Returns: A tuple containing the number of executed days and
     ///            the total in the challenge.
-    func getCompletionProgress() -> (executed: Int, total: Int) {
-        return (getExecutedDays()?.count ?? 0, days?.count ?? 0)
+    func getCompletionProgress() -> (past: Int, total: Int) {
+        // Declare the count of past days. Take into account the current day as well.
+        var pastCount = getPastDays()?.count ?? 0
+        let totalCount = days?.count ?? 1
+
+        if getCurrentDay()?.wasExecuted ?? false {
+            pastCount += 1
+        }
+
+        return (pastCount, totalCount)
     }
 
     /// Gets the order (related to the date) of a given habitDay entity.
