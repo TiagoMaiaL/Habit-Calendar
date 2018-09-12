@@ -90,7 +90,7 @@ class HabitStorageTests: IntegrationTestCase {
         }
 
         // Create the habit.
-        let color = HabitMO.Color.alizarin
+        let color = HabitMO.Color.systemBlue
         let joggingHabit = habitStorage.create(
             using: context,
             user: userFactory.makeDummy(),
@@ -160,7 +160,7 @@ class HabitStorageTests: IntegrationTestCase {
             using: context,
             user: userFactory.makeDummy(),
             name: "exercise",
-            color: .alizarin,
+            color: .systemPink,
             days: [Date(), Date().byAddingDays(10)!, Date().byAddingDays(15)!],
             and: fireTimes
         )
@@ -262,7 +262,7 @@ class HabitStorageTests: IntegrationTestCase {
         let dummyHabit = habitFactory.makeDummy()
 
         // 2. Edit it with the desired color.
-        let colorToEdit = HabitMO.Color.amethyst
+        let colorToEdit = HabitMO.Color.systemTeal
         _ = habitStorage.edit(
             dummyHabit,
             using: context,

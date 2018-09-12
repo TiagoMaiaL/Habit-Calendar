@@ -15,17 +15,14 @@ extension HabitMO.Color {
 
     /// The UIColors associated with each enum constant.
     static let uiColors = [
-        midnightBlue: UIColor(red: 52/255, green: 73/255, blue: 94/255, alpha: 1),
-        amethyst: UIColor(red: 155/255, green: 89/255, blue: 182/255, alpha: 1),
-        pomegranate: UIColor(red: 192/255, green: 57/255, blue: 43/255, alpha: 1),
-        alizarin: UIColor(red: 231/255, green: 76/255, blue: 60/255, alpha: 1),
-        carrot: UIColor(red: 230/255, green: 126/255, blue: 34/255, alpha: 1),
-        orange: UIColor(red: 243/255, green: 156/255, blue: 18/255, alpha: 1),
-        blue: UIColor(red: 0/255, green: 168/255, blue: 255/255, alpha: 1.0),
-        peterRiver: UIColor(red: 52/255, green: 152/255, blue: 219/255, alpha: 1),
-        belizeRole: UIColor(red: 41/255, green: 128/255, blue: 185/255, alpha: 1),
-        turquoise: UIColor(red: 26/255, green: 188/255, blue: 156/255, alpha: 1),
-        emerald: UIColor(red: 46/255, green: 204/255, blue: 113/255, alpha: 1)
+        systemRed: UIColor("#FF3B30"),
+        systemOrange: UIColor("#FF9500"),
+        systemYellow: UIColor("#FFCC00"),
+        systemGreen: UIColor("#4CD964"),
+        systemTeal: UIColor("#5AC8FA"),
+        systemBlue: UIColor("#007AFF"),
+        systemPurple: UIColor("#5856D6"),
+        systemPink: UIColor("#FF2D55")
     ]
 
     /// The UIColor associated with the enum.

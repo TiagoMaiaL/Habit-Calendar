@@ -128,7 +128,7 @@ class HabitStorageNotificationTests: IntegrationTestCase {
             using: context,
             user: dummyUser,
             name: "Testing notifications",
-            color: .blue,
+            color: .systemBlue,
             days: days,
             and: fireTimes
         )
