@@ -92,12 +92,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
             // Seed the approriate procedures.
             seeder.seed()
-
-            // TODO: Move this authorization request to the appropriate controller.
-            // Request the user's authorization to schedule local notifications.
-            notificationManager.requestAuthorization { authorized in
-                print("User \(authorized ? "authorized" : "denied").")
-            }
         }
 
         // Register the user notification categories.
@@ -114,10 +108,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         // Inject the main dependencies into the initial HabitTableViewController:
         if let habitsListingController = window?.rootViewController?.contents as? HabitsTableViewController {
-            // Inject its container.
             habitsListingController.container = persistentContainer
-            // Inject its habit storage.
             habitsListingController.habitStorage = habitStorage
+            habitsListingController.notificationManager = notificationManager
         }
 
         return true
@@ -191,6 +184,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 }
 
+// MARK: UserNotifications extension
 extension AppDelegate: UNUserNotificationCenterDelegate {
 
     // MARK: Imperatives
