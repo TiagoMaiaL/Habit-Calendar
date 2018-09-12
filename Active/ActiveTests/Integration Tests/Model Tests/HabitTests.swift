@@ -271,7 +271,7 @@ class HabitTests: IntegrationTestCase {
         habit.id = UUID().uuidString
         habit.createdAt = Date()
         habit.name = "Random habit name"
-        habit.color = HabitMO.Color.blue.rawValue
+        habit.color = HabitMO.Color.systemRed.rawValue
 
         return habit
     }
