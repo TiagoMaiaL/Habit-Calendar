@@ -41,7 +41,7 @@ extension HabitDetailsViewController: CalendarDisplaying {
                 // Change the cell's color showing if the day was executed or not.
                 cell.rangeBackgroundView.backgroundColor = habitDay.wasExecuted ?
                     habitColor.uiColor :
-                    habitColor.uiColor.withAlphaComponent(0.5)
+                    habitColor.uiColor.withAlphaComponent(0.6)
                 cell.dayTitleLabel.textColor = .white
 
                 // Change the cell's range type, if it's the challenge's begin date, end date, or if it's in between.
@@ -59,7 +59,7 @@ extension HabitDetailsViewController: CalendarDisplaying {
                     cell.dayTitleLabel.textColor = UIColor(red: 74/255, green: 74/255, blue: 74/255, alpha: 1)
                 } else if cellState.date.isFuture {
                     // Days to be completed in the future should have a less bright color.
-                    cell.rangeBackgroundView.backgroundColor = habitColor.uiColor.withAlphaComponent(0.3)
+                    cell.rangeBackgroundView.backgroundColor = habitColor.uiColor.withAlphaComponent(0.5)
                 }
             } else {
                 cell.position = .none
