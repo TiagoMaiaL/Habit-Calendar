@@ -1,4 +1,4 @@
-# Active
+# Habit-Calendar
 A habit tracking app
 
 ## About
