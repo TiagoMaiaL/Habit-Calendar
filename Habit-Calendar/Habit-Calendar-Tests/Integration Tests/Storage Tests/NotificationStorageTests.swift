@@ -10,7 +10,7 @@ import Foundation
 import XCTest
 import CoreData
 import UserNotifications
-@testable import Active
+@testable import Habit_Calendar
 
 /// Class in charge of testing the HabitStorage methods.
 class NotificationStorageTests: IntegrationTestCase {

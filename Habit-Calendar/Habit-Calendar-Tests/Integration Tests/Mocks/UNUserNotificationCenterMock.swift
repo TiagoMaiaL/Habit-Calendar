@@ -8,7 +8,7 @@
 
 import Foundation
 import UserNotifications
-@testable import Active
+@testable import Habit_Calendar
 
 /// Mock used to fake the authorization requests.
 /// - Note: The authorization requests prompt the user to authorize.

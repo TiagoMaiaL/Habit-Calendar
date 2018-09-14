@@ -8,7 +8,7 @@
 
 import XCTest
 import CoreData
-@testable import Active
+@testable import Habit_Calendar
 
 /// The TestCase class used to test the app's storage layer.
 /// - Note: TestCase class intended to be subclassed by each file testing the storage classes.

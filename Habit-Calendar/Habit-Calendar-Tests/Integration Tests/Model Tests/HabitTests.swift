@@ -8,7 +8,7 @@
 
 import CoreData
 import XCTest
-@testable import Active
+@testable import Habit_Calendar
 
 /// Class in charge of testing the Habit core data entity methods.
 class HabitTests: IntegrationTestCase {

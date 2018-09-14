@@ -7,7 +7,7 @@
 
 import XCTest
 import UserNotifications
-@testable import Active
+@testable import Habit_Calendar
 
 /// Class in charge of testing the NotificationScheduler struct.
 class NotificationSchedulerTests: IntegrationTestCase {

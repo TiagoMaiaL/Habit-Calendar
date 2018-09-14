@@ -8,7 +8,7 @@
 
 import XCTest
 import CoreData
-@testable import Active
+@testable import Habit_Calendar
 
 /// Class in charge of testing the UserStorage methods.
 class UserStorageTests: IntegrationTestCase {

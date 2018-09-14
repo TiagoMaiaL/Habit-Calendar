@@ -8,7 +8,7 @@
 
 import XCTest
 import CoreData
-@testable import Active
+@testable import Habit_Calendar
 
 class HabitStorageNotificationTests: IntegrationTestCase {
 

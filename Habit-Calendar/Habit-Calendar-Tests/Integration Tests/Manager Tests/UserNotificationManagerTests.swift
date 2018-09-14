@@ -8,7 +8,7 @@
 
 import XCTest
 import UserNotifications
-@testable import Active
+@testable import Habit_Calendar
 
 class UserNotificationManagerTests: IntegrationTestCase {
 
