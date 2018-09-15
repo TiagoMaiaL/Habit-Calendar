@@ -77,16 +77,7 @@ extension HabitDetailsViewController: NotificationAvailabilityDisplayable {
 
     // MARK: Imperatives
 
-    func observeForegroundEvent() {
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(displayNotificationAvailability(_:)),
-            name: Notification.Name.UIApplicationDidBecomeActive,
-            object: nil
-        )
-    }
-
-    @objc func displayNotificationAvailability(_ notification: NSNotification? = nil) {
+    func displayNotificationAvailability() {
         // Update the fire times section.
         displayFireTimesSection()
     }
