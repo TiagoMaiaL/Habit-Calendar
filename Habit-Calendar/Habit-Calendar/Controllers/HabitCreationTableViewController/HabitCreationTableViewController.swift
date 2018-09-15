@@ -121,7 +121,7 @@ class HabitCreationTableViewController: UITableViewController {
     // MARK: Deinitializers
 
     deinit {
-        removeObserver()
+        stopObserving()
     }
 
     // MARK: ViewController Life Cycle
@@ -136,7 +136,7 @@ class HabitCreationTableViewController: UITableViewController {
         assert(notificationManager != nil, "Error: failed to inject the notification manager.")
 
         // Observe the app's active event to display if the user notifications are allowed.
-        observeForegroundEvent()
+        startObserving()
 
         // Configure the appearance of the navigation bar to never use the
         // large titles.

@@ -318,6 +318,8 @@
 		47C320382130799D0094BBF8 /* HabitCreationTableViewController+ColorField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C320372130799C0094BBF8 /* HabitCreationTableViewController+ColorField.swift */; };
 		47C3203A213079AD0094BBF8 /* HabitCreationTableViewController+NameField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C32039213079AD0094BBF8 /* HabitCreationTableViewController+NameField.swift */; };
 		47C3203C2130E91F0094BBF8 /* FireTimesDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C3203B2130E91F0094BBF8 /* FireTimesDisplayable.swift */; };
+		47D00E76214D9F1600B21A7C /* NotificationObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DA52B1214D9C5B00A45102 /* NotificationObserver.swift */; };
+		47D00E77214D9F1600B21A7C /* NotificationObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DA52B1214D9C5B00A45102 /* NotificationObserver.swift */; };
 		47D7003D210179F600F4FE88 /* NotificationScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D7003C210179F600F4FE88 /* NotificationScheduler.swift */; };
 		47D7004121017D0A00F4FE88 /* NotificationSchedulerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D7004021017D0A00F4FE88 /* NotificationSchedulerTests.swift */; };
 		47D8308820FCE82F002D3A97 /* DaysChallengeMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D8308720FCE82F002D3A97 /* DaysChallengeMO.swift */; };
@@ -330,6 +332,7 @@
 		47DA52AE214D622D00A45102 /* HabitsTableViewController+DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47961084214D5D8C00BFECFC /* HabitsTableViewController+DataSource.swift */; };
 		47DA52AF214D623000A45102 /* HabitsTableViewController+FetchedResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47961086214D5E3200BFECFC /* HabitsTableViewController+FetchedResultsController.swift */; };
 		47DA52B0214D623000A45102 /* HabitsTableViewController+FetchedResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47961086214D5E3200BFECFC /* HabitsTableViewController+FetchedResultsController.swift */; };
+		47DA52B2214D9C5B00A45102 /* NotificationObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DA52B1214D9C5B00A45102 /* NotificationObserver.swift */; };
 		47E6C20B20EAF550003BDB4D /* HabitCreationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E6C20A20EAF550003BDB4D /* HabitCreationTableViewController.swift */; };
 		47E6C20D20EAF567003BDB4D /* HabitDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E6C20C20EAF567003BDB4D /* HabitDetailsViewController.swift */; };
 		47E6C21020EB1233003BDB4D /* Seeder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E6C20F20EB1233003BDB4D /* Seeder.swift */; };
@@ -486,6 +489,7 @@
 		47D8308D20FD1490002D3A97 /* DaysChallengeFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaysChallengeFactory.swift; sourceTree = "<group>"; };
 		47D8308F20FD6288002D3A97 /* DaysChallengeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaysChallengeTests.swift; sourceTree = "<group>"; };
 		47D8FC9D20DC13990094026B /* UserNotificationManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationManagerTests.swift; sourceTree = "<group>"; };
+		47DA52B1214D9C5B00A45102 /* NotificationObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationObserver.swift; sourceTree = "<group>"; };
 		47E6C20A20EAF550003BDB4D /* HabitCreationTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitCreationTableViewController.swift; sourceTree = "<group>"; };
 		47E6C20C20EAF567003BDB4D /* HabitDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitDetailsViewController.swift; sourceTree = "<group>"; };
 		47E6C20F20EB1233003BDB4D /* Seeder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Seeder.swift; sourceTree = "<group>"; };
@@ -625,6 +629,7 @@
 				47C1F3DD212A140F00DDA7BB /* CalendarDisplaying.swift */,
 				47C3203B2130E91F0094BBF8 /* FireTimesDisplayable.swift */,
 				475197D721359516009F959C /* NotificationAvailabilityDisplayable.swift */,
+				47DA52B1214D9C5B00A45102 /* NotificationObserver.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1393,6 +1398,7 @@
 				470C41BD2144B091007F6F35 /* AppDelegate.swift in Sources */,
 				470C41BE2144B091007F6F35 /* HabitDetailsViewController+Calendar.swift in Sources */,
 				470C41BF2144B091007F6F35 /* HabitMOColor+UIColor.swift in Sources */,
+				47D00E76214D9F1600B21A7C /* NotificationObserver.swift in Sources */,
 				470C41C02144B091007F6F35 /* FireTimesSelectionViewController.swift in Sources */,
 				470C41C12144B091007F6F35 /* ColorsPickerView.swift in Sources */,
 				470C41C22144B091007F6F35 /* DayMO.swift in Sources */,
@@ -1472,6 +1478,7 @@
 				470C422E2144B164007F6F35 /* AppDelegate.swift in Sources */,
 				470C422F2144B164007F6F35 /* HabitDetailsViewController+Calendar.swift in Sources */,
 				470C42302144B164007F6F35 /* HabitMOColor+UIColor.swift in Sources */,
+				47D00E77214D9F1600B21A7C /* NotificationObserver.swift in Sources */,
 				470C42312144B164007F6F35 /* FireTimesSelectionViewController.swift in Sources */,
 				470C42322144B164007F6F35 /* ColorsPickerView.swift in Sources */,
 				470C42332144B164007F6F35 /* DayMO.swift in Sources */,
@@ -1551,6 +1558,7 @@
 				47C3202B212DCC230094BBF8 /* HabitDetailsViewController+NoChallengesSection.swift in Sources */,
 				47F635F020BB920900AC4555 /* AppDelegate.swift in Sources */,
 				47C3202D212DD59A0094BBF8 /* HabitDetailsViewController+Calendar.swift in Sources */,
+				47DA52B2214D9C5B00A45102 /* NotificationObserver.swift in Sources */,
 				47B2398A212203F9009CB25C /* HabitMOColor+UIColor.swift in Sources */,
 				4737312D20ED503B00895DD2 /* FireTimesSelectionViewController.swift in Sources */,
 				4761F5B32120A0F700A8D407 /* ColorsPickerView.swift in Sources */,

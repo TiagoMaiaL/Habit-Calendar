@@ -161,7 +161,7 @@ class HabitDetailsViewController: UIViewController {
     // MARK: Deinitializers
 
     deinit {
-        NotificationCenter.default.removeObserver(self)
+        stopObserving()
     }
 
     // MARK: ViewController Life Cycle
@@ -169,18 +169,9 @@ class HabitDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Register to possible notifications thrown by changes in other managed contexts.
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(handleContextChanges(notification:)),
-            name: Notification.Name.NSManagedObjectContextDidSave,
-            object: nil
-        )
-
-        // Refresh the user notifications authorization view every time the app become active.
-        observeForegroundEvent()
-
         checkDependencies()
+        startObserving()
+
         // Get the habit's challenges to display in the calendar.
         challenges = getChallenges(from: habit)
 
@@ -378,5 +369,36 @@ class HabitDetailsViewController: UIViewController {
         } else {
             return filteredChallenges.last
         }
+    }
+}
+
+extension HabitDetailsViewController: NotificationObserver {
+
+    func startObserving() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handleContextChanges(notification:)),
+            name: Notification.Name.NSManagedObjectContextDidSave,
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handleActivationEvent(_:)),
+            name: Notification.Name.UIApplicationDidBecomeActive,
+            object: nil
+        )
+    }
+
+    func stopObserving() {
+        NotificationCenter.default.removeObserver(self)
+    }
+}
+
+extension HabitDetailsViewController: AppActiveObserver {
+    @objc func handleActivationEvent(_ notification: Notification) {
+        calendarView.reloadData()
+        displaySections()
+
+        displayNotificationAvailability()
     }
 }
