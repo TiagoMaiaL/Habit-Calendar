@@ -252,6 +252,26 @@ class HabitTests: IntegrationTestCase {
         )
     }
 
+    func testGettingCurrentChallengeOnItsFinalDay() {
+        // 1. Declare a dummy habit with its challenge on the last day.
+        let dummyHabit = habitFactory.makeDummy()
+        // 1.1 Remove its challenges.
+        if let challenges = dummyHabit.challenges as? Set<DaysChallengeMO> {
+            dummyHabit.removeFromChallenges(challenges as NSSet)
+        }
+
+        // 1.2 Add a new one on its final day.
+        let dates = [Date().byAddingDays(-1), Date()].compactMap { $0 }
+        guard !dates.isEmpty else {
+            XCTFail("Couldn't generate the dummy challenge's dates.")
+            return
+        }
+        dummyHabit.addToChallenges(daysChallengeFactory.makeDummy(using: dates))
+
+        // 2. Assert the current challenge is correctly returned.
+        XCTAssertNotNil(dummyHabit.getCurrentChallenge())
+    }
+
     func testGettingColorAsEnum() {
         // 1. Declare a dummy habit.
         let dummyHabit = habitFactory.makeDummy()

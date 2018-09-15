@@ -114,7 +114,7 @@ class HabitMO: NSManagedObject {
     /// - Note: The current challenge is a DaysChallenge containing the current
     ///         date within its range (fromDate, toDate).
     func getCurrentChallenge() -> DaysChallengeMO? {
-        let today = Date()
+        let today = Date().getBeginningOfDay()
         let currentPredicate = NSPredicate(
             format: "fromDate <= %@ AND %@ <= toDate",
             today as NSDate,
