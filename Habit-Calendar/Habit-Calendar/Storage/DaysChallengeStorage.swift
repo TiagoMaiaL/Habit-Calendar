@@ -40,7 +40,7 @@ class DaysChallengeStorage {
             daysDates.count > 1,
             "The provided days dates must have two or more dates."
         )
-
+        let daysDates = daysDates.map { $0.getBeginningOfDay() }
         let challenge = DaysChallengeMO(context: context)
 
         // Configure its main properties:
