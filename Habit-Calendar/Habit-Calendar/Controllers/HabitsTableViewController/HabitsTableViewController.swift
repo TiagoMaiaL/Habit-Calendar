@@ -135,13 +135,7 @@ class HabitsTableViewController: UITableViewController {
         super.viewWillAppear(animated)
 
         // Start fetching for the habits.
-        // TODO: Check what errors are thrown by the fetch. Every error should be reported to the user.
-        do {
-            displayEmptyStateIfNeeded()
-            try selectedFetchedResultsController.performFetch()
-        } catch {
-            assertionFailure("Error: Couldn't fetch the user's habits.")
-        }
+        updateList()
     }
 
     // MARK: Navigation
