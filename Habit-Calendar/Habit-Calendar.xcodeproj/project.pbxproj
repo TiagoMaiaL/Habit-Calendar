@@ -359,6 +359,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		47D00E78214DAF0400B21A7C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 47F635E420BB920900AC4555 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 470C41B12144B091007F6F35;
+			remoteInfo = "Habit-Calendar-Dev";
+		};
 		47F6360420BB920D00AC4555 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 47F635E420BB920900AC4555 /* Project object */;
@@ -1019,6 +1026,7 @@
 			);
 			dependencies = (
 				47F6360520BB920D00AC4555 /* PBXTargetDependency */,
+				47D00E79214DAF0400B21A7C /* PBXTargetDependency */,
 			);
 			name = "Habit-CalendarTests";
 			productName = ActiveTests;
@@ -1650,6 +1658,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		47D00E79214DAF0400B21A7C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 470C41B12144B091007F6F35 /* Habit-Calendar-Dev */;
+			targetProxy = 47D00E78214DAF0400B21A7C /* PBXContainerItemProxy */;
+		};
 		47F6360520BB920D00AC4555 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 47F635EB20BB920900AC4555 /* Habit-Calendar */;

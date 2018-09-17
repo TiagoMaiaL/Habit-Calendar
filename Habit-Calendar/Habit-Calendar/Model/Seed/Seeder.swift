@@ -83,6 +83,7 @@ class Seeder {
                 print("\nOops =(")
                 print("There was an error when trying to save the seed context:")
                 print(error.localizedDescription)
+                print(error)
             }
 
             self.printEntitiesCount()

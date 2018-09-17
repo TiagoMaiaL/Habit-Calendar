@@ -115,6 +115,51 @@ class DevelopmentSeeder: Seeder {
                 dummyHabit.addToChallenges(completedChallenge)
                 dummyHabit.user = user
             }
+        }, {
+            context in
+
+            // Useful for testing the whole challenge's life cycle: begin, middle (in progress), and end.
+            print("Seeding habits with challenges in their final days.")
+
+            // Get the previously seeded user.
+            guard let user = try? context.fetch(UserMO.fetchRequest()).first as? UserMO else {
+                assertionFailure("Couldn't get the seeded user.")
+                return
+            }
+            let challengeFactory = DaysChallengeFactory(context: context)
+
+            let dummyHabit = HabitFactory(context: context).makeDummy()
+            dummyHabit.user = user
+
+            // Remove their current challenges.
+            if let challengesSet = dummyHabit.challenges as? Set<DaysChallengeMO> {
+                for challenge in challengesSet {
+                    // Remove the challenge's days.
+                    if let daysSet = challenge.days as? Set<HabitDayMO> {
+                        for day in daysSet {
+                            dummyHabit.removeFromDays(day)
+                            context.delete(day)
+                        }
+                    }
+
+                    dummyHabit.removeFromChallenges(challenge)
+                    context.delete(challenge)
+                }
+            }
+
+            let endingDates = [Date().byAddingDays(-1), Date()].compactMap { $0 }
+            let endingChallenge = challengeFactory.makeDummy(using: endingDates)
+
+            guard let days = endingChallenge.days as? Set<HabitDayMO> else {
+                assertionFailure("Couldn't get the dummy's challenge's days.")
+                return
+            }
+            endingChallenge.habit = dummyHabit
+            for day in days {
+                day.habit = dummyHabit
+            }
+
+            dummyHabit.addToChallenges(endingChallenge)
         }
     ]
 
