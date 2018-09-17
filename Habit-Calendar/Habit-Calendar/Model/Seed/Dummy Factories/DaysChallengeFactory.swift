@@ -56,13 +56,13 @@ struct DaysChallengeFactory: DummyFactory {
     /// - Returns: A configured dummy challenge.
     func makeDummy(using dates: [Date]) -> DaysChallengeMO {
         assert(!dates.isEmpty, "The dates mustn't be empty.")
-        let sortedDates = dates.sorted()
+        let sortedDates = dates.sorted().map { $0.getBeginningOfDay() }
 
         // Declare the dummy and its main properties:
         let dummyChallenge = DaysChallengeMO(context: context)
         dummyChallenge.id = UUID().uuidString
-        dummyChallenge.createdAt = sortedDates.first!
-        dummyChallenge.fromDate = dummyChallenge.createdAt!
+        dummyChallenge.createdAt = Date()
+        dummyChallenge.fromDate = sortedDates.first!
         dummyChallenge.toDate = sortedDates.last!
 
         // Associate its days according to the provided dates:
