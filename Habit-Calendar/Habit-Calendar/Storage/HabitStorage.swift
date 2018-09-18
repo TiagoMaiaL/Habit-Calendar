@@ -83,7 +83,13 @@ class HabitStorage {
     func makeFetchedResultsController(context: NSManagedObjectContext) -> NSFetchedResultsController<HabitMO> {
         // Filter for habits that have an active days' challenge.
         let inProgressPredicate = NSPredicate(
-            format: "SUBQUERY(challenges, $challenge, $challenge.isClosed == false).@count == 1"
+            format: """
+SUBQUERY(challenges, $challenge,
+$challenge.isClosed == false AND $challenge.fromDate <= %@ AND %@ <= $challenge.toDate
+).@count >= 1
+""",
+            Date().getBeginningOfDay() as NSDate,
+            Date().getBeginningOfDay() as NSDate
         )
         let request: NSFetchRequest<HabitMO> = HabitMO.fetchRequest()
         request.predicate = inProgressPredicate

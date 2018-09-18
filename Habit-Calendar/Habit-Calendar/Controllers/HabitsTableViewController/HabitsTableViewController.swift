@@ -87,8 +87,7 @@ class HabitsTableViewController: UITableViewController {
     // MARK: Deinitialization
 
     deinit {
-        // Remove the registered observers.
-        NotificationCenter.default.removeObserver(self)
+        stopObserving()
     }
 
     // MARK: ViewController Life Cycle
@@ -101,20 +100,7 @@ class HabitsTableViewController: UITableViewController {
         assert(habitStorage != nil, "The habit storage must be injected.")
         assert(notificationManager != nil, "The notification manager must be injected.")
 
-        // Register to possible notifications thrown by changes in other managed contexts.
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(handleContextChanges(notification:)),
-            name: Notification.Name.NSManagedObjectContextDidSave,
-            object: nil
-        )
-        // Register to notifications informing that the app has become active. Update the fetched controllers.
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(updateFetchedResultsController(notification:)),
-            name: Notification.Name.UIApplicationDidBecomeActive,
-            object: nil
-        )
+        startObserving()
 
         // Configure the nav bar.
         navigationController?.navigationBar.prefersLargeTitles = true
@@ -208,10 +194,10 @@ class HabitsTableViewController: UITableViewController {
 
         // Refresh the current view context by using the payloads in the notifications.
         container.viewContext.mergeChanges(fromContextDidSave: notification)
-    }
 
-    @objc private func updateFetchedResultsController(notification: Notification) {
-        updateList()
+        DispatchQueue.main.async {
+            self.displayEmptyStateIfNeeded()
+        }
     }
 
     // MARK: Imperatives
@@ -261,8 +247,10 @@ class HabitsTableViewController: UITableViewController {
                 emptyStateView.emptyLabel.text = """
                 You don't have any habits in progress at the moment, what do you think of new challenges?
                 """
+                emptyStateView.callToActionButton.isHidden = false
             case .completed:
                 emptyStateView.emptyLabel.text = "You don't have any completed habits yet."
+                emptyStateView.callToActionButton.isHidden = true
             }
 
             return
@@ -288,5 +276,35 @@ class HabitsTableViewController: UITableViewController {
         UserDefaults.standard.setFirstLaunchPassed()
         // Present it on top of the window's root controller.
         present(presentationController, animated: true)
+    }
+}
+
+extension HabitsTableViewController: NotificationObserver {
+    func startObserving() {
+        // Register to possible notifications thrown by changes in other managed contexts.
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handleContextChanges(notification:)),
+            name: Notification.Name.NSManagedObjectContextDidSave,
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handleActivationEvent(_:)),
+            name: .UIApplicationDidBecomeActive,
+            object: nil
+        )
+    }
+
+    func stopObserving() {
+        NotificationCenter.default.removeObserver(self)
+    }
+}
+
+extension HabitsTableViewController: AppActiveObserver {
+    func handleActivationEvent(_ notification: Notification) {
+        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { _ in
+            self.updateList()
+        }
     }
 }
