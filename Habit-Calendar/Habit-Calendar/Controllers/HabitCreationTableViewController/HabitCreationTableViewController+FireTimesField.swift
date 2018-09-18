@@ -48,7 +48,8 @@ extension HabitCreationTableViewController: NotificationAvailabilityDisplayable 
     func displayNotificationAvailability() {
         notificationManager.getAuthorizationStatus { isAuthorized in
             DispatchQueue.main.async {
-                self.areNotificationsAuthorized = isAuthorized
+                self.notAuthorizedContainer.isHidden = isAuthorized
+                self.fireTimesContainer.isHidden = !isAuthorized
                 self.tableView.reloadData()
             }
         }

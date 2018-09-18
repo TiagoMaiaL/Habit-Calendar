@@ -44,6 +44,9 @@ class HabitCreationTableViewController: UITableViewController {
     /// The label displaying the last day in the selected sequence.
     @IBOutlet weak var toDayLabel: UILabel!
 
+    /// The stack view containing the fire times labels.
+    @IBOutlet weak var fireTimesContainer: UIStackView!
+
     /// The label displaying the amount of fire times selected.
     @IBOutlet weak var fireTimesAmountLabel: UILabel!
 
@@ -55,6 +58,9 @@ class HabitCreationTableViewController: UITableViewController {
 
     /// The color's field color picker view.
     @IBOutlet weak var colorPicker: ColorsPickerView!
+
+    /// The container showing that the user hasn't enabled user notifications.
+    @IBOutlet weak var notAuthorizedContainer: UIStackView!
 
     /// The container in which the habit is going to be persisted.
     var container: NSPersistentContainer!
@@ -353,17 +359,6 @@ information unavailable.
 }
 
 extension HabitCreationTableViewController {
-
-    // MARK: types
-
-    /// The fields used for creating a new habit.
-    private enum Field: Int {
-        case name = 0,
-            color,
-            days,
-            fireTimes,
-            notificationsNotAuthorized
-    }
 
     // MARK: TableView delegate methods
 
