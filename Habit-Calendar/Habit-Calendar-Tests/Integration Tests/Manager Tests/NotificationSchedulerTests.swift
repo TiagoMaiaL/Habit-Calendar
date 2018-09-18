@@ -102,6 +102,12 @@ class NotificationSchedulerTests: IntegrationTestCase {
             UNNotificationCategory.Kind.dayPrompt(habitId: nil).identifier,
             "The category identifier should be informed."
         )
+        XCTAssertNotNil(
+            userNotificationOptions.content.sound
+        )
+        XCTAssertNotNil(
+            userNotificationOptions.content.badge
+        )
 
         // Declare the trigger as a UNTitmeIntervalNotificationTrigger.
         guard let dateTrigger = userNotificationOptions.trigger as? UNTimeIntervalNotificationTrigger else {
@@ -109,7 +115,10 @@ class NotificationSchedulerTests: IntegrationTestCase {
             return
         }
 
-        XCTAssertNotNil(dateTrigger.nextTriggerDate(), "The notification trigger should have a valid trigger date.")
+        XCTAssertNotNil(
+            dateTrigger.nextTriggerDate(),
+            "The notification trigger should have a valid trigger date."
+        )
         XCTAssertEqual(
             dateTrigger.nextTriggerDate()!.description,
             dummyNotification.getFireDate().description,

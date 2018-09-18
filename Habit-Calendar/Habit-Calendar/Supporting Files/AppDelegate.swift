@@ -116,6 +116,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.daysChallengeStorage.closePastChallenges(using: context)
             try? context.save()
         }
+
+        // Reset the app icon's badge number.
+        application.applicationIconBadgeNumber = 0
     }
 
     func applicationWillTerminate(_ application: UIApplication) {

@@ -35,8 +35,12 @@ struct NotificationScheduler {
             content.title = habit.getTitleText()
             content.subtitle = habit.getSubtitleText()
             content.body = makeBodyText(from: notification)
-            content.categoryIdentifier = UNNotificationCategory.Kind.dayPrompt(habitId: nil).identifier
+            content.categoryIdentifier = UNNotificationCategory.Kind.dayPrompt(
+                habitId: nil
+            ).identifier
             content.userInfo["habitIdentifier"] = habit.id
+            content.sound = UNNotificationSound.default()
+            content.badge = 1
         } else {
             assertionFailure("The passed notification must have a valid habit entity.")
         }
