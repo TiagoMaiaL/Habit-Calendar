@@ -54,9 +54,16 @@ class HabitStorage {
     /// - Parameter context: The context used to fetch the habits.
     /// - Returns: The created fetched results controller.
     func makeCompletedFetchedResultsController(context: NSManagedObjectContext) -> NSFetchedResultsController<HabitMO> {
-        // Filter for habits that don't have an active days' challenge (aren't closed yet).
+        // Filter for habits that don't have an active days' challenge
+        // (aren't closed yet or date is not in between the challenge).
         let completedPredicate = NSPredicate(
-            format: "SUBQUERY(challenges, $challenge, $challenge.isClosed == false).@count == 0"
+            format: """
+SUBQUERY(challenges, $challenge,
+    $challenge.isClosed == false AND $challenge.fromDate <= %@ AND %@ <= $challenge.toDate
+).@count == 0
+""",
+            Date().getBeginningOfDay() as NSDate,
+            Date().getBeginningOfDay() as NSDate
         )
         let request: NSFetchRequest<HabitMO> = HabitMO.fetchRequest()
         request.predicate = completedPredicate
@@ -85,7 +92,7 @@ class HabitStorage {
         let inProgressPredicate = NSPredicate(
             format: """
 SUBQUERY(challenges, $challenge,
-$challenge.isClosed == false AND $challenge.fromDate <= %@ AND %@ <= $challenge.toDate
+    $challenge.isClosed == false AND $challenge.fromDate <= %@ AND %@ <= $challenge.toDate
 ).@count > 0
 """,
             Date().getBeginningOfDay() as NSDate,

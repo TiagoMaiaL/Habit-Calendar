@@ -320,7 +320,7 @@ extension HabitsTableViewController: NotificationObserver {
 extension HabitsTableViewController: AppActiveObserver {
     func handleActivationEvent(_ notification: Notification) {
         Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { _ in
-            // Reset the current fetched results controller, so its query always takes today into account.
+            // Reset the current fetched results controller, so its predicate always takes today into account.
             switch self.selectedSegment {
             case .inProgress:
                 self._progressfetchedResultsController = nil
