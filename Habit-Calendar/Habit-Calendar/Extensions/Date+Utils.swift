@@ -41,7 +41,7 @@ extension Date {
     /// Gets the configured current calendar.
     private func getCurrentCalendar() -> Calendar {
         var calendar = Calendar.current
-        calendar.timeZone = TimeZone.current
+        calendar.timeZone = TimeZone.autoupdatingCurrent
 
         return calendar
     }

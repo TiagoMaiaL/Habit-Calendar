@@ -100,12 +100,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Register the app for any UserNotification's events.
         UNUserNotificationCenter.current().delegate = self
 
-        // Close any past challenges that are open.
-        persistentContainer.performBackgroundTask { context in
-            self.daysChallengeStorage.closePastChallenges(using: context)
-            try? context.save()
-        }
-
         // Inject the main dependencies into the initial HabitTableViewController:
         if let habitsListingController = window?.rootViewController?.contents as? HabitsTableViewController {
             habitsListingController.container = persistentContainer
@@ -114,6 +108,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         return true
+    }
+
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        // Close any past challenges that are open.
+        persistentContainer.performBackgroundTask { context in
+            self.daysChallengeStorage.closePastChallenges(using: context)
+            try? context.save()
+        }
     }
 
     func applicationWillTerminate(_ application: UIApplication) {

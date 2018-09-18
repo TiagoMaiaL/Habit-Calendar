@@ -47,21 +47,37 @@ class HabitsTableViewController: UITableViewController {
     /// The segmented control used to change the habits being displayed, based on its stage (completed or in progress).
     @IBOutlet weak var habitsSegmentedControl: UISegmentedControl!
 
-    /// The fetched results controller used to get the habits that are in progress and display them with the tableView.
-    lazy var progressfetchedResultsController: NSFetchedResultsController<HabitMO> = {
-        let fetchedController = habitStorage.makeFetchedResultsController(context: container.viewContext)
-        fetchedController.delegate = self
+    /// The variable holding the current(related to today) fetchedResultsController
+    /// for the habits that are in progress.
+    /// - Note: To re-initialize this property, only set it to nil, and use the getter.
+    private var _progressfetchedResultsController: NSFetchedResultsController<HabitMO>? = nil
 
-        return fetchedController
-    }()
+    /// The fetched results controller used to get the habits that are in progress and display them with the tableView.
+    var progressfetchedResultsController: NSFetchedResultsController<HabitMO> {
+        if _progressfetchedResultsController == nil {
+            let fetchedController = habitStorage.makeFetchedResultsController(context: container.viewContext)
+            fetchedController.delegate = self
+            _progressfetchedResultsController = fetchedController
+        }
+
+        return _progressfetchedResultsController!
+    }
+
+    /// The variable holding the current(related to today) fetchedResultsController
+    /// for the completed habits.
+    /// - Note: To re-initialize this property, only set it to nil, and use the getter.
+    private var _completedfetchedResultsController: NSFetchedResultsController<HabitMO>? = nil
 
     /// The fetched results controller used to get the habits that are completed and display them with the tableView.
-    lazy var completedfetchedResultsController: NSFetchedResultsController<HabitMO> = {
-        let fetchedController = habitStorage.makeCompletedFetchedResultsController(context: container.viewContext)
-        fetchedController.delegate = self
+    var completedfetchedResultsController: NSFetchedResultsController<HabitMO> {
+        if _completedfetchedResultsController == nil {
+            let fetchedController = habitStorage.makeCompletedFetchedResultsController(context: container.viewContext)
+            fetchedController.delegate = self
+            _completedfetchedResultsController = fetchedController
+        }
 
-        return fetchedController
-    }()
+        return _completedfetchedResultsController!
+    }
 
     /// The currently selected segment.
     var selectedSegment: Segment {
@@ -87,8 +103,7 @@ class HabitsTableViewController: UITableViewController {
     // MARK: Deinitialization
 
     deinit {
-        // Remove the registered observers.
-        NotificationCenter.default.removeObserver(self)
+        stopObserving()
     }
 
     // MARK: ViewController Life Cycle
@@ -101,20 +116,7 @@ class HabitsTableViewController: UITableViewController {
         assert(habitStorage != nil, "The habit storage must be injected.")
         assert(notificationManager != nil, "The notification manager must be injected.")
 
-        // Register to possible notifications thrown by changes in other managed contexts.
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(handleContextChanges(notification:)),
-            name: Notification.Name.NSManagedObjectContextDidSave,
-            object: nil
-        )
-        // Register to notifications informing that the app has become active. Update the fetched controllers.
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(updateFetchedResultsController(notification:)),
-            name: Notification.Name.UIApplicationDidBecomeActive,
-            object: nil
-        )
+        startObserving()
 
         // Configure the nav bar.
         navigationController?.navigationBar.prefersLargeTitles = true
@@ -135,13 +137,7 @@ class HabitsTableViewController: UITableViewController {
         super.viewWillAppear(animated)
 
         // Start fetching for the habits.
-        // TODO: Check what errors are thrown by the fetch. Every error should be reported to the user.
-        do {
-            displayEmptyStateIfNeeded()
-            try selectedFetchedResultsController.performFetch()
-        } catch {
-            assertionFailure("Error: Couldn't fetch the user's habits.")
-        }
+        updateList()
     }
 
     // MARK: Navigation
@@ -214,10 +210,10 @@ class HabitsTableViewController: UITableViewController {
 
         // Refresh the current view context by using the payloads in the notifications.
         container.viewContext.mergeChanges(fromContextDidSave: notification)
-    }
 
-    @objc private func updateFetchedResultsController(notification: Notification) {
-        updateList()
+        DispatchQueue.main.async {
+            self.displayEmptyStateIfNeeded()
+        }
     }
 
     // MARK: Imperatives
@@ -267,8 +263,10 @@ class HabitsTableViewController: UITableViewController {
                 emptyStateView.emptyLabel.text = """
                 You don't have any habits in progress at the moment, what do you think of new challenges?
                 """
+                emptyStateView.callToActionButton.isHidden = false
             case .completed:
                 emptyStateView.emptyLabel.text = "You don't have any completed habits yet."
+                emptyStateView.callToActionButton.isHidden = true
             }
 
             return
@@ -294,5 +292,43 @@ class HabitsTableViewController: UITableViewController {
         UserDefaults.standard.setFirstLaunchPassed()
         // Present it on top of the window's root controller.
         present(presentationController, animated: true)
+    }
+}
+
+extension HabitsTableViewController: NotificationObserver {
+    func startObserving() {
+        // Register to possible notifications thrown by changes in other managed contexts.
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handleContextChanges(notification:)),
+            name: Notification.Name.NSManagedObjectContextDidSave,
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handleActivationEvent(_:)),
+            name: .UIApplicationDidBecomeActive,
+            object: nil
+        )
+    }
+
+    func stopObserving() {
+        NotificationCenter.default.removeObserver(self)
+    }
+}
+
+extension HabitsTableViewController: AppActiveObserver {
+    func handleActivationEvent(_ notification: Notification) {
+        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { _ in
+            // Reset the current fetched results controller, so its predicate always takes today into account.
+            switch self.selectedSegment {
+            case .inProgress:
+                self._progressfetchedResultsController = nil
+            case .completed:
+                self._completedfetchedResultsController = nil
+            }
+
+            self.updateList()
+        }
     }
 }
