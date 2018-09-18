@@ -47,21 +47,37 @@ class HabitsTableViewController: UITableViewController {
     /// The segmented control used to change the habits being displayed, based on its stage (completed or in progress).
     @IBOutlet weak var habitsSegmentedControl: UISegmentedControl!
 
-    /// The fetched results controller used to get the habits that are in progress and display them with the tableView.
-    lazy var progressfetchedResultsController: NSFetchedResultsController<HabitMO> = {
-        let fetchedController = habitStorage.makeFetchedResultsController(context: container.viewContext)
-        fetchedController.delegate = self
+    /// The variable holding the current(related to today) fetchedResultsController
+    /// for the habits that are in progress.
+    /// - Note: To re-initialize this property, only set it to nil, and use the getter.
+    private var _progressfetchedResultsController: NSFetchedResultsController<HabitMO>? = nil
 
-        return fetchedController
-    }()
+    /// The fetched results controller used to get the habits that are in progress and display them with the tableView.
+    var progressfetchedResultsController: NSFetchedResultsController<HabitMO> {
+        if _progressfetchedResultsController == nil {
+            let fetchedController = habitStorage.makeFetchedResultsController(context: container.viewContext)
+            fetchedController.delegate = self
+            _progressfetchedResultsController = fetchedController
+        }
+
+        return _progressfetchedResultsController!
+    }
+
+    /// The variable holding the current(related to today) fetchedResultsController
+    /// for the completed habits.
+    /// - Note: To re-initialize this property, only set it to nil, and use the getter.
+    private var _completedfetchedResultsController: NSFetchedResultsController<HabitMO>? = nil
 
     /// The fetched results controller used to get the habits that are completed and display them with the tableView.
-    lazy var completedfetchedResultsController: NSFetchedResultsController<HabitMO> = {
-        let fetchedController = habitStorage.makeCompletedFetchedResultsController(context: container.viewContext)
-        fetchedController.delegate = self
+    var completedfetchedResultsController: NSFetchedResultsController<HabitMO> {
+        if _completedfetchedResultsController == nil {
+            let fetchedController = habitStorage.makeCompletedFetchedResultsController(context: container.viewContext)
+            fetchedController.delegate = self
+            _completedfetchedResultsController = fetchedController
+        }
 
-        return fetchedController
-    }()
+        return _completedfetchedResultsController!
+    }
 
     /// The currently selected segment.
     var selectedSegment: Segment {
@@ -304,6 +320,14 @@ extension HabitsTableViewController: NotificationObserver {
 extension HabitsTableViewController: AppActiveObserver {
     func handleActivationEvent(_ notification: Notification) {
         Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { _ in
+            // Reset the current fetched results controller, so its query always takes today into account.
+            switch self.selectedSegment {
+            case .inProgress:
+                self._progressfetchedResultsController = nil
+            case .completed:
+                self._completedfetchedResultsController = nil
+            }
+
             self.updateList()
         }
     }

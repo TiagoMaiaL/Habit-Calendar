@@ -86,7 +86,7 @@ class HabitStorage {
             format: """
 SUBQUERY(challenges, $challenge,
 $challenge.isClosed == false AND $challenge.fromDate <= %@ AND %@ <= $challenge.toDate
-).@count >= 1
+).@count > 0
 """,
             Date().getBeginningOfDay() as NSDate,
             Date().getBeginningOfDay() as NSDate
