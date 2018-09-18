@@ -131,7 +131,7 @@ SUBQUERY(challenges, $challenge,
         // Declare a new habit instance.
         let habit = HabitMO(context: context)
         habit.id = UUID().uuidString
-        habit.name = name
+        habit.name = treatName(name)
         habit.createdAt = Date()
         habit.color = color.rawValue
 
@@ -199,7 +199,7 @@ SUBQUERY(challenges, $challenge,
         and notificationFireTimes: [DateComponents]? = nil
     ) -> HabitMO {
         if let name = name {
-            habit.name = name
+            habit.name = treatName(name)
         }
 
         if let color = color {
@@ -337,4 +337,11 @@ SUBQUERY(challenges, $challenge,
 
         return notifications
      }
+
+    /// Returns the treated name string.
+    /// - Parameter name: The name to be treated.
+    /// - Returns: The treated name.
+    private func treatName(_ name: String) -> String {
+        return name.trimmingCharacters(in: .whitespacesAndNewlines).capitalized
+    }
 }
