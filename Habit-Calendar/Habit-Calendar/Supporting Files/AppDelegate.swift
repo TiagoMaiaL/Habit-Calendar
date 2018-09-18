@@ -234,6 +234,8 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         detailsController.container = persistentContainer
         detailsController.habitStorage = habitStorage
         detailsController.notificationManager = notificationManager
+        detailsController.notificationStorage = notificationStorage
+        detailsController.notificationScheduler = notificationScheduler
 
         navigationController.pushViewController(detailsController, animated: true)
     }
