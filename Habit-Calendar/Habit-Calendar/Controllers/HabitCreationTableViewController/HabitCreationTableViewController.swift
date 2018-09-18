@@ -44,6 +44,9 @@ class HabitCreationTableViewController: UITableViewController {
     /// The label displaying the last day in the selected sequence.
     @IBOutlet weak var toDayLabel: UILabel!
 
+    /// The stack view containing the fire times labels.
+    @IBOutlet weak var fireTimesContainer: UIStackView!
+
     /// The label displaying the amount of fire times selected.
     @IBOutlet weak var fireTimesAmountLabel: UILabel!
 
@@ -55,6 +58,9 @@ class HabitCreationTableViewController: UITableViewController {
 
     /// The color's field color picker view.
     @IBOutlet weak var colorPicker: ColorsPickerView!
+
+    /// The container showing that the user hasn't enabled user notifications.
+    @IBOutlet weak var notAuthorizedContainer: UIStackView!
 
     /// The container in which the habit is going to be persisted.
     var container: NSPersistentContainer!
@@ -137,6 +143,9 @@ class HabitCreationTableViewController: UITableViewController {
 
         // Observe the app's active event to display if the user notifications are allowed.
         startObserving()
+
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 180
 
         // Configure the appearance of the navigation bar to never use the
         // large titles.
@@ -351,40 +360,9 @@ information unavailable.
 
 extension HabitCreationTableViewController {
 
-    // MARK: types
-
-    /// The fields used for creating a new habit.
-    private enum Field: Int {
-        case name = 0,
-            color,
-            days,
-            fireTimes,
-            notificationsNotAuthorized
-    }
-
     // MARK: TableView delegate methods
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if let field = Field(rawValue: indexPath.row) {
-            switch field {
-            case .name:
-                return 130
-            case .color:
-                // Compute the expected height for the color picker field.
-                let marginsValue: CGFloat = 20
-                let titleExpectedHeight: CGFloat = 40
-                let stackVerticalSpace: CGFloat = 10
-
-                return marginsValue + titleExpectedHeight + stackVerticalSpace + colorPicker.getExpectedHeight()
-            case .days:
-                return 160
-            case .fireTimes:
-                return areNotificationsAuthorized ? 172 : 0
-            case .notificationsNotAuthorized:
-                return !areNotificationsAuthorized ? 140 : 0
-            }
-        } else {
-            return 0
-        }
+        return UITableViewAutomaticDimension
     }
 }

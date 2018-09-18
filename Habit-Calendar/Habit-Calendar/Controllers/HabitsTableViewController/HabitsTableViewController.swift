@@ -133,13 +133,6 @@ class HabitsTableViewController: UITableViewController {
         displayPresentationIfNeeded()
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-        // Start fetching for the habits.
-        updateList()
-    }
-
     // MARK: Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -204,7 +197,7 @@ class HabitsTableViewController: UITableViewController {
         // If the changes were only updates, reload the tableView.
         if (notification.userInfo?["updated"] as? Set<NSManagedObject>) != nil {
             DispatchQueue.main.async {
-                self.tableView.reloadData()
+                self.updateList()
             }
         }
 
