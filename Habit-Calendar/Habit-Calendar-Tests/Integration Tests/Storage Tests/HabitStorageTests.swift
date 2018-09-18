@@ -77,7 +77,7 @@ class HabitStorageTests: IntegrationTestCase {
     // MARK: Tests
 
     func testHabitCreation() {
-        let name = "Go jogging"
+        let name = "Go Jogging"
         let days = (0...7).compactMap { dayNumber in
             // Create and return a date by adding the number of days.
             Date().byAddingDays(dayNumber)
@@ -170,6 +170,35 @@ class HabitStorageTests: IntegrationTestCase {
             habit.fireTimes?.count == fireTimes.count,
             "The habit should have notifications created with it."
         )
+    }
+
+    func testHabitNameTreatmentInCreation() {
+        // 1. Declare the dependencies to create a habit.
+        let user = userFactory.makeDummy()
+        let days = [Date().byAddingDays(-1), Date()].compactMap { $0 }
+
+        // 2. Create the new habit.
+        let habit = habitStorage.create(
+            using: context,
+            user: user,
+            name: " testing        ",
+            color: .systemPink,
+            days: days
+        )
+
+        // 3. Assert the returned habit has the expected name.
+        XCTAssertEqual("Testing", habit.name)
+    }
+
+    func testHabitNameTreatmentInEdition() {
+        // 1. Declare a dummy habit.
+        let habit = habitFactory.makeDummy()
+
+        // 2. Edit the habit.
+        _ = habitStorage.edit(habit, using: context, name: "   testing again      ")
+
+        // 3. Assert the name is correct.
+        XCTAssertEqual("Testing Again", habit.name)
     }
 
     func testInProgressFetchedResultsController() {
