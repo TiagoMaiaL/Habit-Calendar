@@ -15,7 +15,7 @@
 		470C4170213EE70D007F6F35 /* UNNotificationContent+Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470C416F213EE70D007F6F35 /* UNNotificationContent+Category.swift */; };
 		470C41B02144A4B9007F6F35 /* DevelopmentSeeder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470C41AF2144A4B9007F6F35 /* DevelopmentSeeder.swift */; };
 		470C41B42144B091007F6F35 /* HabitFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475C96A520DEFEBC00212E1F /* HabitFactory.swift */; };
-		470C41B52144B091007F6F35 /* Active.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 47F635F620BB920900AC4555 /* Active.xcdatamodeld */; };
+		470C41B52144B091007F6F35 /* Habit-Calendar.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 47F635F620BB920900AC4555 /* Habit-Calendar.xcdatamodeld */; };
 		470C41B62144B091007F6F35 /* UNNotificationContent+Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470C416F213EE70D007F6F35 /* UNNotificationContent+Category.swift */; };
 		470C41B72144B091007F6F35 /* DummyFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475C96A120DEFB4C00212E1F /* DummyFactory.swift */; };
 		470C41B82144B091007F6F35 /* Int+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470230D720E5250A003A1F6E /* Int+Utils.swift */; };
@@ -115,7 +115,7 @@
 		470C42192144B091007F6F35 /* SF-Pro-Display-Heavy.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4732CE522114D9CA00E2770C /* SF-Pro-Display-Heavy.otf */; };
 		470C421A2144B091007F6F35 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47F635F320BB920900AC4555 /* Main.storyboard */; };
 		470C42252144B164007F6F35 /* HabitFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475C96A520DEFEBC00212E1F /* HabitFactory.swift */; };
-		470C42262144B164007F6F35 /* Active.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 47F635F620BB920900AC4555 /* Active.xcdatamodeld */; };
+		470C42262144B164007F6F35 /* Habit-Calendar.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 47F635F620BB920900AC4555 /* Habit-Calendar.xcdatamodeld */; };
 		470C42272144B164007F6F35 /* UNNotificationContent+Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470C416F213EE70D007F6F35 /* UNNotificationContent+Category.swift */; };
 		470C42282144B164007F6F35 /* DummyFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475C96A120DEFB4C00212E1F /* DummyFactory.swift */; };
 		470C42292144B164007F6F35 /* Int+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470230D720E5250A003A1F6E /* Int+Utils.swift */; };
@@ -351,7 +351,7 @@
 		47EE82EF214988270093A6D6 /* UserDefaults+Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47EE82EC214988270093A6D6 /* UserDefaults+Login.swift */; };
 		47F635F020BB920900AC4555 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F635EF20BB920900AC4555 /* AppDelegate.swift */; };
 		47F635F520BB920900AC4555 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47F635F320BB920900AC4555 /* Main.storyboard */; };
-		47F635F820BB920900AC4555 /* Active.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 47F635F620BB920900AC4555 /* Active.xcdatamodeld */; };
+		47F635F820BB920900AC4555 /* Habit-Calendar.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 47F635F620BB920900AC4555 /* Habit-Calendar.xcdatamodeld */; };
 		47F635FA20BB920D00AC4555 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 47F635F920BB920D00AC4555 /* Assets.xcassets */; };
 		47F635FD20BB920D00AC4555 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47F635FB20BB920D00AC4555 /* LaunchScreen.storyboard */; };
 		9E4741ED7011810FD00BF941 /* Pods_Habit_Calendar_Habit_Calendar_Stg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89D08208B03E9A306F89DFA9 /* Pods_Habit_Calendar_Habit_Calendar_Stg.framework */; };
@@ -577,7 +577,7 @@
 		4713A20520C16555008A13D2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				47F635F620BB920900AC4555 /* Active.xcdatamodeld */,
+				47F635F620BB920900AC4555 /* Habit-Calendar.xcdatamodeld */,
 				4713A1FB20C1643E008A13D2 /* UserMO.swift */,
 				4713A1FD20C16459008A13D2 /* HabitMO.swift */,
 				4713A1FF20C164E6008A13D2 /* HabitDayMO.swift */,
@@ -1395,7 +1395,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				470C41B42144B091007F6F35 /* HabitFactory.swift in Sources */,
-				470C41B52144B091007F6F35 /* Active.xcdatamodeld in Sources */,
+				470C41B52144B091007F6F35 /* Habit-Calendar.xcdatamodeld in Sources */,
 				470C41B62144B091007F6F35 /* UNNotificationContent+Category.swift in Sources */,
 				470C41B72144B091007F6F35 /* DummyFactory.swift in Sources */,
 				470C41B82144B091007F6F35 /* Int+Utils.swift in Sources */,
@@ -1475,7 +1475,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				470C42252144B164007F6F35 /* HabitFactory.swift in Sources */,
-				470C42262144B164007F6F35 /* Active.xcdatamodeld in Sources */,
+				470C42262144B164007F6F35 /* Habit-Calendar.xcdatamodeld in Sources */,
 				470C42272144B164007F6F35 /* UNNotificationContent+Category.swift in Sources */,
 				470C42282144B164007F6F35 /* DummyFactory.swift in Sources */,
 				470C42292144B164007F6F35 /* Int+Utils.swift in Sources */,
@@ -1555,7 +1555,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				47E6C21520EB12B2003BDB4D /* HabitFactory.swift in Sources */,
-				47F635F820BB920900AC4555 /* Active.xcdatamodeld in Sources */,
+				47F635F820BB920900AC4555 /* Habit-Calendar.xcdatamodeld in Sources */,
 				470C4170213EE70D007F6F35 /* UNNotificationContent+Category.swift in Sources */,
 				47E6C21120EB129C003BDB4D /* DummyFactory.swift in Sources */,
 				470230D820E5250A003A1F6E /* Int+Utils.swift in Sources */,
@@ -2037,13 +2037,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		47F635F620BB920900AC4555 /* Active.xcdatamodeld */ = {
+		47F635F620BB920900AC4555 /* Habit-Calendar.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
 				47F635F720BB920900AC4555 /* Active.xcdatamodel */,
 			);
 			currentVersion = 47F635F720BB920900AC4555 /* Active.xcdatamodel */;
-			path = Active.xcdatamodeld;
+			path = "Habit-Calendar.xcdatamodeld";
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
