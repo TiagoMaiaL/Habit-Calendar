@@ -301,6 +301,9 @@
 		47961081214C230900BFECFC /* Habit-Calendar-Stg-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4796107B214C230900BFECFC /* Habit-Calendar-Stg-Info.plist */; };
 		47961085214D5D8C00BFECFC /* HabitsTableViewController+DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47961084214D5D8C00BFECFC /* HabitsTableViewController+DataSource.swift */; };
 		47961087214D5E3300BFECFC /* HabitsTableViewController+FetchedResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47961086214D5E3200BFECFC /* HabitsTableViewController+FetchedResultsController.swift */; };
+		47A7457921530753003A382C /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A7457821530753003A382C /* DataController.swift */; };
+		47A7457B2153098F003A382C /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A7457821530753003A382C /* DataController.swift */; };
+		47A7457C21530990003A382C /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A7457821530753003A382C /* DataController.swift */; };
 		47AA365321037B0B0008D2DC /* FireTimeMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AA365221037B0B0008D2DC /* FireTimeMO.swift */; };
 		47AA365521037B8B0008D2DC /* FireTimeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AA365421037B8B0008D2DC /* FireTimeTests.swift */; };
 		47AA3657210382380008D2DC /* FireTimeStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AA3656210382380008D2DC /* FireTimeStorageTests.swift */; };
@@ -471,6 +474,7 @@
 		4796107B214C230900BFECFC /* Habit-Calendar-Stg-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Habit-Calendar-Stg-Info.plist"; sourceTree = "<group>"; };
 		47961084214D5D8C00BFECFC /* HabitsTableViewController+DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HabitsTableViewController+DataSource.swift"; sourceTree = "<group>"; };
 		47961086214D5E3200BFECFC /* HabitsTableViewController+FetchedResultsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HabitsTableViewController+FetchedResultsController.swift"; sourceTree = "<group>"; };
+		47A7457821530753003A382C /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		47AA365221037B0B0008D2DC /* FireTimeMO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireTimeMO.swift; sourceTree = "<group>"; };
 		47AA365421037B8B0008D2DC /* FireTimeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireTimeTests.swift; sourceTree = "<group>"; };
 		47AA3656210382380008D2DC /* FireTimeStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireTimeStorageTests.swift; sourceTree = "<group>"; };
@@ -577,14 +581,9 @@
 		4713A20520C16555008A13D2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				47A7457821530753003A382C /* DataController.swift */,
 				47F635F620BB920900AC4555 /* Habit-Calendar.xcdatamodeld */,
-				4713A1FB20C1643E008A13D2 /* UserMO.swift */,
-				4713A1FD20C16459008A13D2 /* HabitMO.swift */,
-				4713A1FF20C164E6008A13D2 /* HabitDayMO.swift */,
-				4713A20120C164FB008A13D2 /* DayMO.swift */,
-				4713A20320C16542008A13D2 /* NotificationMO.swift */,
-				47D8308720FCE82F002D3A97 /* DaysChallengeMO.swift */,
-				47AA365221037B0B0008D2DC /* FireTimeMO.swift */,
+				47A7457A21530766003A382C /* Managed Objects */,
 				47E6C20E20EB1213003BDB4D /* Seed */,
 			);
 			path = Model;
@@ -843,6 +842,20 @@
 				47961086214D5E3200BFECFC /* HabitsTableViewController+FetchedResultsController.swift */,
 			);
 			path = HabitsTableViewController;
+			sourceTree = "<group>";
+		};
+		47A7457A21530766003A382C /* Managed Objects */ = {
+			isa = PBXGroup;
+			children = (
+				4713A1FB20C1643E008A13D2 /* UserMO.swift */,
+				4713A1FD20C16459008A13D2 /* HabitMO.swift */,
+				4713A1FF20C164E6008A13D2 /* HabitDayMO.swift */,
+				4713A20120C164FB008A13D2 /* DayMO.swift */,
+				4713A20320C16542008A13D2 /* NotificationMO.swift */,
+				47D8308720FCE82F002D3A97 /* DaysChallengeMO.swift */,
+				47AA365221037B0B0008D2DC /* FireTimeMO.swift */,
+			);
+			path = "Managed Objects";
 			sourceTree = "<group>";
 		};
 		47C32027212C578C0094BBF8 /* HabitDetailsViewController */ = {
@@ -1427,6 +1440,7 @@
 				470C41D02144B091007F6F35 /* HabitCreationTableViewController+DaysField.swift in Sources */,
 				470C41D12144B091007F6F35 /* DayStorage.swift in Sources */,
 				470C41D22144B091007F6F35 /* HabitDetailsViewController+PromptSection.swift in Sources */,
+				47A7457B2153098F003A382C /* DataController.swift in Sources */,
 				470C41D32144B091007F6F35 /* RoundedButton.swift in Sources */,
 				470C41D42144B091007F6F35 /* UserStorage.swift in Sources */,
 				470C41D52144B091007F6F35 /* NotificationFactory.swift in Sources */,
@@ -1507,6 +1521,7 @@
 				470C42412144B164007F6F35 /* HabitCreationTableViewController+DaysField.swift in Sources */,
 				470C42422144B164007F6F35 /* DayStorage.swift in Sources */,
 				470C42432144B164007F6F35 /* HabitDetailsViewController+PromptSection.swift in Sources */,
+				47A7457C21530990003A382C /* DataController.swift in Sources */,
 				470C42442144B164007F6F35 /* RoundedButton.swift in Sources */,
 				470C42452144B164007F6F35 /* UserStorage.swift in Sources */,
 				470C42462144B164007F6F35 /* NotificationFactory.swift in Sources */,
@@ -1587,6 +1602,7 @@
 				47C32029212C57D10094BBF8 /* HabitDetailsViewController+ProgressSection.swift in Sources */,
 				47C320342130793A0094BBF8 /* HabitCreationTableViewController+DaysField.swift in Sources */,
 				4725D06120CA06EE00C3B63F /* DayStorage.swift in Sources */,
+				47A7457921530753003A382C /* DataController.swift in Sources */,
 				47C3202F212DD7C80094BBF8 /* HabitDetailsViewController+PromptSection.swift in Sources */,
 				4732CE7E211A12B500E2770C /* RoundedButton.swift in Sources */,
 				4725D05F20C97D9C00C3B63F /* UserStorage.swift in Sources */,
