@@ -293,12 +293,6 @@
 		4779588020D8ADA90080614F /* NotificationStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4779587F20D8ADA90080614F /* NotificationStorageTests.swift */; };
 		4779588320D8B2E10080614F /* UserNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4779588220D8B2E10080614F /* UserNotificationManager.swift */; };
 		4779588520D8B38B0080614F /* NotificationStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4779588420D8B38B0080614F /* NotificationStorage.swift */; };
-		4796107C214C230900BFECFC /* Habit-Calendar-Dev-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4796107A214C230900BFECFC /* Habit-Calendar-Dev-Info.plist */; };
-		4796107D214C230900BFECFC /* Habit-Calendar-Dev-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4796107A214C230900BFECFC /* Habit-Calendar-Dev-Info.plist */; };
-		4796107E214C230900BFECFC /* Habit-Calendar-Dev-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4796107A214C230900BFECFC /* Habit-Calendar-Dev-Info.plist */; };
-		4796107F214C230900BFECFC /* Habit-Calendar-Stg-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4796107B214C230900BFECFC /* Habit-Calendar-Stg-Info.plist */; };
-		47961080214C230900BFECFC /* Habit-Calendar-Stg-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4796107B214C230900BFECFC /* Habit-Calendar-Stg-Info.plist */; };
-		47961081214C230900BFECFC /* Habit-Calendar-Stg-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4796107B214C230900BFECFC /* Habit-Calendar-Stg-Info.plist */; };
 		47961085214D5D8C00BFECFC /* HabitsTableViewController+DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47961084214D5D8C00BFECFC /* HabitsTableViewController+DataSource.swift */; };
 		47961087214D5E3300BFECFC /* HabitsTableViewController+FetchedResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47961086214D5E3200BFECFC /* HabitsTableViewController+FetchedResultsController.swift */; };
 		47AA365321037B0B0008D2DC /* FireTimeMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AA365221037B0B0008D2DC /* FireTimeMO.swift */; };
@@ -1043,11 +1037,16 @@
 				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = "Tiago Maia Lopes";
 				TargetAttributes = {
+					470C41B12144B091007F6F35 = {
+						LastSwiftMigration = 1000;
+					};
 					47F635EB20BB920900AC4555 = {
 						CreatedOnToolsVersion = 9.3.1;
+						LastSwiftMigration = 1000;
 					};
 					47F6360220BB920D00AC4555 = {
 						CreatedOnToolsVersion = 9.3.1;
+						LastSwiftMigration = 1000;
 						TestTargetID = 47F635EB20BB920900AC4555;
 					};
 				};
@@ -1085,7 +1084,6 @@
 				470C41FD2144B091007F6F35 /* LaunchScreen.storyboard in Resources */,
 				470C41FE2144B091007F6F35 /* SF-Pro-Text-SemiboldItalic.otf in Resources */,
 				470C41FF2144B091007F6F35 /* SF-Pro-Display-Light.otf in Resources */,
-				4796107D214C230900BFECFC /* Habit-Calendar-Dev-Info.plist in Resources */,
 				470C42002144B091007F6F35 /* SF-Pro-Display-Medium.otf in Resources */,
 				470C42012144B091007F6F35 /* SF-Pro-Text-Heavy.otf in Resources */,
 				470C42022144B091007F6F35 /* SF-Pro-Text-RegularItalic.otf in Resources */,
@@ -1096,7 +1094,6 @@
 				470C42072144B091007F6F35 /* SF-Pro-Text-Bold.otf in Resources */,
 				470C42082144B091007F6F35 /* SF-Pro-Text-LightItalic.otf in Resources */,
 				470C42092144B091007F6F35 /* SF-Pro-Display-Bold.otf in Resources */,
-				47961080214C230900BFECFC /* Habit-Calendar-Stg-Info.plist in Resources */,
 				470C420A2144B091007F6F35 /* SF-Pro-Display-UltralightItalic.otf in Resources */,
 				470C420B2144B091007F6F35 /* SF-Pro-Text-Medium.otf in Resources */,
 				470C420C2144B091007F6F35 /* SF-Pro-Text-Regular.otf in Resources */,
@@ -1128,7 +1125,6 @@
 				470C426E2144B164007F6F35 /* LaunchScreen.storyboard in Resources */,
 				470C426F2144B164007F6F35 /* SF-Pro-Text-SemiboldItalic.otf in Resources */,
 				470C42702144B164007F6F35 /* SF-Pro-Display-Light.otf in Resources */,
-				4796107E214C230900BFECFC /* Habit-Calendar-Dev-Info.plist in Resources */,
 				470C42712144B164007F6F35 /* SF-Pro-Display-Medium.otf in Resources */,
 				470C42722144B164007F6F35 /* SF-Pro-Text-Heavy.otf in Resources */,
 				470C42732144B164007F6F35 /* SF-Pro-Text-RegularItalic.otf in Resources */,
@@ -1139,7 +1135,6 @@
 				470C42782144B164007F6F35 /* SF-Pro-Text-Bold.otf in Resources */,
 				470C42792144B164007F6F35 /* SF-Pro-Text-LightItalic.otf in Resources */,
 				470C427A2144B164007F6F35 /* SF-Pro-Display-Bold.otf in Resources */,
-				47961081214C230900BFECFC /* Habit-Calendar-Stg-Info.plist in Resources */,
 				470C427B2144B164007F6F35 /* SF-Pro-Display-UltralightItalic.otf in Resources */,
 				470C427C2144B164007F6F35 /* SF-Pro-Text-Medium.otf in Resources */,
 				470C427D2144B164007F6F35 /* SF-Pro-Text-Regular.otf in Resources */,
@@ -1171,7 +1166,6 @@
 				47F635FD20BB920D00AC4555 /* LaunchScreen.storyboard in Resources */,
 				4732CE6F2114D9D100E2770C /* SF-Pro-Text-SemiboldItalic.otf in Resources */,
 				4732CE6B2114D9D100E2770C /* SF-Pro-Display-Light.otf in Resources */,
-				4796107C214C230900BFECFC /* Habit-Calendar-Dev-Info.plist in Resources */,
 				4732CE722114D9D100E2770C /* SF-Pro-Display-Medium.otf in Resources */,
 				4732CE672114D9D100E2770C /* SF-Pro-Text-Heavy.otf in Resources */,
 				4732CE612114D9D100E2770C /* SF-Pro-Text-RegularItalic.otf in Resources */,
@@ -1182,7 +1176,6 @@
 				4732CE652114D9D100E2770C /* SF-Pro-Text-Bold.otf in Resources */,
 				4732CE5F2114D9D100E2770C /* SF-Pro-Text-LightItalic.otf in Resources */,
 				4732CE682114D9D100E2770C /* SF-Pro-Display-Bold.otf in Resources */,
-				4796107F214C230900BFECFC /* Habit-Calendar-Stg-Info.plist in Resources */,
 				4732CE642114D9D100E2770C /* SF-Pro-Display-UltralightItalic.otf in Resources */,
 				4732CE6A2114D9D100E2770C /* SF-Pro-Text-Medium.otf in Resources */,
 				4732CE6E2114D9D100E2770C /* SF-Pro-Text-Regular.otf in Resources */,
@@ -1708,7 +1701,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "tiago.maia.development.Habit-Calendar";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -1731,7 +1724,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "tiago.maia.development.Habit-Calendar";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
@@ -1914,7 +1907,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "tiago.maia.Habit-Calendar";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -1937,7 +1930,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "tiago.maia.Habit-Calendar";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
@@ -1958,7 +1951,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = tiago.maia.ActiveTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Habit-Calendar.app/Habit-Calendar";
 			};
@@ -1980,7 +1973,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = tiago.maia.ActiveTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Habit-Calendar.app/Habit-Calendar";
 			};

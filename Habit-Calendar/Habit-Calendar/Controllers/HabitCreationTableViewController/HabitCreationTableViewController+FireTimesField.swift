@@ -36,7 +36,7 @@ extension HabitCreationTableViewController: NotificationAvailabilityDisplayable 
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(handleActivationEvent(_:)),
-            name: Notification.Name.UIApplicationDidBecomeActive,
+            name: UIApplication.didBecomeActiveNotification,
             object: nil
         )
     }

@@ -39,7 +39,7 @@ struct NotificationScheduler {
                 habitId: nil
             ).identifier
             content.userInfo["habitIdentifier"] = habit.id
-            content.sound = UNNotificationSound.default()
+            content.sound = UNNotificationSound.default
             content.badge = 1
         } else {
             assertionFailure("The passed notification must have a valid habit entity.")

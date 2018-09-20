@@ -114,8 +114,8 @@ class CalendarChallengeDayCell: CalendarDayCell {
         bottomSeparator.isHidden = true
 
         // The circle view should always be in the front.
-        contentView.bringSubview(toFront: circleView)
-        contentView.bringSubview(toFront: dayTitleLabel)
+        contentView.bringSubviewToFront(circleView)
+        contentView.bringSubviewToFront(dayTitleLabel)
 
         rangeBackgroundView.isHidden = false
 

@@ -300,7 +300,7 @@ extension HabitsTableViewController: NotificationObserver {
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(handleActivationEvent(_:)),
-            name: .UIApplicationDidBecomeActive,
+            name: UIApplication.didBecomeActiveNotification,
             object: nil
         )
     }
