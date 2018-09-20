@@ -1,6 +1,6 @@
 PODS:
   - JTAppleCalendar (7.1.5)
-  - SwiftLint (0.26.0)
+  - SwiftLint (0.27.0)
   - UIColor_Hex_Swift (4.0.2)
 
 DEPENDENCIES:
@@ -16,7 +16,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   JTAppleCalendar: 2d4f974f9f3c8b4964d51ca1f6e004883c031fbe
-  SwiftLint: f6b83e8d95ee1e91e11932d843af4fdcbf3fc764
+  SwiftLint: 3207c1faa2240bf8973b191820a116113cd11073
   UIColor_Hex_Swift: 2fb123c7d864994a5137ef57c4dc55e17a657d29
 
 PODFILE CHECKSUM: 57127aa744982cf7d2f8b214ab48fd2a63b0241b
