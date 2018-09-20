@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="UnM-u1-uch">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="43I-6W-MKS">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -72,7 +71,7 @@
                                             <rect key="frame" x="26" y="21" width="323" height="108"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="iJD-cf-E77">
-                                                    <rect key="frame" x="13" y="15" width="297" height="77"/>
+                                                    <rect key="frame" x="13" y="15.5" width="297" height="77"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Play guitar" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bjx-cs-62X">
                                                             <rect key="frame" x="0.0" y="0.0" width="109" height="30"/>
@@ -251,12 +250,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="1000"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.99215686274509807" green="0.99215686274509807" blue="0.99607843137254903" alpha="1" colorSpace="calibratedRGB"/>
-                        <view key="tableFooterView" contentMode="scaleToFill" id="U4g-rN-Yvd" userLabel="Footer">
+                        <view key="tableFooterView" contentMode="scaleToFill" misplaced="YES" id="U4g-rN-Yvd" userLabel="Footer">
                             <rect key="frame" x="0.0" y="768" width="375" height="104"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D90-7S-rS4" customClass="RoundedButton" customModule="Habit_Calendar" customModuleProvider="target">
-                                    <rect key="frame" x="117.5" y="27" width="140" height="50"/>
+                                    <rect key="frame" x="117.5" y="193.5" width="140" height="50"/>
                                     <color key="backgroundColor" red="0.18431372549019609" green="0.21176470588235294" blue="0.25098039215686274" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="140" id="EpX-yy-wTD"/>
@@ -551,7 +550,7 @@
                                                         <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="3pf-TQ-uQU" userLabel="Selected fire times">
                                                             <rect key="frame" x="0.0" y="84" width="306" height="67.5"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" ambiguous="YES" text="Notifications" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jfL-Qf-BsI">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Notifications" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jfL-Qf-BsI">
                                                                     <rect key="frame" x="0.0" y="0.0" width="119.5" height="0.0"/>
                                                                     <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="20"/>
                                                                     <nil key="textColor"/>
@@ -563,13 +562,13 @@
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="2 times selected" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="OSf-bA-IA0">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" ambiguous="YES" text="2 times selected" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="OSf-bA-IA0">
                                                                     <rect key="frame" x="0.0" y="21.5" width="117" height="18"/>
                                                                     <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="15"/>
                                                                     <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Ii-SK-90P">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" ambiguous="YES" text="--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Ii-SK-90P">
                                                                     <rect key="frame" x="0.0" y="49.5" width="15" height="18"/>
                                                                     <fontDescription key="fontDescription" name="SFProText-Bold" family="SF Pro Text" pointSize="15"/>
                                                                     <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -673,7 +672,7 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="zJ1-bL-rA4">
-                                            <rect key="frame" x="117" y="10" width="142.5" height="78"/>
+                                            <rect key="frame" x="116.5" y="10" width="142.5" height="78"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 fire times selected" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nz0-4c-Qss">
                                                     <rect key="frame" x="0.0" y="0.0" width="142.5" height="18"/>
@@ -682,7 +681,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZDt-Pv-rzP" customClass="RoundedButton" customModule="Habit_Calendar" customModuleProvider="target">
-                                                    <rect key="frame" x="1.5" y="28" width="140" height="50"/>
+                                                    <rect key="frame" x="1" y="28" width="140" height="50"/>
                                                     <color key="backgroundColor" red="0.0" green="0.6588235294" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="50" id="aWW-NN-Ric"/>
@@ -748,7 +747,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="m9Q-Np-GV4" userLabel="Contents">
-                                <rect key="frame" x="0.0" y="74" width="375" height="473"/>
+                                <rect key="frame" x="0.0" y="74" width="375" height="469.5"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="if9-BC-710" userLabel="Header">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
@@ -792,7 +791,7 @@
                                         </constraints>
                                     </view>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ge3-Po-cVn" userLabel="Calendar" customClass="JTAppleCalendarView" customModule="JTAppleCalendar">
-                                        <rect key="frame" x="0.0" y="100" width="375" height="373"/>
+                                        <rect key="frame" x="0.0" y="100" width="375" height="369.5"/>
                                         <color key="backgroundColor" red="0.99215686270000003" green="0.99215686270000003" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="Qht-0H-FBg">
                                             <size key="itemSize" width="57" height="62"/>
@@ -819,13 +818,13 @@
                                 </constraints>
                             </stackView>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rgk-0r-iRX">
-                                <rect key="frame" x="0.0" y="547" width="375" height="120"/>
+                                <rect key="frame" x="0.0" y="543.5" width="375" height="123.5"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="KeP-ht-BXW" userLabel="Container view">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="123.5"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="sLa-Kl-H3k">
-                                            <rect key="frame" x="64.5" y="10" width="247" height="100"/>
+                                            <rect key="frame" x="64" y="10" width="247" height="103.5"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 days selected" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oC3-Pu-dRa">
                                                     <rect key="frame" x="68.5" y="0.0" width="110.5" height="18"/>
@@ -834,13 +833,13 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="From: 07/09/2018, to: 09/11/2018" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L7z-qI-NEn" userLabel="Days range label">
-                                                    <rect key="frame" x="0.0" y="26" width="247" height="16"/>
+                                                    <rect key="frame" x="0.0" y="26" width="247" height="19.5"/>
                                                     <fontDescription key="fontDescription" name="SFProText-Light" family="SF Pro Text" pointSize="16"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cqd-Qf-JuL" userLabel="Done" customClass="RoundedButton" customModule="Habit_Calendar" customModuleProvider="target">
-                                                    <rect key="frame" x="53.5" y="50" width="140.5" height="50"/>
+                                                    <rect key="frame" x="53.5" y="53.5" width="140" height="50"/>
                                                     <color key="backgroundColor" red="0.0" green="0.6588235294117647" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="140" id="AOZ-6U-NjB"/>
@@ -1011,7 +1010,7 @@ Add as many habits as you wish.</string>
                                                 </subviews>
                                             </stackView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hvo-EF-j3D" customClass="RoundedButton" customModule="Habit_Calendar" customModuleProvider="target">
-                                                <rect key="frame" x="117" y="642" width="140" height="50"/>
+                                                <rect key="frame" x="117.5" y="642" width="140" height="50"/>
                                                 <color key="backgroundColor" red="0.0" green="0.47843137254901957" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="140" id="2qn-MP-frN"/>
@@ -1061,7 +1060,7 @@ Add as many habits as you wish.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fax-CU-dEM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="669.60000000000002" y="687.7061469265368"/>
+            <point key="canvasLocation" x="1132" y="647"/>
         </scene>
         <!--Read-->
         <scene sceneID="xFu-io-JbZ">
@@ -1573,7 +1572,7 @@ you think of adding a new one?</string>
         <!--Navigation Controller-->
         <scene sceneID="GVs-QO-GaP">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="UnM-u1-uch" sceneMemberID="viewController">
+                <navigationController restorationIdentifier="MainNavigationController" storyboardIdentifier="MainNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="UnM-u1-uch" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="LVX-oX-mFJ">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -1586,10 +1585,45 @@ you think of adding a new one?</string>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3oM-uh-WmO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="192.80000000000001" y="-60.719640179910051"/>
+            <point key="canvasLocation" x="252" y="-61"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="4hU-5k-jTH">
+            <objects>
+                <viewController id="43I-6W-MKS" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="wyW-cG-BwM">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic-app-launch-screen" translatesAutoresizingMaskIntoConstraints="NO" id="6Gx-EI-ldJ">
+                                <rect key="frame" x="0.0" y="146" width="375" height="375"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="6Gx-EI-ldJ" secondAttribute="height" multiplier="1:1" id="S2z-MW-aQB"/>
+                                </constraints>
+                            </imageView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="MWR-Un-JUO">
+                                <rect key="frame" x="169" y="531" width="37" height="37"/>
+                                <color key="color" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.99215686270000003" green="0.99215686270000003" blue="0.99607843139999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="MWR-Un-JUO" firstAttribute="centerX" secondItem="wyW-cG-BwM" secondAttribute="centerX" id="HJF-pb-Q0b"/>
+                            <constraint firstItem="6Gx-EI-ldJ" firstAttribute="centerX" secondItem="Et3-pO-W4e" secondAttribute="centerX" id="Mee-JK-ZqX"/>
+                            <constraint firstItem="MWR-Un-JUO" firstAttribute="top" secondItem="6Gx-EI-ldJ" secondAttribute="bottom" constant="10" id="SCG-D5-dl7"/>
+                            <constraint firstItem="6Gx-EI-ldJ" firstAttribute="width" secondItem="Et3-pO-W4e" secondAttribute="width" id="Sln-uI-k3z"/>
+                            <constraint firstItem="6Gx-EI-ldJ" firstAttribute="centerY" secondItem="Et3-pO-W4e" secondAttribute="centerY" constant="-10" id="VQ9-hi-KZQ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Et3-pO-W4e"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xou-Jc-pMr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-529" y="-62"/>
         </scene>
     </scenes>
     <resources>
+        <image name="ic-app-launch-screen" width="375" height="376"/>
         <image name="ic-calendar" width="42" height="47"/>
         <image name="ic-notification" width="41" height="46"/>
     </resources>
