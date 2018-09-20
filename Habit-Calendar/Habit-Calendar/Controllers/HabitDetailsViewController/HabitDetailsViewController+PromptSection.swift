@@ -128,8 +128,8 @@ extension HabitDetailsViewController {
         let attributedString = NSMutableAttributedString(string: "\(orderTitle) day")
         attributedString.addAttributes(
             [
-                NSAttributedStringKey.font: UIFont(name: "SFProText-Semibold", size: 20)!,
-                NSAttributedStringKey.foregroundColor: habitColor
+                NSAttributedString.Key.font: UIFont(name: "SFProText-Semibold", size: 20)!,
+                NSAttributedString.Key.foregroundColor: habitColor
             ],
             range: NSRange(location: 0, length: orderTitle.count)
         )

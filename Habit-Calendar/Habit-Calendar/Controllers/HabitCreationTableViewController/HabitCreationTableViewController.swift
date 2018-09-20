@@ -144,7 +144,7 @@ class HabitCreationTableViewController: UITableViewController {
         // Observe the app's active event to display if the user notifications are allowed.
         startObserving()
 
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 180
 
         // Configure the appearance of the navigation bar to never use the
@@ -363,6 +363,6 @@ extension HabitCreationTableViewController {
     // MARK: TableView delegate methods
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
 }
