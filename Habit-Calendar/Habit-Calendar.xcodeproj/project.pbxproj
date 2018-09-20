@@ -577,6 +577,7 @@
 			children = (
 				47A7457821530753003A382C /* DataController.swift */,
 				47F635F620BB920900AC4555 /* Habit-Calendar.xcdatamodeld */,
+				4725D05720C8A42400C3B63F /* Storage */,
 				47A7457A21530766003A382C /* Managed Objects */,
 				47E6C20E20EB1213003BDB4D /* Seed */,
 			);
@@ -921,10 +922,9 @@
 		47F635EE20BB920900AC4555 /* Habit-Calendar */ = {
 			isa = PBXGroup;
 			children = (
+				4713A20520C16555008A13D2 /* Model */,
 				4725D05920C8A43B00C3B63F /* Views */,
 				4725D05820C8A42E00C3B63F /* Controllers */,
-				4725D05720C8A42400C3B63F /* Storage */,
-				4713A20520C16555008A13D2 /* Model */,
 				4779588120D8B2AC0080614F /* Managers */,
 				474F9C8420CC7DEF0094C19C /* Extensions */,
 				47F6361220BB924100AC4555 /* Supporting Files */,
