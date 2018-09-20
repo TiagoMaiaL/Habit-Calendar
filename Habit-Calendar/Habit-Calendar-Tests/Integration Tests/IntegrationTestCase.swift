@@ -80,7 +80,7 @@ class IntegrationTestCase: XCTestCase {
     /// Creates an in-memory persistent container to be used by the tests.
     /// - Returns: The in-memory NSPersistentContainer.
     func makeMemoryPersistentContainer() -> NSPersistentContainer {
-        let container = NSPersistentContainer(name: "Active")
+        let container = NSPersistentContainer(name: "Habit-Calendar")
 
         // Declare the in-memory Store description.
         let description = NSPersistentStoreDescription()

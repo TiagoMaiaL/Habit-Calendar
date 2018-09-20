@@ -16,7 +16,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: Properties
 
     /// The controller holding the app's persistent container.
-    var dataController: DataController!
+    var dataController: DataController! {
+        didSet {
+            // Close any past challenges that are open.
+            dataController.persistentContainer.performBackgroundTask { context in
+                self.daysChallengeStorage.closePastChallenges(using: context)
+                try? context.save()
+            }
+        }
+    }
 
     /// The app's main window.
     var window: UIWindow?
@@ -101,12 +109,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
-        // Close any past challenges that are open.
-        dataController.persistentContainer.performBackgroundTask { context in
-            self.daysChallengeStorage.closePastChallenges(using: context)
-            try? context.save()
-        }
-
         // Reset the app icon's badge number.
         application.applicationIconBadgeNumber = 0
     }
