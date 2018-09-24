@@ -290,6 +290,9 @@
 		4761F5B32120A0F700A8D407 /* ColorsPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4761F5B22120A0F700A8D407 /* ColorsPickerView.swift */; };
 		4761F5B52120D06900A8D407 /* ColorsPickerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4761F5B42120D06900A8D407 /* ColorsPickerDataSource.swift */; };
 		4761F5B72120D7F900A8D407 /* ColorOptionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4761F5B62120D7F900A8D407 /* ColorOptionCollectionViewCell.swift */; };
+		4769CB8E215972CC00DA0EBB /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4769CB8D215972CC00DA0EBB /* SplashViewController.swift */; };
+		4769CB8F215972CC00DA0EBB /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4769CB8D215972CC00DA0EBB /* SplashViewController.swift */; };
+		4769CB90215972CC00DA0EBB /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4769CB8D215972CC00DA0EBB /* SplashViewController.swift */; };
 		4779588020D8ADA90080614F /* NotificationStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4779587F20D8ADA90080614F /* NotificationStorageTests.swift */; };
 		4779588320D8B2E10080614F /* UserNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4779588220D8B2E10080614F /* UserNotificationManager.swift */; };
 		4779588520D8B38B0080614F /* NotificationStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4779588420D8B38B0080614F /* NotificationStorage.swift */; };
@@ -461,6 +464,7 @@
 		4761F5B22120A0F700A8D407 /* ColorsPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsPickerView.swift; sourceTree = "<group>"; };
 		4761F5B42120D06900A8D407 /* ColorsPickerDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsPickerDataSource.swift; sourceTree = "<group>"; };
 		4761F5B62120D7F900A8D407 /* ColorOptionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorOptionCollectionViewCell.swift; sourceTree = "<group>"; };
+		4769CB8D215972CC00DA0EBB /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		4779587F20D8ADA90080614F /* NotificationStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationStorageTests.swift; sourceTree = "<group>"; };
 		4779588220D8B2E10080614F /* UserNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationManager.swift; sourceTree = "<group>"; };
 		4779588420D8B38B0080614F /* NotificationStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationStorage.swift; sourceTree = "<group>"; };
@@ -620,6 +624,7 @@
 			isa = PBXGroup;
 			children = (
 				47F635F320BB920900AC4555 /* Main.storyboard */,
+				4769CB8D215972CC00DA0EBB /* SplashViewController.swift */,
 				47EE82E8214875050093A6D6 /* OnBoardingViewController.swift */,
 				47961083214D5D5000BFECFC /* HabitsTableViewController */,
 				4737312C20ED503B00895DD2 /* FireTimesSelectionViewController.swift */,
@@ -1417,6 +1422,7 @@
 				470C41BA2144B091007F6F35 /* ColorOptionCollectionViewCell.swift in Sources */,
 				470C41BB2144B091007F6F35 /* DaysHeaderView.swift in Sources */,
 				470C41BC2144B091007F6F35 /* HabitDetailsViewController+NoChallengesSection.swift in Sources */,
+				4769CB8F215972CC00DA0EBB /* SplashViewController.swift in Sources */,
 				470C41BD2144B091007F6F35 /* AppDelegate.swift in Sources */,
 				470C41BE2144B091007F6F35 /* HabitDetailsViewController+Calendar.swift in Sources */,
 				470C41BF2144B091007F6F35 /* HabitMOColor+UIColor.swift in Sources */,
@@ -1498,6 +1504,7 @@
 				470C422B2144B164007F6F35 /* ColorOptionCollectionViewCell.swift in Sources */,
 				470C422C2144B164007F6F35 /* DaysHeaderView.swift in Sources */,
 				470C422D2144B164007F6F35 /* HabitDetailsViewController+NoChallengesSection.swift in Sources */,
+				4769CB90215972CC00DA0EBB /* SplashViewController.swift in Sources */,
 				470C422E2144B164007F6F35 /* AppDelegate.swift in Sources */,
 				470C422F2144B164007F6F35 /* HabitDetailsViewController+Calendar.swift in Sources */,
 				470C42302144B164007F6F35 /* HabitMOColor+UIColor.swift in Sources */,
@@ -1579,6 +1586,7 @@
 				4732CE83211CB89F00E2770C /* MonthHeaderView.swift in Sources */,
 				4761F5B72120D7F900A8D407 /* ColorOptionCollectionViewCell.swift in Sources */,
 				4732CE81211C93B500E2770C /* DaysHeaderView.swift in Sources */,
+				4769CB8E215972CC00DA0EBB /* SplashViewController.swift in Sources */,
 				47C3202B212DCC230094BBF8 /* HabitDetailsViewController+NoChallengesSection.swift in Sources */,
 				47F635F020BB920900AC4555 /* AppDelegate.swift in Sources */,
 				47C3202D212DD59A0094BBF8 /* HabitDetailsViewController+Calendar.swift in Sources */,

@@ -1585,21 +1585,23 @@ you think of adding a new one?</string>
             </objects>
             <point key="canvasLocation" x="252" y="-61"/>
         </scene>
-        <!--View Controller-->
+        <!--Splash View Controller-->
         <scene sceneID="4hU-5k-jTH">
             <objects>
-                <viewController id="43I-6W-MKS" sceneMemberID="viewController">
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xou-Jc-pMr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController autoresizesArchivedViewToFullSize="NO" automaticallyAdjustsScrollViewInsets="NO" id="43I-6W-MKS" customClass="SplashViewController" customModule="Habit_Calendar" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wyW-cG-BwM">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic-app-launch-screen" translatesAutoresizingMaskIntoConstraints="NO" id="6Gx-EI-ldJ">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic-app-launch-screen" translatesAutoresizingMaskIntoConstraints="NO" id="6Gx-EI-ldJ">
                                 <rect key="frame" x="0.0" y="161" width="414" height="414"/>
+                                <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="6Gx-EI-ldJ" secondAttribute="height" multiplier="1:1" id="S2z-MW-aQB"/>
+                                    <constraint firstAttribute="width" secondItem="6Gx-EI-ldJ" secondAttribute="height" multiplier="1:1" id="lgS-Zw-70O"/>
                                 </constraints>
                             </imageView>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="MWR-Un-JUO">
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="MWR-Un-JUO">
                                 <rect key="frame" x="188.66666666666666" y="585" width="37" height="37"/>
                                 <color key="color" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </activityIndicatorView>
@@ -1607,16 +1609,20 @@ you think of adding a new one?</string>
                         <color key="backgroundColor" red="0.99215686270000003" green="0.99215686270000003" blue="0.99607843139999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="MWR-Un-JUO" firstAttribute="centerX" secondItem="wyW-cG-BwM" secondAttribute="centerX" id="HJF-pb-Q0b"/>
-                            <constraint firstItem="6Gx-EI-ldJ" firstAttribute="centerX" secondItem="Et3-pO-W4e" secondAttribute="centerX" id="Mee-JK-ZqX"/>
+                            <constraint firstItem="6Gx-EI-ldJ" firstAttribute="centerX" secondItem="wyW-cG-BwM" secondAttribute="centerX" id="Mee-JK-ZqX"/>
                             <constraint firstItem="MWR-Un-JUO" firstAttribute="top" secondItem="6Gx-EI-ldJ" secondAttribute="bottom" constant="10" id="SCG-D5-dl7"/>
-                            <constraint firstItem="6Gx-EI-ldJ" firstAttribute="width" secondItem="Et3-pO-W4e" secondAttribute="width" id="Sln-uI-k3z"/>
-                            <constraint firstItem="6Gx-EI-ldJ" firstAttribute="centerY" secondItem="Et3-pO-W4e" secondAttribute="centerY" constant="-10" id="VQ9-hi-KZQ"/>
+                            <constraint firstItem="6Gx-EI-ldJ" firstAttribute="centerY" secondItem="wyW-cG-BwM" secondAttribute="centerY" id="VQ9-hi-KZQ"/>
+                            <constraint firstItem="6Gx-EI-ldJ" firstAttribute="width" secondItem="wyW-cG-BwM" secondAttribute="width" id="vyA-Ek-F7g"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Et3-pO-W4e"/>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="activityIndicator" destination="MWR-Un-JUO" id="t67-xR-IJd"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="xou-Jc-pMr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-529" y="-62"/>
         </scene>
@@ -1629,6 +1635,6 @@ you think of adding a new one?</string>
     <inferredMetricsTieBreakers>
         <segue reference="G29-rb-isc"/>
         <segue reference="43l-ZQ-AR3"/>
-        <segue reference="5mV-Cj-rFr"/>
+        <segue reference="Xkx-Wi-bYR"/>
     </inferredMetricsTieBreakers>
 </document>
