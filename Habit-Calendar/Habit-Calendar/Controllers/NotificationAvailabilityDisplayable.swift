@@ -8,7 +8,7 @@
 
 import Foundation
 
-/// Adds the interface for displaying whether user notifications aren't allowed by the user.
+/// Adds the interface for displaying whether user notifications are allowed or not.
 protocol NotificationAvailabilityDisplayable: AppActiveObserver {
 
     // MARK: Imperatives

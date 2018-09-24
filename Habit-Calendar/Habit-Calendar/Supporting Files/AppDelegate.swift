@@ -6,6 +6,7 @@
 //  Copyright © 2018 Tiago Maia Lopes. All rights reserved.
 //
 
+import Foundation
 import UIKit
 import CoreData
 import UserNotifications
@@ -79,6 +80,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         notificationScheduler: notificationScheduler,
         fireTimeStorage: FireTimeStorage()
     )
+
+    /// The app to be displayed when the user selects an user notification.
+    /// - Note: This variable is used in the cases that the app is launching and the habits
+    ///         controller can't be accessed. Setting this var will make the habits
+    ///         controller to immediately display the habit after being loaded.
+    private var habitToDisplay: HabitMO?
 
     // MARK: Delegate methods
 
@@ -164,8 +171,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.window?.rootViewController?.view.removeFromSuperview()
             // Change the root controller to be the navigation one.
             self.window?.rootViewController = navigationController
+
+            if let habitToDisplay = self.habitToDisplay {
+                self.sendHabitReminderNotification(habitToDisplay)
+                self.habitToDisplay = nil
+            }
         }
         animator.startAnimation()
+    }
+
+    /// Sends a notification about the receival of a habit user notification launch event.
+    private func sendHabitReminderNotification(_ habit: HabitMO) {
+        NotificationCenter.default.post(
+            name: Notification.Name.didSelectHabitReminder,
+            object: self,
+            userInfo: ["habit": habit]
+        )
     }
 }
 
@@ -200,27 +221,6 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         UNUserNotificationCenter.current().setNotificationCategories([dayPromptCategory])
     }
 
-    /// Takes the user to the habit details controller.
-    private func showHabitDetails(_ habit: HabitMO) {
-        guard let navigationController = window?.rootViewController as? UINavigationController else { return }
-
-        guard let detailsController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(
-            withIdentifier: "HabitDetails"
-        ) as? HabitDetailsViewController else {
-            assertionFailure("Couldn't get the habit details controller.")
-            return
-        }
-
-        detailsController.habit = habit
-        detailsController.container = dataController.persistentContainer
-        detailsController.habitStorage = habitStorage
-        detailsController.notificationManager = notificationManager
-        detailsController.notificationStorage = notificationStorage
-        detailsController.notificationScheduler = notificationScheduler
-
-        navigationController.pushViewController(detailsController, animated: true)
-    }
-
     // MARK: UserNotificationCenter Delegate methods
 
     func userNotificationCenter(
@@ -247,7 +247,16 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 
             switch response.actionIdentifier {
             case UNNotificationDefaultActionIdentifier:
-                showHabitDetails(habit)
+                // If the habits listing controller is already being displayed, show the details.
+                if window?.rootViewController is UINavigationController {
+                    // Post a notification to the habits table view controller,
+                    // so it can display the habit.
+                    sendHabitReminderNotification(habit)
+                } else {
+                    // If not, the splash screen is being displayed, show the details immediately after
+                    // displaying the habits controller.
+                    habitToDisplay = habit
+                }
 
             case yesAction:
                 habit.getCurrentChallenge()?.markCurrentDayAsExecuted()

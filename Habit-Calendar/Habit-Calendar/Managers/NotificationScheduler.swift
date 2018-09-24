@@ -52,7 +52,7 @@ struct NotificationScheduler {
 
         // Declare the notification trigger with the correct date.
         let trigger = UNTimeIntervalNotificationTrigger(
-            timeInterval: fireDateTimeInterval,
+            timeInterval: Date().timeIntervalSinceNow + 10, //fireDateTimeInterval,
             repeats: false
         )
 

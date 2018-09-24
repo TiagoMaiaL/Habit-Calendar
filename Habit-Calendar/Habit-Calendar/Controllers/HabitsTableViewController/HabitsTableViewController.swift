@@ -50,7 +50,7 @@ class HabitsTableViewController: UITableViewController {
     /// The variable holding the current(related to today) fetchedResultsController
     /// for the habits that are in progress.
     /// - Note: To re-initialize this property, only set it to nil, and use the getter.
-    private var _progressfetchedResultsController: NSFetchedResultsController<HabitMO>? = nil
+    private var _progressfetchedResultsController: NSFetchedResultsController<HabitMO>?
 
     /// The fetched results controller used to get the habits that are in progress and display them with the tableView.
     var progressfetchedResultsController: NSFetchedResultsController<HabitMO> {
@@ -66,7 +66,7 @@ class HabitsTableViewController: UITableViewController {
     /// The variable holding the current(related to today) fetchedResultsController
     /// for the completed habits.
     /// - Note: To re-initialize this property, only set it to nil, and use the getter.
-    private var _completedfetchedResultsController: NSFetchedResultsController<HabitMO>? = nil
+    private var _completedfetchedResultsController: NSFetchedResultsController<HabitMO>?
 
     /// The fetched results controller used to get the habits that are completed and display them with the tableView.
     var completedfetchedResultsController: NSFetchedResultsController<HabitMO> {
@@ -190,25 +190,6 @@ class HabitsTableViewController: UITableViewController {
         performSegue(withIdentifier: newHabitSegueIdentifier, sender: self)
     }
 
-    /// Listens to any saved changes happening in other contexts and refreshes
-    /// the viewContext.
-    /// - Parameter notification: The thrown notification
-    @objc private func handleContextChanges(notification: Notification) {
-        // If the changes were only updates, reload the tableView.
-        if (notification.userInfo?["updated"] as? Set<NSManagedObject>) != nil {
-            DispatchQueue.main.async {
-                self.updateList()
-            }
-        }
-
-        // Refresh the current view context by using the payloads in the notifications.
-        container.viewContext.mergeChanges(fromContextDidSave: notification)
-
-        DispatchQueue.main.async {
-            self.displayEmptyStateIfNeeded()
-        }
-    }
-
     // MARK: Imperatives
 
     /// Updates the controller's list of habits.
@@ -293,7 +274,7 @@ extension HabitsTableViewController: NotificationObserver {
         // Register to possible notifications thrown by changes in other managed contexts.
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(handleContextChanges(notification:)),
+            selector: #selector(handleContextChanges(_:)),
             name: Notification.Name.NSManagedObjectContextDidSave,
             object: nil
         )
@@ -301,6 +282,12 @@ extension HabitsTableViewController: NotificationObserver {
             self,
             selector: #selector(handleActivationEvent(_:)),
             name: UIApplication.didBecomeActiveNotification,
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handleHabitReminderSelection(_:)),
+            name: Notification.Name.didSelectHabitReminder,
             object: nil
         )
     }
@@ -323,5 +310,57 @@ extension HabitsTableViewController: AppActiveObserver {
 
             self.updateList()
         }
+    }
+}
+
+extension HabitsTableViewController: ManagedContextChangeObserver {
+    /// Listens to any saved changes happening in other contexts and refreshes
+    /// the viewContext.
+    /// - Parameter notification: The thrown notification
+    @objc internal func handleContextChanges(_ notification: Notification) {
+        // If the changes were only updates, reload the tableView.
+        if (notification.userInfo?["updated"] as? Set<NSManagedObject>) != nil {
+            DispatchQueue.main.async {
+                self.updateList()
+            }
+        }
+
+        // Refresh the current view context by using the payloads in the notifications.
+        container.viewContext.mergeChanges(fromContextDidSave: notification)
+
+        DispatchQueue.main.async {
+            self.displayEmptyStateIfNeeded()
+        }
+    }
+}
+
+extension HabitsTableViewController: HabitReminderSelectionObserver {
+    /// Takes the user to the habit details controller.
+    private func showHabitDetails(_ habit: HabitMO) {
+        guard let detailsController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(
+            withIdentifier: "HabitDetails"
+            ) as? HabitDetailsViewController else {
+                assertionFailure("Couldn't get the habit details controller.")
+                return
+        }
+
+        detailsController.habit = habit
+        detailsController.container = container
+        detailsController.habitStorage = habitStorage
+        detailsController.notificationManager = notificationManager
+        detailsController.notificationStorage = NotificationStorage()
+        detailsController.notificationScheduler = NotificationScheduler(
+            notificationManager: notificationManager
+        )
+
+        navigationController?.pushViewController(detailsController, animated: true)
+    }
+
+    func handleHabitReminderSelection(_ notification: Notification) {
+        guard let habit = notification.userInfo?["habit"] as? HabitMO else {
+            assertionFailure("Couldn't get the user notification's habit.")
+            return
+        }
+        showHabitDetails(habit)
     }
 }
