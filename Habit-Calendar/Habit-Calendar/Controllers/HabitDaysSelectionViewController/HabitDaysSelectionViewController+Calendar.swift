@@ -50,7 +50,7 @@ extension HabitDaysSelectionViewController {
     }
 }
 
-extension HabitDaysSelectionViewController: CalendarDisplaying {
+extension HabitDaysSelectionViewController: CalendarDisplayable {
 
     // MARK: Imperatives
 

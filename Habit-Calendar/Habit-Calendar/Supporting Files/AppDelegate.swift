@@ -6,6 +6,7 @@
 //  Copyright © 2018 Tiago Maia Lopes. All rights reserved.
 //
 
+import Foundation
 import UIKit
 import CoreData
 import UserNotifications
@@ -14,6 +15,17 @@ import UserNotifications
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // MARK: Properties
+
+    /// The controller holding the app's persistent container.
+    var dataController: DataController! {
+        didSet {
+            // Close any past challenges that are open.
+            dataController.persistentContainer.performBackgroundTask { context in
+                self.daysChallengeStorage.closePastChallenges(using: context)
+                try? context.save()
+            }
+        }
+    }
 
     /// The app's main window.
     var window: UIWindow?
@@ -32,7 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     /// The app's UserMO main entity.
     private(set) lazy var mainUser = userStorage.getUser(
-        using: persistentContainer.viewContext
+        using: dataController.persistentContainer.viewContext
     )!
 
     /// The app's DayMO storage.
@@ -69,123 +81,99 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         fireTimeStorage: FireTimeStorage()
     )
 
+    /// The app to be displayed when the user selects an user notification.
+    /// - Note: This variable is used in the cases that the app is launching and the habits
+    ///         controller can't be accessed. Setting this var will make the habits
+    ///         controller to immediately display the habit after being loaded.
+    private var habitToDisplay: HabitMO?
+
     // MARK: Delegate methods
 
     func application(
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
-        /// Flag indicating if the tests are being executed or not.
-        let isTesting = ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] != nil
+        // If app is being tested, there's no need to continue the app's configuration
+        guard ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] == nil else { return true }
 
-        if !isTesting {
-            // Declare the seeder to be used based on the environemnt.
-            var seeder: Seeder!
-
-            #if DEVELOPMENT
-            seeder = DevelopmentSeeder(container: persistentContainer)
-            // Only erase in the development evironment.
-            seeder.erase()
-            #else
-            seeder = Seeder(container: persistentContainer)
-            #endif
-
-            // Seed the approriate procedures.
-            seeder.seed()
-        }
-
-        // Register the user notification categories.
-        registerNotificationCategories()
-
-        // Register the app for any UserNotification's events.
+        registerUserNotificationCategories()
         UNUserNotificationCenter.current().delegate = self
 
-        // Inject the main dependencies into the initial HabitTableViewController:
-        if let habitsListingController = window?.rootViewController?.contents as? HabitsTableViewController {
-            habitsListingController.container = persistentContainer
-            habitsListingController.habitStorage = habitStorage
-            habitsListingController.notificationManager = notificationManager
+        // Try loading the core data stack.
+        dataController = DataController { error in
+            if error == nil {
+                DispatchQueue.main.async {
+                    // Continue with the app's launch flow.
+                    self.seed()
+                    self.displayRootNavigationController()
+                }
+            } else {
+                // TODO: Display any errors to the user.
+            }
         }
 
         return true
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
-        // Close any past challenges that are open.
-        persistentContainer.performBackgroundTask { context in
-            self.daysChallengeStorage.closePastChallenges(using: context)
-            try? context.save()
-        }
-
         // Reset the app icon's badge number.
         application.applicationIconBadgeNumber = 0
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Save the view context.
-        self.saveContext()
+        dataController.saveContext()
     }
 
-    // MARK: - Core Data stack
+    // MARK: Imperatives
 
-    /// The container used by the app.
-    lazy var persistentContainer: NSPersistentContainer = {
-        /*
-         The persistent container for the application. This implementation
-         creates and returns a container, having loaded the store for the
-         application to it. This property is optional since there are legitimate
-         error conditions that could cause the creation of the store to fail.
-         */
-        let container = NSPersistentContainer(name: "Active")
-        container.loadPersistentStores(completionHandler: { (_, error) in
-            if let error = error as NSError? {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate.
-                // You should not use this function in a shipping application,
-                // although it may be useful during development.
+    /// Seeds the main entities needed to run the app.
+    private func seed() {
+        var seeder: Seeder!
 
-                /*
-                 Typical reasons for an error here include:
-                 * The parent directory does not exist, cannot be created, or disallows writing.
-                 * The persistent store is not accessible, due to permissions or data
-                 * protection when the device is locked.
-                 * The device is out of space.
-                 * The store could not be migrated to the current model version.
-                 Check the error message to determine what the actual problem was.
-                 */
-                fatalError("Unresolved error \(error), \(error.userInfo)")
-            }
-        })
-        return container
-    }()
+        // In development, the seed includes habits that are in progress and finished.
+        #if DEVELOPMENT
+        seeder = DevelopmentSeeder(container: dataController.persistentContainer)
+        // Only erase in the development evironment.
+        seeder.erase()
+        #else
+        // Otherwise, the seed only includes the main user.
+        seeder = Seeder(container: dataController.persistentContainer)
+        #endif
 
-    /// Convenient access to the app's persistent container.
-    static var persistentContainer: NSPersistentContainer {
-        return AppDelegate.current.persistentContainer
+        seeder.seed()
     }
 
-    /// Convenient access to the app's used view context.
-    static var viewContext: NSManagedObjectContext {
-        return persistentContainer.viewContext
-    }
-
-    // MARK: - Core Data Saving support
-
-    /// Saves the app's view context.
-    func saveContext () {
-        let context = persistentContainer.viewContext
-        if context.hasChanges {
-            do {
-                try context.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate.
-                // You should not use this function in a shipping application,
-                // although it may be useful during development.
-                let nserror = error as NSError
-                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
-            }
+    /// Displays the main navigation controller of the app.
+    private func displayRootNavigationController() {
+        guard let splashController = window?.rootViewController as? SplashViewController else {
+            assertionFailure("Couldn't get the splash screen.")
+            return
         }
+        guard let navigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(
+            withIdentifier: "MainNavigationController"
+            ) as? UINavigationController else {
+                assertionFailure("Couldn't get the main navigation controller.")
+                return
+        }
+
+        // Inject the main dependencies into the initial HabitsTableViewController
+        if let habitsController = navigationController.contents as? HabitsTableViewController {
+            habitsController.container = dataController.persistentContainer
+            habitsController.habitStorage = habitStorage
+            habitsController.notificationManager = notificationManager
+        }
+
+        splashController.displayRootController(navigationController)
+    }
+
+    /// Sends a notification about the receival of a habit user notification launch event.
+    private func sendHabitReminderNotification(_ habit: HabitMO) {
+        NotificationCenter.default.post(
+            name: Notification.Name.didSelectHabitReminder,
+            object: self,
+            userInfo: ["habit": habit]
+        )
     }
 }
 
@@ -195,7 +183,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     // MARK: Imperatives
 
     /// Registers the user notifications' categories with its corresponding actions.
-    private func registerNotificationCategories() {
+    private func registerUserNotificationCategories() {
         let categoryKind = UNNotificationCategory.Kind.dayPrompt(habitId: nil)
         let (yesActionIdentifier, notActionIdentifier) = categoryKind.getActionIdentifiers()
 
@@ -220,26 +208,6 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         UNUserNotificationCenter.current().setNotificationCategories([dayPromptCategory])
     }
 
-    /// Takes the user to the habit details controller.
-    private func showHabitDetails(_ habit: HabitMO) {
-        guard let navigationController = window?.rootViewController as? UINavigationController else { return }
-
-        guard let detailsController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(
-            withIdentifier: "HabitDetails"
-        ) as? HabitDetailsViewController else {
-            return
-        }
-
-        detailsController.habit = habit
-        detailsController.container = persistentContainer
-        detailsController.habitStorage = habitStorage
-        detailsController.notificationManager = notificationManager
-        detailsController.notificationStorage = notificationStorage
-        detailsController.notificationScheduler = notificationScheduler
-
-        navigationController.pushViewController(detailsController, animated: true)
-    }
-
     // MARK: UserNotificationCenter Delegate methods
 
     func userNotificationCenter(
@@ -255,23 +223,35 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
                 assertionFailure("Couldn't get the habit's id from the notification payload.")
                 return
             }
-            guard let habit = habitStorage.habit(using: persistentContainer.viewContext, and: habitId) else {
-                assertionFailure("Couldn't get the habit using the passed identifier.")
-                return
+            guard let habit = habitStorage.habit(
+                using: dataController.persistentContainer.viewContext,
+                and: habitId
+                ) else {
+                    assertionFailure("Couldn't get the habit using the passed identifier.")
+                    return
             }
             let (yesAction, noAction) = category.getActionIdentifiers()
 
             switch response.actionIdentifier {
             case UNNotificationDefaultActionIdentifier:
-                showHabitDetails(habit)
+                // If the habits listing controller is already being displayed, show the details.
+                if window?.rootViewController is UINavigationController {
+                    // Post a notification to the habits table view controller,
+                    // so it can display the habit.
+                    sendHabitReminderNotification(habit)
+                } else {
+                    // If not, the splash screen is being displayed, show the details immediately after
+                    // displaying the habits controller.
+                    habitToDisplay = habit
+                }
 
             case yesAction:
                 habit.getCurrentChallenge()?.markCurrentDayAsExecuted()
-                saveContext()
+                dataController.saveContext()
 
             case noAction:
                 habit.getCurrentChallenge()?.markCurrentDayAsExecuted(false)
-                saveContext()
+                dataController.saveContext()
 
             default:
                 break

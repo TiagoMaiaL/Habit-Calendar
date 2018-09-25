@@ -15,7 +15,7 @@
 		470C4170213EE70D007F6F35 /* UNNotificationContent+Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470C416F213EE70D007F6F35 /* UNNotificationContent+Category.swift */; };
 		470C41B02144A4B9007F6F35 /* DevelopmentSeeder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470C41AF2144A4B9007F6F35 /* DevelopmentSeeder.swift */; };
 		470C41B42144B091007F6F35 /* HabitFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475C96A520DEFEBC00212E1F /* HabitFactory.swift */; };
-		470C41B52144B091007F6F35 /* Active.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 47F635F620BB920900AC4555 /* Active.xcdatamodeld */; };
+		470C41B52144B091007F6F35 /* Habit-Calendar.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 47F635F620BB920900AC4555 /* Habit-Calendar.xcdatamodeld */; };
 		470C41B62144B091007F6F35 /* UNNotificationContent+Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470C416F213EE70D007F6F35 /* UNNotificationContent+Category.swift */; };
 		470C41B72144B091007F6F35 /* DummyFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475C96A120DEFB4C00212E1F /* DummyFactory.swift */; };
 		470C41B82144B091007F6F35 /* Int+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470230D720E5250A003A1F6E /* Int+Utils.swift */; };
@@ -54,7 +54,7 @@
 		470C41D92144B091007F6F35 /* HabitDaysSelectionViewController+Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475197D52132F4E1009F959C /* HabitDaysSelectionViewController+Calendar.swift */; };
 		470C41DA2144B091007F6F35 /* HabitDayStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4725D06220CA14A600C3B63F /* HabitDayStorage.swift */; };
 		470C41DB2144B091007F6F35 /* HabitTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4732CE772114F23200E2770C /* HabitTableViewCell.swift */; };
-		470C41DC2144B091007F6F35 /* CalendarDisplaying.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C1F3DD212A140F00DDA7BB /* CalendarDisplaying.swift */; };
+		470C41DC2144B091007F6F35 /* CalendarDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C1F3DD212A140F00DDA7BB /* CalendarDisplayable.swift */; };
 		470C41DD2144B091007F6F35 /* HabitMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4713A1FD20C16459008A13D2 /* HabitMO.swift */; };
 		470C41DE2144B091007F6F35 /* HabitDetailsViewController+FireTimesSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C32030212EFD380094BBF8 /* HabitDetailsViewController+FireTimesSection.swift */; };
 		470C41DF2144B091007F6F35 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4732CE792114FF5F00E2770C /* CardView.swift */; };
@@ -115,7 +115,7 @@
 		470C42192144B091007F6F35 /* SF-Pro-Display-Heavy.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4732CE522114D9CA00E2770C /* SF-Pro-Display-Heavy.otf */; };
 		470C421A2144B091007F6F35 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47F635F320BB920900AC4555 /* Main.storyboard */; };
 		470C42252144B164007F6F35 /* HabitFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475C96A520DEFEBC00212E1F /* HabitFactory.swift */; };
-		470C42262144B164007F6F35 /* Active.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 47F635F620BB920900AC4555 /* Active.xcdatamodeld */; };
+		470C42262144B164007F6F35 /* Habit-Calendar.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 47F635F620BB920900AC4555 /* Habit-Calendar.xcdatamodeld */; };
 		470C42272144B164007F6F35 /* UNNotificationContent+Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470C416F213EE70D007F6F35 /* UNNotificationContent+Category.swift */; };
 		470C42282144B164007F6F35 /* DummyFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475C96A120DEFB4C00212E1F /* DummyFactory.swift */; };
 		470C42292144B164007F6F35 /* Int+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470230D720E5250A003A1F6E /* Int+Utils.swift */; };
@@ -154,7 +154,7 @@
 		470C424A2144B164007F6F35 /* HabitDaysSelectionViewController+Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475197D52132F4E1009F959C /* HabitDaysSelectionViewController+Calendar.swift */; };
 		470C424B2144B164007F6F35 /* HabitDayStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4725D06220CA14A600C3B63F /* HabitDayStorage.swift */; };
 		470C424C2144B164007F6F35 /* HabitTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4732CE772114F23200E2770C /* HabitTableViewCell.swift */; };
-		470C424D2144B164007F6F35 /* CalendarDisplaying.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C1F3DD212A140F00DDA7BB /* CalendarDisplaying.swift */; };
+		470C424D2144B164007F6F35 /* CalendarDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C1F3DD212A140F00DDA7BB /* CalendarDisplayable.swift */; };
 		470C424E2144B164007F6F35 /* HabitMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4713A1FD20C16459008A13D2 /* HabitMO.swift */; };
 		470C424F2144B164007F6F35 /* HabitDetailsViewController+FireTimesSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C32030212EFD380094BBF8 /* HabitDetailsViewController+FireTimesSection.swift */; };
 		470C42502144B164007F6F35 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4732CE792114FF5F00E2770C /* CardView.swift */; };
@@ -290,18 +290,27 @@
 		4761F5B32120A0F700A8D407 /* ColorsPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4761F5B22120A0F700A8D407 /* ColorsPickerView.swift */; };
 		4761F5B52120D06900A8D407 /* ColorsPickerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4761F5B42120D06900A8D407 /* ColorsPickerDataSource.swift */; };
 		4761F5B72120D7F900A8D407 /* ColorOptionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4761F5B62120D7F900A8D407 /* ColorOptionCollectionViewCell.swift */; };
+		4769CB8E215972CC00DA0EBB /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4769CB8D215972CC00DA0EBB /* SplashViewController.swift */; };
+		4769CB8F215972CC00DA0EBB /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4769CB8D215972CC00DA0EBB /* SplashViewController.swift */; };
+		4769CB90215972CC00DA0EBB /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4769CB8D215972CC00DA0EBB /* SplashViewController.swift */; };
+		4769CB922159826F00DA0EBB /* HCPersistentContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4769CB912159826F00DA0EBB /* HCPersistentContainer.swift */; };
+		4769CB932159826F00DA0EBB /* HCPersistentContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4769CB912159826F00DA0EBB /* HCPersistentContainer.swift */; };
+		4769CB942159826F00DA0EBB /* HCPersistentContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4769CB912159826F00DA0EBB /* HCPersistentContainer.swift */; };
 		4779588020D8ADA90080614F /* NotificationStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4779587F20D8ADA90080614F /* NotificationStorageTests.swift */; };
 		4779588320D8B2E10080614F /* UserNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4779588220D8B2E10080614F /* UserNotificationManager.swift */; };
 		4779588520D8B38B0080614F /* NotificationStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4779588420D8B38B0080614F /* NotificationStorage.swift */; };
 		47961085214D5D8C00BFECFC /* HabitsTableViewController+DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47961084214D5D8C00BFECFC /* HabitsTableViewController+DataSource.swift */; };
 		47961087214D5E3300BFECFC /* HabitsTableViewController+FetchedResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47961086214D5E3200BFECFC /* HabitsTableViewController+FetchedResultsController.swift */; };
+		47A7457921530753003A382C /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A7457821530753003A382C /* DataController.swift */; };
+		47A7457B2153098F003A382C /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A7457821530753003A382C /* DataController.swift */; };
+		47A7457C21530990003A382C /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A7457821530753003A382C /* DataController.swift */; };
 		47AA365321037B0B0008D2DC /* FireTimeMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AA365221037B0B0008D2DC /* FireTimeMO.swift */; };
 		47AA365521037B8B0008D2DC /* FireTimeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AA365421037B8B0008D2DC /* FireTimeTests.swift */; };
 		47AA3657210382380008D2DC /* FireTimeStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AA3656210382380008D2DC /* FireTimeStorageTests.swift */; };
 		47AA3659210382AB0008D2DC /* FireTimeStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AA3658210382AB0008D2DC /* FireTimeStorage.swift */; };
 		47AA365B2104D5E60008D2DC /* FireTimeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AA365A2104D5E60008D2DC /* FireTimeFactory.swift */; };
 		47B2398A212203F9009CB25C /* HabitMOColor+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B23989212203F9009CB25C /* HabitMOColor+UIColor.swift */; };
-		47C1F3DE212A140F00DDA7BB /* CalendarDisplaying.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C1F3DD212A140F00DDA7BB /* CalendarDisplaying.swift */; };
+		47C1F3DE212A140F00DDA7BB /* CalendarDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C1F3DD212A140F00DDA7BB /* CalendarDisplayable.swift */; };
 		47C32029212C57D10094BBF8 /* HabitDetailsViewController+ProgressSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C32028212C57D10094BBF8 /* HabitDetailsViewController+ProgressSection.swift */; };
 		47C3202B212DCC230094BBF8 /* HabitDetailsViewController+NoChallengesSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C3202A212DCC230094BBF8 /* HabitDetailsViewController+NoChallengesSection.swift */; };
 		47C3202D212DD59A0094BBF8 /* HabitDetailsViewController+Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C3202C212DD59A0094BBF8 /* HabitDetailsViewController+Calendar.swift */; };
@@ -345,7 +354,7 @@
 		47EE82EF214988270093A6D6 /* UserDefaults+Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47EE82EC214988270093A6D6 /* UserDefaults+Login.swift */; };
 		47F635F020BB920900AC4555 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F635EF20BB920900AC4555 /* AppDelegate.swift */; };
 		47F635F520BB920900AC4555 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47F635F320BB920900AC4555 /* Main.storyboard */; };
-		47F635F820BB920900AC4555 /* Active.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 47F635F620BB920900AC4555 /* Active.xcdatamodeld */; };
+		47F635F820BB920900AC4555 /* Habit-Calendar.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 47F635F620BB920900AC4555 /* Habit-Calendar.xcdatamodeld */; };
 		47F635FA20BB920D00AC4555 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 47F635F920BB920D00AC4555 /* Assets.xcassets */; };
 		47F635FD20BB920D00AC4555 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47F635FB20BB920D00AC4555 /* LaunchScreen.storyboard */; };
 		9E4741ED7011810FD00BF941 /* Pods_Habit_Calendar_Habit_Calendar_Stg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89D08208B03E9A306F89DFA9 /* Pods_Habit_Calendar_Habit_Calendar_Stg.framework */; };
@@ -458,6 +467,8 @@
 		4761F5B22120A0F700A8D407 /* ColorsPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsPickerView.swift; sourceTree = "<group>"; };
 		4761F5B42120D06900A8D407 /* ColorsPickerDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsPickerDataSource.swift; sourceTree = "<group>"; };
 		4761F5B62120D7F900A8D407 /* ColorOptionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorOptionCollectionViewCell.swift; sourceTree = "<group>"; };
+		4769CB8D215972CC00DA0EBB /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
+		4769CB912159826F00DA0EBB /* HCPersistentContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCPersistentContainer.swift; sourceTree = "<group>"; };
 		4779587F20D8ADA90080614F /* NotificationStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationStorageTests.swift; sourceTree = "<group>"; };
 		4779588220D8B2E10080614F /* UserNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationManager.swift; sourceTree = "<group>"; };
 		4779588420D8B38B0080614F /* NotificationStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationStorage.swift; sourceTree = "<group>"; };
@@ -465,13 +476,14 @@
 		4796107B214C230900BFECFC /* Habit-Calendar-Stg-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Habit-Calendar-Stg-Info.plist"; sourceTree = "<group>"; };
 		47961084214D5D8C00BFECFC /* HabitsTableViewController+DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HabitsTableViewController+DataSource.swift"; sourceTree = "<group>"; };
 		47961086214D5E3200BFECFC /* HabitsTableViewController+FetchedResultsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HabitsTableViewController+FetchedResultsController.swift"; sourceTree = "<group>"; };
+		47A7457821530753003A382C /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		47AA365221037B0B0008D2DC /* FireTimeMO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireTimeMO.swift; sourceTree = "<group>"; };
 		47AA365421037B8B0008D2DC /* FireTimeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireTimeTests.swift; sourceTree = "<group>"; };
 		47AA3656210382380008D2DC /* FireTimeStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireTimeStorageTests.swift; sourceTree = "<group>"; };
 		47AA3658210382AB0008D2DC /* FireTimeStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireTimeStorage.swift; sourceTree = "<group>"; };
 		47AA365A2104D5E60008D2DC /* FireTimeFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireTimeFactory.swift; sourceTree = "<group>"; };
 		47B23989212203F9009CB25C /* HabitMOColor+UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HabitMOColor+UIColor.swift"; sourceTree = "<group>"; };
-		47C1F3DD212A140F00DDA7BB /* CalendarDisplaying.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDisplaying.swift; sourceTree = "<group>"; };
+		47C1F3DD212A140F00DDA7BB /* CalendarDisplayable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDisplayable.swift; sourceTree = "<group>"; };
 		47C32028212C57D10094BBF8 /* HabitDetailsViewController+ProgressSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HabitDetailsViewController+ProgressSection.swift"; sourceTree = "<group>"; };
 		47C3202A212DCC230094BBF8 /* HabitDetailsViewController+NoChallengesSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HabitDetailsViewController+NoChallengesSection.swift"; sourceTree = "<group>"; };
 		47C3202C212DD59A0094BBF8 /* HabitDetailsViewController+Calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HabitDetailsViewController+Calendar.swift"; sourceTree = "<group>"; };
@@ -571,14 +583,11 @@
 		4713A20520C16555008A13D2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				47F635F620BB920900AC4555 /* Active.xcdatamodeld */,
-				4713A1FB20C1643E008A13D2 /* UserMO.swift */,
-				4713A1FD20C16459008A13D2 /* HabitMO.swift */,
-				4713A1FF20C164E6008A13D2 /* HabitDayMO.swift */,
-				4713A20120C164FB008A13D2 /* DayMO.swift */,
-				4713A20320C16542008A13D2 /* NotificationMO.swift */,
-				47D8308720FCE82F002D3A97 /* DaysChallengeMO.swift */,
-				47AA365221037B0B0008D2DC /* FireTimeMO.swift */,
+				47A7457821530753003A382C /* DataController.swift */,
+				4769CB912159826F00DA0EBB /* HCPersistentContainer.swift */,
+				47F635F620BB920900AC4555 /* Habit-Calendar.xcdatamodeld */,
+				47A7457A21530766003A382C /* Managed Objects */,
+				4725D05720C8A42400C3B63F /* Storage */,
 				47E6C20E20EB1213003BDB4D /* Seed */,
 			);
 			path = Model;
@@ -620,6 +629,7 @@
 			isa = PBXGroup;
 			children = (
 				47F635F320BB920900AC4555 /* Main.storyboard */,
+				4769CB8D215972CC00DA0EBB /* SplashViewController.swift */,
 				47EE82E8214875050093A6D6 /* OnBoardingViewController.swift */,
 				47961083214D5D5000BFECFC /* HabitsTableViewController */,
 				4737312C20ED503B00895DD2 /* FireTimesSelectionViewController.swift */,
@@ -627,10 +637,9 @@
 				47C32032213078B40094BBF8 /* HabitCreationTableViewController */,
 				47C32027212C578C0094BBF8 /* HabitDetailsViewController */,
 				47B23989212203F9009CB25C /* HabitMOColor+UIColor.swift */,
-				47C1F3DD212A140F00DDA7BB /* CalendarDisplaying.swift */,
+				47C1F3DD212A140F00DDA7BB /* CalendarDisplayable.swift */,
 				47C3203B2130E91F0094BBF8 /* FireTimesDisplayable.swift */,
 				475197D721359516009F959C /* NotificationAvailabilityDisplayable.swift */,
-				47DA52B1214D9C5B00A45102 /* NotificationObserver.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -839,6 +848,28 @@
 			path = HabitsTableViewController;
 			sourceTree = "<group>";
 		};
+		47A7457A21530766003A382C /* Managed Objects */ = {
+			isa = PBXGroup;
+			children = (
+				4713A1FB20C1643E008A13D2 /* UserMO.swift */,
+				4713A1FD20C16459008A13D2 /* HabitMO.swift */,
+				4713A1FF20C164E6008A13D2 /* HabitDayMO.swift */,
+				4713A20120C164FB008A13D2 /* DayMO.swift */,
+				4713A20320C16542008A13D2 /* NotificationMO.swift */,
+				47D8308720FCE82F002D3A97 /* DaysChallengeMO.swift */,
+				47AA365221037B0B0008D2DC /* FireTimeMO.swift */,
+			);
+			path = "Managed Objects";
+			sourceTree = "<group>";
+		};
+		47A8DF252154250E00468698 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				47DA52B1214D9C5B00A45102 /* NotificationObserver.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
 		47C32027212C578C0094BBF8 /* HabitDetailsViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -908,12 +939,12 @@
 		47F635EE20BB920900AC4555 /* Habit-Calendar */ = {
 			isa = PBXGroup;
 			children = (
+				4713A20520C16555008A13D2 /* Model */,
 				4725D05920C8A43B00C3B63F /* Views */,
 				4725D05820C8A42E00C3B63F /* Controllers */,
-				4725D05720C8A42400C3B63F /* Storage */,
-				4713A20520C16555008A13D2 /* Model */,
 				4779588120D8B2AC0080614F /* Managers */,
 				474F9C8420CC7DEF0094C19C /* Extensions */,
+				47A8DF252154250E00468698 /* Protocols */,
 				47F6361220BB924100AC4555 /* Supporting Files */,
 				47F635FE20BB920D00AC4555 /* Info.plist */,
 				4796107A214C230900BFECFC /* Habit-Calendar-Dev-Info.plist */,
@@ -1034,7 +1065,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0930;
-				LastUpgradeCheck = 0930;
+				LastUpgradeCheck = 1000;
 				ORGANIZATIONNAME = "Tiago Maia Lopes";
 				TargetAttributes = {
 					470C41B12144B091007F6F35 = {
@@ -1388,7 +1419,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				470C41B42144B091007F6F35 /* HabitFactory.swift in Sources */,
-				470C41B52144B091007F6F35 /* Active.xcdatamodeld in Sources */,
+				470C41B52144B091007F6F35 /* Habit-Calendar.xcdatamodeld in Sources */,
 				470C41B62144B091007F6F35 /* UNNotificationContent+Category.swift in Sources */,
 				470C41B72144B091007F6F35 /* DummyFactory.swift in Sources */,
 				470C41B82144B091007F6F35 /* Int+Utils.swift in Sources */,
@@ -1396,6 +1427,7 @@
 				470C41BA2144B091007F6F35 /* ColorOptionCollectionViewCell.swift in Sources */,
 				470C41BB2144B091007F6F35 /* DaysHeaderView.swift in Sources */,
 				470C41BC2144B091007F6F35 /* HabitDetailsViewController+NoChallengesSection.swift in Sources */,
+				4769CB8F215972CC00DA0EBB /* SplashViewController.swift in Sources */,
 				470C41BD2144B091007F6F35 /* AppDelegate.swift in Sources */,
 				470C41BE2144B091007F6F35 /* HabitDetailsViewController+Calendar.swift in Sources */,
 				470C41BF2144B091007F6F35 /* HabitMOColor+UIColor.swift in Sources */,
@@ -1419,7 +1451,9 @@
 				470C41CF2144B091007F6F35 /* HabitDetailsViewController+ProgressSection.swift in Sources */,
 				470C41D02144B091007F6F35 /* HabitCreationTableViewController+DaysField.swift in Sources */,
 				470C41D12144B091007F6F35 /* DayStorage.swift in Sources */,
+				4769CB932159826F00DA0EBB /* HCPersistentContainer.swift in Sources */,
 				470C41D22144B091007F6F35 /* HabitDetailsViewController+PromptSection.swift in Sources */,
+				47A7457B2153098F003A382C /* DataController.swift in Sources */,
 				470C41D32144B091007F6F35 /* RoundedButton.swift in Sources */,
 				470C41D42144B091007F6F35 /* UserStorage.swift in Sources */,
 				470C41D52144B091007F6F35 /* NotificationFactory.swift in Sources */,
@@ -1429,7 +1463,7 @@
 				470C41D92144B091007F6F35 /* HabitDaysSelectionViewController+Calendar.swift in Sources */,
 				470C41DA2144B091007F6F35 /* HabitDayStorage.swift in Sources */,
 				470C41DB2144B091007F6F35 /* HabitTableViewCell.swift in Sources */,
-				470C41DC2144B091007F6F35 /* CalendarDisplaying.swift in Sources */,
+				470C41DC2144B091007F6F35 /* CalendarDisplayable.swift in Sources */,
 				470C41DD2144B091007F6F35 /* HabitMO.swift in Sources */,
 				470C41DE2144B091007F6F35 /* HabitDetailsViewController+FireTimesSection.swift in Sources */,
 				470C41DF2144B091007F6F35 /* CardView.swift in Sources */,
@@ -1468,7 +1502,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				470C42252144B164007F6F35 /* HabitFactory.swift in Sources */,
-				470C42262144B164007F6F35 /* Active.xcdatamodeld in Sources */,
+				470C42262144B164007F6F35 /* Habit-Calendar.xcdatamodeld in Sources */,
 				470C42272144B164007F6F35 /* UNNotificationContent+Category.swift in Sources */,
 				470C42282144B164007F6F35 /* DummyFactory.swift in Sources */,
 				470C42292144B164007F6F35 /* Int+Utils.swift in Sources */,
@@ -1476,6 +1510,7 @@
 				470C422B2144B164007F6F35 /* ColorOptionCollectionViewCell.swift in Sources */,
 				470C422C2144B164007F6F35 /* DaysHeaderView.swift in Sources */,
 				470C422D2144B164007F6F35 /* HabitDetailsViewController+NoChallengesSection.swift in Sources */,
+				4769CB90215972CC00DA0EBB /* SplashViewController.swift in Sources */,
 				470C422E2144B164007F6F35 /* AppDelegate.swift in Sources */,
 				470C422F2144B164007F6F35 /* HabitDetailsViewController+Calendar.swift in Sources */,
 				470C42302144B164007F6F35 /* HabitMOColor+UIColor.swift in Sources */,
@@ -1499,7 +1534,9 @@
 				470C42402144B164007F6F35 /* HabitDetailsViewController+ProgressSection.swift in Sources */,
 				470C42412144B164007F6F35 /* HabitCreationTableViewController+DaysField.swift in Sources */,
 				470C42422144B164007F6F35 /* DayStorage.swift in Sources */,
+				4769CB942159826F00DA0EBB /* HCPersistentContainer.swift in Sources */,
 				470C42432144B164007F6F35 /* HabitDetailsViewController+PromptSection.swift in Sources */,
+				47A7457C21530990003A382C /* DataController.swift in Sources */,
 				470C42442144B164007F6F35 /* RoundedButton.swift in Sources */,
 				470C42452144B164007F6F35 /* UserStorage.swift in Sources */,
 				470C42462144B164007F6F35 /* NotificationFactory.swift in Sources */,
@@ -1509,7 +1546,7 @@
 				470C424A2144B164007F6F35 /* HabitDaysSelectionViewController+Calendar.swift in Sources */,
 				470C424B2144B164007F6F35 /* HabitDayStorage.swift in Sources */,
 				470C424C2144B164007F6F35 /* HabitTableViewCell.swift in Sources */,
-				470C424D2144B164007F6F35 /* CalendarDisplaying.swift in Sources */,
+				470C424D2144B164007F6F35 /* CalendarDisplayable.swift in Sources */,
 				470C424E2144B164007F6F35 /* HabitMO.swift in Sources */,
 				470C424F2144B164007F6F35 /* HabitDetailsViewController+FireTimesSection.swift in Sources */,
 				470C42502144B164007F6F35 /* CardView.swift in Sources */,
@@ -1548,7 +1585,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				47E6C21520EB12B2003BDB4D /* HabitFactory.swift in Sources */,
-				47F635F820BB920900AC4555 /* Active.xcdatamodeld in Sources */,
+				47F635F820BB920900AC4555 /* Habit-Calendar.xcdatamodeld in Sources */,
 				470C4170213EE70D007F6F35 /* UNNotificationContent+Category.swift in Sources */,
 				47E6C21120EB129C003BDB4D /* DummyFactory.swift in Sources */,
 				470230D820E5250A003A1F6E /* Int+Utils.swift in Sources */,
@@ -1556,6 +1593,7 @@
 				4732CE83211CB89F00E2770C /* MonthHeaderView.swift in Sources */,
 				4761F5B72120D7F900A8D407 /* ColorOptionCollectionViewCell.swift in Sources */,
 				4732CE81211C93B500E2770C /* DaysHeaderView.swift in Sources */,
+				4769CB8E215972CC00DA0EBB /* SplashViewController.swift in Sources */,
 				47C3202B212DCC230094BBF8 /* HabitDetailsViewController+NoChallengesSection.swift in Sources */,
 				47F635F020BB920900AC4555 /* AppDelegate.swift in Sources */,
 				47C3202D212DD59A0094BBF8 /* HabitDetailsViewController+Calendar.swift in Sources */,
@@ -1579,7 +1617,9 @@
 				47C320382130799D0094BBF8 /* HabitCreationTableViewController+ColorField.swift in Sources */,
 				47C32029212C57D10094BBF8 /* HabitDetailsViewController+ProgressSection.swift in Sources */,
 				47C320342130793A0094BBF8 /* HabitCreationTableViewController+DaysField.swift in Sources */,
+				4769CB922159826F00DA0EBB /* HCPersistentContainer.swift in Sources */,
 				4725D06120CA06EE00C3B63F /* DayStorage.swift in Sources */,
+				47A7457921530753003A382C /* DataController.swift in Sources */,
 				47C3202F212DD7C80094BBF8 /* HabitDetailsViewController+PromptSection.swift in Sources */,
 				4732CE7E211A12B500E2770C /* RoundedButton.swift in Sources */,
 				4725D05F20C97D9C00C3B63F /* UserStorage.swift in Sources */,
@@ -1590,7 +1630,7 @@
 				475197D62132F4E1009F959C /* HabitDaysSelectionViewController+Calendar.swift in Sources */,
 				4725D06320CA14A600C3B63F /* HabitDayStorage.swift in Sources */,
 				4732CE782114F23200E2770C /* HabitTableViewCell.swift in Sources */,
-				47C1F3DE212A140F00DDA7BB /* CalendarDisplaying.swift in Sources */,
+				47C1F3DE212A140F00DDA7BB /* CalendarDisplayable.swift in Sources */,
 				4713A1FE20C16459008A13D2 /* HabitMO.swift in Sources */,
 				47C32031212EFD380094BBF8 /* HabitDetailsViewController+FireTimesSection.swift in Sources */,
 				4732CE7A2114FF5F00E2770C /* CardView.swift in Sources */,
@@ -2030,13 +2070,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		47F635F620BB920900AC4555 /* Active.xcdatamodeld */ = {
+		47F635F620BB920900AC4555 /* Habit-Calendar.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
 				47F635F720BB920900AC4555 /* Active.xcdatamodel */,
 			);
 			currentVersion = 47F635F720BB920900AC4555 /* Active.xcdatamodel */;
-			path = Active.xcdatamodeld;
+			path = "Habit-Calendar.xcdatamodeld";
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

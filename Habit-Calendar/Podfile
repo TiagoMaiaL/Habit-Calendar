@@ -2,7 +2,7 @@
 platform :ios, '10.0'
 
 def shared_pods
-    pod 'JTAppleCalendar', '~> 7.1.5'
+    pod 'JTAppleCalendar', '~> 7.1.6'
     pod 'SwiftLint'
     pod 'UIColor_Hex_Swift', '~> 4.0.2'
 end

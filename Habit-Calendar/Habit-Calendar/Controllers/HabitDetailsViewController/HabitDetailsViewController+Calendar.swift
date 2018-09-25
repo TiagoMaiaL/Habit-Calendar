@@ -10,7 +10,7 @@ import UIKit
 import JTAppleCalendar
 
 /// Adds the calendar capabilities to the habit details controller.
-extension HabitDetailsViewController: CalendarDisplaying {
+extension HabitDetailsViewController: CalendarDisplayable {
 
     // MARK: Imperatives
 

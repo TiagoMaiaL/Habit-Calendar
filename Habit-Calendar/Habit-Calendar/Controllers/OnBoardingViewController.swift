@@ -27,6 +27,8 @@ class OnBoardingViewController: UIViewController {
 
     @IBAction func closeController(_ sender: RoundedButton) {
         dismiss(animated: true) {
+            UserDefaults.standard.setFirstLaunchPassed()
+
             // Request the user's authorization to schedule local notifications.
             self.notificationManager.requestAuthorization { authorized in
                 print("User \(authorized ? "authorized" : "denied").")

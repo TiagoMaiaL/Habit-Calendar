@@ -1,5 +1,5 @@
 //
-//  CalendarDisplaying.swift
+//  CalendarDisplayable.swift
 //  Active
 //
 //  Created by Tiago Maia Lopes on 19/08/18.
@@ -9,7 +9,7 @@
 import JTAppleCalendar
 
 /// Protocol defining the capability to display a calendar.
-protocol CalendarDisplaying: JTAppleCalendarViewDelegate, JTAppleCalendarViewDataSource {
+protocol CalendarDisplayable: JTAppleCalendarViewDelegate, JTAppleCalendarViewDataSource {
 
     // MARK: Properties
 
@@ -65,7 +65,7 @@ protocol CalendarDisplaying: JTAppleCalendarViewDelegate, JTAppleCalendarViewDat
     func handleAppearanceOfCell(_ cell: JTAppleCell, using cellState: CellState)
 }
 
-extension CalendarDisplaying {
+extension CalendarDisplayable {
 
     func getCurrentMonth() -> Date {
         return calendarView.visibleDates().monthDates.first?.date ?? Date()
