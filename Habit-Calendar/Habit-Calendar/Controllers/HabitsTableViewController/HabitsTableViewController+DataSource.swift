@@ -25,7 +25,7 @@ extension HabitsTableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell: UITableViewCell? = nil
+        var cell: UITableViewCell?
 
         // Get the current habit object.
         let habit = selectedFetchedResultsController.object(at: indexPath)

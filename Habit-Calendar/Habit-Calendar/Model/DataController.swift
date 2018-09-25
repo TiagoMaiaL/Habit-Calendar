@@ -34,8 +34,6 @@ class DataController {
                 #if DEVELOPMENT
                 fatalError("Unresolved error \(error), \(error.userInfo)")
                 #endif
-
-                // TODO: Treat these kind of errors.
             }
 
             completionBlock(error)
