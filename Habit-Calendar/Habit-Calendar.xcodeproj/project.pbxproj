@@ -230,6 +230,10 @@
 		47160A4421387AAE00E717C9 /* EmptyStateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47160A4321387AAE00E717C9 /* EmptyStateView.xib */; };
 		47160A4621387AC300E717C9 /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47160A4521387AC300E717C9 /* EmptyStateView.swift */; };
 		47160A48213B18F900E717C9 /* HabitStorageNotificationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47160A47213B18F900E717C9 /* HabitStorageNotificationTests.swift */; };
+		471D0AE3215A9E620095750A /* UIAlertController+Factories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471D0AE2215A9E620095750A /* UIAlertController+Factories.swift */; };
+		471D0AE5215AA0460095750A /* AlertControllerFactoriesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471D0AE4215AA0460095750A /* AlertControllerFactoriesTests.swift */; };
+		471D0AE6215AA11A0095750A /* UIAlertController+Factories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471D0AE2215A9E620095750A /* UIAlertController+Factories.swift */; };
+		471D0AE7215AA11A0095750A /* UIAlertController+Factories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471D0AE2215A9E620095750A /* UIAlertController+Factories.swift */; };
 		4725D05B20C8A4BA00C3B63F /* HabitsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4725D05A20C8A4BA00C3B63F /* HabitsTableViewController.swift */; };
 		4725D05D20C8A96200C3B63F /* HabitStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4725D05C20C8A96200C3B63F /* HabitStorage.swift */; };
 		4725D05F20C97D9C00C3B63F /* UserStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4725D05E20C97D9C00C3B63F /* UserStorage.swift */; };
@@ -401,6 +405,8 @@
 		47160A4321387AAE00E717C9 /* EmptyStateView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmptyStateView.xib; sourceTree = "<group>"; };
 		47160A4521387AC300E717C9 /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
 		47160A47213B18F900E717C9 /* HabitStorageNotificationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitStorageNotificationTests.swift; sourceTree = "<group>"; };
+		471D0AE2215A9E620095750A /* UIAlertController+Factories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Factories.swift"; sourceTree = "<group>"; };
+		471D0AE4215AA0460095750A /* AlertControllerFactoriesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertControllerFactoriesTests.swift; sourceTree = "<group>"; };
 		4725D05A20C8A4BA00C3B63F /* HabitsTableViewController.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = HabitsTableViewController.swift; sourceTree = "<group>"; tabWidth = 4; };
 		4725D05C20C8A96200C3B63F /* HabitStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitStorage.swift; sourceTree = "<group>"; };
 		4725D05E20C97D9C00C3B63F /* UserStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStorage.swift; sourceTree = "<group>"; };
@@ -720,6 +726,7 @@
 			isa = PBXGroup;
 			children = (
 				474A209B20D1B51300E0EBD0 /* DateUtilsTests.swift */,
+				471D0AE4215AA0460095750A /* AlertControllerFactoriesTests.swift */,
 			);
 			path = "Extension Tests";
 			sourceTree = "<group>";
@@ -734,6 +741,7 @@
 				470C416F213EE70D007F6F35 /* UNNotificationContent+Category.swift */,
 				470C42932145A52C007F6F35 /* UIColor+Palette.swift */,
 				47EE82EC214988270093A6D6 /* UserDefaults+Login.swift */,
+				471D0AE2215A9E620095750A /* UIAlertController+Factories.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1467,6 +1475,7 @@
 				470C41DD2144B091007F6F35 /* HabitMO.swift in Sources */,
 				470C41DE2144B091007F6F35 /* HabitDetailsViewController+FireTimesSection.swift in Sources */,
 				470C41DF2144B091007F6F35 /* CardView.swift in Sources */,
+				471D0AE6215AA11A0095750A /* UIAlertController+Factories.swift in Sources */,
 				470C41E02144B091007F6F35 /* NotificationStorage.swift in Sources */,
 				470C41E12144B091007F6F35 /* DaysChallengeMO.swift in Sources */,
 				470C41E22144B091007F6F35 /* HabitCreationTableViewController.swift in Sources */,
@@ -1550,6 +1559,7 @@
 				470C424E2144B164007F6F35 /* HabitMO.swift in Sources */,
 				470C424F2144B164007F6F35 /* HabitDetailsViewController+FireTimesSection.swift in Sources */,
 				470C42502144B164007F6F35 /* CardView.swift in Sources */,
+				471D0AE7215AA11A0095750A /* UIAlertController+Factories.swift in Sources */,
 				470C42512144B164007F6F35 /* NotificationStorage.swift in Sources */,
 				470C42522144B164007F6F35 /* DaysChallengeMO.swift in Sources */,
 				470C42532144B164007F6F35 /* HabitCreationTableViewController.swift in Sources */,
@@ -1633,6 +1643,7 @@
 				47C1F3DE212A140F00DDA7BB /* CalendarDisplayable.swift in Sources */,
 				4713A1FE20C16459008A13D2 /* HabitMO.swift in Sources */,
 				47C32031212EFD380094BBF8 /* HabitDetailsViewController+FireTimesSection.swift in Sources */,
+				471D0AE3215A9E620095750A /* UIAlertController+Factories.swift in Sources */,
 				4732CE7A2114FF5F00E2770C /* CardView.swift in Sources */,
 				4779588520D8B38B0080614F /* NotificationStorage.swift in Sources */,
 				47D8308820FCE82F002D3A97 /* DaysChallengeMO.swift in Sources */,
@@ -1684,6 +1695,7 @@
 				4779588020D8ADA90080614F /* NotificationStorageTests.swift in Sources */,
 				474F9C8A20CE3F670094C19C /* IntegrationTestCase.swift in Sources */,
 				47AA365521037B8B0008D2DC /* FireTimeTests.swift in Sources */,
+				471D0AE5215AA0460095750A /* AlertControllerFactoriesTests.swift in Sources */,
 				47D8308C20FD00E5002D3A97 /* DaysChallengeStorageTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

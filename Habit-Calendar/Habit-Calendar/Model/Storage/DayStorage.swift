@@ -14,7 +14,6 @@ class DayStorage {
 
     // MARK: Types
 
-    // TODO: Make these storage errors more generic.
     enum DayStorageError: Error {
         case dayAlreadyCreated
     }

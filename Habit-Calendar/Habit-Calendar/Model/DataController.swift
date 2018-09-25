@@ -22,22 +22,10 @@ class DataController {
         persistentContainer = HCPersistentContainer(name: "Habit-Calendar")
         persistentContainer.loadPersistentStores(completionHandler: { (_, error) in
             if let error = error as NSError? {
-                /*
-                 Typical reasons for an error here include:
-                 * The parent directory does not exist, cannot be created, or disallows writing.
-                 * The persistent store is not accessible, due to permissions or data
-                 * protection when the device is locked.
-                 * The device is out of space.
-                 * The store could not be migrated to the current model version.
-                 Check the error message to determine what the actual problem was.
-                 */
                 #if DEVELOPMENT
                 fatalError("Unresolved error \(error), \(error.userInfo)")
                 #endif
-
-                // TODO: Treat these kind of errors.
             }
-
             completionBlock(error)
         })
     }

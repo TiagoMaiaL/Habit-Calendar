@@ -108,7 +108,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     self.displayRootNavigationController()
                 }
             } else {
-                // TODO: Display any errors to the user.
+                /*
+                 Typical reasons for an error here include:
+                 * The parent directory does not exist, cannot be created, or disallows writing.
+                 * The persistent store is not accessible, due to permissions or data
+                 * protection when the device is locked.
+                 * The device is out of space.
+                 * The store could not be migrated to the current model version.
+                 Check the error message to determine what the actual problem was.
+                 */
+                self.sendDataControllerLoadingErrorNotification(error: error!)
             }
         }
 
@@ -173,6 +182,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             name: Notification.Name.didSelectHabitReminder,
             object: self,
             userInfo: ["habit": habit]
+        )
+    }
+
+    /// Sends a notification about errors that happen while loading core data.
+    /// - Note: Any controllers can then handle
+    ///         these kind of errors in the best way.
+    private func sendDataControllerLoadingErrorNotification(error: Error) {
+        NotificationCenter.default.post(
+            name: Notification.Name.didFailLoadingData,
+            object: self,
+            userInfo: ["error": error]
         )
     }
 }

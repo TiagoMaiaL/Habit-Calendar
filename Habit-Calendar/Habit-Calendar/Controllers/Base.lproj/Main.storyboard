@@ -427,9 +427,9 @@
                                                     <rect key="frame" x="25" y="10" width="341" height="139.66666666666666"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pyb-N6-nac">
-                                                            <rect key="frame" x="0.0" y="0.0" width="157.66666666666666" height="25.333333333333332"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="183.33333333333334" height="25.333333333333332"/>
                                                             <attributedString key="attributedText">
-                                                                <fragment content="Days challenge ">
+                                                                <fragment content="Challenge of days ">
                                                                     <attributes>
                                                                         <font key="NSFont" size="20" name="SFProText-Regular"/>
                                                                         <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
@@ -876,7 +876,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="jIC-fg-zIB"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Days' challenge" id="2Vo-cB-dmZ">
+                    <navigationItem key="navigationItem" title="Challenge of days" id="2Vo-cB-dmZ">
                         <barButtonItem key="rightBarButtonItem" title="Clear" id="11t-ft-cFW">
                             <connections>
                                 <action selector="deselectDays:" destination="zeZ-9t-rmb" id="adg-L0-oDR"/>
@@ -948,7 +948,7 @@ Add as many habits as you wish.</string>
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="6JK-0u-PFw">
-                                                        <rect key="frame" x="0.0" y="227.33333333333331" width="374" height="151.66666666666669"/>
+                                                        <rect key="frame" x="0.0" y="227.33333333333331" width="372.33333333333331" height="151.66666666666669"/>
                                                         <subviews>
                                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic-calendar" translatesAutoresizingMaskIntoConstraints="NO" id="EpP-2q-irp">
                                                                 <rect key="frame" x="0.0" y="0.0" width="45" height="47"/>
@@ -957,7 +957,7 @@ Add as many habits as you wish.</string>
                                                                 </constraints>
                                                             </imageView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="wvE-26-2EX">
-                                                                <rect key="frame" x="60" y="0.0" width="314" height="151.66666666666666"/>
+                                                                <rect key="frame" x="60" y="0.0" width="312.33333333333331" height="151.66666666666666"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Challenge yourself" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fMA-0Y-9jl">
                                                                         <rect key="frame" x="0.0" y="0.0" width="165" height="24"/>
@@ -965,14 +965,14 @@ Add as many habits as you wish.</string>
                                                                         <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Commit to a habit by beginning a new challenge of days and  checking your daily accomplishments." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MLS-wP-bUS">
-                                                                        <rect key="frame" x="0.0" y="34.000000000000007" width="314" height="64.666666666666686"/>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Commit to a habit by beginning a new challenge of days and checking your daily accomplishments." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MLS-wP-bUS">
+                                                                        <rect key="frame" x="0.0" y="34.000000000000007" width="312.33333333333331" height="64.666666666666686"/>
                                                                         <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="18"/>
                                                                         <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Keep track of the challenge’s progress, and the days you missed." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dX3-aK-wEC">
-                                                                        <rect key="frame" x="0.0" y="108.66666666666669" width="300.33333333333331" height="43"/>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Keep track of the progress of the challenge, and the days you missed." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dX3-aK-wEC">
+                                                                        <rect key="frame" x="0.0" y="108.66666666666669" width="307.33333333333331" height="43"/>
                                                                         <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="18"/>
                                                                         <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <nil key="highlightedColor"/>

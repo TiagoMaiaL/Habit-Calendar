@@ -27,21 +27,11 @@ class Seeder {
         context in
         print("Seeding user.")
 
-        // Try to fetch any users in the database.
-        let request: NSFetchRequest<UserMO> = UserMO.fetchRequest()
-        let results = try? context.fetch(request)
-
-        // If there's already a saved UserMO,
-        // don't proceed with the user seed.
-        if let results = results, !results.isEmpty {
-            return
+        // Create the base user if necessary.
+        let userStorage = UserStorage()
+        if userStorage.getUser(using: context) == nil {
+            _ = userStorage.create(using: context)
         }
-
-        // Instantiate a new user factory using the context.
-        let userFactory = UserFactory(context: context)
-
-        // Make a new dummy.
-        _ = userFactory.makeDummy()
     }]
 
     /// An array of blocks containing the seeding code in the desired order.
@@ -106,6 +96,7 @@ class Seeder {
         let entities = [
             "User": UserMO.fetchRequest(),
             "Habit": HabitMO.fetchRequest(),
+            "Challenge": DaysChallengeMO.fetchRequest(),
             "HabitDay": HabitDayMO.fetchRequest(),
             "Notification": NotificationMO.fetchRequest(),
             "Day": DayMO.fetchRequest()

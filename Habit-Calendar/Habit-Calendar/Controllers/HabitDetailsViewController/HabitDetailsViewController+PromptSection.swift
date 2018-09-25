@@ -41,8 +41,19 @@ extension HabitDetailsViewController {
                 self.notificationScheduler.schedule(dayNotifications)
             }
 
-            // TODO: Display an error to the user.
-            try? challenge.managedObjectContext?.save()
+            do {
+                try challenge.managedObjectContext?.save()
+            } catch {
+                challenge.managedObjectContext?.rollback()
+                self.present(
+                    UIAlertController.make(
+                        title: "Error",
+                        message: "The current day couldn't be marked as executed. Please contact the developer."
+                    ),
+                    animated: true
+                )
+                assertionFailure("Inconsistency: couldn't mark the current day as executed.")
+            }
 
             DispatchQueue.main.async {
                 // Update the prompt view.

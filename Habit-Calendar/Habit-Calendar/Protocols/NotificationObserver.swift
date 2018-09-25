@@ -15,6 +15,12 @@ extension Notification.Name {
     static var didSelectHabitReminder: Notification.Name {
         return Notification.Name("REMINDER_SELECTED")
     }
+
+    /// Name for the notification sent when an error happened while the
+    /// data controller was being loaded.
+    static var didFailLoadingData: Notification.Name {
+        return Notification.Name("FAILED_LOADING_DATA")
+    }
 }
 
 /// The interface to register/unregister to notifications from the NotificationCenter api.
@@ -47,4 +53,10 @@ extension Notification.Name {
 
     /// Handles the didSelectHabitReminder notification.
     @objc func handleHabitReminderSelection(_ notification: Notification)
+}
+
+@objc protocol DataLoadingErrorObserver: NotificationObserver {
+
+    /// Handles the didFailLoadingData notification.
+    @objc func handleDataLoadingError(_ notification: Notification)
 }

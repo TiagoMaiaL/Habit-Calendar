@@ -266,10 +266,21 @@ class HabitCreationTableViewController: UITableViewController {
                 )
             }
 
-            // TODO: Report any errors to the user.
             do {
                 try context.save()
             } catch {
+                context.rollback()
+                DispatchQueue.main.async {
+                    self.present(
+                        UIAlertController.make(
+                            title: "Error",
+                            message: """
+There was an error while the habit was being persisted. Please contact the developer.
+"""
+                        ),
+                        animated: true
+                    )
+                }
                 assertionFailure("Error: Couldn't save the new habit entity.")
             }
         }

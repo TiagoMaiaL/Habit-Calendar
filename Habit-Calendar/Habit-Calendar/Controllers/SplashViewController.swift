@@ -17,6 +17,22 @@ class SplashViewController: UIViewController {
     /// Loading view indicating progress.
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
+    // MARK: Initializers
+
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        startObserving()
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        startObserving()
+    }
+
+    deinit {
+        stopObserving()
+    }
+
     // MARK: Life Cycle
 
     override func viewDidAppear(_ animated: Bool) {
@@ -31,6 +47,7 @@ class SplashViewController: UIViewController {
     // MARK: Imperatives
 
     /// Displays the passed controller as the root one.
+    /// - Parameter controller: The controller to be presented as the root one.
     func displayRootController(_ controller: UIViewController) {
         controller.transitioningDelegate = self
         present(controller, animated: true)
@@ -38,6 +55,8 @@ class SplashViewController: UIViewController {
 }
 
 extension SplashViewController: UIViewControllerTransitioningDelegate {
+
+    // MARK: UIViewControllerTransitioningDelegate implementation methods
 
     func animationController(
         forPresented presented: UIViewController,
@@ -49,6 +68,9 @@ extension SplashViewController: UIViewControllerTransitioningDelegate {
 }
 
 extension SplashViewController: UIViewControllerAnimatedTransitioning {
+
+    // MARK: UIViewControllerAnimatedTransitioning implementation methods
+
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return 0.3
     }
@@ -75,5 +97,50 @@ extension SplashViewController: UIViewControllerAnimatedTransitioning {
         }
 
         propertyAnimator.startAnimation()
+    }
+}
+
+import os.log
+extension SplashViewController: DataLoadingErrorObserver {
+
+    // MARK: DataLoadingErrorObserver implementation methods
+
+    func startObserving() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handleDataLoadingError(_:)),
+            name: NSNotification.Name.didFailLoadingData,
+            object: nil
+        )
+    }
+
+    func stopObserving() {
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    func handleDataLoadingError(_ notification: Notification) {
+        // Present the unrecoverable error. Also make sure the controller is on screen by putting off the presentation.
+        Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { _ in
+            self.present(
+                UIAlertController.make(
+                    title: "Error",
+                    message: """
+An unrecoverable error happened while trying to load the app. Please contact the app developer.
+""",
+                    mainButtonTitle: "Exit",
+                    buttonHandler: {
+                        if let error = notification.userInfo?["error"] as? NSError {
+                            os_log(
+                                "Failed to load the data controller: %@\n%@",
+                                error.localizedDescription,
+                                error.userInfo
+                            )
+                        }
+                        abort()
+                    }
+                ),
+                animated: true
+            )
+        }
     }
 }
