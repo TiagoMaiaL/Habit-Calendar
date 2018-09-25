@@ -40,7 +40,19 @@ extension HabitDetailsViewController: HabitDaysSelectionViewControllerDelegate {
             container.viewContext,
             days: daysDates
         )
-        // TODO: Check the possible errors thrown by the save.
-        try? container.viewContext.save()
+
+        do {
+            try container.viewContext.save()
+        } catch {
+            container.viewContext.rollback()
+            present(
+                UIAlertController.make(
+                    title: "Error",
+                    message: "The new challenge of days couldn't be added to the habit. Plase contact the developer."
+                ),
+                animated: true
+            )
+            assertionFailure("Couldn't add a new challenge to the habit.")
+        }
     }
 }

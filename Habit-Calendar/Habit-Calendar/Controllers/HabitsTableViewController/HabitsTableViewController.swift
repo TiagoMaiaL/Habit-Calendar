@@ -194,10 +194,20 @@ class HabitsTableViewController: UITableViewController {
 
     /// Updates the controller's list of habits.
     private func updateList() {
-        // TODO: Alert the user in case of errors.
-        try? selectedFetchedResultsController.performFetch()
-        displayEmptyStateIfNeeded()
-        tableView.reloadData()
+        do {
+            try selectedFetchedResultsController.performFetch()
+            displayEmptyStateIfNeeded()
+            tableView.reloadData()
+        } catch {
+            present(
+                UIAlertController.make(
+                    title: "Error",
+                    message: "An error occurred while listing your habits. Please contact the developer."
+                ),
+                animated: true
+            )
+            assertionFailure("An error occurred while performing the fetch for habits.")
+        }
     }
 
     /// Instantiates a new EmptyStateView for usage.

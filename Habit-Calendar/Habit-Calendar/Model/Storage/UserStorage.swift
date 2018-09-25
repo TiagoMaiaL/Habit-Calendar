@@ -18,7 +18,6 @@ class UserStorage {
     /// - Note: Only one user is created by each app.
     /// - Parameter context: The context used to fetch the entity.
     /// - Returns: the app's user entity, if it exists.
-    // TODO: Check what are the possible exceptions thrown by a fetch.
     func getUser(using context: NSManagedObjectContext) -> UserMO? {
         // Get the request to fetch the user.
         let request: NSFetchRequest<UserMO> = UserMO.fetchRequest()
