@@ -14,12 +14,12 @@ class DataController {
     // MARK: Properties
 
     /// Holds the core data stack.
-    let persistentContainer: NSPersistentContainer
+    let persistentContainer: HCPersistentContainer
 
     // MARK: Initializers
 
     init(completionBlock: @escaping (Error?) -> Void) {
-        persistentContainer = NSPersistentContainer(name: "Habit-Calendar")
+        persistentContainer = HCPersistentContainer(name: "Habit-Calendar")
         persistentContainer.loadPersistentStores(completionHandler: { (_, error) in
             if let error = error as NSError? {
                 /*
