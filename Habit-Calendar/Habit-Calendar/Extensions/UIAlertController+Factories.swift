@@ -26,7 +26,7 @@ extension UIAlertController {
         buttonHandler: (() -> Void)? = nil
     ) -> UIAlertController {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: mainButtonTitle, style: .default, handler: nil))
+        alert.addAction(UIAlertAction(title: mainButtonTitle, style: .default) { _ in buttonHandler?() })
 
         return alert
     }
