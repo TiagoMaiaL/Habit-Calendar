@@ -1588,7 +1588,6 @@ you think of adding a new one?</string>
         <!--Splash View Controller-->
         <scene sceneID="4hU-5k-jTH">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="xou-Jc-pMr" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController autoresizesArchivedViewToFullSize="NO" automaticallyAdjustsScrollViewInsets="NO" id="43I-6W-MKS" customClass="SplashViewController" customModule="Habit_Calendar" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wyW-cG-BwM">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
@@ -1623,6 +1622,7 @@ you think of adding a new one?</string>
                         <outlet property="activityIndicator" destination="MWR-Un-JUO" id="t67-xR-IJd"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xou-Jc-pMr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-529" y="-62"/>
         </scene>

@@ -263,7 +263,6 @@ class HabitsTableViewController: UITableViewController {
         }
         presentationController.notificationManager = notificationManager
 
-        UserDefaults.standard.setFirstLaunchPassed()
         // Present it on top of the window's root controller.
         present(presentationController, animated: true)
     }

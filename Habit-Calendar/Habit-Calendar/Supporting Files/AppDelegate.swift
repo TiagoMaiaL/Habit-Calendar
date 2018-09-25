@@ -105,7 +105,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 DispatchQueue.main.async {
                     // Continue with the app's launch flow.
                     self.seed()
-                    self.replaceRootController()
+                    self.displayRootNavigationController()
                 }
             } else {
                 // TODO: Display any errors to the user.
@@ -144,13 +144,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         seeder.seed()
     }
 
-    /// Displays the main controller and removes the splash screen.
-    private func replaceRootController() {
+    /// Displays the main navigation controller of the app.
+    private func displayRootNavigationController() {
+        guard let splashController = window?.rootViewController as? SplashViewController else {
+            assertionFailure("Couldn't get the splash screen.")
+            return
+        }
         guard let navigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(
             withIdentifier: "MainNavigationController"
-        ) as? UINavigationController else {
-            assertionFailure("Couldn't get the main navigation controller.")
-            return
+            ) as? UINavigationController else {
+                assertionFailure("Couldn't get the main navigation controller.")
+                return
         }
 
         // Inject the main dependencies into the initial HabitsTableViewController
@@ -160,24 +164,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             habitsController.notificationManager = notificationManager
         }
 
-        navigationController.view.alpha = 0
-        window?.addSubview(navigationController.view)
-
-        let animator = UIViewPropertyAnimator(duration: 0.1, curve: .easeIn) {
-            navigationController.view.alpha = 1
-        }
-        animator.addCompletion { _ in
-            // Remove the splash screen from the hierarchy.
-            self.window?.rootViewController?.view.removeFromSuperview()
-            // Change the root controller to be the navigation one.
-            self.window?.rootViewController = navigationController
-
-            if let habitToDisplay = self.habitToDisplay {
-                self.sendHabitReminderNotification(habitToDisplay)
-                self.habitToDisplay = nil
-            }
-        }
-        animator.startAnimation()
+        splashController.displayRootController(navigationController)
     }
 
     /// Sends a notification about the receival of a habit user notification launch event.
