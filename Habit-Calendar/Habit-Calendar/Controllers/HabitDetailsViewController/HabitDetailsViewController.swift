@@ -23,12 +23,12 @@ class HabitDetailsViewController: UIViewController {
     }
 
     /// The current habit's color.
-    private(set) var habitColor: UIColor!
+    var habitColor: UIColor!
 
     /// The habit's ordered challenge entities to be displayed.
     /// - Note: This array mustn't be empty. The existence of challenges is ensured
     ///         in the habit's creation and edition process.
-    private var challenges: [DaysChallengeMO]! {
+    var challenges: [DaysChallengeMO]! {
         didSet {
             // Store the initial and final calendar dates.
             startDate = challenges.first!.fromDate!.getBeginningOfMonth()!
@@ -241,41 +241,6 @@ class HabitDetailsViewController: UIViewController {
         goToPreviousMonth()
     }
 
-    /// Listens to any saved changes happening in other contexts and refreshes
-    /// the viewContext.
-    /// - Parameter notification: The thrown notification
-    @objc private func handleContextChanges(notification: Notification) {
-        // If there's an update in the habit being displayed, update the controller's view.
-        if (notification.userInfo?["updated"] as? Set<NSManagedObject>) != nil {
-            DispatchQueue.main.async {
-                // Update the title, if changed.
-                if self.title != self.habit.name {
-                    self.title = self.habit.name
-                }
-
-                // Update the habit's color.
-                self.habitColor = self.habit.getColor().uiColor
-
-                // Update the challenges.
-                self.challenges = self.getChallenges(from: self.habit)
-
-                // Update the calendar.
-                Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { _ in
-                    self.calendarView.reloadData()
-                    self.calendarView.scrollToDate(
-                        Date().getBeginningOfDay() // Today
-                    )
-                }
-
-                // Update the sections.
-                self.displaySections()
-            }
-        }
-
-        // Merge the changes from the habit's edition.
-        container.viewContext.mergeChanges(fromContextDidSave: notification)
-    }
-
     // MARK: Imperatives
 
     /// Asserts on the values of the main controller's dependencies.
@@ -321,7 +286,7 @@ class HabitDetailsViewController: UIViewController {
     }
 
     /// Updates and handles the display of each controller's section.
-    private func displaySections() {
+    func displaySections() {
         // Configure the appearance of the prompt section.
         displayPromptView()
 
@@ -375,36 +340,5 @@ class HabitDetailsViewController: UIViewController {
         } else {
             return filteredChallenges.last
         }
-    }
-}
-
-extension HabitDetailsViewController: NotificationObserver {
-
-    func startObserving() {
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(handleContextChanges(notification:)),
-            name: Notification.Name.NSManagedObjectContextDidSave,
-            object: nil
-        )
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(handleActivationEvent(_:)),
-            name: UIApplication.didBecomeActiveNotification,
-            object: nil
-        )
-    }
-
-    func stopObserving() {
-        NotificationCenter.default.removeObserver(self)
-    }
-}
-
-extension HabitDetailsViewController: AppActiveObserver {
-    @objc func handleActivationEvent(_ notification: Notification) {
-        calendarView.reloadData()
-        displaySections()
-
-        displayNotificationAvailability()
     }
 }

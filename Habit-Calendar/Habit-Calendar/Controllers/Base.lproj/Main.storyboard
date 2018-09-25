@@ -251,7 +251,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.99215686274509807" green="0.99215686274509807" blue="0.99607843137254903" alpha="1" colorSpace="calibratedRGB"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="U4g-rN-Yvd" userLabel="Footer">
-                            <rect key="frame" x="0.0" y="768" width="414" height="104"/>
+                            <rect key="frame" x="0.0" y="845" width="414" height="104"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D90-7S-rS4" customClass="RoundedButton" customModule="Habit_Calendar" customModuleProvider="target">
@@ -514,62 +514,62 @@
                                             <segue destination="zeZ-9t-rmb" kind="show" identifier="Show days selection controller" id="y7q-nn-pWX"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="172" id="5x1-FQ-bQv" userLabel="Notifications Cell">
-                                        <rect key="frame" x="0.0" y="596" width="414" height="172"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="249" id="5x1-FQ-bQv" userLabel="Notifications Cell">
+                                        <rect key="frame" x="0.0" y="596" width="414" height="249"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5x1-FQ-bQv" id="rtd-gG-HQu">
-                                            <rect key="frame" x="0.0" y="0.0" width="376" height="171.66666666666666"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="376" height="248.66666666666666"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="a9O-d8-gYr" userLabel="Container">
-                                                    <rect key="frame" x="25" y="10" width="341" height="151.66666666666666"/>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="a9O-d8-gYr" userLabel="Container">
+                                                    <rect key="frame" x="25" y="10" width="341" height="228.66666666666666"/>
                                                     <subviews>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="At8-YD-oiI" userLabel="Not authorized">
-                                                            <rect key="frame" x="0.0" y="0.0" width="341" height="74"/>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="At8-YD-oiI" userLabel="Not authorized">
+                                                            <rect key="frame" x="0.0" y="0.0" width="341" height="91.333333333333329"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Notifications" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lr3-PR-xA7">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="119.66666666666667" height="0.0"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="119.66666666666667" height="17.333333333333332"/>
                                                                     <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="20"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="User notifications are not authorized." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="qed-rw-VaE">
-                                                                    <rect key="frame" x="0.0" y="10" width="262.66666666666669" height="18"/>
+                                                                    <rect key="frame" x="0.0" y="27.333333333333336" width="262.66666666666669" height="18"/>
                                                                     <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="15"/>
                                                                     <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Enable the user notifications to be reminded about your habits" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="dNs-4f-fKj">
-                                                                    <rect key="frame" x="0.0" y="38" width="341" height="36"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enable the user notifications to be reminded about your habits" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="dNs-4f-fKj">
+                                                                    <rect key="frame" x="0.0" y="55.333333333333329" width="341" height="36"/>
                                                                     <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="15"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                             </subviews>
                                                         </stackView>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="3pf-TQ-uQU" userLabel="Selected fire times">
-                                                            <rect key="frame" x="0.0" y="84" width="341" height="67.666666666666686"/>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="3pf-TQ-uQU" userLabel="Selected fire times">
+                                                            <rect key="frame" x="0.0" y="101.33333333333334" width="341" height="127.33333333333334"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Notifications" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jfL-Qf-BsI">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="119.66666666666667" height="0.0"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="119.66666666666667" height="20.666666666666668"/>
                                                                     <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="20"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="At what times would you like to be reminded about this habit?" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="XUS-SP-b8Q">
-                                                                    <rect key="frame" x="0.0" y="10" width="341" height="1.6666666666666661"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="At what times would you like to be reminded about this habit?" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="XUS-SP-b8Q">
+                                                                    <rect key="frame" x="0.0" y="30.666666666666668" width="341" height="40.666666666666657"/>
                                                                     <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="17"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" ambiguous="YES" text="2 times selected" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="OSf-bA-IA0">
-                                                                    <rect key="frame" x="0.0" y="21.666666666666671" width="116.66666666666667" height="18"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="2 times selected" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="OSf-bA-IA0">
+                                                                    <rect key="frame" x="0.0" y="81.333333333333329" width="116.66666666666667" height="18"/>
                                                                     <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="15"/>
                                                                     <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" ambiguous="YES" text="--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Ii-SK-90P">
-                                                                    <rect key="frame" x="0.0" y="49.666666666666657" width="14.666666666666666" height="18"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Ii-SK-90P">
+                                                                    <rect key="frame" x="0.0" y="109.33333333333333" width="14.666666666666666" height="18"/>
                                                                     <fontDescription key="fontDescription" name="SFProText-Bold" family="SF Pro Text" pointSize="15"/>
                                                                     <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
@@ -622,7 +622,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bag-g3-dbf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2965.5999999999999" y="-180.80959520239881"/>
+            <point key="canvasLocation" x="2965.217391304348" y="-180.97826086956522"/>
         </scene>
         <!--Notifications-->
         <scene sceneID="e0g-by-TQS">
@@ -1633,8 +1633,8 @@ you think of adding a new one?</string>
         <image name="ic-notification" width="41" height="46"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="G29-rb-isc"/>
-        <segue reference="43l-ZQ-AR3"/>
+        <segue reference="y7q-nn-pWX"/>
+        <segue reference="J1H-vQ-s49"/>
         <segue reference="Xkx-Wi-bYR"/>
     </inferredMetricsTieBreakers>
 </document>

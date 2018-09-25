@@ -266,23 +266,7 @@ class HabitCreationTableViewController: UITableViewController {
                 )
             }
 
-            do {
-                try context.save()
-            } catch {
-                context.rollback()
-                DispatchQueue.main.async {
-                    self.present(
-                        UIAlertController.make(
-                            title: "Error",
-                            message: """
-There was an error while the habit was being persisted. Please contact the developer.
-"""
-                        ),
-                        animated: true
-                    )
-                }
-                assertionFailure("Error: Couldn't save the new habit entity.")
-            }
+            self.saveCreationContext(context)
         }
 
         navigationController?.popViewController(
@@ -366,6 +350,27 @@ information unavailable.
         )
         trashButton.tintColor = .red
         navigationItem.setRightBarButton(trashButton, animated: false)
+    }
+
+    /// Tries to save the context and displays an alert to the user if an error happened.
+    private func saveCreationContext(_ context: NSManagedObjectContext) {
+        do {
+            try context.save()
+        } catch {
+            context.rollback()
+            DispatchQueue.main.async {
+                self.present(
+                    UIAlertController.make(
+                        title: "Error",
+                        message: """
+There was an error while the habit was being persisted. Please contact the developer.
+"""
+                    ),
+                    animated: true
+                )
+            }
+            assertionFailure("Error: Couldn't save the new habit entity.")
+        }
     }
 }
 
