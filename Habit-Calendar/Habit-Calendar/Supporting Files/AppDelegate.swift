@@ -174,6 +174,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         splashController.displayRootController(navigationController)
+
+        if let habitToDisplay = self.habitToDisplay {
+            // The user selected the habit from the user notification. Show it right after displaying
+            // the root controller.
+            Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { _ in
+                DispatchQueue.main.async {
+                    self.sendHabitReminderNotification(habitToDisplay)
+                }
+            }
+        }
     }
 
     /// Sends a notification about the receival of a habit user notification launch event.
@@ -209,7 +219,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 
         let yesAction = UNNotificationAction(
             identifier: yesActionIdentifier,
-            title: "Yes, i did",
+            title: "Yes, I did",
             options: UNNotificationActionOptions(rawValue: 0)
         )
         let noAction = UNNotificationAction(
@@ -255,7 +265,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
             switch response.actionIdentifier {
             case UNNotificationDefaultActionIdentifier:
                 // If the habits listing controller is already being displayed, show the details.
-                if window?.rootViewController is UINavigationController {
+                if window?.rootViewController?.presentedViewController is UINavigationController {
                     // Post a notification to the habits table view controller,
                     // so it can display the habit.
                     sendHabitReminderNotification(habit)
