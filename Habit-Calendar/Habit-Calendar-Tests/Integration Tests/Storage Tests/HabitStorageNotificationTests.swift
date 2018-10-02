@@ -392,6 +392,62 @@ class HabitStorageNotificationTests: IntegrationTestCase {
         wait(for: [expectation], timeout: 0.2)
     }
 
+    func testEditingHabitNameShouldRescheduleUserNotifications() {
+        let nameRescheduleExpectation = XCTestExpectation(
+            description: "Reschedules the user notifications after changing the name."
+        )
+
+        // Enable the mock's authorization to schedule the notifications.
+        notificationCenterMock.shouldAuthorize = true
+
+        // 1. Declare the habit attributes needed for creation:
+        let days = (0...Int.random(2..<10)).compactMap {
+            Date().byAddingDays($0)
+        }
+        let fireTimes = [
+            DateComponents(hour: 23, minute: 59)
+        ]
+
+        // 2. Create the habit.
+        let createdHabit = habitStorage.create(
+            using: context,
+            user: userFactory.makeDummy(),
+            name: "Testing notifications",
+            color: .systemBlue,
+            days: days,
+            and: fireTimes
+        )
+
+        // 2. Check on its current notifications.
+        Timer.scheduledTimer(withTimeInterval: 0.01, repeats: false) { _ in
+            self.notificationCenterMock.getPendingNotificationRequests { requests in
+                XCTAssertEqual(
+                    requests.count,
+                    createdHabit.notifications?.count,
+                    "The user notifications weren't properly scheduled."
+                )
+
+                // 3. Edit it by changing its name.
+                let newName = "Go skating"
+                _ = self.habitStorage.edit(createdHabit, using: self.context, name: newName)
+
+                // 4. Check if the notifications were properly scheduled and if the name was changed.
+                Timer.scheduledTimer(withTimeInterval: 0.01, repeats: false) { _ in
+                    self.notificationCenterMock.getPendingNotificationRequests { requests in
+                        XCTAssertEqual(requests.count, createdHabit.notifications?.count)
+                        XCTAssertFalse(
+                            requests.filter({$0.content.title == createdHabit.getTitleText()}).isEmpty
+                        )
+
+                        nameRescheduleExpectation.fulfill()
+                    }
+                }
+            }
+        }
+
+        wait(for: [nameRescheduleExpectation], timeout: 0.2)
+    }
+
     // MARK: Imperatives
 
     /// Calculates the expected number of created notifications.
