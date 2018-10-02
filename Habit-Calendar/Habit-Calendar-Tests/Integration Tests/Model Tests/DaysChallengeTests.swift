@@ -165,6 +165,28 @@ class DaysChallengeTests: IntegrationTestCase {
         XCTAssertNil(habitDay)
     }
 
+    func testGettingDayFromDateNotInBeginning() {
+        // 1. Create a dummy challenge with a date not in the beginning.
+        let dummyChallenge = daysChallengeFactory.makeDummy()
+        let dummyDay = dayFactory.makeDummy()
+
+        var components = Date().components
+        components.hour = 12
+        components.minute = 0
+        components.second = 0
+        let expectedDate = Calendar.current.date(from: components)
+
+        dummyDay.date = expectedDate
+
+        let habitDay = habitDayFactory.makeDummy()
+        habitDay.day = dummyDay
+
+        dummyChallenge.addToDays(habitDay)
+
+        // 2. Try fetching the day.
+        XCTAssertNotNil(dummyChallenge.getDay(for: expectedDate!))
+    }
+
     func testGettingEmptyChallengeCurrentDayShouldBeNil() {
         // 1. Create an empty dummy challenge.
         let emptyDummyChallenge = DaysChallengeMO(
