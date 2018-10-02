@@ -346,6 +346,12 @@ extension HabitsTableViewController: ManagedContextChangeObserver {
 extension HabitsTableViewController: HabitReminderSelectionObserver {
     /// Takes the user to the habit details controller.
     private func showHabitDetails(_ habit: HabitMO) {
+        // If the habit is already being displayed, there's no need to push a new controller.
+        if let presentedDetailsController = navigationController?.topViewController as? HabitDetailsViewController {
+            guard presentedDetailsController.habit != habit else { return }
+            navigationController?.popViewController(animated: true)
+        }
+
         guard let detailsController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(
             withIdentifier: "HabitDetails"
             ) as? HabitDetailsViewController else {
