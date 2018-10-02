@@ -18,23 +18,17 @@ class DaysChallengeMO: NSManagedObject {
     /// if there's one.
     /// - Returns: The HabitDayMO entity representing today's date.
     func getCurrentDay() -> HabitDayMO? {
-        let todayPredicate = NSPredicate(
-            format: "day.date >= %@ and day.date <= %@",
-            Date().getBeginningOfDay() as NSDate,
-            Date().getEndOfDay() as NSDate
-        )
-        return days?.filtered(using: todayPredicate).first as? HabitDayMO
+        return getDay(for: Date())
     }
 
     /// Returns the HabitDay associated with the passed date, if found.
     /// - Parameter date: The date associated with the habit day.
     func getDay(for date: Date) -> HabitDayMO? {
-        let beginningDate = date.getBeginningOfDay()
-
         // Declare the predicate to filter for the specific day.
         let dayPredicate = NSPredicate(
-            format: "day.date = %@",
-            beginningDate as NSDate
+            format: "day.date >= %@ and day.date <= %@",
+            date.getBeginningOfDay() as NSDate,
+            date.getEndOfDay() as NSDate
         )
 
         return days?.filtered(using: dayPredicate).first as? HabitDayMO
