@@ -216,7 +216,7 @@ SUBQUERY(challenges, $challenge,
 
         // If the days or fire times were editted, the habit's notifications become invalid, so it's necessary
         // to create and schedule new ones.
-        if days != nil || notificationFireTimes != nil {
+        if name != nil || days != nil || notificationFireTimes != nil {
             if let notifications = habit.notifications as? Set<NotificationMO> {
                 // Unschedule all user notifications associated with
                 // the entities.
