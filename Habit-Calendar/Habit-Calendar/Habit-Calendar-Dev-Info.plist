@@ -48,5 +48,14 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>UIApplicationShortcutItems</key>
+	<array>
+		<dict>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>New habit</string>
+			<key>UIApplicationShortcutItemType</key>
+			<string>$(BUNDLE_IDENTIFIER).new-habit</string>
+		</dict>
+	</array>
 </dict>
 </plist>

@@ -81,11 +81,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         fireTimeStorage: FireTimeStorage()
     )
 
+    /// Flag indicating if the splash screen is still being displayed or not.
+    private var isDisplayingSplashScreen: Bool {
+        return AppDelegate.current.window?.rootViewController?.presentedViewController == nil
+    }
+
     /// The app to be displayed when the user selects an user notification.
     /// - Note: This variable is used in the cases that the app is launching and the habits
     ///         controller can't be accessed. Setting this var will make the habits
     ///         controller to immediately display the habit after being loaded.
     private var habitToDisplay: HabitMO?
+
+    /// Flag indicating if the habit creation controller should be displayed because the user selected the New habit
+    /// quick action.
+    private var shouldDisplayCreationController = false
 
     // MARK: Delegate methods
 
@@ -175,12 +184,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         splashController.displayRootController(navigationController)
 
-        if let habitToDisplay = self.habitToDisplay {
-            // The user selected the habit from the user notification. Show it right after displaying
-            // the root controller.
-            Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { _ in
-                DispatchQueue.main.async {
+        Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { _ in
+            DispatchQueue.main.async {
+                // The user selected the habit from the user notification. Show it right after displaying
+                // the root controller.
+                if let habitToDisplay = self.habitToDisplay {
                     self.sendHabitReminderNotification(habitToDisplay)
+
+                // The user selected the "New habit" quick action.
+                } else if self.shouldDisplayCreationController {
+                    self.sendNewHabitQuickActionNotification()
                 }
             }
         }
@@ -204,6 +217,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             object: self,
             userInfo: ["error": error]
         )
+    }
+
+    /// Sends a notification about the selection of the "New habit" quick action.
+    private func sendNewHabitQuickActionNotification() {
+        NotificationCenter.default.post(name: Notification.Name.didSelectNewHabitQuickAction, object: self)
     }
 }
 
@@ -264,15 +282,13 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 
             switch response.actionIdentifier {
             case UNNotificationDefaultActionIdentifier:
-                // If the habits listing controller is already being displayed, show the details.
-                if window?.rootViewController?.presentedViewController is UINavigationController {
-                    // Post a notification to the habits table view controller,
-                    // so it can display the habit.
-                    sendHabitReminderNotification(habit)
-                } else {
-                    // If not, the splash screen is being displayed, show the details immediately after
+                if isDisplayingSplashScreen {
+                    // If the splash screen is being displayed, show the details immediately after
                     // displaying the habits controller.
                     habitToDisplay = habit
+                } else {
+                    // If the habits listing controller is already being displayed, show the details.
+                    sendHabitReminderNotification(habit)
                 }
 
             case yesAction:
@@ -289,5 +305,49 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         }
 
         completionHandler()
+    }
+}
+
+extension AppDelegate {
+
+    // MARK: Type
+
+    /// The type of quick action selected by the user.
+    private enum QuickActionType: String {
+        case newHabit = "new-habit"
+        case displayHabit = "display-habit"
+    }
+
+    // MARK: Shortcuts
+
+    func application(
+        _ application: UIApplication,
+        performActionFor shortcutItem: UIApplicationShortcutItem,
+        completionHandler: @escaping (Bool) -> Void
+    ) {
+        if let typeRawValue = shortcutItem.type.components(separatedBy: ".").last,
+            let type = QuickActionType(rawValue: typeRawValue) {
+            handleQuickAction(withType: type)
+        }
+        completionHandler(false)
+    }
+
+    // MARK: Imperatives
+
+    /// Handles the quick action for the passed enum value.
+    /// - Parameter type: the type of quick action selected.
+    private func handleQuickAction(withType type: QuickActionType) {
+        switch type {
+        case .newHabit:
+            if isDisplayingSplashScreen {
+                // Set a flag to present the creation controller right after displaying the list of habits.
+                shouldDisplayCreationController = true
+            } else {
+                // The habits list is being displayed, present the creation controller on top of it.
+                sendNewHabitQuickActionNotification()
+            }
+        default:
+            break
+        }
     }
 }

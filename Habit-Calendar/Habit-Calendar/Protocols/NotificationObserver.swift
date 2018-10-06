@@ -16,6 +16,11 @@ extension Notification.Name {
         return Notification.Name("REMINDER_SELECTED")
     }
 
+    /// Name for the notification sent when the user selects the "New habit" quick action.
+    static var didSelectNewHabitQuickAction: Notification.Name {
+        return Notification.Name("NEW_HABIT_ACTION")
+    }
+
     /// Name for the notification sent when an error happened while the
     /// data controller was being loaded.
     static var didFailLoadingData: Notification.Name {
@@ -55,6 +60,16 @@ extension Notification.Name {
     @objc func handleHabitReminderSelection(_ notification: Notification)
 }
 
+/// Observer for the didSelectNewHabitQuickAction notification, which is sent when the user
+/// selects the "New habit" quick action.
+@objc protocol NewHabitQuickActionObserver: NotificationObserver {
+
+    /// Handles the didSelectNewHabitQuickAction notification.
+    @objc func handleNewHabitQuickAction(_ notification: Notification)
+}
+
+/// Observer for the didFailLoadingData notification, which is sent when
+/// Core Data stack can't be initialized.
 @objc protocol DataLoadingErrorObserver: NotificationObserver {
 
     /// Handles the didFailLoadingData notification.
