@@ -22,6 +22,9 @@ class HabitsShortcutItemsManager {
     /// shortcut item.
     static let habitIdentifierUserInfoKey = "habit_identifier"
 
+    /// The limit of dynamic shortcut items that can be added to the application.
+    static let shortcutItemsLimit = 4
+
     /// The app containing the shortcutItems to be managed.
     private(set) weak var application: UIApplication!
 
@@ -44,7 +47,19 @@ class HabitsShortcutItemsManager {
     /// - Parameter habit: the HabitMO used to add the new shortcut item.
     func addApplicationShortcut(for habit: HabitMO) {
         assert(habit.id != nil, "An invalid habit entity was passed.")
-        application.shortcutItems?.insert(makeShorcutItem(habit: habit), at: 0)
+        var shortcuts = [UIApplicationShortcutItem]()
+
+        if let appShortcuts = application.shortcutItems, !appShortcuts.isEmpty {
+            shortcuts = appShortcuts
+        }
+
+        shortcuts.insert(makeShorcutItem(habit: habit), at: 0)
+
+        if shortcuts.count > HabitsShortcutItemsManager.shortcutItemsLimit {
+            _ = shortcuts.removeLast()
+        }
+
+        application.shortcutItems = shortcuts
     }
 
     /// Removes the shortcut item corresponding to the passed habit.

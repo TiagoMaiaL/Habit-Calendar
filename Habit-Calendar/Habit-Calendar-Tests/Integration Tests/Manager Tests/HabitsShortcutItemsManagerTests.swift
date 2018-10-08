@@ -22,7 +22,7 @@ class HabitsShortcutItemsManagerTests: IntegrationTestCase {
     override func setUp() {
         super.setUp()
 
-        // Reset the
+        // Reset the shortcuts of the app.
         UIApplication.shared.shortcutItems = []
 
         // Instantiate the manager to be tested.
@@ -71,7 +71,38 @@ class HabitsShortcutItemsManagerTests: IntegrationTestCase {
     }
 
     func testAddingNewShortcutItemForHabitWhenOtherShortcutsDoAlreadyExist() {
-        XCTMarkNotImplemented()
+        // 1. Configure the manager with a dummy habit.
+        manager.addApplicationShortcut(for: habitFactory.makeDummy())
+
+        // 2. Declare a new dummy, and add it to the manager.
+        let dummyHabit = habitFactory.makeDummy()
+        manager.addApplicationShortcut(for: dummyHabit)
+
+        // 3. The first shortcut should be related to the last habit that was added.
+        XCTAssertEqual(UIApplication.shared.shortcutItems?.count, 2)
+        XCTAssertEqual(UIApplication.shared.shortcutItems?.first?.localizedTitle, dummyHabit.getTitleText())
+    }
+
+    func testAddingNewShortcutShouldRespectTheLimitOfItems() {
+        // 1. Configure the manager with 4 dummy habits (the maximum).
+        let limit = HabitsShortcutItemsManager.shortcutItemsLimit
+        for _ in 0..<limit {
+            manager.addApplicationShortcut(for: habitFactory.makeDummy())
+        }
+
+        // 2. Declare a new dummy, add it to the manager.
+        let dummyHabit = habitFactory.makeDummy()
+        manager.addApplicationShortcut(for: dummyHabit)
+
+        // 3. The habit should be added as the first item and the last item should be removed,
+        // because the limit was reached.
+        XCTAssertEqual(manager.habitIdentifiers.count, limit)
+        XCTAssertEqual(UIApplication.shared.shortcutItems?.count, limit)
+        XCTAssertEqual(manager.habitIdentifiers.first, dummyHabit.id)
+        XCTAssertEqual(
+            UIApplication.shared.shortcutItems?.first?.localizedTitle,
+            dummyHabit.getTitleText()
+        )
     }
 
     func testRemovingShortcutAssociatedWithHabit() {
