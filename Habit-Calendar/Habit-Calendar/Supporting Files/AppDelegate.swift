@@ -334,6 +334,11 @@ extension AppDelegate {
 
     // MARK: Imperatives
 
+    /// Handles the dynamic shortcut items of the app, based on the created and accessed habits.
+    private func handleDynamicQuickActions() {
+        //
+    }
+
     /// Handles the quick action for the passed enum value.
     /// - Parameter type: the type of quick action selected.
     private func handleQuickAction(withType type: QuickActionType) {
