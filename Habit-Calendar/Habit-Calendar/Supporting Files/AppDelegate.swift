@@ -313,7 +313,7 @@ extension AppDelegate {
     // MARK: Type
 
     /// The type of quick action selected by the user.
-    private enum QuickActionType: String {
+    enum QuickActionType: String {
         case newHabit = "new-habit"
         case displayHabit = "display-habit"
     }
