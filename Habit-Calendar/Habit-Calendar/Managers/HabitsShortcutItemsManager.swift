@@ -66,7 +66,31 @@ class HabitsShortcutItemsManager {
     /// - Parameter habit: the HabitMO used to get and remove the associated shortcut item.
     func removeApplicationShortcut(for habit: HabitMO) {
         assert(habit.id != nil, "An invalid habit entity was passed.")
-        // TODO:
+
+        var shortcuts = application.shortcutItems ?? []
+
+        if !shortcuts.isEmpty {
+            // Search for the shortcut associated with the passed habit.
+            var shortcutToRemoveIndex = NSNotFound
+
+            for (index, shortcut) in shortcuts.enumerated() {
+                // Get the associated habit identifier from the user info.
+                let shortcutHabitIdentifier = shortcut.userInfo?[
+                    HabitsShortcutItemsManager.habitIdentifierUserInfoKey
+                ] as? String ?? ""
+
+                // Remove it.
+                if shortcutHabitIdentifier == habit.id {
+                    shortcutToRemoveIndex = index
+                }
+            }
+
+            // If found, remove it.
+            if shortcutToRemoveIndex != NSNotFound {
+                _ = shortcuts.remove(at: shortcutToRemoveIndex)
+                application.shortcutItems = shortcuts
+            }
+        }
     }
 
     /// Makes a new dynamic shortcut item for the passed habit.

@@ -106,6 +106,21 @@ class HabitsShortcutItemsManagerTests: IntegrationTestCase {
     }
 
     func testRemovingShortcutAssociatedWithHabit() {
-        XCTMarkNotImplemented()
+        // 1. Declare a dummy habit and a shortcut associated with it.
+        let dummyHabit = habitFactory.makeDummy()
+        manager.addApplicationShortcut(for: dummyHabit)
+
+        // 2. Configure the manager to add another shortcut.
+        manager.addApplicationShortcut(for: habitFactory.makeDummy())
+
+        // 3. Remove the shortcut by using the manager.
+        manager.removeApplicationShortcut(for: dummyHabit)
+        guard manager.habitIdentifiers.count == 1 else {
+            XCTFail("The manager didn't delete the shortcut.")
+            return
+        }
+
+        // 4. Assert that the associated shortcut isn't there any longer, there's only one now.
+        XCTAssertNotEqual(manager.habitIdentifiers.first!, dummyHabit.id)
     }
 }
