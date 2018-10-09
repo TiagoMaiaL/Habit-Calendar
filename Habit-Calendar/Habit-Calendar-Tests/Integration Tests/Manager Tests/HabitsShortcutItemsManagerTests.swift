@@ -105,6 +105,37 @@ class HabitsShortcutItemsManagerTests: IntegrationTestCase {
         )
     }
 
+    func testAddingTheSameShortcutAgainShouldDoNothing() {
+        // 1. Declare the dummy habit used to add the shortcuts.
+        let dummyHabit = habitFactory.makeDummy()
+
+        // 2. Add the same shortcut more than once.
+        for _ in 0..<2 {
+            manager.addApplicationShortcut(for: dummyHabit)
+        }
+
+        // 3. The shortcut must be added only once.
+        XCTAssertEqual(manager.habitIdentifiers.count, 1)
+        XCTAssertEqual(UIApplication.shared.shortcutItems?.count, 1)
+    }
+
+    func testAddindTheSameShortcutAgainShouldMakeItBeTheFirstOneToAppearInTheOrder() {
+        // 1. Declare the dummy habit to be added more than once.
+        let dummyHabit = habitFactory.makeDummy()
+
+        // 2. Add a shortcut associated with some other dummy.
+        //    Add the specific shortcut associated with the previously declared dummy.
+        manager.addApplicationShortcut(for: dummyHabit)
+        manager.addApplicationShortcut(for: habitFactory.makeDummy())
+
+        // 3. Add the same shortcut once again.
+        manager.addApplicationShortcut(for: dummyHabit)
+
+        // 4. Assert that the expected shortcuts is now the first item.
+        XCTAssertEqual(manager.habitIdentifiers.first, dummyHabit.id)
+        XCTAssertEqual(UIApplication.shared.shortcutItems?.first?.localizedTitle, dummyHabit.getTitleText())
+    }
+
     func testRemovingShortcutAssociatedWithHabit() {
         // 1. Declare a dummy habit and a shortcut associated with it.
         let dummyHabit = habitFactory.makeDummy()

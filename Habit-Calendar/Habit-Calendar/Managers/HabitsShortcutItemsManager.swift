@@ -48,13 +48,22 @@ class HabitsShortcutItemsManager {
     func addApplicationShortcut(for habit: HabitMO) {
         assert(habit.id != nil, "An invalid habit entity was passed.")
         var shortcuts = [UIApplicationShortcutItem]()
+        var shortcutToAdd = makeShorcutItem(habit: habit)
 
         if let appShortcuts = application.shortcutItems, !appShortcuts.isEmpty {
             shortcuts = appShortcuts
         }
 
-        shortcuts.insert(makeShorcutItem(habit: habit), at: 0)
+        // Check if there's already a shortcut associated with the habit,
+        // if so, remove it, and add it as the first item.
+        let foundIndex = searchShortcutAssociated(with: habit)
+        if foundIndex != NSNotFound {
+            shortcutToAdd = shortcuts.remove(at: foundIndex)
+        }
 
+        shortcuts.insert(shortcutToAdd, at: 0)
+
+        // Remove the last shortcut if the list is now greater than the limit.
         if shortcuts.count > HabitsShortcutItemsManager.shortcutItemsLimit {
             _ = shortcuts.removeLast()
         }
@@ -67,29 +76,9 @@ class HabitsShortcutItemsManager {
     func removeApplicationShortcut(for habit: HabitMO) {
         assert(habit.id != nil, "An invalid habit entity was passed.")
 
-        var shortcuts = application.shortcutItems ?? []
-
-        if !shortcuts.isEmpty {
-            // Search for the shortcut associated with the passed habit.
-            var shortcutToRemoveIndex = NSNotFound
-
-            for (index, shortcut) in shortcuts.enumerated() {
-                // Get the associated habit identifier from the user info.
-                let shortcutHabitIdentifier = shortcut.userInfo?[
-                    HabitsShortcutItemsManager.habitIdentifierUserInfoKey
-                ] as? String ?? ""
-
-                // Remove it.
-                if shortcutHabitIdentifier == habit.id {
-                    shortcutToRemoveIndex = index
-                }
-            }
-
-            // If found, remove it.
-            if shortcutToRemoveIndex != NSNotFound {
-                _ = shortcuts.remove(at: shortcutToRemoveIndex)
-                application.shortcutItems = shortcuts
-            }
+        let indexToDelete = searchShortcutAssociated(with: habit)
+        if indexToDelete != NSNotFound {
+            _ = application.shortcutItems!.remove(at: indexToDelete)
         }
     }
 
@@ -107,4 +96,28 @@ class HabitsShortcutItemsManager {
             ]
         )
     }
+
+    /// Searches for the specific shortcut item associated with the passed habit.
+    /// - Parameter habit: The habit associated to the shortcut to be searched.
+    /// - Returns: the index of the shortcut, or NSNotFound otherwise.
+    private func searchShortcutAssociated(with habit: HabitMO) -> Int {
+        guard let shortcuts = application.shortcutItems else {
+            return NSNotFound
+        }
+
+        var foundIndex = NSNotFound
+
+        for (index, shortcut) in shortcuts.enumerated() {
+            // Get the associated habit identifier from the user info.
+            if let shortcutHabitIdentifier = shortcut.userInfo?[
+                HabitsShortcutItemsManager.habitIdentifierUserInfoKey
+            ] as? String, shortcutHabitIdentifier == habit.id {
+                foundIndex = index
+                break
+            }
+        }
+
+        return foundIndex
+    }
+
 }
