@@ -49,6 +49,9 @@ class HabitDetailsViewController: UIViewController {
     /// provided habit.
     var container: NSPersistentContainer!
 
+    /// The shortcuts manager used to add a new shortcut when the habit is displayed.
+    var shortcutsManager: HabitsShortcutItemsManager!
+
     /// The edit segue identifier taking to the HabitCreationViewController.
     private let editSegueIdentifier = "Edit the habit"
 
@@ -207,6 +210,7 @@ class HabitDetailsViewController: UIViewController {
             editionController.habitStore = habitStorage
             editionController.notificationManager = notificationManager
             editionController.habit = habit
+            editionController.shortcutsManager = shortcutsManager
 
         case newChallengeSegueIdentifier:
             guard let daysSelectionController = segue.destination as? HabitDaysSelectionViewController else {
@@ -282,6 +286,10 @@ class HabitDetailsViewController: UIViewController {
         assert(
             notificationScheduler != nil,
             "Error: the notification scheduler wasn't injected."
+        )
+        assert(
+            shortcutsManager != nil,
+            "Error: the shortcuts manager must be injected."
         )
     }
 

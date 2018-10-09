@@ -81,6 +81,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         fireTimeStorage: FireTimeStorage()
     )
 
+    /// The manager in charge of adding / removing the dynamic shortcuts of the app.
+    private lazy var shortcutsManager = HabitsShortcutItemsManager(application: UIApplication.shared)
+
     /// Flag indicating if the splash screen is still being displayed or not.
     private var isDisplayingSplashScreen: Bool {
         return AppDelegate.current.window?.rootViewController?.presentedViewController == nil
@@ -180,6 +183,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             habitsController.container = dataController.persistentContainer
             habitsController.habitStorage = habitStorage
             habitsController.notificationManager = notificationManager
+            habitsController.shortcutsManager = shortcutsManager
         }
 
         splashController.displayRootController(navigationController)
@@ -333,11 +337,6 @@ extension AppDelegate {
     }
 
     // MARK: Imperatives
-
-    /// Handles the dynamic shortcut items of the app, based on the created and accessed habits.
-    private func handleDynamicQuickActions() {
-        //
-    }
 
     /// Handles the quick action for the passed enum value.
     /// - Parameter type: the type of quick action selected.

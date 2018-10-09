@@ -44,6 +44,9 @@ class HabitsTableViewController: UITableViewController {
     /// The user notification manager used to check or request the user's authorization.
     var notificationManager: UserNotificationManager!
 
+    /// The shortcuts manager to be injected in the creation and details controllers.
+    var shortcutsManager: HabitsShortcutItemsManager!
+
     /// The segmented control used to change the habits being displayed, based on its stage (completed or in progress).
     @IBOutlet weak var habitsSegmentedControl: UISegmentedControl!
 
@@ -113,6 +116,7 @@ class HabitsTableViewController: UITableViewController {
         assert(container != nil, "The persistent container must be injected.")
         assert(habitStorage != nil, "The habit storage must be injected.")
         assert(notificationManager != nil, "The notification manager must be injected.")
+        assert(shortcutsManager != nil, "The shortcuts manager must be injected.")
 
         startObserving()
 
@@ -148,6 +152,7 @@ class HabitsTableViewController: UITableViewController {
                 habitCreationController.habitStore = habitStorage
                 habitCreationController.userStore = AppDelegate.current.userStorage
                 habitCreationController.notificationManager = notificationManager
+                habitCreationController.shortcutsManager = shortcutsManager
             } else {
                 assertionFailure(
                     "Error: Couldn't get the habit creation controller."
@@ -163,6 +168,7 @@ class HabitsTableViewController: UITableViewController {
                 habitDetailsController.notificationScheduler = NotificationScheduler(
                     notificationManager: notificationManager
                 )
+                habitDetailsController.shortcutsManager = shortcutsManager
 
                 // Get the selected habit for injection.
                 guard let indexPath = tableView.indexPathForSelectedRow else {

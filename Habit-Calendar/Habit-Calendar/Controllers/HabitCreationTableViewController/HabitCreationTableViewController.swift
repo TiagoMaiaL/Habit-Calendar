@@ -65,6 +65,9 @@ class HabitCreationTableViewController: UITableViewController {
     /// The container in which the habit is going to be persisted.
     var container: NSPersistentContainer!
 
+    /// The shortcuts manager used to add a new shortcut when a habit gets added or edited.
+    var shortcutsManager: HabitsShortcutItemsManager!
+
     /// The habit storage used for this controller to
     /// create/edit the habit.
     var habitStore: HabitStorage!
@@ -140,6 +143,7 @@ class HabitCreationTableViewController: UITableViewController {
         assert(container != nil, "Error: failed to inject the persistent container.")
         assert(habitStore != nil, "Error: failed to inject the habit store.")
         assert(notificationManager != nil, "Error: failed to inject the notification manager.")
+        assert(shortcutsManager != nil, "Error: The shortcuts manager must be injected.")
 
         // Observe the app's active event to display if the user notifications are allowed.
         startObserving()
