@@ -44,11 +44,12 @@ class HabitsShortcutItemsManager {
     // MARK: Imperatives
 
     /// Adds a new shortcut item associated with the passed habit to the application.
+    /// - Note: This method must be called in the main thread.
     /// - Parameter habit: the HabitMO used to add the new shortcut item.
     func addApplicationShortcut(for habit: HabitMO) {
         assert(habit.id != nil, "An invalid habit entity was passed.")
         var shortcuts = [UIApplicationShortcutItem]()
-        var shortcutToAdd = makeShorcutItem(habit: habit)
+        var shortcutToAdd = makeShortcutItem(habit: habit)
 
         if let appShortcuts = application.shortcutItems, !appShortcuts.isEmpty {
             shortcuts = appShortcuts
@@ -72,6 +73,7 @@ class HabitsShortcutItemsManager {
     }
 
     /// Removes the shortcut item corresponding to the passed habit.
+    /// - Note: This method must be called in the main thread.
     /// - Parameter habit: the HabitMO used to get and remove the associated shortcut item.
     func removeApplicationShortcut(for habit: HabitMO) {
         assert(habit.id != nil, "An invalid habit entity was passed.")
@@ -85,7 +87,7 @@ class HabitsShortcutItemsManager {
     /// Makes a new dynamic shortcut item for the passed habit.
     /// - Parameter habit: the habit associated with the shortcut to be created.
     /// - Returns: the shortcut item.
-    private func makeShorcutItem(habit: HabitMO) -> UIApplicationShortcutItem {
+    private func makeShortcutItem(habit: HabitMO) -> UIApplicationShortcutItem {
         return UIApplicationShortcutItem(
             type: AppDelegate.QuickActionType.displayHabit.rawValue,
             localizedTitle: habit.getTitleText(),

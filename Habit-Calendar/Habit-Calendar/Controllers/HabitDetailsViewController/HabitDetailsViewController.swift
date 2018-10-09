@@ -196,6 +196,13 @@ class HabitDetailsViewController: UIViewController {
         displaySections()
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        /// Every time a habit is displayed, add an app shortcut for it.
+        shortcutsManager.addApplicationShortcut(for: habit)
+    }
+
     // MARK: Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
