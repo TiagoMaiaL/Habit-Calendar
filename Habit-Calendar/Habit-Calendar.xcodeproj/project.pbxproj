@@ -225,6 +225,13 @@
 		4713A20020C164E6008A13D2 /* HabitDayMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4713A1FF20C164E6008A13D2 /* HabitDayMO.swift */; };
 		4713A20220C164FB008A13D2 /* DayMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4713A20120C164FB008A13D2 /* DayMO.swift */; };
 		4713A20420C16542008A13D2 /* NotificationMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4713A20320C16542008A13D2 /* NotificationMO.swift */; };
+		4715A8F42166A49B00713B23 /* HabitsTableViewController+NotificationObservers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4715A8F32166A49B00713B23 /* HabitsTableViewController+NotificationObservers.swift */; };
+		4715A8F52166A4F500713B23 /* HabitsTableViewController+NotificationObservers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4715A8F32166A49B00713B23 /* HabitsTableViewController+NotificationObservers.swift */; };
+		4715A8F62166A4F500713B23 /* HabitsTableViewController+NotificationObservers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4715A8F32166A49B00713B23 /* HabitsTableViewController+NotificationObservers.swift */; };
+		4715A8F8216BA0F200713B23 /* HabitsShortcutItemsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4715A8F7216BA0F200713B23 /* HabitsShortcutItemsManager.swift */; };
+		4715A8F9216BC3D000713B23 /* HabitsShortcutItemsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4715A8F7216BA0F200713B23 /* HabitsShortcutItemsManager.swift */; };
+		4715A8FA216BC3D100713B23 /* HabitsShortcutItemsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4715A8F7216BA0F200713B23 /* HabitsShortcutItemsManager.swift */; };
+		4715A8FF216BC5B400713B23 /* HabitsShortcutItemsManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4715A8FB216BC46C00713B23 /* HabitsShortcutItemsManagerTests.swift */; };
 		47160A3F2137275B00E717C9 /* CompletedHabitTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47160A3E2137275B00E717C9 /* CompletedHabitTableViewCell.swift */; };
 		47160A4121372B2F00E717C9 /* RoundedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47160A4021372B2F00E717C9 /* RoundedView.swift */; };
 		47160A4421387AAE00E717C9 /* EmptyStateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47160A4321387AAE00E717C9 /* EmptyStateView.xib */; };
@@ -403,6 +410,9 @@
 		4713A1FF20C164E6008A13D2 /* HabitDayMO.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = HabitDayMO.swift; sourceTree = "<group>"; tabWidth = 4; };
 		4713A20120C164FB008A13D2 /* DayMO.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = DayMO.swift; sourceTree = "<group>"; tabWidth = 4; };
 		4713A20320C16542008A13D2 /* NotificationMO.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = NotificationMO.swift; sourceTree = "<group>"; tabWidth = 4; };
+		4715A8F32166A49B00713B23 /* HabitsTableViewController+NotificationObservers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HabitsTableViewController+NotificationObservers.swift"; sourceTree = "<group>"; };
+		4715A8F7216BA0F200713B23 /* HabitsShortcutItemsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitsShortcutItemsManager.swift; sourceTree = "<group>"; };
+		4715A8FB216BC46C00713B23 /* HabitsShortcutItemsManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitsShortcutItemsManagerTests.swift; sourceTree = "<group>"; };
 		47160A3E2137275B00E717C9 /* CompletedHabitTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedHabitTableViewCell.swift; sourceTree = "<group>"; };
 		47160A4021372B2F00E717C9 /* RoundedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedView.swift; sourceTree = "<group>"; };
 		47160A4321387AAE00E717C9 /* EmptyStateView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmptyStateView.xib; sourceTree = "<group>"; };
@@ -846,6 +856,7 @@
 			children = (
 				4779588220D8B2E10080614F /* UserNotificationManager.swift */,
 				47D7003C210179F600F4FE88 /* NotificationScheduler.swift */,
+				4715A8F7216BA0F200713B23 /* HabitsShortcutItemsManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -856,6 +867,7 @@
 				4725D05A20C8A4BA00C3B63F /* HabitsTableViewController.swift */,
 				47961084214D5D8C00BFECFC /* HabitsTableViewController+DataSource.swift */,
 				47961086214D5E3200BFECFC /* HabitsTableViewController+FetchedResultsController.swift */,
+				4715A8F32166A49B00713B23 /* HabitsTableViewController+NotificationObservers.swift */,
 			);
 			path = HabitsTableViewController;
 			sourceTree = "<group>";
@@ -913,6 +925,7 @@
 			children = (
 				47D8FC9D20DC13990094026B /* UserNotificationManagerTests.swift */,
 				47D7004021017D0A00F4FE88 /* NotificationSchedulerTests.swift */,
+				4715A8FB216BC46C00713B23 /* HabitsShortcutItemsManagerTests.swift */,
 			);
 			path = "Manager Tests";
 			sourceTree = "<group>";
@@ -1461,6 +1474,7 @@
 				470C41CD2144B091007F6F35 /* RoundedView.swift in Sources */,
 				470C41CE2144B091007F6F35 /* HabitCreationTableViewController+ColorField.swift in Sources */,
 				47EE82EA21497DDB0093A6D6 /* OnBoardingViewController.swift in Sources */,
+				4715A8FA216BC3D100713B23 /* HabitsShortcutItemsManager.swift in Sources */,
 				470C41CF2144B091007F6F35 /* HabitDetailsViewController+ProgressSection.swift in Sources */,
 				470C41D02144B091007F6F35 /* HabitCreationTableViewController+DaysField.swift in Sources */,
 				470C41D12144B091007F6F35 /* DayStorage.swift in Sources */,
@@ -1507,6 +1521,7 @@
 				470C42952145A85B007F6F35 /* UIColor+Palette.swift in Sources */,
 				470C41F22144B091007F6F35 /* UIViewController+Utils.swift in Sources */,
 				470C41F32144B091007F6F35 /* FireTimeStorage.swift in Sources */,
+				4715A8F52166A4F500713B23 /* HabitsTableViewController+NotificationObservers.swift in Sources */,
 				470C41F42144B091007F6F35 /* HabitDayFactory.swift in Sources */,
 				470C41F52144B091007F6F35 /* ProgressView.swift in Sources */,
 			);
@@ -1546,6 +1561,7 @@
 				470C423E2144B164007F6F35 /* RoundedView.swift in Sources */,
 				470C423F2144B164007F6F35 /* HabitCreationTableViewController+ColorField.swift in Sources */,
 				47EE82EB21497DDC0093A6D6 /* OnBoardingViewController.swift in Sources */,
+				4715A8F9216BC3D000713B23 /* HabitsShortcutItemsManager.swift in Sources */,
 				470C42402144B164007F6F35 /* HabitDetailsViewController+ProgressSection.swift in Sources */,
 				470C42412144B164007F6F35 /* HabitCreationTableViewController+DaysField.swift in Sources */,
 				470C42422144B164007F6F35 /* DayStorage.swift in Sources */,
@@ -1592,6 +1608,7 @@
 				470C42962145A85B007F6F35 /* UIColor+Palette.swift in Sources */,
 				470C42632144B164007F6F35 /* UIViewController+Utils.swift in Sources */,
 				470C42642144B164007F6F35 /* FireTimeStorage.swift in Sources */,
+				4715A8F62166A4F500713B23 /* HabitsTableViewController+NotificationObservers.swift in Sources */,
 				470C42652144B164007F6F35 /* HabitDayFactory.swift in Sources */,
 				470C42662144B164007F6F35 /* ProgressView.swift in Sources */,
 			);
@@ -1631,6 +1648,7 @@
 				4761F5B52120D06900A8D407 /* ColorsPickerDataSource.swift in Sources */,
 				47160A4121372B2F00E717C9 /* RoundedView.swift in Sources */,
 				47EE82E9214875050093A6D6 /* OnBoardingViewController.swift in Sources */,
+				4715A8F8216BA0F200713B23 /* HabitsShortcutItemsManager.swift in Sources */,
 				47C320382130799D0094BBF8 /* HabitCreationTableViewController+ColorField.swift in Sources */,
 				47C32029212C57D10094BBF8 /* HabitDetailsViewController+ProgressSection.swift in Sources */,
 				47C320342130793A0094BBF8 /* HabitCreationTableViewController+DaysField.swift in Sources */,
@@ -1677,6 +1695,7 @@
 				470C42942145A52C007F6F35 /* UIColor+Palette.swift in Sources */,
 				47E6C21F20EC16C8003BDB4D /* UIViewController+Utils.swift in Sources */,
 				47AA3659210382AB0008D2DC /* FireTimeStorage.swift in Sources */,
+				4715A8F42166A49B00713B23 /* HabitsTableViewController+NotificationObservers.swift in Sources */,
 				47E6C21720EB12BA003BDB4D /* HabitDayFactory.swift in Sources */,
 				4732CE762114E8A200E2770C /* ProgressView.swift in Sources */,
 			);
@@ -1697,6 +1716,7 @@
 				47D7004121017D0A00F4FE88 /* NotificationSchedulerTests.swift in Sources */,
 				47160A48213B18F900E717C9 /* HabitStorageNotificationTests.swift in Sources */,
 				4752FDC120FE623900116F1A /* XCTUtils.swift in Sources */,
+				4715A8FF216BC5B400713B23 /* HabitsShortcutItemsManagerTests.swift in Sources */,
 				474A209720D1B02700E0EBD0 /* HabitStorageTests.swift in Sources */,
 				47D8FC9E20DC13990094026B /* UserNotificationManagerTests.swift in Sources */,
 				474A209520D00AFA00E0EBD0 /* DayStorageTests.swift in Sources */,

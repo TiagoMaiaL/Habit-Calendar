@@ -65,6 +65,11 @@ class HabitCreationTableViewController: UITableViewController {
     /// The container in which the habit is going to be persisted.
     var container: NSPersistentContainer!
 
+    /// The shortcuts manager used to add a new shortcut when a habit gets added or edited.
+    /// - Note: The manager is used by this controller to add a shortcut every time a habit is created or edited, and
+    ///         to remove one when the habit is deleted.
+    var shortcutsManager: HabitsShortcutItemsManager!
+
     /// The habit storage used for this controller to
     /// create/edit the habit.
     var habitStore: HabitStorage!
@@ -140,6 +145,7 @@ class HabitCreationTableViewController: UITableViewController {
         assert(container != nil, "Error: failed to inject the persistent container.")
         assert(habitStore != nil, "Error: failed to inject the habit store.")
         assert(notificationManager != nil, "Error: failed to inject the notification manager.")
+        assert(shortcutsManager != nil, "Error: The shortcuts manager must be injected.")
 
         // Observe the app's active event to display if the user notifications are allowed.
         startObserving()
@@ -240,8 +246,10 @@ class HabitCreationTableViewController: UITableViewController {
                 return
             }
 
+            var habit: HabitMO!
+
             if !self.isEditingHabit {
-                _ = self.habitStore.create(
+                habit = self.habitStore.create(
                     using: context,
                     user: user,
                     name: self.name!,
@@ -256,7 +264,7 @@ class HabitCreationTableViewController: UITableViewController {
                     return
                 }
 
-                _ = self.habitStore.edit(
+                habit = self.habitStore.edit(
                     habitToEdit,
                     using: context,
                     name: self.name,
@@ -267,8 +275,15 @@ class HabitCreationTableViewController: UITableViewController {
             }
 
             self.saveCreationContext(context)
-        }
 
+            let habitId = habit.id!
+            DispatchQueue.main.async {
+                // Every time a habit is added or edited, a new app shortcut related to it is added.
+                self.shortcutsManager.addApplicationShortcut(
+                    for: self.habitStore.habit(using: self.container.viewContext, and: habitId)!
+                )
+            }
+        }
         navigationController?.popViewController(
             animated: true
         )
@@ -288,8 +303,8 @@ information unavailable.
         )
         // Declare its actions.
         alert.addAction(UIAlertAction(title: "Delete", style: .destructive) { _ in
-            // If so, delete the habit using the container's viewContext.
-            // Pop the current controller.
+            // Remove the shortcut associated with the habit.
+            self.shortcutsManager.removeApplicationShortcut(for: self.habit!)
             self.habitStore.delete(self.habit!, from: self.container.viewContext)
             self.navigationController?.popToRootViewController(animated: true)
         })

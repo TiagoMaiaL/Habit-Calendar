@@ -12,8 +12,13 @@ extension Notification.Name {
 
     /// Name for the notification sent when the user selects the
     /// user notification reminding about a specific habit.
-    static var didSelectHabitReminder: Notification.Name {
+    static var didChooseHabitToDisplay: Notification.Name {
         return Notification.Name("REMINDER_SELECTED")
+    }
+
+    /// Name for the notification sent when the user selects the "New habit" quick action.
+    static var didSelectNewHabitQuickAction: Notification.Name {
+        return Notification.Name("NEW_HABIT_ACTION")
     }
 
     /// Name for the notification sent when an error happened while the
@@ -47,14 +52,24 @@ extension Notification.Name {
     @objc func handleContextChanges(_ notification: Notification)
 }
 
-/// Observer for the didSelectHabitReminder notification, which is sent when the user
-/// selects the user notification reminding about a habit.
-@objc protocol HabitReminderSelectionObserver: NotificationObserver {
+/// Observer for the didChooseHabitToDisplay notification, which is sent when the user
+/// selects the user notification reminding about a habit, or the shortcut for a specific habit.
+@objc protocol HabitToBeDisplayedObserver: NotificationObserver {
 
-    /// Handles the didSelectHabitReminder notification.
-    @objc func handleHabitReminderSelection(_ notification: Notification)
+    /// Handles the didChooseHabitToDisplay notification.
+    @objc func handleHabitToDisplayNotification(_ notification: Notification)
 }
 
+/// Observer for the didSelectNewHabitQuickAction notification, which is sent when the user
+/// selects the "New habit" quick action.
+@objc protocol NewHabitQuickActionObserver: NotificationObserver {
+
+    /// Handles the didSelectNewHabitQuickAction notification.
+    @objc func handleNewHabitQuickAction(_ notification: Notification)
+}
+
+/// Observer for the didFailLoadingData notification, which is sent when
+/// Core Data stack can't be initialized.
 @objc protocol DataLoadingErrorObserver: NotificationObserver {
 
     /// Handles the didFailLoadingData notification.

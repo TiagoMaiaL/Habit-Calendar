@@ -44,11 +44,13 @@ class HabitsTableViewController: UITableViewController {
     /// The user notification manager used to check or request the user's authorization.
     var notificationManager: UserNotificationManager!
 
+    /// The shortcuts manager to be injected in the creation and details controllers.
+    var shortcutsManager: HabitsShortcutItemsManager!
+
     /// The segmented control used to change the habits being displayed, based on its stage (completed or in progress).
     @IBOutlet weak var habitsSegmentedControl: UISegmentedControl!
 
-    /// The variable holding the current(related to today) fetchedResultsController
-    /// for the habits that are in progress.
+    /// The variable holding the current(related to today) fetchedResultsController for the habits that are in progress.
     /// - Note: To re-initialize this property, only set it to nil, and use the getter.
     private var _progressfetchedResultsController: NSFetchedResultsController<HabitMO>?
 
@@ -63,8 +65,7 @@ class HabitsTableViewController: UITableViewController {
         return _progressfetchedResultsController!
     }
 
-    /// The variable holding the current(related to today) fetchedResultsController
-    /// for the completed habits.
+    /// The variable holding the current(related to today) fetchedResultsController for the completed habits.
     /// - Note: To re-initialize this property, only set it to nil, and use the getter.
     private var _completedfetchedResultsController: NSFetchedResultsController<HabitMO>?
 
@@ -115,6 +116,7 @@ class HabitsTableViewController: UITableViewController {
         assert(container != nil, "The persistent container must be injected.")
         assert(habitStorage != nil, "The habit storage must be injected.")
         assert(notificationManager != nil, "The notification manager must be injected.")
+        assert(shortcutsManager != nil, "The shortcuts manager must be injected.")
 
         startObserving()
 
@@ -150,6 +152,7 @@ class HabitsTableViewController: UITableViewController {
                 habitCreationController.habitStore = habitStorage
                 habitCreationController.userStore = AppDelegate.current.userStorage
                 habitCreationController.notificationManager = notificationManager
+                habitCreationController.shortcutsManager = shortcutsManager
             } else {
                 assertionFailure(
                     "Error: Couldn't get the habit creation controller."
@@ -165,6 +168,7 @@ class HabitsTableViewController: UITableViewController {
                 habitDetailsController.notificationScheduler = NotificationScheduler(
                     notificationManager: notificationManager
                 )
+                habitDetailsController.shortcutsManager = shortcutsManager
 
                 // Get the selected habit for injection.
                 guard let indexPath = tableView.indexPathForSelectedRow else {
@@ -197,8 +201,18 @@ class HabitsTableViewController: UITableViewController {
 
     // MARK: Imperatives
 
+    /// Updates the list to take the today's date as a fetch parameter.
+    func refreshListDate() {
+        switch self.selectedSegment {
+        case .inProgress:
+            self._progressfetchedResultsController = nil
+        case .completed:
+            self._completedfetchedResultsController = nil
+        }
+    }
+
     /// Updates the controller's list of habits.
-    private func updateList() {
+    func updateList() {
         do {
             try selectedFetchedResultsController.performFetch()
             displayEmptyStateIfNeeded()
@@ -280,107 +294,5 @@ class HabitsTableViewController: UITableViewController {
 
         // Present it on top of the window's root controller.
         present(presentationController, animated: true)
-    }
-}
-
-extension HabitsTableViewController: NotificationObserver {
-    func startObserving() {
-        // Register to possible notifications thrown by changes in other managed contexts.
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(handleContextChanges(_:)),
-            name: Notification.Name.NSManagedObjectContextDidSave,
-            object: nil
-        )
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(handleActivationEvent(_:)),
-            name: UIApplication.didBecomeActiveNotification,
-            object: nil
-        )
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(handleHabitReminderSelection(_:)),
-            name: Notification.Name.didSelectHabitReminder,
-            object: nil
-        )
-    }
-
-    func stopObserving() {
-        NotificationCenter.default.removeObserver(self)
-    }
-}
-
-extension HabitsTableViewController: AppActiveObserver {
-    func handleActivationEvent(_ notification: Notification) {
-        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { _ in
-            // Reset the current fetched results controller, so its predicate always takes today into account.
-            switch self.selectedSegment {
-            case .inProgress:
-                self._progressfetchedResultsController = nil
-            case .completed:
-                self._completedfetchedResultsController = nil
-            }
-
-            self.updateList()
-        }
-    }
-}
-
-extension HabitsTableViewController: ManagedContextChangeObserver {
-    /// Listens to any saved changes happening in other contexts and refreshes
-    /// the viewContext.
-    /// - Parameter notification: The thrown notification
-    @objc internal func handleContextChanges(_ notification: Notification) {
-        // If the changes were only updates, reload the tableView.
-        if (notification.userInfo?["updated"] as? Set<NSManagedObject>) != nil {
-            DispatchQueue.main.async {
-                self.updateList()
-            }
-        }
-
-        // Refresh the current view context by using the payloads in the notifications.
-        container.viewContext.mergeChanges(fromContextDidSave: notification)
-
-        DispatchQueue.main.async {
-            self.displayEmptyStateIfNeeded()
-        }
-    }
-}
-
-extension HabitsTableViewController: HabitReminderSelectionObserver {
-    /// Takes the user to the habit details controller.
-    private func showHabitDetails(_ habit: HabitMO) {
-        // If the habit is already being displayed, there's no need to push a new controller.
-        if let presentedDetailsController = navigationController?.topViewController as? HabitDetailsViewController {
-            guard presentedDetailsController.habit != habit else { return }
-            navigationController?.popViewController(animated: true)
-        }
-
-        guard let detailsController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(
-            withIdentifier: "HabitDetails"
-            ) as? HabitDetailsViewController else {
-                assertionFailure("Couldn't get the habit details controller.")
-                return
-        }
-
-        detailsController.habit = habit
-        detailsController.container = container
-        detailsController.habitStorage = habitStorage
-        detailsController.notificationManager = notificationManager
-        detailsController.notificationStorage = NotificationStorage()
-        detailsController.notificationScheduler = NotificationScheduler(
-            notificationManager: notificationManager
-        )
-
-        navigationController?.pushViewController(detailsController, animated: true)
-    }
-
-    func handleHabitReminderSelection(_ notification: Notification) {
-        guard let habit = notification.userInfo?["habit"] as? HabitMO else {
-            assertionFailure("Couldn't get the user notification's habit.")
-            return
-        }
-        showHabitDetails(habit)
     }
 }
