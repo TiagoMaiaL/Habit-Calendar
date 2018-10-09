@@ -193,7 +193,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 // The user selected the habit from the user notification. Show it right after displaying
                 // the root controller.
                 if let habitToDisplay = self.habitToDisplay {
-                    self.sendHabitReminderNotification(habitToDisplay)
+                    self.sendNotificationToDisplayHabit(habitToDisplay)
 
                 // The user selected the "New habit" quick action.
                 } else if self.shouldDisplayCreationController {
@@ -203,10 +203,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 
-    /// Sends a notification about the receival of a habit user notification launch event.
-    private func sendHabitReminderNotification(_ habit: HabitMO) {
+    /// Sends a notification to display the passed habit.
+    private func sendNotificationToDisplayHabit(_ habit: HabitMO) {
         NotificationCenter.default.post(
-            name: Notification.Name.didSelectHabitReminder,
+            name: Notification.Name.didChooseHabitToDisplay,
             object: self,
             userInfo: ["habit": habit]
         )
@@ -292,7 +292,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
                     habitToDisplay = habit
                 } else {
                     // If the habits listing controller is already being displayed, show the details.
-                    sendHabitReminderNotification(habit)
+                    sendNotificationToDisplayHabit(habit)
                 }
 
             case yesAction:
@@ -329,18 +329,12 @@ extension AppDelegate {
         performActionFor shortcutItem: UIApplicationShortcutItem,
         completionHandler: @escaping (Bool) -> Void
     ) {
-        if let typeRawValue = shortcutItem.type.components(separatedBy: ".").last,
-            let type = QuickActionType(rawValue: typeRawValue) {
-            handleQuickAction(withType: type)
+        guard let typeRawValue = shortcutItem.type.components(separatedBy: ".").last,
+            let type = QuickActionType(rawValue: typeRawValue) else {
+                assertionFailure("Couldn't get the type of the shortcut item.")
+                return
         }
-        completionHandler(false)
-    }
 
-    // MARK: Imperatives
-
-    /// Handles the quick action for the passed enum value.
-    /// - Parameter type: the type of quick action selected.
-    private func handleQuickAction(withType type: QuickActionType) {
         switch type {
         case .newHabit:
             if isDisplayingSplashScreen {
@@ -350,8 +344,25 @@ extension AppDelegate {
                 // The habits list is being displayed, present the creation controller on top of it.
                 sendNewHabitQuickActionNotification()
             }
-        default:
-            break
+        case .displayHabit:
+            // Get the habit to be displayed.
+            guard let habitId = shortcutItem.userInfo?[HabitsShortcutItemsManager.habitIdentifierUserInfoKey]
+                as? String,
+                let habit = habitStorage.habit(
+                    using: dataController.persistentContainer.viewContext,
+                    and: habitId
+                ) else {
+                    assertionFailure("Couldn't get the habit to be displayed.")
+                    return
+            }
+
+            if isDisplayingSplashScreen {
+                habitToDisplay = habit
+            } else {
+                sendNotificationToDisplayHabit(habit)
+            }
         }
+
+        completionHandler(false)
     }
 }

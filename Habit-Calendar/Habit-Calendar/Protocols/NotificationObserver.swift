@@ -12,7 +12,7 @@ extension Notification.Name {
 
     /// Name for the notification sent when the user selects the
     /// user notification reminding about a specific habit.
-    static var didSelectHabitReminder: Notification.Name {
+    static var didChooseHabitToDisplay: Notification.Name {
         return Notification.Name("REMINDER_SELECTED")
     }
 
@@ -52,12 +52,12 @@ extension Notification.Name {
     @objc func handleContextChanges(_ notification: Notification)
 }
 
-/// Observer for the didSelectHabitReminder notification, which is sent when the user
-/// selects the user notification reminding about a habit.
-@objc protocol HabitReminderSelectionObserver: NotificationObserver {
+/// Observer for the didChooseHabitToDisplay notification, which is sent when the user
+/// selects the user notification reminding about a habit, or the shortcut for a specific habit.
+@objc protocol HabitToBeDisplayedObserver: NotificationObserver {
 
-    /// Handles the didSelectHabitReminder notification.
-    @objc func handleHabitReminderSelection(_ notification: Notification)
+    /// Handles the didChooseHabitToDisplay notification.
+    @objc func handleHabitToDisplayNotification(_ notification: Notification)
 }
 
 /// Observer for the didSelectNewHabitQuickAction notification, which is sent when the user

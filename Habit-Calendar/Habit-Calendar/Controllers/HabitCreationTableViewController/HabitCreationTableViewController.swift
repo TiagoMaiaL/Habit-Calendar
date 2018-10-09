@@ -282,9 +282,8 @@ class HabitCreationTableViewController: UITableViewController {
                 self.shortcutsManager.addApplicationShortcut(
                     for: self.habitStore.habit(using: self.container.viewContext, and: habitId)!
                 )
-            }   
+            }
         }
-
         navigationController?.popViewController(
             animated: true
         )

@@ -26,8 +26,8 @@ extension HabitsTableViewController: NotificationObserver {
         )
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(handleHabitReminderSelection(_:)),
-            name: Notification.Name.didSelectHabitReminder,
+            selector: #selector(handleHabitToDisplayNotification(_:)),
+            name: Notification.Name.didChooseHabitToDisplay,
             object: nil
         )
         NotificationCenter.default.addObserver(
@@ -73,7 +73,7 @@ extension HabitsTableViewController: ManagedContextChangeObserver {
     }
 }
 
-extension HabitsTableViewController: HabitReminderSelectionObserver {
+extension HabitsTableViewController: HabitToBeDisplayedObserver {
     /// Takes the user to the habit details controller.
     private func showHabitDetails(_ habit: HabitMO) {
         // If the habit is already being displayed, there's no need to push a new controller.
@@ -97,11 +97,12 @@ extension HabitsTableViewController: HabitReminderSelectionObserver {
         detailsController.notificationScheduler = NotificationScheduler(
             notificationManager: notificationManager
         )
+        detailsController.shortcutsManager = shortcutsManager
 
         navigationController?.pushViewController(detailsController, animated: true)
     }
 
-    func handleHabitReminderSelection(_ notification: Notification) {
+    func handleHabitToDisplayNotification(_ notification: Notification) {
         guard let habit = notification.userInfo?["habit"] as? HabitMO else {
             assertionFailure("Couldn't get the user notification's habit.")
             return
