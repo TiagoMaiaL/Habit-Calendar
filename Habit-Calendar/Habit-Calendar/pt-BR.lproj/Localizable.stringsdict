@@ -44,21 +44,21 @@
 		<string>%#@day@</string>
 		<key>day</key>
 		<dict>
-            <key>NSStringFormatSpecTypeKey</key>
-            <string>NSStringPluralRuleType</string>
-            <key>NSStringFormatValueTypeKey</key>
-            <string>d</string>
-            <key>zero</key>
-            <string>Day zero.</string>
-            <key>one</key>
-            <string>%dst day.</string>
-            <key>two</key>
-            <string>%dnd day.</string>
-            <key>three</key>
-            <string>%drd day.</string>
-            <key>other</key>
-            <string>%dth day.</string>
-        </dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>Day zero.</string>
+			<key>one</key>
+			<string>%dst day.</string>
+			<key>two</key>
+			<string>%dnd day.</string>
+			<key>three</key>
+			<string>%drd day.</string>
+			<key>other</key>
+			<string>%dth day.</string>
+		</dict>
 	</dict>
 	<key>%d day(s) missed.</key>
 	<dict>
@@ -66,17 +66,17 @@
 		<string>%#@days@</string>
 		<key>days</key>
 		<dict>
-            <key>NSStringFormatSpecTypeKey</key>
-            <string>NSStringPluralRuleType</string>
-            <key>NSStringFormatValueTypeKey</key>
-            <string>d</string>
-            <key>zero</key>
-            <string>%d days missed.</string>
-            <key>one</key>
-            <string>%d day missed.</string>
-            <key>other</key>
-            <string>%d days missed.</string>
-        </dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>%d days missed.</string>
+			<key>one</key>
+			<string>%d day missed.</string>
+			<key>other</key>
+			<string>%d days missed.</string>
+		</dict>
 	</dict>
 	<key>%d day(s) executed.</key>
 	<dict>
@@ -84,71 +84,71 @@
 		<string>%#@days@</string>
 		<key>days</key>
 		<dict>
-            <key>NSStringFormatSpecTypeKey</key>
-            <string>NSStringPluralRuleType</string>
-            <key>NSStringFormatValueTypeKey</key>
-            <string>d</string>
-            <key>zero</key>
-            <string>%d days executed.</string>
-            <key>one</key>
-            <string>%d day executed.</string>
-            <key>other</key>
-            <string>%d days executed.</string>
-        </dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>%d days executed.</string>
+			<key>one</key>
+			<string>%d day executed.</string>
+			<key>other</key>
+			<string>%d days executed.</string>
+		</dict>
 	</dict>
 	<key>%d day(s) to finish the challenge.</key>
-    <dict>
-        <key>NSStringLocalizedFormatKey</key>
-        <string>%#@days@</string>
-        <key>days</key>
-        <dict>
-            <key>NSStringFormatSpecTypeKey</key>
-            <string>NSStringPluralRuleType</string>
-            <key>NSStringFormatValueTypeKey</key>
-            <string>d</string>
-            <key>zero</key>
-            <string>%d days to finish the challenge.</string>
-            <key>one</key>
-            <string>%d day to finish the challenge.</string>
-            <key>other</key>
-            <string>%d days to finish the challenge.</string>
-        </dict>
-    </dict>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@days@</string>
+		<key>days</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>%d days to finish the challenge.</string>
+			<key>one</key>
+			<string>%d day to finish the challenge.</string>
+			<key>other</key>
+			<string>%d days to finish the challenge.</string>
+		</dict>
+	</dict>
 	<key>%d completed day(s).</key>
-    <dict>
-        <key>NSStringLocalizedFormatKey</key>
-        <string>%#@days@</string>
-        <key>days</key>
-        <dict>
-            <key>NSStringFormatSpecTypeKey</key>
-            <string>NSStringPluralRuleType</string>
-            <key>NSStringFormatValueTypeKey</key>
-            <string>d</string>
-            <key>zero</key>
-            <string>%d completed days.</string>
-            <key>one</key>
-            <string>%d completed day.</string>
-            <key>other</key>
-            <string>%d completed days.</string>
-        </dict>
-    </dict>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@days@</string>
+		<key>days</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>%d completed days.</string>
+			<key>one</key>
+			<string>%d completed day.</string>
+			<key>other</key>
+			<string>%d completed days.</string>
+		</dict>
+	</dict>
 	<key>%d fire time(s) selected.</key>
-    <dict>
-        <key>NSStringLocalizedFormatKey</key>
-        <string>%#@fire times@</string>
-        <key>fire times</key>
-        <dict>
-            <key>NSStringFormatSpecTypeKey</key>
-            <string>NSStringPluralRuleType</string>
-            <key>NSStringFormatValueTypeKey</key>
-            <string>d</string>
-            <key>zero</key>
-            <string>%d fire times selected.</string>
-            <key>one</key>
-            <string>%d fire time selected.</string>
-            <key>other</key>
-            <string>%d fire times selected.</string>
-        </dict>
-    </dict>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@fire times@</string>
+		<key>fire times</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>%d fire times selected.</string>
+			<key>one</key>
+			<string>%d fire time selected.</string>
+			<key>other</key>
+			<string>%d fire times selected.</string>
+		</dict>
+	</dict>
 </dict>
 </plist>

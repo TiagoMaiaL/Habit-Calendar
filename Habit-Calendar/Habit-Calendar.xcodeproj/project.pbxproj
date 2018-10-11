@@ -371,9 +371,9 @@
 		47F635F820BB920900AC4555 /* Habit-Calendar.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 47F635F620BB920900AC4555 /* Habit-Calendar.xcdatamodeld */; };
 		47F635FA20BB920D00AC4555 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 47F635F920BB920D00AC4555 /* Assets.xcassets */; };
 		47F635FD20BB920D00AC4555 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47F635FB20BB920D00AC4555 /* LaunchScreen.storyboard */; };
-		47FB0C27216EA6B9000BB956 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 47FB0C26216EA6B9000BB956 /* Localizable.stringsdict */; };
-		47FB0C28216EA6B9000BB956 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 47FB0C26216EA6B9000BB956 /* Localizable.stringsdict */; };
-		47FB0C29216EA6B9000BB956 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 47FB0C26216EA6B9000BB956 /* Localizable.stringsdict */; };
+		47FB0C2C216F9DE5000BB956 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 47FB0C30216F9DE5000BB956 /* Localizable.stringsdict */; };
+		47FB0C2D216F9DE5000BB956 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 47FB0C30216F9DE5000BB956 /* Localizable.stringsdict */; };
+		47FB0C2E216F9DE5000BB956 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 47FB0C30216F9DE5000BB956 /* Localizable.stringsdict */; };
 		9E4741ED7011810FD00BF941 /* Pods_Habit_Calendar_Habit_Calendar_Stg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89D08208B03E9A306F89DFA9 /* Pods_Habit_Calendar_Habit_Calendar_Stg.framework */; };
 		F0B9EAD3EC4A253D66E6E19E /* Pods_Habit_CalendarTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4262C4E7635B46715D883F5 /* Pods_Habit_CalendarTests.framework */; };
 /* End PBXBuildFile section */
@@ -541,9 +541,10 @@
 		47F635FE20BB920D00AC4555 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		47F6360320BB920D00AC4555 /* Habit-CalendarTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Habit-CalendarTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		47F6360920BB920D00AC4555 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		47FB0C24216EA678000BB956 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Main.strings"; sourceTree = "<group>"; };
-		47FB0C25216EA678000BB956 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
-		47FB0C26216EA6B9000BB956 /* Localizable.stringsdict */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; path = Localizable.stringsdict; sourceTree = "<group>"; };
+		47FB0C2A216F9D81000BB956 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Main.strings"; sourceTree = "<group>"; };
+		47FB0C2B216F9D84000BB956 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		47FB0C2F216F9DE5000BB956 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = "pt-BR"; path = "pt-BR.lproj/Localizable.stringsdict"; sourceTree = "<group>"; };
+		47FB0C31216F9DF2000BB956 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		526255EDCB5FA3EB9A7C5FF7 /* Pods-Habit-CalendarTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Habit-CalendarTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Habit-CalendarTests/Pods-Habit-CalendarTests.release.xcconfig"; sourceTree = "<group>"; };
 		579A72317FF280C998EF8FD3 /* Pods-Habit-Calendar-Habit-Calendar-Dev.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Habit-Calendar-Habit-Calendar-Dev.release.xcconfig"; path = "Pods/Target Support Files/Pods-Habit-Calendar-Habit-Calendar-Dev/Pods-Habit-Calendar-Habit-Calendar-Dev.release.xcconfig"; sourceTree = "<group>"; };
 		76ED27CFE67DF2D0EDBE8934 /* Pods_Habit_Calendar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Habit_Calendar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -981,7 +982,7 @@
 				47F635FE20BB920D00AC4555 /* Info.plist */,
 				4796107A214C230900BFECFC /* Habit-Calendar-Dev-Info.plist */,
 				4796107B214C230900BFECFC /* Habit-Calendar-Stg-Info.plist */,
-				47FB0C26216EA6B9000BB956 /* Localizable.stringsdict */,
+				47FB0C30216F9DE5000BB956 /* Localizable.stringsdict */,
 			);
 			path = "Habit-Calendar";
 			sourceTree = "<group>";
@@ -1154,7 +1155,7 @@
 				470C42032144B091007F6F35 /* SF-Pro-Display-Thin.otf in Resources */,
 				470C42042144B091007F6F35 /* SF-Pro-Display-ThinItalic.otf in Resources */,
 				470C42052144B091007F6F35 /* SF-Pro-Text-Light.otf in Resources */,
-				47FB0C28216EA6B9000BB956 /* Localizable.stringsdict in Resources */,
+				47FB0C2D216F9DE5000BB956 /* Localizable.stringsdict in Resources */,
 				470C42062144B091007F6F35 /* SF-Pro-Display-Black.otf in Resources */,
 				470C42072144B091007F6F35 /* SF-Pro-Text-Bold.otf in Resources */,
 				470C42082144B091007F6F35 /* SF-Pro-Text-LightItalic.otf in Resources */,
@@ -1196,7 +1197,7 @@
 				470C42742144B164007F6F35 /* SF-Pro-Display-Thin.otf in Resources */,
 				470C42752144B164007F6F35 /* SF-Pro-Display-ThinItalic.otf in Resources */,
 				470C42762144B164007F6F35 /* SF-Pro-Text-Light.otf in Resources */,
-				47FB0C29216EA6B9000BB956 /* Localizable.stringsdict in Resources */,
+				47FB0C2E216F9DE5000BB956 /* Localizable.stringsdict in Resources */,
 				470C42772144B164007F6F35 /* SF-Pro-Display-Black.otf in Resources */,
 				470C42782144B164007F6F35 /* SF-Pro-Text-Bold.otf in Resources */,
 				470C42792144B164007F6F35 /* SF-Pro-Text-LightItalic.otf in Resources */,
@@ -1238,7 +1239,7 @@
 				4732CE712114D9D100E2770C /* SF-Pro-Display-Thin.otf in Resources */,
 				4732CE632114D9D100E2770C /* SF-Pro-Display-ThinItalic.otf in Resources */,
 				4732CE662114D9D100E2770C /* SF-Pro-Text-Light.otf in Resources */,
-				47FB0C27216EA6B9000BB956 /* Localizable.stringsdict in Resources */,
+				47FB0C2C216F9DE5000BB956 /* Localizable.stringsdict in Resources */,
 				4732CE602114D9D100E2770C /* SF-Pro-Display-Black.otf in Resources */,
 				4732CE652114D9D100E2770C /* SF-Pro-Text-Bold.otf in Resources */,
 				4732CE5F2114D9D100E2770C /* SF-Pro-Text-LightItalic.otf in Resources */,
@@ -1758,7 +1759,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				47F635F420BB920900AC4555 /* Base */,
-				47FB0C24216EA678000BB956 /* pt-BR */,
+				47FB0C2A216F9D81000BB956 /* pt-BR */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -1767,9 +1768,18 @@
 			isa = PBXVariantGroup;
 			children = (
 				47F635FC20BB920D00AC4555 /* Base */,
-				47FB0C25216EA678000BB956 /* pt-BR */,
+				47FB0C2B216F9D84000BB956 /* pt-BR */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		47FB0C30216F9DE5000BB956 /* Localizable.stringsdict */ = {
+			isa = PBXVariantGroup;
+			children = (
+				47FB0C2F216F9DE5000BB956 /* pt-BR */,
+				47FB0C31216F9DF2000BB956 /* en */,
+			);
+			name = Localizable.stringsdict;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
