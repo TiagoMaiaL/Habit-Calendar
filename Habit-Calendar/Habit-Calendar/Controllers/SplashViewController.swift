@@ -124,9 +124,9 @@ extension SplashViewController: DataLoadingErrorObserver {
             self.present(
                 UIAlertController.make(
                     title: "Error",
-                    message: """
+                    message: NSLocalizedString("""
 An unrecoverable error happened while trying to load the app. Please contact the app developer.
-""",
+""", comment: "Error message displayed when there's an error to launch the app."),
                     mainButtonTitle: "Exit",
                     buttonHandler: {
                         if let error = notification.userInfo?["error"] as? NSError {

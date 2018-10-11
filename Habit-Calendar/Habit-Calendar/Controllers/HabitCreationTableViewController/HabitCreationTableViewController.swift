@@ -171,7 +171,7 @@ class HabitCreationTableViewController: UITableViewController {
 
         // If there's a passed habit, it means that the controller should edit it.
         if isEditingHabit {
-            title = "Edit habit"
+            title = NSLocalizedString("Edit habit", comment: "Title of the edition controller.")
             displayHabitProperties()
             configureDeletionButton()
         }
@@ -294,21 +294,29 @@ class HabitCreationTableViewController: UITableViewController {
         // Alert the user to see if the deletion is really wanted:
         // Declare the alert.
         let alert = UIAlertController(
-            title: "Delete",
-            message: """
+            title: NSLocalizedString(
+                "Delete",
+                comment: "Title of the alert displayed when the user wants to delete a habit."
+            ),
+            message: NSLocalizedString("""
 Are you sure you want to delete this habit? Deleting this habit makes all the history \
 information unavailable.
-""",
+""", comment: "Message of the alert displayed when the user wants to delete a habit."),
             preferredStyle: .alert
         )
         // Declare its actions.
-        alert.addAction(UIAlertAction(title: "Delete", style: .destructive) { _ in
-            // Remove the shortcut associated with the habit.
-            self.shortcutsManager.removeApplicationShortcut(for: self.habit!)
-            self.habitStore.delete(self.habit!, from: self.container.viewContext)
-            self.navigationController?.popToRootViewController(animated: true)
-        })
-        alert.addAction(UIAlertAction(title: "Cancel", style: .default))
+        alert.addAction(
+            UIAlertAction(
+                title: NSLocalizedString("Delete", comment: "Destructive action."),
+                style: .destructive
+            ) { _ in
+                // Remove the shortcut associated with the habit.
+                self.shortcutsManager.removeApplicationShortcut(for: self.habit!)
+                self.habitStore.delete(self.habit!, from: self.container.viewContext)
+                self.navigationController?.popToRootViewController(animated: true)
+            }
+        )
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .default))
 
         // Present it.
         present(alert, animated: true)
@@ -320,7 +328,7 @@ information unavailable.
     private func configureDoneButton() {
         if let habitToEdit = habit {
             // Change the button's title if there's a habit to be editted.
-            doneButton.setTitle("Edit", for: .normal)
+            doneButton.setTitle(NSLocalizedString("Edit", comment: "Title of the edition button."), for: .normal)
 
             // Check if anything changed.
             let isNameDifferent = !(name ?? "").isEmpty && name != habitToEdit.name
@@ -376,10 +384,13 @@ information unavailable.
             DispatchQueue.main.async {
                 self.present(
                     UIAlertController.make(
-                        title: "Error",
-                        message: """
+                        title: NSLocalizedString(
+                            "Error",
+                            comment: "Title of the alert displayed when the habit couldn't be persisted."
+                        ),
+                        message: NSLocalizedString("""
 There was an error while the habit was being persisted. Please contact the developer.
-"""
+""", comment: "Message of the alert displayed when the habit couldn't be persisted.")
                     ),
                     animated: true
                 )

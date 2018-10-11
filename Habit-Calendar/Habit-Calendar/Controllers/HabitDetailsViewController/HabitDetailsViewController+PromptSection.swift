@@ -16,9 +16,7 @@ extension HabitDetailsViewController {
     /// Sets the current as executed or not, depending on the user's action.
     @IBAction func informActivityExecution(_ sender: UISwitch) {
         guard let challenge = habit.getCurrentChallenge() else {
-            assertionFailure(
-                "Inconsistency: There isn't a current habit day but the prompt is being displayed."
-            )
+            assertionFailure("Inconsistency: There isn't a current habit day but the prompt is being displayed.")
             return
         }
 
@@ -47,8 +45,11 @@ extension HabitDetailsViewController {
                 challenge.managedObjectContext?.rollback()
                 self.present(
                     UIAlertController.make(
-                        title: "Error",
-                        message: "The current day couldn't be marked as executed. Please contact the developer."
+                        title: NSLocalizedString("Error", comment: ""),
+                        message: NSLocalizedString(
+                            "The current day couldn't be marked as executed. Please contact the developer.",
+                            comment: "Message displayed when an error occurs while marking the day as executed."
+                        )
                     ),
                     animated: true
                 )
@@ -85,10 +86,11 @@ extension HabitDetailsViewController {
 
         // Display the current challenge's duration.
         let formatter = DateFormatter.shortCurrent
-        currentChallengeDurationLabel.text = """
-        From \(formatter.string(from: currentChallenge.fromDate!)), \
-        to \(formatter.string(from: currentChallenge.toDate!))
-        """
+        currentChallengeDurationLabel.text = String.localizedStringWithFormat(
+            NSLocalizedString("From %@, to %@", comment: "Text displayed the challenge's duration."),
+            formatter.string(from: currentChallenge.fromDate!),
+            formatter.string(from: currentChallenge.toDate!)
+        )
 
         // Get the order of the day in the challenge.
         guard let orderedChallengeDays = currentChallenge.days?.sortedArray(
@@ -111,11 +113,17 @@ extension HabitDetailsViewController {
 
         if currentDay.wasExecuted {
             wasExecutedSwitch.isOn = true
-            promptAnswerLabel.text = "Yes, I did it."
+            promptAnswerLabel.text = NSLocalizedString(
+                "Yes, I did it.",
+                comment: "Text displayed when the current day is marked as executed."
+            )
             promptAnswerLabel.textColor = habitColor
         } else {
             wasExecutedSwitch.isOn = false
-            promptAnswerLabel.text = "No, not yet."
+            promptAnswerLabel.text = NSLocalizedString(
+                "No, not yet.",
+                comment: "Text displayed when the current day isn't marked as executed."
+            )
             promptAnswerLabel.textColor = UIColor(red: 47/255, green: 54/255, blue: 64/255, alpha: 1)
         }
     }
@@ -125,6 +133,7 @@ extension HabitDetailsViewController {
     private func displayPromptViewTitle(withOrder order: Int) {
         var orderTitle = ""
 
+        // TODO: Localize the order text using the stringsdict file.
         switch order {
         case 1:
             orderTitle = "1st"
@@ -136,6 +145,7 @@ extension HabitDetailsViewController {
             orderTitle = "\(order)th"
         }
 
+        // TODO: Localize the order text using the stringsdict file.
         let attributedString = NSMutableAttributedString(string: "\(orderTitle) day")
         attributedString.addAttributes(
             [

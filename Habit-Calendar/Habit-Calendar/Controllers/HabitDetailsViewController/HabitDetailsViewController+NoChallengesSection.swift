@@ -47,8 +47,11 @@ extension HabitDetailsViewController: HabitDaysSelectionViewControllerDelegate {
             container.viewContext.rollback()
             present(
                 UIAlertController.make(
-                    title: "Error",
-                    message: "The new challenge of days couldn't be added to the habit. Plase contact the developer."
+                    title: NSLocalizedString("Error", comment: ""),
+                    message: NSLocalizedString(
+                        "The new challenge of days couldn't be added to the habit. Plase contact the developer.",
+                        comment: "Message displayed when there's an error with the creation of a new challenge."
+                    )
                 ),
                 animated: true
             )

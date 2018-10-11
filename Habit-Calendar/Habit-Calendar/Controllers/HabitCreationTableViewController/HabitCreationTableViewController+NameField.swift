@@ -29,7 +29,7 @@ extension HabitCreationTableViewController {
     func configureNameField() {
         // If the habit is being editted, change the title to not required.
         if habit != nil {
-            nameFieldTitleLabel.text = "Name"
+            nameFieldTitleLabel.text = NSLocalizedString("Name", comment: "The title of the name field.")
         }
 
         // Associate the event listener to the textField.
@@ -48,7 +48,12 @@ extension HabitCreationTableViewController {
     func makeToolbar() -> UIToolbar {
         let toolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: 50))
         toolBar.setItems(
-            [UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(endNameEdition))],
+            [UIBarButtonItem(
+                title: NSLocalizedString("Done", comment: "The title of the toolbar button."),
+                style: .done,
+                target: self,
+                action: #selector(endNameEdition)
+            )],
             animated: false
         )
 

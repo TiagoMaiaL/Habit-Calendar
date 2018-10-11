@@ -26,10 +26,13 @@ extension HabitDetailsViewController {
 
         // How many days to complete the challenge.
         let daysToComplete = (challenge.days?.count ?? 0) - (challenge.getPastDays()?.count ?? 0)
+        // TODO: Localize this string using the strings dict file.
         daysToFinishLabel.text = "\(daysToComplete) days to finish the challenge."
         // How many days were executed.
+        // TODO: Localize this string using the strings dict file.
         executedDaysLabel.text = "\(challenge.getExecutedDays()?.count ?? 0) days executed."
         // How many days were missed.
+        // TODO: Localize this string using the strings dict file.
         missedDaysLabel.text = "\(challenge.getMissedDays()?.count ?? 0) days missed."
 
         // Display the challenge's progress bar.

@@ -56,10 +56,14 @@ extension FireTimesDisplayable {
     func displayFireTimes(_ fireTimes: [FireTime]) {
         if !fireTimes.isEmpty {
             // Set the text for the label displaying the amount of fire times.
+            // TODO: Localize this using the strings dict file.
             fireTimesAmountLabel.text = "\(fireTimes.count) fire time\(fireTimes.count == 1 ? "" : "s") selected."
             fireTimesLabel.text = getText(from: fireTimes)
         } else {
-            fireTimesAmountLabel.text = "No fire times selected."
+            fireTimesAmountLabel.text = NSLocalizedString(
+                "No fire times selected.",
+                comment: "Text displayed when the user hasn't selected any fire time for the habit."
+            )
             fireTimesLabel.text = "--"
         }
     }

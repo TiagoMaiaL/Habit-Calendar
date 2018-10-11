@@ -175,6 +175,7 @@ class HabitDaysSelectionViewController: UIViewController {
         // Declare the number of selected dates.
         let datesCount = calendarView.selectedDates.count
         // Display the number of selected days.
+        // TODO: Localize the days count in the stringsdict.
         selectedDaysNumberLabel.text = "\(datesCount) day\(datesCount == 1 ? "" : "s") selected"
 
         // Display the range label.
@@ -193,7 +194,14 @@ class HabitDaysSelectionViewController: UIViewController {
             lastDescription = "--"
         }
 
-        selectedDaysRangeLabel.text = "From: \(firstDescription), to: \(lastDescription)"
+        selectedDaysRangeLabel.text = String.localizedStringWithFormat(
+            NSLocalizedString(
+                "From: %@, to: %@",
+                comment: "Label displaying the duration of the challenge of days."
+            ),
+            firstDescription,
+            lastDescription
+        )
     }
 }
 

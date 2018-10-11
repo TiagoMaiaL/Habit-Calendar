@@ -220,8 +220,11 @@ class HabitsTableViewController: UITableViewController {
         } catch {
             present(
                 UIAlertController.make(
-                    title: "Error",
-                    message: "An error occurred while listing your habits. Please contact the developer."
+                    title: NSLocalizedString("Error", comment: "The alert title in the habits listing controller."),
+                    message: NSLocalizedString(
+                        "An error occurred while listing your habits. Please contact the developer.",
+                        comment: "The message displayed when the habits couldn't be fetched."
+                    )
                 ),
                 animated: true
             )
@@ -250,7 +253,10 @@ class HabitsTableViewController: UITableViewController {
             habitsSegmentedControl.isHidden = true
             emptyStateView.isHidden = false
             emptyStateView.callToActionButton.isHidden = false
-            emptyStateView.emptyLabel.text = "You don't have any habits yet. Let's begin by adding a new one!"
+            emptyStateView.emptyLabel.text = NSLocalizedString(
+                "You don't have any habits yet. Let's begin by adding a new one!",
+                comment: "Message displayed when the user doesn't have any habit."
+            )
 
             return
         }
@@ -263,12 +269,15 @@ class HabitsTableViewController: UITableViewController {
 
             switch selectedSegment {
             case .inProgress:
-                emptyStateView.emptyLabel.text = """
+                emptyStateView.emptyLabel.text = NSLocalizedString("""
                 You don't have any habits in progress at the moment, what do you think of new challenges?
-                """
+                """, comment: "Message displayed when the user doesn't have any habit in progress.")
                 emptyStateView.callToActionButton.isHidden = false
             case .completed:
-                emptyStateView.emptyLabel.text = "You don't have any completed habits yet."
+                emptyStateView.emptyLabel.text = NSLocalizedString(
+                    "You don't have any completed habits yet.",
+                    comment: "Message displayed when the user doesn't have any completed habit."
+                )
                 emptyStateView.callToActionButton.isHidden = true
             }
 

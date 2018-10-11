@@ -118,6 +118,7 @@ extension CalendarDisplayable {
         let formatter = DateFormatter()
         formatter.locale = Locale.current
         formatter.timeZone = TimeZone.current
+        // TODO: Never make use of hardcoded formats. Fix this.
         formatter.dateFormat = "MMMM, yyyy"
 
         // Change the title label to reflect it.
