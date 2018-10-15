@@ -175,8 +175,13 @@ class HabitDaysSelectionViewController: UIViewController {
         // Declare the number of selected dates.
         let datesCount = calendarView.selectedDates.count
         // Display the number of selected days.
-        // TODO: Localize the days count in the stringsdict.
-        selectedDaysNumberLabel.text = "\(datesCount) day\(datesCount == 1 ? "" : "s") selected"
+        selectedDaysNumberLabel.text = String.localizedStringWithFormat(
+            NSLocalizedString(
+                "%d day(s) selected.",
+                comment: "The label showing how many days were selected for the challenge."
+            ),
+            datesCount
+        )
 
         // Display the range label.
         let formatter = DateFormatter.shortCurrent

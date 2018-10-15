@@ -131,28 +131,20 @@ extension HabitDetailsViewController {
     /// Configures the prompt view title text.
     /// - Parameter order: the order of day in the current challenge.
     private func displayPromptViewTitle(withOrder order: Int) {
-        var orderTitle = ""
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .ordinal
+        numberFormatter.locale = .current
 
-        // TODO: Localize the order text using the stringsdict file.
-        switch order {
-        case 1:
-            orderTitle = "1st"
-        case 2:
-            orderTitle = "2nd"
-        case 3:
-            orderTitle = "3rd"
-        default:
-            orderTitle = "\(order)th"
-        }
+        let orderText = numberFormatter.string(for: order)!
+        let dayOrderText = orderText + " " + NSLocalizedString("day", comment: "The nth day.") + "."
 
-        // TODO: Localize the order text using the stringsdict file.
-        let attributedString = NSMutableAttributedString(string: "\(orderTitle) day")
+        let attributedString = NSMutableAttributedString(string: dayOrderText)
         attributedString.addAttributes(
             [
                 NSAttributedString.Key.font: UIFont(name: "SFProText-Semibold", size: 20)!,
                 NSAttributedString.Key.foregroundColor: habitColor
             ],
-            range: NSRange(location: 0, length: orderTitle.count)
+            range: NSRange(location: 0, length: orderText.count)
         )
 
         currentDayTitleLabel.attributedText = attributedString

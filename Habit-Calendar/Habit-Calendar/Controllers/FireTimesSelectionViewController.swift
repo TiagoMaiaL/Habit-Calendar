@@ -124,10 +124,13 @@ class FireTimesSelectionViewController: UIViewController {
 
     /// Displays the amount of fire times selected by the user.
     private func displayFireTimesAmount() {
-        // TODO: Localize the fire times string using the strings dict.
-        fireTimesAmountLabel?.text = """
-        \(selectedFireTimes.count) selected fire time\(selectedFireTimes.count == 1 ? "" : "s")
-        """
+        fireTimesAmountLabel?.text = String.localizedStringWithFormat(
+            NSLocalizedString(
+                "%d selected fire time(s).",
+                comment: "The lable showing how many fire times were selected."
+            ),
+            selectedFireTimes.count
+        )
     }
 
     /// Updates the UI components according to the selection of fire times.

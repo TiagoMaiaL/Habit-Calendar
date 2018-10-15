@@ -31,8 +31,13 @@ extension HabitCreationTableViewController {
         if let days = days?.sorted(), !days.isEmpty {
             let formatter = DateFormatter.shortCurrent
             // Set the text for the label displaying the number of days.
-            // TODO: Localize this text in the strings dict file.
-            daysAmountLabel.text = "\(days.count) day\(days.count == 1 ? "" : "s") selected."
+            daysAmountLabel.text = String.localizedStringWithFormat(
+                NSLocalizedString(
+                    "%d day(s) selected.",
+                    comment: "The label showing how many days were selected for the challenge."
+                ),
+                days.count
+            )
             // Set the text for the label displaying initial day in the sequence.
             fromDayLabel.text = formatter.string(from: days.first!)
             // Set the text for the label displaying final day in the sequence.
