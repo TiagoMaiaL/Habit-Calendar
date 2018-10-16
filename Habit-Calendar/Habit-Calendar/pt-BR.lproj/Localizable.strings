@@ -38,6 +38,9 @@
    Title of the alert displayed when the user wants to delete a habit. */
 "Delete" = "Deletar";
 
+/* The subtitle of the user notifications. */
+"Did you practice this activity today?" = "Você praticou esta atividade hoje?";
+
 /* The title of the toolbar button. */
 "Done" = "Pronto";
 

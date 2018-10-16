@@ -28,22 +28,24 @@ struct NotificationScheduler {
     /// - Parameter notification: The notification from which the user
     ///                           notification will be generated.
     func makeNotificationOptions(for notification: NotificationMO) -> UserNotificationOptions {
+        guard let habit = notification.habit, let challenge = habit.getCurrentChallenge() else {
+            assertionFailure(
+                "The passed notification must have a valid habit entity (with an active challenge as well."
+            )
+            return (UNNotificationContent(), UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false))
+        }
+
         // Declare the notification contents with the correct attributes.
         let content = UNMutableNotificationContent()
-
-        if let habit = notification.habit {
-            content.title = habit.getTitleText()
-            content.subtitle = habit.getSubtitleText()
-            content.body = makeBodyText(from: notification)
-            content.categoryIdentifier = UNNotificationCategory.Kind.dayPrompt(
-                habitId: nil
-            ).identifier
-            content.userInfo["habitIdentifier"] = habit.id
-            content.sound = UNNotificationSound.default
-            content.badge = 1
-        } else {
-            assertionFailure("The passed notification must have a valid habit entity.")
-        }
+        content.title = habit.getTitleText()
+        content.subtitle = habit.getSubtitleText()
+        content.body = challenge.getNotificationText(for: Int(notification.dayOrder))
+        content.categoryIdentifier = UNNotificationCategory.Kind.dayPrompt(
+            habitId: nil
+        ).identifier
+        content.userInfo["habitIdentifier"] = habit.id
+        content.sound = UNNotificationSound.default
+        content.badge = 1
 
         // Declare the time interval used to schedule the notification.
         let fireDateTimeInterval = notification.getFireDate().timeIntervalSinceNow
@@ -57,29 +59,6 @@ struct NotificationScheduler {
         )
 
         return (content: content, trigger: trigger)
-    }
-
-    /// Creates the notification body text by using the dayOrder property of the notification entity.
-    /// - Parameter notification: The NotificationMO entity.
-    /// - Returns: The body text.
-    func makeBodyText(from notification: NotificationMO) -> String {
-        assert(notification.dayOrder > 0, "The dayOrder must be set and be greater than 0.")
-
-        let dayOrder = Int(notification.dayOrder)
-        var dayOrderText = String(dayOrder)
-
-        switch dayOrder {
-        case 1:
-            dayOrderText += "st"
-        case 2:
-            dayOrderText += "nd"
-        case 3:
-            dayOrderText += "rd"
-        default:
-            dayOrderText += "th"
-        }
-
-        return "Today is your \(dayOrderText) day."
     }
 
     /// Schedules an user notification associated with the passed entity.

@@ -45,19 +45,6 @@ class NotificationSchedulerTests: IntegrationTestCase {
 
     // MARK: Tests
 
-    func testBodyTextFactory() {
-        // 1. Declare a dummy notification.
-        let dummyNotification = notificationFactory.makeDummy()
-
-        // 1.1 Change its dayOrder to a random value.
-        let dayOrder = Int.random(1..<51)
-        dummyNotification.dayOrder = Int64(dayOrder)
-
-        // 2. Get the body text and assert on its content.
-        let text = notificationScheduler.makeBodyText(from: dummyNotification)
-        XCTAssertNotNil(text.range(of: String(dayOrder)))
-    }
-
     func testContentAndTriggerFactory() {
         // Test the factories for the user notification's trigger and content
         // options when a Notification entity is passed and the authorization

@@ -92,24 +92,9 @@ extension HabitDetailsViewController {
             formatter.string(from: currentChallenge.toDate!)
         )
 
-        // Get the order of the day in the challenge.
-        guard let orderedChallengeDays = currentChallenge.days?.sortedArray(
-            using: [NSSortDescriptor(key: "day.date", ascending: true)]
-            ) as? [HabitDayMO] else {
-                assertionFailure("Error: Couldn't get the challenge's sorted habit days.")
-                return
-        }
-        guard let dayIndex = orderedChallengeDays.index(of: currentDay) else {
-            assertionFailure("Error: Couldn't get the current day's index.")
-            return
-        }
-
         promptContentView.isHidden = false
-
         wasExecutedSwitch.onTintColor = habitColor
-
-        let order = dayIndex + 1
-        displayPromptViewTitle(withOrder: order)
+        displayPromptViewTitle(currentChallenge.getNotificationOrderText(for: currentDay))
 
         if currentDay.wasExecuted {
             wasExecutedSwitch.isOn = true
@@ -129,22 +114,15 @@ extension HabitDetailsViewController {
     }
 
     /// Configures the prompt view title text.
-    /// - Parameter order: the order of day in the current challenge.
-    private func displayPromptViewTitle(withOrder order: Int) {
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .ordinal
-        numberFormatter.locale = .current
-
-        let orderText = numberFormatter.string(for: order)!
-        let dayOrderText = orderText + " " + NSLocalizedString("day", comment: "The nth day.") + "."
-
-        let attributedString = NSMutableAttributedString(string: dayOrderText)
+    /// - Parameter title: The title string.
+    private func displayPromptViewTitle(_ title: String) {
+        let attributedString = NSMutableAttributedString(string: title)
         attributedString.addAttributes(
             [
                 NSAttributedString.Key.font: UIFont(name: "SFProText-Semibold", size: 20)!,
                 NSAttributedString.Key.foregroundColor: habitColor
             ],
-            range: NSRange(location: 0, length: orderText.count)
+            range: NSRange(location: 0, length: title.count)
         )
 
         currentDayTitleLabel.attributedText = attributedString
