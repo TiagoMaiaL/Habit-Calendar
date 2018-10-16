@@ -1,5 +1,5 @@
 //
-//  DateFormatter+Utils.swift
+//  Formatter+Utils.swift
 //  Active
 //
 //  Created by Tiago Maia Lopes on 17/08/18.
@@ -19,5 +19,15 @@ extension DateFormatter {
         formatter.dateStyle = .short
         return formatter
     }
+}
 
+extension NumberFormatter {
+
+    /// The local ordinal formatter.
+    static var localOrdinal: NumberFormatter {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .ordinal
+        formatter.locale = .current
+        return formatter
+    }
 }
