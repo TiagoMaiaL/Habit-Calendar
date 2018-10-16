@@ -22,8 +22,14 @@
 /* The message displayed when the habits couldn't be fetched. */
 "An error occurred while listing your habits. Please contact the developer." = "Ocorreu um erro enquanto os hábitos estavam sendo listados. Por favor, contate o desenvolvedor.";
 
+/* Error message displayed when there's an error to launch the app. */
+"An unrecoverable error happened. Please contact the app developer." = "Um erro irrecuperável ocorreu. Por favor, contate o desenvolvedor.";
+
 /* Alert message displayed when the user didn't select any fire time. */
 "Are you sure you don't want to be reminded about your habit?" = "Você tem certeza de que não deseja receber notificações para o seu hábito? ";
+
+/* Message of the alert displayed when the user wants to delete a habit. */
+"Are you sure you want to delete this habit? Deleting this habit will also delete its history." = "Tem certeza de que deseja deletar este hábito? Ao deletá-lo, todo o histórico será perdido.";
 
 /* No comment provided by engineer. */
 "Cancel" = "Cancelar";
@@ -81,6 +87,9 @@
 /* Message displayed when there's an error with the creation of a new challenge. */
 "The new challenge of days couldn't be added to the habit. Plase contact the developer." = "O desafio de dias não pôde ser adicionado ao hábito. Por favor, contate o desenvolvedor.";
 
+/* Message of the alert displayed when the habit couldn't be persisted. */
+"There was an error while the habit was being persisted. Please contact the developer." = "Ocorreu um erro enquanto o hábito estava sendo persistido. Por favor, contate o desenvolvedor.";
+
 /* Description of the days field in the edition controller. */
 "Would you like to begin a new challenge of days?" = "Você gostaria de começar um novo desafio de dias?";
 
@@ -92,6 +101,9 @@
 
 /* Message displayed when the user doesn't have any completed habit. */
 "You don't have any completed habits yet." = "Você não tem nenhum desafio completo ainda.";
+
+/* Message displayed when the user doesn't have any habit in progress. */
+"You don't have any habits in progress at the moment, what do you think of new challenges?" = "Você não tem nenhum hábito em progresso, o que você acha de novos desafios?";
 
 /* Message displayed when the user doesn't have any habit. */
 "You don't have any habits yet. Let's begin by adding a new one!" = "Você ainda não tem nenhum hábito. Vamos começar criando um!";

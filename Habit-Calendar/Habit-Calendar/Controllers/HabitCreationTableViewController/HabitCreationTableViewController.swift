@@ -298,10 +298,10 @@ class HabitCreationTableViewController: UITableViewController {
                 "Delete",
                 comment: "Title of the alert displayed when the user wants to delete a habit."
             ),
-            message: NSLocalizedString("""
-Are you sure you want to delete this habit? Deleting this habit makes all the history \
-information unavailable.
-""", comment: "Message of the alert displayed when the user wants to delete a habit."),
+            message: NSLocalizedString(
+                "Are you sure you want to delete this habit? Deleting this habit will also delete its history.",
+                comment: "Message of the alert displayed when the user wants to delete a habit."
+            ),
             preferredStyle: .alert
         )
         // Declare its actions.
@@ -388,9 +388,10 @@ information unavailable.
                             "Error",
                             comment: "Title of the alert displayed when the habit couldn't be persisted."
                         ),
-                        message: NSLocalizedString("""
-There was an error while the habit was being persisted. Please contact the developer.
-""", comment: "Message of the alert displayed when the habit couldn't be persisted.")
+                        message: NSLocalizedString(
+                            "There was an error while the habit was being persisted. Please contact the developer.",
+                            comment: "Message of the alert displayed when the habit couldn't be persisted."
+                        )
                     ),
                     animated: true
                 )

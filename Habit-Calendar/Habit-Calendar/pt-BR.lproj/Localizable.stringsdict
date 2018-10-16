@@ -13,11 +13,11 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>d</string>
 			<key>one</key>
-			<string>%d day executed.</string>
+			<string>%d dia executado.</string>
 			<key>other</key>
-			<string>%d days executed.</string>
+			<string>%d dias executados.</string>
 			<key>zero</key>
-			<string>%d days executed.</string>
+			<string>%d dias executados.</string>
 		</dict>
 	</dict>
 	<key>%d day(s) missed.</key>
@@ -31,11 +31,11 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>d</string>
 			<key>one</key>
-			<string>%d day missed.</string>
+			<string>%d dia perdido.</string>
 			<key>other</key>
-			<string>%d days missed.</string>
+			<string>%d dias perdidos.</string>
 			<key>zero</key>
-			<string>%d days missed.</string>
+			<string>%d dias perdidos.</string>
 		</dict>
 	</dict>
 	<key>%d day(s) selected.</key>
@@ -49,11 +49,11 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>d</string>
 			<key>one</key>
-			<string>%d day selected.</string>
+			<string>%d dia selecionado.</string>
 			<key>other</key>
-			<string>%d days selected.</string>
+			<string>%d dias selecionados.</string>
 			<key>zero</key>
-			<string>%d days selected.</string>
+			<string>%d dias selecionados.</string>
 		</dict>
 	</dict>
 	<key>%d day(s) to finish the challenge.</key>
@@ -67,11 +67,11 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>d</string>
 			<key>one</key>
-			<string>%d day to finish the challenge.</string>
+			<string>%d dia para finalizar o desafio.</string>
 			<key>other</key>
-			<string>%d days to finish the challenge.</string>
+			<string>%d dias para finalizar o desafio.</string>
 			<key>zero</key>
-			<string>%d days to finish the challenge.</string>
+			<string>%d dias para finalizar o desafio.</string>
 		</dict>
 	</dict>
 	<key>%d fire time(s) selected.</key>
@@ -85,11 +85,11 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>d</string>
 			<key>one</key>
-			<string>%d fire time selected.</string>
+			<string>%d alarme selecionado.</string>
 			<key>other</key>
-			<string>%d fire times selected.</string>
+			<string>%d alarmes selecionados.</string>
 			<key>zero</key>
-			<string>%d fire times selected.</string>
+			<string>%d alarmes selecionados.</string>
 		</dict>
 	</dict>
 	<key>%d selected fire time(s).</key>
@@ -103,11 +103,11 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>d</string>
 			<key>one</key>
-			<string>%d selected fire time.</string>
+			<string>%d alarme selecionado.</string>
 			<key>other</key>
-			<string>%d selected fire times.</string>
+			<string>%d alarmes selecionados.</string>
 			<key>zero</key>
-			<string>%d selected fire times.</string>
+			<string>%d alarmes selecionados.</string>
 		</dict>
 	</dict>
 </dict>

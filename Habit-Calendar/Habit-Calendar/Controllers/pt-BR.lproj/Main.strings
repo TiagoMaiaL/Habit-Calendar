@@ -1,3 +1,6 @@
+/* Class = "UILabel"; text = "Name"; ObjectID = "0AK-r5-sfZ"; */
+"0AK-r5-sfZ.text" = "Nome";
+
 /* Class = "UINavigationItem"; title = "Challenge of days"; ObjectID = "2Vo-cB-dmZ"; */
 "2Vo-cB-dmZ.title" = "Desafio de dias";
 
@@ -56,13 +59,16 @@
 "dNs-4f-fKj.text" = "Habilite as notifições de usuário para ser lembrado sobre os seus hábitos";
 
 /* Class = "UILabel"; text = "Keep track of the progress of the challenge, and the days you missed."; ObjectID = "dX3-aK-wEC"; */
-"dX3-aK-wEC.text" = "Observe o seu progresso diariamente, veja quantos dias você executou ou perdeu.";
+"dX3-aK-wEC.text" = "Acompanhe o seu progresso diariamente, veja quantos dias você executou ou perdeu, e quantos dias ainda faltam para finalizar o seu desafio.";
 
 /* Class = "UITableViewController"; title = "New Habit"; ObjectID = "e07-lh-rVp"; */
 "e07-lh-rVp.title" = "Novo hábito";
 
 /* Class = "UILabel"; text = "Challenge yourself"; ObjectID = "fMA-0Y-9jl"; */
 "fMA-0Y-9jl.text" = "Se desafie";
+
+/* Class = "UILabel"; text = "*"; ObjectID = "fR4-XP-FOU"; */
+"fR4-XP-FOU.text" = "*";
 
 /* Class = "UILabel"; text = "Did you execute this activity today?"; ObjectID = "FXo-XX-A07"; */
 "FXo-XX-A07.text" = "Você executou esta atividade hoje?";
@@ -88,6 +94,9 @@
 /* Class = "UIButton"; normalTitle = "Got it"; ObjectID = "Hvo-EF-j3D"; */
 "Hvo-EF-j3D.normalTitle" = "Entendi";
 
+/* Class = "UILabel"; text = "Habits"; ObjectID = "iC7-7Z-GhY"; */
+"iC7-7Z-GhY.text" = "Hábitos";
+
 /* Class = "UITextField"; placeholder = "Ex: Go jogging"; ObjectID = "IGr-WJ-mRM"; */
 "IGr-WJ-mRM.placeholder" = "Ex: Corrida";
 
@@ -99,6 +108,9 @@
 
 /* Class = "UILabel"; text = "For how many days will you keep doing this activity?"; ObjectID = "JOL-oE-7MJ"; */
 "JOL-oE-7MJ.text" = "Por quantos dias você vai fazer essa atividade?";
+
+/* Class = "UILabel"; text = "Color"; ObjectID = "JUM-W9-3bo"; */
+"JUM-W9-3bo.text" = "Cor";
 
 /* Class = "UIButton"; normalTitle = "New challenge"; ObjectID = "kvL-AD-FIe"; */
 "kvL-AD-FIe.normalTitle" = "Novo desafio";
@@ -116,7 +128,7 @@
 "mFI-ZJ-3fT.title" = "Limpar";
 
 /* Class = "UILabel"; text = "Commit to a habit by beginning a new challenge of days and checking your daily accomplishments."; ObjectID = "MLS-wP-bUS"; */
-"MLS-wP-bUS.text" = "Se comprometa a começar um hábito com um desafio de dias. Cheque o seu progresso diariamente.";
+"MLS-wP-bUS.text" = "Se comprometa a construir um hábito, executando a atividade durante os dias escolhidos por você no seu desafio de dias.";
 
 /* Class = "UINavigationItem"; title = "Notifications"; ObjectID = "mv3-a9-agy"; */
 "mv3-a9-agy.title" = "Notificações";
@@ -132,6 +144,9 @@
 
 /* Class = "UILabel"; text = "2 times selected"; ObjectID = "OSf-bA-IA0"; */
 "OSf-bA-IA0.text" = "2 times selected";
+
+/* Class = "UILabel"; text = "Challenge of days"; ObjectID = "pyb-N6-nac"; */
+"pyb-N6-nac.text" = "Desafio de dias";
 
 /* Class = "UILabel"; text = "User notifications are not authorized."; ObjectID = "qBa-YY-9xH"; */
 "qBa-YY-9xH.text" = "Notificações de usuário não estão autorizadas.";
@@ -181,6 +196,12 @@
 /* Class = "UIViewController"; title = "Read"; ObjectID = "wZd-FS-1mH"; */
 "wZd-FS-1mH.title" = "Read";
 
+/* Class = "UILabel"; text = "Start new"; ObjectID = "x7D-ar-eCD"; */
+"x7D-ar-eCD.text" = "Comece novos";
+
+/* Class = "UILabel"; text = "*"; ObjectID = "xao-gA-zVr"; */
+"xao-gA-zVr.text" = "*";
+
 /* Class = "UILabel"; text = "At what times would you like to be reminded about this habit?"; ObjectID = "XUS-SP-b8Q"; */
 "XUS-SP-b8Q.text" = "Em quais horas do dia você gostaria de receber notificações sobre esse hábito?";
 
@@ -192,4 +213,7 @@
 
 /* Class = "UIViewController"; title = "Days"; ObjectID = "zeZ-9t-rmb"; */
 "zeZ-9t-rmb.title" = "Dias";
+
+/* Class = "UILabel"; text = "*"; ObjectID = "ZZc-vs-FON"; */
+"ZZc-vs-FON.text" = "*";
 

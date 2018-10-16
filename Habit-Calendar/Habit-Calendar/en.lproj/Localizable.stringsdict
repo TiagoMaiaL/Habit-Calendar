@@ -20,24 +20,6 @@
 			<string>%d days selected.</string>
 		</dict>
 	</dict>
-	<key>%d selected fire time(s).</key>
-	<dict>
-		<key>NSStringLocalizedFormatKey</key>
-		<string>%#@firetimes@</string>
-		<key>firetimes</key>
-		<dict>
-			<key>NSStringFormatSpecTypeKey</key>
-			<string>NSStringPluralRuleType</string>
-			<key>NSStringFormatValueTypeKey</key>
-			<string>d</string>
-			<key>zero</key>
-			<string>%d selected fire times.</string>
-			<key>one</key>
-			<string>%d selected fire time.</string>
-			<key>other</key>
-			<string>%d selected fire times.</string>
-		</dict>
-	</dict>
 	<key>%d day(s) missed.</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
@@ -108,6 +90,24 @@
 			<string>%d fire time selected.</string>
 			<key>other</key>
 			<string>%d fire times selected.</string>
+		</dict>
+	</dict>
+	<key>%d selected fire time(s).</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@firetimes@</string>
+		<key>firetimes</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>%d selected fire times.</string>
+			<key>one</key>
+			<string>%d selected fire time.</string>
+			<key>other</key>
+			<string>%d selected fire times.</string>
 		</dict>
 	</dict>
 </dict>

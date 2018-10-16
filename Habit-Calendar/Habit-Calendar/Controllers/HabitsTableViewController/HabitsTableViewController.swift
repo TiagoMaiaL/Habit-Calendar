@@ -269,9 +269,10 @@ class HabitsTableViewController: UITableViewController {
 
             switch selectedSegment {
             case .inProgress:
-                emptyStateView.emptyLabel.text = NSLocalizedString("""
-                You don't have any habits in progress at the moment, what do you think of new challenges?
-                """, comment: "Message displayed when the user doesn't have any habit in progress.")
+                emptyStateView.emptyLabel.text = NSLocalizedString(
+                    "You don't have any habits in progress at the moment, what do you think of new challenges?",
+                    comment: "Message displayed when the user doesn't have any habit in progress."
+                )
                 emptyStateView.callToActionButton.isHidden = false
             case .completed:
                 emptyStateView.emptyLabel.text = NSLocalizedString(
