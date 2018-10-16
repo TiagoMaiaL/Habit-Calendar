@@ -62,6 +62,9 @@ class HabitCreationTableViewController: UITableViewController {
     /// The container showing that the user hasn't enabled user notifications.
     @IBOutlet weak var notAuthorizedContainer: UIStackView!
 
+    /// The labels indicating that the associated fields are required.
+    @IBOutlet var requiredLabelMarkers: [UILabel]!
+
     /// The container in which the habit is going to be persisted.
     var container: NSPersistentContainer!
 
@@ -174,6 +177,7 @@ class HabitCreationTableViewController: UITableViewController {
             title = NSLocalizedString("Edit habit", comment: "Title of the edition controller.")
             displayHabitProperties()
             configureDeletionButton()
+            requiredLabelMarkers.forEach { $0.isHidden = true }
         }
     }
 
