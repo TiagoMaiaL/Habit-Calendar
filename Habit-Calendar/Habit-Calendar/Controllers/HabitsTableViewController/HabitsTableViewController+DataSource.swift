@@ -43,7 +43,13 @@ extension HabitsTableViewController {
 
                 // And its progress.
                 let progress = habit.getCurrentChallenge()?.getCompletionProgress() ?? (0, 0)
-                cell.progressLabel?.text = "\(progress.0) / \(progress.1) completed days"
+                cell.progressLabel?.text = String.localizedStringWithFormat(
+                    NSLocalizedString(
+                        "%0.0f%% completed.",
+                        comment: "The percentage indicating the completion of the challenge."
+                    ),
+                    (Double(progress.0) / Double(progress.1)) * 100.0
+                )
                 cell.progressBar.tint = habit.getColor().uiColor
                 // Change the bar's progress (past days / total).
                 cell.progressBar.progress = CGFloat(Double(progress.0) / Double(progress.1))

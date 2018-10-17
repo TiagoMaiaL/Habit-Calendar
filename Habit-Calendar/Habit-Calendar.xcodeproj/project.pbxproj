@@ -61,7 +61,7 @@
 		470C41E02144B091007F6F35 /* NotificationStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4779588420D8B38B0080614F /* NotificationStorage.swift */; };
 		470C41E12144B091007F6F35 /* DaysChallengeMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D8308720FCE82F002D3A97 /* DaysChallengeMO.swift */; };
 		470C41E22144B091007F6F35 /* HabitCreationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E6C20A20EAF550003BDB4D /* HabitCreationTableViewController.swift */; };
-		470C41E32144B091007F6F35 /* DateFormatter+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474B7B9D212746BE00814A8E /* DateFormatter+Utils.swift */; };
+		470C41E32144B091007F6F35 /* Formatter+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474B7B9D212746BE00814A8E /* Formatter+Utils.swift */; };
 		470C41E42144B091007F6F35 /* HabitStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4725D05C20C8A96200C3B63F /* HabitStorage.swift */; };
 		470C41E52144B091007F6F35 /* HabitCreationTableViewController+FireTimesField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C32035213079770094BBF8 /* HabitCreationTableViewController+FireTimesField.swift */; };
 		470C41E62144B091007F6F35 /* DayFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475C96A320DEFC9500212E1F /* DayFactory.swift */; };
@@ -82,7 +82,6 @@
 		470C41F52144B091007F6F35 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4732CE752114E8A200E2770C /* ProgressView.swift */; };
 		470C41F92144B091007F6F35 /* SF-Pro-Display-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4732CE4B2114D9C100E2770C /* SF-Pro-Display-Semibold.otf */; };
 		470C41FA2144B091007F6F35 /* SF-Pro-Text-MediumItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4732CE3D2114D9B000E2770C /* SF-Pro-Text-MediumItalic.otf */; };
-		470C41FB2144B091007F6F35 /* EmptyStateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47160A4321387AAE00E717C9 /* EmptyStateView.xib */; };
 		470C41FC2144B091007F6F35 /* SF-Pro-Display-BlackItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4732CE442114D9B900E2770C /* SF-Pro-Display-BlackItalic.otf */; };
 		470C41FD2144B091007F6F35 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47F635FB20BB920D00AC4555 /* LaunchScreen.storyboard */; };
 		470C41FE2144B091007F6F35 /* SF-Pro-Text-SemiboldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4732CE512114D9C900E2770C /* SF-Pro-Text-SemiboldItalic.otf */; };
@@ -161,7 +160,7 @@
 		470C42512144B164007F6F35 /* NotificationStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4779588420D8B38B0080614F /* NotificationStorage.swift */; };
 		470C42522144B164007F6F35 /* DaysChallengeMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D8308720FCE82F002D3A97 /* DaysChallengeMO.swift */; };
 		470C42532144B164007F6F35 /* HabitCreationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E6C20A20EAF550003BDB4D /* HabitCreationTableViewController.swift */; };
-		470C42542144B164007F6F35 /* DateFormatter+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474B7B9D212746BE00814A8E /* DateFormatter+Utils.swift */; };
+		470C42542144B164007F6F35 /* Formatter+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474B7B9D212746BE00814A8E /* Formatter+Utils.swift */; };
 		470C42552144B164007F6F35 /* HabitStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4725D05C20C8A96200C3B63F /* HabitStorage.swift */; };
 		470C42562144B164007F6F35 /* HabitCreationTableViewController+FireTimesField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C32035213079770094BBF8 /* HabitCreationTableViewController+FireTimesField.swift */; };
 		470C42572144B164007F6F35 /* DayFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475C96A320DEFC9500212E1F /* DayFactory.swift */; };
@@ -182,7 +181,6 @@
 		470C42662144B164007F6F35 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4732CE752114E8A200E2770C /* ProgressView.swift */; };
 		470C426A2144B164007F6F35 /* SF-Pro-Display-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4732CE4B2114D9C100E2770C /* SF-Pro-Display-Semibold.otf */; };
 		470C426B2144B164007F6F35 /* SF-Pro-Text-MediumItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4732CE3D2114D9B000E2770C /* SF-Pro-Text-MediumItalic.otf */; };
-		470C426C2144B164007F6F35 /* EmptyStateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47160A4321387AAE00E717C9 /* EmptyStateView.xib */; };
 		470C426D2144B164007F6F35 /* SF-Pro-Display-BlackItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4732CE442114D9B900E2770C /* SF-Pro-Display-BlackItalic.otf */; };
 		470C426E2144B164007F6F35 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47F635FB20BB920D00AC4555 /* LaunchScreen.storyboard */; };
 		470C426F2144B164007F6F35 /* SF-Pro-Text-SemiboldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4732CE512114D9C900E2770C /* SF-Pro-Text-SemiboldItalic.otf */; };
@@ -234,7 +232,6 @@
 		4715A8FF216BC5B400713B23 /* HabitsShortcutItemsManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4715A8FB216BC46C00713B23 /* HabitsShortcutItemsManagerTests.swift */; };
 		47160A3F2137275B00E717C9 /* CompletedHabitTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47160A3E2137275B00E717C9 /* CompletedHabitTableViewCell.swift */; };
 		47160A4121372B2F00E717C9 /* RoundedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47160A4021372B2F00E717C9 /* RoundedView.swift */; };
-		47160A4421387AAE00E717C9 /* EmptyStateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47160A4321387AAE00E717C9 /* EmptyStateView.xib */; };
 		47160A4621387AC300E717C9 /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47160A4521387AC300E717C9 /* EmptyStateView.swift */; };
 		47160A48213B18F900E717C9 /* HabitStorageNotificationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47160A47213B18F900E717C9 /* HabitStorageNotificationTests.swift */; };
 		471D0AE3215A9E620095750A /* UIAlertController+Factories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471D0AE2215A9E620095750A /* UIAlertController+Factories.swift */; };
@@ -288,7 +285,7 @@
 		474A209520D00AFA00E0EBD0 /* DayStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474A209420D00AFA00E0EBD0 /* DayStorageTests.swift */; };
 		474A209720D1B02700E0EBD0 /* HabitStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474A209620D1B02700E0EBD0 /* HabitStorageTests.swift */; };
 		474A209C20D1B51300E0EBD0 /* DateUtilsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474A209B20D1B51300E0EBD0 /* DateUtilsTests.swift */; };
-		474B7B9E212746BE00814A8E /* DateFormatter+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474B7B9D212746BE00814A8E /* DateFormatter+Utils.swift */; };
+		474B7B9E212746BE00814A8E /* Formatter+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474B7B9D212746BE00814A8E /* Formatter+Utils.swift */; };
 		474F9C8620CC7E180094C19C /* Date+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474F9C8520CC7E180094C19C /* Date+Utils.swift */; };
 		474F9C8A20CE3F670094C19C /* IntegrationTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474F9C8920CE3F670094C19C /* IntegrationTestCase.swift */; };
 		474F9C8D20CEE2840094C19C /* UserStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474F9C8C20CEE2840094C19C /* UserStorageTests.swift */; };
@@ -324,6 +321,18 @@
 		47AA3659210382AB0008D2DC /* FireTimeStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AA3658210382AB0008D2DC /* FireTimeStorage.swift */; };
 		47AA365B2104D5E60008D2DC /* FireTimeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AA365A2104D5E60008D2DC /* FireTimeFactory.swift */; };
 		47B2398A212203F9009CB25C /* HabitMOColor+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B23989212203F9009CB25C /* HabitMOColor+UIColor.swift */; };
+		47BC53E221752F2300A5DC17 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 47BC53E021752F2300A5DC17 /* InfoPlist.strings */; };
+		47BC53E521752F2300A5DC17 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 47BC53E321752F2300A5DC17 /* Localizable.strings */; };
+		47BC53FE2176565C00A5DC17 /* EmptyStateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47BC54022176565C00A5DC17 /* EmptyStateView.xib */; };
+		47BC53FF2176565C00A5DC17 /* EmptyStateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47BC54022176565C00A5DC17 /* EmptyStateView.xib */; };
+		47BC54002176565C00A5DC17 /* EmptyStateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47BC54022176565C00A5DC17 /* EmptyStateView.xib */; };
+		47BC540521765D2E00A5DC17 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 47BC53E321752F2300A5DC17 /* Localizable.strings */; };
+		47BC540621765D2F00A5DC17 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 47BC53E321752F2300A5DC17 /* Localizable.strings */; };
+		47BC540721765D3300A5DC17 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 47BC53E021752F2300A5DC17 /* InfoPlist.strings */; };
+		47BC540821765D3500A5DC17 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 47BC53E021752F2300A5DC17 /* InfoPlist.strings */; };
+		47BC540A2176754800A5DC17 /* HabitCreationTableViewController+HabitHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47BC54092176754800A5DC17 /* HabitCreationTableViewController+HabitHandling.swift */; };
+		47BC540B2176754800A5DC17 /* HabitCreationTableViewController+HabitHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47BC54092176754800A5DC17 /* HabitCreationTableViewController+HabitHandling.swift */; };
+		47BC540C2176754800A5DC17 /* HabitCreationTableViewController+HabitHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47BC54092176754800A5DC17 /* HabitCreationTableViewController+HabitHandling.swift */; };
 		47C1F3DE212A140F00DDA7BB /* CalendarDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C1F3DD212A140F00DDA7BB /* CalendarDisplayable.swift */; };
 		47C32029212C57D10094BBF8 /* HabitDetailsViewController+ProgressSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C32028212C57D10094BBF8 /* HabitDetailsViewController+ProgressSection.swift */; };
 		47C3202B212DCC230094BBF8 /* HabitDetailsViewController+NoChallengesSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C3202A212DCC230094BBF8 /* HabitDetailsViewController+NoChallengesSection.swift */; };
@@ -371,6 +380,9 @@
 		47F635F820BB920900AC4555 /* Habit-Calendar.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 47F635F620BB920900AC4555 /* Habit-Calendar.xcdatamodeld */; };
 		47F635FA20BB920D00AC4555 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 47F635F920BB920D00AC4555 /* Assets.xcassets */; };
 		47F635FD20BB920D00AC4555 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47F635FB20BB920D00AC4555 /* LaunchScreen.storyboard */; };
+		47FB0C2C216F9DE5000BB956 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 47FB0C30216F9DE5000BB956 /* Localizable.stringsdict */; };
+		47FB0C2D216F9DE5000BB956 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 47FB0C30216F9DE5000BB956 /* Localizable.stringsdict */; };
+		47FB0C2E216F9DE5000BB956 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 47FB0C30216F9DE5000BB956 /* Localizable.stringsdict */; };
 		9E4741ED7011810FD00BF941 /* Pods_Habit_Calendar_Habit_Calendar_Stg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89D08208B03E9A306F89DFA9 /* Pods_Habit_Calendar_Habit_Calendar_Stg.framework */; };
 		F0B9EAD3EC4A253D66E6E19E /* Pods_Habit_CalendarTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4262C4E7635B46715D883F5 /* Pods_Habit_CalendarTests.framework */; };
 /* End PBXBuildFile section */
@@ -415,7 +427,6 @@
 		4715A8FB216BC46C00713B23 /* HabitsShortcutItemsManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitsShortcutItemsManagerTests.swift; sourceTree = "<group>"; };
 		47160A3E2137275B00E717C9 /* CompletedHabitTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedHabitTableViewCell.swift; sourceTree = "<group>"; };
 		47160A4021372B2F00E717C9 /* RoundedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedView.swift; sourceTree = "<group>"; };
-		47160A4321387AAE00E717C9 /* EmptyStateView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmptyStateView.xib; sourceTree = "<group>"; };
 		47160A4521387AC300E717C9 /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
 		47160A47213B18F900E717C9 /* HabitStorageNotificationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitStorageNotificationTests.swift; sourceTree = "<group>"; };
 		471D0AE2215A9E620095750A /* UIAlertController+Factories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Factories.swift"; sourceTree = "<group>"; };
@@ -467,7 +478,7 @@
 		474A209420D00AFA00E0EBD0 /* DayStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayStorageTests.swift; sourceTree = "<group>"; };
 		474A209620D1B02700E0EBD0 /* HabitStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitStorageTests.swift; sourceTree = "<group>"; };
 		474A209B20D1B51300E0EBD0 /* DateUtilsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtilsTests.swift; sourceTree = "<group>"; };
-		474B7B9D212746BE00814A8E /* DateFormatter+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Utils.swift"; sourceTree = "<group>"; };
+		474B7B9D212746BE00814A8E /* Formatter+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Formatter+Utils.swift"; sourceTree = "<group>"; };
 		474F9C8520CC7E180094C19C /* Date+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Utils.swift"; sourceTree = "<group>"; };
 		474F9C8920CE3F670094C19C /* IntegrationTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegrationTestCase.swift; sourceTree = "<group>"; };
 		474F9C8C20CEE2840094C19C /* UserStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStorageTests.swift; sourceTree = "<group>"; };
@@ -503,6 +514,11 @@
 		47AA3658210382AB0008D2DC /* FireTimeStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireTimeStorage.swift; sourceTree = "<group>"; };
 		47AA365A2104D5E60008D2DC /* FireTimeFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireTimeFactory.swift; sourceTree = "<group>"; };
 		47B23989212203F9009CB25C /* HabitMOColor+UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HabitMOColor+UIColor.swift"; sourceTree = "<group>"; };
+		47BC53E121752F2300A5DC17 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		47BC53E421752F2300A5DC17 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		47BC54012176565C00A5DC17 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/EmptyStateView.xib; sourceTree = "<group>"; };
+		47BC54042176566000A5DC17 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/EmptyStateView.strings"; sourceTree = "<group>"; };
+		47BC54092176754800A5DC17 /* HabitCreationTableViewController+HabitHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HabitCreationTableViewController+HabitHandling.swift"; sourceTree = "<group>"; };
 		47C1F3DD212A140F00DDA7BB /* CalendarDisplayable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDisplayable.swift; sourceTree = "<group>"; };
 		47C32028212C57D10094BBF8 /* HabitDetailsViewController+ProgressSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HabitDetailsViewController+ProgressSection.swift"; sourceTree = "<group>"; };
 		47C3202A212DCC230094BBF8 /* HabitDetailsViewController+NoChallengesSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HabitDetailsViewController+NoChallengesSection.swift"; sourceTree = "<group>"; };
@@ -538,6 +554,10 @@
 		47F635FE20BB920D00AC4555 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		47F6360320BB920D00AC4555 /* Habit-CalendarTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Habit-CalendarTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		47F6360920BB920D00AC4555 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		47FB0C2A216F9D81000BB956 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Main.strings"; sourceTree = "<group>"; };
+		47FB0C2B216F9D84000BB956 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		47FB0C2F216F9DE5000BB956 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = "pt-BR"; path = "pt-BR.lproj/Localizable.stringsdict"; sourceTree = "<group>"; };
+		47FB0C31216F9DF2000BB956 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		526255EDCB5FA3EB9A7C5FF7 /* Pods-Habit-CalendarTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Habit-CalendarTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Habit-CalendarTests/Pods-Habit-CalendarTests.release.xcconfig"; sourceTree = "<group>"; };
 		579A72317FF280C998EF8FD3 /* Pods-Habit-Calendar-Habit-Calendar-Dev.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Habit-Calendar-Habit-Calendar-Dev.release.xcconfig"; path = "Pods/Target Support Files/Pods-Habit-Calendar-Habit-Calendar-Dev/Pods-Habit-Calendar-Habit-Calendar-Dev.release.xcconfig"; sourceTree = "<group>"; };
 		76ED27CFE67DF2D0EDBE8934 /* Pods_Habit_Calendar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Habit_Calendar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -625,7 +645,7 @@
 		47160A4221387A4900E717C9 /* EmptyStateView */ = {
 			isa = PBXGroup;
 			children = (
-				47160A4321387AAE00E717C9 /* EmptyStateView.xib */,
+				47BC54022176565C00A5DC17 /* EmptyStateView.xib */,
 				47160A4521387AC300E717C9 /* EmptyStateView.swift */,
 			);
 			path = EmptyStateView;
@@ -751,7 +771,7 @@
 				474F9C8520CC7E180094C19C /* Date+Utils.swift */,
 				470230D720E5250A003A1F6E /* Int+Utils.swift */,
 				47E6C21E20EC16C8003BDB4D /* UIViewController+Utils.swift */,
-				474B7B9D212746BE00814A8E /* DateFormatter+Utils.swift */,
+				474B7B9D212746BE00814A8E /* Formatter+Utils.swift */,
 				470C416F213EE70D007F6F35 /* UNNotificationContent+Category.swift */,
 				470C42932145A52C007F6F35 /* UIColor+Palette.swift */,
 				47EE82EC214988270093A6D6 /* UserDefaults+Login.swift */,
@@ -916,6 +936,7 @@
 				47C32035213079770094BBF8 /* HabitCreationTableViewController+FireTimesField.swift */,
 				47C320372130799C0094BBF8 /* HabitCreationTableViewController+ColorField.swift */,
 				47C32039213079AD0094BBF8 /* HabitCreationTableViewController+NameField.swift */,
+				47BC54092176754800A5DC17 /* HabitCreationTableViewController+HabitHandling.swift */,
 			);
 			path = HabitCreationTableViewController;
 			sourceTree = "<group>";
@@ -973,8 +994,11 @@
 				47A8DF252154250E00468698 /* Protocols */,
 				47F6361220BB924100AC4555 /* Supporting Files */,
 				47F635FE20BB920D00AC4555 /* Info.plist */,
+				47BC53E021752F2300A5DC17 /* InfoPlist.strings */,
 				4796107A214C230900BFECFC /* Habit-Calendar-Dev-Info.plist */,
+				47BC53E321752F2300A5DC17 /* Localizable.strings */,
 				4796107B214C230900BFECFC /* Habit-Calendar-Stg-Info.plist */,
+				47FB0C30216F9DE5000BB956 /* Localizable.stringsdict */,
 			);
 			path = "Habit-Calendar";
 			sourceTree = "<group>";
@@ -1115,6 +1139,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"pt-BR",
 			);
 			mainGroup = 47F635E320BB920900AC4555;
 			productRefGroup = 47F635ED20BB920900AC4555 /* Products */;
@@ -1136,17 +1161,18 @@
 			files = (
 				470C41F92144B091007F6F35 /* SF-Pro-Display-Semibold.otf in Resources */,
 				470C41FA2144B091007F6F35 /* SF-Pro-Text-MediumItalic.otf in Resources */,
-				470C41FB2144B091007F6F35 /* EmptyStateView.xib in Resources */,
 				470C41FC2144B091007F6F35 /* SF-Pro-Display-BlackItalic.otf in Resources */,
 				470C41FD2144B091007F6F35 /* LaunchScreen.storyboard in Resources */,
 				470C41FE2144B091007F6F35 /* SF-Pro-Text-SemiboldItalic.otf in Resources */,
 				470C41FF2144B091007F6F35 /* SF-Pro-Display-Light.otf in Resources */,
 				470C42002144B091007F6F35 /* SF-Pro-Display-Medium.otf in Resources */,
 				470C42012144B091007F6F35 /* SF-Pro-Text-Heavy.otf in Resources */,
+				47BC53FF2176565C00A5DC17 /* EmptyStateView.xib in Resources */,
 				470C42022144B091007F6F35 /* SF-Pro-Text-RegularItalic.otf in Resources */,
 				470C42032144B091007F6F35 /* SF-Pro-Display-Thin.otf in Resources */,
 				470C42042144B091007F6F35 /* SF-Pro-Display-ThinItalic.otf in Resources */,
 				470C42052144B091007F6F35 /* SF-Pro-Text-Light.otf in Resources */,
+				47FB0C2D216F9DE5000BB956 /* Localizable.stringsdict in Resources */,
 				470C42062144B091007F6F35 /* SF-Pro-Display-Black.otf in Resources */,
 				470C42072144B091007F6F35 /* SF-Pro-Text-Bold.otf in Resources */,
 				470C42082144B091007F6F35 /* SF-Pro-Text-LightItalic.otf in Resources */,
@@ -1157,7 +1183,9 @@
 				470C420D2144B091007F6F35 /* Assets.xcassets in Resources */,
 				470C420E2144B091007F6F35 /* SF-Pro-Display-Ultralight.otf in Resources */,
 				470C420F2144B091007F6F35 /* SF-Pro-Display-SemiboldItalic.otf in Resources */,
+				47BC53E521752F2300A5DC17 /* Localizable.strings in Resources */,
 				470C42102144B091007F6F35 /* SF-Pro-Display-RegularItalic.otf in Resources */,
+				47BC53E221752F2300A5DC17 /* InfoPlist.strings in Resources */,
 				470C42112144B091007F6F35 /* SF-Pro-Text-HeavyItalic.otf in Resources */,
 				470C42122144B091007F6F35 /* SF-Pro-Text-Semibold.otf in Resources */,
 				470C42132144B091007F6F35 /* SF-Pro-Display-MediumItalic.otf in Resources */,
@@ -1177,17 +1205,20 @@
 			files = (
 				470C426A2144B164007F6F35 /* SF-Pro-Display-Semibold.otf in Resources */,
 				470C426B2144B164007F6F35 /* SF-Pro-Text-MediumItalic.otf in Resources */,
-				470C426C2144B164007F6F35 /* EmptyStateView.xib in Resources */,
 				470C426D2144B164007F6F35 /* SF-Pro-Display-BlackItalic.otf in Resources */,
 				470C426E2144B164007F6F35 /* LaunchScreen.storyboard in Resources */,
 				470C426F2144B164007F6F35 /* SF-Pro-Text-SemiboldItalic.otf in Resources */,
+				47BC540721765D3300A5DC17 /* InfoPlist.strings in Resources */,
 				470C42702144B164007F6F35 /* SF-Pro-Display-Light.otf in Resources */,
 				470C42712144B164007F6F35 /* SF-Pro-Display-Medium.otf in Resources */,
 				470C42722144B164007F6F35 /* SF-Pro-Text-Heavy.otf in Resources */,
 				470C42732144B164007F6F35 /* SF-Pro-Text-RegularItalic.otf in Resources */,
 				470C42742144B164007F6F35 /* SF-Pro-Display-Thin.otf in Resources */,
 				470C42752144B164007F6F35 /* SF-Pro-Display-ThinItalic.otf in Resources */,
+				47BC54002176565C00A5DC17 /* EmptyStateView.xib in Resources */,
 				470C42762144B164007F6F35 /* SF-Pro-Text-Light.otf in Resources */,
+				47BC540521765D2E00A5DC17 /* Localizable.strings in Resources */,
+				47FB0C2E216F9DE5000BB956 /* Localizable.stringsdict in Resources */,
 				470C42772144B164007F6F35 /* SF-Pro-Display-Black.otf in Resources */,
 				470C42782144B164007F6F35 /* SF-Pro-Text-Bold.otf in Resources */,
 				470C42792144B164007F6F35 /* SF-Pro-Text-LightItalic.otf in Resources */,
@@ -1218,17 +1249,20 @@
 			files = (
 				4732CE692114D9D100E2770C /* SF-Pro-Display-Semibold.otf in Resources */,
 				4732CE5B2114D9D100E2770C /* SF-Pro-Text-MediumItalic.otf in Resources */,
-				47160A4421387AAE00E717C9 /* EmptyStateView.xib in Resources */,
 				4732CE622114D9D100E2770C /* SF-Pro-Display-BlackItalic.otf in Resources */,
 				47F635FD20BB920D00AC4555 /* LaunchScreen.storyboard in Resources */,
 				4732CE6F2114D9D100E2770C /* SF-Pro-Text-SemiboldItalic.otf in Resources */,
+				47BC540821765D3500A5DC17 /* InfoPlist.strings in Resources */,
 				4732CE6B2114D9D100E2770C /* SF-Pro-Display-Light.otf in Resources */,
 				4732CE722114D9D100E2770C /* SF-Pro-Display-Medium.otf in Resources */,
 				4732CE672114D9D100E2770C /* SF-Pro-Text-Heavy.otf in Resources */,
 				4732CE612114D9D100E2770C /* SF-Pro-Text-RegularItalic.otf in Resources */,
 				4732CE712114D9D100E2770C /* SF-Pro-Display-Thin.otf in Resources */,
 				4732CE632114D9D100E2770C /* SF-Pro-Display-ThinItalic.otf in Resources */,
+				47BC53FE2176565C00A5DC17 /* EmptyStateView.xib in Resources */,
 				4732CE662114D9D100E2770C /* SF-Pro-Text-Light.otf in Resources */,
+				47BC540621765D2F00A5DC17 /* Localizable.strings in Resources */,
+				47FB0C2C216F9DE5000BB956 /* Localizable.stringsdict in Resources */,
 				4732CE602114D9D100E2770C /* SF-Pro-Display-Black.otf in Resources */,
 				4732CE652114D9D100E2770C /* SF-Pro-Text-Bold.otf in Resources */,
 				4732CE5F2114D9D100E2770C /* SF-Pro-Text-LightItalic.otf in Resources */,
@@ -1492,13 +1526,14 @@
 				470C41DB2144B091007F6F35 /* HabitTableViewCell.swift in Sources */,
 				470C41DC2144B091007F6F35 /* CalendarDisplayable.swift in Sources */,
 				470C41DD2144B091007F6F35 /* HabitMO.swift in Sources */,
+				47BC540B2176754800A5DC17 /* HabitCreationTableViewController+HabitHandling.swift in Sources */,
 				470C41DE2144B091007F6F35 /* HabitDetailsViewController+FireTimesSection.swift in Sources */,
 				470C41DF2144B091007F6F35 /* CardView.swift in Sources */,
 				471D0AE6215AA11A0095750A /* UIAlertController+Factories.swift in Sources */,
 				470C41E02144B091007F6F35 /* NotificationStorage.swift in Sources */,
 				470C41E12144B091007F6F35 /* DaysChallengeMO.swift in Sources */,
 				470C41E22144B091007F6F35 /* HabitCreationTableViewController.swift in Sources */,
-				470C41E32144B091007F6F35 /* DateFormatter+Utils.swift in Sources */,
+				470C41E32144B091007F6F35 /* Formatter+Utils.swift in Sources */,
 				470C41E42144B091007F6F35 /* HabitStorage.swift in Sources */,
 				470C41E52144B091007F6F35 /* HabitCreationTableViewController+FireTimesField.swift in Sources */,
 				470C41E62144B091007F6F35 /* DayFactory.swift in Sources */,
@@ -1579,13 +1614,14 @@
 				470C424C2144B164007F6F35 /* HabitTableViewCell.swift in Sources */,
 				470C424D2144B164007F6F35 /* CalendarDisplayable.swift in Sources */,
 				470C424E2144B164007F6F35 /* HabitMO.swift in Sources */,
+				47BC540C2176754800A5DC17 /* HabitCreationTableViewController+HabitHandling.swift in Sources */,
 				470C424F2144B164007F6F35 /* HabitDetailsViewController+FireTimesSection.swift in Sources */,
 				470C42502144B164007F6F35 /* CardView.swift in Sources */,
 				471D0AE7215AA11A0095750A /* UIAlertController+Factories.swift in Sources */,
 				470C42512144B164007F6F35 /* NotificationStorage.swift in Sources */,
 				470C42522144B164007F6F35 /* DaysChallengeMO.swift in Sources */,
 				470C42532144B164007F6F35 /* HabitCreationTableViewController.swift in Sources */,
-				470C42542144B164007F6F35 /* DateFormatter+Utils.swift in Sources */,
+				470C42542144B164007F6F35 /* Formatter+Utils.swift in Sources */,
 				470C42552144B164007F6F35 /* HabitStorage.swift in Sources */,
 				470C42562144B164007F6F35 /* HabitCreationTableViewController+FireTimesField.swift in Sources */,
 				470C42572144B164007F6F35 /* DayFactory.swift in Sources */,
@@ -1666,6 +1702,7 @@
 				4725D06320CA14A600C3B63F /* HabitDayStorage.swift in Sources */,
 				4732CE782114F23200E2770C /* HabitTableViewCell.swift in Sources */,
 				47C1F3DE212A140F00DDA7BB /* CalendarDisplayable.swift in Sources */,
+				47BC540A2176754800A5DC17 /* HabitCreationTableViewController+HabitHandling.swift in Sources */,
 				4713A1FE20C16459008A13D2 /* HabitMO.swift in Sources */,
 				47C32031212EFD380094BBF8 /* HabitDetailsViewController+FireTimesSection.swift in Sources */,
 				471D0AE3215A9E620095750A /* UIAlertController+Factories.swift in Sources */,
@@ -1673,7 +1710,7 @@
 				4779588520D8B38B0080614F /* NotificationStorage.swift in Sources */,
 				47D8308820FCE82F002D3A97 /* DaysChallengeMO.swift in Sources */,
 				47E6C20B20EAF550003BDB4D /* HabitCreationTableViewController.swift in Sources */,
-				474B7B9E212746BE00814A8E /* DateFormatter+Utils.swift in Sources */,
+				474B7B9E212746BE00814A8E /* Formatter+Utils.swift in Sources */,
 				4725D05D20C8A96200C3B63F /* HabitStorage.swift in Sources */,
 				47C32036213079770094BBF8 /* HabitCreationTableViewController+FireTimesField.swift in Sources */,
 				47E6C21320EB12A2003BDB4D /* DayFactory.swift in Sources */,
@@ -1744,10 +1781,36 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		47BC53E021752F2300A5DC17 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				47BC53E121752F2300A5DC17 /* pt-BR */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		47BC53E321752F2300A5DC17 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				47BC53E421752F2300A5DC17 /* pt-BR */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		47BC54022176565C00A5DC17 /* EmptyStateView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				47BC54012176565C00A5DC17 /* Base */,
+				47BC54042176566000A5DC17 /* pt-BR */,
+			);
+			name = EmptyStateView.xib;
+			sourceTree = "<group>";
+		};
 		47F635F320BB920900AC4555 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				47F635F420BB920900AC4555 /* Base */,
+				47FB0C2A216F9D81000BB956 /* pt-BR */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -1756,8 +1819,18 @@
 			isa = PBXVariantGroup;
 			children = (
 				47F635FC20BB920D00AC4555 /* Base */,
+				47FB0C2B216F9D84000BB956 /* pt-BR */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		47FB0C30216F9DE5000BB956 /* Localizable.stringsdict */ = {
+			isa = PBXVariantGroup;
+			children = (
+				47FB0C2F216F9DE5000BB956 /* pt-BR */,
+				47FB0C31216F9DF2000BB956 /* en */,
+			);
+			name = Localizable.stringsdict;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -1859,6 +1932,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_EMPTY_CONTEXT = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1919,6 +1994,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_EMPTY_CONTEXT = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

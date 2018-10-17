@@ -1,0 +1,219 @@
+/* Class = "UILabel"; text = "Name"; ObjectID = "0AK-r5-sfZ"; */
+"0AK-r5-sfZ.text" = "Nome";
+
+/* Class = "UINavigationItem"; title = "Challenge of days"; ObjectID = "2Vo-cB-dmZ"; */
+"2Vo-cB-dmZ.title" = "Desafio de dias";
+
+/* Class = "UILabel"; text = "--"; ObjectID = "4Ii-SK-90P"; */
+"4Ii-SK-90P.text" = "--";
+
+/* Class = "UILabel"; text = "Get notified"; ObjectID = "7gs-8L-Lmk"; */
+"7gs-8L-Lmk.text" = "Receba notificações";
+
+/* Class = "UIBarButtonItem"; title = "Clear"; ObjectID = "11t-ft-cFW"; */
+"11t-ft-cFW.title" = "Limpar";
+
+/* Class = "UILabel"; text = "Enable the user notifications in the Settings app to be reminded of your habits."; ObjectID = "48O-rX-eeq"; */
+"48O-rX-eeq.text" = "Habilite as notificações no app de Ajustes para ser lembrado dos seus hábitos.";
+
+/* Class = "UILabel"; text = "What would you like to start doing?"; ObjectID = "60s-II-rIh"; */
+"60s-II-rIh.text" = "O que você gostaria de começar a fazer?";
+
+/* Class = "UILabel"; text = "Design"; ObjectID = "A55-Nz-kvc"; */
+"A55-Nz-kvc.text" = "Design";
+
+/* Class = "UILabel"; text = "5 days missed."; ObjectID = "ACk-Cd-HNW"; */
+"ACk-Cd-HNW.text" = "5 days missed.";
+
+/* Class = "UILabel"; text = "12:00pm, 15:00pm"; ObjectID = "aGK-JJ-zui"; */
+"aGK-JJ-zui.text" = "12:00pm, 15:00pm";
+
+/* Class = "UILabel"; text = "Yes, I did it."; ObjectID = "AkU-5d-3Oh"; */
+"AkU-5d-3Oh.text" = "Yes, I did it.";
+
+/* Class = "UILabel"; text = "From 10/09/18, to 25/09/18"; ObjectID = "ARc-nS-7ID"; */
+"ARc-nS-7ID.text" = "From 10/09/18, to 25/09/18";
+
+/* Class = "UILabel"; text = "30th day"; ObjectID = "B0i-n0-rre"; */
+"B0i-n0-rre.text" = "30th day";
+
+/* Class = "UILabel"; text = "Play guitar"; ObjectID = "Bjx-cs-62X"; */
+"Bjx-cs-62X.text" = "Play guitar";
+
+/* Class = "UILabel"; text = "two times were selected:"; ObjectID = "C8L-3d-lkg"; */
+"C8L-3d-lkg.text" = "two times were selected:";
+
+/* Class = "UILabel"; text = "To:"; ObjectID = "CQ4-LS-NZO"; */
+"CQ4-LS-NZO.text" = "Até:";
+
+/* Class = "UIButton"; normalTitle = "done"; ObjectID = "Cqd-Qf-JuL"; */
+"Cqd-Qf-JuL.normalTitle" = "pronto";
+
+/* Class = "UIButton"; normalTitle = "Create"; ObjectID = "D90-7S-rS4"; */
+"D90-7S-rS4.normalTitle" = "Criar";
+
+/* Class = "UILabel"; text = "Change your lifestyle by building \nnew habits and getting things done.\nAdd as many habits as you wish."; ObjectID = "DM9-ag-tED"; */
+"DM9-ag-tED.text" = "Construa novos hábitos e mude o seu estilo de vida. Adicione quantos hábitos achar necessário.";
+
+/* Class = "UILabel"; text = "Enable the user notifications to be reminded about your habits"; ObjectID = "dNs-4f-fKj"; */
+"dNs-4f-fKj.text" = "Habilite as notifições de usuário para ser lembrado sobre os seus hábitos";
+
+/* Class = "UILabel"; text = "Keep track of the progress of the challenge, and the days you missed."; ObjectID = "dX3-aK-wEC"; */
+"dX3-aK-wEC.text" = "Acompanhe o seu progresso diariamente, veja quantos dias você executou ou perdeu, e quantos dias ainda faltam para finalizar o seu desafio.";
+
+/* Class = "UITableViewController"; title = "New Habit"; ObjectID = "e07-lh-rVp"; */
+"e07-lh-rVp.title" = "Novo hábito";
+
+/* Class = "UILabel"; text = "Challenge yourself"; ObjectID = "fMA-0Y-9jl"; */
+"fMA-0Y-9jl.text" = "Se desafie";
+
+/* Class = "UILabel"; text = "*"; ObjectID = "fR4-XP-FOU"; */
+"fR4-XP-FOU.text" = "*";
+
+/* Class = "UILabel"; text = "Did you execute this activity today?"; ObjectID = "FXo-XX-A07"; */
+"FXo-XX-A07.text" = "Você executou esta atividade hoje?";
+
+/* Class = "UILabel"; text = "You don’t have an active\nchallange for this habit. What do\nyou think of adding a new one?"; ObjectID = "Gas-Uk-a7r"; */
+"Gas-Uk-a7r.text" = "Você não está em um desafio de dias no momento, você gostaria de começar um para este hábito?";
+
+/* Class = "UILabel"; text = "89 days selected"; ObjectID = "GyR-VK-GCC"; */
+"GyR-VK-GCC.text" = "89 days selected";
+
+/* Class = "UILabel"; text = "Receive daily notifications by configuring the times you wish to get reminded about your habits."; ObjectID = "hbQ-cV-prp"; */
+"hbQ-cV-prp.text" = "Receba notificações diariamente ao configurar os alarmes para cada um dos seus hábitos.";
+
+/* Class = "UILabel"; text = "07 / 89 days"; ObjectID = "hH7-d5-qyV"; */
+"hH7-d5-qyV.text" = "07 / 89 days";
+
+/* Class = "UILabel"; text = "Current challenge"; ObjectID = "HNV-Ys-NMS"; */
+"HNV-Ys-NMS.text" = "Desafio atual";
+
+/* Class = "UIViewController"; title = "Notifications"; ObjectID = "hr1-dK-bvy"; */
+"hr1-dK-bvy.title" = "Notificações";
+
+/* Class = "UIButton"; normalTitle = "Got it"; ObjectID = "Hvo-EF-j3D"; */
+"Hvo-EF-j3D.normalTitle" = "Entendi";
+
+/* Class = "UILabel"; text = "Habits"; ObjectID = "iC7-7Z-GhY"; */
+"iC7-7Z-GhY.text" = "Hábitos";
+
+/* Class = "UITextField"; placeholder = "Ex: Go jogging"; ObjectID = "IGr-WJ-mRM"; */
+"IGr-WJ-mRM.placeholder" = "Ex: Corrida";
+
+/* Class = "UIButton"; normalTitle = "New fire times"; ObjectID = "iwj-aA-khj"; */
+"iwj-aA-khj.normalTitle" = "Novo alarme";
+
+/* Class = "UILabel"; text = "Notifications"; ObjectID = "jfL-Qf-BsI"; */
+"jfL-Qf-BsI.text" = "Notificações";
+
+/* Class = "UILabel"; text = "For how many days will you keep doing this activity?"; ObjectID = "JOL-oE-7MJ"; */
+"JOL-oE-7MJ.text" = "Por quantos dias você vai fazer essa atividade?";
+
+/* Class = "UILabel"; text = "Color"; ObjectID = "JUM-W9-3bo"; */
+"JUM-W9-3bo.text" = "Cor";
+
+/* Class = "UIButton"; normalTitle = "New challenge"; ObjectID = "kvL-AD-FIe"; */
+"kvL-AD-FIe.normalTitle" = "Novo desafio";
+
+/* Class = "UILabel"; text = "From: 07/09/2018, to: 09/11/2018"; ObjectID = "L7z-qI-NEn"; */
+"L7z-qI-NEn.text" = "From: 07/09/2018, to: 09/11/2018";
+
+/* Class = "UILabel"; text = "Notifications"; ObjectID = "Lr3-PR-xA7"; */
+"Lr3-PR-xA7.text" = "Notificações";
+
+/* Class = "UINavigationItem"; title = "Play guitar"; ObjectID = "LZl-wy-YbF"; */
+"LZl-wy-YbF.title" = "Play guitar";
+
+/* Class = "UIBarButtonItem"; title = "Clear"; ObjectID = "mFI-ZJ-3fT"; */
+"mFI-ZJ-3fT.title" = "Limpar";
+
+/* Class = "UILabel"; text = "Commit to a habit by beginning a new challenge of days and checking your daily accomplishments."; ObjectID = "MLS-wP-bUS"; */
+"MLS-wP-bUS.text" = "Se comprometa a construir um hábito, executando a atividade durante os dias escolhidos por você no seu desafio de dias.";
+
+/* Class = "UINavigationItem"; title = "Notifications"; ObjectID = "mv3-a9-agy"; */
+"mv3-a9-agy.title" = "Notificações";
+
+/* Class = "UILabel"; text = "0 fire times selected"; ObjectID = "Nz0-4c-Qss"; */
+"Nz0-4c-Qss.text" = "0 fire times selected";
+
+/* Class = "UILabel"; text = "0 days selected"; ObjectID = "oC3-Pu-dRa"; */
+"oC3-Pu-dRa.text" = "0 days selected";
+
+/* Class = "UILabel"; text = "Fire times"; ObjectID = "oEs-Aq-yqx"; */
+"oEs-Aq-yqx.text" = "Alarmes";
+
+/* Class = "UILabel"; text = "2 times selected"; ObjectID = "OSf-bA-IA0"; */
+"OSf-bA-IA0.text" = "2 times selected";
+
+/* Class = "UILabel"; text = "Challenge of days"; ObjectID = "pyb-N6-nac"; */
+"pyb-N6-nac.text" = "Desafio de dias";
+
+/* Class = "UILabel"; text = "User notifications are not authorized."; ObjectID = "qBa-YY-9xH"; */
+"qBa-YY-9xH.text" = "Notificações de usuário não estão autorizadas.";
+
+/* Class = "UILabel"; text = "--"; ObjectID = "qbf-Ac-7Ay"; */
+"qbf-Ac-7Ay.text" = "--";
+
+/* Class = "UILabel"; text = "User notifications are not authorized."; ObjectID = "qed-rw-VaE"; */
+"qed-rw-VaE.text" = "Notificações de usuário não estão autorizadas.";
+
+/* Class = "UILabel"; text = "25 days executed."; ObjectID = "qf6-KL-TXJ"; */
+"qf6-KL-TXJ.text" = "25 days executed.";
+
+/* Class = "UITableViewController"; title = "Habits"; ObjectID = "QhD-k9-yHg"; */
+"QhD-k9-yHg.title" = "Hábitos";
+
+/* Class = "UILabel"; text = "--"; ObjectID = "qIT-Tk-yq9"; */
+"qIT-Tk-yq9.text" = "--";
+
+/* Class = "UISegmentedControl"; qVn-Re-KHh.segmentTitles[0] = "In progress"; ObjectID = "qVn-Re-KHh"; */
+"qVn-Re-KHh.segmentTitles[0]" = "Em progresso";
+
+/* Class = "UISegmentedControl"; qVn-Re-KHh.segmentTitles[1] = "Completed"; ObjectID = "qVn-Re-KHh"; */
+"qVn-Re-KHh.segmentTitles[1]" = "Completos";
+
+/* Class = "UILabel"; text = "Fire times"; ObjectID = "sAk-0M-OS2"; */
+"sAk-0M-OS2.text" = "Alarmes";
+
+/* Class = "UILabel"; text = "8 days to finish the challenge."; ObjectID = "sDl-b5-BNm"; */
+"sDl-b5-BNm.text" = "8 days to finish the challenge.";
+
+/* Class = "UILabel"; text = "From:"; ObjectID = "TgM-TB-tff"; */
+"TgM-TB-tff.text" = "De:";
+
+/* Class = "UILabel"; text = "Progress"; ObjectID = "Tit-Hr-iPN"; */
+"Tit-Hr-iPN.text" = "Progresso";
+
+/* Class = "UINavigationItem"; title = "Habits"; ObjectID = "VDb-Iq-agm"; */
+"VDb-Iq-agm.title" = "Hábitos";
+
+/* Class = "UILabel"; text = "Fire times"; ObjectID = "wUQ-bj-3jO"; */
+"wUQ-bj-3jO.text" = "Alarmes";
+
+/* Class = "UILabel"; text = "00:00"; ObjectID = "wyh-eF-kYV"; */
+"wyh-eF-kYV.text" = "00:00";
+
+/* Class = "UIViewController"; title = "Read"; ObjectID = "wZd-FS-1mH"; */
+"wZd-FS-1mH.title" = "Read";
+
+/* Class = "UILabel"; text = "Start new"; ObjectID = "x7D-ar-eCD"; */
+"x7D-ar-eCD.text" = "Comece novos";
+
+/* Class = "UILabel"; text = "*"; ObjectID = "xao-gA-zVr"; */
+"xao-gA-zVr.text" = "*";
+
+/* Class = "UILabel"; text = "At what times would you like to be reminded about this habit?"; ObjectID = "XUS-SP-b8Q"; */
+"XUS-SP-b8Q.text" = "Em quais horas do dia você gostaria de receber notificações sobre esse hábito?";
+
+/* Class = "UILabel"; text = "You currently don’t have any selected fire times for this habit. Fire times help you by reminding you about this habit at specific times of the day."; ObjectID = "yeb-ra-Zcx"; */
+"yeb-ra-Zcx.text" = "Você não tem nenhum alarme para esse hábito. Configure alarmes para esse hábito e receba notificações diariamente.";
+
+/* Class = "UIButton"; normalTitle = "Done"; ObjectID = "ZDt-Pv-rzP"; */
+"ZDt-Pv-rzP.normalTitle" = "Pronto";
+
+/* Class = "UIViewController"; title = "Days"; ObjectID = "zeZ-9t-rmb"; */
+"zeZ-9t-rmb.title" = "Dias";
+
+/* Class = "UILabel"; text = "*"; ObjectID = "ZZc-vs-FON"; */
+"ZZc-vs-FON.text" = "*";
+

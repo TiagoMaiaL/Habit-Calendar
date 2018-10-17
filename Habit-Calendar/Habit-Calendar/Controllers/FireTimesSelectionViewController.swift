@@ -64,18 +64,10 @@ class FireTimesSelectionViewController: UIViewController {
         super.viewDidLoad()
 
         // Make assertions on the required dependencies.
-        assert(
-            themeColor != nil,
-            "The controller's theme color should be properly injected."
-        )
+        assert(themeColor != nil, "The controller's theme color should be properly injected.")
 
         // Configure the tableView's content insets.
-        tableView.contentInset = UIEdgeInsets(
-            top: 0,
-            left: 0,
-            bottom: 120,
-            right: 0
-        )
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 120, right: 0)
 
         // Configure the done button's theme color.
         doneButton.backgroundColor = themeColor
@@ -89,12 +81,25 @@ class FireTimesSelectionViewController: UIViewController {
     @IBAction func selectFireTimes(_ sender: UIButton) {
         if selectedFireTimes.isEmpty {
             let alert = UIAlertController(
-                title: "No fire times selected",
-                message: "Are you sure you don't want to be reminded about your habit?",
+                title: NSLocalizedString(
+                    "No fire times selected",
+                    comment: "Alert title displayed when the user didn't select any fire time."
+                ),
+                message: NSLocalizedString(
+                    "Are you sure you don't want to be reminded about your habit?",
+                    comment: "Alert message displayed when the user didn't select any fire time."
+                ),
                 preferredStyle: .alert
             )
-            alert.addAction(UIAlertAction(title: "Yes", style: .default) { _ in self.endSelection() })
-            alert.addAction(UIAlertAction(title: "Cancel", style: .default))
+            alert.addAction(
+                UIAlertAction(
+                    title: NSLocalizedString("Yes", comment: ""),
+                    style: .default
+                ) { _ in self.endSelection() }
+            )
+            alert.addAction(
+                UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .default)
+            )
 
             present(alert, animated: true)
         } else {
@@ -119,9 +124,13 @@ class FireTimesSelectionViewController: UIViewController {
 
     /// Displays the amount of fire times selected by the user.
     private func displayFireTimesAmount() {
-        fireTimesAmountLabel?.text = """
-        \(selectedFireTimes.count) selected fire time\(selectedFireTimes.count == 1 ? "" : "s")
-        """
+        fireTimesAmountLabel?.text = String.localizedStringWithFormat(
+            NSLocalizedString(
+                "%d selected fire time(s).",
+                comment: "The lable showing how many fire times were selected."
+            ),
+            selectedFireTimes.count
+        )
     }
 
     /// Updates the UI components according to the selection of fire times.

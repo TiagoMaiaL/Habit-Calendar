@@ -382,6 +382,31 @@ class DaysChallengeTests: IntegrationTestCase {
         XCTAssertFalse(challenge.isClosed)
     }
 
+    func testGettingNotificationOrderText() {
+        // 1. Declare a dummy challenge.
+        let dates = (0..<5).map { Date().byAddingDays($0)!.getBeginningOfDay() }
+        let dummyChallenge = daysChallengeFactory.makeDummy(using: dates)
+
+        // 2. Get a random day.
+        let sortDescriptor = NSSortDescriptor(key: "day.date", ascending: true)
+        guard let days = dummyChallenge.days?.sortedArray(using: [sortDescriptor]) as? [HabitDayMO] else {
+            XCTFail("Couldn't get the challenge's days.")
+            return
+        }
+
+        // 3. Get the text related to it and make assertions.
+        let randomIndex = Int.random(0..<days.count)
+        let order = randomIndex + 1
+        let text = dummyChallenge.getNotificationOrderText(for: days[randomIndex])
+
+        XCTAssertFalse(text.isEmpty)
+        guard let range = text.range(of: String(order)) else {
+            XCTFail("Couldn't find the range of the order text.")
+            return
+        }
+        XCTAssertFalse(range.isEmpty)
+    }
+
     // MARK: Imperatives
 
     /// Generates habit days with its dates generated from the passed range.

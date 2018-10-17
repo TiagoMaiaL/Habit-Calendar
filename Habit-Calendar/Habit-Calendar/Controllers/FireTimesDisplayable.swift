@@ -33,6 +33,10 @@ protocol FireTimesDisplayable {
 extension FireTimesDisplayable {
 
     func getText(from fireTimes: [FireTime]) -> String {
+        guard !fireTimes.isEmpty else {
+            return "--"
+        }
+
         // Set the text for the label displaying some of the selected fire times:
         let fireTimeFormatter = DateFormatter.makeFireTimeDateFormatter()
         let fireDates = fireTimes.compactMap {
@@ -54,13 +58,14 @@ extension FireTimesDisplayable {
     }
 
     func displayFireTimes(_ fireTimes: [FireTime]) {
-        if !fireTimes.isEmpty {
-            // Set the text for the label displaying the amount of fire times.
-            fireTimesAmountLabel.text = "\(fireTimes.count) fire time\(fireTimes.count == 1 ? "" : "s") selected."
-            fireTimesLabel.text = getText(from: fireTimes)
-        } else {
-            fireTimesAmountLabel.text = "No fire times selected."
-            fireTimesLabel.text = "--"
-        }
+        // Set the text for the label displaying the amount of fire times.
+        fireTimesAmountLabel.text = String.localizedStringWithFormat(
+            NSLocalizedString(
+                "%d fire time(s) selected.",
+                comment: "The number of fire times selected by the user."
+            ),
+            fireTimes.count
+        )
+        fireTimesLabel.text = getText(from: fireTimes)
     }
 }

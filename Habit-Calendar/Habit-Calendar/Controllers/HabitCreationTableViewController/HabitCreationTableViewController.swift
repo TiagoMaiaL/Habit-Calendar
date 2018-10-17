@@ -62,6 +62,9 @@ class HabitCreationTableViewController: UITableViewController {
     /// The container showing that the user hasn't enabled user notifications.
     @IBOutlet weak var notAuthorizedContainer: UIStackView!
 
+    /// The labels indicating that the associated fields are required.
+    @IBOutlet var requiredLabelMarkers: [UILabel]!
+
     /// The container in which the habit is going to be persisted.
     var container: NSPersistentContainer!
 
@@ -80,11 +83,6 @@ class HabitCreationTableViewController: UITableViewController {
 
     /// The habit entity being editted.
     var habit: HabitMO?
-
-    /// Flag indicating if there's a habit being created or editted.
-    var isEditingHabit: Bool {
-        return habit != nil
-    }
 
     /// The habit's name being informed by the user.
     var name: String? {
@@ -171,9 +169,10 @@ class HabitCreationTableViewController: UITableViewController {
 
         // If there's a passed habit, it means that the controller should edit it.
         if isEditingHabit {
-            title = "Edit habit"
+            title = NSLocalizedString("Edit habit", comment: "Title of the edition controller.")
             displayHabitProperties()
             configureDeletionButton()
+            requiredLabelMarkers.forEach { $0.isHidden = true }
         }
     }
 
@@ -236,54 +235,8 @@ class HabitCreationTableViewController: UITableViewController {
             assert(!(days ?? []).isEmpty, "Error: the habit's days must have a valid value.")
         }
 
-        // If there's no previous habit, create and persist a new one.
-        container.performBackgroundTask { context in
-            // Retrieve the app's current user before using it.
-            guard let user = self.userStore.getUser(using: context) else {
-                // It's a bug if there's no user. The user should be created on
-                // the first launch.
-                assertionFailure("Inconsistency: There's no user in the database. It must be set.")
-                return
-            }
+        handleHabitForPersistency()
 
-            var habit: HabitMO!
-
-            if !self.isEditingHabit {
-                habit = self.habitStore.create(
-                    using: context,
-                    user: user,
-                    name: self.name!,
-                    color: self.habitColor!,
-                    days: self.days!,
-                    and: self.fireTimes
-                )
-            } else {
-                // If there's a previous habit, update it with the new values.
-                guard let habitToEdit = self.habitStore.habit(using: context, and: self.habit!.id!) else {
-                    assertionFailure("The habit should be correclty fetched.")
-                    return
-                }
-
-                habit = self.habitStore.edit(
-                    habitToEdit,
-                    using: context,
-                    name: self.name,
-                    color: self.habitColor,
-                    days: self.days,
-                    and: self.fireTimes
-                )
-            }
-
-            self.saveCreationContext(context)
-
-            let habitId = habit.id!
-            DispatchQueue.main.async {
-                // Every time a habit is added or edited, a new app shortcut related to it is added.
-                self.shortcutsManager.addApplicationShortcut(
-                    for: self.habitStore.habit(using: self.container.viewContext, and: habitId)!
-                )
-            }
-        }
         navigationController?.popViewController(
             animated: true
         )
@@ -294,21 +247,29 @@ class HabitCreationTableViewController: UITableViewController {
         // Alert the user to see if the deletion is really wanted:
         // Declare the alert.
         let alert = UIAlertController(
-            title: "Delete",
-            message: """
-Are you sure you want to delete this habit? Deleting this habit makes all the history \
-information unavailable.
-""",
+            title: NSLocalizedString(
+                "Delete",
+                comment: "Title of the alert displayed when the user wants to delete a habit."
+            ),
+            message: NSLocalizedString(
+                "Are you sure you want to delete this habit? Deleting this habit will also delete its history.",
+                comment: "Message of the alert displayed when the user wants to delete a habit."
+            ),
             preferredStyle: .alert
         )
         // Declare its actions.
-        alert.addAction(UIAlertAction(title: "Delete", style: .destructive) { _ in
-            // Remove the shortcut associated with the habit.
-            self.shortcutsManager.removeApplicationShortcut(for: self.habit!)
-            self.habitStore.delete(self.habit!, from: self.container.viewContext)
-            self.navigationController?.popToRootViewController(animated: true)
-        })
-        alert.addAction(UIAlertAction(title: "Cancel", style: .default))
+        alert.addAction(
+            UIAlertAction(
+                title: NSLocalizedString("Delete", comment: "Destructive action."),
+                style: .destructive
+            ) { _ in
+                // Remove the shortcut associated with the habit.
+                self.shortcutsManager.removeApplicationShortcut(for: self.habit!)
+                self.habitStore.delete(self.habit!, from: self.container.viewContext)
+                self.navigationController?.popToRootViewController(animated: true)
+            }
+        )
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .default))
 
         // Present it.
         present(alert, animated: true)
@@ -320,7 +281,7 @@ information unavailable.
     private func configureDoneButton() {
         if let habitToEdit = habit {
             // Change the button's title if there's a habit to be editted.
-            doneButton.setTitle("Edit", for: .normal)
+            doneButton.setTitle(NSLocalizedString("Edit", comment: "Title of the edition button."), for: .normal)
 
             // Check if anything changed.
             let isNameDifferent = !(name ?? "").isEmpty && name != habitToEdit.name
@@ -365,27 +326,6 @@ information unavailable.
         )
         trashButton.tintColor = .red
         navigationItem.setRightBarButton(trashButton, animated: false)
-    }
-
-    /// Tries to save the context and displays an alert to the user if an error happened.
-    private func saveCreationContext(_ context: NSManagedObjectContext) {
-        do {
-            try context.save()
-        } catch {
-            context.rollback()
-            DispatchQueue.main.async {
-                self.present(
-                    UIAlertController.make(
-                        title: "Error",
-                        message: """
-There was an error while the habit was being persisted. Please contact the developer.
-"""
-                    ),
-                    animated: true
-                )
-            }
-            assertionFailure("Error: Couldn't save the new habit entity.")
-        }
     }
 }
 

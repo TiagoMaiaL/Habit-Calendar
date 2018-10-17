@@ -1,0 +1,110 @@
+/* The percentage indicating the completion of the challenge. */
+"%0.0f%% completed." = "%0.0f%% completo.";
+
+/* The label showing how many days were executed. */
+"%d day(s) executed." = "%d dia(s) executado(s).";
+
+/* The label showing how many days were missed. */
+"%d day(s) missed." = "%d dia(s) perdido(s).";
+
+/* The label showing how many days were selected for the challenge. */
+"%d day(s) selected." = "%d dia(s) selecionado(s).";
+
+/* The label showing the days to finish the challenge. */
+"%d day(s) to finish the challenge." = "%d dia(s) para finalizar o desafio.";
+
+/* The number of fire times selected by the user. */
+"%d fire time(s) selected." = "%d alarme(s) selecionado(s).";
+
+/* The lable showing how many fire times were selected. */
+"%d selected fire time(s)." = "%d alarme(s) selecionado(s).";
+
+/* The message displayed when the habits couldn't be fetched. */
+"An error occurred while listing your habits. Please contact the developer." = "Ocorreu um erro enquanto os hábitos estavam sendo listados. Por favor, contate o desenvolvedor.";
+
+/* Error message displayed when there's an error to launch the app. */
+"An unrecoverable error happened. Please contact the app developer." = "Um erro irrecuperável ocorreu. Por favor, contate o desenvolvedor.";
+
+/* Alert message displayed when the user didn't select any fire time. */
+"Are you sure you don't want to be reminded about your habit?" = "Você tem certeza de que não deseja receber notificações para o seu hábito? ";
+
+/* Message of the alert displayed when the user wants to delete a habit. */
+"Are you sure you want to delete this habit? Deleting this habit will also delete its history." = "Tem certeza de que deseja deletar este hábito? Ao deletá-lo, todo o histórico será perdido.";
+
+/* No comment provided by engineer. */
+"Cancel" = "Cancelar";
+
+/* The title of the color field. */
+"Color" = "Cor";
+
+/* The nth day. */
+"day" = "Dia";
+
+/* Destructive action.
+   Title of the alert displayed when the user wants to delete a habit. */
+"Delete" = "Deletar";
+
+/* The subtitle of the user notifications. */
+"Did you practice this activity today?" = "Você praticou esta atividade hoje?";
+
+/* The title of the toolbar button. */
+"Done" = "Pronto";
+
+/* Title of the edition button. */
+"Edit" = "Editar";
+
+/* Title of the edition controller. */
+"Edit habit" = "Editar hábito";
+
+/* The alert title in the habits listing controller.
+   Title of the alert displayed when the habit couldn't be persisted. */
+"Error" = "Erro";
+
+/* Text displayed the challenge's duration. */
+"From %@, to %@" = "De %1$@, até %2$@";
+
+/* Label displaying the duration of the challenge of days. */
+"From: %@, to: %@" = "De: %1$@, até: %2$@";
+
+/* The title of the name field. */
+"Name" = "Nome";
+
+/* Text of the title of the days field in the edition controller. */
+"New challenge of days" = "Novo desafio de dias";
+
+/* Text displayed when the user didn't select any days of a new challenge of days. */
+"No days were selected." = "Nenhum dia foi selecionado.";
+
+/* Alert title displayed when the user didn't select any fire time. */
+"No fire times selected" = "Nenhum alarme foi selecionado.";
+
+/* Text displayed when the current day isn't marked as executed. */
+"No, not yet." = "Ainda não.";
+
+/* Message displayed when an error occurs while marking the day as executed. */
+"The current day couldn't be marked as executed. Please contact the developer." = "O dia atual não pôde ser marcado como executado. Por favor, contate o desenvolvedor.";
+
+/* Message displayed when there's an error with the creation of a new challenge. */
+"The new challenge of days couldn't be added to the habit. Plase contact the developer." = "O desafio de dias não pôde ser adicionado ao hábito. Por favor, contate o desenvolvedor.";
+
+/* Message of the alert displayed when the habit couldn't be persisted. */
+"There was an error while the habit was being persisted. Please contact the developer." = "Ocorreu um erro enquanto o hábito estava sendo persistido. Por favor, contate o desenvolvedor.";
+
+/* Description of the days field in the edition controller. */
+"Would you like to begin a new challenge of days?" = "Você gostaria de começar um novo desafio de dias?";
+
+/* No comment provided by engineer. */
+"Yes" = "Sim";
+
+/* Text displayed when the current day is marked as executed. */
+"Yes, I did it." = "Sim, eu fiz.";
+
+/* Message displayed when the user doesn't have any completed habit. */
+"You don't have any completed habits yet." = "Você não tem nenhum desafio completo ainda.";
+
+/* Message displayed when the user doesn't have any habit in progress. */
+"You don't have any habits in progress at the moment, what do you think of new challenges?" = "Você não tem nenhum hábito em progresso, o que você acha de novos desafios?";
+
+/* Message displayed when the user doesn't have any habit. */
+"You don't have any habits yet. Let's begin by adding a new one!" = "Você ainda não tem nenhum hábito. Vamos começar criando um!";
+

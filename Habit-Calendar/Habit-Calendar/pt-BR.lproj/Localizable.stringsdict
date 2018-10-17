@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>%d day(s) executed.</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@days@</string>
+		<key>days</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>one</key>
+			<string>%d dia executado.</string>
+			<key>other</key>
+			<string>%d dias executados.</string>
+			<key>zero</key>
+			<string>%d dias executados.</string>
+		</dict>
+	</dict>
+	<key>%d day(s) missed.</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@days@</string>
+		<key>days</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>one</key>
+			<string>%d dia perdido.</string>
+			<key>other</key>
+			<string>%d dias perdidos.</string>
+			<key>zero</key>
+			<string>%d dias perdidos.</string>
+		</dict>
+	</dict>
+	<key>%d day(s) selected.</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@days@</string>
+		<key>days</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>one</key>
+			<string>%d dia selecionado.</string>
+			<key>other</key>
+			<string>%d dias selecionados.</string>
+			<key>zero</key>
+			<string>%d dias selecionados.</string>
+		</dict>
+	</dict>
+	<key>%d day(s) to finish the challenge.</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@days@</string>
+		<key>days</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>one</key>
+			<string>%d dia para finalizar o desafio.</string>
+			<key>other</key>
+			<string>%d dias para finalizar o desafio.</string>
+			<key>zero</key>
+			<string>%d dias para finalizar o desafio.</string>
+		</dict>
+	</dict>
+	<key>%d fire time(s) selected.</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@firetimes@</string>
+		<key>firetimes</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>one</key>
+			<string>%d alarme selecionado.</string>
+			<key>other</key>
+			<string>%d alarmes selecionados.</string>
+			<key>zero</key>
+			<string>%d alarmes selecionados.</string>
+		</dict>
+	</dict>
+	<key>%d selected fire time(s).</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@firetimes@</string>
+		<key>firetimes</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>one</key>
+			<string>%d alarme selecionado.</string>
+			<key>other</key>
+			<string>%d alarmes selecionados.</string>
+			<key>zero</key>
+			<string>%d alarmes selecionados.</string>
+		</dict>
+	</dict>
+</dict>
+</plist>

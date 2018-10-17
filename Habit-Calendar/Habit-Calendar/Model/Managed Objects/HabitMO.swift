@@ -65,16 +65,10 @@ class HabitMO: NSManagedObject {
     ///         notifications and to display the habit's info.
     /// - Returns: The habit's subtitle string.
     func getSubtitleText() -> String {
-        // TODO: Make this localized.
-        return "Did you practice this activity today?"
-    }
-
-    /// Gets the habit description text.
-    /// - Note: The habit description text is used for user
-    ///         notifications.
-    /// - Returns: The habit's description string.
-    func getDescriptionText() -> String {
-        return ""
+        return NSLocalizedString(
+            "Did you practice this activity today?",
+            comment: "The subtitle of the user notifications."
+        )
     }
 
     /// Returns the current habit day for today (the current date),

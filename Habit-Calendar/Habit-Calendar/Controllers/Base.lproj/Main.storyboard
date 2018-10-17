@@ -10,6 +10,9 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
+        <array key="SF-Pro-Display-Bold.otf">
+            <string>SFProDisplay-Bold</string>
+        </array>
         <array key="SF-Pro-Display-Regular.otf">
             <string>SFProDisplay-Regular</string>
         </array>
@@ -290,25 +293,23 @@
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="sEI-14-LMZ">
                                                     <rect key="frame" x="30" y="21" width="354" height="113"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0AK-r5-sfZ">
-                                                            <rect key="frame" x="0.0" y="0.0" width="69.666666666666671" height="24"/>
-                                                            <attributedString key="attributedText">
-                                                                <fragment content="Name ">
-                                                                    <attributes>
-                                                                        <font key="NSFont" size="20" name="SFProText-Regular"/>
-                                                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                                    </attributes>
-                                                                </fragment>
-                                                                <fragment content="*">
-                                                                    <attributes>
-                                                                        <color key="NSColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                        <font key="NSFont" size="20" name="SFProText-Regular"/>
-                                                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                                    </attributes>
-                                                                </fragment>
-                                                            </attributedString>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="GCh-KY-j2G">
+                                                            <rect key="frame" x="0.0" y="0.0" width="73.666666666666671" height="24"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0AK-r5-sfZ">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="55" height="24"/>
+                                                                    <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="20"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZZc-vs-FON">
+                                                                    <rect key="frame" x="65" y="0.0" width="8.6666666666666714" height="24"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                                    <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                        </stackView>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rbh-0c-oq7">
                                                             <rect key="frame" x="0.0" y="34" width="354" height="39"/>
                                                             <subviews>
@@ -367,27 +368,25 @@
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="N01-Ea-GHX" userLabel="Layout">
                                                     <rect key="frame" x="30" y="21" width="354" height="239"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JUM-W9-3bo">
-                                                            <rect key="frame" x="0.0" y="0.0" width="65.666666666666671" height="23.666666666666668"/>
-                                                            <attributedString key="attributedText">
-                                                                <fragment content="Color ">
-                                                                    <attributes>
-                                                                        <font key="NSFont" size="20" name="SFProText-Regular"/>
-                                                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                                    </attributes>
-                                                                </fragment>
-                                                                <fragment content="*">
-                                                                    <attributes>
-                                                                        <color key="NSColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                        <font key="NSFont" size="20" name="SFProText-Regular"/>
-                                                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                                    </attributes>
-                                                                </fragment>
-                                                            </attributedString>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="vHj-BW-YYw">
+                                                            <rect key="frame" x="0.0" y="0.0" width="69.333333333333329" height="34"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Color" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JUM-W9-3bo">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="50.666666666666664" height="24"/>
+                                                                    <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="20"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xao-gA-zVr">
+                                                                    <rect key="frame" x="60.666666666666664" y="0.0" width="8.6666666666666643" height="24"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                                    <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                        </stackView>
                                                         <view contentMode="scaleToFill" verticalHuggingPriority="249" translatesAutoresizingMaskIntoConstraints="NO" id="41k-RE-w2b" customClass="ColorsPickerView" customModule="Habit_Calendar" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="33.666666666666671" width="354" height="205.33333333333331"/>
+                                                            <rect key="frame" x="0.0" y="44" width="354" height="195"/>
                                                             <color key="backgroundColor" red="0.99215686274509807" green="0.99215686274509807" blue="0.99607843137254903" alpha="1" colorSpace="calibratedRGB"/>
                                                             <userDefinedRuntimeAttributes>
                                                                 <userDefinedRuntimeAttribute type="number" keyPath="colorNumber">
@@ -426,25 +425,23 @@
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="AnH-Bq-Z54">
                                                     <rect key="frame" x="25" y="10" width="341" height="139.66666666666666"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pyb-N6-nac">
-                                                            <rect key="frame" x="0.0" y="0.0" width="183.33333333333334" height="25.333333333333332"/>
-                                                            <attributedString key="attributedText">
-                                                                <fragment content="Challenge of days ">
-                                                                    <attributes>
-                                                                        <font key="NSFont" size="20" name="SFProText-Regular"/>
-                                                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                                    </attributes>
-                                                                </fragment>
-                                                                <fragment content="*">
-                                                                    <attributes>
-                                                                        <color key="NSColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                        <font key="NSFont" size="20" name="SFProText-Regular"/>
-                                                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                                    </attributes>
-                                                                </fragment>
-                                                            </attributedString>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="WoQ-OW-H8L">
+                                                            <rect key="frame" x="0.0" y="0.0" width="187" height="25.333333333333332"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Challenge of days" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pyb-N6-nac">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="168.33333333333334" height="24"/>
+                                                                    <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="20"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fR4-XP-FOU">
+                                                                    <rect key="frame" x="178.33333333333334" y="0.0" width="8.6666666666666572" height="24"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                                    <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                        </stackView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="For how many days will you keep doing this activity?" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="JOL-oE-7MJ">
                                                             <rect key="frame" x="0.0" y="35.333333333333336" width="341" height="43.000000000000007"/>
                                                             <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="17"/>
@@ -618,6 +615,9 @@
                         <outlet property="nameTextField" destination="IGr-WJ-mRM" id="KLh-ua-2fN"/>
                         <outlet property="notAuthorizedContainer" destination="At8-YD-oiI" id="12s-nx-ZYu"/>
                         <outlet property="toDayLabel" destination="qbf-Ac-7Ay" id="DRe-Ft-XTm"/>
+                        <outletCollection property="requiredLabelMarkers" destination="ZZc-vs-FON" collectionClass="NSMutableArray" id="Cf1-3r-fuG"/>
+                        <outletCollection property="requiredLabelMarkers" destination="xao-gA-zVr" collectionClass="NSMutableArray" id="gYe-VA-fCH"/>
+                        <outletCollection property="requiredLabelMarkers" destination="fR4-XP-FOU" collectionClass="NSMutableArray" id="roY-3a-rvA"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bag-g3-dbf" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -910,34 +910,30 @@
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="717"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="8kz-Ld-lX0" userLabel="Texts">
-                                                <rect key="frame" x="20" y="20" width="374" height="517.66666666666663"/>
+                                                <rect key="frame" x="20" y="20" width="374" height="518"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="67e-Jj-j0e">
-                                                        <rect key="frame" x="0.0" y="0.0" width="297" height="187.33333333333334"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="297" height="187.66666666666666"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x7D-ar-eCD">
-                                                                <rect key="frame" x="0.0" y="0.0" width="250" height="95.666666666666671"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="width" constant="250" id="pa5-2b-PRn"/>
-                                                                </constraints>
-                                                                <attributedString key="attributedText">
-                                                                    <fragment content="Start new ">
-                                                                        <attributes>
-                                                                            <color key="NSColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
-                                                                            <font key="NSFont" size="40" name="SFProDisplay-Bold"/>
-                                                                        </attributes>
-                                                                    </fragment>
-                                                                    <fragment content="habits">
-                                                                        <attributes>
-                                                                            <color key="NSColor" red="0.0" green="0.47843137254901957" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                                            <font key="NSFont" size="40" name="SFProDisplay-Bold"/>
-                                                                        </attributes>
-                                                                    </fragment>
-                                                                </attributedString>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="N8k-jJ-xka">
+                                                                <rect key="frame" x="0.0" y="0.0" width="174.66666666666666" height="96"/>
+                                                                <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Start new" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x7D-ar-eCD">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="174.66666666666666" height="48"/>
+                                                                        <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="40"/>
+                                                                        <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Habits" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iC7-7Z-GhY">
+                                                                        <rect key="frame" x="0.0" y="48" width="119" height="48"/>
+                                                                        <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="40"/>
+                                                                        <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                </subviews>
+                                                            </stackView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DM9-ag-tED">
-                                                                <rect key="frame" x="0.0" y="115.66666666666666" width="297" height="71.666666666666657"/>
+                                                                <rect key="frame" x="0.0" y="116" width="297" height="71.666666666666686"/>
                                                                 <string key="text">Change your lifestyle by building 
 new habits and getting things done.
 Add as many habits as you wish.</string>
@@ -948,7 +944,7 @@ Add as many habits as you wish.</string>
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="6JK-0u-PFw">
-                                                        <rect key="frame" x="0.0" y="227.33333333333331" width="372.33333333333331" height="151.66666666666669"/>
+                                                        <rect key="frame" x="0.0" y="227.66666666666669" width="372.33333333333331" height="151.66666666666669"/>
                                                         <subviews>
                                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic-calendar" translatesAutoresizingMaskIntoConstraints="NO" id="EpP-2q-irp">
                                                                 <rect key="frame" x="0.0" y="0.0" width="45" height="47"/>
@@ -972,7 +968,7 @@ Add as many habits as you wish.</string>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Keep track of the progress of the challenge, and the days you missed." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dX3-aK-wEC">
-                                                                        <rect key="frame" x="0.0" y="108.66666666666669" width="307.33333333333331" height="43"/>
+                                                                        <rect key="frame" x="0.0" y="108.66666666666663" width="307.33333333333331" height="43"/>
                                                                         <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="18"/>
                                                                         <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <nil key="highlightedColor"/>
@@ -982,7 +978,7 @@ Add as many habits as you wish.</string>
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="IEk-fO-rZ9">
-                                                        <rect key="frame" x="0.0" y="419" width="374" height="98.666666666666629"/>
+                                                        <rect key="frame" x="0.0" y="419.33333333333331" width="374" height="98.666666666666686"/>
                                                         <subviews>
                                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic-notification" translatesAutoresizingMaskIntoConstraints="NO" id="Lng-2y-Vmd">
                                                                 <rect key="frame" x="0.0" y="0.0" width="41" height="46"/>
@@ -1635,6 +1631,6 @@ you think of adding a new one?</string>
     <inferredMetricsTieBreakers>
         <segue reference="y7q-nn-pWX"/>
         <segue reference="J1H-vQ-s49"/>
-        <segue reference="Xkx-Wi-bYR"/>
+        <segue reference="5mV-Cj-rFr"/>
     </inferredMetricsTieBreakers>
 </document>

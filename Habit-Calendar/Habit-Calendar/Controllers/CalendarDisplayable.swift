@@ -118,7 +118,7 @@ extension CalendarDisplayable {
         let formatter = DateFormatter()
         formatter.locale = Locale.current
         formatter.timeZone = TimeZone.current
-        formatter.dateFormat = "MMMM, yyyy"
+        formatter.setLocalizedDateFormatFromTemplate("MMMM, yyyy")
 
         // Change the title label to reflect it.
         monthTitleLabel.text = formatter.string(from: firstDate)
