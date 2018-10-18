@@ -322,6 +322,7 @@
 		47AA365B2104D5E60008D2DC /* FireTimeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AA365A2104D5E60008D2DC /* FireTimeFactory.swift */; };
 		47B0DA182178D7FF00C38F07 /* AppStoreReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47FE20E82178D61D0095DF33 /* AppStoreReviewManager.swift */; };
 		47B0DA192178D7FF00C38F07 /* AppStoreReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47FE20E82178D61D0095DF33 /* AppStoreReviewManager.swift */; };
+		47B0DA1B2178EA5000C38F07 /* AppStoreReviewManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B0DA1A2178EA5000C38F07 /* AppStoreReviewManagerTests.swift */; };
 		47B2398A212203F9009CB25C /* HabitMOColor+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B23989212203F9009CB25C /* HabitMOColor+UIColor.swift */; };
 		47BC53E221752F2300A5DC17 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 47BC53E021752F2300A5DC17 /* InfoPlist.strings */; };
 		47BC53E521752F2300A5DC17 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 47BC53E321752F2300A5DC17 /* Localizable.strings */; };
@@ -516,6 +517,7 @@
 		47AA3656210382380008D2DC /* FireTimeStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireTimeStorageTests.swift; sourceTree = "<group>"; };
 		47AA3658210382AB0008D2DC /* FireTimeStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireTimeStorage.swift; sourceTree = "<group>"; };
 		47AA365A2104D5E60008D2DC /* FireTimeFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireTimeFactory.swift; sourceTree = "<group>"; };
+		47B0DA1A2178EA5000C38F07 /* AppStoreReviewManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStoreReviewManagerTests.swift; sourceTree = "<group>"; };
 		47B23989212203F9009CB25C /* HabitMOColor+UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HabitMOColor+UIColor.swift"; sourceTree = "<group>"; };
 		47BC53E121752F2300A5DC17 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		47BC53E421752F2300A5DC17 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -952,6 +954,7 @@
 				47D8FC9D20DC13990094026B /* UserNotificationManagerTests.swift */,
 				47D7004021017D0A00F4FE88 /* NotificationSchedulerTests.swift */,
 				4715A8FB216BC46C00713B23 /* HabitsShortcutItemsManagerTests.swift */,
+				47B0DA1A2178EA5000C38F07 /* AppStoreReviewManagerTests.swift */,
 			);
 			path = "Manager Tests";
 			sourceTree = "<group>";
@@ -1762,6 +1765,7 @@
 				47160A48213B18F900E717C9 /* HabitStorageNotificationTests.swift in Sources */,
 				4752FDC120FE623900116F1A /* XCTUtils.swift in Sources */,
 				4715A8FF216BC5B400713B23 /* HabitsShortcutItemsManagerTests.swift in Sources */,
+				47B0DA1B2178EA5000C38F07 /* AppStoreReviewManagerTests.swift in Sources */,
 				474A209720D1B02700E0EBD0 /* HabitStorageTests.swift in Sources */,
 				47D8FC9E20DC13990094026B /* UserNotificationManagerTests.swift in Sources */,
 				474A209520D00AFA00E0EBD0 /* DayStorageTests.swift in Sources */,
