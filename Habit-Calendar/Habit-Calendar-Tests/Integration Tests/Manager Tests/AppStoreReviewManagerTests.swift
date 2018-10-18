@@ -57,6 +57,28 @@ class AppStoreReviewManagerTests: IntegrationTestCase {
         )
     }
 
+    func testResetingParametersWithANewAppVersion() {
+        // 1. Configure the testDefaults with an app version, and a count.
+        let version = "3.0.0"
+        testDefaults.set(
+            version,
+            forKey: AppStoreReviewManager.UserDefaultsKeys.lastPromptedAppVersionKey.rawValue
+        )
+        testDefaults.set(
+            12,
+            forKey: AppStoreReviewManager.UserDefaultsKeys.habitDayExecutionCountKey.rawValue
+        )
+
+        // 2. Update the parameters with a new version.
+        reviewManager.updateReviewParameters(usingAppVersion: "3.0.1")
+
+        // 3. assert that the count were reseted.
+        XCTAssertEqual(
+            0,
+            testDefaults.integer(forKey: AppStoreReviewManager.UserDefaultsKeys.habitDayExecutionCountKey.rawValue)
+        )
+    }
+
     func testRequestReviewingShouldNotRequest() {
         // 1. Call it with a test version.
         reviewManager.requestReviewIfAppropriate(usingAppVersion: "1.0.1")

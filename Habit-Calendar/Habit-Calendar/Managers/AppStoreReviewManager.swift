@@ -62,7 +62,22 @@ struct AppStoreReviewManager {
     /// Updates the review parameters.
     /// - Note: Every time this method is called, the internal count of executed days is increased by one.
     ///         Always make sure to call this in the right place of the application flow.
-    func updateReviewParameters() {
+    func updateReviewParameters(usingAppVersion version: String? = nil) {
+        if let passedVersion = version {
+            let lastPromptedVersion = userDefaults.string(
+                forKey: UserDefaultsKeys.lastPromptedAppVersionKey.rawValue
+            )
+
+            // If there's a new version, reset the count.
+            if passedVersion != lastPromptedVersion {
+                userDefaults.set(
+                    0,
+                    forKey: UserDefaultsKeys.habitDayExecutionCountKey.rawValue
+                )
+                return
+            }
+        }
+
         // Update the count to += 1.
         let count = userDefaults.integer(
             forKey: UserDefaultsKeys.habitDayExecutionCountKey.rawValue
