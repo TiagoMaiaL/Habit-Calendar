@@ -320,6 +320,8 @@
 		47AA3657210382380008D2DC /* FireTimeStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AA3656210382380008D2DC /* FireTimeStorageTests.swift */; };
 		47AA3659210382AB0008D2DC /* FireTimeStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AA3658210382AB0008D2DC /* FireTimeStorage.swift */; };
 		47AA365B2104D5E60008D2DC /* FireTimeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AA365A2104D5E60008D2DC /* FireTimeFactory.swift */; };
+		47B0DA182178D7FF00C38F07 /* AppStoreReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47FE20E82178D61D0095DF33 /* AppStoreReviewManager.swift */; };
+		47B0DA192178D7FF00C38F07 /* AppStoreReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47FE20E82178D61D0095DF33 /* AppStoreReviewManager.swift */; };
 		47B2398A212203F9009CB25C /* HabitMOColor+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B23989212203F9009CB25C /* HabitMOColor+UIColor.swift */; };
 		47BC53E221752F2300A5DC17 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 47BC53E021752F2300A5DC17 /* InfoPlist.strings */; };
 		47BC53E521752F2300A5DC17 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 47BC53E321752F2300A5DC17 /* Localizable.strings */; };
@@ -383,6 +385,7 @@
 		47FB0C2C216F9DE5000BB956 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 47FB0C30216F9DE5000BB956 /* Localizable.stringsdict */; };
 		47FB0C2D216F9DE5000BB956 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 47FB0C30216F9DE5000BB956 /* Localizable.stringsdict */; };
 		47FB0C2E216F9DE5000BB956 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 47FB0C30216F9DE5000BB956 /* Localizable.stringsdict */; };
+		47FE20E92178D61D0095DF33 /* AppStoreReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47FE20E82178D61D0095DF33 /* AppStoreReviewManager.swift */; };
 		9E4741ED7011810FD00BF941 /* Pods_Habit_Calendar_Habit_Calendar_Stg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89D08208B03E9A306F89DFA9 /* Pods_Habit_Calendar_Habit_Calendar_Stg.framework */; };
 		F0B9EAD3EC4A253D66E6E19E /* Pods_Habit_CalendarTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4262C4E7635B46715D883F5 /* Pods_Habit_CalendarTests.framework */; };
 /* End PBXBuildFile section */
@@ -558,6 +561,7 @@
 		47FB0C2B216F9D84000BB956 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		47FB0C2F216F9DE5000BB956 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = "pt-BR"; path = "pt-BR.lproj/Localizable.stringsdict"; sourceTree = "<group>"; };
 		47FB0C31216F9DF2000BB956 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
+		47FE20E82178D61D0095DF33 /* AppStoreReviewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStoreReviewManager.swift; sourceTree = "<group>"; };
 		526255EDCB5FA3EB9A7C5FF7 /* Pods-Habit-CalendarTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Habit-CalendarTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Habit-CalendarTests/Pods-Habit-CalendarTests.release.xcconfig"; sourceTree = "<group>"; };
 		579A72317FF280C998EF8FD3 /* Pods-Habit-Calendar-Habit-Calendar-Dev.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Habit-Calendar-Habit-Calendar-Dev.release.xcconfig"; path = "Pods/Target Support Files/Pods-Habit-Calendar-Habit-Calendar-Dev/Pods-Habit-Calendar-Habit-Calendar-Dev.release.xcconfig"; sourceTree = "<group>"; };
 		76ED27CFE67DF2D0EDBE8934 /* Pods_Habit_Calendar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Habit_Calendar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -877,6 +881,7 @@
 				4779588220D8B2E10080614F /* UserNotificationManager.swift */,
 				47D7003C210179F600F4FE88 /* NotificationScheduler.swift */,
 				4715A8F7216BA0F200713B23 /* HabitsShortcutItemsManager.swift */,
+				47FE20E82178D61D0095DF33 /* AppStoreReviewManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -1483,6 +1488,7 @@
 				470C41B62144B091007F6F35 /* UNNotificationContent+Category.swift in Sources */,
 				470C41B72144B091007F6F35 /* DummyFactory.swift in Sources */,
 				470C41B82144B091007F6F35 /* Int+Utils.swift in Sources */,
+				47B0DA182178D7FF00C38F07 /* AppStoreReviewManager.swift in Sources */,
 				470C41B92144B091007F6F35 /* MonthHeaderView.swift in Sources */,
 				470C41BA2144B091007F6F35 /* ColorOptionCollectionViewCell.swift in Sources */,
 				470C41BB2144B091007F6F35 /* DaysHeaderView.swift in Sources */,
@@ -1571,6 +1577,7 @@
 				470C42272144B164007F6F35 /* UNNotificationContent+Category.swift in Sources */,
 				470C42282144B164007F6F35 /* DummyFactory.swift in Sources */,
 				470C42292144B164007F6F35 /* Int+Utils.swift in Sources */,
+				47B0DA192178D7FF00C38F07 /* AppStoreReviewManager.swift in Sources */,
 				470C422A2144B164007F6F35 /* MonthHeaderView.swift in Sources */,
 				470C422B2144B164007F6F35 /* ColorOptionCollectionViewCell.swift in Sources */,
 				470C422C2144B164007F6F35 /* DaysHeaderView.swift in Sources */,
@@ -1659,6 +1666,7 @@
 				470C4170213EE70D007F6F35 /* UNNotificationContent+Category.swift in Sources */,
 				47E6C21120EB129C003BDB4D /* DummyFactory.swift in Sources */,
 				470230D820E5250A003A1F6E /* Int+Utils.swift in Sources */,
+				47FE20E92178D61D0095DF33 /* AppStoreReviewManager.swift in Sources */,
 				470C42982146E194007F6F35 /* CalendarChallengeDayCell.swift in Sources */,
 				4732CE83211CB89F00E2770C /* MonthHeaderView.swift in Sources */,
 				4761F5B72120D7F900A8D407 /* ColorOptionCollectionViewCell.swift in Sources */,
