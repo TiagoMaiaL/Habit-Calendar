@@ -37,6 +37,8 @@ extension HabitDetailsViewController {
                 self.notificationScheduler.unschedule(dayNotifications)
             } else {
                 self.notificationScheduler.schedule(dayNotifications)
+                // Update the review parameters. The execution count is increased by one.
+                self.reviewManager.updateReviewParameters()
             }
 
             do {

@@ -99,6 +99,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     /// quick action.
     private var shouldDisplayCreationController = false
 
+    /// The review manager used to collect the feedback of the user.
+    private var reviewManager = AppStoreReviewManager(userDefaults: UserDefaults.standard)
+
     // MARK: Delegate methods
 
     func application(
@@ -139,6 +142,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Reset the app icon's badge number.
         application.applicationIconBadgeNumber = 0
+
+        // Always call the method to reset the review parameters if the app version has changed.
+        let infoDictionaryKey = kCFBundleVersionKey as String
+        if let version = Bundle.main.object(forInfoDictionaryKey: infoDictionaryKey) as? String {
+            reviewManager.updateReviewParameters(usingAppVersion: version)
+        } else {
+            assertionFailure("Error: Couldn't get the app version.")
+        }
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
@@ -184,6 +195,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             habitsController.habitStorage = habitStorage
             habitsController.notificationManager = notificationManager
             habitsController.shortcutsManager = shortcutsManager
+            habitsController.reviewManager = reviewManager
         }
 
         splashController.displayRootController(navigationController)

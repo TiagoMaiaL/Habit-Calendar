@@ -98,6 +98,7 @@ extension HabitsTableViewController: HabitToBeDisplayedObserver {
             notificationManager: notificationManager
         )
         detailsController.shortcutsManager = shortcutsManager
+        detailsController.reviewManager = reviewManager
 
         navigationController?.pushViewController(detailsController, animated: true)
     }

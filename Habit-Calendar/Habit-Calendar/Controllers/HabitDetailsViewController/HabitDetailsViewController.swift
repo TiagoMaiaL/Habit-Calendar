@@ -161,6 +161,11 @@ class HabitDetailsViewController: UIViewController {
     /// The button that takes to the fire times controller.
     @IBOutlet weak var newFireTimesButton: RoundedButton!
 
+    /// The review manager used to update the parameters for review.
+    /// - Note: Every time the user marks a day as executed, the parameters
+    ///         get updated.
+    var reviewManager: AppStoreReviewManager!
+
     // MARK: Deinitializers
 
     deinit {
@@ -256,62 +261,28 @@ class HabitDetailsViewController: UIViewController {
 
     /// Asserts on the values of the main controller's dependencies.
     private func checkDependencies() {
-        // Assert on the required properties to be injected
-        // (habit, habitStorage, container and the calendar header views):
-        assert(
-            habit != nil,
-            "Error: the needed habit wasn't injected."
-        )
-        assert(
-            habitStorage != nil,
-            "Error: the needed habitStorage wasn't injected."
-        )
-        assert(
-            container != nil,
-            "Error: the needed container wasn't injected."
-        )
-        assert(
-            monthTitleLabel != nil,
-            "Error: the month title label wasn't set."
-        )
-        assert(
-            nextMonthButton != nil,
-            "Error: the next month button wasn't set."
-        )
-        assert(
-            previousMonthButton != nil,
-            "Error: the previous month button wasn't set."
-        )
-        assert(
-            notificationManager != nil,
-            "Error: the notification manager wasn't injected."
-        )
-        assert(
-            notificationStorage != nil,
-            "Error: the notification storage wasn't injected."
-        )
-        assert(
-            notificationScheduler != nil,
-            "Error: the notification scheduler wasn't injected."
-        )
-        assert(
-            shortcutsManager != nil,
-            "Error: the shortcuts manager must be injected."
-        )
+        // Assert on the required properties to be injected:
+        assert(habit != nil, "Error: the needed habit wasn't injected.")
+        assert(habitStorage != nil, "Error: the needed habitStorage wasn't injected.")
+        assert(container != nil, "Error: the needed container wasn't injected.")
+        assert(monthTitleLabel != nil, "Error: the month title label wasn't set.")
+        assert(nextMonthButton != nil, "Error: the next month button wasn't set.")
+        assert(previousMonthButton != nil, "Error: the previous month button wasn't set.")
+        assert(notificationManager != nil, "Error: the notification manager wasn't injected.")
+        assert(notificationStorage != nil, "Error: the notification storage wasn't injected.")
+        assert(notificationScheduler != nil, "Error: the notification scheduler wasn't injected.")
+        assert(shortcutsManager != nil, "Error: the shortcuts manager must be injected.")
+        assert(reviewManager != nil, "Error: the review manager must be injected.")
     }
 
     /// Updates and handles the display of each controller's section.
     func displaySections() {
-        // Configure the appearance of the prompt section.
         displayPromptView()
-
-        // Configure the appearance of the challenge's progress section.
         displayProgressSection()
 
         // Display the no challenge view, if there's no active challenge for the habit.
         displayNoChallengesView()
 
-        // Display the fire times section.
         displayFireTimesSection()
     }
 

@@ -101,6 +101,15 @@ class HabitsTableViewController: UITableViewController {
     /// The empty state view showing the controller's initial states (no habits, or no habits in the segments)
     private var emptyStateView: EmptyStateView!
 
+    /// The review manager used to ask the user for a feedback.
+    /// - Note: The review is asked if the user isn't scrolling the tableView
+    ///         for more than 2 secs, and if it's appropriate to do so.
+    var reviewManager: AppStoreReviewManager!
+
+    /// The timer that will ask the user for a review.
+    /// - Note: This timer is disabled if the user scrolls again within 2 secs.
+    var reviewTimer: Timer?
+
     // MARK: Deinitialization
 
     deinit {
@@ -117,6 +126,7 @@ class HabitsTableViewController: UITableViewController {
         assert(habitStorage != nil, "The habit storage must be injected.")
         assert(notificationManager != nil, "The notification manager must be injected.")
         assert(shortcutsManager != nil, "The shortcuts manager must be injected.")
+        assert(reviewManager != nil, "The review manager must be injected.")
 
         startObserving()
 
@@ -138,11 +148,24 @@ class HabitsTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         updateList()
+
+        // Try to request the review, if the user makes an action,
+        // like scrolling or selecting a habit, the timer is invalidated.
+        reviewTimer = Timer.scheduledTimer(withTimeInterval: 5, repeats: false) { _ in
+            let infoDictionaryKey = kCFBundleVersionKey as String
+            if let version = Bundle.main.object(forInfoDictionaryKey: infoDictionaryKey) as? String {
+                self.reviewManager.requestReviewIfAppropriate(usingAppVersion: version)
+            } else {
+                assertionFailure("Error: Couldn't get the app version.")
+            }
+        }
     }
 
     // MARK: Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        reviewTimer?.invalidate()
+
         switch segue.identifier {
         case newHabitSegueIdentifier:
             // Inject the controller's habit storage, user storage,
@@ -169,6 +192,7 @@ class HabitsTableViewController: UITableViewController {
                     notificationManager: notificationManager
                 )
                 habitDetailsController.shortcutsManager = shortcutsManager
+                habitDetailsController.reviewManager = reviewManager
 
                 // Get the selected habit for injection.
                 guard let indexPath = tableView.indexPathForSelectedRow else {
@@ -192,6 +216,7 @@ class HabitsTableViewController: UITableViewController {
     // MARK: Actions
 
     @IBAction func switchSegment(_ sender: UISegmentedControl) {
+        reviewTimer?.invalidate()
         updateList()
     }
 
@@ -304,5 +329,16 @@ class HabitsTableViewController: UITableViewController {
 
         // Present it on top of the window's root controller.
         present(presentationController, animated: true)
+    }
+}
+
+extension HabitsTableViewController {
+
+    // MARK: ScrollView delegate methods.
+
+    public override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        // If the user scrolls, invalidate the review timer, so the user's action
+        // isn't interrupted.
+        reviewTimer?.invalidate()
     }
 }
