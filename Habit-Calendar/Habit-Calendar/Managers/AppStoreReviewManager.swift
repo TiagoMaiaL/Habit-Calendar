@@ -22,6 +22,9 @@ struct AppStoreReviewManager {
         case lastPromptedAppVersionKey = "LAST_PROMPT_APP_VERSION"
     }
 
+    /// The number of days executed to ask for a review.
+    static let daysCountParameter = 20
+
     // MARK: Properties
 
     /// The defaults holding the parameters to make the request for reviews.
@@ -33,8 +36,27 @@ struct AppStoreReviewManager {
     /// - Note: The request is made only under certain requirements:
     ///         - The user must have marked a day (of any habit) as executed at least 20 times.
     ///         - There's a new version of the app that the user didn't review.
-    func requestReviewIfAppropriate() {
+    func requestReviewIfAppropriate(usingAppVersion version: String) {
+        let lastPromptedVersionParameter = userDefaults.string(
+            forKey: UserDefaultsKeys.lastPromptedAppVersionKey.rawValue
+        )
+        let countParameter = userDefaults.integer(
+            forKey: UserDefaultsKeys.habitDayExecutionCountKey.rawValue
+        )
 
+        if lastPromptedVersionParameter != version && countParameter >= AppStoreReviewManager.daysCountParameter {
+            userDefaults.set(
+                version, forKey:
+                UserDefaultsKeys.lastPromptedAppVersionKey.rawValue
+            )
+            userDefaults.set(
+                0,
+                forKey: UserDefaultsKeys.habitDayExecutionCountKey.rawValue
+            )
+            DispatchQueue.main.async {
+                SKStoreReviewController.requestReview()
+            }
+        }
     }
 
     /// Updates the review parameters.
@@ -49,11 +71,5 @@ struct AppStoreReviewManager {
             count + 1,
             forKey: UserDefaultsKeys.habitDayExecutionCountKey.rawValue
         )
-    }
-
-    /// Resets the review parameters if appropriate (the app was updated).
-    /// - Note: This method should be called every time the app activates.
-    func resetReviewParametersIfAppropriate() {
-        
     }
 }
