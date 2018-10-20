@@ -20,6 +20,7 @@ struct AppStoreReviewManager {
     enum UserDefaultsKeys: String {
         case countParameterKey = "NUMBER_OF_EXECUTED_DAYS_COUNT"
         case lastPromptedAppVersionKey = "LAST_PROMPT_APP_VERSION"
+        case wasReviewRequestedForThisVersion = "WAS_REVIEW_REQUESTED"
     }
 
     /// The number of executed days needed in order to ask for a review.
@@ -33,6 +34,11 @@ struct AppStoreReviewManager {
     /// The current count parameter related to the current version.
     var currentCountParameter: Int {
         return userDefaults.integer(forKey: UserDefaultsKeys.countParameterKey.rawValue)
+    }
+
+    /// The flag indicating if the review was requested for the current version.
+    private var wasReviewRequested: Bool {
+        return userDefaults.bool(forKey: UserDefaultsKeys.wasReviewRequestedForThisVersion.rawValue)
     }
 
     // MARK: Imperatives
@@ -66,24 +72,24 @@ struct AppStoreReviewManager {
     /// - Note: Every time this method is called, the internal count of executed days is increased by one.
     ///         Always make sure to call this in the right place of the application flow.
     func updateReviewParameters(usingAppVersion version: String? = nil) {
-        if let passedVersion = version {
-            let lastPromptedVersion = userDefaults.string(
-                forKey: UserDefaultsKeys.lastPromptedAppVersionKey.rawValue
-            )
+//        if let passedVersion = version {
+//            let lastPromptedVersion = userDefaults.string(
+//                forKey: UserDefaultsKeys.lastPromptedAppVersionKey.rawValue
+//            )
+//
+//            // If there's a new version and the count param is already greater than the limit, reset the count.
+//            if lastPromptedVersion != nil &&
+//                passedVersion != lastPromptedVersion &&
+//                currentCountParameter > AppStoreReviewManager.countParameterLimit + 10 {
+//                userDefaults.set(
+//                    0,
+//                    forKey: UserDefaultsKeys.countParameterKey.rawValue
+//                )
+//                return
+//            }
+//        }
 
-            // If there's a new version and the count param is already greater than the limit, reset the count.
-            if lastPromptedVersion != nil &&
-                passedVersion != lastPromptedVersion &&
-                currentCountParameter > AppStoreReviewManager.countParameterLimit + 10 {
-                userDefaults.set(
-                    0,
-                    forKey: UserDefaultsKeys.countParameterKey.rawValue
-                )
-                return
-            }
-        }
-
-        if currentCountParameter < AppStoreReviewManager.countParameterLimit {
+        if wasReviewRequested == false && currentCountParameter < AppStoreReviewManager.countParameterLimit {
             // Update the count to += 1.
             userDefaults.set(
                 currentCountParameter + 1,

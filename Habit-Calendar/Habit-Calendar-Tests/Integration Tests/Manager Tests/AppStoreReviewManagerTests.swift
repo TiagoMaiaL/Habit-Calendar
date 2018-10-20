@@ -83,20 +83,30 @@ class AppStoreReviewManagerTests: IntegrationTestCase {
     }
 
     func testUpdatingParametersWontWorkBecauseTheRequestWasAlreadyMadeForTheVersion() {
-        XCTMarkNotImplemented()
+        // 1. Configure the defaults with the flag indicating that the review
+        // request was already made for the current version.
+        testDefaults.set(
+            true,
+            forKey: AppStoreReviewManager.UserDefaultsKeys.wasReviewRequestedForThisVersion.rawValue
+        )
 
-        // 1. 
+        // 2. Call the method to update the parameters and check it didn't update.
+        reviewManager.updateReviewParameters()
+
+        XCTAssertEqual(0, reviewManager.currentCountParameter)
     }
 
     func testResetingTheParametersWontWorkBecauseVersionDidNotChange() {
         XCTMarkNotImplemented()
+
+        // 1. Configure the test defaults with the version, flag, and parameters.
+
+        // 2. Call the reset with the same app version.
+
+        // 3. It shouldn't reset any of the contents in the test defaults.
     }
 
-    func testResetingTheParametersForRequestingReview() {
-        XCTMarkNotImplemented()
-    }
-
-    func testResetingParametersWithANewAppVersion() {
+    func testResetingParametersWithANewAppVersionWillWork() {
         XCTMarkNotImplemented()
 
         // 1. Configure the testDefaults with an app version, and a count.
