@@ -151,7 +151,7 @@ class HabitsTableViewController: UITableViewController {
 
         // Try to request the review, if the user makes an action,
         // like scrolling or selecting a habit, the timer is invalidated.
-        reviewTimer = Timer.scheduledTimer(withTimeInterval: 5, repeats: false) { _ in
+        reviewTimer = Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { _ in
             let infoDictionaryKey = kCFBundleVersionKey as String
             if let version = Bundle.main.object(forInfoDictionaryKey: infoDictionaryKey) as? String {
                 self.reviewManager.requestReviewIfAppropriate(usingAppVersion: version)

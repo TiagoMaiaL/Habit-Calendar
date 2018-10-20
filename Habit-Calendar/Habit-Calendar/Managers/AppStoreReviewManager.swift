@@ -18,17 +18,22 @@ struct AppStoreReviewManager {
 
     /// The keys used by this instance to access the user defaults.
     enum UserDefaultsKeys: String {
-        case habitDayExecutionCountKey = "NUMBER_OF_EXECUTED_DAYS_COUNT"
+        case countParameterKey = "NUMBER_OF_EXECUTED_DAYS_COUNT"
         case lastPromptedAppVersionKey = "LAST_PROMPT_APP_VERSION"
     }
 
-    /// The number of days executed to ask for a review.
-    static let daysCountParameter = 20
+    /// The number of executed days needed in order to ask for a review.
+    static let countParameterLimit = 20
 
     // MARK: Properties
 
-    /// The defaults holding the parameters to make the request for reviews.
+    /// The defaults holding the parameters to make the request for an app store review.
     let userDefaults: UserDefaults
+
+    /// The current count parameter related to the current version.
+    var currentCountParameter: Int {
+        return userDefaults.integer(forKey: UserDefaultsKeys.countParameterKey.rawValue)
+    }
 
     // MARK: Imperatives
 
@@ -40,18 +45,16 @@ struct AppStoreReviewManager {
         let lastPromptedVersionParameter = userDefaults.string(
             forKey: UserDefaultsKeys.lastPromptedAppVersionKey.rawValue
         )
-        let countParameter = userDefaults.integer(
-            forKey: UserDefaultsKeys.habitDayExecutionCountKey.rawValue
-        )
 
-        if lastPromptedVersionParameter != version && countParameter >= AppStoreReviewManager.daysCountParameter {
+        if lastPromptedVersionParameter != version &&
+            currentCountParameter >= AppStoreReviewManager.countParameterLimit {
             userDefaults.set(
-                version, forKey:
-                UserDefaultsKeys.lastPromptedAppVersionKey.rawValue
+                version,
+                forKey: UserDefaultsKeys.lastPromptedAppVersionKey.rawValue
             )
             userDefaults.set(
                 0,
-                forKey: UserDefaultsKeys.habitDayExecutionCountKey.rawValue
+                forKey: UserDefaultsKeys.countParameterKey.rawValue
             )
             DispatchQueue.main.async {
                 SKStoreReviewController.requestReview()
@@ -68,23 +71,25 @@ struct AppStoreReviewManager {
                 forKey: UserDefaultsKeys.lastPromptedAppVersionKey.rawValue
             )
 
-            // If there's a new version, reset the count.
-            if passedVersion != lastPromptedVersion {
+            // If there's a new version and the count param is already greater than the limit, reset the count.
+            if lastPromptedVersion != nil &&
+                passedVersion != lastPromptedVersion &&
+                currentCountParameter > AppStoreReviewManager.countParameterLimit + 10 {
                 userDefaults.set(
                     0,
-                    forKey: UserDefaultsKeys.habitDayExecutionCountKey.rawValue
+                    forKey: UserDefaultsKeys.countParameterKey.rawValue
                 )
                 return
             }
         }
 
-        // Update the count to += 1.
-        let count = userDefaults.integer(
-            forKey: UserDefaultsKeys.habitDayExecutionCountKey.rawValue
-        )
-        userDefaults.set(
-            count + 1,
-            forKey: UserDefaultsKeys.habitDayExecutionCountKey.rawValue
-        )
+        if currentCountParameter < AppStoreReviewManager.countParameterLimit {
+            // Update the count to += 1.
+            userDefaults.set(
+                currentCountParameter + 1,
+                forKey: UserDefaultsKeys.countParameterKey.rawValue
+            )
+            print("Review parameter Count is now: \(currentCountParameter)")
+        }
     }
 }

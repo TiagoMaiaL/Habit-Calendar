@@ -34,11 +34,11 @@ extension HabitDetailsViewController {
             ).filter { $0.fireDate?.isFuture ?? false}
 
             if wasExecuted {
+                // Update the review parameters. The execution count is increased by one.
+                self.reviewManager.updateReviewParameters()
                 self.notificationScheduler.unschedule(dayNotifications)
             } else {
                 self.notificationScheduler.schedule(dayNotifications)
-                // Update the review parameters. The execution count is increased by one.
-                self.reviewManager.updateReviewParameters()
             }
 
             do {

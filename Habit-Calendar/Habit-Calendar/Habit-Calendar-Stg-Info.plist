@@ -17,7 +17,7 @@
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
-	<string>20181003stg</string>
+	<string>201810101stg</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UIAppFonts</key>
@@ -28,6 +28,15 @@
 		<string>SF-Pro-Text-Light.otf</string>
 		<string>SF-Pro-Text-Bold.otf</string>
 		<string>SF-Pro-Text-Regular.otf</string>
+	</array>
+	<key>UIApplicationShortcutItems</key>
+	<array>
+		<dict>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>New habit</string>
+			<key>UIApplicationShortcutItemType</key>
+			<string>$(BUNDLE_IDENTIFIER).new-habit</string>
+		</dict>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
@@ -47,15 +56,6 @@
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
-	</array>
-	<key>UIApplicationShortcutItems</key>
-	<array>
-		<dict>
-			<key>UIApplicationShortcutItemTitle</key>
-			<string>New habit</string>
-			<key>UIApplicationShortcutItemType</key>
-			<string>$(BUNDLE_IDENTIFIER).new-habit</string>
-		</dict>
 	</array>
 </dict>
 </plist>
