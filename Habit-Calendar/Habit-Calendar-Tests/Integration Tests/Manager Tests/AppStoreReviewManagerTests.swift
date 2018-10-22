@@ -97,36 +97,59 @@ class AppStoreReviewManagerTests: IntegrationTestCase {
     }
 
     func testResetingTheParametersWontWorkBecauseVersionDidNotChange() {
-        XCTMarkNotImplemented()
-
         // 1. Configure the test defaults with the version, flag, and parameters.
-
-        // 2. Call the reset with the same app version.
-
-        // 3. It shouldn't reset any of the contents in the test defaults.
-    }
-
-    func testResetingParametersWithANewAppVersionWillWork() {
-        XCTMarkNotImplemented()
-
-        // 1. Configure the testDefaults with an app version, and a count.
-        let version = "3.0.0"
+        testDefaults.set(
+            true,
+            forKey: AppStoreReviewManager.UserDefaultsKeys.wasReviewRequestedForThisVersion.rawValue
+        )
+        testDefaults.set(
+            AppStoreReviewManager.countParameterLimit,
+            forKey: AppStoreReviewManager.UserDefaultsKeys.countParameterKey.rawValue
+        )
+        let version = "1.0.0"
         testDefaults.set(
             version,
             forKey: AppStoreReviewManager.UserDefaultsKeys.lastPromptedAppVersionKey.rawValue
         )
+
+        // 2. Call the reset with the same app version.
+        reviewManager.resetParameters(withNewVersion: version)
+
+        // 3. It shouldn't reset any of the contents in the test defaults.
+        XCTAssertNotEqual(0, reviewManager.currentCountParameter)
+        XCTAssertNotEqual(false, reviewManager.wasReviewRequested)
+        // The version is the same as before.
+        XCTAssertEqual(
+            version,
+            testDefaults.string(forKey: AppStoreReviewManager.UserDefaultsKeys.lastPromptedAppVersionKey.rawValue)
+        )
+    }
+
+    func testResetingParametersWithANewAppVersionWillWork() {
+        // 1. Configure the test defaults with the version, flag, and parameters.
         testDefaults.set(
-            12,
+            true,
+            forKey: AppStoreReviewManager.UserDefaultsKeys.wasReviewRequestedForThisVersion.rawValue
+        )
+        testDefaults.set(
+            AppStoreReviewManager.countParameterLimit,
             forKey: AppStoreReviewManager.UserDefaultsKeys.countParameterKey.rawValue
         )
+        testDefaults.set(
+            "1.0.0",
+            forKey: AppStoreReviewManager.UserDefaultsKeys.lastPromptedAppVersionKey.rawValue
+        )
 
-        // 2. Update the parameters with a new version.
-        reviewManager.updateReviewParameters(usingAppVersion: "3.0.1")
+        // 2. Call the reset with a new app version.
+        reviewManager.resetParameters(withNewVersion: "1.0.1")
 
-        // 3. assert that the count were reseted.
+        // 3. It should reset all of the contents in the test defaults.
+        XCTAssertEqual(0, reviewManager.currentCountParameter)
+        XCTAssertEqual(false, reviewManager.wasReviewRequested)
+        // The version is the same as before.
         XCTAssertEqual(
-            0,
-            testDefaults.integer(forKey: AppStoreReviewManager.UserDefaultsKeys.countParameterKey.rawValue)
+            "1.0.1",
+            testDefaults.string(forKey: AppStoreReviewManager.UserDefaultsKeys.lastPromptedAppVersionKey.rawValue)
         )
     }
 

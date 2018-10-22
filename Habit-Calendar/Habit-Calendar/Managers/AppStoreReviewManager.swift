@@ -31,14 +31,34 @@ struct AppStoreReviewManager {
     /// The defaults holding the parameters to make the request for an app store review.
     let userDefaults: UserDefaults
 
+    /// The last version in which a review for feedback was requested.
+    private var lastPromptedAppVersion: String {
+        get {
+            return userDefaults.string(forKey: UserDefaultsKeys.lastPromptedAppVersionKey.rawValue) ?? ""
+        }
+        set {
+            userDefaults.set(newValue, forKey: UserDefaultsKeys.lastPromptedAppVersionKey.rawValue)
+        }
+    }
+
     /// The current count parameter related to the current version.
-    var currentCountParameter: Int {
-        return userDefaults.integer(forKey: UserDefaultsKeys.countParameterKey.rawValue)
+    private(set) var currentCountParameter: Int {
+        get {
+            return userDefaults.integer(forKey: UserDefaultsKeys.countParameterKey.rawValue)
+        }
+        set {
+            userDefaults.set(newValue, forKey: UserDefaultsKeys.countParameterKey.rawValue)
+        }
     }
 
     /// The flag indicating if the review was requested for the current version.
-    private var wasReviewRequested: Bool {
-        return userDefaults.bool(forKey: UserDefaultsKeys.wasReviewRequestedForThisVersion.rawValue)
+    var wasReviewRequested: Bool {
+        get {
+            return userDefaults.bool(forKey: UserDefaultsKeys.wasReviewRequestedForThisVersion.rawValue)
+        }
+        set {
+            userDefaults.set(newValue, forKey: UserDefaultsKeys.wasReviewRequestedForThisVersion.rawValue)
+        }
     }
 
     // MARK: Imperatives
@@ -96,6 +116,17 @@ struct AppStoreReviewManager {
                 forKey: UserDefaultsKeys.countParameterKey.rawValue
             )
             print("Review parameter Count is now: \(currentCountParameter)")
+        }
+    }
+
+    /// Resets the parameters for review.
+    /// - Note: Only resets if the passed version is new.
+    mutating func resetParameters(withNewVersion version: String) {
+        if version != lastPromptedAppVersion {
+            currentCountParameter = 0
+            wasReviewRequested = false
+            // The version gets updated, so reseting will only happen in the next version.
+            lastPromptedAppVersion = version
         }
     }
 }
