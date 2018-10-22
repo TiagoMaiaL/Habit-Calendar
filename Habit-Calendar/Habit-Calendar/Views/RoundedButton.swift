@@ -22,18 +22,33 @@ import UIKit
         }
     }
 
+    // MARK: Initializers
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
+    }
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        setup()
+    }
+
+    private func setup() {
+        layer.cornerRadius = self.frame.height / 2
+        adjustsImageWhenHighlighted = false
+    }
+
     // MARK: Life Cycle
 
     override func prepareForInterfaceBuilder() {
         super.prepareForInterfaceBuilder()
         layoutIfNeeded()
-    }
-
-    override func layoutSubviews() {
-        super.layoutSubviews()
-
-        // Configure the button's corner radius.
-        layer.cornerRadius = frame.size.height / 2
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -56,7 +71,7 @@ import UIKit
     /// Animates the button to display the touch down event.
     private func animateBeginOfTouch() {
         UIViewPropertyAnimator(duration: 0.1, curve: .easeIn) {
-            self.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+            self.transform = CGAffineTransform(scaleX: 0.85, y: 0.85)
         }.startAnimation()
     }
 
