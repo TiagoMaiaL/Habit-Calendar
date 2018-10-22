@@ -43,14 +43,7 @@ import QuartzCore
         setupShadow()
     }
 
-    // MARK: Life cycle
-
-    override func prepareForInterfaceBuilder() {
-        super.prepareForInterfaceBuilder()
-        setupShadow()
-    }
-
-    // MARK: Imperatives
+    // MARK: Setup
 
     /// Configures the card's shadow according to the inspectable properties.
     private func setupShadow() {
@@ -59,5 +52,12 @@ import QuartzCore
         layer.shadowOpacity = shadowOpacity
         layer.shadowOffset = shadowOffset
         layer.shadowColor = shadowColor.cgColor
+    }
+
+    // MARK: Life cycle
+
+    override func prepareForInterfaceBuilder() {
+        super.prepareForInterfaceBuilder()
+        setupShadow()
     }
 }

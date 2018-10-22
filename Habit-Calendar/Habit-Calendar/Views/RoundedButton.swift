@@ -9,7 +9,7 @@
 import UIKit
 
 /// A custom rounded button.
-@IBDesignable class RoundedButton: UIButton {
+@IBDesignable class RoundedButton: UIButton, TouchAnimatable {
 
     // MARK: Properties
 
@@ -64,22 +64,5 @@ import UIKit
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesCancelled(touches, with: event)
         animateEndOfTouch()
-    }
-
-    // MARK: Imperatives
-
-    /// Animates the button to display the touch down event.
-    private func animateBeginOfTouch() {
-        UIViewPropertyAnimator(duration: 0.1, curve: .easeIn) {
-            self.transform = CGAffineTransform(scaleX: 0.85, y: 0.85)
-        }.startAnimation()
-    }
-
-    /// Animates the button to display the touch up event.
-    private func animateEndOfTouch() {
-        UIViewPropertyAnimator(duration: 0.5, dampingRatio: 0.3) {
-            self.transform = CGAffineTransform.identity
-            self.layer.cornerRadius = self.frame.size.height / 2
-        }.startAnimation()
     }
 }
