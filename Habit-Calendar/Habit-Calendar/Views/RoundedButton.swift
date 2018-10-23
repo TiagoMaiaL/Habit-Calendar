@@ -9,7 +9,7 @@
 import UIKit
 
 /// A custom rounded button.
-@IBDesignable class RoundedButton: UIButton {
+@IBDesignable class RoundedButton: UIButton, TouchAnimatable {
 
     // MARK: Properties
 
@@ -22,6 +22,28 @@ import UIKit
         }
     }
 
+    // MARK: Initializers
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
+    }
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        setup()
+    }
+
+    private func setup() {
+        layer.cornerRadius = self.frame.height / 2
+        adjustsImageWhenHighlighted = false
+    }
+
     // MARK: Life Cycle
 
     override func prepareForInterfaceBuilder() {
@@ -29,11 +51,18 @@ import UIKit
         layoutIfNeeded()
     }
 
-    override func layoutSubviews() {
-        super.layoutSubviews()
-
-        // Configure the button's corner radius.
-        layer.cornerRadius = frame.size.height / 2
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        animateBeginOfTouch()
     }
 
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesEnded(touches, with: event)
+        animateEndOfTouch()
+    }
+
+    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesCancelled(touches, with: event)
+        animateEndOfTouch()
+    }
 }

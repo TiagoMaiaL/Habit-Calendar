@@ -320,6 +320,9 @@
 		47AA3657210382380008D2DC /* FireTimeStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AA3656210382380008D2DC /* FireTimeStorageTests.swift */; };
 		47AA3659210382AB0008D2DC /* FireTimeStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AA3658210382AB0008D2DC /* FireTimeStorage.swift */; };
 		47AA365B2104D5E60008D2DC /* FireTimeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AA365A2104D5E60008D2DC /* FireTimeFactory.swift */; };
+		47B0DA26217E542D00C38F07 /* TouchAnimatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B0DA25217E542D00C38F07 /* TouchAnimatable.swift */; };
+		47B0DA27217E542D00C38F07 /* TouchAnimatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B0DA25217E542D00C38F07 /* TouchAnimatable.swift */; };
+		47B0DA28217E542D00C38F07 /* TouchAnimatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B0DA25217E542D00C38F07 /* TouchAnimatable.swift */; };
 		47B2398A212203F9009CB25C /* HabitMOColor+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B23989212203F9009CB25C /* HabitMOColor+UIColor.swift */; };
 		47BC53E221752F2300A5DC17 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 47BC53E021752F2300A5DC17 /* InfoPlist.strings */; };
 		47BC53E521752F2300A5DC17 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 47BC53E321752F2300A5DC17 /* Localizable.strings */; };
@@ -513,6 +516,7 @@
 		47AA3656210382380008D2DC /* FireTimeStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireTimeStorageTests.swift; sourceTree = "<group>"; };
 		47AA3658210382AB0008D2DC /* FireTimeStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireTimeStorage.swift; sourceTree = "<group>"; };
 		47AA365A2104D5E60008D2DC /* FireTimeFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireTimeFactory.swift; sourceTree = "<group>"; };
+		47B0DA25217E542D00C38F07 /* TouchAnimatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchAnimatable.swift; sourceTree = "<group>"; };
 		47B23989212203F9009CB25C /* HabitMOColor+UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HabitMOColor+UIColor.swift"; sourceTree = "<group>"; };
 		47BC53E121752F2300A5DC17 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		47BC53E421752F2300A5DC17 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -696,6 +700,7 @@
 				4732CE7B2118DA8400E2770C /* UnderlinedTextField.swift */,
 				4732CE7D211A12B500E2770C /* RoundedButton.swift */,
 				47160A4021372B2F00E717C9 /* RoundedView.swift */,
+				47B0DA25217E542D00C38F07 /* TouchAnimatable.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1522,6 +1527,7 @@
 				470C41D72144B091007F6F35 /* Date+Utils.swift in Sources */,
 				470C41D82144B091007F6F35 /* HabitsTableViewController.swift in Sources */,
 				470C41D92144B091007F6F35 /* HabitDaysSelectionViewController+Calendar.swift in Sources */,
+				47B0DA27217E542D00C38F07 /* TouchAnimatable.swift in Sources */,
 				470C41DA2144B091007F6F35 /* HabitDayStorage.swift in Sources */,
 				470C41DB2144B091007F6F35 /* HabitTableViewCell.swift in Sources */,
 				470C41DC2144B091007F6F35 /* CalendarDisplayable.swift in Sources */,
@@ -1610,6 +1616,7 @@
 				470C42482144B164007F6F35 /* Date+Utils.swift in Sources */,
 				470C42492144B164007F6F35 /* HabitsTableViewController.swift in Sources */,
 				470C424A2144B164007F6F35 /* HabitDaysSelectionViewController+Calendar.swift in Sources */,
+				47B0DA28217E542D00C38F07 /* TouchAnimatable.swift in Sources */,
 				470C424B2144B164007F6F35 /* HabitDayStorage.swift in Sources */,
 				470C424C2144B164007F6F35 /* HabitTableViewCell.swift in Sources */,
 				470C424D2144B164007F6F35 /* CalendarDisplayable.swift in Sources */,
@@ -1698,6 +1705,7 @@
 				47AA365321037B0B0008D2DC /* FireTimeMO.swift in Sources */,
 				474F9C8620CC7E180094C19C /* Date+Utils.swift in Sources */,
 				4725D05B20C8A4BA00C3B63F /* HabitsTableViewController.swift in Sources */,
+				47B0DA26217E542D00C38F07 /* TouchAnimatable.swift in Sources */,
 				475197D62132F4E1009F959C /* HabitDaysSelectionViewController+Calendar.swift in Sources */,
 				4725D06320CA14A600C3B63F /* HabitDayStorage.swift in Sources */,
 				4732CE782114F23200E2770C /* HabitTableViewCell.swift in Sources */,
