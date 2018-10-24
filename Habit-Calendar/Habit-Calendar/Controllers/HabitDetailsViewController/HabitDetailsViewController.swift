@@ -16,7 +16,7 @@ class HabitDetailsViewController: UIViewController {
     // MARK: Properties
 
     /// The habit presented by this controller.
-    var habit: HabitMO! {
+    weak var habit: HabitMO! {
         didSet {
             habitColor = habit.getColor().uiColor
         }
@@ -47,7 +47,7 @@ class HabitDetailsViewController: UIViewController {
 
     /// The persistent container used by this store to manage the
     /// provided habit.
-    var container: NSPersistentContainer!
+    weak var container: NSPersistentContainer!
 
     /// The shortcuts manager used to add a new shortcut when the habit is displayed.
     var shortcutsManager: HabitsShortcutItemsManager!

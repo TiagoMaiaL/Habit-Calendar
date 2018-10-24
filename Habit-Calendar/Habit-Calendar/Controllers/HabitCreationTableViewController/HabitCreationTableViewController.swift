@@ -66,7 +66,7 @@ class HabitCreationTableViewController: UITableViewController {
     @IBOutlet var requiredLabelMarkers: [UILabel]!
 
     /// The container in which the habit is going to be persisted.
-    var container: NSPersistentContainer!
+    weak var container: NSPersistentContainer!
 
     /// The shortcuts manager used to add a new shortcut when a habit gets added or edited.
     /// - Note: The manager is used by this controller to add a shortcut every time a habit is created or edited, and
@@ -82,7 +82,7 @@ class HabitCreationTableViewController: UITableViewController {
     var userStore: UserStorage!
 
     /// The habit entity being editted.
-    var habit: HabitMO?
+    weak var habit: HabitMO?
 
     /// The habit's name being informed by the user.
     var name: String? {
