@@ -44,6 +44,9 @@ class HabitCreationTableViewController: UITableViewController {
     /// The label displaying the last day in the selected sequence.
     @IBOutlet weak var toDayLabel: UILabel!
 
+    /// The fire times table view cell.
+    @IBOutlet weak var fireTimesCell: UITableViewCell!
+
     /// The stack view containing the fire times labels.
     @IBOutlet weak var fireTimesContainer: UIStackView!
 

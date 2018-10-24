@@ -50,6 +50,7 @@ extension HabitCreationTableViewController: NotificationAvailabilityDisplayable 
             DispatchQueue.main.async {
                 self.notAuthorizedContainer.isHidden = isAuthorized
                 self.fireTimesContainer.isHidden = !isAuthorized
+                self.fireTimesCell.isUserInteractionEnabled = isAuthorized
                 self.tableView.reloadData()
             }
         }
