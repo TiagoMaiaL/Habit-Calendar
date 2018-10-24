@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 
 /// Class in charge of managing the storage of Habit entities.
-class HabitStorage {
+struct HabitStorage {
 
     // MARK: - Properties
 

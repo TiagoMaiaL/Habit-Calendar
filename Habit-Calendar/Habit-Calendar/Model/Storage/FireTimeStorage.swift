@@ -9,7 +9,7 @@
 import CoreData
 
 /// Class in charge of storing FireTime entities.
-class FireTimeStorage {
+struct FireTimeStorage {
 
     // MARK: Imperatives
 

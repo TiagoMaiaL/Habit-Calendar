@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 
 /// Class in charge of storing HabitDay entities.
-class HabitDayStorage {
+struct HabitDayStorage {
 
     // MARK: - Properties
 
