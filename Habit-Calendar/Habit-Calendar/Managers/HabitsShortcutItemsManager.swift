@@ -14,7 +14,7 @@ import UIKit
 ///     - A habit is created or updated.
 ///     - A habit is viewed (its details are displayed to the user).
 ///     - A habit is deleted.
-class HabitsShortcutItemsManager {
+struct HabitsShortcutItemsManager {
 
     // MARK: Properties
 
