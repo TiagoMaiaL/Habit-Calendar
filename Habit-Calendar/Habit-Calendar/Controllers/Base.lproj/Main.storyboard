@@ -609,6 +609,7 @@
                         <outlet property="daysAmountLabel" destination="GyR-VK-GCC" id="aqR-Rj-RRo"/>
                         <outlet property="doneButton" destination="D90-7S-rS4" id="hFv-tY-Ca2"/>
                         <outlet property="fireTimesAmountLabel" destination="OSf-bA-IA0" id="IfS-J8-2BV"/>
+                        <outlet property="fireTimesCell" destination="5x1-FQ-bQv" id="0pb-Ae-I87"/>
                         <outlet property="fireTimesContainer" destination="3pf-TQ-uQU" id="PKe-t9-lJ6"/>
                         <outlet property="fireTimesLabel" destination="4Ii-SK-90P" id="maA-aC-dqy"/>
                         <outlet property="fromDayLabel" destination="qIT-Tk-yq9" id="Xvb-pW-3Au"/>
