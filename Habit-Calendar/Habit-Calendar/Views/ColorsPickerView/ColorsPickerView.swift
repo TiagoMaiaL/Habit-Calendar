@@ -51,8 +51,8 @@ import UIKit
     /// color options.
     lazy var colorPickerDataSource: ColorPickerViewDataSource = {
         let dataSource = ColorPickerViewDataSource()
-        dataSource.colorSelectionHandler = {
-            self.colorChangeHandler?($0)
+        dataSource.colorSelectionHandler = { [weak self] in
+            self?.colorChangeHandler?($0)
         }
 
         return dataSource
