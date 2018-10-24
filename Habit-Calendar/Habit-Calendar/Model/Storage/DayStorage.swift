@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 
 /// Class in charge of storing calendar Day entities.
-class DayStorage {
+struct DayStorage {
 
     // MARK: Types
 

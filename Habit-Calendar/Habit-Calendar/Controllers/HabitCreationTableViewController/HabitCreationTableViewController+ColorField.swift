@@ -39,9 +39,9 @@ extension HabitCreationTableViewController {
         }
 
         // Set the color change handler.
-        colorPicker.colorChangeHandler = { uiColor in
+        colorPicker.colorChangeHandler = { [weak self] uiColor in
             // Associate the selected color.
-            self.habitColor = HabitMO.Color.getInstanceFrom(color: uiColor)
+            self?.habitColor = HabitMO.Color.getInstanceFrom(color: uiColor)
         }
         // Get the possible colors to be displayed.
         let possibleColors = Array(HabitMO.Color.uiColors.values)

@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 
 /// Class in charge of managing user entities.
-class UserStorage {
+struct UserStorage {
 
     // MARK: - Imperatives
 

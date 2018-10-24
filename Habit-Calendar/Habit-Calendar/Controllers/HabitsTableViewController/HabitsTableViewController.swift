@@ -36,7 +36,7 @@ class HabitsTableViewController: UITableViewController {
     let completedHabitCellIdentifier = "Completed habit table view cell"
 
     /// The used persistence container.
-    var container: NSPersistentContainer!
+    weak var container: NSPersistentContainer!
 
     /// The Habit storage used to fetch the tracked habits.
     var habitStorage: HabitStorage!

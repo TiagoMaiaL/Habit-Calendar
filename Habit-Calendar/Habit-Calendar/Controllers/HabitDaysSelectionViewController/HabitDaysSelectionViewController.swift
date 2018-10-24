@@ -71,7 +71,7 @@ class HabitDaysSelectionViewController: UIViewController {
     weak var delegate: HabitDaysSelectionViewControllerDelegate?
 
     /// The controller's theme color.
-    var themeColor: UIColor!
+    weak var themeColor: UIColor!
 
     /// Flag indicating if the range selection between two dates should be applied.
     /// - Note: The range selection normally takes place when an user selects one date and than

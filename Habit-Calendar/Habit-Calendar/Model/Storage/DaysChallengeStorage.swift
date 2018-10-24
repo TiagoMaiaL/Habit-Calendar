@@ -9,7 +9,7 @@
 import CoreData
 
 /// Class in charge of managing the DaysChallengeMO entities.
-class DaysChallengeStorage {
+struct DaysChallengeStorage {
 
     // MARK: Properties
 

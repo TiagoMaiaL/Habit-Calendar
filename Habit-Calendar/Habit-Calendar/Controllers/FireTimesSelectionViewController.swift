@@ -40,7 +40,7 @@ class FireTimesSelectionViewController: UIViewController {
     }
 
     /// The controller's theme color.
-    var themeColor: UIColor! {
+    weak var themeColor: UIColor! {
         didSet {
             // Reload the table view to update the selected style.
             tableView?.reloadData()
