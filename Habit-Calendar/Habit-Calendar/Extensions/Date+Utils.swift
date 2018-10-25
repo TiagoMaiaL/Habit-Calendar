@@ -13,9 +13,17 @@ extension Date {
 
     // MARK: Properties
 
+    /// The configured current lazy evaluated calendar.
+    static private var currentCalendar: Calendar = {
+        var calendar = Calendar.current
+        calendar.timeZone = TimeZone.autoupdatingCurrent
+
+        return calendar
+    }()
+
     /// The date's components according to the system's calendar.
     var components: DateComponents {
-        return getCurrentCalendar().dateComponents(
+        return Date.currentCalendar.dateComponents(
             [.second, .minute, .hour, .day, .month, .year],
             from: self
         )
@@ -23,7 +31,7 @@ extension Date {
 
     /// Indicates if the date is in today or not.
     var isInToday: Bool {
-        return getCurrentCalendar().isDateInToday(self)
+        return Date.currentCalendar.isDateInToday(self)
     }
 
     /// Indicates if the date is in the future or not.
@@ -38,18 +46,10 @@ extension Date {
 
     // MARK: Imperatives
 
-    /// Gets the configured current calendar.
-    private func getCurrentCalendar() -> Calendar {
-        var calendar = Calendar.current
-        calendar.timeZone = TimeZone.autoupdatingCurrent
-
-        return calendar
-    }
-
     /// Gets a new date representing the beginning of the current date's day value.
     /// - Returns: the current date at midnight (beginning of day).
     func getBeginningOfDay() -> Date {
-        return getCurrentCalendar().startOfDay(for: self)
+        return Date.currentCalendar.startOfDay(for: self)
     }
 
     /// Gets a new date representing the end of the current date's day value.
@@ -63,7 +63,7 @@ extension Date {
         endOfDayComponents.minute = 59
         endOfDayComponents.second = 59
 
-        let dayAtEnd = getCurrentCalendar().date(from: endOfDayComponents)
+        let dayAtEnd = Date.currentCalendar.date(from: endOfDayComponents)
 
         // Is there a mistake with the computation of the date?
         assert(dayAtEnd != nil, "The computation of the end of the day couldn't be performed.")
@@ -76,7 +76,7 @@ extension Date {
     ///                              added to the date.
     /// - Returns: A new date with the minutes added.
     func byAddingMinutes(_ numberOfMinutes: Int) -> Date? {
-        return getCurrentCalendar().date(
+        return Date.currentCalendar.date(
             byAdding: .minute,
             value: numberOfMinutes,
             to: self
@@ -87,7 +87,7 @@ extension Date {
     /// - Parameter numberOfDays: The number of days to be added to the date.
     /// - Returns: A new date with the days added.
     func byAddingDays(_ numberOfDays: Int) -> Date? {
-        return getCurrentCalendar().date(
+        return Date.currentCalendar.date(
             byAdding: .day,
             value: numberOfDays,
             to: self
@@ -98,7 +98,7 @@ extension Date {
     /// - Parameter numberOfMonths: The number of months to be added to the date.
     /// - Returns: A new date with the months added.
     func byAddingMonths(_ numberOfMonths: Int) -> Date? {
-        return getCurrentCalendar().date(
+        return Date.currentCalendar.date(
             byAdding: .month,
             value: numberOfMonths,
             to: self
@@ -109,7 +109,7 @@ extension Date {
     /// - Parameter numberOfYears: The number of years to be added.
     /// - Returns: A new date with the added years.
     func byAddingYears(_ numberOfYears: Int) -> Date? {
-        return getCurrentCalendar().date(
+        return Date.currentCalendar.date(
             byAdding: .year,
             value: numberOfYears,
             to: self
@@ -122,7 +122,7 @@ extension Date {
     ///         before the receiver.
     /// - Returns: The difference of days being an integer number.
     func getDifferenceInDays(from date: Date) -> Int {
-        return getCurrentCalendar().dateComponents(
+        return Date.currentCalendar.dateComponents(
             [.day],
             from: self,
             to: date

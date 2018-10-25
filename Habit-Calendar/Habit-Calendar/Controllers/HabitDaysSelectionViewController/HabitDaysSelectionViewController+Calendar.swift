@@ -191,17 +191,6 @@ extension HabitDaysSelectionViewController: JTAppleCalendarViewDataSource, JTApp
         if cell != nil {
             select(date)
             calendar.reloadData()
-//            let indexPathsToReload = [
-//                cellState.date.byAddingDays(-1)!,
-//                cellState.date,
-//                cellState.date.byAddingDays(1)!
-//                ].compactMap {
-//                    calendar.cellStatus(for: $0)?.cell()
-//                }.compactMap {
-//                    calendar.indexPath(for: $0)
-//            }
-//
-//            calendar.reloadItems(at: indexPathsToReload)
         }
 
         // Configure footer according to the current selection.
@@ -214,21 +203,9 @@ extension HabitDaysSelectionViewController: JTAppleCalendarViewDataSource, JTApp
         cell: JTAppleCell?,
         cellState: CellState
         ) {
-        print(cell)
         // Change the cell's appearance to show the deselected state.
         if cell != nil {
             calendar.reloadData()
-//            let indexPathsToReload = [
-//                cellState.date.byAddingDays(-1)!,
-//                cellState.date,
-//                cellState.date.byAddingDays(1)!
-//            ].compactMap {
-//                calendar.cellStatus(for: $0)?.cell()
-//            }.compactMap {
-//                calendar.indexPath(for: $0)
-//            }
-//
-//            calendar.reloadItems(at: indexPathsToReload)
         }
 
         // Configure footer according to the current selection.
