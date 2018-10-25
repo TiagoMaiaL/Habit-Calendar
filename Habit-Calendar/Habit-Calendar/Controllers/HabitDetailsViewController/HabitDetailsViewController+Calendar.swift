@@ -45,9 +45,9 @@ extension HabitDetailsViewController: CalendarDisplayable {
                 cell.dayTitleLabel.textColor = .white
 
                 // Change the cell's range type, if it's the challenge's begin date, end date, or if it's in between.
-                if cellState.date == challenge.fromDate!.getBeginningOfDay() {
+                if cellState.date == challenge.fromDateInCurrentTimeZone {
                     cell.position = .begin
-                } else if cellState.date == challenge.toDate!.getBeginningOfDay() {
+                } else if cellState.date == challenge.toDateInCurrentTimeZone {
                     cell.position = .end
                 } else if cellState.date.isInBetween(challenge.fromDate!, challenge.toDate!) {
                     cell.position = .inBetween

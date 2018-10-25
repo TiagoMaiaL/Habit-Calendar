@@ -336,13 +336,12 @@ class HabitDetailsViewController: UIViewController {
     /// - Note: The challenge is found if the date is in between or is it's begin or final.
     /// - Returns: The challenge entity, if any.
     func getChallenge(from date: Date) -> DaysChallengeMO? {
-        let date = date.getBeginningOfDay()
         // Try to get the matching challenge by filtering through the habit's fetched ones.
         // The challenge matches when the passed date or is in between,
         // or is one of the challenge's limit dates (begin or end).
         let filteredChallenges = challenges.filter {
-            let fromDate = $0.fromDate!.getBeginningOfDay()
-            let toDate = $0.toDate!.getBeginningOfDay()
+            let fromDate = $0.fromDateInCurrentTimeZone
+            let toDate = $0.toDateInCurrentTimeZone
 
             return date.isInBetween(fromDate, toDate) ||
                 date.compare(fromDate) == .orderedSame ||
