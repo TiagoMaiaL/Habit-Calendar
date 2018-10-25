@@ -58,23 +58,35 @@ import JTAppleCalendar
         return rangeView
     }()
 
-    /// The range view's vertical constraint applied to all situations.
-    private lazy var verticalConstraint: NSLayoutConstraint = {
-        return rangeBackgroundView.centerYAnchor.constraint(equalTo: dayTitleLabel.centerYAnchor)
+    /// The general constraints applied to the day text label.
+    private lazy var generalDayLabelConstraints: [NSLayoutConstraint] = {
+        return [
+            dayTitleLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            dayTitleLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
+        ]
     }()
 
-    /// The range view's height constraint applied to all situations.
-    private lazy var heightConstraint: NSLayoutConstraint = {
-        return rangeBackgroundView.heightAnchor.constraint(
-            equalTo: dayTitleLabel.heightAnchor,
-            multiplier: 1,
-            constant: 10
-        )
+    /// The general constraints applied to the range view.
+    private lazy var generalRangeConstraints: [NSLayoutConstraint] = {
+        return [
+            rangeBackgroundView.centerYAnchor.constraint(equalTo: dayTitleLabel.centerYAnchor),
+            rangeBackgroundView.heightAnchor.constraint(
+                equalTo: dayTitleLabel.heightAnchor,
+                multiplier: 1,
+                constant: 10
+            ),
+            rangeBackgroundView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 2, constant: 0)
+        ]
     }()
 
-    /// The range view's width constraint applied to all situations.
-    private lazy var widthConstraint: NSLayoutConstraint = {
-        return rangeBackgroundView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 2, constant: 0)
+    /// The general constraints applied to the circle view.
+    private lazy var generalCircleConstraints: [NSLayoutConstraint] = {
+        return [
+            circleView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            circleView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            circleView.widthAnchor.constraint(equalToConstant: 35),
+            circleView.heightAnchor.constraint(equalToConstant: 35)
+        ]
     }()
 
     /// The range view's begin horizontal constraint.
@@ -91,6 +103,14 @@ import JTAppleCalendar
     private lazy var endHorizontalConstraint: NSLayoutConstraint = {
         return rangeBackgroundView.trailingAnchor.constraint(equalTo: dayTitleLabel.trailingAnchor, constant: 10)
     }()
+
+    /// Flag indicating if the constraints for the views were already applied.
+    /// - Note: This flag is used to avoid applying the same constraints over and over again.
+    private var constraintsAreApplied: Bool {
+        return (generalRangeConstraints + generalCircleConstraints + generalDayLabelConstraints).reduce(false) {
+            $0 && $1.isActive
+        }
+    }
 
     /// MARK: Life cycle
 
@@ -143,24 +163,18 @@ import JTAppleCalendar
 
     /// Applies the layout to the subviews, if appropriate.
     func applyLayout() {
-        dayTitleLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-        dayTitleLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
-
-        circleView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-        circleView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
-        circleView.widthAnchor.constraint(equalToConstant: 35).isActive = true
-        circleView.heightAnchor.constraint(equalToConstant: 35).isActive = true
-        circleView.layer.cornerRadius = 35 * 0.5
+        if !constraintsAreApplied {
+            (generalDayLabelConstraints + generalCircleConstraints + generalRangeConstraints).forEach {
+                $0.isActive = true
+            }
+            circleView.layer.cornerRadius = 35 * 0.5
+        }
 
         // The circle view should always be in the front.
         contentView.bringSubviewToFront(circleView)
         contentView.bringSubviewToFront(dayTitleLabel)
 
         rangeBackgroundView.isHidden = false
-
-        verticalConstraint.isActive = true
-        heightConstraint.isActive = true
-        widthConstraint.isActive = true
 
         // Apply the rangeBgView's layout, according to the current position.
         switch position {
