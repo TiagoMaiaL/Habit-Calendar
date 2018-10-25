@@ -1116,7 +1116,7 @@ Add as many habits as you wish.</string>
                                                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                                 </collectionViewFlowLayout>
                                                                 <cells>
-                                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" reuseIdentifier="challenge day cell id" id="CWe-an-Y5t" customClass="CalendarChallengeDayCell" customModule="Habit_Calendar" customModuleProvider="target">
+                                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" reuseIdentifier="challenge day cell id" id="CWe-an-Y5t" customClass="CalendarDayCell" customModule="Habit_Calendar" customModuleProvider="target">
                                                                         <rect key="frame" x="0.0" y="0.0" width="57" height="55"/>
                                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -1631,8 +1631,8 @@ you think of adding a new one?</string>
         <image name="ic-notification" width="41" height="46"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="y7q-nn-pWX"/>
-        <segue reference="J1H-vQ-s49"/>
-        <segue reference="Xkx-Wi-bYR"/>
+        <segue reference="G29-rb-isc"/>
+        <segue reference="43l-ZQ-AR3"/>
+        <segue reference="5mV-Cj-rFr"/>
     </inferredMetricsTieBreakers>
 </document>

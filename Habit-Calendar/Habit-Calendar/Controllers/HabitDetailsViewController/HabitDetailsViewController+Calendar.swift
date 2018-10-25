@@ -23,7 +23,7 @@ extension HabitDetailsViewController: CalendarDisplayable {
         using cellState: CellState
     ) {
         // Cast it to the expected instance.
-        guard let cell = cell as? CalendarChallengeDayCell else {
+        guard let cell = cell as? CalendarDayCell else {
             assertionFailure("Couldn't cast the cell to a CalendarDayCell's instance.")
             return
         }
@@ -96,7 +96,7 @@ extension HabitDetailsViewController: JTAppleCalendarViewDataSource, JTAppleCale
             for: indexPath
         )
 
-        guard let dayCell = cell as? CalendarChallengeDayCell else {
+        guard let dayCell = cell as? CalendarDayCell else {
             assertionFailure("Couldn't get the expected details calendar cell.")
             return cell
         }

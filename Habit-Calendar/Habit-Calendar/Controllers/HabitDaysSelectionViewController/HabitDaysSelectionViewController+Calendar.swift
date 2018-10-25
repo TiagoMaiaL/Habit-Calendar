@@ -72,6 +72,8 @@ extension HabitDaysSelectionViewController: CalendarDisplayable {
         if cellState.dateBelongsTo != .thisMonth {
             cell.dayTitleLabel.text = ""
             cell.backgroundColor = .clear
+            cell.rangeBackgroundView.backgroundColor = .clear
+            cell.position = .none
             return
         }
 
@@ -84,8 +86,21 @@ extension HabitDaysSelectionViewController: CalendarDisplayable {
         // 3. is the date in the current day or not.
         // Change the cell's background color to match the selection state.
         if cellState.isSelected {
-            cell.backgroundColor = themeColor
+            cell.rangeBackgroundView.backgroundColor = themeColor
             cell.dayTitleLabel.textColor = .white
+
+            switch cellState.selectedPosition() {
+            case .left:
+                cell.position = .begin
+            case .middle:
+                cell.position = .inBetween
+            case .right:
+                cell.position = .end
+            case .full:
+                cell.position = cellState.date.isInToday ? .begin : .inBetween
+            default:
+                break
+            }
 
             if cellState.date.isInToday {
                 cell.circleView.backgroundColor = .white
@@ -98,6 +113,8 @@ extension HabitDaysSelectionViewController: CalendarDisplayable {
                 cell.dayTitleLabel.textColor = UIColor(red: 74/255, green: 74/255, blue: 74/255, alpha: 1)
             }
 
+            cell.position = .none
+            cell.rangeBackgroundView.backgroundColor = .clear
             cell.backgroundColor = .white
         }
     }
@@ -171,9 +188,20 @@ extension HabitDaysSelectionViewController: JTAppleCalendarViewDataSource, JTApp
         cellState: CellState
         ) {
         // Change the cell's appearance to show the selected state.
-        if let cell = cell {
+        if cell != nil {
             select(date)
-            handleAppearanceOfCell(cell, using: cellState)
+            calendar.reloadData()
+//            let indexPathsToReload = [
+//                cellState.date.byAddingDays(-1)!,
+//                cellState.date,
+//                cellState.date.byAddingDays(1)!
+//                ].compactMap {
+//                    calendar.cellStatus(for: $0)?.cell()
+//                }.compactMap {
+//                    calendar.indexPath(for: $0)
+//            }
+//
+//            calendar.reloadItems(at: indexPathsToReload)
         }
 
         // Configure footer according to the current selection.
@@ -186,9 +214,21 @@ extension HabitDaysSelectionViewController: JTAppleCalendarViewDataSource, JTApp
         cell: JTAppleCell?,
         cellState: CellState
         ) {
+        print(cell)
         // Change the cell's appearance to show the deselected state.
-        if let cell = cell {
-            handleAppearanceOfCell(cell, using: cellState)
+        if cell != nil {
+            calendar.reloadData()
+//            let indexPathsToReload = [
+//                cellState.date.byAddingDays(-1)!,
+//                cellState.date,
+//                cellState.date.byAddingDays(1)!
+//            ].compactMap {
+//                calendar.cellStatus(for: $0)?.cell()
+//            }.compactMap {
+//                calendar.indexPath(for: $0)
+//            }
+//
+//            calendar.reloadItems(at: indexPathsToReload)
         }
 
         // Configure footer according to the current selection.

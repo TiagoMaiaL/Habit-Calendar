@@ -11,6 +11,13 @@ import JTAppleCalendar
 /// Cell in charge of displaying the calendar's days.
 @IBDesignable class CalendarDayCell: JTAppleCell {
 
+    // MARK: Types
+
+    /// The kind of challenge day being displayed within the challenge's range of days.
+    enum RangePosition {
+        case begin, inBetween, end, none
+    }
+
     // MARK: Parameters
 
     /// The text's default color.
@@ -35,13 +42,75 @@ import JTAppleCalendar
         return circleView
     }()
 
-    /// The cell's bottom separator.
-    lazy var bottomSeparator: CALayer = {
-        let separatorLayer = CALayer()
-        separatorLayer.backgroundColor = UIColor(red: 236/255, green: 240/255, blue: 241/255, alpha: 1).cgColor
+    /// The day's position within the challenge's days.
+    /// Default value is none.
+    var position: RangePosition = .none {
+        didSet {
+            setNeedsLayout()
+        }
+    }
 
-        return separatorLayer
+    /// The background view displaying the day's position in the challenge.
+    private(set) lazy var rangeBackgroundView: UIView = {
+        let rangeView = UIView()
+        rangeView.translatesAutoresizingMaskIntoConstraints = false
+
+        return rangeView
     }()
+
+    /// The general constraints applied to the day text label.
+    private lazy var generalDayLabelConstraints: [NSLayoutConstraint] = {
+        return [
+            dayTitleLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            dayTitleLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
+        ]
+    }()
+
+    /// The general constraints applied to the range view.
+    private lazy var generalRangeConstraints: [NSLayoutConstraint] = {
+        return [
+            rangeBackgroundView.centerYAnchor.constraint(equalTo: dayTitleLabel.centerYAnchor),
+            rangeBackgroundView.heightAnchor.constraint(
+                equalTo: dayTitleLabel.heightAnchor,
+                multiplier: 1,
+                constant: 10
+            ),
+            rangeBackgroundView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 2, constant: 0)
+        ]
+    }()
+
+    /// The general constraints applied to the circle view.
+    private lazy var generalCircleConstraints: [NSLayoutConstraint] = {
+        return [
+            circleView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            circleView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            circleView.widthAnchor.constraint(equalToConstant: 35),
+            circleView.heightAnchor.constraint(equalToConstant: 35)
+        ]
+    }()
+
+    /// The range view's begin horizontal constraint.
+    private lazy var beginHorizontalConstraint: NSLayoutConstraint = {
+        return rangeBackgroundView.leadingAnchor.constraint(equalTo: dayTitleLabel.leadingAnchor, constant: -10)
+    }()
+
+    /// The range view's inBetween horizontal constraint.
+    private lazy var inBetweenHorizontalConstraint: NSLayoutConstraint = {
+        return rangeBackgroundView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor)
+    }()
+
+    /// The range view's end horizontal constraint.
+    private lazy var endHorizontalConstraint: NSLayoutConstraint = {
+        return rangeBackgroundView.trailingAnchor.constraint(equalTo: dayTitleLabel.trailingAnchor, constant: 10)
+    }()
+
+    /// Flag indicating if the constraints for the views were already applied.
+    /// - Note: This flag is used to avoid applying the same constraints over and over again.
+    private var constraintsAreApplied: Bool {
+        return (generalRangeConstraints + generalCircleConstraints + generalDayLabelConstraints).reduce(false) {
+            $0 && $1.isActive
+        }
+    }
 
     /// MARK: Life cycle
 
@@ -50,6 +119,13 @@ import JTAppleCalendar
 
         handleSubviews()
         applyLayout()
+
+        switch position {
+        case .begin, .inBetween, .end:
+            rangeBackgroundView.layer.cornerRadius = (dayTitleLabel.intrinsicContentSize.height + 10) / 2
+        default:
+            rangeBackgroundView.layer.cornerRadius = 0
+        }
     }
 
     override func prepareForInterfaceBuilder() {
@@ -64,6 +140,11 @@ import JTAppleCalendar
         backgroundColor = .white
         circleView.backgroundColor = .clear
         dayTitleLabel.textColor = defaultTextColor
+
+        // Deactivate all horizontal constraints (specific constraints for each position type).
+        beginHorizontalConstraint.isActive = false
+        inBetweenHorizontalConstraint.isActive = false
+        endHorizontalConstraint.isActive = false
     }
 
     // MARK: Imperatives
@@ -72,31 +153,42 @@ import JTAppleCalendar
     func handleSubviews() {
         guard !contentView.subviews.contains(circleView),
             !contentView.subviews.contains(dayTitleLabel),
-            bottomSeparator.superlayer == nil else {
+            !contentView.subviews.contains(rangeBackgroundView) else {
                 return
         }
         contentView.addSubview(circleView)
         contentView.addSubview(dayTitleLabel)
-        contentView.layer.addSublayer(bottomSeparator)
-
+        contentView.addSubview(rangeBackgroundView)
     }
 
     /// Applies the layout to the subviews, if appropriate.
     func applyLayout() {
-        dayTitleLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-        dayTitleLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+        if !constraintsAreApplied {
+            (generalDayLabelConstraints + generalCircleConstraints + generalRangeConstraints).forEach {
+                $0.isActive = true
+            }
+            circleView.layer.cornerRadius = 35 * 0.5
+        }
 
-        circleView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-        circleView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
-        circleView.widthAnchor.constraint(equalToConstant: 35).isActive = true
-        circleView.heightAnchor.constraint(equalToConstant: 35).isActive = true
-        circleView.layer.cornerRadius = 35 * 0.5
+        // The circle view should always be in the front.
+        contentView.bringSubviewToFront(circleView)
+        contentView.bringSubviewToFront(dayTitleLabel)
 
-        bottomSeparator.frame = CGRect(
-            x: 0,
-            y: contentView.frame.size.height - 1,
-            width: contentView.frame.size.width,
-            height: 1
-        )
+        rangeBackgroundView.isHidden = false
+
+        // Apply the rangeBgView's layout, according to the current position.
+        switch position {
+        case .begin:
+            beginHorizontalConstraint.isActive = true
+
+        case .inBetween:
+            inBetweenHorizontalConstraint.isActive = true
+
+        case .end:
+            endHorizontalConstraint.isActive = true
+
+        case .none:
+            rangeBackgroundView.isHidden = true
+        }
     }
 }
