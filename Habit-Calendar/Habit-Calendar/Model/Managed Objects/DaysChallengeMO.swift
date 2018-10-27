@@ -12,6 +12,18 @@ import CoreData
 /// tracked and executed on.
 class DaysChallengeMO: NSManagedObject {
 
+    // MARK: Properties
+
+    /// The lazy evaluated from date property, in the current time zone.
+    lazy var fromDateInCurrentTimeZone: Date = {
+        return fromDate!.getBeginningOfDay()
+    }()
+
+    /// The lazy evaluated to date property, in the current time zone.
+    lazy var toDateInCurrentTimeZone: Date = {
+        return toDate!.getBeginningOfDay()
+    }()
+
     // MARK: Imperatives
 
     /// Returns the challenge's current day (associated with today's date),
