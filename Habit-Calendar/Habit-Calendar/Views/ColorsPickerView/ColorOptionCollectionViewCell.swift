@@ -72,21 +72,19 @@ class ColorOptionCollectionViewCell: UICollectionViewCell {
         colorView.layer.shadowOffset = .zero
         colorView.layer.shadowColor = nil
     }
+}
 
+// Adds the touch animations to the option cell.
+extension ColorOptionCollectionViewCell: TouchAnimatable {
     /// Animates the colorView size to show it's selected.
     func animateSelection() {
-        UIView.animate(withDuration: 0.1) {
-            self.colorView.transform = CGAffineTransform(scaleX: 1.25, y: 1.25)
-            self.applyShadow()
-        }
+        animateBeginOfTouch()
+        self.applyShadow()
     }
 
     /// Animates the colorView size to show it's not selected any more.
     func animateDeselection() {
-        UIView.animate(withDuration: 0.1) {
-            self.colorView.transform = .identity
-            self.removeShadow()
-        }
+        animateEndOfTouch()
+        self.removeShadow()
     }
-
 }
