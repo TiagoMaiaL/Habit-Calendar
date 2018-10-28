@@ -189,6 +189,15 @@ class HabitCreationTableViewController: UITableViewController {
         displayNotificationAvailability()
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        // If there's a habit being edited, this property will be set, and the selection should be shown.
+        if let habitColor = habitColor {
+            colorPicker.selectedColor = habitColor.uiColor
+        }
+    }
+
     // MARK: Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -304,9 +313,8 @@ class HabitCreationTableViewController: UITableViewController {
         // Display the habit's name.
         nameTextField.text = habit!.name
 
-        // Display the habit's color.
+        // Keep the color of the habit to be displayed after the view appears.
         habitColor = habit!.getColor()
-        colorPicker.selectedColor = habitColor!.uiColor
 
         // Display the habit's current days' challenge.
 
