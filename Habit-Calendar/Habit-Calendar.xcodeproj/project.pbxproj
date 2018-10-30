@@ -321,6 +321,9 @@
 		47B0DA27217E542D00C38F07 /* TouchAnimatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B0DA25217E542D00C38F07 /* TouchAnimatable.swift */; };
 		47B0DA28217E542D00C38F07 /* TouchAnimatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B0DA25217E542D00C38F07 /* TouchAnimatable.swift */; };
 		47B2398A212203F9009CB25C /* HabitMOColor+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B23989212203F9009CB25C /* HabitMOColor+UIColor.swift */; };
+		47B38B002188C88D00C26A92 /* FireTimeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B38AFF2188C88D00C26A92 /* FireTimeTableViewCell.swift */; };
+		47B38B012188CA4600C26A92 /* FireTimeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B38AFF2188C88D00C26A92 /* FireTimeTableViewCell.swift */; };
+		47B38B022188CA4700C26A92 /* FireTimeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B38AFF2188C88D00C26A92 /* FireTimeTableViewCell.swift */; };
 		47BC53E221752F2300A5DC17 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 47BC53E021752F2300A5DC17 /* InfoPlist.strings */; };
 		47BC53E521752F2300A5DC17 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 47BC53E321752F2300A5DC17 /* Localizable.strings */; };
 		47BC53FE2176565C00A5DC17 /* EmptyStateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47BC54022176565C00A5DC17 /* EmptyStateView.xib */; };
@@ -514,6 +517,7 @@
 		47AA365A2104D5E60008D2DC /* FireTimeFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireTimeFactory.swift; sourceTree = "<group>"; };
 		47B0DA25217E542D00C38F07 /* TouchAnimatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchAnimatable.swift; sourceTree = "<group>"; };
 		47B23989212203F9009CB25C /* HabitMOColor+UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HabitMOColor+UIColor.swift"; sourceTree = "<group>"; };
+		47B38AFF2188C88D00C26A92 /* FireTimeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireTimeTableViewCell.swift; sourceTree = "<group>"; };
 		47BC53E121752F2300A5DC17 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		47BC53E421752F2300A5DC17 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		47BC54012176565C00A5DC17 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/EmptyStateView.xib; sourceTree = "<group>"; };
@@ -697,6 +701,7 @@
 				4732CE7D211A12B500E2770C /* RoundedButton.swift */,
 				47160A4021372B2F00E717C9 /* RoundedView.swift */,
 				47B0DA25217E542D00C38F07 /* TouchAnimatable.swift */,
+				47B38AFF2188C88D00C26A92 /* FireTimeTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1538,6 +1543,7 @@
 				470C41E42144B091007F6F35 /* HabitStorage.swift in Sources */,
 				470C41E52144B091007F6F35 /* HabitCreationTableViewController+FireTimesField.swift in Sources */,
 				470C41E62144B091007F6F35 /* DayFactory.swift in Sources */,
+				47B38B012188CA4600C26A92 /* FireTimeTableViewCell.swift in Sources */,
 				470C41E72144B091007F6F35 /* UnderlinedTextField.swift in Sources */,
 				47DA52AD214D622C00A45102 /* HabitsTableViewController+DataSource.swift in Sources */,
 				47A2AEF1215ADCC800AF7788 /* HabitDetailsViewController+NotificationObserver.swift in Sources */,
@@ -1626,6 +1632,7 @@
 				470C42552144B164007F6F35 /* HabitStorage.swift in Sources */,
 				470C42562144B164007F6F35 /* HabitCreationTableViewController+FireTimesField.swift in Sources */,
 				470C42572144B164007F6F35 /* DayFactory.swift in Sources */,
+				47B38B022188CA4700C26A92 /* FireTimeTableViewCell.swift in Sources */,
 				470C42582144B164007F6F35 /* UnderlinedTextField.swift in Sources */,
 				47DA52AE214D622D00A45102 /* HabitsTableViewController+DataSource.swift in Sources */,
 				47A2AEF2215ADCC900AF7788 /* HabitDetailsViewController+NotificationObserver.swift in Sources */,
@@ -1714,6 +1721,7 @@
 				4725D05D20C8A96200C3B63F /* HabitStorage.swift in Sources */,
 				47C32036213079770094BBF8 /* HabitCreationTableViewController+FireTimesField.swift in Sources */,
 				47E6C21320EB12A2003BDB4D /* DayFactory.swift in Sources */,
+				47B38B002188C88D00C26A92 /* FireTimeTableViewCell.swift in Sources */,
 				47961085214D5D8C00BFECFC /* HabitsTableViewController+DataSource.swift in Sources */,
 				47A2AEF0215ADBBB00AF7788 /* HabitDetailsViewController+NotificationObserver.swift in Sources */,
 				4732CE7C2118DA8400E2770C /* UnderlinedTextField.swift in Sources */,

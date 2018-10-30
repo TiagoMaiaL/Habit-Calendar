@@ -210,41 +210,42 @@ extension FireTimesSelectionViewController: UITableViewDataSource, UITableViewDe
     // MARK: TableView Delegate methods
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        // Get the cell.
-        let cell = tableView.dequeueReusableCell(
-            withIdentifier: cellIdentifier
-        ) ?? UITableViewCell(
-            style: .default,
-            reuseIdentifier: cellIdentifier
-        )
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as? FireTimeTableViewCell else {
+            assertionFailure("Couldn't get the fire time cell.")
+            return UITableViewCell(
+                style: .default,
+                reuseIdentifier: cellIdentifier
+            )
+        }
 
         // Declare the current fire time to be displayed.
         let currentFireTime = fireTimeComponents[indexPath.row]
 
         // Set it's time text by using a date formatter.
         if let fireDate = Calendar.current.date(from: currentFireTime) {
-            cell.textLabel?.text = fireDateFormatter.string(from: fireDate)
+            cell.fireTimeLabel?.text = fireDateFormatter.string(from: fireDate)
         }
+
+        cell.isFireTimeBlocked = false
 
         // If this fire time is among the selected ones,
         // display the selected style in the cell.
         if selectedFireTimeComponents.contains(currentFireTime) {
-            cell.backgroundColor = themeColor
-            cell.textLabel?.textColor = .white
+            cell.habitColor = themeColor
+            cell.select()
         } else if let index = sortedFireTimes.map({ $0.getFireTimeComponents() }).lastIndex(of: currentFireTime) {
             // If this fire time spot is already taken, show the habit blocking it.
-
-            // TODO: Show the habit using this fire time.
-            // For now we'll only display it differently and show the habit name.
             let blockingFireTime = sortedFireTimes[index]
             let blockingHabit = blockingFireTime.habit!
 
-            cell.backgroundColor = .gray
-            cell.textLabel?.text = blockingHabit.name
+            cell.habitColor = blockingHabit.getColor().uiColor
+            cell.isFireTimeBlocked = true
+
+            // TODO: Show the habit using this fire time.
+            // For now we'll only display it differently and show the habit name.
+            cell.habitNameLabel?.text = blockingHabit.name
         } else {
-            // Set the cell's style to be the default one.
-            cell.backgroundColor = .white
-            cell.textLabel?.textColor = .black
+            cell.deselect()
         }
 
         return cell
