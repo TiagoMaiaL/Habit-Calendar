@@ -7,12 +7,26 @@
 //
 
 import UIKit
+import CoreData
 
 /// The controller used to select the notifications fire times for the
 /// habit being created/edited.
 class FireTimesSelectionViewController: UIViewController {
 
     // MARK: Properties
+
+    /// The container used to fetch fire times from.
+    var container: NSPersistentContainer!
+
+    /// The fire times storage used to list all app fire times.
+    var fireTimesStorage: FireTimeStorage! {
+        didSet {
+            sortedFireTimes = fireTimesStorage.getAllSortedFireTimes(using: container.viewContext)
+        }
+    }
+
+    /// All fire times from all habits.
+    private var sortedFireTimes: [FireTimeMO] = []
 
     /// The fire date cell's reusable identifier.
     private let cellIdentifier = "fire date selection cell"
@@ -64,7 +78,9 @@ class FireTimesSelectionViewController: UIViewController {
         super.viewDidLoad()
 
         // Make assertions on the required dependencies.
-        assert(themeColor != nil, "The controller's theme color should be properly injected.")
+        assert(container != nil, "The persistent container must be injected.")
+        assert(fireTimesStorage != nil, "The fire times storage must be injected")
+        assert(themeColor != nil, "The controller's theme color must be injected.")
 
         // Configure the tableView's content insets.
         tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 120, right: 0)

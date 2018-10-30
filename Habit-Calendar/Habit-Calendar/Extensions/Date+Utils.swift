@@ -152,6 +152,7 @@ extension DateFormatter {
         let formatter = DateFormatter()
         formatter.locale = Locale.current
         formatter.timeZone = TimeZone.current
+        // TODO: This shouldn't be set this way (hardcoded).
         formatter.dateFormat = "HH:mm"
 
         return formatter
