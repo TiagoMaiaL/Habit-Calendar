@@ -44,4 +44,15 @@ struct FireTimeStorage {
         return fireTime
     }
 
+    /// Fetches the fire times of the app sorted by the time.
+    /// - Parameter context: The context used to fetch all fire times.
+    /// - Returns: all fire times of the app.
+    func getAllSortedFireTimes(using context: NSManagedObjectContext) -> [FireTimeMO] {
+        let request: NSFetchRequest<FireTimeMO> = FireTimeMO.fetchRequest()
+        request.sortDescriptors = [
+            NSSortDescriptor(key: "hour", ascending: true),
+            NSSortDescriptor(key: "minute", ascending: true)
+        ]
+        return (try? context.fetch(request)) ?? []
+    }
 }
