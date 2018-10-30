@@ -38,7 +38,7 @@ class FireTimesSelectionViewController: UIViewController {
     private let fireDateFormatter = DateFormatter.makeFireTimeDateFormatter()
 
     /// The fire times displayed to the user for selection.
-    private lazy var fireTimes = makeFireTimesProgression(
+    private lazy var fireTimeComponents = makeFireTimesProgression(
         minutesInterval: interval
     )
 
@@ -46,7 +46,7 @@ class FireTimesSelectionViewController: UIViewController {
     @IBOutlet weak var fireTimesAmountLabel: UILabel?
 
     /// The fire dates selected by the user.
-    var selectedFireTimes = Set<FireTimesDisplayable.FireTime>() {
+    var selectedFireTimeComponents = Set<FireTimesDisplayable.FireTime>() {
         didSet {
             guard fireTimesAmountLabel != nil else { return }
             updateUI()
@@ -95,7 +95,7 @@ class FireTimesSelectionViewController: UIViewController {
     // MARK: Actions
 
     @IBAction func selectFireTimes(_ sender: UIButton) {
-        if selectedFireTimes.isEmpty {
+        if selectedFireTimeComponents.isEmpty {
             let alert = UIAlertController(
                 title: NSLocalizedString(
                     "No fire times selected",
@@ -124,7 +124,7 @@ class FireTimesSelectionViewController: UIViewController {
     }
 
     @IBAction func eraseSelection(_ sender: UIBarButtonItem) {
-        selectedFireTimes.removeAll()
+        selectedFireTimeComponents.removeAll()
         tableView.reloadData()
     }
 
@@ -134,7 +134,7 @@ class FireTimesSelectionViewController: UIViewController {
     private func endSelection() {
         // Call the delegate passing the fire dates selected
         // by the user.
-        delegate?.didSelectFireTimes(Array(selectedFireTimes))
+        delegate?.didSelectFireTimes(Array(selectedFireTimeComponents))
         navigationController?.popViewController(animated: true)
     }
 
@@ -145,7 +145,7 @@ class FireTimesSelectionViewController: UIViewController {
                 "%d selected fire time(s).",
                 comment: "The lable showing how many fire times were selected."
             ),
-            selectedFireTimes.count
+            selectedFireTimeComponents.count
         )
     }
 
@@ -204,7 +204,7 @@ extension FireTimesSelectionViewController: UITableViewDataSource, UITableViewDe
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return fireTimes.count
+        return fireTimeComponents.count
     }
 
     // MARK: TableView Delegate methods
@@ -219,7 +219,7 @@ extension FireTimesSelectionViewController: UITableViewDataSource, UITableViewDe
         )
 
         // Declare the current fire time to be displayed.
-        let currentFireTime = fireTimes[indexPath.row]
+        let currentFireTime = fireTimeComponents[indexPath.row]
 
         // Set it's time text by using a date formatter.
         if let fireDate = Calendar.current.date(from: currentFireTime) {
@@ -228,9 +228,19 @@ extension FireTimesSelectionViewController: UITableViewDataSource, UITableViewDe
 
         // If this fire time is among the selected ones,
         // display the selected style in the cell.
-        if selectedFireTimes.contains(currentFireTime) {
+        if selectedFireTimeComponents.contains(currentFireTime) {
             cell.backgroundColor = themeColor
             cell.textLabel?.textColor = .white
+        } else if let index = sortedFireTimes.map({ $0.getFireTimeComponents() }).lastIndex(of: currentFireTime) {
+            // If this fire time spot is already taken, show the habit blocking it.
+
+            // TODO: Show the habit using this fire time.
+            // For now we'll only display it differently and show the habit name.
+            let blockingFireTime = sortedFireTimes[index]
+            let blockingHabit = blockingFireTime.habit!
+
+            cell.backgroundColor = .gray
+            cell.textLabel?.text = blockingHabit.name
         } else {
             // Set the cell's style to be the default one.
             cell.backgroundColor = .white
@@ -242,14 +252,14 @@ extension FireTimesSelectionViewController: UITableViewDataSource, UITableViewDe
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Get the selected date.
-        let selectedFireTime = fireTimes[indexPath.row]
+        let selectedFireTime = fireTimeComponents[indexPath.row]
 
-        if selectedFireTimes.contains(selectedFireTime) {
+        if selectedFireTimeComponents.contains(selectedFireTime) {
             // Remove it from the selected ones.
-            selectedFireTimes.remove(selectedFireTime)
+            selectedFireTimeComponents.remove(selectedFireTime)
         } else {
             // Add it to the selected ones.
-            selectedFireTimes.insert(selectedFireTime)
+            selectedFireTimeComponents.insert(selectedFireTime)
         }
 
         // Reload the cell to display its selected state.

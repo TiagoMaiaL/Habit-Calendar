@@ -223,10 +223,10 @@ class HabitCreationTableViewController: UITableViewController {
                 fireTimesSelectionController.fireTimesStorage = FireTimeStorage()
 
                 if let fireTimes = fireTimes {
-                    fireTimesSelectionController.selectedFireTimes = Set(fireTimes)
+                    fireTimesSelectionController.selectedFireTimeComponents = Set(fireTimes)
                 } else if let fireTimes = (habit?.fireTimes as? Set<FireTimeMO>)?.map({ $0.getFireTimeComponents() }) {
                     // In case the habit is being editted and has some fire times to be displayed.
-                    fireTimesSelectionController.selectedFireTimes = Set(fireTimes)
+                    fireTimesSelectionController.selectedFireTimeComponents = Set(fireTimes)
                 }
                 fireTimesSelectionController.themeColor = themeColor
             } else {
