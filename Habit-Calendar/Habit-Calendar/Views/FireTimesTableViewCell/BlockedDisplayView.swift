@@ -111,5 +111,8 @@ import UIKit
             constant: -7
         ).isActive = true
         blockedCircleView.cornerRadius = 15 / 2
+
+        // Since the auto layout was applied, set the flag to true.
+        wasLayoutApplied = true
     }
 }

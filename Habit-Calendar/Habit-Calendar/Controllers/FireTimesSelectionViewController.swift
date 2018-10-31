@@ -26,7 +26,14 @@ class FireTimesSelectionViewController: UIViewController {
     }
 
     /// All fire times from all habits.
-    private var sortedFireTimes: [FireTimeMO] = []
+    private var sortedFireTimes: [FireTimeMO] = [] {
+        didSet {
+            sortedFireTimeComponents = sortedFireTimes.map({ $0.getFireTimeComponents() })
+        }
+    }
+
+    /// The fire time components generated from the sorted entities.
+    private var sortedFireTimeComponents = [DateComponents]()
 
     /// The fire date cell's reusable identifier.
     private let cellIdentifier = "fire date selection cell"
@@ -233,7 +240,7 @@ extension FireTimesSelectionViewController: UITableViewDataSource, UITableViewDe
         if selectedFireTimeComponents.contains(currentFireTime) {
             cell.habitColor = themeColor
             cell.select()
-        } else if let index = sortedFireTimes.map({ $0.getFireTimeComponents() }).lastIndex(of: currentFireTime) {
+        } else if let index = sortedFireTimeComponents.lastIndex(of: currentFireTime) {
             // If this fire time spot is already taken, show the habit blocking it.
             let blockingFireTime = sortedFireTimes[index]
             let blockingHabit = blockingFireTime.habit!
