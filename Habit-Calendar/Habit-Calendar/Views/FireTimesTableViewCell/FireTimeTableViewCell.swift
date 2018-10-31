@@ -12,7 +12,7 @@ import UIKit
 /// - Note: This cell has a default state showing the free fire time and it also has a state showing a blocked
 ///         fire time. If the fire time is blocked, the name of the habit is displayed, with a line on top of
 ///         the fire time label.
-@IBDesignable class FireTimeTableViewCell: UITableViewCell {
+class FireTimeTableViewCell: UITableViewCell {
 
     // MARK: Properties
 
@@ -23,10 +23,18 @@ import UIKit
     @IBOutlet weak var habitNameLabel: UILabel!
 
     /// The flag indicating if the fire time is blocked or not.
-    var isFireTimeBlocked = false {
+    var isFireTimeBlocked: Bool = false {
         didSet {
+            // If the fire time is blocked, the user can't interact with it.
             isUserInteractionEnabled = !isFireTimeBlocked
+
+            // Configure which views to display / hide.
             habitNameLabel?.isHidden = !isFireTimeBlocked
+            blockedView?.isHidden = !isFireTimeBlocked
+
+            // Configure the text color.
+            fireTimeLabel.textColor = isFireTimeBlocked ? UIColor("#787878") : .black
+            contentView.backgroundColor = isFireTimeBlocked ? UIColor("#EFEFF4") : .white
         }
     }
 
@@ -36,13 +44,23 @@ import UIKit
         didSet {
             if let color = habitColor {
                 habitNameLabel.textColor = color
+                blockedView.color = color
             } else {
                 habitNameLabel.textColor = .black
+                blockedView.color = .black
             }
         }
     }
 
+    /// A view used to indicate that the fire time is blocked or not.
+    @IBOutlet weak var blockedView: BlockedDisplayView!
+
     // MARK: Life Cycle
+
+    override func prepareForInterfaceBuilder() {
+        setNeedsLayout()
+        setNeedsDisplay()
+    }
 
     override func prepareForReuse() {
         super.prepareForReuse()

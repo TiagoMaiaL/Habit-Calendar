@@ -241,7 +241,6 @@ extension FireTimesSelectionViewController: UITableViewDataSource, UITableViewDe
             cell.habitColor = blockingHabit.getColor().uiColor
             cell.isFireTimeBlocked = true
 
-            // TODO: Show the habit using this fire time.
             // For now we'll only display it differently and show the habit name.
             cell.habitNameLabel?.text = blockingHabit.name
         } else {
@@ -265,6 +264,10 @@ extension FireTimesSelectionViewController: UITableViewDataSource, UITableViewDe
 
         // Reload the cell to display its selected state.
         tableView.reloadRows(at: [indexPath], with: .fade)
+    }
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 50
     }
 }
 
