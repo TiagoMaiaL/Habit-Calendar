@@ -42,50 +42,6 @@ import UIKit
         }
     }
 
-    /// The view showing indicating that the fire time is blocked by another habit.
-    /// - Note: this view is a line being displayed on top of the fire time label.
-//    private(set) lazy var blockedFireTimeView: UIView = {
-//        let baseView = UIView()
-//        baseView.translatesAutoresizingMaskIntoConstraints = false
-//        baseView.backgroundColor = .clear
-//
-//        baseView.addSubview(blockedLineView)
-//        baseView.addSubview(blockedCircleView)
-//
-//        blockedLineView.widthAnchor.constraint(equalTo: baseView.widthAnchor, multiplier: 1).isActive = true
-//        blockedLineView.centerXAnchor.constraint(equalTo: baseView.centerXAnchor).isActive = true
-//        blockedLineView.centerYAnchor.constraint(equalTo: baseView.centerYAnchor).isActive = true
-//        blockedLineView.heightAnchor.constraint(equalToConstant: 8).isActive = true
-//
-//        blockedCircleView.widthAnchor.constraint(equalToConstant: 15).isActive = true
-//        blockedCircleView.heightAnchor.constraint(equalToConstant: 15).isActive = true
-//        blockedCircleView.centerYAnchor.constraint(equalTo: blockedLineView.centerYAnchor).isActive = true
-//        blockedCircleView.trailingAnchor.constraint(equalTo: blockedLineView.trailingAnchor, constant: 7)
-//        blockedCircleView.cornerRadius = 15 / 2
-//
-//        return baseView
-//    }()
-
-    /// The line displayed on top of the fire time label, displayed if the fire time is blocked.
-//    private lazy var blockedLineView: UIView = {
-//        let blockedLine = UIView()
-//        blockedLine.translatesAutoresizingMaskIntoConstraints = false
-//
-//        blockedLine.backgroundColor = .red
-//
-//        return blockedLine
-//    }()
-
-    /// The circle displayed in the end of the blocked line view.
-//    private lazy var blockedCircleView: RoundedView = {
-//        let circleView = RoundedView()
-//        circleView.translatesAutoresizingMaskIntoConstraints = false
-//
-//        circleView.backgroundColor = .red
-//
-//        return circleView
-//    }()
-
     // MARK: Life Cycle
 
     override func prepareForReuse() {

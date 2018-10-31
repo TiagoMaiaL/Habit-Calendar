@@ -665,11 +665,24 @@
                                                                 </label>
                                                             </subviews>
                                                         </stackView>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="btb-PH-shb" userLabel="Blocked display view" customClass="BlockedDisplayView" customModule="Habit_Calendar" customModuleProvider="target">
+                                                            <rect key="frame" x="0.0" y="0.0" width="94.666666666666671" height="56.666666666666664"/>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="color" keyPath="color">
+                                                                    <color key="value" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                            </userDefinedRuntimeAttributes>
+                                                        </view>
                                                     </subviews>
                                                     <constraints>
+                                                        <constraint firstItem="uV2-Rt-yfy" firstAttribute="leading" secondItem="btb-PH-shb" secondAttribute="trailing" constant="20" id="JgP-Go-R04"/>
+                                                        <constraint firstItem="btb-PH-shb" firstAttribute="top" secondItem="BhU-qr-Sgj" secondAttribute="top" id="KRi-rd-1CB"/>
                                                         <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="7wE-ZS-avV" secondAttribute="trailing" constant="10" id="TbO-LY-bDG"/>
+                                                        <constraint firstAttribute="bottom" secondItem="btb-PH-shb" secondAttribute="bottom" id="X7p-Ao-OBs"/>
                                                         <constraint firstItem="7wE-ZS-avV" firstAttribute="leading" secondItem="BhU-qr-Sgj" secondAttribute="leadingMargin" constant="10" id="dnt-YM-gmv"/>
                                                         <constraint firstAttribute="bottomMargin" secondItem="7wE-ZS-avV" secondAttribute="bottom" id="e94-Jr-QbA"/>
+                                                        <constraint firstItem="btb-PH-shb" firstAttribute="leading" secondItem="BhU-qr-Sgj" secondAttribute="leading" id="qzy-kY-JBz"/>
                                                         <constraint firstItem="7wE-ZS-avV" firstAttribute="top" secondItem="BhU-qr-Sgj" secondAttribute="topMargin" id="ydZ-nW-KEy"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
