@@ -141,21 +141,3 @@ extension Date {
         return compare(lower) == .orderedDescending && compare(greater) == .orderedAscending
     }
 }
-
-/// Adds some common formatter factories used by the controllers
-/// to display dates in an specific format.
-extension DateFormatter {
-
-    /// Creates a new DateFormatter used to display notification fire times.
-    /// - Returns: The FireTime date formatter.
-    static func makeFireTimeDateFormatter() -> DateFormatter {
-        let formatter = DateFormatter()
-        formatter.locale = Locale.current
-        formatter.timeZone = TimeZone.current
-        // TODO: This shouldn't be set this way (hardcoded).
-        formatter.dateFormat = "HH:mm"
-
-        return formatter
-    }
-
-}

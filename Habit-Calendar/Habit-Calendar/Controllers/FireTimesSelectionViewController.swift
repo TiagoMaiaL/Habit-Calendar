@@ -42,7 +42,7 @@ class FireTimesSelectionViewController: UIViewController {
     private let interval = 30
 
     /// The formatter for each fire time option displayed to the user.
-    private let fireDateFormatter = DateFormatter.makeFireTimeDateFormatter()
+    private let fireDateFormatter = DateFormatter.fireTimeFormatter
 
     /// The fire times displayed to the user for selection.
     private lazy var fireTimeComponents = makeFireTimesProgression(
