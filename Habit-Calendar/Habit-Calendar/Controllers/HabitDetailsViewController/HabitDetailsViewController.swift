@@ -233,6 +233,8 @@ class HabitDetailsViewController: UIViewController {
                 return
             }
             fireTimesSelectionController.delegate = self
+            fireTimesSelectionController.container = container
+            fireTimesSelectionController.fireTimesStorage = FireTimeStorage()
             fireTimesSelectionController.themeColor = habitColor
 
         default:

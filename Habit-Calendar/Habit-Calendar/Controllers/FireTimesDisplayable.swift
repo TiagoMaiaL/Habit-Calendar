@@ -38,7 +38,7 @@ extension FireTimesDisplayable {
         }
 
         // Set the text for the label displaying some of the selected fire times:
-        let fireTimeFormatter = DateFormatter.makeFireTimeDateFormatter()
+        let fireTimeFormatter = DateFormatter.fireTimeFormatter
         let fireDates = fireTimes.compactMap {
             Calendar.current.date(from: $0)
         }.sorted()

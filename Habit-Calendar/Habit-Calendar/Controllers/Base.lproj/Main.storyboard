@@ -641,22 +641,56 @@
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="672"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="fire date selection cell" textLabel="wyh-eF-kYV" style="IBUITableViewCellStyleDefault" id="sFh-AE-ZBt">
-                                                <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="fire date selection cell" rowHeight="50" id="sFh-AE-ZBt" customClass="FireTimeTableViewCell" customModule="Habit_Calendar" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="28" width="414" height="50"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="sFh-AE-ZBt" id="BhU-qr-Sgj">
-                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="49.666666666666664"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="wyh-eF-kYV">
-                                                            <rect key="frame" x="20" y="0.0" width="374" height="43.666666666666664"/>
-                                                            <autoresizingMask key="autoresizingMask"/>
-                                                            <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="17"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="7wE-ZS-avV">
+                                                            <rect key="frame" x="30" y="11" width="181.66666666666666" height="28"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UIA-ws-dMG">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="44.666666666666664" height="28"/>
+                                                                    <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="17"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Go Jogging" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uV2-Rt-yfy">
+                                                                    <rect key="frame" x="84.666666666666686" y="0.0" width="97" height="28"/>
+                                                                    <fontDescription key="fontDescription" name="SFProText-Bold" family="SF Pro Text" pointSize="17"/>
+                                                                    <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                        </stackView>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="btb-PH-shb" userLabel="Blocked display view" customClass="BlockedDisplayView" customModule="Habit_Calendar" customModuleProvider="target">
+                                                            <rect key="frame" x="0.0" y="0.0" width="94.666666666666671" height="49.666666666666664"/>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="color" keyPath="color">
+                                                                    <color key="value" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                            </userDefinedRuntimeAttributes>
+                                                        </view>
                                                     </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="uV2-Rt-yfy" firstAttribute="leading" secondItem="btb-PH-shb" secondAttribute="trailing" constant="20" id="JgP-Go-R04"/>
+                                                        <constraint firstItem="btb-PH-shb" firstAttribute="top" secondItem="BhU-qr-Sgj" secondAttribute="top" id="KRi-rd-1CB"/>
+                                                        <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="7wE-ZS-avV" secondAttribute="trailing" constant="10" id="TbO-LY-bDG"/>
+                                                        <constraint firstAttribute="bottom" secondItem="btb-PH-shb" secondAttribute="bottom" id="X7p-Ao-OBs"/>
+                                                        <constraint firstItem="7wE-ZS-avV" firstAttribute="leading" secondItem="BhU-qr-Sgj" secondAttribute="leadingMargin" constant="10" id="dnt-YM-gmv"/>
+                                                        <constraint firstAttribute="bottomMargin" secondItem="7wE-ZS-avV" secondAttribute="bottom" id="e94-Jr-QbA"/>
+                                                        <constraint firstItem="btb-PH-shb" firstAttribute="leading" secondItem="BhU-qr-Sgj" secondAttribute="leading" id="qzy-kY-JBz"/>
+                                                        <constraint firstItem="7wE-ZS-avV" firstAttribute="top" secondItem="BhU-qr-Sgj" secondAttribute="topMargin" id="ydZ-nW-KEy"/>
+                                                    </constraints>
                                                 </tableViewCellContentView>
+                                                <connections>
+                                                    <outlet property="blockedView" destination="btb-PH-shb" id="zAe-mE-XVf"/>
+                                                    <outlet property="fireTimeLabel" destination="UIA-ws-dMG" id="sOx-Gu-MmD"/>
+                                                    <outlet property="habitNameLabel" destination="uV2-Rt-yfy" id="3XD-RP-wmt"/>
+                                                </connections>
                                             </tableViewCell>
                                         </prototypes>
                                         <connections>
@@ -737,7 +771,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rE2-W1-pId" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3857" y="-180"/>
+            <point key="canvasLocation" x="3856.521739130435" y="-180.16304347826087"/>
         </scene>
         <!--Days-->
         <scene sceneID="LN7-wK-ThL">
@@ -1631,8 +1665,8 @@ you think of adding a new one?</string>
         <image name="ic-notification" width="41" height="46"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="G29-rb-isc"/>
-        <segue reference="43l-ZQ-AR3"/>
+        <segue reference="y7q-nn-pWX"/>
+        <segue reference="J1H-vQ-s49"/>
         <segue reference="5mV-Cj-rFr"/>
     </inferredMetricsTieBreakers>
 </document>

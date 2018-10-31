@@ -18,7 +18,7 @@ class HabitCreationTableViewController: UITableViewController {
     private let daysSelectionSegue = "Show days selection controller"
 
     /// The segue identifier for the NotificationsSelection controller.
-    private let notificationSelectionSegue = "Show fire dates selection controller"
+    private let fireTimesSelectionSegue = "Show fire dates selection controller"
 
     /// The label displaying the name field's title.
     @IBOutlet weak var nameFieldTitleLabel: UILabel!
@@ -215,18 +215,20 @@ class HabitCreationTableViewController: UITableViewController {
                 assertionFailure("Error: Couldn't get the days selection controller.")
             }
 
-        case notificationSelectionSegue:
+        case fireTimesSelectionSegue:
             // Associate the NotificationsSelectionController's delegate.
-            if let notificationsController = segue.destination as? FireTimesSelectionViewController {
-                notificationsController.delegate = self
+            if let fireTimesSelectionController = segue.destination as? FireTimesSelectionViewController {
+                fireTimesSelectionController.delegate = self
+                fireTimesSelectionController.container = container
+                fireTimesSelectionController.fireTimesStorage = FireTimeStorage()
 
                 if let fireTimes = fireTimes {
-                    notificationsController.selectedFireTimes = Set(fireTimes)
+                    fireTimesSelectionController.selectedFireTimeComponents = Set(fireTimes)
                 } else if let fireTimes = (habit?.fireTimes as? Set<FireTimeMO>)?.map({ $0.getFireTimeComponents() }) {
                     // In case the habit is being editted and has some fire times to be displayed.
-                    notificationsController.selectedFireTimes = Set(fireTimes)
+                    fireTimesSelectionController.selectedFireTimeComponents = Set(fireTimes)
                 }
-                notificationsController.themeColor = themeColor
+                fireTimesSelectionController.themeColor = themeColor
             } else {
                 assertionFailure("Error: Couldn't get the fire dates selection controller.")
             }

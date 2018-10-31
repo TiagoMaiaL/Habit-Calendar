@@ -81,4 +81,33 @@ class FireTimeStorageTests: IntegrationTestCase {
             "The fireTime's habit should be correclty associated."
         )
     }
+
+    func testGettingAllFireTimesSortedByTime() {
+        let factory = FireTimeFactory(context: context)
+
+        // 1. Declare some dummy fire times.
+        let firstFireTime = factory.makeDummy()
+        firstFireTime.hour = 0
+        firstFireTime.minute = 30
+
+         let secondFireTime = factory.makeDummy()
+        secondFireTime.hour = 1
+        secondFireTime.minute = 0
+
+        let thirdFireTime = factory.makeDummy()
+        thirdFireTime.hour = 1
+        thirdFireTime.minute = 30
+
+        // 2. Get the sorted fire times.
+        let fireTimes = fireTimeStorage.getAllSortedFireTimes(using: context)
+
+        // 3. Assert on the count and order.
+        guard fireTimes.count == 3 else {
+            XCTFail("The fire times weren't properly listed.")
+            return
+        }
+        XCTAssertEqual(firstFireTime.id, fireTimes[0].id)
+        XCTAssertEqual(secondFireTime.id, fireTimes[1].id)
+        XCTAssertEqual(thirdFireTime.id, fireTimes[2].id)
+    }
 }

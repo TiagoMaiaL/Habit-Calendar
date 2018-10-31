@@ -19,6 +19,16 @@ extension DateFormatter {
         formatter.dateStyle = .short
         return formatter
     }
+
+    /// Creates a new DateFormatter used to display notification fire times.
+    /// - Returns: The FireTime date formatter.
+    static var fireTimeFormatter: DateFormatter {
+        let formatter = DateFormatter()
+        formatter.locale = Locale.current
+        formatter.timeZone = TimeZone.current
+        formatter.setLocalizedDateFormatFromTemplate("HH:mm")
+        return formatter
+    }
 }
 
 extension NumberFormatter {
