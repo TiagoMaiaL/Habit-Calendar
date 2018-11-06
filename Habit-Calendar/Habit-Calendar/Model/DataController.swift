@@ -20,6 +20,12 @@ class DataController {
 
     init(completionBlock: @escaping (Error?) -> Void) {
         persistentContainer = HCPersistentContainer(name: "Habit-Calendar")
+
+        let migrationDescription = NSPersistentStoreDescription()
+        migrationDescription.shouldMigrateStoreAutomatically = true
+        migrationDescription.shouldInferMappingModelAutomatically = true
+
+        persistentContainer.persistentStoreDescriptions.append(migrationDescription)
         persistentContainer.loadPersistentStores(completionHandler: { (_, error) in
             if let error = error as NSError? {
                 #if DEVELOPMENT

@@ -124,12 +124,6 @@ class NotificationSchedulerTests: IntegrationTestCase {
 
         // Schedule it by passing the dummy entity.
         notificationScheduler.schedule(dummyNotification) { notification in
-            // Check if it was marked as scheduled.
-            XCTAssertTrue(
-                notification.wasScheduled,
-                "The notification entity should've been scheduled."
-            )
-
             // Check if the notification was indeed scheduled:
             self.notificationCenterMock.getPendingNotificationRequests { requests in
                 // Search for the user notification request associated with it.
@@ -208,11 +202,6 @@ class NotificationSchedulerTests: IntegrationTestCase {
             // that's why a timer is needed here.
             Timer.scheduledTimer(withTimeInterval: 0.01, repeats: false) { _ in
                 for notification in notifications {
-                    // Assert on the wasExecuted property.
-                    XCTAssertTrue(
-                        notification.wasScheduled,
-                        "The notification should have been scheduled."
-                    )
                     // Assert on the identifier.
                     XCTAssertTrue(
                         identifiers.contains(
