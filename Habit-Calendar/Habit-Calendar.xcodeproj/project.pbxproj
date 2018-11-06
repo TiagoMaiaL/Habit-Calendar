@@ -490,6 +490,7 @@
 		475197D52132F4E1009F959C /* HabitDaysSelectionViewController+Calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HabitDaysSelectionViewController+Calendar.swift"; sourceTree = "<group>"; };
 		475197D721359516009F959C /* NotificationAvailabilityDisplayable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationAvailabilityDisplayable.swift; sourceTree = "<group>"; };
 		4752FDC020FE623900116F1A /* XCTUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCTUtils.swift; sourceTree = "<group>"; };
+		4754CE02218D534F00797E59 /* Habit-Calendar-1.0.3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Habit-Calendar-1.0.3.xcdatamodel"; sourceTree = "<group>"; };
 		475C96A120DEFB4C00212E1F /* DummyFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyFactory.swift; sourceTree = "<group>"; };
 		475C96A320DEFC9500212E1F /* DayFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayFactory.swift; sourceTree = "<group>"; };
 		475C96A520DEFEBC00212E1F /* HabitFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitFactory.swift; sourceTree = "<group>"; };
@@ -2214,9 +2215,10 @@
 		47F635F620BB920900AC4555 /* Habit-Calendar.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				4754CE02218D534F00797E59 /* Habit-Calendar-1.0.3.xcdatamodel */,
 				47F635F720BB920900AC4555 /* Active.xcdatamodel */,
 			);
-			currentVersion = 47F635F720BB920900AC4555 /* Active.xcdatamodel */;
+			currentVersion = 4754CE02218D534F00797E59 /* Habit-Calendar-1.0.3.xcdatamodel */;
 			path = "Habit-Calendar.xcdatamodeld";
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

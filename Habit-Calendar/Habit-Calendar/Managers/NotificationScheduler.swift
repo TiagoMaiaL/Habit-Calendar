@@ -85,7 +85,6 @@ struct NotificationScheduler {
             if error == nil {
                 // Set the notification's scheduled flag.
                 notification.managedObjectContext?.perform {
-                    notification.wasScheduled = true
                     completionHandler?(notification)
                 }
             } else {

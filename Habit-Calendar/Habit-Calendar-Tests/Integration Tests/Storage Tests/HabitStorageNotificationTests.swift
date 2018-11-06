@@ -157,12 +157,6 @@ class HabitStorageNotificationTests: IntegrationTestCase {
                     "All notifications should have been properly scheduled."
                 )
 
-                // - Assert on the notifications' wasScheduled property.
-                XCTAssertTrue(
-                    notifications.filter { !$0.wasScheduled }.count == 0,
-                    "All notifications should have been scheduled."
-                )
-
                 scheduleExpectation.fulfill()
             }
         }
@@ -203,19 +197,11 @@ class HabitStorageNotificationTests: IntegrationTestCase {
         Timer.scheduledTimer(withTimeInterval: 0.01, repeats: false) { _ in
             // - assert on the number of user notifications
             self.notificationCenterMock.getPendingNotificationRequests { requests in
-
                 XCTAssertEqual(
                     requests.count,
                     dummyHabit.notifications?.count,
                     "The user notifications weren't properly scheduled."
                 )
-
-                // - assert that all notifications were properly scheduled.
-                XCTAssertTrue(
-                    (dummyHabit.notifications as? Set<NotificationMO>)?.filter { !$0.wasScheduled }.count == 0,
-                    "The notifications weren't properly scheduled."
-                )
-
                 rescheduleExpectation.fulfill()
             }
         }
@@ -269,17 +255,10 @@ class HabitStorageNotificationTests: IntegrationTestCase {
 
             // - assert on the number of user notifications
             self.notificationCenterMock.getPendingNotificationRequests { requests in
-
                 XCTAssertEqual(
                     requests.count,
                     dummyHabit.notifications?.count,
                     "The user notifications weren't properly scheduled."
-                )
-
-                // - assert that all notifications were properly scheduled.
-                XCTAssertTrue(
-                    (dummyHabit.notifications as? Set<NotificationMO>)?.filter { !$0.wasScheduled }.count == 0,
-                    "The notifications weren't properly scheduled."
                 )
 
                 rescheduleExpectation.fulfill()
@@ -332,19 +311,11 @@ class HabitStorageNotificationTests: IntegrationTestCase {
 
             // - assert on the number of user notifications
             self.notificationCenterMock.getPendingNotificationRequests { requests in
-
                 XCTAssertEqual(
                     requests.count,
                     dummyHabit.notifications?.count,
                     "The user notifications weren't properly scheduled."
                 )
-
-                // - assert that all notifications were properly scheduled.
-                XCTAssertTrue(
-                    (dummyHabit.notifications as? Set<NotificationMO>)?.filter { !$0.wasScheduled }.count == 0,
-                    "The notifications weren't properly scheduled."
-                )
-
                 rescheduleExpectation.fulfill()
             }
         }

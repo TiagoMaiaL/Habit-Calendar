@@ -70,7 +70,6 @@ class NotificationStorageTests: IntegrationTestCase {
         XCTAssertNotNil(notification?.fireDate)
         XCTAssertNotNil(notification?.userNotificationId)
         XCTAssertTrue((notification?.dayOrder ?? 0) > 0)
-        XCTAssertFalse(notification?.wasScheduled ?? true)
         XCTAssertEqual(dummyHabit, notification?.habit)
     }
 
