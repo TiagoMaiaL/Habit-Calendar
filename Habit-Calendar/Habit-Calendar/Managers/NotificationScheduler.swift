@@ -69,27 +69,21 @@ struct NotificationScheduler {
     func schedule(
         _ notification: NotificationMO,
         completionHandler: ((NotificationMO) -> Void)? = nil) {
+        precondition(
+            notification.userNotificationId != nil,
+            "The notification id must be set to schedule the notification."
+        )
 
         // Declare the options used to schedule a new request.
         let options = makeNotificationOptions(for: notification)
-
-        // Associate the user notification's identifier.
-        notification.userNotificationId = UUID().uuidString
 
         // Schedule the new request.
         notificationManager.schedule(
             with: notification.userNotificationId!,
             content: options.content,
             and: options.trigger
-        ) { error in
-            if error == nil {
-                // Set the notification's scheduled flag.
-                notification.managedObjectContext?.perform {
-                    completionHandler?(notification)
-                }
-            } else {
-                completionHandler?(notification)
-            }
+        ) { _ in
+            completionHandler?(notification)
         }
     }
 
