@@ -97,19 +97,14 @@ class NotificationSchedulerTests: IntegrationTestCase {
         )
 
         // Declare the trigger as a UNTitmeIntervalNotificationTrigger.
-        guard let dateTrigger = userNotificationOptions.trigger as? UNTimeIntervalNotificationTrigger else {
-            XCTFail("The generated notification's trigger is nil.")
+        guard let calendarTrigger = userNotificationOptions.trigger as? UNCalendarNotificationTrigger else {
+            XCTFail("The calendar trigger must be set.")
             return
         }
 
         XCTAssertNotNil(
-            dateTrigger.nextTriggerDate(),
+            calendarTrigger.nextTriggerDate(),
             "The notification trigger should have a valid trigger date."
-        )
-        XCTAssertEqual(
-            dateTrigger.nextTriggerDate()!.description,
-            dummyNotification.getFireDate().description,
-            "The user notification trigger should have the correct next trigger date."
         )
     }
 
@@ -129,12 +124,12 @@ class NotificationSchedulerTests: IntegrationTestCase {
                 // Search for the user notification request associated with it.
                 let request = requests.filter { $0.identifier == notification.userNotificationId }.first
 
-                if request != nil {
-                    scheduleExpectation.fulfill()
-                } else {
+                if request == nil {
                     // If it wasn't found, make the test fail.
                     XCTFail("Couldn't find the scheduled user notification request.")
                 }
+
+                scheduleExpectation.fulfill()
             }
         }
 

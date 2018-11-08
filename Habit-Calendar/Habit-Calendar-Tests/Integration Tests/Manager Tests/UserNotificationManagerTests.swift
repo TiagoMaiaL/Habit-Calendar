@@ -140,7 +140,7 @@ class UserNotificationManagerTests: IntegrationTestCase {
 
         wait(for: [notificationExpectation], timeout: 0.1)
     }
-//
+
     func testScheduledNotificationFetch() {
         notificationCenterMock.shouldAuthorize = true
 

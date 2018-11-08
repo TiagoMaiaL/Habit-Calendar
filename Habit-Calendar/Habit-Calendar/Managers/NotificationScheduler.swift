@@ -47,6 +47,7 @@ struct NotificationScheduler {
         content.sound = UNNotificationSound.default
         content.badge = 1
 
+        // TODO: Change this to be a calendar time interval
         // Declare the time interval used to schedule the notification.
         let fireDateTimeInterval = notification.getFireDate().timeIntervalSinceNow
         // Assert that the fire date is in the future.
@@ -64,8 +65,7 @@ struct NotificationScheduler {
     /// Schedules an user notification associated with the passed entity.
     /// - Parameters:
     ///     - notification: The core data entity to be scheduled.
-    ///     - completionHandler: The handler called after the schedule
-    ///                          finishes.
+    ///     - completionHandler: The handler called after the schedule finishes.
     func schedule(
         _ notification: NotificationMO,
         completionHandler: ((NotificationMO) -> Void)? = nil) {
