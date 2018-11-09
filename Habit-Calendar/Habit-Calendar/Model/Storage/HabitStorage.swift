@@ -312,6 +312,7 @@ SUBQUERY(challenges, $challenge,
     ///     - habit: The habit to add the notifications to.
     ///     - fireTimes: The notifications' fire times.
     /// - Returns: The notification entities.
+    // TODO: Correct this method.
     private func makeNotifications(
         context: NSManagedObjectContext,
         habit: HabitMO,
@@ -332,10 +333,10 @@ SUBQUERY(challenges, $challenge,
 
         let notifications = notificationStorage.createNotificationsFrom(habit: habit, using: context)
 
-        if !notifications.isEmpty {
-            // Schedule the user notifications.
-            notificationScheduler.schedule(notifications)
-        }
+//        if !notifications.isEmpty {
+//            // Schedule the user notifications.
+//            notificationScheduler.schedule(notifications)
+//        }
 
         return notifications
      }

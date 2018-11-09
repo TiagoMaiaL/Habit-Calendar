@@ -51,48 +51,34 @@ struct NotificationScheduler {
 
     /// Schedules an user notification associated with the passed entity.
     /// - Parameters:
-    ///     - notification: The core data entity to be scheduled.
-    ///     - completionHandler: The handler called after the schedule finishes.
-    // TODO: Correct this method.
-    func schedule(
-        _ notification: NotificationMO,
-        completionHandler: ((NotificationMO) -> Void)? = nil) {
+    ///     - habit: the habit related to the pending notification requests to be scheduled.
+    func scheduleNotifications(for habit: HabitMO) {
+        guard let fireTimes = habit.fireTimes as? Set<FireTimeMO> else {
+            assertionFailure("The habit must have a valid fire times set.")
+            return
+        }
 
-//        precondition(
-//            notification.userNotificationId != nil,
-//            "The notification id must be set to schedule the notification."
-//        )
-//
-//        // Declare the options used to schedule a new request.
-//        let options = makeNotificationOptions(for: notification)
-//
-//        // Schedule the new request.
-//        notificationManager.schedule(
-//            with: notification.userNotificationId!,
-//            content: options.content,
-//            and: options.trigger
-//        ) { _ in
-//            completionHandler?(notification)
-//        }
-    }
-
-    /// Schedules an user notification associated with the passed entity.
-    /// - Parameters:
-    ///     - notification: The core data entity to be scheduled.
-    func schedule(
-        _ notifications: [NotificationMO]) {
-        for notification in notifications {
-            schedule(notification)
+        // Add the pending notification requests for each fire time.
+        for fireTime in fireTimes {
+            let options = makeNotificationOptions(from: fireTime)
+            notificationManager.schedule(
+                // TODO: Instead of with use "using".
+                with: fireTime.notification!.userNotificationId!,
+                content: options.content,
+                and: options.trigger
+            )
         }
     }
 
-    /// Unschedules the notification requests associated with
-    /// the passed entities.
-    /// - Parameter notifications: The Notification entities.
-    func unschedule(_ notifications: [NotificationMO]) {
-        // Remove the requests.
+    /// Unschedules the notification requests associated with the passed habit.
+    /// - Parameter habit: The habit entity.
+    func unscheduleNotifications(from habit: HabitMO) {
+        guard let fireTimes = habit.fireTimes as? Set<FireTimeMO> else {
+            assertionFailure("The habit must have fire times")
+            return
+        }
         notificationManager.unschedule(
-            withIdentifiers: notifications.compactMap { $0.userNotificationId }
+            withIdentifiers: fireTimes.compactMap { $0.notification?.userNotificationId }
         )
     }
 

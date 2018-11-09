@@ -54,7 +54,7 @@ struct UserNotificationManager {
     func schedule(with identifier: String,
                   content: UNNotificationContent,
                   and trigger: UNNotificationTrigger,
-                  _ completionHandler: @escaping (Error?) -> Void) {
+                  _ completionHandler: ((Error?) -> Void)? = nil) {
         getAuthorizationStatus { isAuthorized in
             // Check to see if the notification is allowed.
             // If it is, schedule the request.
@@ -69,7 +69,7 @@ struct UserNotificationManager {
 
                 // Call the internal notification center and schedule it.
                 self.notificationCenter.add(request) { error in
-                    completionHandler(error)
+                    completionHandler?(error)
                 }
             }
         }
