@@ -26,36 +26,22 @@ class NotificationStorage {
     ///     - habitDay: The habit day entity used to create the notification.
     ///     - fireTime: The date components (hour and minute) to fire the notification at the specified day.
     /// - Returns: a new Notification entity.
+    // TODO: Remove this method. Notifications will be created from fire times only.
     func create(
         using context: NSManagedObjectContext,
         habitDay: HabitDayMO,
         andFireTime fireTimeComponents: DateComponents
     ) throws -> NotificationMO? {
-        guard let habit = habitDay.habit,
-            let challenge = habit.getCurrentChallenge() else {
-            return nil
-        }
-        guard let order = challenge.getOrder(of: habitDay) else {
-            assertionFailure("Error: the order should be correclty returned.")
-            return nil
-        }
-        guard let fireDate = makeFireDate(from: habitDay, and: fireTimeComponents),
-            fireDate.isFuture else {
-            return nil
-        }
 
         // Check if there's a notification with the same attributes already stored.
-        if self.notification(from: context, habit: habit, and: fireDate) != nil {
-            throw NotificationStorageError.notificationAlreadyCreated
-        }
+//        if self.notification(from: context, habit: habit, and: fireDate) != nil {
+//            throw NotificationStorageError.notificationAlreadyCreated
+//        }
 
         // Declare a new Notification instance.
         let notification = NotificationMO(context: context)
         notification.id = UUID().uuidString
-        notification.fireDate = fireDate
         notification.userNotificationId = UUID().uuidString
-        notification.habit = habit
-        notification.dayOrder = Int64(order)
 
         return notification
     }
@@ -142,22 +128,13 @@ class NotificationStorage {
     ///     - habit: one of the habits associated with the notification entity to be searched.
     ///     - day: the day's date to look for notifications.
     /// - Returns: the notifications within the passed day.
+    // TODO: Remove this method, it'll no longer be used.
     func notifications(
         from context: NSManagedObjectContext,
         habit: HabitMO,
         andDay dayDate: Date
     ) -> [NotificationMO] {
-        // Declare the day's filter predicate. The fire dates must be in between the day's begin and end.
-        let dayPredicate = NSPredicate(
-            format: "%@ <= fireDate AND fireDate <= %@",
-            dayDate.getBeginningOfDay() as NSDate,
-            dayDate.getEndOfDay() as NSDate
-        )
-        if let notificationsSet = habit.notifications?.filtered(using: dayPredicate) as? Set<NotificationMO> {
-            return [NotificationMO](notificationsSet)
-        } else {
-            return []
-        }
+        return []
     }
 
     /// Deletes from storage the passed notification.

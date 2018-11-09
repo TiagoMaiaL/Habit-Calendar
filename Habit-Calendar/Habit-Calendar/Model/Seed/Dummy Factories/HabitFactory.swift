@@ -52,7 +52,6 @@ struct HabitFactory: DummyFactory {
         configure(habit: habit)
         configureFireTimes(for: habit)
         configureHabitDays(for: habit)
-        configureNotifications(for: habit)
 
         assert(
             (habit.fireTimes?.count ?? 0) > 0,
@@ -61,10 +60,6 @@ struct HabitFactory: DummyFactory {
         assert(
             (habit.challenges?.count ?? 0) > 0,
             "The generated dummy habit must have a challenge."
-        )
-        assert(
-            (habit.notifications?.count ?? 0) > 0,
-            "The generated dummy habit must have notifications."
         )
 
         return habit
@@ -88,8 +83,8 @@ struct HabitFactory: DummyFactory {
         var fireTimes = [
             fireTimeFactory.makeDummy()
         ]
-        // Add a second fire time, making sure its different from the
-        // first one (to avoid errors, since there's a requirement of only one notification per date).
+        // Add a second fire time, making sure it's different from the first one (to avoid errors, since there's a
+        // requirement of only one notification per single fire time).
         let secondFireTime = fireTimeFactory.makeDummy()
         if secondFireTime.hour == fireTimes.first!.hour {
             secondFireTime.minute = 1
@@ -104,42 +99,5 @@ struct HabitFactory: DummyFactory {
         let challengeFactory = DaysChallengeFactory(context: context)
         let dummyChallenge = challengeFactory.makeDummy()
         dummyChallenge.habit = habit
-    }
-
-    private func configureNotifications(for habit: HabitMO) {
-        let notificationFactory = NotificationFactory(context: context)
-
-        guard let habitDays = habit.getCurrentChallenge()?.days as? Set<HabitDayMO> else {
-            assertionFailure("Error: The challenge dummy doesn't have valid days.")
-            return
-        }
-        guard let fireTimes = habit.fireTimes as? Set<FireTimeMO> else {
-            assertionFailure("Error: Couldn't get the dummy's fire times.")
-            return
-        }
-
-        // For each day, generate the notifications based on the fire times and the habit's day.
-        for habitDay in habitDays {
-            habitDay.habit = habit
-
-            for fireTime in fireTimes {
-                // Create the fireDate by appending the date to the fireTime's components.
-                if var fireDate = Calendar.current.date(
-                    byAdding: fireTime.getFireTimeComponents(),
-                    to: habitDay.day!.date!
-                    ) {
-                    if fireDate.isPast {
-                        fireDate = Date().byAddingMinutes(60)!
-                    }
-
-                    let notification = notificationFactory.makeDummy()
-                    notification.fireDate = fireDate
-                    notification.habit = habit
-                    if let order = habit.getCurrentChallenge()!.getOrder(of: habitDay) {
-                        notification.dayOrder = Int64(order)
-                    }
-                }
-            }
-        }
     }
 }

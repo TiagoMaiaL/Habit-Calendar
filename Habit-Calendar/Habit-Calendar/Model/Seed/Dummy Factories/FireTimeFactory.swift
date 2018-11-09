@@ -30,8 +30,13 @@ struct FireTimeFactory: DummyFactory {
         fireTime.createdAt = Date()
         fireTime.hour = Int16(Int.random(0..<24))
         // Get a minute value that's or 30 or 00.
+
         let randomMinute = arc4random_uniform(2) == 0 ? 0 : 30
         fireTime.minute = Int16(randomMinute)
+
+        // Associate the notification entity.
+        let notificationFactory = NotificationFactory(context: context)
+        fireTime.notification = notificationFactory.makeDummy()
 
         return fireTime
     }

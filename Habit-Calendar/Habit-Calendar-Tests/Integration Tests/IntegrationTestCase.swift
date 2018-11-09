@@ -106,29 +106,34 @@ class IntegrationTestCase: XCTestCase {
     /// from a dummy Habit.
     /// - Returns: the dummy notification.
     func makeNotification() -> NotificationMO {
-        // Declare the dummy habit.
-        let dummyHabit = habitFactory.makeDummy()
+        // TODO: Correct this method to use a notification dummy.
+        // TODO: Is this method really needed?
 
-        // Declare the dummy notification out of the passed habit.
-        guard let dummyNotification = (dummyHabit.notifications as? Set<NotificationMO>)?.first else {
-            assertionFailure(
-                "A notification object must be retrieved from a dummy Habit"
-            )
-            return notificationFactory.makeDummy()
-        }
+        return notificationFactory.makeDummy()
 
-        // Make assertions to ensure that the habit and
-        // fireDate properties are set.
-        assert(
-            dummyNotification.fireDate != nil,
-            "The fireDate property from the generated notification dummy should be set."
-        )
-        assert(
-            dummyNotification.habit != nil,
-            "The habit property from the generated notification dummy should be set."
-        )
-        assert(dummyNotification.dayOrder > 0, "The notification should have an order.")
-
-        return dummyNotification
+//        // Declare the dummy habit.
+//        let dummyHabit = habitFactory.makeDummy()
+//
+//        // Declare the dummy notification out of the passed habit.
+//        guard let dummyNotification = (dummyHabit.notifications as? Set<NotificationMO>)?.first else {
+//            assertionFailure(
+//                "A notification object must be retrieved from a dummy Habit"
+//            )
+//            return notificationFactory.makeDummy()
+//        }
+//
+//        // Make assertions to ensure that the habit and
+//        // fireDate properties are set.
+//        assert(
+//            dummyNotification.fireDate != nil,
+//            "The fireDate property from the generated notification dummy should be set."
+//        )
+//        assert(
+//            dummyNotification.habit != nil,
+//            "The habit property from the generated notification dummy should be set."
+//        )
+//        assert(dummyNotification.dayOrder > 0, "The notification should have an order.")
+//
+//        return dummyNotification
     }
 }

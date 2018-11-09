@@ -71,6 +71,18 @@ class HabitMO: NSManagedObject {
         )
     }
 
+    /// Gets the habit subtitle text.
+    /// - Note: The habit body text may be used for user
+    ///         notifications and to display the habit's info.
+    /// - Returns: The body text of the habit.
+    func getBodyText() -> String {
+        // TODO: Localize this in the files before uploading the build.
+        return NSLocalizedString(
+            "Please don't forget to execute this activity today. You will be glad in the future.",
+            comment: "The body text of every notification."
+        )
+    }
+
     /// Returns the current habit day for today (the current date),
     /// if there's one being tracked.
     func getCurrentDay() -> HabitDayMO? {

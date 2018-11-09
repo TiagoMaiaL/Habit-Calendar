@@ -216,26 +216,27 @@ SUBQUERY(challenges, $challenge,
 
         // If the days or fire times were editted, the habit's notifications become invalid, so it's necessary
         // to create and schedule new ones.
-        if name != nil || days != nil || notificationFireTimes != nil {
-            if let notifications = habit.notifications as? Set<NotificationMO> {
-                // Unschedule all user notifications associated with
-                // the entities.
-                notificationScheduler.unschedule(Array(notifications))
-
-                // Remove the current notifications.
-                for notification in notifications {
-                    habit.removeFromNotifications(notification)
-                    context.delete(notification)
-                }
-            }
-
-            // Create and schedule the new notifications.
-            _ = makeNotifications(
-                context: context,
-                habit: habit,
-                fireTimes: notificationFireTimes
-            )
-        }
+        // TODO: Change how notifications are going to be rescheduled.
+//        if name != nil || days != nil || notificationFireTimes != nil {
+//            if let notifications = habit.notifications as? Set<NotificationMO> {
+//                // Unschedule all user notifications associated with
+//                // the entities.
+//                notificationScheduler.unschedule(Array(notifications))
+//
+//                // Remove the current notifications.
+//                for notification in notifications {
+//                    habit.removeFromNotifications(notification)
+//                    context.delete(notification)
+//                }
+//            }
+//
+//            // Create and schedule the new notifications.
+//            _ = makeNotifications(
+//                context: context,
+//                habit: habit,
+//                fireTimes: notificationFireTimes
+//            )
+//        }
 
         return habit
     }
@@ -296,9 +297,10 @@ SUBQUERY(challenges, $challenge,
     /// Removes the passed habit from the database.
     /// - Parameter context: The context used to delete the habit from.
     func delete(_ habit: HabitMO, from context: NSManagedObjectContext) {
-        if let notifications = habit.notifications as? Set<NotificationMO> {
-            notificationScheduler.unschedule([NotificationMO](notifications))
-        }
+        // TODO: Change how notifications are deleted.
+//        if let notifications = habit.notifications as? Set<NotificationMO> {
+//            notificationScheduler.unschedule([NotificationMO](notifications))
+//        }
 
         context.delete(habit)
     }

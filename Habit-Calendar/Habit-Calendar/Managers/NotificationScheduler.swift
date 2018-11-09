@@ -23,23 +23,19 @@ struct NotificationScheduler {
 
     // MARK: Imperatives
 
-    /// Creates the user notification options (content and trigger)
-    /// from the passed habit and notification entities.
-    /// - Parameter notification: The notification from which the user
-    ///                           notification will be generated.
-    func makeNotificationOptions(for notification: NotificationMO) -> UserNotificationOptions {
-        guard let habit = notification.habit, let challenge = habit.getCurrentChallenge() else {
-            assertionFailure(
-                "The passed notification must have a valid habit entity (with an active challenge as well."
-            )
-            return (UNNotificationContent(), UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false))
-        }
+    /// Creates the options (content and trigger) for the pending request associated to the FireTimeMO.
+    /// - Parameter fireTime: The FireTimeMO from which contents are generated.
+    func makeNotificationOptions(from fireTime: FireTimeMO) -> UserNotificationOptions {
+        precondition(fireTime.habit != nil, "The fire time must have a habit.")
+        precondition(fireTime.notification != nil, "The fire time must have a notification.")
 
-        // Declare the notification contents with the correct attributes.
+        let habit = fireTime.habit!
+
+        // Declare the notification contents.
         let content = UNMutableNotificationContent()
         content.title = habit.getTitleText()
         content.subtitle = habit.getSubtitleText()
-        content.body = challenge.getNotificationText(for: Int(notification.dayOrder))
+        content.body = habit.getBodyText()
         content.categoryIdentifier = UNNotificationCategory.Kind.dayPrompt(
             habitId: nil
         ).identifier
@@ -47,17 +43,8 @@ struct NotificationScheduler {
         content.sound = UNNotificationSound.default
         content.badge = 1
 
-        // TODO: Change this to be a calendar time interval
-        // Declare the time interval used to schedule the notification.
-        let fireDateTimeInterval = notification.getFireDate().timeIntervalSinceNow
-        // Assert that the fire date is in the future.
-        assert(fireDateTimeInterval > 0, "Inconsistency: the notification's fire date must be in the future.")
-
-        // Declare the notification trigger with the correct date.
-        let trigger = UNTimeIntervalNotificationTrigger(
-            timeInterval: fireDateTimeInterval,
-            repeats: false
-        )
+        // Declare the calendar trigger.
+        let trigger = UNCalendarNotificationTrigger(dateMatching: fireTime.getFireTimeComponents(), repeats: true)
 
         return (content: content, trigger: trigger)
     }
@@ -66,25 +53,27 @@ struct NotificationScheduler {
     /// - Parameters:
     ///     - notification: The core data entity to be scheduled.
     ///     - completionHandler: The handler called after the schedule finishes.
+    // TODO: Correct this method.
     func schedule(
         _ notification: NotificationMO,
         completionHandler: ((NotificationMO) -> Void)? = nil) {
-        precondition(
-            notification.userNotificationId != nil,
-            "The notification id must be set to schedule the notification."
-        )
 
-        // Declare the options used to schedule a new request.
-        let options = makeNotificationOptions(for: notification)
-
-        // Schedule the new request.
-        notificationManager.schedule(
-            with: notification.userNotificationId!,
-            content: options.content,
-            and: options.trigger
-        ) { _ in
-            completionHandler?(notification)
-        }
+//        precondition(
+//            notification.userNotificationId != nil,
+//            "The notification id must be set to schedule the notification."
+//        )
+//
+//        // Declare the options used to schedule a new request.
+//        let options = makeNotificationOptions(for: notification)
+//
+//        // Schedule the new request.
+//        notificationManager.schedule(
+//            with: notification.userNotificationId!,
+//            content: options.content,
+//            and: options.trigger
+//        ) { _ in
+//            completionHandler?(notification)
+//        }
     }
 
     /// Schedules an user notification associated with the passed entity.

@@ -35,11 +35,9 @@ struct NotificationFactory: DummyFactory {
         // Associate its properties.
         notification.id = UUID().uuidString
         notification.userNotificationId = UUID().uuidString
-        notification.fireDate = Date().byAddingDays(Int.random(0..<50))
 
         assert(notification.id != nil, "Id must be set.")
         assert(notification.userNotificationId != nil, "User notification id must be set.")
-        assert(notification.fireDate != nil, "Fire date must be set.")
 
         return notification
     }

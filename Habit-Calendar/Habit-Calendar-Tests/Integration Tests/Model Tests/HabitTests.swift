@@ -61,6 +61,12 @@ class HabitTests: IntegrationTestCase {
         XCTAssertEqual(dummyHabit.getSubtitleText(), expectedSubtitle)
     }
 
+    func testBodyText() {
+        let expectedBodyText = "Please don't forget to execute this activity today. You will be glad in the future."
+        let dummyHabit = habitFactory.makeDummy()
+        XCTAssertEqual(expectedBodyText, dummyHabit.getBodyText())
+    }
+
     func testFetchForExecutedDays() {
         // 1. Declare a dummy habit.
         let dummyHabit = habitFactory.makeDummy()
