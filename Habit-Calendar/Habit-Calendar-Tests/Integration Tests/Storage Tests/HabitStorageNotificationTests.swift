@@ -436,39 +436,4 @@ class HabitStorageNotificationTests: IntegrationTestCase {
 //
 //        wait(for: [nameRescheduleExpectation], timeout: 0.2)
     }
-
-    // MARK: Imperatives
-
-    /// Calculates the expected number of created notifications.
-    /// - Note: Only notifications with future fire dates are created and scheduled.
-    /// - Parameter habit: The habit used to calculate the amount of created notifications.
-    /// - Returns: The count to be compared.
-    // TODO: Remove this method. Not necessary any more.
-    private func getExpectedNotificationsCount(from habit: HabitMO) -> Int {
-        // Get all days and check if their fire dates would be in the future and could be accounted.
-        guard let days = habit.days as? Set<HabitDayMO> else {
-            assertionFailure("Couldn't get the days to calculate the notifications count.")
-            return 0
-        }
-        guard let fireTimes = habit.fireTimes as? Set<FireTimeMO> else {
-            assertionFailure("Couldn't get the fireTimes to calculate the notifications count.")
-            return 0
-        }
-        let notificationStorage = NotificationStorage()
-
-        var expectedCount = 0
-
-        for day in days {
-            for fireTime in fireTimes {
-                if let fireDate = notificationStorage.makeFireDate(
-                    from: day,
-                    and: fireTime.getFireTimeComponents()
-                ), fireDate.isFuture {
-                    expectedCount += 1
-                }
-            }
-        }
-
-        return expectedCount
-    }
 }
