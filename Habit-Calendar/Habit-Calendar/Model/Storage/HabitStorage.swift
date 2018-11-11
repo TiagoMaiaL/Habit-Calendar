@@ -157,11 +157,8 @@ SUBQUERY(challenges, $challenge,
             }
 
             // Create and schedule the notifications.
-            _ = makeNotifications(
-                context: context,
-                habit: habit,
-                fireTimes: fireTimes
-            )
+            _ = notificationStorage.createNotificationsFrom(habit: habit, using: context)
+            notificationScheduler.scheduleNotifications(for: habit)
         }
 
         return habit
@@ -304,42 +301,6 @@ SUBQUERY(challenges, $challenge,
 
         context.delete(habit)
     }
-
-    /// Creates a bunch of notification entities and schedule all of its
-    /// related user notifications, if authorized to do so.
-    /// - Parameters:
-    ///     - context: The NSManagedObject context to be used.
-    ///     - habit: The habit to add the notifications to.
-    ///     - fireTimes: The notifications' fire times.
-    /// - Returns: The notification entities.
-    // TODO: Correct this method.
-    private func makeNotifications(
-        context: NSManagedObjectContext,
-        habit: HabitMO,
-        fireTimes: [DateComponents]?
-    ) -> [NotificationMO] {
-        // If the passed fire times are nil, try getting the habit's current ones.
-        guard let fireTimes = fireTimes ?? (habit.fireTimes as? Set<FireTimeMO>)?.map({
-            $0.getFireTimeComponents()
-        }) else {
-            // The habit doesn't have any fire times associated with it. This case is possible,
-            // since the user can deny the usage of user notifications.
-            return []
-        }
-        guard !fireTimes.isEmpty else {
-            // If the fire times are empty, just return nil because no notifications should be scheduled.
-            return []
-        }
-
-        let notifications = notificationStorage.createNotificationsFrom(habit: habit, using: context)
-
-//        if !notifications.isEmpty {
-//            // Schedule the user notifications.
-//            notificationScheduler.schedule(notifications)
-//        }
-
-        return notifications
-     }
 
     /// Returns the treated name string.
     /// - Parameter name: The name to be treated.
