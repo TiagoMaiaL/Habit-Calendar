@@ -55,4 +55,17 @@ struct FireTimeStorage {
         ]
         return (try? context.fetch(request)) ?? []
     }
+
+    /// Deletes the fire times from the passed habit and context.
+    /// - Parameters:
+    ///     - habit: The habit containing the fire times.
+    ///     - context: The context from which the fire times are deleted.
+    func delete(from habit: HabitMO, andContext context: NSManagedObjectContext) {
+        guard let fireTimes = habit.fireTimes as? Set<FireTimeMO> else { return }
+
+        habit.removeFromFireTimes(fireTimes as NSSet)
+        for fireTime in fireTimes {
+            context.delete(fireTime)
+        }
+    }
 }
