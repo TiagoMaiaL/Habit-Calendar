@@ -241,12 +241,12 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 
         let yesAction = UNNotificationAction(
             identifier: yesActionIdentifier,
-            title: "Yes, I did",
+            title: NSLocalizedString("Yes, I did", comment: "The title of the notification action."),
             options: UNNotificationActionOptions(rawValue: 0)
         )
         let noAction = UNNotificationAction(
             identifier: notActionIdentifier,
-            title: "No, not yet",
+            title: NSLocalizedString("No, not yet", comment: "The title of the notification action."),
             options: UNNotificationActionOptions(rawValue: 0)
         )
         let dayPromptCategory = UNNotificationCategory(
