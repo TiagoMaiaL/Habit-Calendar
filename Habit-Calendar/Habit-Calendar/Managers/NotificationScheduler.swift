@@ -62,8 +62,7 @@ struct NotificationScheduler {
         for fireTime in fireTimes {
             let options = makeNotificationOptions(from: fireTime)
             notificationManager.schedule(
-                // TODO: Instead of with use "using".
-                with: fireTime.notification!.userNotificationId!,
+                using: fireTime.notification!.userNotificationId!,
                 content: options.content,
                 and: options.trigger
             )

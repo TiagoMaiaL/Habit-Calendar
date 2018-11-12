@@ -110,7 +110,7 @@ class UserNotificationManagerTests: IntegrationTestCase {
 
         // Schedule the notification.
         notificationManager.schedule(
-            with: identifier,
+            using: identifier,
             content: content,
             and: trigger
         ) { error in
@@ -161,7 +161,7 @@ class UserNotificationManagerTests: IntegrationTestCase {
 
         // Schedule the notification.
         notificationManager.schedule(
-            with: identifier,
+            using: identifier,
             content: content,
             and: trigger
         ) { _ in
@@ -216,7 +216,7 @@ class UserNotificationManagerTests: IntegrationTestCase {
 
         // Schedule a new notification.
         notificationManager.schedule(
-            with: identifier,
+            using: identifier,
             content: content,
             and: trigger
         ) { _ in

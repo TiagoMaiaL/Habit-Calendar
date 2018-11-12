@@ -51,7 +51,7 @@ struct UserNotificationManager {
     ///                                scheduled.
     /// - Returns: The notification identifier of the scheduled user
     ///            notification.
-    func schedule(with identifier: String,
+    func schedule(using identifier: String,
                   content: UNNotificationContent,
                   and trigger: UNNotificationTrigger,
                   _ completionHandler: ((Error?) -> Void)? = nil) {

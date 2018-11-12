@@ -272,7 +272,6 @@ SUBQUERY(challenges, $challenge,
             )
         }
         // Create the notification entities and associate them to the habit and fire time entities.
-        // TODO: Check if it's better to let the fire time storage create the notifications.
         _ = notificationStorage.createNotificationsFrom(habit: habit, using: context)
     }
 

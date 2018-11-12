@@ -117,6 +117,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 DispatchQueue.main.async {
                     // Continue with the app's launch flow.
                     self.seed()
+                    self.clearNotificationRequestsIfNeeded()
                     self.displayRootNavigationController()
                 }
             } else {
@@ -226,6 +227,39 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     /// Sends a notification about the selection of the "New habit" quick action.
     private func sendNewHabitQuickActionNotification() {
         NotificationCenter.default.post(name: Notification.Name.didSelectNewHabitQuickAction, object: self)
+    }
+
+    /// Clears the pending notification requests and invalid NotificationMO entities.
+    /// - Note: Notifications without fire times are the result of migrating from the previous
+    ///         user notification code to the new one.
+    private func clearNotificationRequestsIfNeeded() {
+        let request: NSFetchRequest<NotificationMO> = NotificationMO.fetchRequest()
+        request.predicate = NSPredicate(format: "fireTime = nil")
+
+        dataController.persistentContainer.performBackgroundTask { context in
+            print("Clearing notifications.")
+
+            // Remove the invalid notifications (the ones that don't have a fire time relationship.
+            if let invalidNotifications = try? context.fetch(request), !invalidNotifications.isEmpty {
+                print("Removing invalid notifications.")
+                for notification in invalidNotifications {
+                    self.notificationStorage.delete(notification, from: context)
+                }
+
+                // Clear the pending notification requests.
+                let habitsRequest: NSFetchRequest<HabitMO> = HabitMO.fetchRequest()
+                if let allHabits = try? context.fetch(habitsRequest) {
+                    print("Re-adding the pending notification requests.")
+                    UNUserNotificationCenter.current().removeAllDeliveredNotifications()
+                    UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+
+                    for habit in allHabits {
+                        _ = self.notificationStorage.createNotificationsFrom(habit: habit, using: context)
+                        self.notificationScheduler.scheduleNotifications(for: habit)
+                    }
+                }
+            }
+        }
     }
 }
 

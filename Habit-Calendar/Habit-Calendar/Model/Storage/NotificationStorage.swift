@@ -26,7 +26,7 @@ class NotificationStorage {
     ///     - fireTime: The fire time to be associated with the new notification instance.
     /// - Returns: a new Notification entity.
     func create(using context: NSManagedObjectContext, andFireTime fireTime: FireTimeMO) -> NotificationMO? {
-        precondition(fireTime.notification == nil, "The passed fire time mustn't have a notification entity.")
+        guard fireTime.notification == nil else { return fireTime.notification }
 
         let notification = NotificationMO(context: context)
         notification.id = UUID().uuidString
