@@ -26,20 +26,6 @@ extension HabitDetailsViewController {
         challenge.managedObjectContext?.perform {
             challenge.markCurrentDayAsExecuted(wasExecuted)
 
-            // TODO: Remove this code.
-            // Schedule / unschedule the notifications for the day, depending on the user's answer.
-//            let dayNotifications = self.notificationStorage.notifications(
-//                from: challenge.managedObjectContext!,
-//                habit: self.habit,
-//                andDay: Date()
-//            ).filter { $0.fireDate?.isFuture ?? false}
-//
-//            if wasExecuted {
-//                self.notificationScheduler.unschedule(dayNotifications)
-//            } else {
-//                self.notificationScheduler.schedule(dayNotifications)
-//            }
-
             do {
                 try challenge.managedObjectContext?.save()
             } catch {

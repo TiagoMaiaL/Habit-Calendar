@@ -211,29 +211,11 @@ SUBQUERY(challenges, $challenge,
             editFireTimes(fireTimes, ofHabit: habit)
         }
 
-        // If the days or fire times were editted, the habit's notifications become invalid, so it's necessary
-        // to create and schedule new ones.
-        // TODO: Change how notifications are going to be rescheduled.
-//        if name != nil || days != nil || notificationFireTimes != nil {
-//            if let notifications = habit.notifications as? Set<NotificationMO> {
-//                // Unschedule all user notifications associated with
-//                // the entities.
-//                notificationScheduler.unschedule(Array(notifications))
-//
-//                // Remove the current notifications.
-//                for notification in notifications {
-//                    habit.removeFromNotifications(notification)
-//                    context.delete(notification)
-//                }
-//            }
-//
-//            // Create and schedule the new notifications.
-//            _ = makeNotifications(
-//                context: context,
-//                habit: habit,
-//                fireTimes: notificationFireTimes
-//            )
-//        }
+        // If or the name or the fire times were changed, the notifications need to be rescheduled.
+        if name != nil || notificationFireTimes != nil {
+            notificationScheduler.unscheduleNotifications(from: habit)
+            notificationScheduler.scheduleNotifications(for: habit)
+        }
 
         return habit
     }
@@ -289,16 +271,15 @@ SUBQUERY(challenges, $challenge,
                 andHabit: habit
             )
         }
+        // Create the notification entities and associate them to the habit and fire time entities.
+        // TODO: Check if it's better to let the fire time storage create the notifications.
+        _ = notificationStorage.createNotificationsFrom(habit: habit, using: context)
     }
 
     /// Removes the passed habit from the database.
     /// - Parameter context: The context used to delete the habit from.
     func delete(_ habit: HabitMO, from context: NSManagedObjectContext) {
-        // TODO: Change how notifications are deleted.
-//        if let notifications = habit.notifications as? Set<NotificationMO> {
-//            notificationScheduler.unschedule([NotificationMO](notifications))
-//        }
-
+        notificationScheduler.unscheduleNotifications(from: habit)
         context.delete(habit)
     }
 
