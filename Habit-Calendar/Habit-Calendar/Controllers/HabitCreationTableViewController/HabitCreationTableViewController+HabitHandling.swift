@@ -56,7 +56,7 @@ extension HabitCreationTableViewController {
                     name: self.name,
                     color: self.habitColor,
                     days: self.days,
-                    and: self.fireTimes
+                    andFireTimes: self.fireTimes
                 )
             }
 

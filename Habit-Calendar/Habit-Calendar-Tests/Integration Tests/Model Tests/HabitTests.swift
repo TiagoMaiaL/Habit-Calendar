@@ -62,7 +62,7 @@ class HabitTests: IntegrationTestCase {
     }
 
     func testBodyText() {
-        let expectedBodyText = "Please don't forget to execute this activity today. You will be glad in the future."
+        let expectedBodyText = "Don't forget to execute this activity today."
         let dummyHabit = habitFactory.makeDummy()
         XCTAssertEqual(expectedBodyText, dummyHabit.getBodyText())
     }

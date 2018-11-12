@@ -193,7 +193,7 @@ SUBQUERY(challenges, $challenge,
         name: String? = nil,
         color: HabitMO.Color? = nil,
         days: [Date]? = nil,
-        and notificationFireTimes: [DateComponents]? = nil
+        andFireTimes notificationFireTimes: [DateComponents]? = nil
     ) -> HabitMO {
         if let name = name {
             habit.name = treatName(name)
@@ -255,8 +255,9 @@ SUBQUERY(challenges, $challenge,
             return
         }
 
-        // Remove the current fire time entities associated with the habit.
+        // Remove the current fire time entities associated with the habit and unschedule the pending requests.
         if let currentFireTimes = habit.fireTimes as? Set<FireTimeMO> {
+            notificationScheduler.unscheduleNotifications(from: habit)
             for fireTime in currentFireTimes {
                 habit.removeFromFireTimes(fireTime)
                 context.delete(fireTime)

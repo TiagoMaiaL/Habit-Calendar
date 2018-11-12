@@ -123,7 +123,7 @@ class HabitStorageNotificationTests: IntegrationTestCase {
         _ = habitStorage.edit(
             dummyHabit,
             using: context,
-            and: fireTimes
+            andFireTimes: fireTimes
         )
 
         // 4. Check if FireTimeMO entities were created.
@@ -151,7 +151,7 @@ class HabitStorageNotificationTests: IntegrationTestCase {
         _ = habitStorage.edit(
             dummy,
             using: context,
-            and: fireTimeComponents
+            andFireTimes: fireTimeComponents
         )
 
         // 4. Fetch the dummy's notifications and make assertions on it.
@@ -198,7 +198,7 @@ class HabitStorageNotificationTests: IntegrationTestCase {
         _ = habitStorage.edit(
             dummyHabit,
             using: context,
-            and: fireTimeComponents
+            andFireTimes: fireTimeComponents
         )
 
         // 4. Assert on the fire times and scheduled notifications.
@@ -271,6 +271,27 @@ class HabitStorageNotificationTests: IntegrationTestCase {
         }
 
         wait(for: [nameRescheduleExpectation], timeout: 0.2)
+    }
+
+    func testRemovingFireTimesFromHabitShouldUnscheduleNotifications() {
+        notificationCenterMock.shouldAuthorize = true
+        let expectation = XCTestExpectation(description: "Unschedule notifications and remove fire times.")
+
+        // 1. Declare a dummy habit.
+        let dummy = habitFactory.makeDummy()
+        notificationScheduler.scheduleNotifications(for: dummy)
+
+        // 2. Remove its fire times using the storage (empty fire times array).
+        _ = habitStorage.edit(dummy, using: context, andFireTimes: [])
+
+        // 3. Make assertions on the number of fire times and pending requests.
+        XCTAssertEqual(dummy.fireTimes?.count, 0)
+        notificationCenterMock.getPendingNotificationRequests { requests in
+            XCTAssertEqual(requests.count, 0)
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 0.1)
     }
 
     func testPendingRequestsAreRemovedWhenDeletingHabit() {
