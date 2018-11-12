@@ -76,9 +76,8 @@ class HabitMO: NSManagedObject {
     ///         notifications and to display the habit's info.
     /// - Returns: The body text of the habit.
     func getBodyText() -> String {
-        // TODO: Localize this in the files before uploading the build.
         return NSLocalizedString(
-            "Please don't forget to execute this activity today. You will be glad in the future.",
+            "Don't forget to execute this activity today.",
             comment: "The body text of every notification."
         )
     }

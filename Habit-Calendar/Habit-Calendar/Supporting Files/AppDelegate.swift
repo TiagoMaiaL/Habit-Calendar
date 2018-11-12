@@ -230,18 +230,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     /// Clears the pending notification requests and invalid NotificationMO entities.
-    /// - Note: Notifications without fire times are the result of migrating from the previous
-    ///         user notification code to the new one.
     private func clearNotificationRequestsIfNeeded() {
         let request: NSFetchRequest<NotificationMO> = NotificationMO.fetchRequest()
         request.predicate = NSPredicate(format: "fireTime = nil")
 
         dataController.persistentContainer.performBackgroundTask { context in
-            print("Clearing notifications.")
-
             // Remove the invalid notifications (the ones that don't have a fire time relationship.
             if let invalidNotifications = try? context.fetch(request), !invalidNotifications.isEmpty {
-                print("Removing invalid notifications.")
                 for notification in invalidNotifications {
                     self.notificationStorage.delete(notification, from: context)
                 }
@@ -249,7 +244,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 // Clear the pending notification requests.
                 let habitsRequest: NSFetchRequest<HabitMO> = HabitMO.fetchRequest()
                 if let allHabits = try? context.fetch(habitsRequest) {
-                    print("Re-adding the pending notification requests.")
                     UNUserNotificationCenter.current().removeAllDeliveredNotifications()
                     UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
 
@@ -396,7 +390,6 @@ extension AppDelegate {
                 sendNotificationToDisplayHabit(habit)
             }
         }
-
         completionHandler(false)
     }
 }
