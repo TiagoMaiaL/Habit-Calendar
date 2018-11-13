@@ -24,6 +24,7 @@ This app is the result of my necessities to track my habits and become a happier
 <img src="https://github.com/TiagoMaiaL/Habit-Calendar/blob/master/app-images/habit-creation.png" width=300>
 <img src="https://github.com/TiagoMaiaL/Habit-Calendar/blob/master/app-images/habit-fire-times.png" width=300>
 <img src="https://github.com/TiagoMaiaL/Habit-Calendar/blob/master/app-images/habit-challenge.png" width=300>
+<img src="https://github.com/TiagoMaiaL/Habit-Calendar/blob/master/app-images/notification.png" width=300>
 
 ## License
 
