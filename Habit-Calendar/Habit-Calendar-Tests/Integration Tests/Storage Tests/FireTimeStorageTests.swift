@@ -82,6 +82,22 @@ class FireTimeStorageTests: IntegrationTestCase {
         )
     }
 
+    func testFireTimesRemoval() {
+        // 1. Create a dummy habit.
+        let dummyHabit = habitFactory.makeDummy()
+        guard let fireTimes = dummyHabit.fireTimes as? Set<FireTimeMO> else {
+            XCTFail("Couldn't get the fire times from the dummy habit.")
+            return
+        }
+
+        // 2. Remove its fire times by using the storage.
+        fireTimeStorage.delete(from: dummyHabit, andContext: context)
+
+        // 3. Assert they were marked as deleted and are no longer associated with the habit entity.
+        XCTAssertEqual(dummyHabit.fireTimes?.count, 0)
+        XCTAssertTrue(fireTimes.filter({ !$0.isDeleted }).count == 0)
+    }
+
     func testGettingAllFireTimesSortedByTime() {
         let factory = FireTimeFactory(context: context)
 

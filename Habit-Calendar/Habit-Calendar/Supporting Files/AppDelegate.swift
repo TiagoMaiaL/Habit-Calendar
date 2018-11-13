@@ -117,6 +117,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 DispatchQueue.main.async {
                     // Continue with the app's launch flow.
                     self.seed()
+                    self.clearNotificationRequestsIfNeeded()
                     self.displayRootNavigationController()
                 }
             } else {
@@ -227,6 +228,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func sendNewHabitQuickActionNotification() {
         NotificationCenter.default.post(name: Notification.Name.didSelectNewHabitQuickAction, object: self)
     }
+
+    /// Clears the pending notification requests and invalid NotificationMO entities.
+    private func clearNotificationRequestsIfNeeded() {
+        let request: NSFetchRequest<NotificationMO> = NotificationMO.fetchRequest()
+        request.predicate = NSPredicate(format: "fireTime = nil")
+
+        dataController.persistentContainer.performBackgroundTask { context in
+            // Remove the invalid notifications (the ones that don't have a fire time relationship.
+            if let invalidNotifications = try? context.fetch(request), !invalidNotifications.isEmpty {
+                for notification in invalidNotifications {
+                    self.notificationStorage.delete(notification, from: context)
+                }
+
+                // Clear the pending notification requests.
+                let habitsRequest: NSFetchRequest<HabitMO> = HabitMO.fetchRequest()
+                if let allHabits = try? context.fetch(habitsRequest) {
+                    UNUserNotificationCenter.current().removeAllDeliveredNotifications()
+                    UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+
+                    for habit in allHabits {
+                        _ = self.notificationStorage.createNotificationsFrom(habit: habit, using: context)
+                        self.notificationScheduler.scheduleNotifications(for: habit)
+                    }
+                }
+            }
+        }
+    }
 }
 
 // MARK: UserNotifications extension
@@ -241,12 +269,12 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 
         let yesAction = UNNotificationAction(
             identifier: yesActionIdentifier,
-            title: "Yes, I did",
+            title: NSLocalizedString("Yes, I did", comment: "The title of the notification action."),
             options: UNNotificationActionOptions(rawValue: 0)
         )
         let noAction = UNNotificationAction(
             identifier: notActionIdentifier,
-            title: "No, not yet",
+            title: NSLocalizedString("No, not yet", comment: "The title of the notification action."),
             options: UNNotificationActionOptions(rawValue: 0)
         )
         let dayPromptCategory = UNNotificationCategory(
@@ -362,7 +390,6 @@ extension AppDelegate {
                 sendNotificationToDisplayHabit(habit)
             }
         }
-
         completionHandler(false)
     }
 }

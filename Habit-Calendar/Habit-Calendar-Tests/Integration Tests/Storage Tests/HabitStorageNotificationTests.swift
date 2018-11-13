@@ -56,9 +56,61 @@ class HabitStorageNotificationTests: IntegrationTestCase {
 
     // MARK: Tests
 
+    func testCreatingHabitShouldScheduleUserNotifications() {
+        notificationCenterMock.shouldAuthorize = true
+        let scheduleExpectation = XCTestExpectation(
+            description: "Create a new habit and create and schedule the notifications."
+        )
+
+        // 1. Declare the habit attributes needed for creation:
+        let dummyUser = userFactory.makeDummy()
+        let days = (0...Int.random(2..<10)).compactMap {
+            Date().byAddingDays($0)
+        }
+        let fireTimeComponents = [
+            DateComponents(hour: 23, minute: 59)
+        ]
+
+        // 2. Create the habit.
+        let createdHabit = habitStorage.create(
+            using: context,
+            user: dummyUser,
+            name: "Testing notifications",
+            color: .systemBlue,
+            days: days,
+            and: fireTimeComponents
+        )
+        guard let fireTimes = createdHabit.fireTimes as? Set<FireTimeMO> else {
+            XCTFail("Couldn't get the fire times from the created habit.")
+            return
+        }
+
+        // 3 Assert that the fire times have a notification entiity associated with them.
+        XCTAssertTrue(fireTimes.filter({ $0.notification == nil }).isEmpty)
+
+        // Use a timer to make the assertions on the scheduling of user
+        // notifications. Scheduling notifications is an async operation.
+        Timer.scheduledTimer(withTimeInterval: 0.01, repeats: false) { _ in
+            // 4. Assert that the notifications of the habit were scheduled.
+            self.notificationCenterMock.getPendingNotificationRequests { requests in
+                XCTAssertEqual(requests.count, fireTimes.count)
+
+                // 4.1. Assert on the identifiers of each notificationMO and user notifications.
+                let identifiers = Set(requests.map { $0.identifier })
+                let notificationIdentifiers = Set(fireTimes.compactMap({ $0.notification?.userNotificationId }))
+
+                XCTAssertEqual(identifiers, notificationIdentifiers)
+
+                scheduleExpectation.fulfill()
+            }
+        }
+        wait(for: [scheduleExpectation], timeout: 0.2)
+    }
+
     func testHabitEditionWithFireTimesPropertyShouldCreateFireTimeEntities() {
         // 1. Create a dummy habit.
         let dummyHabit = habitFactory.makeDummy()
+        dummyHabit.removeFromFireTimes(dummyHabit.fireTimes ?? [])
 
         // 2. Declare the fire times.
         let fireTimes = [
@@ -71,7 +123,7 @@ class HabitStorageNotificationTests: IntegrationTestCase {
         _ = habitStorage.edit(
             dummyHabit,
             using: context,
-            and: fireTimes
+            andFireTimes: fireTimes
         )
 
         // 4. Check if FireTimeMO entities were created.
@@ -85,9 +137,12 @@ class HabitStorageNotificationTests: IntegrationTestCase {
     func testHabitEditionWithFireTimesPropertyShouldCreateNotifications() {
         // 1. Create a dummy habit.
         let dummy = habitFactory.makeDummy()
+        if let fireTimesToDelete = dummy.fireTimes {
+            dummy.removeFromFireTimes(fireTimesToDelete)
+        }
 
         // 2. Declare the fire times.
-        let fireTimes = [
+        let fireTimeComponents = [
             DateComponents(hour: 15, minute: 30),
             DateComponents(hour: 11, minute: 15)
         ]
@@ -96,120 +151,20 @@ class HabitStorageNotificationTests: IntegrationTestCase {
         _ = habitStorage.edit(
             dummy,
             using: context,
-            and: fireTimes
+            andFireTimes: fireTimeComponents
         )
 
         // 4. Fetch the dummy's notifications and make assertions on it.
         // 4.1. Check if the count is the expected one.
-        XCTAssertEqual(
-            dummy.notifications?.count,
-            getExpectedNotificationsCount(from: dummy),
-            "The added notifications should have the expected count of the passed fire times * days."
-        )
+        guard let fireTimes = dummy.fireTimes as? Set<FireTimeMO> else {
+            XCTFail("The fire times weren't properly created.")
+            return
+        }
+
+        XCTAssertTrue(fireTimes.filter({ $0.notification == nil }).isEmpty)
     }
 
-    func testCreatingHabitShouldScheduleUserNotifications() {
-        notificationCenterMock.shouldAuthorize = true
-        let scheduleExpectation = XCTestExpectation(
-            description: "Create a new habit and create and schedule the notifications."
-        )
-
-        // 1. Declare the habit attributes needed for creation:
-        let dummyUser = userFactory.makeDummy()
-        let days = (0...Int.random(2..<10)).compactMap {
-            Date().byAddingDays($0)
-        }
-        let fireTimes = [
-            DateComponents(hour: 23, minute: 59)
-        ]
-
-        // 2. Create the habit.
-        let createdHabit = habitStorage.create(
-            using: context,
-            user: dummyUser,
-            name: "Testing notifications",
-            color: .systemBlue,
-            days: days,
-            and: fireTimes
-        )
-
-        // Use a timer to make the assertions on the scheduling of user
-        // notifications. Scheduling notifications is an async operation.
-        Timer.scheduledTimer(withTimeInterval: 0.01, repeats: false) { _ in
-            // 3. Assert that the habit's notifications were scheduled:
-            // - Assert on the count of notifications and user notifications.
-            let notificationsCount = self.getExpectedNotificationsCount(from: createdHabit)
-            XCTAssertEqual(createdHabit.notifications?.count, notificationsCount)
-
-            self.notificationCenterMock.getPendingNotificationRequests { requests in
-                XCTAssertEqual(requests.count, notificationsCount)
-
-                // - Assert on the identifiers of each notificationMO and user notifications.
-                let identifiers = requests.map { $0.identifier }
-                guard let notificationsSet = createdHabit.notifications as? Set<NotificationMO> else {
-                    XCTFail("The notifications weren't properly created.")
-                    return
-                }
-                let notifications = Array(notificationsSet)
-
-                XCTAssertTrue(
-                    notifications.filter { !identifiers.contains( $0.userNotificationId! ) }.count == 0,
-                    "All notifications should have been properly scheduled."
-                )
-
-                scheduleExpectation.fulfill()
-            }
-        }
-        wait(for: [scheduleExpectation], timeout: 0.2)
-    }
-
-    func testEditingHabitDaysShouldRescheduleUserNotifications() {
-        let rescheduleExpectation = XCTestExpectation(
-            description: "Reschedules the user notifications after changing the days dates."
-        )
-
-        // Enable the mock's authorization to schedule the notifications.
-        notificationCenterMock.shouldAuthorize = true
-
-        // 1. Declare the dummy habit.
-        let dummyHabit = habitFactory.makeDummy()
-
-        // 2. Declare the new days dates.
-        let days = (0...Int.random(2..<10)).compactMap {
-            Date().byAddingDays($0)
-        }
-
-        // 3. Edit the habit.
-        _ = habitStorage.edit(
-            dummyHabit,
-            using: context,
-            days: days
-        )
-
-        // 4. Make the appropriated assertions:
-        // - assert on the number of notification entities:
-        XCTAssertEqual(
-            dummyHabit.notifications?.count,
-            getExpectedNotificationsCount(from: dummyHabit),
-            "The amount of notifications should be the number of future days * the fire times."
-        )
-
-        Timer.scheduledTimer(withTimeInterval: 0.01, repeats: false) { _ in
-            // - assert on the number of user notifications
-            self.notificationCenterMock.getPendingNotificationRequests { requests in
-                XCTAssertEqual(
-                    requests.count,
-                    dummyHabit.notifications?.count,
-                    "The user notifications weren't properly scheduled."
-                )
-                rescheduleExpectation.fulfill()
-            }
-        }
-
-        wait(for: [rescheduleExpectation], timeout: 0.2)
-    }
-
-    func testEditingHabitFireDatesShouldRescheduleUserNotifications() {
+    func testEditingHabitFireTimesShouldRescheduleUserNotifications() {
         let rescheduleExpectation = XCTestExpectation(
             description: "Reschedules the user notifications after changing the notifications fire times."
         )
@@ -219,20 +174,23 @@ class HabitStorageNotificationTests: IntegrationTestCase {
 
         // 1. Declare the dummy habit.
         let dummyHabit = habitFactory.makeDummy()
+        if let fireTimesToDelete = dummyHabit.fireTimes {
+            dummyHabit.removeFromFireTimes(fireTimesToDelete)
+        }
 
         // 2. Declare the new fire tiems.
-        let fireTimes = [
+        let fireTimeComponents = [
             DateComponents(
-                hour: Int.random(0..<23),
-                minute: Int.random(0..<59)
+                hour: 23,
+                minute: 0
             ),
             DateComponents(
-                hour: Int.random(0..<23),
-                minute: Int.random(0..<59)
+                hour: 22,
+                minute: 30
             ),
             DateComponents(
-                hour: Int.random(0..<23),
-                minute: Int.random(0..<59)
+                hour: 20,
+                minute: 0
             )
         ]
 
@@ -240,134 +198,36 @@ class HabitStorageNotificationTests: IntegrationTestCase {
         _ = habitStorage.edit(
             dummyHabit,
             using: context,
-            and: fireTimes
+            andFireTimes: fireTimeComponents
         )
 
-        // 4. Make the appropriated assertions:
-        // - assert on the number of notification entities:
-        XCTAssertEqual(
-            dummyHabit.notifications?.count,
-            getExpectedNotificationsCount(from: dummyHabit),
-            "The amount of notifications should be the number of future days * the fire times."
-        )
+        // 4. Assert on the fire times and scheduled notifications.
+        XCTAssertEqual(fireTimeComponents.count, dummyHabit.fireTimes?.count)
 
         Timer.scheduledTimer(withTimeInterval: 0.01, repeats: false) { _ in
-
-            // - assert on the number of user notifications
             self.notificationCenterMock.getPendingNotificationRequests { requests in
-                XCTAssertEqual(
-                    requests.count,
-                    dummyHabit.notifications?.count,
-                    "The user notifications weren't properly scheduled."
-                )
+                XCTAssertEqual(requests.count, fireTimeComponents.count)
+
+                if let newFireTimes = dummyHabit.fireTimes as? Set<FireTimeMO> {
+                    let newFireTimeIdentifiers = Set(newFireTimes.compactMap { $0.notification?.userNotificationId })
+                    let requestIdentifiers = Set(requests.map { $0.identifier })
+
+                    XCTAssertEqual(requestIdentifiers, newFireTimeIdentifiers)
+                } else {
+                    XCTFail("The fire times should have been added.")
+                }
 
                 rescheduleExpectation.fulfill()
             }
         }
 
         wait(for: [rescheduleExpectation], timeout: 0.2)
-    }
-
-    func testEditingDaysAndFireDatesShouldRescheduleUserNotifications() {
-        let rescheduleExpectation = XCTestExpectation(
-            description: "Reschedules the user notifications after changing the days and the notifications fire times."
-        )
-
-        // Enable the mock's authorization to schedule the notifications.
-        notificationCenterMock.shouldAuthorize = true
-
-        // 1. Declare the dummy habit.
-        let dummyHabit = habitFactory.makeDummy()
-
-        // 2. Declare the new days and fire tiems.
-        let days = (0...Int.random(2..<10)).compactMap {
-            Date().byAddingDays($0)
-        }
-        let fireTimeFactory = FireTimeFactory(context: context)
-        let firstFireTime = fireTimeFactory.makeDummy()
-        let secondFireTime = fireTimeFactory.makeDummy()
-        // In order to avoid equal fire times, always switch the minutes.
-        secondFireTime.minute = firstFireTime.minute == 30 ? 0 : 30
-
-        let fireTimes = [firstFireTime, secondFireTime].map { $0.getFireTimeComponents() }
-
-        // 3. Edit the habit.
-        _ = habitStorage.edit(
-            dummyHabit,
-            using: context,
-            days: days,
-            and: fireTimes
-        )
-
-        // 4. Make the appropriated assertions:
-        // - assert on the number of notification entities:
-        XCTAssertEqual(
-            dummyHabit.notifications?.count,
-            getExpectedNotificationsCount(from: dummyHabit),
-            "The amount of notifications should be the number of future days * the fire times."
-        )
-
-        Timer.scheduledTimer(withTimeInterval: 0.01, repeats: false) { _ in
-
-            // - assert on the number of user notifications
-            self.notificationCenterMock.getPendingNotificationRequests { requests in
-                XCTAssertEqual(
-                    requests.count,
-                    dummyHabit.notifications?.count,
-                    "The user notifications weren't properly scheduled."
-                )
-                rescheduleExpectation.fulfill()
-            }
-        }
-
-        wait(for: [rescheduleExpectation], timeout: 0.2)
-    }
-
-    func testNotificationsAreRemovedWhenDeletingHabit() {
-        // 1. Declare a dummy habit.
-        let dummyHabit = habitFactory.makeDummy()
-
-        // 2. Delete the habit.
-        habitStorage.delete(dummyHabit, from: context)
-        try? context.save()
-
-        // 3. Check if the notifications are also marked as removed.
-        XCTAssertEqual(0, try? context.count(for: NotificationMO.fetchRequest()))
-    }
-
-    func testPendingRequestsAreRemovedWhenDeletingHabit() {
-        let expectation = XCTestExpectation(description: "The habit's pending requests should be deleted as well.")
-
-        // 1. Declare a dummy habit.
-        let dummyHabit = habitFactory.makeDummy()
-
-        // 2. Schedule its notifications.
-        guard let set = dummyHabit.notifications as? Set<NotificationMO> else {
-            XCTFail("Couldn't get the dummy habit's notifications.")
-            return
-        }
-
-        let notifications = [NotificationMO](set)
-        notificationCenterMock.shouldAuthorize = true
-        notificationScheduler.schedule(notifications)
-
-        // 3. Delete the habit.
-        habitStorage.delete(dummyHabit, from: context)
-
-        // 4. Assert its pending requests were removed as well.
-        notificationCenterMock.getPendingNotificationRequests { requests in
-            XCTAssertEqual(0, requests.count, "The pending notification requests should also have been removed.")
-            expectation.fulfill()
-        }
-
-        wait(for: [expectation], timeout: 0.2)
     }
 
     func testEditingHabitNameShouldRescheduleUserNotifications() {
         let nameRescheduleExpectation = XCTestExpectation(
             description: "Reschedules the user notifications after changing the name."
         )
-
         // Enable the mock's authorization to schedule the notifications.
         notificationCenterMock.shouldAuthorize = true
 
@@ -375,7 +235,7 @@ class HabitStorageNotificationTests: IntegrationTestCase {
         let days = (0...Int.random(2..<10)).compactMap {
             Date().byAddingDays($0)
         }
-        let fireTimes = [
+        let fireTimeComponents = [
             DateComponents(hour: 23, minute: 59)
         ]
 
@@ -386,17 +246,13 @@ class HabitStorageNotificationTests: IntegrationTestCase {
             name: "Testing notifications",
             color: .systemBlue,
             days: days,
-            and: fireTimes
+            and: fireTimeComponents
         )
 
         // 2. Check on its current notifications.
         Timer.scheduledTimer(withTimeInterval: 0.01, repeats: false) { _ in
             self.notificationCenterMock.getPendingNotificationRequests { requests in
-                XCTAssertEqual(
-                    requests.count,
-                    createdHabit.notifications?.count,
-                    "The user notifications weren't properly scheduled."
-                )
+                XCTAssertEqual(fireTimeComponents.count, requests.count)
 
                 // 3. Edit it by changing its name.
                 let newName = "Go skating"
@@ -405,10 +261,8 @@ class HabitStorageNotificationTests: IntegrationTestCase {
                 // 4. Check if the notifications were properly scheduled and if the name was changed.
                 Timer.scheduledTimer(withTimeInterval: 0.01, repeats: false) { _ in
                     self.notificationCenterMock.getPendingNotificationRequests { requests in
-                        XCTAssertEqual(requests.count, createdHabit.notifications?.count)
-                        XCTAssertFalse(
-                            requests.filter({$0.content.title == createdHabit.getTitleText()}).isEmpty
-                        )
+                        XCTAssertEqual(requests.count, createdHabit.fireTimes?.count)
+                        XCTAssertFalse(requests.filter { $0.content.title == createdHabit.getTitleText() }.isEmpty)
 
                         nameRescheduleExpectation.fulfill()
                     }
@@ -419,37 +273,55 @@ class HabitStorageNotificationTests: IntegrationTestCase {
         wait(for: [nameRescheduleExpectation], timeout: 0.2)
     }
 
-    // MARK: Imperatives
+    func testRemovingFireTimesFromHabitShouldUnscheduleNotifications() {
+        notificationCenterMock.shouldAuthorize = true
+        let expectation = XCTestExpectation(description: "Unschedule notifications and remove fire times.")
 
-    /// Calculates the expected number of created notifications.
-    /// - Note: Only notifications with future fire dates are created and scheduled.
-    /// - Parameter habit: The habit used to calculate the amount of created notifications.
-    /// - Returns: The count to be compared.
-    private func getExpectedNotificationsCount(from habit: HabitMO) -> Int {
-        // Get all days and check if their fire dates would be in the future and could be accounted.
-        guard let days = habit.days as? Set<HabitDayMO> else {
-            assertionFailure("Couldn't get the days to calculate the notifications count.")
-            return 0
+        // 1. Declare a dummy habit.
+        let dummy = habitFactory.makeDummy()
+        notificationScheduler.scheduleNotifications(for: dummy)
+
+        // 2. Remove its fire times using the storage (empty fire times array).
+        _ = habitStorage.edit(dummy, using: context, andFireTimes: [])
+
+        // 3. Make assertions on the number of fire times and pending requests.
+        XCTAssertEqual(dummy.fireTimes?.count, 0)
+        notificationCenterMock.getPendingNotificationRequests { requests in
+            XCTAssertEqual(requests.count, 0)
+            expectation.fulfill()
         }
-        guard let fireTimes = habit.fireTimes as? Set<FireTimeMO> else {
-            assertionFailure("Couldn't get the fireTimes to calculate the notifications count.")
-            return 0
+
+        wait(for: [expectation], timeout: 0.1)
+    }
+
+    func testPendingRequestsAreRemovedWhenDeletingHabit() {
+        let expectation = XCTestExpectation(description: "The habit's pending requests should be deleted as well.")
+
+        // 1. Declare a dummy habit.
+        let dummyHabit = habitFactory.makeDummy()
+
+        // 2. Schedule its notifications.
+        guard (dummyHabit.fireTimes?.count ?? 0) > 0 else {
+            XCTFail("The dummy habit must have fire times to continue with the test.")
+            return
         }
-        let notificationStorage = NotificationStorage()
 
-        var expectedCount = 0
+        notificationCenterMock.shouldAuthorize = true
+        notificationScheduler.scheduleNotifications(for: dummyHabit)
 
-        for day in days {
-            for fireTime in fireTimes {
-                if let fireDate = notificationStorage.makeFireDate(
-                    from: day,
-                    and: fireTime.getFireTimeComponents()
-                ), fireDate.isFuture {
-                    expectedCount += 1
-                }
+        notificationCenterMock.getPendingNotificationRequests { requests in
+            XCTAssertEqual(dummyHabit.fireTimes?.count, requests.count)
+
+            // 3. Delete the habit.
+            self.habitStorage.delete(dummyHabit, from: self.context)
+
+            // 4. Assert its pending requests were removed as well.
+            self.notificationCenterMock.getPendingNotificationRequests { requests in
+                XCTAssertEqual(0, requests.count, "The pending notification requests should also have been removed.")
+                expectation.fulfill()
             }
         }
 
-        return expectedCount
+        wait(for: [expectation], timeout: 0.2)
     }
 }

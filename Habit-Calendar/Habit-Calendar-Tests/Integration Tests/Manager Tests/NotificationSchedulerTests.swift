@@ -45,17 +45,18 @@ class NotificationSchedulerTests: IntegrationTestCase {
 
     // MARK: Tests
 
-    func testContentAndTriggerFactory() {
-        // Test the factories for the user notification's trigger and content
-        // options when a Notification entity is passed and the authorization
-        // was fully granted by the user.
-
-        // Declare the notification (associated with a Habit dummy) that needs to be passed.
-        let dummyNotification = makeNotification()
+    /// Test the factories for creating the trigger and content options of the pending requests.
+    func testRequestContentAndTriggerFactory() {
+        // Declare the dummy habit and fire tiem used to get the pending request values.
+        let dummyHabit = habitFactory.makeDummy()
+        guard let fireTime = (dummyHabit.fireTimes as? Set<FireTimeMO>)?.first else {
+            XCTFail("To proceed the test needs a fire time.")
+            return
+        }
 
         // Make the content and trigger options out of the passed habit.
         let userNotificationOptions = notificationScheduler.makeNotificationOptions(
-            for: dummyNotification
+            from: fireTime
         )
 
         // Check on the content properties(texts).
@@ -65,23 +66,22 @@ class NotificationSchedulerTests: IntegrationTestCase {
         )
         XCTAssertEqual(
             userNotificationOptions.content.title,
-            dummyNotification.habit!.getTitleText(),
+            dummyHabit.getTitleText(),
             "The user notification content should have the correct title text."
         )
         XCTAssertEqual(
             userNotificationOptions.content.subtitle,
-            dummyNotification.habit!.getSubtitleText(),
+            dummyHabit.getSubtitleText(),
             "The user notification content should have the correct subtitle text."
         )
-        XCTAssertNotNil(
-            userNotificationOptions.content.body.range(
-                of: String(Int(dummyNotification.dayOrder))
-            ),
-            "The day's order should be informed in the notification."
+        XCTAssertEqual(
+            userNotificationOptions.content.body,
+            dummyHabit.getBodyText(),
+            "The user notification content should have the correct body text."
         )
         XCTAssertEqual(
             userNotificationOptions.content.userInfo["habitIdentifier"] as? String,
-            dummyNotification.habit?.id,
+            dummyHabit.id,
             "The notification id should be passed within the user info."
         )
         XCTAssertEqual(
@@ -89,168 +89,78 @@ class NotificationSchedulerTests: IntegrationTestCase {
             UNNotificationCategory.Kind.dayPrompt(habitId: nil).identifier,
             "The category identifier should be informed."
         )
-        XCTAssertNotNil(
-            userNotificationOptions.content.sound
-        )
-        XCTAssertNotNil(
-            userNotificationOptions.content.badge
-        )
+        XCTAssertNotNil(userNotificationOptions.content.sound)
+        XCTAssertNotNil(userNotificationOptions.content.badge)
 
         // Declare the trigger as a UNTitmeIntervalNotificationTrigger.
-        guard let dateTrigger = userNotificationOptions.trigger as? UNTimeIntervalNotificationTrigger else {
-            XCTFail("The generated notification's trigger is nil.")
+        guard let calendarTrigger = userNotificationOptions.trigger as? UNCalendarNotificationTrigger else {
+            XCTFail("The calendar trigger must be set.")
             return
         }
 
-        XCTAssertNotNil(
-            dateTrigger.nextTriggerDate(),
-            "The notification trigger should have a valid trigger date."
-        )
-        XCTAssertEqual(
-            dateTrigger.nextTriggerDate()!.description,
-            dummyNotification.getFireDate().description,
-            "The user notification trigger should have the correct next trigger date."
-        )
+        // Assert on the date components, they need to be equal to the ones of the FireTimeMO.
+        XCTAssertNotNil(calendarTrigger.nextTriggerDate())
+        XCTAssertEqual(calendarTrigger.dateComponents.minute, fireTime.getFireTimeComponents().minute)
+        XCTAssertEqual(calendarTrigger.dateComponents.hour, fireTime.getFireTimeComponents().hour)
     }
 
-    func testSchedulingNotification() {
-        // Schedule a notification.
+    /// Tests if the notification requests of the habit are scheduled.
+    func testSchedulingNotificationsForTheHabit() {
         let scheduleExpectation = XCTestExpectation(
-            description: "Schedules an user notification related to a NotificationMO."
+            description: "Schedules the user notifications for the dummy habit."
         )
 
-        // Declare a dummy notification to be used.
-        let dummyNotification = makeNotification()
+        let dummyHabit = habitFactory.makeDummy()
+        notificationScheduler.scheduleNotifications(for: dummyHabit)
 
-        // Schedule it by passing the dummy entity.
-        notificationScheduler.schedule(dummyNotification) { notification in
-            // Check if the notification was indeed scheduled:
-            self.notificationCenterMock.getPendingNotificationRequests { requests in
-                // Search for the user notification request associated with it.
-                let request = requests.filter { $0.identifier == notification.userNotificationId }.first
+        let expectedRequestIdentifiers = (dummyHabit.fireTimes as? Set<FireTimeMO>)?.compactMap {
+            $0.notification?.userNotificationId
+        } ?? []
 
-                if request != nil {
-                    scheduleExpectation.fulfill()
-                } else {
-                    // If it wasn't found, make the test fail.
-                    XCTFail("Couldn't find the scheduled user notification request.")
-                }
-            }
+        // Check if the pending notification requests were added.
+        self.notificationCenterMock.getPendingNotificationRequests { requests in
+            XCTAssertEqual(expectedRequestIdentifiers.count, requests.count)
+            XCTAssertEqual(
+                Set(expectedRequestIdentifiers),
+                Set(requests.map { $0.identifier })
+            )
+
+            scheduleExpectation.fulfill()
         }
 
         wait(for: [scheduleExpectation], timeout: 0.1)
     }
 
-    func testUnschedulingNotification() {
-        // Declare the expectation to be fullfilled.
+    func testRemovingPendingNotificationRequestsFromAHabit() {
         let unscheduleExpectation = XCTestExpectation(
-            description: "Unschedules an user notification associated with a NotificationMO."
+            description: "Unschedules the user notifications for a habit."
         )
 
-        // 1. Declare a dummy notification.
-        let dummyNotification = makeNotification()
+        let firstHabit = habitFactory.makeDummy()
+        guard let fireTimes = firstHabit.fireTimes as? Set<FireTimeMO> else {
+            XCTFail("Couldn't get the fire times of the habit.")
+            return
+        }
+        let firstHabitNotificationIdentifiers = fireTimes.compactMap { $0.notification?.userNotificationId }
 
-        // 2. Schedule it.
-        notificationScheduler.schedule(dummyNotification) { _ in
-            // 3. Unschedule it.
-            self.notificationScheduler.unschedule(
-                [dummyNotification]
+        let secondHabit = habitFactory.makeDummy()
+
+        notificationScheduler.scheduleNotifications(for: firstHabit)
+        notificationScheduler.scheduleNotifications(for: secondHabit)
+
+        notificationScheduler.unscheduleNotifications(from: firstHabit)
+        notificationCenterMock.getPendingNotificationRequests { requests in
+            XCTAssertEqual(requests.count, secondHabit.fireTimes?.count)
+
+            let requestIdentifiers = Set(requests.map { $0.identifier })
+
+            XCTAssertFalse(
+                Set(firstHabitNotificationIdentifiers).isSubset(of: requestIdentifiers)
             )
 
-            // 4. Assert it was deleted by trying to fetch it
-            // using the mock.
-            self.notificationCenterMock.getPendingNotificationRequests { requests in
-                XCTAssertTrue(
-                    requests.filter {
-                        $0.identifier == dummyNotification.userNotificationId
-                    }.count == 0,
-                    "The scheduled notification should have been deleted."
-                )
-
-                unscheduleExpectation.fulfill()
-            }
+            unscheduleExpectation.fulfill()
         }
 
         wait(for: [unscheduleExpectation], timeout: 0.1)
-    }
-
-    func testSchedulingManyNotifications() {
-        // 1. Declare the expectation to be fulfilled.
-        let scheduleExpectation = XCTestExpectation(
-            description: "Schedule a bunch of user notifications related to the NotificationMO entities."
-        )
-
-        // 2. Declare a dummy habit with n notifications.
-        let dummyHabit = habitFactory.makeDummy()
-
-        // 3. Schedule the notifications.
-        guard let notificationsSet = dummyHabit.notifications as? Set<NotificationMO> else {
-            XCTFail("Error: Couldn't get the dummy habit notifications.")
-            return
-        }
-        let notifications = Array(notificationsSet)
-        notificationScheduler.schedule(notifications)
-
-        // 4. Fetch them by using the mock and assert on each value.
-        self.notificationCenterMock.getPendingNotificationRequests { requests in
-
-            let identifiers = requests.map { $0.identifier }
-
-            // Setup a timer to get the notifications to be marked as
-            // executed. Since they're marked within the managed object
-            // context's thread, they aren't marked immediatelly,
-            // that's why a timer is needed here.
-            Timer.scheduledTimer(withTimeInterval: 0.01, repeats: false) { _ in
-                for notification in notifications {
-                    // Assert on the identifier.
-                    XCTAssertTrue(
-                        identifiers.contains(
-                            notification.userNotificationId!
-                        ),
-                        "The notification wasn't properly scheduled."
-                    )
-                }
-                scheduleExpectation.fulfill()
-            }
-        }
-
-        wait(for: [scheduleExpectation], timeout: 0.2)
-    }
-
-    func testUnschedulingManyNotifications() {
-        // 1. Declare the expectation.
-        let unscheduleExpectation = XCTestExpectation(
-            description: "Unschedule many user notifications."
-        )
-
-        // 2. Declare a dummy habit and get its notifications.
-        let dummyHabit = habitFactory.makeDummy()
-
-        guard let notificationsSet = dummyHabit.notifications as? Set<NotificationMO> else {
-            XCTFail("Error: Couldn't get the dummy habit's notifications.")
-            return
-        }
-
-        let notifications = Array(notificationsSet)
-
-        // 3. Schedule all of them.
-        notificationScheduler.schedule(notifications)
-
-        // 4. Fire a timer to delete all of them.
-        Timer.scheduledTimer(withTimeInterval: 0.01, repeats: false) { _ in
-            self.notificationScheduler.unschedule(notifications)
-
-            // 5. Assert they were deleted by trying to fetch them from the
-            // mock.
-            self.notificationCenterMock.getPendingNotificationRequests { requests in
-                XCTAssertTrue(
-                    requests.isEmpty,
-                    "The notifications should have been deleted."
-                )
-                unscheduleExpectation.fulfill()
-            }
-        }
-
-        wait(for: [unscheduleExpectation], timeout: 0.2)
     }
 }

@@ -47,6 +47,9 @@
 /* The subtitle of the user notifications. */
 "Did you practice this activity today?" = "Você praticou esta atividade hoje?";
 
+/* The body text of every notification. */
+"Don't forget to execute this activity today." = "Não se esqueça de praticar esta atividade hoje.";
+
 /* The title of the toolbar button. */
 "Done" = "Pronto";
 
@@ -78,6 +81,9 @@
 /* Alert title displayed when the user didn't select any fire time. */
 "No fire times selected" = "Nenhum alarme foi selecionado.";
 
+/* The title of the notification action. */
+"No, not yet" = "Ainda não";
+
 /* Text displayed when the current day isn't marked as executed. */
 "No, not yet." = "Ainda não.";
 
@@ -95,6 +101,9 @@
 
 /* No comment provided by engineer. */
 "Yes" = "Sim";
+
+/* The title of the notification action. */
+"Yes, I did" = "Sim";
 
 /* Text displayed when the current day is marked as executed. */
 "Yes, I did it." = "Sim, eu fiz.";

@@ -23,6 +23,7 @@
         <attribute name="id" attributeType="String" syncable="YES"/>
         <attribute name="minute" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="habit" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Habit" inverseName="fireTimes" inverseEntity="Habit" syncable="YES"/>
+        <relationship name="notification" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Notification" inverseName="fireTime" inverseEntity="Notification" syncable="YES"/>
     </entity>
     <entity name="Habit" representedClassName=".HabitMO" versionHashModifier="added index" syncable="YES" codeGenerationType="category">
         <attribute name="color" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
@@ -32,7 +33,6 @@
         <relationship name="challenges" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="DaysChallenge" inverseName="habit" inverseEntity="DaysChallenge" syncable="YES"/>
         <relationship name="days" toMany="YES" deletionRule="Cascade" destinationEntity="HabitDay" inverseName="habit" inverseEntity="HabitDay" syncable="YES"/>
         <relationship name="fireTimes" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="FireTime" inverseName="habit" inverseEntity="FireTime" syncable="YES"/>
-        <relationship name="notifications" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Notification" inverseName="habit" inverseEntity="Notification" syncable="YES"/>
         <relationship name="user" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="habits" inverseEntity="User" syncable="YES"/>
         <fetchIndex name="byCreatedNameAndIdIndex">
             <fetchIndexElement property="createdAt" type="Binary" order="descending"/>
@@ -49,14 +49,9 @@
         <relationship name="habit" maxCount="1" deletionRule="Nullify" destinationEntity="Habit" inverseName="days" inverseEntity="Habit" syncable="YES"/>
     </entity>
     <entity name="Notification" representedClassName=".NotificationMO" versionHashModifier="added index" syncable="YES" codeGenerationType="category">
-        <attribute name="dayOrder" attributeType="Integer 64" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="fireDate" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="id" attributeType="String" syncable="YES"/>
         <attribute name="userNotificationId" attributeType="String" syncable="YES"/>
-        <relationship name="habit" maxCount="1" deletionRule="Nullify" destinationEntity="Habit" inverseName="notifications" inverseEntity="Habit" syncable="YES"/>
-        <fetchIndex name="byFireDateIndex">
-            <fetchIndexElement property="fireDate" type="Binary" order="ascending"/>
-        </fetchIndex>
+        <relationship name="fireTime" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="FireTime" inverseName="notification" inverseEntity="FireTime" syncable="YES"/>
     </entity>
     <entity name="User" representedClassName=".UserMO" syncable="YES" codeGenerationType="category">
         <attribute name="createdAt" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
@@ -65,11 +60,11 @@
     </entity>
     <elements>
         <element name="Day" positionX="-3638" positionY="-4030" width="128" height="88"/>
-        <element name="DaysChallenge" positionX="-3645" positionY="-3883" width="128" height="148"/>
-        <element name="FireTime" positionX="-2999" positionY="-3922" width="128" height="118"/>
-        <element name="Habit" positionX="-3215" positionY="-3915" width="128" height="180"/>
-        <element name="HabitDay" positionX="-3438" positionY="-3978" width="128" height="133"/>
-        <element name="Notification" positionX="-2997" positionY="-3745" width="128" height="120"/>
+        <element name="DaysChallenge" positionX="-3517.203125" positionY="-3756.83984375" width="128" height="148"/>
+        <element name="FireTime" positionX="-2999" positionY="-3922" width="128" height="135"/>
+        <element name="Habit" positionX="-3224.0234375" positionY="-3920.21484375" width="128" height="165"/>
+        <element name="HabitDay" positionX="-3429.3046875" positionY="-3982.23828125" width="128" height="133"/>
+        <element name="Notification" positionX="-2797.7890625" positionY="-3877.125" width="128" height="90"/>
         <element name="User" positionX="-3242" positionY="-4131" width="128" height="88"/>
     </elements>
 </model>

@@ -66,7 +66,7 @@ extension HabitDetailsViewController: FireTimesSelectionViewControllerDelegate {
     // MARK: FireTimesSelectionViewControllerDelegate methods
 
     func didSelectFireTimes(_ fireTimes: [FireTimesDisplayable.FireTime]) {
-        _ = habitStorage.edit(habit, using: container.viewContext, and: fireTimes)
+        _ = habitStorage.edit(habit, using: container.viewContext, andFireTimes: fireTimes)
         // Save it to make any new changes in sync.
         try? container.viewContext.save()
     }

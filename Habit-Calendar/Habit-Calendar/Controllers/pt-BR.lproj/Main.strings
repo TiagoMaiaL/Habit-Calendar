@@ -190,9 +190,6 @@
 /* Class = "UILabel"; text = "Fire times"; ObjectID = "wUQ-bj-3jO"; */
 "wUQ-bj-3jO.text" = "Alarmes";
 
-/* Class = "UILabel"; text = "00:00"; ObjectID = "wyh-eF-kYV"; */
-"wyh-eF-kYV.text" = "00:00";
-
 /* Class = "UIViewController"; title = "Read"; ObjectID = "wZd-FS-1mH"; */
 "wZd-FS-1mH.title" = "Read";
 
