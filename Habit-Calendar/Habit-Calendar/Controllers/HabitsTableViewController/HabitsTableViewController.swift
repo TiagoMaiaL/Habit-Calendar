@@ -138,6 +138,8 @@ class HabitsTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         updateList()
+
+        scheduleTestNotification()
     }
 
     // MARK: Navigation
@@ -304,5 +306,25 @@ class HabitsTableViewController: UITableViewController {
 
         // Present it on top of the window's root controller.
         present(presentationController, animated: true)
+    }
+
+    /// Displays a test notification for the first habit.
+    /// TODO: Remove this after testing the notification content extension.
+    private func scheduleTestNotification() {
+        let habitRequest: NSFetchRequest<HabitMO> = HabitMO.fetchRequest()
+        let results = try? container.viewContext.fetch(habitRequest)
+
+        if let habit = results?.first {
+            let content = UNMutableNotificationContent()
+            content.title = "Testing notification"
+            content.subtitle = "Testing notification"
+            content.body = "empty."
+            content.categoryIdentifier = "HABIT_DAY_PROMPT"
+
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+
+            notificationManager.schedule(using: "testing_id", content: content, and: trigger)
+            print("Scheduled a notification for the next 5 secs.")
+        }
     }
 }
