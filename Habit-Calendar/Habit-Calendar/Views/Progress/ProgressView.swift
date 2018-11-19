@@ -9,7 +9,7 @@
 import UIKit
 
 /// A progress bar view.
-@IBDesignable class ProgressView: UIView {
+@IBDesignable class ProgressView: UIView, ProgressDisplayable {
 
     // MARK: Properties
 
@@ -62,7 +62,7 @@ import UIKit
 
     /// Draws the progress bar taking into account the color and
     /// the progress amount.
-    private func drawProgress() {
+    func drawProgress() {
         guard let tint = tint else { return }
 
         // Create a RectPath for the view's background bar.

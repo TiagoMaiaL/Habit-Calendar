@@ -213,6 +213,14 @@
 		470C42942145A52C007F6F35 /* UIColor+Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470C42932145A52C007F6F35 /* UIColor+Palette.swift */; };
 		470C42952145A85B007F6F35 /* UIColor+Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470C42932145A52C007F6F35 /* UIColor+Palette.swift */; };
 		470C42962145A85B007F6F35 /* UIColor+Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470C42932145A52C007F6F35 /* UIColor+Palette.swift */; };
+		470CB3E321A2F56C00CEB95B /* RoundedProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470CB3E221A2F56C00CEB95B /* RoundedProgressView.swift */; };
+		470CB3E621A2F5EB00CEB95B /* ProgressDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470CB3E521A2F5EB00CEB95B /* ProgressDisplayable.swift */; };
+		470CB3E721A2F5EB00CEB95B /* ProgressDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470CB3E521A2F5EB00CEB95B /* ProgressDisplayable.swift */; };
+		470CB3E821A2F5EB00CEB95B /* ProgressDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470CB3E521A2F5EB00CEB95B /* ProgressDisplayable.swift */; };
+		470CB3E921A2F5EB00CEB95B /* ProgressDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470CB3E521A2F5EB00CEB95B /* ProgressDisplayable.swift */; };
+		470CB3EA21A2F5F200CEB95B /* RoundedProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470CB3E221A2F56C00CEB95B /* RoundedProgressView.swift */; };
+		470CB3EB21A2F5F300CEB95B /* RoundedProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470CB3E221A2F56C00CEB95B /* RoundedProgressView.swift */; };
+		470CB3EC21A2F5F300CEB95B /* RoundedProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470CB3E221A2F56C00CEB95B /* RoundedProgressView.swift */; };
 		4713A1FC20C1643E008A13D2 /* UserMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4713A1FB20C1643E008A13D2 /* UserMO.swift */; };
 		4713A1FE20C16459008A13D2 /* HabitMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4713A1FD20C16459008A13D2 /* HabitMO.swift */; };
 		4713A20020C164E6008A13D2 /* HabitDayMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4713A1FF20C164E6008A13D2 /* HabitDayMO.swift */; };
@@ -448,6 +456,8 @@
 		470C42202144B091007F6F35 /* Habit-Calendar-Dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Habit-Calendar-Dev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		470C42912144B164007F6F35 /* Habit-Calendar-Stg.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Habit-Calendar-Stg.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		470C42932145A52C007F6F35 /* UIColor+Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Palette.swift"; sourceTree = "<group>"; };
+		470CB3E221A2F56C00CEB95B /* RoundedProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedProgressView.swift; sourceTree = "<group>"; };
+		470CB3E521A2F5EB00CEB95B /* ProgressDisplayable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressDisplayable.swift; sourceTree = "<group>"; };
 		4713A1FB20C1643E008A13D2 /* UserMO.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = UserMO.swift; sourceTree = "<group>"; tabWidth = 4; };
 		4713A1FD20C16459008A13D2 /* HabitMO.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = HabitMO.swift; sourceTree = "<group>"; tabWidth = 4; };
 		4713A1FF20C164E6008A13D2 /* HabitDayMO.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = HabitDayMO.swift; sourceTree = "<group>"; tabWidth = 4; };
@@ -671,6 +681,16 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		470CB3E421A2F5B000CEB95B /* Progress */ = {
+			isa = PBXGroup;
+			children = (
+				4732CE752114E8A200E2770C /* ProgressView.swift */,
+				470CB3E221A2F56C00CEB95B /* RoundedProgressView.swift */,
+				470CB3E521A2F5EB00CEB95B /* ProgressDisplayable.swift */,
+			);
+			path = Progress;
+			sourceTree = "<group>";
+		};
 		4713A20520C16555008A13D2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -743,7 +763,7 @@
 				4761F5B12120A0BD00A8D407 /* ColorsPickerView */,
 				4761F5AE21209E7900A8D407 /* Calendar */,
 				47B38B04218A043F00C26A92 /* FireTimesTableViewCell */,
-				4732CE752114E8A200E2770C /* ProgressView.swift */,
+				470CB3E421A2F5B000CEB95B /* Progress */,
 				4732CE792114FF5F00E2770C /* CardView.swift */,
 				4732CE7B2118DA8400E2770C /* UnderlinedTextField.swift */,
 				4732CE7D211A12B500E2770C /* RoundedButton.swift */,
@@ -1607,6 +1627,7 @@
 				470C41C62144B091007F6F35 /* Seeder.swift in Sources */,
 				470C41C72144B091007F6F35 /* NotificationAvailabilityDisplayable.swift in Sources */,
 				470C41C82144B091007F6F35 /* NotificationMO.swift in Sources */,
+				470CB3E721A2F5EB00CEB95B /* ProgressDisplayable.swift in Sources */,
 				470C41C92144B091007F6F35 /* CompletedHabitTableViewCell.swift in Sources */,
 				470C41CA2144B091007F6F35 /* CalendarDayCell.swift in Sources */,
 				470C41CB2144B091007F6F35 /* FireTimeFactory.swift in Sources */,
@@ -1631,6 +1652,7 @@
 				47B0DA27217E542D00C38F07 /* TouchAnimatable.swift in Sources */,
 				470C41DA2144B091007F6F35 /* HabitDayStorage.swift in Sources */,
 				47B38B0B218A047A00C26A92 /* BlockedDisplayView.swift in Sources */,
+				470CB3EA21A2F5F200CEB95B /* RoundedProgressView.swift in Sources */,
 				470C41DB2144B091007F6F35 /* HabitTableViewCell.swift in Sources */,
 				470C41DC2144B091007F6F35 /* CalendarDisplayable.swift in Sources */,
 				470C41DD2144B091007F6F35 /* HabitMO.swift in Sources */,
@@ -1697,6 +1719,7 @@
 				470C42372144B164007F6F35 /* Seeder.swift in Sources */,
 				470C42382144B164007F6F35 /* NotificationAvailabilityDisplayable.swift in Sources */,
 				470C42392144B164007F6F35 /* NotificationMO.swift in Sources */,
+				470CB3E821A2F5EB00CEB95B /* ProgressDisplayable.swift in Sources */,
 				470C423A2144B164007F6F35 /* CompletedHabitTableViewCell.swift in Sources */,
 				470C423B2144B164007F6F35 /* CalendarDayCell.swift in Sources */,
 				470C423C2144B164007F6F35 /* FireTimeFactory.swift in Sources */,
@@ -1721,6 +1744,7 @@
 				47B0DA28217E542D00C38F07 /* TouchAnimatable.swift in Sources */,
 				470C424B2144B164007F6F35 /* HabitDayStorage.swift in Sources */,
 				47B38B0C218A047A00C26A92 /* BlockedDisplayView.swift in Sources */,
+				470CB3EB21A2F5F300CEB95B /* RoundedProgressView.swift in Sources */,
 				470C424C2144B164007F6F35 /* HabitTableViewCell.swift in Sources */,
 				470C424D2144B164007F6F35 /* CalendarDisplayable.swift in Sources */,
 				470C424E2144B164007F6F35 /* HabitMO.swift in Sources */,
@@ -1765,6 +1789,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				47D1A4E9219F2BE300C45846 /* NotificationViewController.swift in Sources */,
+				470CB3E921A2F5EB00CEB95B /* ProgressDisplayable.swift in Sources */,
+				470CB3EC21A2F5F300CEB95B /* RoundedProgressView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1801,6 +1827,7 @@
 				4761F5B52120D06900A8D407 /* ColorsPickerDataSource.swift in Sources */,
 				47160A4121372B2F00E717C9 /* RoundedView.swift in Sources */,
 				47EE82E9214875050093A6D6 /* OnBoardingViewController.swift in Sources */,
+				470CB3E321A2F56C00CEB95B /* RoundedProgressView.swift in Sources */,
 				4715A8F8216BA0F200713B23 /* HabitsShortcutItemsManager.swift in Sources */,
 				47C320382130799D0094BBF8 /* HabitCreationTableViewController+ColorField.swift in Sources */,
 				47C32029212C57D10094BBF8 /* HabitDetailsViewController+ProgressSection.swift in Sources */,
@@ -1808,6 +1835,7 @@
 				4769CB922159826F00DA0EBB /* HCPersistentContainer.swift in Sources */,
 				4725D06120CA06EE00C3B63F /* DayStorage.swift in Sources */,
 				47A7457921530753003A382C /* DataController.swift in Sources */,
+				470CB3E621A2F5EB00CEB95B /* ProgressDisplayable.swift in Sources */,
 				47C3202F212DD7C80094BBF8 /* HabitDetailsViewController+PromptSection.swift in Sources */,
 				4732CE7E211A12B500E2770C /* RoundedButton.swift in Sources */,
 				4725D05F20C97D9C00C3B63F /* UserStorage.swift in Sources */,
