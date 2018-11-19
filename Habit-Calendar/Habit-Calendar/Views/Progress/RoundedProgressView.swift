@@ -16,13 +16,14 @@ import UIKit
     @IBInspectable var tint: UIColor? {
         didSet {
             setNeedsDisplay()
+            progressLabel.textColor = tint ?? .black
         }
     }
 
     @IBInspectable var progress: CGFloat = 0 {
         didSet {
             setNeedsDisplay()
-            // TODO: Change the title of the progress label.
+            displayProgress()
         }
     }
 
@@ -75,6 +76,24 @@ import UIKit
 
     // MARK: Imperatives
 
+    /// Configures the label text to display the current progress.
+    private func displayProgress() {
+        // Set the label text with attributed strings. The perctent sign should be smaller.
+        let progressText = String(Int(progress * 100))
+        let attributedString = NSMutableAttributedString(string: progressText + "%")
+
+        attributedString.addAttributes(
+            [.font: UIFont(name: "SFProText-Medium", size: 20)!],
+            range: NSRange(location: 0, length: progressText.count)
+        )
+        attributedString.addAttributes(
+            [.font: UIFont(name: "SFProText-Regular", size: 15)!],
+            range: NSRange(location: progressText.count, length: 1)
+        )
+
+        progressLabel.attributedText = attributedString
+    }
+
     func drawProgress() {
         let tint = self.tint ?? UIColor.black
 
@@ -85,7 +104,8 @@ import UIKit
             wasAutoLayoutApplied = true
         }
 
-        // TODO: Draw the circle bars.
+        // Draw the progress circles.
+        // There are two: one showing the progress and other showing the total circle.
         let center = CGPoint(x: frame.size.width / 2, y: frame.size.height / 2)
         let radius = (frame.size.height / 2) - 10
 
