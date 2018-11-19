@@ -15,7 +15,7 @@ protocol ProgressDisplayable {
     /// The main color of the progress view.
     var tint: UIColor? { get set }
 
-    /// The progress to be displayed by the view.
+    /// The progress (from 0 to 1) to be displayed by the view.
     var progress: CGFloat { get set }
 
     // MARK: Imperatives

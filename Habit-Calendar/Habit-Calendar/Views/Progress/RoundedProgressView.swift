@@ -22,6 +22,7 @@ import UIKit
     @IBInspectable var progress: CGFloat = 0 {
         didSet {
             setNeedsDisplay()
+            // TODO: Change the title of the progress label.
         }
     }
 
@@ -29,6 +30,7 @@ import UIKit
     private(set) var progressLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "33%"
         return label
     }()
 
@@ -77,11 +79,37 @@ import UIKit
         let tint = self.tint ?? UIColor.black
 
         if !wasAutoLayoutApplied {
-            // TODO: Apply the auto layout.
+            progressLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+            progressLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
 
             wasAutoLayoutApplied = true
         }
 
         // TODO: Draw the circle bars.
+        let center = CGPoint(x: frame.size.width / 2, y: frame.size.height / 2)
+        let radius = (frame.size.height / 2) - 10
+
+        let filledProgresseBar = UIBezierPath(
+            arcCenter: center,
+            radius: radius,
+            startAngle: -.pi / 2,
+            endAngle: (2 * .pi * progress) - .pi / 2,
+            clockwise: true
+        )
+        tint.setStroke()
+        filledProgresseBar.lineWidth = 7
+        filledProgresseBar.lineCapStyle = .round
+        filledProgresseBar.stroke()
+
+        let placeHolderProgresseBar = UIBezierPath(
+            arcCenter: center,
+            radius: radius,
+            startAngle: 0,
+            endAngle: 360,
+            clockwise: true
+        )
+        tint.withAlphaComponent(0.5).setStroke()
+        placeHolderProgresseBar.lineWidth = 7
+        placeHolderProgresseBar.stroke()
     }
 }

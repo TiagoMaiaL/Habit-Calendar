@@ -50,6 +50,7 @@ import UIKit
     // MARK: Life cycle
 
     override func draw(_ rect: CGRect) {
+        super.draw(rect)
         drawProgress()
     }
 
