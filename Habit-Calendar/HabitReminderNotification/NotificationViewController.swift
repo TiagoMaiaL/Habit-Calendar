@@ -14,7 +14,23 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
 
     // MARK: Properties
 
-    @IBOutlet var label: UILabel?
+    /// The label displaying the habit name.
+    @IBOutlet weak var habitNameLabel: UILabel!
+
+    /// The progress view displaying the progress of the current challenge of days.
+    @IBOutlet weak var progressView: RoundedProgressView!
+
+    /// The label displaying how many days to finish the challenge.
+    @IBOutlet weak var daysToFinishChallengeLabel: UILabel!
+
+    /// The label displaying how many days were executed in the current challenge of days.
+    @IBOutlet weak var executedDaysLabel: UILabel!
+
+    /// The label displaying how many days were missed in the current challenge of days.
+    @IBOutlet weak var missedDaysLabel: UILabel!
+
+    /// The label displaying if the activity was executed today or not.
+    @IBOutlet weak var dayPerformedLabel: UILabel!
 
     // MARK: Life cycle
 
@@ -26,6 +42,6 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
     // MARK: UNNotificationContentExtension Implementation.
 
     func didReceive(_ notification: UNNotification) {
-        self.label?.text = notification.request.content.body
+        // TODO: handle the event.
     }
 }
