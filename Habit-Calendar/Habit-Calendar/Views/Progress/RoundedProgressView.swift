@@ -83,7 +83,7 @@ import UIKit
         let attributedString = NSMutableAttributedString(string: progressText + "%")
 
         attributedString.addAttributes(
-            [.font: UIFont(name: "SFProText-Medium", size: 20)!],
+            [.font: UIFont(name: "SFProText-Bold", size: 20)!],
             range: NSRange(location: 0, length: progressText.count)
         )
         attributedString.addAttributes(

@@ -28,13 +28,20 @@
 			<true/>
 			<key>UNNotificationExtensionCategory</key>
 			<string>HABIT_DAY_PROMPT</string>
-			<key>UNNotificationExtensionInitialContentSizeRatio</key>
-			<real>1</real>
 		</dict>
 		<key>NSExtensionMainStoryboard</key>
 		<string>MainInterface</string>
 		<key>NSExtensionPointIdentifier</key>
 		<string>com.apple.usernotifications.content-extension</string>
 	</dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>SF-Pro-Display-Light.otf</string>
+		<string>SF-Pro-Display-Bold.otf</string>
+		<string>SF-Pro-Display-Regular.otf</string>
+		<string>SF-Pro-Text-Light.otf</string>
+		<string>SF-Pro-Text-Bold.otf</string>
+		<string>SF-Pro-Text-Regular.otf</string>
+	</array>
 </dict>
 </plist>
