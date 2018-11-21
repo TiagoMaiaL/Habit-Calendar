@@ -592,6 +592,8 @@
 		47D8308F20FD6288002D3A97 /* DaysChallengeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaysChallengeTests.swift; sourceTree = "<group>"; };
 		47D8FC9D20DC13990094026B /* UserNotificationManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationManagerTests.swift; sourceTree = "<group>"; };
 		47DA52B1214D9C5B00A45102 /* NotificationObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationObserver.swift; sourceTree = "<group>"; };
+		47E4A94A21A5CAE90017F1A8 /* Habit-Calendar.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Habit-Calendar.entitlements"; sourceTree = "<group>"; };
+		47E4A94B21A5CBB10017F1A8 /* HabitReminderNotification.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HabitReminderNotification.entitlements; sourceTree = "<group>"; };
 		47E6C20A20EAF550003BDB4D /* HabitCreationTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitCreationTableViewController.swift; sourceTree = "<group>"; };
 		47E6C20C20EAF567003BDB4D /* HabitDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitDetailsViewController.swift; sourceTree = "<group>"; };
 		47E6C20F20EB1233003BDB4D /* Seeder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Seeder.swift; sourceTree = "<group>"; };
@@ -1027,6 +1029,7 @@
 		47D1A4E7219F2BE200C45846 /* HabitReminderNotification */ = {
 			isa = PBXGroup;
 			children = (
+				47E4A94B21A5CBB10017F1A8 /* HabitReminderNotification.entitlements */,
 				47D1A4E8219F2BE300C45846 /* NotificationViewController.swift */,
 				47D1A4EA219F2BE300C45846 /* MainInterface.storyboard */,
 				47D1A4ED219F2BE300C45846 /* Info.plist */,
@@ -1081,6 +1084,7 @@
 		47F635EE20BB920900AC4555 /* Habit-Calendar */ = {
 			isa = PBXGroup;
 			children = (
+				47E4A94A21A5CAE90017F1A8 /* Habit-Calendar.entitlements */,
 				4713A20520C16555008A13D2 /* Model */,
 				4725D05920C8A43B00C3B63F /* Views */,
 				4725D05820C8A42E00C3B63F /* Controllers */,
@@ -1237,10 +1241,20 @@
 					};
 					47D1A4E1219F2BE200C45846 = {
 						CreatedOnToolsVersion = 10.0;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					47F635EB20BB920900AC4555 = {
 						CreatedOnToolsVersion = 9.3.1;
 						LastSwiftMigration = 1000;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					47F6360220BB920D00AC4555 = {
 						CreatedOnToolsVersion = 9.3.1;
@@ -2092,6 +2106,7 @@
 		47D1A4F1219F2BE300C45846 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = HabitReminderNotification/HabitReminderNotification.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 79964U8894;
@@ -2108,13 +2123,14 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
 		47D1A4F2219F2BE300C45846 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = HabitReminderNotification/HabitReminderNotification.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 79964U8894;
@@ -2130,7 +2146,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -2258,6 +2274,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Habit-Calendar/Habit-Calendar.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 79964U8894;
@@ -2282,6 +2299,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Habit-Calendar/Habit-Calendar.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 79964U8894;
