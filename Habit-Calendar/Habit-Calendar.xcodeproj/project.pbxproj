@@ -409,6 +409,28 @@
 		47E4A96721A5D5590017F1A8 /* SF-Pro-Text-RegularItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4732CE432114D9B700E2770C /* SF-Pro-Text-RegularItalic.otf */; };
 		47E4A96821A5D5590017F1A8 /* SF-Pro-Text-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4732CE4F2114D9C600E2770C /* SF-Pro-Text-Semibold.otf */; };
 		47E4A96921A5D5590017F1A8 /* SF-Pro-Text-SemiboldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4732CE512114D9C900E2770C /* SF-Pro-Text-SemiboldItalic.otf */; };
+		47E4A96A21A5D9BD0017F1A8 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A7457821530753003A382C /* DataController.swift */; };
+		47E4A96B21A5D9BD0017F1A8 /* HCPersistentContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4769CB912159826F00DA0EBB /* HCPersistentContainer.swift */; };
+		47E4A96C21A5D9C20017F1A8 /* Habit-Calendar.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4790AA8121935E7400F6EB1C /* Habit-Calendar.xcdatamodeld */; };
+		47E4A96D21A5D9C70017F1A8 /* UserMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4713A1FB20C1643E008A13D2 /* UserMO.swift */; };
+		47E4A96E21A5D9C70017F1A8 /* HabitMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4713A1FD20C16459008A13D2 /* HabitMO.swift */; };
+		47E4A96F21A5D9C70017F1A8 /* HabitDayMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4713A1FF20C164E6008A13D2 /* HabitDayMO.swift */; };
+		47E4A97021A5D9C70017F1A8 /* DayMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4713A20120C164FB008A13D2 /* DayMO.swift */; };
+		47E4A97121A5D9C70017F1A8 /* NotificationMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4713A20320C16542008A13D2 /* NotificationMO.swift */; };
+		47E4A97221A5D9C70017F1A8 /* DaysChallengeMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D8308720FCE82F002D3A97 /* DaysChallengeMO.swift */; };
+		47E4A97321A5D9C70017F1A8 /* FireTimeMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AA365221037B0B0008D2DC /* FireTimeMO.swift */; };
+		47E4A97421A5D9CE0017F1A8 /* UserStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4725D05E20C97D9C00C3B63F /* UserStorage.swift */; };
+		47E4A97521A5D9CE0017F1A8 /* HabitStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4725D05C20C8A96200C3B63F /* HabitStorage.swift */; };
+		47E4A97621A5D9CE0017F1A8 /* DayStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4725D06020CA06EE00C3B63F /* DayStorage.swift */; };
+		47E4A97721A5D9CE0017F1A8 /* HabitDayStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4725D06220CA14A600C3B63F /* HabitDayStorage.swift */; };
+		47E4A97821A5D9CE0017F1A8 /* NotificationStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4779588420D8B38B0080614F /* NotificationStorage.swift */; };
+		47E4A97921A5D9CE0017F1A8 /* DaysChallengeStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D8308920FCFDD6002D3A97 /* DaysChallengeStorage.swift */; };
+		47E4A97A21A5D9CE0017F1A8 /* FireTimeStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AA3658210382AB0008D2DC /* FireTimeStorage.swift */; };
+		47E4A97B21A5D9E70017F1A8 /* UserNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4779588220D8B2E10080614F /* UserNotificationManager.swift */; };
+		47E4A97C21A5D9E70017F1A8 /* NotificationScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D7003C210179F600F4FE88 /* NotificationScheduler.swift */; };
+		47E4A97D21A5D9EE0017F1A8 /* Date+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474F9C8520CC7E180094C19C /* Date+Utils.swift */; };
+		47E4A98121A5D9EE0017F1A8 /* UNNotificationContent+Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470C416F213EE70D007F6F35 /* UNNotificationContent+Category.swift */; };
+		47E4A98521A5DA220017F1A8 /* Formatter+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474B7B9D212746BE00814A8E /* Formatter+Utils.swift */; };
 		47E6C20B20EAF550003BDB4D /* HabitCreationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E6C20A20EAF550003BDB4D /* HabitCreationTableViewController.swift */; };
 		47E6C20D20EAF567003BDB4D /* HabitDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E6C20C20EAF567003BDB4D /* HabitDetailsViewController.swift */; };
 		47E6C21020EB1233003BDB4D /* Seeder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E6C20F20EB1233003BDB4D /* Seeder.swift */; };
@@ -1862,9 +1884,31 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				47E4A98521A5DA220017F1A8 /* Formatter+Utils.swift in Sources */,
+				47E4A96D21A5D9C70017F1A8 /* UserMO.swift in Sources */,
 				47D1A4E9219F2BE300C45846 /* NotificationViewController.swift in Sources */,
+				47E4A97A21A5D9CE0017F1A8 /* FireTimeStorage.swift in Sources */,
+				47E4A97B21A5D9E70017F1A8 /* UserNotificationManager.swift in Sources */,
+				47E4A96A21A5D9BD0017F1A8 /* DataController.swift in Sources */,
+				47E4A96F21A5D9C70017F1A8 /* HabitDayMO.swift in Sources */,
+				47E4A97421A5D9CE0017F1A8 /* UserStorage.swift in Sources */,
+				47E4A97221A5D9C70017F1A8 /* DaysChallengeMO.swift in Sources */,
+				47E4A97D21A5D9EE0017F1A8 /* Date+Utils.swift in Sources */,
+				47E4A96C21A5D9C20017F1A8 /* Habit-Calendar.xcdatamodeld in Sources */,
+				47E4A98121A5D9EE0017F1A8 /* UNNotificationContent+Category.swift in Sources */,
+				47E4A96E21A5D9C70017F1A8 /* HabitMO.swift in Sources */,
+				47E4A97C21A5D9E70017F1A8 /* NotificationScheduler.swift in Sources */,
+				47E4A97021A5D9C70017F1A8 /* DayMO.swift in Sources */,
+				47E4A97521A5D9CE0017F1A8 /* HabitStorage.swift in Sources */,
+				47E4A97721A5D9CE0017F1A8 /* HabitDayStorage.swift in Sources */,
 				470CB3E921A2F5EB00CEB95B /* ProgressDisplayable.swift in Sources */,
+				47E4A97921A5D9CE0017F1A8 /* DaysChallengeStorage.swift in Sources */,
+				47E4A97321A5D9C70017F1A8 /* FireTimeMO.swift in Sources */,
+				47E4A97121A5D9C70017F1A8 /* NotificationMO.swift in Sources */,
+				47E4A97821A5D9CE0017F1A8 /* NotificationStorage.swift in Sources */,
 				470CB3EC21A2F5F300CEB95B /* RoundedProgressView.swift in Sources */,
+				47E4A97621A5D9CE0017F1A8 /* DayStorage.swift in Sources */,
+				47E4A96B21A5D9BD0017F1A8 /* HCPersistentContainer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
