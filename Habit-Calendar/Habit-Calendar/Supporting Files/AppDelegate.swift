@@ -112,7 +112,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UNUserNotificationCenter.current().delegate = self
 
         // Try loading the core data stack.
-        dataController = DataController { error in
+        dataController = DataController { error, _ in
             if error == nil {
                 DispatchQueue.main.async {
                     // Continue with the app's launch flow.

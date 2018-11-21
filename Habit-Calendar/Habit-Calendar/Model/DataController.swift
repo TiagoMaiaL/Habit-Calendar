@@ -18,7 +18,7 @@ class DataController {
 
     // MARK: Initializers
 
-    init(completionBlock: @escaping (Error?) -> Void) {
+    init(completionBlock: @escaping (Error?, NSPersistentContainer) -> Void) {
         persistentContainer = HCPersistentContainer(name: "Habit-Calendar")
 
         let description = persistentContainer.persistentStoreDescriptions.first ?? NSPersistentStoreDescription()
@@ -35,7 +35,7 @@ class DataController {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
                 #endif
             }
-            completionBlock(error)
+            completionBlock(error, self.persistentContainer)
         })
     }
 
