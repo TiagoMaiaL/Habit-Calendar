@@ -316,10 +316,11 @@ class HabitsTableViewController: UITableViewController {
 
         if let habit = results?.first {
             let content = UNMutableNotificationContent()
-            content.title = "Testing notification"
-            content.subtitle = "Testing notification"
-            content.body = "empty."
+            content.title = habit.name!
+            content.subtitle = "Did you practice this activity today?"
+            content.body = "Testing body text"
             content.categoryIdentifier = "HABIT_DAY_PROMPT"
+            content.userInfo["habitIdentifier"] = habit.id!
 
             let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
 
