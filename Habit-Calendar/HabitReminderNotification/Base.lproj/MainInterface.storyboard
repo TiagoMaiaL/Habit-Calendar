@@ -131,6 +131,7 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="250"/>
                     <connections>
+                        <outlet property="currentDayOrderLabel" destination="O8U-2M-qiy" id="rpa-Ez-gCz"/>
                         <outlet property="dayPerformedLabel" destination="usW-zZ-31R" id="aha-mN-uNv"/>
                         <outlet property="daysToFinishChallengeLabel" destination="s7U-nr-pMK" id="Pba-ef-myM"/>
                         <outlet property="executedDaysLabel" destination="iSk-Ub-Z5j" id="1iy-vf-fZ1"/>
