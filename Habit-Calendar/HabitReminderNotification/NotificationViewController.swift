@@ -36,6 +36,9 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
     /// The label displaying if the activity was executed today or not.
     @IBOutlet weak var dayPerformedLabel: UILabel!
 
+    /// The view displaying the color of the daily habit view.
+    @IBOutlet weak var dailyHabitColorView: RoundedView!
+
     /// The data controller used to initalize core data and fetch the habit
     /// associated with the notification from the store.
     private var dataController: DataController?
@@ -51,50 +54,79 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
 
     /// Displays the habit associated with the received notification.
     /// - Parameter habit: The habit to be displayed.
+    // TODO: Remove the duplicated code.
+    // TODO: Localize the extension.
     private func display(_ habit: HabitMO) {
-        let color = habit.getColor().uiColor
+        let hasChallenge = habit.getCurrentChallenge() != nil && habit.getCurrentChallenge()?.getCurrentDay() != nil
 
-        // Display the habit in one of two states: with challenges or without.
-        if let challenge = habit.getCurrentChallenge() {
-            let progressInfo = challenge.getCompletionProgress()
+        // Configure the initial views for display.
+        dailyHabitColorView.isHidden = hasChallenge
+        progressView.isHidden = !hasChallenge
+        daysToFinishChallengeLabel.isHidden = !hasChallenge
+        currentDayOrderLabel.isHidden = !hasChallenge
 
-            progressView.progress = CGFloat(Double(progressInfo.past) / Double(progressInfo.total))
-            progressView.tint = color
-
-            daysToFinishChallengeLabel.text = String.localizedStringWithFormat(
-                NSLocalizedString(
-                    "%d day(s) to finish the challenge.",
-                    comment: "The label showing the days to finish the challenge."
-                ),
-                progressInfo.total - progressInfo.past
-            )
-            missedDaysLabel.text = String.localizedStringWithFormat(
-                NSLocalizedString("%d day(s) missed.", comment: "The label showing how many days were missed."),
-                challenge.getMissedDays()?.count ?? 0
-            )
-            executedDaysLabel.text = String.localizedStringWithFormat(
-                NSLocalizedString("%d day(s) executed.", comment: "The label showing how many days were executed."),
-                challenge.getExecutedDays()?.count ?? 0
-            )
-
-            currentDayOrderLabel.text = challenge.getNotificationOrderText(for: habit.getCurrentDay()!)
-
-            if habit.getCurrentDay()!.wasExecuted {
-                dayPerformedLabel.text = NSLocalizedString(
-                    "Yes, I did it.",
-                    comment: "Text displayed when the current day is marked as executed."
-                )
-                dayPerformedLabel.textColor = color
-            } else {
-                dayPerformedLabel.text = NSLocalizedString(
-                    "No, not yet.",
-                    comment: "Text displayed when the current day isn't marked as executed."
-                )
-                dayPerformedLabel.textColor = UIColor(red: 47/255, green: 54/255, blue: 64/255, alpha: 1)
-            }
+        // Display the current challenge of days, if the habit has one. Or display the daily view for it.
+        if hasChallenge {
+            displayChallenge(for: habit)
         } else {
-
+            displayDailyInformation(for: habit)
         }
+    }
+
+    /// Displays the notification when the habit has an active challenge of days.
+    /// - Parameter Habit: The habit containing the challenge to be displayed.
+    private func displayChallenge(for habit: HabitMO) {
+        guard let challenge = habit.getCurrentChallenge(), let currentDay = challenge.getCurrentDay() else {
+            assertionFailure("The habit must have a challenge to be displayed.")
+            return
+        }
+
+        let color = habit.getColor().uiColor
+        let progressInfo = challenge.getCompletionProgress()
+
+        // Configure the display of the progress view.
+        progressView.progress = CGFloat(Double(progressInfo.past) / Double(progressInfo.total))
+        progressView.tint = color
+
+        // Configure the progress labels
+        daysToFinishChallengeLabel.text = String.localizedStringWithFormat(
+            NSLocalizedString(
+                "%d day(s) to finish the challenge.",
+                comment: "The label showing the days to finish the challenge."
+            ),
+            progressInfo.total - progressInfo.past
+        )
+        missedDaysLabel.text = String.localizedStringWithFormat(
+            NSLocalizedString("%d day(s) missed.", comment: "The label showing how many days were missed."),
+            challenge.getMissedDays()?.count ?? 0
+        )
+        executedDaysLabel.text = String.localizedStringWithFormat(
+            NSLocalizedString("%d day(s) executed.", comment: "The label showing how many days were executed."),
+            challenge.getExecutedDays()?.count ?? 0
+        )
+
+        // Configure the prompt section.
+        currentDayOrderLabel.text = challenge.getNotificationOrderText(for: currentDay)
+
+        if currentDay.wasExecuted {
+            dayPerformedLabel.text = NSLocalizedString(
+                "Yes, I did it.",
+                comment: "Text displayed when the current day is marked as executed."
+            )
+            dayPerformedLabel.textColor = color
+        } else {
+            dayPerformedLabel.text = NSLocalizedString(
+                "No, not yet.",
+                comment: "Text displayed when the current day isn't marked as executed."
+            )
+            dayPerformedLabel.textColor = UIColor(red: 47/255, green: 54/255, blue: 64/255, alpha: 1)
+        }
+    }
+
+    /// Displays the notification when the habit doesn't have an active challenge, it's a daily one.
+    /// - Parameter habit: the daily habit to be displayed.
+    private func displayDailyInformation(for habit: HabitMO) {
+        // TODO: Show the daily information.
     }
 
     // MARK: UNNotificationContentExtension Implementation.

@@ -38,12 +38,30 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="UdJ-Pv-wDk">
                                         <rect key="frame" x="0.0" y="0.0" width="220.5" height="132"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Go Jogging" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gmb-a6-1Gf">
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="LL1-RI-pjB" userLabel="Habit Name">
                                                 <rect key="frame" x="0.0" y="0.0" width="220.5" height="30"/>
-                                                <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="25"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HDn-S1-r6j" customClass="RoundedView" customModule="Habit_Calendar">
+                                                        <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+                                                        <color key="backgroundColor" red="0.0" green="0.6588235294" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="30" id="GQh-44-WxK"/>
+                                                            <constraint firstAttribute="height" constant="30" id="V01-OU-9PB"/>
+                                                        </constraints>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                <real key="value" value="15"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </view>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Go Jogging" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gmb-a6-1Gf">
+                                                        <rect key="frame" x="40" y="0.0" width="180.5" height="30"/>
+                                                        <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="25"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="8CW-PU-8Zr">
                                                 <rect key="frame" x="0.0" y="30" width="220.5" height="102"/>
                                                 <subviews>
@@ -132,6 +150,7 @@
                     <size key="freeformSize" width="320" height="250"/>
                     <connections>
                         <outlet property="currentDayOrderLabel" destination="O8U-2M-qiy" id="rpa-Ez-gCz"/>
+                        <outlet property="dailyHabitColorView" destination="HDn-S1-r6j" id="Ih9-ub-qdz"/>
                         <outlet property="dayPerformedLabel" destination="usW-zZ-31R" id="aha-mN-uNv"/>
                         <outlet property="daysToFinishChallengeLabel" destination="s7U-nr-pMK" id="Pba-ef-myM"/>
                         <outlet property="executedDaysLabel" destination="iSk-Ub-Z5j" id="1iy-vf-fZ1"/>
@@ -142,7 +161,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vXp-U4-Rya" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-55" y="242"/>
+            <point key="canvasLocation" x="-390" y="255"/>
         </scene>
     </scenes>
 </document>

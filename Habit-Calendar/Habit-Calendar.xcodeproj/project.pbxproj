@@ -315,6 +315,7 @@
 		4790AA8621935E7400F6EB1C /* Habit-Calendar.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4790AA8121935E7400F6EB1C /* Habit-Calendar.xcdatamodeld */; };
 		47961085214D5D8C00BFECFC /* HabitsTableViewController+DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47961084214D5D8C00BFECFC /* HabitsTableViewController+DataSource.swift */; };
 		47961087214D5E3300BFECFC /* HabitsTableViewController+FetchedResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47961086214D5E3200BFECFC /* HabitsTableViewController+FetchedResultsController.swift */; };
+		4799FF4221A835F500273667 /* RoundedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47160A4021372B2F00E717C9 /* RoundedView.swift */; };
 		47A2AEF0215ADBBB00AF7788 /* HabitDetailsViewController+NotificationObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A2AEEF215ADBBB00AF7788 /* HabitDetailsViewController+NotificationObserver.swift */; };
 		47A2AEF1215ADCC800AF7788 /* HabitDetailsViewController+NotificationObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A2AEEF215ADBBB00AF7788 /* HabitDetailsViewController+NotificationObserver.swift */; };
 		47A2AEF2215ADCC900AF7788 /* HabitDetailsViewController+NotificationObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A2AEEF215ADBBB00AF7788 /* HabitDetailsViewController+NotificationObserver.swift */; };
@@ -1914,6 +1915,7 @@
 			files = (
 				47E4A98521A5DA220017F1A8 /* Formatter+Utils.swift in Sources */,
 				47E4A96D21A5D9C70017F1A8 /* UserMO.swift in Sources */,
+				4799FF4221A835F500273667 /* RoundedView.swift in Sources */,
 				47D1A4E9219F2BE300C45846 /* NotificationViewController.swift in Sources */,
 				47E4A97A21A5D9CE0017F1A8 /* FireTimeStorage.swift in Sources */,
 				47E4A97B21A5D9E70017F1A8 /* UserNotificationManager.swift in Sources */,
