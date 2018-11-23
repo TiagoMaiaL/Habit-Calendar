@@ -27,4 +27,8 @@ target 'Habit-Calendar' do
     # Pods for testing
   end
 
+  target 'HabitReminderNotification' do
+    shared_pods
+  end
+
 end

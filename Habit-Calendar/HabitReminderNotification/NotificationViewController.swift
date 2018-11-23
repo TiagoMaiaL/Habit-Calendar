@@ -52,14 +52,14 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
     /// Displays the habit associated with the received notification.
     /// - Parameter habit: The habit to be displayed.
     private func display(_ habit: HabitMO) {
-//        let color = habit.getColor().uiColor
+        let color = habit.getColor().uiColor
 
         // Display the habit in one of two states: with challenges or without.
         if let challenge = habit.getCurrentChallenge() {
             let progressInfo = challenge.getCompletionProgress()
 
             progressView.progress = CGFloat(Double(progressInfo.past) / Double(progressInfo.total))
-//            progressView.tint = color
+            progressView.tint = color
 
             daysToFinishChallengeLabel.text = String.localizedStringWithFormat(
                 NSLocalizedString(
@@ -84,13 +84,13 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
                     "Yes, I did it.",
                     comment: "Text displayed when the current day is marked as executed."
                 )
-//                dayPerformedLabel.textColor = habitColor
+                dayPerformedLabel.textColor = color
             } else {
                 dayPerformedLabel.text = NSLocalizedString(
                     "No, not yet.",
                     comment: "Text displayed when the current day isn't marked as executed."
                 )
-//                dayPerformedLabel.textColor = UIColor(red: 47/255, green: 54/255, blue: 64/255, alpha: 1)
+                dayPerformedLabel.textColor = UIColor(red: 47/255, green: 54/255, blue: 64/255, alpha: 1)
             }
         } else {
 

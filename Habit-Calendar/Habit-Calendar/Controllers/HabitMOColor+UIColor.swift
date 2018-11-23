@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import UIColor_Hex_Swift
 
 /// Extension that adds UIColor capabilities to the Color model enum.
 extension HabitMO.Color {

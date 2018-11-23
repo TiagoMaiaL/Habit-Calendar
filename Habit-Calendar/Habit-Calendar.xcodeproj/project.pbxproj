@@ -431,6 +431,7 @@
 		47E4A97D21A5D9EE0017F1A8 /* Date+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474F9C8520CC7E180094C19C /* Date+Utils.swift */; };
 		47E4A98121A5D9EE0017F1A8 /* UNNotificationContent+Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470C416F213EE70D007F6F35 /* UNNotificationContent+Category.swift */; };
 		47E4A98521A5DA220017F1A8 /* Formatter+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474B7B9D212746BE00814A8E /* Formatter+Utils.swift */; };
+		47E4A98621A82F620017F1A8 /* HabitMOColor+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B23989212203F9009CB25C /* HabitMOColor+UIColor.swift */; };
 		47E6C20B20EAF550003BDB4D /* HabitCreationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E6C20A20EAF550003BDB4D /* HabitCreationTableViewController.swift */; };
 		47E6C20D20EAF567003BDB4D /* HabitDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E6C20C20EAF567003BDB4D /* HabitDetailsViewController.swift */; };
 		47E6C21020EB1233003BDB4D /* Seeder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E6C20F20EB1233003BDB4D /* Seeder.swift */; };
@@ -455,6 +456,7 @@
 		47FB0C2D216F9DE5000BB956 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 47FB0C30216F9DE5000BB956 /* Localizable.stringsdict */; };
 		47FB0C2E216F9DE5000BB956 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 47FB0C30216F9DE5000BB956 /* Localizable.stringsdict */; };
 		9E4741ED7011810FD00BF941 /* Pods_Habit_Calendar_Habit_Calendar_Stg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89D08208B03E9A306F89DFA9 /* Pods_Habit_Calendar_Habit_Calendar_Stg.framework */; };
+		BC869F87CF0F2B283717338D /* Pods_Habit_Calendar_HabitReminderNotification.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00FFEB060F94998A1B76E2EC /* Pods_Habit_Calendar_HabitReminderNotification.framework */; };
 		F0B9EAD3EC4A253D66E6E19E /* Pods_Habit_CalendarTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4262C4E7635B46715D883F5 /* Pods_Habit_CalendarTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -497,6 +499,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		00FFEB060F94998A1B76E2EC /* Pods_Habit_Calendar_HabitReminderNotification.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Habit_Calendar_HabitReminderNotification.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		268F19462C1ACD5147B82258 /* Pods-Habit-Calendar-Habit-Calendar-Stg.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Habit-Calendar-Habit-Calendar-Stg.release.xcconfig"; path = "Pods/Target Support Files/Pods-Habit-Calendar-Habit-Calendar-Stg/Pods-Habit-Calendar-Habit-Calendar-Stg.release.xcconfig"; sourceTree = "<group>"; };
 		42C35DE723A28815A0C4A785 /* Pods-Habit-Calendar-Habit-Calendar-Dev.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Habit-Calendar-Habit-Calendar-Dev.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Habit-Calendar-Habit-Calendar-Dev/Pods-Habit-Calendar-Habit-Calendar-Dev.debug.xcconfig"; sourceTree = "<group>"; };
 		43E31B715CE069B361825ADF /* Pods-Habit-Calendar-Habit-Calendar-Stg.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Habit-Calendar-Habit-Calendar-Stg.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Habit-Calendar-Habit-Calendar-Stg/Pods-Habit-Calendar-Habit-Calendar-Stg.debug.xcconfig"; sourceTree = "<group>"; };
@@ -671,8 +674,10 @@
 		8CE4E2B8BCAB12C14147DCDC /* Pods-Habit-Calendar.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Habit-Calendar.release.xcconfig"; path = "Pods/Target Support Files/Pods-Habit-Calendar/Pods-Habit-Calendar.release.xcconfig"; sourceTree = "<group>"; };
 		B12A12B40816EB9CE8CA092D /* Pods-Habit-Calendar.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Habit-Calendar.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Habit-Calendar/Pods-Habit-Calendar.debug.xcconfig"; sourceTree = "<group>"; };
 		B64BF72BCE01F4D9102A23B1 /* Pods-Habit-CalendarTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Habit-CalendarTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Habit-CalendarTests/Pods-Habit-CalendarTests.debug.xcconfig"; sourceTree = "<group>"; };
+		CACAF1D72ACC7B014D2CF8CE /* Pods-Habit-Calendar-HabitReminderNotification.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Habit-Calendar-HabitReminderNotification.release.xcconfig"; path = "Pods/Target Support Files/Pods-Habit-Calendar-HabitReminderNotification/Pods-Habit-Calendar-HabitReminderNotification.release.xcconfig"; sourceTree = "<group>"; };
 		E4262C4E7635B46715D883F5 /* Pods_Habit_CalendarTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Habit_CalendarTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F30EEBDAD9613A54B2B148CD /* Pods_Habit_Calendar_Habit_Calendar_Dev.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Habit_Calendar_Habit_Calendar_Dev.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FCE84BDDE67C5155152A117E /* Pods-Habit-Calendar-HabitReminderNotification.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Habit-Calendar-HabitReminderNotification.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Habit-Calendar-HabitReminderNotification/Pods-Habit-Calendar-HabitReminderNotification.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -698,6 +703,7 @@
 			files = (
 				47D1A4E6219F2BE200C45846 /* UserNotificationsUI.framework in Frameworks */,
 				47D1A4E4219F2BE200C45846 /* UserNotifications.framework in Frameworks */,
+				BC869F87CF0F2B283717338D /* Pods_Habit_Calendar_HabitReminderNotification.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -731,6 +737,8 @@
 				268F19462C1ACD5147B82258 /* Pods-Habit-Calendar-Habit-Calendar-Stg.release.xcconfig */,
 				B64BF72BCE01F4D9102A23B1 /* Pods-Habit-CalendarTests.debug.xcconfig */,
 				526255EDCB5FA3EB9A7C5FF7 /* Pods-Habit-CalendarTests.release.xcconfig */,
+				FCE84BDDE67C5155152A117E /* Pods-Habit-Calendar-HabitReminderNotification.debug.xcconfig */,
+				CACAF1D72ACC7B014D2CF8CE /* Pods-Habit-Calendar-HabitReminderNotification.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -881,6 +889,7 @@
 				E4262C4E7635B46715D883F5 /* Pods_Habit_CalendarTests.framework */,
 				47D1A4E3219F2BE200C45846 /* UserNotifications.framework */,
 				47D1A4E5219F2BE200C45846 /* UserNotificationsUI.framework */,
+				00FFEB060F94998A1B76E2EC /* Pods_Habit_Calendar_HabitReminderNotification.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1223,6 +1232,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 47D1A4F3219F2BE300C45846 /* Build configuration list for PBXNativeTarget "HabitReminderNotification" */;
 			buildPhases = (
+				B7C952FE3F796E939CE244EE /* [CP] Check Pods Manifest.lock */,
 				47D1A4DE219F2BE200C45846 /* Sources */,
 				47D1A4DF219F2BE200C45846 /* Frameworks */,
 				47D1A4E0219F2BE200C45846 /* Resources */,
@@ -1675,6 +1685,24 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		B7C952FE3F796E939CE244EE /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Habit-Calendar-HabitReminderNotification-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		FF5E6971748D941CDE62DA22 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1906,6 +1934,7 @@
 				47E4A97321A5D9C70017F1A8 /* FireTimeMO.swift in Sources */,
 				47E4A97121A5D9C70017F1A8 /* NotificationMO.swift in Sources */,
 				47E4A97821A5D9CE0017F1A8 /* NotificationStorage.swift in Sources */,
+				47E4A98621A82F620017F1A8 /* HabitMOColor+UIColor.swift in Sources */,
 				470CB3EC21A2F5F300CEB95B /* RoundedProgressView.swift in Sources */,
 				47E4A97621A5D9CE0017F1A8 /* DayStorage.swift in Sources */,
 				47E4A96B21A5D9BD0017F1A8 /* HCPersistentContainer.swift in Sources */,
@@ -2209,6 +2238,7 @@
 		};
 		47D1A4F1219F2BE300C45846 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FCE84BDDE67C5155152A117E /* Pods-Habit-Calendar-HabitReminderNotification.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = HabitReminderNotification/HabitReminderNotification.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -2233,6 +2263,7 @@
 		};
 		47D1A4F2219F2BE300C45846 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CACAF1D72ACC7B014D2CF8CE /* Pods-Habit-Calendar-HabitReminderNotification.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = HabitReminderNotification/HabitReminderNotification.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
