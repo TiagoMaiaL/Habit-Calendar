@@ -126,7 +126,7 @@ SUBQUERY(challenges, $challenge,
                 user: UserMO,
                 name: String,
                 color: HabitMO.Color,
-                days: [Date],
+                days: [Date]? = nil,
                 and notificationFireTimes: [DateComponents]? = nil) -> HabitMO {
         // Declare a new habit instance.
         let habit = HabitMO(context: context)
@@ -139,11 +139,13 @@ SUBQUERY(challenges, $challenge,
         habit.user = user
 
         // Create the challenge.
-        _ = daysChallengeStorage.create(
-            using: context,
-            daysDates: days,
-            and: habit
-        )
+        if let days = days {
+            _ = daysChallengeStorage.create(
+                using: context,
+                daysDates: days,
+                and: habit
+            )
+        }
 
         // Create and associate the notifications to the habit being created.
         if let fireTimes = notificationFireTimes {
