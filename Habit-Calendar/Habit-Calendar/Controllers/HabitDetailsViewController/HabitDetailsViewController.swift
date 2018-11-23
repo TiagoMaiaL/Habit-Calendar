@@ -328,9 +328,6 @@ class HabitDetailsViewController: UIViewController {
         // Fetch the results.
         let results = (try? container.viewContext.fetch(request)) ?? []
 
-        // Assert on the values, the habit must have at least one challenge entity.
-        assert(!results.isEmpty, "Inconsistency: A habit entity must always have at least one challenge entity.")
-
         return results
     }
 

@@ -246,7 +246,6 @@ class HabitCreationTableViewController: UITableViewController {
         if !isEditingHabit {
             assert(!(name ?? "").isEmpty, "Error: the habit's name must be a valid value.")
             assert(habitColor != nil, "Error: the habit's color must be a valid value.")
-            assert(!(days ?? []).isEmpty, "Error: the habit's days must have a valid value.")
         }
 
         handleHabitForPersistency()
@@ -305,8 +304,8 @@ class HabitCreationTableViewController: UITableViewController {
 
             doneButton.isEnabled = isNameDifferent || isColorDifferent || isChallengeDifferent || areFireTimesDifferent
         } else {
-            // Check if the name and days are correctly set.
-            doneButton.isEnabled = !(name ?? "").isEmpty && !(days ?? []).isEmpty && habitColor != nil
+            // Check if the name and color are set.
+            doneButton.isEnabled = !(name ?? "").isEmpty && habitColor != nil
         }
     }
 
