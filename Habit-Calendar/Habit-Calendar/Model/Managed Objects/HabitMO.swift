@@ -99,6 +99,12 @@ class HabitMO: NSManagedObject {
         return days?.filtered(using: predicate).first as? HabitDayMO
     }
 
+    /// Marks the current day as executed, if there's one to be marked.
+    /// - Parameter wasExecuted: the boolean to be set.
+    func markCurrentDayAsExecuted(_ wasExecuted: Bool = true) {
+        getCurrentDay()?.markAsExecuted(wasExecuted)
+    }
+
     /// Returns the entity's habit days that are later than the current date.
     /// - Returns: The habit's day entities in the future.
     func getFutureDays() -> [HabitDayMO] {

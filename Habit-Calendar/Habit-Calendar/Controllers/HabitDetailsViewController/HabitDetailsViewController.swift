@@ -45,8 +45,10 @@ class HabitDetailsViewController: UIViewController {
     /// The habit storage used to manage the controller's habit.
     var habitStorage: HabitStorage!
 
-    /// The persistent container used by this store to manage the
-    /// provided habit.
+    /// The habit day storage used to create an entity associated to today.
+    var habitDayStorage: HabitDayStorage!
+
+    /// The persistent container used by this store to manage the provided habit.
     weak var container: NSPersistentContainer!
 
     /// The shortcuts manager used to add a new shortcut when the habit is displayed.
@@ -270,6 +272,10 @@ class HabitDetailsViewController: UIViewController {
         assert(
             habitStorage != nil,
             "Error: the needed habitStorage wasn't injected."
+        )
+        assert(
+            habitDayStorage != nil,
+            "Error: the habit day storage must be injected."
         )
         assert(
             container != nil,

@@ -289,6 +289,37 @@ class HabitTests: IntegrationTestCase {
         XCTAssertEqual(color, dummyHabit.getColor())
     }
 
+    func testMarkingCurrentDayAsExecuted() {
+        // Declare a dummy habit.
+        let habit = habitFactory.makeDummy()
+        guard let currentDay = habit.getCurrentDay(), !currentDay.wasExecuted else {
+            XCTFail("Couldn't get the current day of the habit.")
+            return
+        }
+
+        // Mark its current day as executed.
+        habit.markCurrentDayAsExecuted()
+
+        // Assert the day was correctly marked.
+        XCTAssertTrue(currentDay.wasExecuted)
+    }
+
+    func testMarkingCurrentDayAsNotExecuted() {
+        // Declare a dummy habit.
+        let habit = habitFactory.makeDummy()
+        guard let currentDay = habit.getCurrentDay(), !currentDay.wasExecuted else {
+            XCTFail("Couldn't get the current day of the habit.")
+            return
+        }
+        habit.markCurrentDayAsExecuted()
+
+        // Mark its current day as not executed.
+        habit.markCurrentDayAsExecuted(false)
+
+        // Assert the day was correctly marked.
+        XCTAssertFalse(currentDay.wasExecuted)
+    }
+
     // MARK: Imperatives
 
     private func makeEmptyDummy() -> HabitMO {

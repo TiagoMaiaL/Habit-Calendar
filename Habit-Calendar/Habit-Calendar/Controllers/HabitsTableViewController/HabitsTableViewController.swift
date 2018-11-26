@@ -163,6 +163,7 @@ class HabitsTableViewController: UITableViewController {
             if let habitDetailsController = segue.destination as? HabitDetailsViewController {
                 habitDetailsController.container = container
                 habitDetailsController.habitStorage = habitStorage
+                habitDetailsController.habitDayStorage = HabitDayStorage(calendarDayStorage: DayStorage())
                 habitDetailsController.notificationManager = notificationManager
                 habitDetailsController.notificationStorage = NotificationStorage()
                 habitDetailsController.notificationScheduler = NotificationScheduler(

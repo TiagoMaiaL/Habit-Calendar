@@ -92,6 +92,7 @@ extension HabitsTableViewController: HabitToBeDisplayedObserver {
         detailsController.habit = habit
         detailsController.container = container
         detailsController.habitStorage = habitStorage
+        detailsController.habitDayStorage = HabitDayStorage(calendarDayStorage: DayStorage())
         detailsController.notificationManager = notificationManager
         detailsController.notificationStorage = NotificationStorage()
         detailsController.notificationScheduler = NotificationScheduler(
