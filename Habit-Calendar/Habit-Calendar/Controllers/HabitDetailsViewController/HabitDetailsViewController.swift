@@ -31,8 +31,8 @@ class HabitDetailsViewController: UIViewController {
     var challenges: [DaysChallengeMO]! {
         didSet {
             // Store the initial and final calendar dates.
-            startDate = challenges.first!.fromDate!.getBeginningOfMonth()!
-            finalDate = challenges.last!.toDate!
+            startDate = challenges.first?.fromDate?.getBeginningOfMonth() ?? Date().getBeginningOfDay()
+            finalDate = challenges.last?.toDate ?? Date().getBeginningOfDay()
         }
     }
 
@@ -101,12 +101,15 @@ class HabitDetailsViewController: UIViewController {
     /// The notificationScheduler used to unschedule the current day's notifications, in case it's marked as executed.
     var notificationScheduler: NotificationScheduler!
 
-    /// The view holding the prompt for the current day.
-    /// - Note: This view is only displayed if today is a challenge day to be accounted.
-    @IBOutlet weak var promptContentView: UIView!
+    /// The current challenge header.
+    @IBOutlet weak var challengeHeaderStackView: UIStackView!
 
     /// The label displaying the current challenge's from and to dates.
     @IBOutlet weak var currentChallengeDurationLabel: UILabel!
+
+    /// The view holding the prompt for the current day.
+    /// - Note: This view is only displayed if today is a challenge day to be accounted.
+    @IBOutlet weak var promptContentView: UIView!
 
     /// The title displaying what challenge's day is today.
     @IBOutlet weak var currentDayTitleLabel: UILabel!
