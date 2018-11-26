@@ -85,18 +85,20 @@ class HabitMO: NSManagedObject {
     /// Returns the current habit day for today (the current date),
     /// if there's one being tracked.
     func getCurrentDay() -> HabitDayMO? {
-        // Get the current date.
-        let today = Date()
+        return getDay(for: Date())
+    }
 
-        // Declare the predicate to search only for the current day.
-        let predicate = NSPredicate(
+    /// Returns the HabitDay associated with the passed date, if found.
+    /// - Parameter date: The date associated with the habit day.
+    func getDay(for date: Date) -> HabitDayMO? {
+        // Declare the predicate to filter for the specific day.
+        let dayPredicate = NSPredicate(
             format: "day.date >= %@ and day.date <= %@",
-            today.getBeginningOfDay() as NSDate,
-            today.getEndOfDay() as NSDate
+            date.getBeginningOfDay() as NSDate,
+            date.getEndOfDay() as NSDate
         )
 
-        // Fetch it and return the first result, if there's one.
-        return days?.filtered(using: predicate).first as? HabitDayMO
+        return days?.filtered(using: dayPredicate).first as? HabitDayMO
     }
 
     /// Marks the current day as executed, if there's one to be marked.

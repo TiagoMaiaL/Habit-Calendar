@@ -320,6 +320,59 @@ class HabitTests: IntegrationTestCase {
         XCTAssertFalse(currentDay.wasExecuted)
     }
 
+    func testGettingDayFromDate() {
+        // 1. Create a dummy habit.
+        let dummyHabit = habitFactory.makeDummy()
+
+        // 2. Try to get the day associated with today.
+        let habitDay = dummyHabit.getDay(for: Date())
+
+        // 3. Assert it returned the correct habit day.
+        XCTAssertNotNil(habitDay)
+        XCTAssertEqual(
+            Date().getBeginningOfDay(),
+            habitDay?.day?.date,
+            "The method should return the correct date."
+        )
+    }
+
+    func testGettingDayFromDateShouldReturnNil() {
+        // 1. Create a dummy habit.
+        let dummyHabit = habitFactory.makeDummy()
+
+        // 2. Try to get the day associated with yesterday.
+        guard let yesterday = Date().byAddingDays(-1) else {
+            XCTFail("Couldn't generate yesterday date.")
+            return
+        }
+        let habitDay = dummyHabit.getDay(for: yesterday)
+
+        // 3. Assert it returned nil.
+        XCTAssertNil(habitDay)
+    }
+
+    func testGettingDayFromDateNotInBeginning() {
+        // 1. Create a dummy habit with a habit day date not in the beginning.
+        let dummyHabit = habitFactory.makeDummy()
+        let dummyDay = dayFactory.makeDummy()
+
+        var components = Date().components
+        components.hour = 12
+        components.minute = 0
+        components.second = 0
+        let expectedDate = Calendar.current.date(from: components)
+
+        dummyDay.date = expectedDate
+
+        let habitDay = habitDayFactory.makeDummy()
+        habitDay.day = dummyDay
+
+        dummyHabit.addToDays(habitDay)
+
+        // 2. Try fetching the day.
+        XCTAssertNotNil(dummyHabit.getDay(for: expectedDate!))
+    }
+
     // MARK: Imperatives
 
     private func makeEmptyDummy() -> HabitMO {
