@@ -76,7 +76,22 @@ class HabitStorageTests: IntegrationTestCase {
 
     // MARK: Tests
 
-    func testHabitCreation() {
+    func testHabitCreationWithoutChallenge() {
+        // 1. Declare the main attributes for creating a habit.
+        let name = "Swim"
+        let color = HabitMO.Color.systemGreen
+        let user = userFactory.makeDummy()
+
+        // 2. Create it, and make the assertions.
+        let habit = habitStorage.create(using: context, user: user, name: name, color: color)
+
+        XCTAssertNotNil(habit.id)
+        XCTAssertEqual(habit.name, name)
+        XCTAssertEqual(habit.color, color.rawValue)
+        XCTAssertTrue(habit.challenges?.count == 0)
+    }
+
+    func testHabitCreationWithChallenge() {
         let name = "Go Jogging"
         let days = (0...7).compactMap { dayNumber in
             // Create and return a date by adding the number of days.
@@ -215,11 +230,11 @@ class HabitStorageTests: IntegrationTestCase {
         XCTAssertEqual(dummyHabits.count, fetchedResultsController.fetchedObjects?.count)
     }
 
-    func testCompletedFetchedResultsController() {
+    func testDailyFetchedResultsController() {
         // 1. Get the fetched results controller.
-        let fetchedResultsController = habitStorage.makeCompletedFetchedResultsController(context: context)
+        let fetchedResultsController = habitStorage.makeDailyFetchedResultsController(context: context)
 
-        // 2. Add some completed dummy habits.
+        // 2. Add some daily dummy habits.
         let dummyHabits = [habitFactory.makeDummy(), habitFactory.makeDummy(), habitFactory.makeDummy()]
 
         for habit in dummyHabits {

@@ -108,8 +108,8 @@
 /* Text displayed when the current day is marked as executed. */
 "Yes, I did it." = "Sim, eu fiz.";
 
-/* Message displayed when the user doesn't have any completed habit. */
-"You don't have any completed habits yet." = "Você não tem nenhum desafio completo ainda.";
+/* Message displayed when the user doesn't have any daily habit. */
+"You don't have any daily habits yet." = "Você ainda não tem nenhum hábito.";
 
 /* Message displayed when the user doesn't have any habit in progress. */
 "You don't have any habits in progress at the moment, what do you think of new challenges?" = "Você não tem nenhum hábito em progresso, o que você acha de novos desafios?";

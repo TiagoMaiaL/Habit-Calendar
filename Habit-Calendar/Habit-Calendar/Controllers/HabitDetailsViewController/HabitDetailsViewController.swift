@@ -31,8 +31,8 @@ class HabitDetailsViewController: UIViewController {
     var challenges: [DaysChallengeMO]! {
         didSet {
             // Store the initial and final calendar dates.
-            startDate = challenges.first!.fromDate!.getBeginningOfMonth()!
-            finalDate = challenges.last!.toDate!
+            startDate = challenges.first?.fromDate?.getBeginningOfMonth() ?? Date().getBeginningOfDay()
+            finalDate = challenges.last?.toDate ?? Date().getBeginningOfDay()
         }
     }
 
@@ -45,8 +45,10 @@ class HabitDetailsViewController: UIViewController {
     /// The habit storage used to manage the controller's habit.
     var habitStorage: HabitStorage!
 
-    /// The persistent container used by this store to manage the
-    /// provided habit.
+    /// The habit day storage used to create an entity associated to today.
+    var habitDayStorage: HabitDayStorage!
+
+    /// The persistent container used by this store to manage the provided habit.
     weak var container: NSPersistentContainer!
 
     /// The shortcuts manager used to add a new shortcut when the habit is displayed.
@@ -101,12 +103,15 @@ class HabitDetailsViewController: UIViewController {
     /// The notificationScheduler used to unschedule the current day's notifications, in case it's marked as executed.
     var notificationScheduler: NotificationScheduler!
 
-    /// The view holding the prompt for the current day.
-    /// - Note: This view is only displayed if today is a challenge day to be accounted.
-    @IBOutlet weak var promptContentView: UIView!
+    /// The current challenge header.
+    @IBOutlet weak var challengeHeaderStackView: UIStackView!
 
     /// The label displaying the current challenge's from and to dates.
     @IBOutlet weak var currentChallengeDurationLabel: UILabel!
+
+    /// The view holding the prompt for the current day.
+    /// - Note: This view is only displayed if today is a challenge day to be accounted.
+    @IBOutlet weak var promptContentView: UIView!
 
     /// The title displaying what challenge's day is today.
     @IBOutlet weak var currentDayTitleLabel: UILabel!
@@ -269,6 +274,10 @@ class HabitDetailsViewController: UIViewController {
             "Error: the needed habitStorage wasn't injected."
         )
         assert(
+            habitDayStorage != nil,
+            "Error: the habit day storage must be injected."
+        )
+        assert(
             container != nil,
             "Error: the needed container wasn't injected."
         )
@@ -327,9 +336,6 @@ class HabitDetailsViewController: UIViewController {
 
         // Fetch the results.
         let results = (try? container.viewContext.fetch(request)) ?? []
-
-        // Assert on the values, the habit must have at least one challenge entity.
-        assert(!results.isEmpty, "Inconsistency: A habit entity must always have at least one challenge entity.")
 
         return results
     }

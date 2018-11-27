@@ -27,7 +27,7 @@ extension HabitsTableViewController: NSFetchedResultsControllerDelegate {
         ) {
         // Only execute the updates if the segment being shown is handled by the passed controller.
         // There're two fetchedResultsController instances managing different segments of the table view,
-        // One for the in progress habits and another for the completed ones. Only update the one being displayed.
+        // One for the in progress habits and another for the daily ones. Only update the one being displayed.
         guard shouldUpdateSegmentFrom(controller: controller) else { return }
 
         // Add or remove rows based on the kind of changes:
@@ -60,8 +60,8 @@ extension HabitsTableViewController: NSFetchedResultsControllerDelegate {
         switch selectedSegment {
         case .inProgress:
             return controller == progressfetchedResultsController
-        case .completed:
-            return controller == completedfetchedResultsController
+        case .daily:
+            return controller == dailyfetchedResultsController
         }
     }
 

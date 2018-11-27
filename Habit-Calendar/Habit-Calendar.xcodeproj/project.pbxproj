@@ -34,7 +34,7 @@
 		470C41C62144B091007F6F35 /* Seeder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E6C20F20EB1233003BDB4D /* Seeder.swift */; };
 		470C41C72144B091007F6F35 /* NotificationAvailabilityDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475197D721359516009F959C /* NotificationAvailabilityDisplayable.swift */; };
 		470C41C82144B091007F6F35 /* NotificationMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4713A20320C16542008A13D2 /* NotificationMO.swift */; };
-		470C41C92144B091007F6F35 /* CompletedHabitTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47160A3E2137275B00E717C9 /* CompletedHabitTableViewCell.swift */; };
+		470C41C92144B091007F6F35 /* DailyHabitTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47160A3E2137275B00E717C9 /* DailyHabitTableViewCell.swift */; };
 		470C41CA2144B091007F6F35 /* CalendarDayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4761F5AF21209EED00A8D407 /* CalendarDayCell.swift */; };
 		470C41CB2144B091007F6F35 /* FireTimeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AA365A2104D5E60008D2DC /* FireTimeFactory.swift */; };
 		470C41CC2144B091007F6F35 /* ColorsPickerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4761F5B42120D06900A8D407 /* ColorsPickerDataSource.swift */; };
@@ -52,7 +52,7 @@
 		470C41D82144B091007F6F35 /* HabitsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4725D05A20C8A4BA00C3B63F /* HabitsTableViewController.swift */; };
 		470C41D92144B091007F6F35 /* HabitDaysSelectionViewController+Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475197D52132F4E1009F959C /* HabitDaysSelectionViewController+Calendar.swift */; };
 		470C41DA2144B091007F6F35 /* HabitDayStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4725D06220CA14A600C3B63F /* HabitDayStorage.swift */; };
-		470C41DB2144B091007F6F35 /* HabitTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4732CE772114F23200E2770C /* HabitTableViewCell.swift */; };
+		470C41DB2144B091007F6F35 /* ProgressHabitTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4732CE772114F23200E2770C /* ProgressHabitTableViewCell.swift */; };
 		470C41DC2144B091007F6F35 /* CalendarDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C1F3DD212A140F00DDA7BB /* CalendarDisplayable.swift */; };
 		470C41DD2144B091007F6F35 /* HabitMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4713A1FD20C16459008A13D2 /* HabitMO.swift */; };
 		470C41DE2144B091007F6F35 /* HabitDetailsViewController+FireTimesSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C32030212EFD380094BBF8 /* HabitDetailsViewController+FireTimesSection.swift */; };
@@ -132,7 +132,7 @@
 		470C42372144B164007F6F35 /* Seeder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E6C20F20EB1233003BDB4D /* Seeder.swift */; };
 		470C42382144B164007F6F35 /* NotificationAvailabilityDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475197D721359516009F959C /* NotificationAvailabilityDisplayable.swift */; };
 		470C42392144B164007F6F35 /* NotificationMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4713A20320C16542008A13D2 /* NotificationMO.swift */; };
-		470C423A2144B164007F6F35 /* CompletedHabitTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47160A3E2137275B00E717C9 /* CompletedHabitTableViewCell.swift */; };
+		470C423A2144B164007F6F35 /* DailyHabitTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47160A3E2137275B00E717C9 /* DailyHabitTableViewCell.swift */; };
 		470C423B2144B164007F6F35 /* CalendarDayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4761F5AF21209EED00A8D407 /* CalendarDayCell.swift */; };
 		470C423C2144B164007F6F35 /* FireTimeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AA365A2104D5E60008D2DC /* FireTimeFactory.swift */; };
 		470C423D2144B164007F6F35 /* ColorsPickerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4761F5B42120D06900A8D407 /* ColorsPickerDataSource.swift */; };
@@ -150,7 +150,7 @@
 		470C42492144B164007F6F35 /* HabitsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4725D05A20C8A4BA00C3B63F /* HabitsTableViewController.swift */; };
 		470C424A2144B164007F6F35 /* HabitDaysSelectionViewController+Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475197D52132F4E1009F959C /* HabitDaysSelectionViewController+Calendar.swift */; };
 		470C424B2144B164007F6F35 /* HabitDayStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4725D06220CA14A600C3B63F /* HabitDayStorage.swift */; };
-		470C424C2144B164007F6F35 /* HabitTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4732CE772114F23200E2770C /* HabitTableViewCell.swift */; };
+		470C424C2144B164007F6F35 /* ProgressHabitTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4732CE772114F23200E2770C /* ProgressHabitTableViewCell.swift */; };
 		470C424D2144B164007F6F35 /* CalendarDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C1F3DD212A140F00DDA7BB /* CalendarDisplayable.swift */; };
 		470C424E2144B164007F6F35 /* HabitMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4713A1FD20C16459008A13D2 /* HabitMO.swift */; };
 		470C424F2144B164007F6F35 /* HabitDetailsViewController+FireTimesSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C32030212EFD380094BBF8 /* HabitDetailsViewController+FireTimesSection.swift */; };
@@ -233,7 +233,7 @@
 		4715A8F9216BC3D000713B23 /* HabitsShortcutItemsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4715A8F7216BA0F200713B23 /* HabitsShortcutItemsManager.swift */; };
 		4715A8FA216BC3D100713B23 /* HabitsShortcutItemsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4715A8F7216BA0F200713B23 /* HabitsShortcutItemsManager.swift */; };
 		4715A8FF216BC5B400713B23 /* HabitsShortcutItemsManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4715A8FB216BC46C00713B23 /* HabitsShortcutItemsManagerTests.swift */; };
-		47160A3F2137275B00E717C9 /* CompletedHabitTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47160A3E2137275B00E717C9 /* CompletedHabitTableViewCell.swift */; };
+		47160A3F2137275B00E717C9 /* DailyHabitTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47160A3E2137275B00E717C9 /* DailyHabitTableViewCell.swift */; };
 		47160A4121372B2F00E717C9 /* RoundedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47160A4021372B2F00E717C9 /* RoundedView.swift */; };
 		47160A4621387AC300E717C9 /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47160A4521387AC300E717C9 /* EmptyStateView.swift */; };
 		47160A48213B18F900E717C9 /* HabitStorageNotificationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47160A47213B18F900E717C9 /* HabitStorageNotificationTests.swift */; };
@@ -277,7 +277,7 @@
 		4732CE712114D9D100E2770C /* SF-Pro-Display-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4732CE532114D9CC00E2770C /* SF-Pro-Display-Thin.otf */; };
 		4732CE722114D9D100E2770C /* SF-Pro-Display-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4732CE542114D9CD00E2770C /* SF-Pro-Display-Medium.otf */; };
 		4732CE762114E8A200E2770C /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4732CE752114E8A200E2770C /* ProgressView.swift */; };
-		4732CE782114F23200E2770C /* HabitTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4732CE772114F23200E2770C /* HabitTableViewCell.swift */; };
+		4732CE782114F23200E2770C /* ProgressHabitTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4732CE772114F23200E2770C /* ProgressHabitTableViewCell.swift */; };
 		4732CE7A2114FF5F00E2770C /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4732CE792114FF5F00E2770C /* CardView.swift */; };
 		4732CE7C2118DA8400E2770C /* UnderlinedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4732CE7B2118DA8400E2770C /* UnderlinedTextField.swift */; };
 		4732CE7E211A12B500E2770C /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4732CE7D211A12B500E2770C /* RoundedButton.swift */; };
@@ -522,7 +522,7 @@
 		4715A8F32166A49B00713B23 /* HabitsTableViewController+NotificationObservers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HabitsTableViewController+NotificationObservers.swift"; sourceTree = "<group>"; };
 		4715A8F7216BA0F200713B23 /* HabitsShortcutItemsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitsShortcutItemsManager.swift; sourceTree = "<group>"; };
 		4715A8FB216BC46C00713B23 /* HabitsShortcutItemsManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitsShortcutItemsManagerTests.swift; sourceTree = "<group>"; };
-		47160A3E2137275B00E717C9 /* CompletedHabitTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedHabitTableViewCell.swift; sourceTree = "<group>"; };
+		47160A3E2137275B00E717C9 /* DailyHabitTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyHabitTableViewCell.swift; sourceTree = "<group>"; };
 		47160A4021372B2F00E717C9 /* RoundedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedView.swift; sourceTree = "<group>"; };
 		47160A4521387AC300E717C9 /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
 		47160A47213B18F900E717C9 /* HabitStorageNotificationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitStorageNotificationTests.swift; sourceTree = "<group>"; };
@@ -564,7 +564,7 @@
 		4732CE532114D9CC00E2770C /* SF-Pro-Display-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Thin.otf"; sourceTree = "<group>"; };
 		4732CE542114D9CD00E2770C /* SF-Pro-Display-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Medium.otf"; sourceTree = "<group>"; };
 		4732CE752114E8A200E2770C /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
-		4732CE772114F23200E2770C /* HabitTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitTableViewCell.swift; sourceTree = "<group>"; };
+		4732CE772114F23200E2770C /* ProgressHabitTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressHabitTableViewCell.swift; sourceTree = "<group>"; };
 		4732CE792114FF5F00E2770C /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		4732CE7B2118DA8400E2770C /* UnderlinedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderlinedTextField.swift; sourceTree = "<group>"; };
 		4732CE7D211A12B500E2770C /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
@@ -770,8 +770,8 @@
 		47160A3D2137271000E717C9 /* Habit cells */ = {
 			isa = PBXGroup;
 			children = (
-				4732CE772114F23200E2770C /* HabitTableViewCell.swift */,
-				47160A3E2137275B00E717C9 /* CompletedHabitTableViewCell.swift */,
+				4732CE772114F23200E2770C /* ProgressHabitTableViewCell.swift */,
+				47160A3E2137275B00E717C9 /* DailyHabitTableViewCell.swift */,
 			);
 			path = "Habit cells";
 			sourceTree = "<group>";
@@ -1753,7 +1753,7 @@
 				470C41C72144B091007F6F35 /* NotificationAvailabilityDisplayable.swift in Sources */,
 				470C41C82144B091007F6F35 /* NotificationMO.swift in Sources */,
 				470CB3E721A2F5EB00CEB95B /* ProgressDisplayable.swift in Sources */,
-				470C41C92144B091007F6F35 /* CompletedHabitTableViewCell.swift in Sources */,
+				470C41C92144B091007F6F35 /* DailyHabitTableViewCell.swift in Sources */,
 				470C41CA2144B091007F6F35 /* CalendarDayCell.swift in Sources */,
 				470C41CB2144B091007F6F35 /* FireTimeFactory.swift in Sources */,
 				470C41CC2144B091007F6F35 /* ColorsPickerDataSource.swift in Sources */,
@@ -1778,7 +1778,7 @@
 				470C41DA2144B091007F6F35 /* HabitDayStorage.swift in Sources */,
 				47B38B0B218A047A00C26A92 /* BlockedDisplayView.swift in Sources */,
 				470CB3EA21A2F5F200CEB95B /* RoundedProgressView.swift in Sources */,
-				470C41DB2144B091007F6F35 /* HabitTableViewCell.swift in Sources */,
+				470C41DB2144B091007F6F35 /* ProgressHabitTableViewCell.swift in Sources */,
 				470C41DC2144B091007F6F35 /* CalendarDisplayable.swift in Sources */,
 				470C41DD2144B091007F6F35 /* HabitMO.swift in Sources */,
 				47BC540B2176754800A5DC17 /* HabitCreationTableViewController+HabitHandling.swift in Sources */,
@@ -1845,7 +1845,7 @@
 				470C42382144B164007F6F35 /* NotificationAvailabilityDisplayable.swift in Sources */,
 				470C42392144B164007F6F35 /* NotificationMO.swift in Sources */,
 				470CB3E821A2F5EB00CEB95B /* ProgressDisplayable.swift in Sources */,
-				470C423A2144B164007F6F35 /* CompletedHabitTableViewCell.swift in Sources */,
+				470C423A2144B164007F6F35 /* DailyHabitTableViewCell.swift in Sources */,
 				470C423B2144B164007F6F35 /* CalendarDayCell.swift in Sources */,
 				470C423C2144B164007F6F35 /* FireTimeFactory.swift in Sources */,
 				470C423D2144B164007F6F35 /* ColorsPickerDataSource.swift in Sources */,
@@ -1870,7 +1870,7 @@
 				470C424B2144B164007F6F35 /* HabitDayStorage.swift in Sources */,
 				47B38B0C218A047A00C26A92 /* BlockedDisplayView.swift in Sources */,
 				470CB3EB21A2F5F300CEB95B /* RoundedProgressView.swift in Sources */,
-				470C424C2144B164007F6F35 /* HabitTableViewCell.swift in Sources */,
+				470C424C2144B164007F6F35 /* ProgressHabitTableViewCell.swift in Sources */,
 				470C424D2144B164007F6F35 /* CalendarDisplayable.swift in Sources */,
 				470C424E2144B164007F6F35 /* HabitMO.swift in Sources */,
 				47BC540C2176754800A5DC17 /* HabitCreationTableViewController+HabitHandling.swift in Sources */,
@@ -1970,7 +1970,7 @@
 				47E6C21020EB1233003BDB4D /* Seeder.swift in Sources */,
 				475197D821359516009F959C /* NotificationAvailabilityDisplayable.swift in Sources */,
 				4713A20420C16542008A13D2 /* NotificationMO.swift in Sources */,
-				47160A3F2137275B00E717C9 /* CompletedHabitTableViewCell.swift in Sources */,
+				47160A3F2137275B00E717C9 /* DailyHabitTableViewCell.swift in Sources */,
 				4761F5B021209EED00A8D407 /* CalendarDayCell.swift in Sources */,
 				47AA365B2104D5E60008D2DC /* FireTimeFactory.swift in Sources */,
 				4761F5B52120D06900A8D407 /* ColorsPickerDataSource.swift in Sources */,
@@ -1996,7 +1996,7 @@
 				475197D62132F4E1009F959C /* HabitDaysSelectionViewController+Calendar.swift in Sources */,
 				4725D06320CA14A600C3B63F /* HabitDayStorage.swift in Sources */,
 				47B38B0A218A047A00C26A92 /* BlockedDisplayView.swift in Sources */,
-				4732CE782114F23200E2770C /* HabitTableViewCell.swift in Sources */,
+				4732CE782114F23200E2770C /* ProgressHabitTableViewCell.swift in Sources */,
 				47C1F3DE212A140F00DDA7BB /* CalendarDisplayable.swift in Sources */,
 				47BC540A2176754800A5DC17 /* HabitCreationTableViewController+HabitHandling.swift in Sources */,
 				4713A1FE20C16459008A13D2 /* HabitMO.swift in Sources */,

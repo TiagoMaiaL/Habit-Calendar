@@ -92,6 +92,8 @@ class DaysChallengeStorageTests: IntegrationTestCase {
             dates.count,
             "The created days' challenge has the wrong amount of dates."
         )
+        XCTAssertEqual(dates.count, dummyHabit.days?.count)
+
         // 4.4. Check if the challenge's days dates are within the passed ones.
         guard let createdHabitDays = createdChallenge.days as? Set<HabitDayMO> else {
             XCTFail("The created days' challenge doesn't have the correct day entities.")
@@ -167,4 +169,29 @@ class DaysChallengeStorageTests: IntegrationTestCase {
         )
     }
 
+    /// Tests if creating a challenge includes the current habit day to it. This case happens if
+    /// the user has marked the current day as executed and then creates a new challenge of days.
+    func testCreatingChallengeShouldIncludeCurrentHabitDayToIt() {
+        // Declare an empty habit.
+        let dummyHabit = habitFactory.makeDummy()
+        dummyHabit.removeFromChallenges(dummyHabit.challenges!)
+        dummyHabit.removeFromDays(dummyHabit.days!)
+
+        // Add a habit day (today date) to it.
+        let dummyHabitDay = habitDayFactory.makeDummy()
+        dummyHabitDay.day = dayFactory.makeDummy()
+        dummyHabit.addToDays(dummyHabitDay)
+
+        // Add a new challenge (beginning now) to it.
+        let dates = (0...5).compactMap { Date().byAddingDays($0) }
+        let createdChallenge = challengeStorage.create(using: context, daysDates: dates, and: dummyHabit)
+
+        // Assert the first habit day was the previous one added.
+        guard let currentChallengeDay = createdChallenge.getDay(for: Date()) else {
+            XCTFail("The created challenge should have a day with the today date.")
+            return
+        }
+        XCTAssertEqual(dummyHabitDay, currentChallengeDay)
+        XCTAssertEqual(dummyHabit.days?.count, createdChallenge.days?.count)
+    }
 }

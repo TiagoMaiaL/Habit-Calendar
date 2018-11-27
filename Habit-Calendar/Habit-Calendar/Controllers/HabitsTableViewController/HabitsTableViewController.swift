@@ -15,10 +15,10 @@ class HabitsTableViewController: UITableViewController {
 
     // MARK: Types
 
-    /// The segments displayed by this controller, which show habits in progress and habits that were completed.
+    /// The segments displayed by this controller, which show habits in progress and habits that are daily.
     enum Segment: Int {
         case inProgress
-        case completed
+        case daily
     }
 
     // MARK: Properties
@@ -32,8 +32,8 @@ class HabitsTableViewController: UITableViewController {
     /// The in progress habit cell's reuse identifier.
     let inProgressHabitCellIdentifier = "In progress habit table view cell"
 
-    /// The completed habit cell's reuse identifier.
-    let completedHabitCellIdentifier = "Completed habit table view cell"
+    /// The daily habit cell's reuse identifier.
+    let dailyHabitCellIdentifier = "Daily habit table view cell"
 
     /// The used persistence container.
     weak var container: NSPersistentContainer!
@@ -47,7 +47,7 @@ class HabitsTableViewController: UITableViewController {
     /// The shortcuts manager to be injected in the creation and details controllers.
     var shortcutsManager: HabitsShortcutItemsManager!
 
-    /// The segmented control used to change the habits being displayed, based on its stage (completed or in progress).
+    /// The segmented control used to change the habits being displayed, based on its stage (daily or in progress).
     @IBOutlet weak var habitsSegmentedControl: UISegmentedControl!
 
     /// The variable holding the current(related to today) fetchedResultsController for the habits that are in progress.
@@ -65,19 +65,19 @@ class HabitsTableViewController: UITableViewController {
         return _progressfetchedResultsController!
     }
 
-    /// The variable holding the current(related to today) fetchedResultsController for the completed habits.
+    /// The variable holding the current(related to today) fetchedResultsController for the daily habits.
     /// - Note: To re-initialize this property, only set it to nil, and use the getter.
-    private var _completedfetchedResultsController: NSFetchedResultsController<HabitMO>?
+    private var _dailyfetchedResultsController: NSFetchedResultsController<HabitMO>?
 
-    /// The fetched results controller used to get the habits that are completed and display them with the tableView.
-    var completedfetchedResultsController: NSFetchedResultsController<HabitMO> {
-        if _completedfetchedResultsController == nil {
-            let fetchedController = habitStorage.makeCompletedFetchedResultsController(context: container.viewContext)
+    /// The fetched results controller used to get the habits that are daily and display them with the tableView.
+    var dailyfetchedResultsController: NSFetchedResultsController<HabitMO> {
+        if _dailyfetchedResultsController == nil {
+            let fetchedController = habitStorage.makeDailyFetchedResultsController(context: container.viewContext)
             fetchedController.delegate = self
-            _completedfetchedResultsController = fetchedController
+            _dailyfetchedResultsController = fetchedController
         }
 
-        return _completedfetchedResultsController!
+        return _dailyfetchedResultsController!
     }
 
     /// The currently selected segment.
@@ -85,7 +85,7 @@ class HabitsTableViewController: UITableViewController {
         return Segment(rawValue: habitsSegmentedControl.selectedSegmentIndex)!
     }
 
-    /// The fetched results controller for the selected segment (in progress or completed habits).
+    /// The fetched results controller for the selected segment (in progress or daily habits).
     /// - Note: This is the fetched results controller used by the tableView's data source, which is chosen based
     ///         on the currently selected segmented.
     var selectedFetchedResultsController: NSFetchedResultsController<HabitMO> {
@@ -93,8 +93,8 @@ class HabitsTableViewController: UITableViewController {
         case .inProgress:
             return progressfetchedResultsController
 
-        case .completed:
-            return completedfetchedResultsController
+        case .daily:
+            return dailyfetchedResultsController
         }
     }
 
@@ -165,6 +165,7 @@ class HabitsTableViewController: UITableViewController {
             if let habitDetailsController = segue.destination as? HabitDetailsViewController {
                 habitDetailsController.container = container
                 habitDetailsController.habitStorage = habitStorage
+                habitDetailsController.habitDayStorage = HabitDayStorage(calendarDayStorage: DayStorage())
                 habitDetailsController.notificationManager = notificationManager
                 habitDetailsController.notificationStorage = NotificationStorage()
                 habitDetailsController.notificationScheduler = NotificationScheduler(
@@ -208,8 +209,8 @@ class HabitsTableViewController: UITableViewController {
         switch self.selectedSegment {
         case .inProgress:
             self._progressfetchedResultsController = nil
-        case .completed:
-            self._completedfetchedResultsController = nil
+        case .daily:
+            self._dailyfetchedResultsController = nil
         }
     }
 
@@ -276,10 +277,10 @@ class HabitsTableViewController: UITableViewController {
                     comment: "Message displayed when the user doesn't have any habit in progress."
                 )
                 emptyStateView.callToActionButton.isHidden = false
-            case .completed:
+            case .daily:
                 emptyStateView.emptyLabel.text = NSLocalizedString(
-                    "You don't have any completed habits yet.",
-                    comment: "Message displayed when the user doesn't have any completed habit."
+                    "You don't have any daily habits yet.",
+                    comment: "Message displayed when the user doesn't have any daily habit."
                 )
                 emptyStateView.callToActionButton.isHidden = true
             }

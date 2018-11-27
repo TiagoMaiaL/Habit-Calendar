@@ -99,5 +99,6 @@ struct HabitFactory: DummyFactory {
         let challengeFactory = DaysChallengeFactory(context: context)
         let dummyChallenge = challengeFactory.makeDummy()
         dummyChallenge.habit = habit
+        habit.addToDays(dummyChallenge.days!)
     }
 }
