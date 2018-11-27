@@ -1,5 +1,5 @@
 //
-//  CompletedHabitTableViewCell.swift
+//  DailyHabitTableViewCell.swift
 //  Active
 //
 //  Created by Tiago Maia Lopes on 29/08/18.
@@ -8,7 +8,8 @@
 
 import UIKit
 
-class CompletedHabitTableViewCell: UITableViewCell {
+/// A UITableViewCell displaying the habits that are daily (don't have an active challenge of days).
+class DailyHabitTableViewCell: UITableViewCell {
 
     // MARK: Properties
 

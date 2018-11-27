@@ -15,21 +15,23 @@ extension HabitDetailsViewController {
 
     /// Sets the current as executed or not, depending on the user's action.
     @IBAction func informActivityExecution(_ sender: UISwitch) {
-        guard let challenge = habit.getCurrentChallenge() else {
-            assertionFailure("Inconsistency: There isn't a current habit day but the prompt is being displayed.")
-            return
+        let context = container.viewContext
+
+        // If there isn't a current day, create one.
+        if habit.getCurrentDay() == nil {
+            _ = habitDayStorage.create(using: context, date: Date(), and: habit)
         }
 
-        // Get the user's answer.
+        // Get the user's answer and mark the day according to it.
         let wasExecuted = sender.isOn
 
-        challenge.managedObjectContext?.perform {
-            challenge.markCurrentDayAsExecuted(wasExecuted)
+        context.perform {
+            self.habit.markCurrentDayAsExecuted(wasExecuted)
 
             do {
-                try challenge.managedObjectContext?.save()
+                try context.save()
             } catch {
-                challenge.managedObjectContext?.rollback()
+                context.rollback()
                 self.present(
                     UIAlertController.make(
                         title: NSLocalizedString("Error", comment: ""),
@@ -59,31 +61,29 @@ extension HabitDetailsViewController {
 
     /// Displays the prompt view if today is a challenge's day.
     func displayPromptView() {
-        // ContentView is hidden by default.
-        promptContentView.isHidden = true
+        if let currentChallenge = habit.getCurrentChallenge() {
+            challengeHeaderStackView.isHidden = false
 
-        // Check if there's a current challenge for the habit.
-        guard let currentChallenge = habit.getCurrentChallenge() else {
-            return
+            // Display the current challenge's duration.
+            let formatter = DateFormatter.shortCurrent
+            currentChallengeDurationLabel.text = String.localizedStringWithFormat(
+                NSLocalizedString("From %@, to %@", comment: "Text displayed the challenge's duration."),
+                formatter.string(from: currentChallenge.fromDate!),
+                formatter.string(from: currentChallenge.toDate!)
+            )
+        } else {
+            challengeHeaderStackView.isHidden = true
         }
-        // Check if today is a challenge's HabitDay.
-        guard let currentDay = currentChallenge.getCurrentDay() else {
-            return
-        }
 
-        // Display the current challenge's duration.
-        let formatter = DateFormatter.shortCurrent
-        currentChallengeDurationLabel.text = String.localizedStringWithFormat(
-            NSLocalizedString("From %@, to %@", comment: "Text displayed the challenge's duration."),
-            formatter.string(from: currentChallenge.fromDate!),
-            formatter.string(from: currentChallenge.toDate!)
-        )
-
-        promptContentView.isHidden = false
         wasExecutedSwitch.onTintColor = habitColor
-        displayPromptViewTitle(currentChallenge.getNotificationOrderText(for: currentDay))
+        if let currentDay = habit.getCurrentChallenge()?.getCurrentDay() {
+            currentDayTitleLabel.isHidden = false
+            displayPromptViewTitle(currentDay.challenge!.getNotificationOrderText(for: currentDay))
+        } else {
+            currentDayTitleLabel.isHidden = true
+        }
 
-        if currentDay.wasExecuted {
+        if habit.getCurrentDay()?.wasExecuted ?? false {
             wasExecutedSwitch.isOn = true
             promptAnswerLabel.text = NSLocalizedString(
                 "Yes, I did it.",

@@ -1,5 +1,5 @@
 //
-//  HabitTableViewCell.swift
+//  InProgressHabitTableViewCell.swift
 //  Active
 //
 //  Created by Tiago Maia Lopes on 03/08/18.
@@ -8,12 +8,12 @@
 
 import UIKit
 
-/// A TableViewCell used to display a habit's details.
-class HabitTableViewCell: UITableViewCell {
+/// A TableViewCell used to display the details about a habit and its current challenge.
+class ProgressHabitTableViewCell: UITableViewCell {
 
     // MARK: Properties
 
-    /// The card looking view displayin the habit's details.
+    /// The card looking view displaying the habit's details.
     @IBOutlet weak var cardView: UIView!
 
     /// The habit's name label.

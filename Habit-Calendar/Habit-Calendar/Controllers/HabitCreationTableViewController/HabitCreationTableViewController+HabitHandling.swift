@@ -40,7 +40,7 @@ extension HabitCreationTableViewController {
                     user: user,
                     name: self.name!,
                     color: self.habitColor!,
-                    days: self.days!,
+                    days: self.days,
                     and: self.fireTimes
                 )
             } else {

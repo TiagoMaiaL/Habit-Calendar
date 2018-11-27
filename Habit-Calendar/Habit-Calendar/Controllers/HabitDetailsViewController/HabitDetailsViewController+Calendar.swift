@@ -31,10 +31,17 @@ extension HabitDetailsViewController: CalendarDisplayable {
         if cellState.dateBelongsTo == .thisMonth {
             cell.dayTitleLabel.text = cellState.text
 
+            if cellState.date.isInToday {
+                // Show the day as today.
+                cell.circleView.backgroundColor = UIColor(red: 74/255, green: 74/255, blue: 74/255, alpha: 1)
+                cell.dayTitleLabel.textColor = .white
+            }
+
             // Try to get the matching challenge and day for the current date.
             // The challenge may not contain certain days in between, that's fine.
             if let challenge = getChallenge(from: cellState.date),
-                let habitDay = challenge.getDay(for: cellState.date) {
+                let habitDay = habit.getDay(for: cellState.date),
+                habitDay.challenge == challenge {
 
                 let habitColor = habit.getColor()
 
@@ -53,14 +60,15 @@ extension HabitDetailsViewController: CalendarDisplayable {
                     cell.position = .inBetween
                 }
 
-                if cellState.date.isInToday {
-                    // Show the day as today.
-                    cell.circleView.backgroundColor = .white
-                    cell.dayTitleLabel.textColor = UIColor(red: 74/255, green: 74/255, blue: 74/255, alpha: 1)
-                } else if cellState.date.isFuture {
+                if cellState.date.isFuture {
                     // Days to be completed in the future should have a less bright color.
                     cell.rangeBackgroundView.backgroundColor = habitColor.uiColor.withAlphaComponent(0.5)
                 }
+            } else if let day = habit.getDay(for: cellState.date), day.wasExecuted {
+                cell.circleView.isHidden = false
+                cell.circleView.backgroundColor = habit.getColor().uiColor
+                cell.dayTitleLabel.textColor = .white
+                cell.position = .none
             } else {
                 cell.position = .none
             }
