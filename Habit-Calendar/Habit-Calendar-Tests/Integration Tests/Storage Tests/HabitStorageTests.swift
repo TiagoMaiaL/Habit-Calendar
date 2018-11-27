@@ -230,11 +230,11 @@ class HabitStorageTests: IntegrationTestCase {
         XCTAssertEqual(dummyHabits.count, fetchedResultsController.fetchedObjects?.count)
     }
 
-    func testCompletedFetchedResultsController() {
+    func testDailyFetchedResultsController() {
         // 1. Get the fetched results controller.
-        let fetchedResultsController = habitStorage.makeCompletedFetchedResultsController(context: context)
+        let fetchedResultsController = habitStorage.makeDailyFetchedResultsController(context: context)
 
-        // 2. Add some completed dummy habits.
+        // 2. Add some daily dummy habits.
         let dummyHabits = [habitFactory.makeDummy(), habitFactory.makeDummy(), habitFactory.makeDummy()]
 
         for habit in dummyHabits {

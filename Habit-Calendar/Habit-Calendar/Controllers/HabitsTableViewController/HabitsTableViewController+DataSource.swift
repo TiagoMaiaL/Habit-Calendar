@@ -36,7 +36,7 @@ extension HabitsTableViewController {
                 withIdentifier: inProgressHabitCellIdentifier,
                 for: indexPath
             )
-            if let cell = cell as? HabitTableViewCell {
+            if let cell = cell as? ProgressHabitTableViewCell {
                 // Display the habit properties:
                 // Its name.
                 cell.nameLabel?.text = habit.name
@@ -54,12 +54,12 @@ extension HabitsTableViewController {
                 // Change the bar's progress (past days / total).
                 cell.progressBar.progress = CGFloat(Double(progress.0) / Double(progress.1))
             }
-        case .completed:
+        case .daily:
             cell = tableView.dequeueReusableCell(
-                withIdentifier: completedHabitCellIdentifier,
+                withIdentifier: dailyHabitCellIdentifier,
                 for: indexPath
             )
-            if let cell = cell as? CompletedHabitTableViewCell {
+            if let cell = cell as? DailyHabitTableViewCell {
                 // Display the habit's name and color.
                 cell.nameLabel.text = habit.name
                 cell.colorView.backgroundColor = habit.getColor().uiColor
@@ -75,7 +75,7 @@ extension HabitsTableViewController {
         switch selectedSegment {
         case .inProgress:
             return 145
-        case .completed:
+        case .daily:
             return 100
         }
     }

@@ -74,7 +74,7 @@ class DevelopmentSeeder: Seeder {
             }
         }, {
             context in
-            print("Seeding completed habits.")
+            print("Seeding habits with past completed challenges.")
 
             // Get the previously seeded user.
             guard let user = try? context.fetch(UserMO.fetchRequest()).first as? UserMO else {
@@ -82,7 +82,7 @@ class DevelopmentSeeder: Seeder {
                 return
             }
 
-            // Completed habits are habits that don't have any active days' challenge.
+            // Daily habits are habits that don't have any active days' challenge.
 
             // Declare two new dummies, add past ones.
             let habitFactory = HabitFactory(context: context)

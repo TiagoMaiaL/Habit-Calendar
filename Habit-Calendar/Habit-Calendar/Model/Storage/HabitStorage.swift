@@ -48,15 +48,16 @@ struct HabitStorage {
 
     // MARK: - Imperatives
 
-    /// Creates a NSFetchedResultsController for fetching completed habit instances
+    /// Creates a NSFetchedResultsController for fetching daily habit instances
     /// ordered by the creation date and score of each habit.
-    /// - Note: Completed habits are habits that don't have any active days' challenge. All challenges were completed.
+    /// - Note: Daily habits are habits that don't have any active challenge of
+    ///         days. All challenges were completed.
     /// - Parameter context: The context used to fetch the habits.
     /// - Returns: The created fetched results controller.
-    func makeCompletedFetchedResultsController(context: NSManagedObjectContext) -> NSFetchedResultsController<HabitMO> {
-        // Filter for habits that don't have an active days' challenge
+    func makeDailyFetchedResultsController(context: NSManagedObjectContext) -> NSFetchedResultsController<HabitMO> {
+        // Filter for habits that don't have an active challenge of days
         // (aren't closed yet or date is not in between the challenge).
-        let completedPredicate = NSPredicate(
+        let dailyPredicate = NSPredicate(
             format: """
 SUBQUERY(challenges, $challenge,
     $challenge.isClosed == false AND $challenge.fromDate <= %@ AND %@ <= $challenge.toDate
@@ -66,7 +67,7 @@ SUBQUERY(challenges, $challenge,
             Date().getBeginningOfDay() as NSDate
         )
         let request: NSFetchRequest<HabitMO> = HabitMO.fetchRequest()
-        request.predicate = completedPredicate
+        request.predicate = dailyPredicate
         // The request should order the habits by the creation date and score.
         request.sortDescriptors = [
             NSSortDescriptor(key: "createdAt", ascending: false)
