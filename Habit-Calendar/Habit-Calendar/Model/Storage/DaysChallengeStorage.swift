@@ -40,20 +40,25 @@ struct DaysChallengeStorage {
             daysDates.count > 1,
             "The provided days dates must have two or more dates."
         )
-        let daysDates = daysDates.map { $0.getBeginningOfDay() }
+        var daysDates = daysDates.map { $0.getBeginningOfDay() }.sorted()
         let challenge = DaysChallengeMO(context: context)
 
         // Configure its main properties:
         challenge.id = UUID().uuidString
         challenge.createdAt = Date()
-        challenge.fromDate = daysDates.sorted().first!
-        challenge.toDate = daysDates.sorted().last!
+        challenge.fromDate = daysDates.first!
+        challenge.toDate = daysDates.last!
 
         // Associate its habit entity.
         challenge.habit = habit
 
-        // Configure its days.
-        // Create the days using the HabitDayStorage.
+        // Configure its days. If there's one for today, add it to the challenge.
+
+        if let currentHabitDay = habit.getDay(for: daysDates.first!) {
+            challenge.addToDays(currentHabitDay)
+            _ = daysDates.remove(at: 0)
+        }
+
         let habitDays = habitDayStorage.createDays(
             using: context,
             dates: daysDates,
