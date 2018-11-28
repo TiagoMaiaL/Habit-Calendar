@@ -106,7 +106,7 @@
 "Yes, I did" = "Sim";
 
 /* Text displayed when the current day is marked as executed. */
-"Yes, I did it." = "Sim, eu fiz.";
+"Yes, I did it." = "Sim, eu pratiquei.";
 
 /* Message displayed when the user doesn't have any daily habit. */
 "You don't have any daily habits yet." = "Você ainda não tem nenhum hábito.";
