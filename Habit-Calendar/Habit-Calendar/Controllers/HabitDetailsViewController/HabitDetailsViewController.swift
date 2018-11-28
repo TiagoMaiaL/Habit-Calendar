@@ -180,6 +180,14 @@ class HabitDetailsViewController: UIViewController {
         checkDependencies()
         startObserving()
 
+        // Refresh the current entity, so it's always in sync with the store. The habit entity might be changed
+        // from a notification content extension, and the controller should reflect the user's choice.
+        if let context = habit.managedObjectContext {
+            context.performAndWait {
+                context.refresh(habit!, mergeChanges: true)
+            }
+        }
+
         // Get the habit's challenges to display in the calendar.
         challenges = getChallenges(from: habit)
 
@@ -205,7 +213,9 @@ class HabitDetailsViewController: UIViewController {
         super.viewDidAppear(animated)
 
         /// Every time a habit is displayed, add an app shortcut for it.
-        shortcutsManager.addApplicationShortcut(for: habit)
+        if habit != nil {
+            shortcutsManager.addApplicationShortcut(for: habit)
+        }
     }
 
     // MARK: Navigation

@@ -33,6 +33,9 @@ extension HabitDetailsViewController: NotificationObserver {
 
 extension HabitDetailsViewController: AppActiveObserver {
     @objc func handleActivationEvent(_ notification: Notification) {
+        // Make sure the habit was injected before doing anything.
+        guard habit != nil else { return }
+
         calendarView.reloadData()
         displaySections()
 

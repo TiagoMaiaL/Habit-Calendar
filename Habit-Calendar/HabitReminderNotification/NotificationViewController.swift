@@ -192,7 +192,12 @@ Trying to display the habit but it doesn't exist anymore. Any scheduled notifica
                 habit.markCurrentDayAsExecuted()
                 dataController?.saveContext()
                 display(habit)
+
+                // Dismiss it not immediately, but after a small delay, so the user can see the progress changing.
                 completion(.doNotDismiss)
+                Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { _ in
+                    completion(.dismiss)
+                }
 
             case noAction:
                 habit.markCurrentDayAsExecuted(false)
