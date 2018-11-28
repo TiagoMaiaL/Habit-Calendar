@@ -313,6 +313,7 @@ class HabitsTableViewController: UITableViewController {
     /// TODO: Remove this after testing the notification content extension.
     private func scheduleTestNotification() {
         let habitRequest: NSFetchRequest<HabitMO> = HabitMO.fetchRequest()
+        habitRequest.sortDescriptors = [NSSortDescriptor(key: "createdAt", ascending: false)]
         let results = try? container.viewContext.fetch(habitRequest)
 
         if let habit = results?.first {

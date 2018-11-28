@@ -59,17 +59,34 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
     private func display(_ habit: HabitMO) {
         let hasChallenge = habit.getCurrentChallenge() != nil && habit.getCurrentChallenge()?.getCurrentDay() != nil
 
+        // Display the color of the habit.
+        let color = habit.getColor().uiColor
+        progressView.tint = color
+        dailyHabitColorView.backgroundColor = color
+
         // Configure the initial views for display.
         dailyHabitColorView.isHidden = hasChallenge
         progressView.isHidden = !hasChallenge
         daysToFinishChallengeLabel.isHidden = !hasChallenge
         currentDayOrderLabel.isHidden = !hasChallenge
 
-        // Display the current challenge of days, if the habit has one. Or display the daily view for it.
         if hasChallenge {
             displayChallenge(for: habit)
+        }
+
+        // Display the information about the current day, if it was executed or not.
+        if habit.getCurrentDay()?.wasExecuted ?? false {
+            dayPerformedLabel.text = NSLocalizedString(
+                "Yes, I did it.",
+                comment: "Text displayed when the current day is marked as executed."
+            )
+            dayPerformedLabel.textColor = color
         } else {
-            displayDailyInformation(for: habit)
+            dayPerformedLabel.text = NSLocalizedString(
+                "No, not yet.",
+                comment: "Text displayed when the current day isn't marked as executed."
+            )
+            dayPerformedLabel.textColor = UIColor(red: 47/255, green: 54/255, blue: 64/255, alpha: 1)
         }
     }
 
@@ -81,12 +98,10 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
             return
         }
 
-        let color = habit.getColor().uiColor
         let progressInfo = challenge.getCompletionProgress()
 
         // Configure the display of the progress view.
         progressView.progress = CGFloat(Double(progressInfo.past) / Double(progressInfo.total))
-        progressView.tint = color
 
         // Configure the progress labels
         daysToFinishChallengeLabel.text = String.localizedStringWithFormat(
@@ -107,26 +122,6 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
 
         // Configure the prompt section.
         currentDayOrderLabel.text = challenge.getNotificationOrderText(for: currentDay)
-
-        if currentDay.wasExecuted {
-            dayPerformedLabel.text = NSLocalizedString(
-                "Yes, I did it.",
-                comment: "Text displayed when the current day is marked as executed."
-            )
-            dayPerformedLabel.textColor = color
-        } else {
-            dayPerformedLabel.text = NSLocalizedString(
-                "No, not yet.",
-                comment: "Text displayed when the current day isn't marked as executed."
-            )
-            dayPerformedLabel.textColor = UIColor(red: 47/255, green: 54/255, blue: 64/255, alpha: 1)
-        }
-    }
-
-    /// Displays the notification when the habit doesn't have an active challenge, it's a daily one.
-    /// - Parameter habit: the daily habit to be displayed.
-    private func displayDailyInformation(for habit: HabitMO) {
-        // TODO: Show the daily information.
     }
 
     // MARK: UNNotificationContentExtension Implementation.
