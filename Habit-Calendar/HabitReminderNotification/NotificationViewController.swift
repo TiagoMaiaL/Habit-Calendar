@@ -39,6 +39,9 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
     /// The view displaying the color of the daily habit view.
     @IBOutlet weak var dailyHabitColorView: RoundedView!
 
+    /// The habit being displayed, if it could be fetched.
+    private var habit: HabitMO?
+
     /// The data controller used to initalize core data and fetch the habit
     /// associated with the notification from the store.
     private var dataController: DataController?
@@ -54,7 +57,7 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
 
     /// Displays the habit associated with the received notification.
     /// - Parameter habit: The habit to be displayed.
-    // TODO: Remove the duplicated code.
+    // TODO: Remove the duplicated code between the habit details and this controllers.
     // TODO: Localize the extension.
     private func display(_ habit: HabitMO) {
         let hasChallenge = habit.getCurrentChallenge() != nil && habit.getCurrentChallenge()?.getCurrentDay() != nil
@@ -147,7 +150,57 @@ Trying to display the habit but it doesn't exist anymore. Any scheduled notifica
                     return
                 }
 
+                self?.habit = result.first
                 self?.display(result.first!)
+            }
+        }
+    }
+
+    func didReceive(
+        _ response: UNNotificationResponse,
+        completionHandler completion: @escaping (UNNotificationContentExtensionResponseOption) -> Void
+    ) {
+        guard let category = response.notification.request.content.getCategory() else { return }
+
+        switch category {
+        case .dayPrompt:
+            guard let habit = self.habit else {
+                completion(.dismiss)
+                return
+            }
+
+            if habit.getCurrentDay() == nil {
+                let habitDayStorage = HabitDayStorage(
+                    calendarDayStorage: DayStorage()
+                )
+                _ = habitDayStorage.create(
+                    using: dataController!.persistentContainer.viewContext,
+                    date: Date(),
+                    and: habit
+                )
+            }
+
+            let (yesAction, noAction) = category.getActionIdentifiers()
+
+            switch response.actionIdentifier {
+            case UNNotificationDefaultActionIdentifier:
+                // Pass the response to the app delegate (launching the app).
+                // The extension won't handle other controllers, as it's not an app.
+                completion(.dismissAndForwardAction)
+
+            case yesAction:
+                habit.markCurrentDayAsExecuted()
+                dataController?.saveContext()
+                display(habit)
+                completion(.doNotDismiss)
+
+            case noAction:
+                habit.markCurrentDayAsExecuted(false)
+                dataController?.saveContext()
+                completion(.dismiss)
+
+            default:
+                break
             }
         }
     }

@@ -301,6 +301,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         case .dayPrompt(let habitId):
             guard let habitId = habitId else {
                 assertionFailure("Couldn't get the habit's id from the notification payload.")
+                completionHandler()
                 return
             }
             guard let habit = habitStorage.habit(
@@ -308,10 +309,9 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
                 and: habitId
                 ) else {
                     assertionFailure("Couldn't get the habit using the passed identifier.")
+                    completionHandler()
                     return
             }
-            let (yesAction, noAction) = category.getActionIdentifiers()
-
             switch response.actionIdentifier {
             case UNNotificationDefaultActionIdentifier:
                 if isDisplayingSplashScreen {
@@ -322,15 +322,6 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
                     // If the habits listing controller is already being displayed, show the details.
                     sendNotificationToDisplayHabit(habit)
                 }
-
-            case yesAction:
-                habit.getCurrentChallenge()?.markCurrentDayAsExecuted()
-                dataController.saveContext()
-
-            case noAction:
-                habit.getCurrentChallenge()?.markCurrentDayAsExecuted(false)
-                dataController.saveContext()
-
             default:
                 break
             }
