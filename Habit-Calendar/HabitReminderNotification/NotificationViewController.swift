@@ -71,10 +71,13 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
         dailyHabitColorView.isHidden = hasChallenge
         progressView.isHidden = !hasChallenge
         daysToFinishChallengeLabel.isHidden = !hasChallenge
+        missedDaysLabel.isHidden = !hasChallenge
         currentDayOrderLabel.isHidden = !hasChallenge
 
         if hasChallenge {
             displayChallenge(for: habit)
+        } else {
+            displayInfo(for: habit)
         }
 
         // Display the information about the current day, if it was executed or not.
@@ -125,6 +128,15 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
 
         // Configure the prompt section.
         currentDayOrderLabel.text = challenge.getNotificationOrderText(for: currentDay)
+    }
+
+    /// Displays how many days were executed and missed in the provided habit entity.
+    /// - Parameter habit: The entitiy to get the info from.
+    private func displayInfo(for habit: HabitMO) {
+        executedDaysLabel.text = String.localizedStringWithFormat(
+            NSLocalizedString("%d day(s) executed.", comment: "The label showing how many days were executed."),
+            habit.getExecutedDaysCount()
+        )
     }
 
     // MARK: UNNotificationContentExtension Implementation.
