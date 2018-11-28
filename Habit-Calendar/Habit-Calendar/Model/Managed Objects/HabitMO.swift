@@ -141,4 +141,16 @@ class HabitMO: NSManagedObject {
     func getColor() -> Color {
         return Color(rawValue: color)!
     }
+
+    /// Gets the number of days from this habit that were executed.
+    func getExecutedDaysCount() -> Int {
+        let request: NSFetchRequest<HabitDayMO> = HabitDayMO.fetchRequest()
+        request.predicate = NSPredicate(format: "wasExecuted = true AND habit.id = %@", id ?? "")
+
+        do {
+            return try managedObjectContext?.count(for: request) ?? 0
+        } catch {
+            return 0
+        }
+    }
 }
