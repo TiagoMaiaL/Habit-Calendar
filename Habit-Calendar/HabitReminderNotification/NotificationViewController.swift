@@ -58,7 +58,6 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
     /// Displays the habit associated with the received notification.
     /// - Parameter habit: The habit to be displayed.
     // TODO: Remove the duplicated code between the habit details and this controllers.
-    // TODO: Localize the extension.
     private func display(_ habit: HabitMO) {
         let hasChallenge = habit.getCurrentChallenge() != nil && habit.getCurrentChallenge()?.getCurrentDay() != nil
 
