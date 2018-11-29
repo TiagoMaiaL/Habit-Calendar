@@ -48,7 +48,7 @@
 "Did you practice this activity today?" = "Você praticou esta atividade hoje?";
 
 /* The body text of every notification. */
-"Don't forget to execute this activity today." = "Não se esqueça de praticar esta atividade hoje.";
+"Don't forget to execute this activity." = "Não se esqueça de praticar esta atividade.";
 
 /* The title of the toolbar button. */
 "Done" = "Pronto";

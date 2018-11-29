@@ -52,7 +52,7 @@
 /* Class = "UIButton"; normalTitle = "Create"; ObjectID = "D90-7S-rS4"; */
 "D90-7S-rS4.normalTitle" = "Criar";
 
-/* Class = "UILabel"; text = "Change your lifestyle by building \nnew habits and getting things done.\nAdd as many habits as you wish."; ObjectID = "DM9-ag-tED"; */
+/* Class = "UILabel"; text = "Change your lifestyle by building\nnew habits and getting things done.\nAdd as many habits as you wish."; ObjectID = "DM9-ag-tED"; */
 "DM9-ag-tED.text" = "Construa novos hábitos e mude o seu estilo de vida. Adicione quantos hábitos achar necessário.";
 
 /* Class = "UILabel"; text = "Enable the user notifications to be reminded about your habits"; ObjectID = "dNs-4f-fKj"; */

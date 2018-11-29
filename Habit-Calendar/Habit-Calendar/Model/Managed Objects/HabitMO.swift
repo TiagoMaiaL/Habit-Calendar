@@ -77,7 +77,7 @@ class HabitMO: NSManagedObject {
     /// - Returns: The body text of the habit.
     func getBodyText() -> String {
         return NSLocalizedString(
-            "Don't forget to execute this activity today.",
+            "Don't forget to execute this activity.",
             comment: "The body text of every notification."
         )
     }
