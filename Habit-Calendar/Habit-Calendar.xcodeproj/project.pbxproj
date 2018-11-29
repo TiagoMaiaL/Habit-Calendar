@@ -2158,6 +2158,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 42C35DE723A28815A0C4A785 /* Pods-Habit-Calendar-Habit-Calendar-Dev.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Dev";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -2181,6 +2182,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 579A72317FF280C998EF8FD3 /* Pods-Habit-Calendar-Habit-Calendar-Dev.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Dev";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -2204,6 +2206,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 43E31B715CE069B361825ADF /* Pods-Habit-Calendar-Habit-Calendar-Stg.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Stg";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -2227,6 +2230,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 268F19462C1ACD5147B82258 /* Pods-Habit-Calendar-Habit-Calendar-Stg.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Stg";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -2250,6 +2254,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = FCE84BDDE67C5155152A117E /* Pods-Habit-Calendar-HabitReminderNotification.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				CODE_SIGN_ENTITLEMENTS = HabitReminderNotification/HabitReminderNotification.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -2275,6 +2280,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = CACAF1D72ACC7B014D2CF8CE /* Pods-Habit-Calendar-HabitReminderNotification.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				CODE_SIGN_ENTITLEMENTS = HabitReminderNotification/HabitReminderNotification.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -2417,7 +2423,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B12A12B40816EB9CE8CA092D /* Pods-Habit-Calendar.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Habit-Calendar/Habit-Calendar.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -2442,7 +2448,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8CE4E2B8BCAB12C14147DCDC /* Pods-Habit-Calendar.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Habit-Calendar/Habit-Calendar.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -2467,7 +2473,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B64BF72BCE01F4D9102A23B1 /* Pods-Habit-CalendarTests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 79964U8894;
@@ -2489,7 +2495,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 526255EDCB5FA3EB9A7C5FF7 /* Pods-Habit-CalendarTests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 79964U8894;

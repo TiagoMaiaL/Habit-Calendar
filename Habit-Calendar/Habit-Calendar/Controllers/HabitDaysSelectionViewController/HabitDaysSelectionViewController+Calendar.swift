@@ -40,7 +40,10 @@ extension HabitDaysSelectionViewController {
 
     /// Deselects all dates, except today (which must be always the first challenge's day).
     func clearSelection() {
-        calendarView.deselectAllDates()
+        // TODO: Investigate why simply calling the deselect method is not working.
+        // Add an issue to the pod's repo if this is a bug in it.
+        calendarView.deselect(dates: calendarView.selectedDates, triggerSelectionDelegate: false)
+        handleFooter()
     }
 
     /// Checks if the current selected dates in the calendar are valid dates for the challenge to be created.
