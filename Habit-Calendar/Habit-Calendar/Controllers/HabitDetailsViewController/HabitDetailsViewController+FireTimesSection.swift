@@ -18,14 +18,6 @@ extension HabitDetailsViewController {
 
     /// Displays the fire times section, if there's an active days' challenge for the habit being presented.
     func displayFireTimesSection() {
-        guard habit.getCurrentChallenge() != nil else {
-            // Hide everything related to fire times.
-            noFireTimesContentView.isHidden = true
-            notificationsAuthContentView.isHidden = true
-            fireTimesContentView.isHidden = true
-            return
-        }
-
         notificationManager.getAuthorizationStatus { isAuthorized in
             DispatchQueue.main.sync {
                 if isAuthorized {
