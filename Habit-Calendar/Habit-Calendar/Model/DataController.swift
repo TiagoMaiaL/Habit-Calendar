@@ -18,7 +18,7 @@ class DataController {
 
     // MARK: Initializers
 
-    init(completionBlock: @escaping (Error?) -> Void) {
+    init(completionBlock: @escaping (Error?, NSPersistentContainer) -> Void) {
         persistentContainer = HCPersistentContainer(name: "Habit-Calendar")
 
         let description = persistentContainer.persistentStoreDescriptions.first ?? NSPersistentStoreDescription()
@@ -29,13 +29,19 @@ class DataController {
             persistentContainer.persistentStoreDescriptions.append(description)
         }
 
+        do {
+            try shareStoreIfNecessary()
+        } catch {
+            completionBlock(error, persistentContainer)
+        }
+
         persistentContainer.loadPersistentStores(completionHandler: { (_, error) in
             if let error = error as NSError? {
                 #if DEVELOPMENT
                 fatalError("Unresolved error \(error), \(error.userInfo)")
                 #endif
             }
-            completionBlock(error)
+            completionBlock(error, self.persistentContainer)
         })
     }
 
@@ -54,6 +60,41 @@ class DataController {
                 #else
                 context.rollback()
                 #endif
+            }
+        }
+    }
+
+    /// Shares the storage file with the app group (only in cases of an app update, before adding extensions).
+    private func shareStoreIfNecessary() throws {
+        let fileManager = FileManager.default
+
+        // Get the default store url (when it's not shared with the app group).
+        let previousStoreUrl = try? fileManager.url(
+            for: .applicationSupportDirectory,
+            in: .userDomainMask,
+            appropriateFor: nil,
+            create: false
+        ).appendingPathComponent("HabitCalendar")
+
+        // Get the store url when it's shared with the app group.
+        let appGroupStoreUrl = fileManager.containerURL(
+            forSecurityApplicationGroupIdentifier: "group.tiago.maia.Habit-Calendar"
+        )?.appendingPathComponent("HabitCalendar")
+
+        // Share the file, if not yet shared and only in cases of an app update before the adition of app extensions.
+        if let previousStoreUrl = previousStoreUrl, let appGroupStoreUrl = appGroupStoreUrl {
+            if fileManager.fileExists(atPath: previousStoreUrl.path),
+                !fileManager.fileExists(atPath: appGroupStoreUrl.path) {
+                do {
+                    print("Moving store from private bundle to shared app group container.")
+                    try fileManager.moveItem(
+                        at: previousStoreUrl,
+                        to: appGroupStoreUrl
+                    )
+                } catch {
+                    assertionFailure("Couldn't share the store with the extensions.")
+                    throw error
+                }
             }
         }
     }

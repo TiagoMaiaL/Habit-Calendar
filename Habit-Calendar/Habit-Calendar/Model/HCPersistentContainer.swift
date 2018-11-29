@@ -11,7 +11,13 @@ import CoreData
 class HCPersistentContainer: NSPersistentContainer {
 
     override class func defaultDirectoryURL() -> URL {
-        return super.defaultDirectoryURL().appendingPathComponent("HabitCalendar")
+        guard let appGroupContainerUrl = FileManager.default.containerURL(
+            forSecurityApplicationGroupIdentifier: "group.tiago.maia.Habit-Calendar"
+            ) else {
+                assertionFailure("Couldn't get the url of the shared container.")
+                return super.defaultDirectoryURL().appendingPathComponent("HabitCalendar")
+        }
+        return appGroupContainerUrl.appendingPathComponent("HabitCalendar")
     }
 
 }

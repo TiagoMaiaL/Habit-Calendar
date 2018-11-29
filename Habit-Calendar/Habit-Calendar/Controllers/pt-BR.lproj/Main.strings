@@ -52,7 +52,7 @@
 /* Class = "UIButton"; normalTitle = "Create"; ObjectID = "D90-7S-rS4"; */
 "D90-7S-rS4.normalTitle" = "Criar";
 
-/* Class = "UILabel"; text = "Change your lifestyle by building \nnew habits and getting things done.\nAdd as many habits as you wish."; ObjectID = "DM9-ag-tED"; */
+/* Class = "UILabel"; text = "Change your lifestyle by building\nnew habits and getting things done.\nAdd as many habits as you wish."; ObjectID = "DM9-ag-tED"; */
 "DM9-ag-tED.text" = "Construa novos hábitos e mude o seu estilo de vida. Adicione quantos hábitos achar necessário.";
 
 /* Class = "UILabel"; text = "Enable the user notifications to be reminded about your habits"; ObjectID = "dNs-4f-fKj"; */
@@ -68,7 +68,7 @@
 "fMA-0Y-9jl.text" = "Se desafie";
 
 /* Class = "UILabel"; text = "Did you execute this activity today?"; ObjectID = "FXo-XX-A07"; */
-"FXo-XX-A07.text" = "Você executou esta atividade hoje?";
+"FXo-XX-A07.text" = "Você praticou esta atividade hoje?";
 
 /* Class = "UILabel"; text = "You don’t have an active\nchallange for this habit. What do\nyou think of adding a new one?"; ObjectID = "Gas-Uk-a7r"; */
 "Gas-Uk-a7r.text" = "Você não está em um desafio de dias no momento, você gostaria de começar um para este hábito?";

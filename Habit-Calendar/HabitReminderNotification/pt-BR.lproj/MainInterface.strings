@@ -1,0 +1,21 @@
+/* Class = "UILabel"; text = "Did you execute this activity today?"; ObjectID = "5PZ-6s-TEz"; */
+"5PZ-6s-TEz.text" = "Você praticou esta atividade hoje?";
+
+/* Class = "UILabel"; text = "5 days missed."; ObjectID = "EbI-5Z-cKX"; */
+"EbI-5Z-cKX.text" = "5 days missed.";
+
+/* Class = "UILabel"; text = "Go Jogging"; ObjectID = "Gmb-a6-1Gf"; */
+"Gmb-a6-1Gf.text" = "Go Jogging";
+
+/* Class = "UILabel"; text = "25 days executed."; ObjectID = "iSk-Ub-Z5j"; */
+"iSk-Ub-Z5j.text" = "25 days executed.";
+
+/* Class = "UILabel"; text = "Today is your 31th day."; ObjectID = "O8U-2M-qiy"; */
+"O8U-2M-qiy.text" = "Today is your 31th day.";
+
+/* Class = "UILabel"; text = "8 days to finish the challenge."; ObjectID = "s7U-nr-pMK"; */
+"s7U-nr-pMK.text" = "8 days to finish the challenge.";
+
+/* Class = "UILabel"; text = "Yes, I did it."; ObjectID = "usW-zZ-31R"; */
+"usW-zZ-31R.text" = "Yes, I did it.";
+

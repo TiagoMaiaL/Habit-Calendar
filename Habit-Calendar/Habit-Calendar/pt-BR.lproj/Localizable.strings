@@ -48,7 +48,7 @@
 "Did you practice this activity today?" = "Você praticou esta atividade hoje?";
 
 /* The body text of every notification. */
-"Don't forget to execute this activity today." = "Não se esqueça de praticar esta atividade hoje.";
+"Don't forget to execute this activity." = "Não se esqueça de praticar esta atividade.";
 
 /* The title of the toolbar button. */
 "Done" = "Pronto";
@@ -106,7 +106,7 @@
 "Yes, I did" = "Sim";
 
 /* Text displayed when the current day is marked as executed. */
-"Yes, I did it." = "Sim, eu fiz.";
+"Yes, I did it." = "Sim, eu pratiquei.";
 
 /* Message displayed when the user doesn't have any daily habit. */
 "You don't have any daily habits yet." = "Você ainda não tem nenhum hábito.";

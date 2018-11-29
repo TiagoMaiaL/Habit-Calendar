@@ -62,7 +62,7 @@ class HabitTests: IntegrationTestCase {
     }
 
     func testBodyText() {
-        let expectedBodyText = "Don't forget to execute this activity today."
+        let expectedBodyText = "Don't forget to execute this activity."
         let dummyHabit = habitFactory.makeDummy()
         XCTAssertEqual(expectedBodyText, dummyHabit.getBodyText())
     }
@@ -371,6 +371,23 @@ class HabitTests: IntegrationTestCase {
 
         // 2. Try fetching the day.
         XCTAssertNotNil(dummyHabit.getDay(for: expectedDate!))
+    }
+
+    func testGettingNumberOfExecutedDays() {
+        // Declare a dummy habit.
+        let dummyHabit = habitFactory.makeDummy()
+
+        // Mark all its days as executed.
+        guard let days = dummyHabit.days as? Set<HabitDayMO> else {
+            XCTFail("Couldn't get the ")
+            return
+        }
+        for day in days {
+            day.markAsExecuted()
+        }
+
+        // Get the count and compare.
+        XCTAssertEqual(days.count, dummyHabit.getExecutedDaysCount())
     }
 
     // MARK: Imperatives
