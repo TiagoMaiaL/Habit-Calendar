@@ -16,7 +16,19 @@ extension HabitDetailsViewController {
     /// Displays the current days' challenge's progress.
     func displayProgressSection() {
         guard let challenge = habit.getCurrentChallenge() else {
-            challengeProgressContentView.isHidden = true
+            // Configure view to display only the progress of the habit.
+            missedDaysLabel.isHidden = true
+            daysToFinishLabel.isHidden = true
+            progressBar.isHidden = true
+
+            // How many days were executed.
+            executedDaysLabel.text = String.localizedStringWithFormat(
+                NSLocalizedString("%d day(s) executed.", comment: "The label showing how many days were executed."),
+                habit.getExecutedDaysCount()
+            )
+
+            challengeProgressContentView.setNeedsLayout()
+
             return
         }
 

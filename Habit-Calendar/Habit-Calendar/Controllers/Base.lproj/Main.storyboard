@@ -1098,10 +1098,10 @@ Add as many habits as you wish.</string>
                                 <rect key="frame" x="0.0" y="64" width="414" height="1472"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eOs-VQ-lGp" userLabel="Content view">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1452"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1457.3333333333333"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="jfc-bo-dXq">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="1452"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="1457.3333333333333"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="jve-z3-FPF" userLabel="Calendar">
                                                         <rect key="frame" x="0.0" y="0.0" width="414" height="400"/>
@@ -1250,7 +1250,7 @@ Add as many habits as you wish.</string>
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R4F-r4-Nta" userLabel="Current challenge progress">
-                                                        <rect key="frame" x="0.0" y="608.33333333333337" width="414" height="155"/>
+                                                        <rect key="frame" x="0.0" y="608.33333333333337" width="414" height="160.33333333333337"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aD8-G3-tBi" userLabel="Separator">
                                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="1"/>
@@ -1260,42 +1260,39 @@ Add as many habits as you wish.</string>
                                                                 </constraints>
                                                             </view>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="y1n-vB-8Jr" userLabel="Content">
-                                                                <rect key="frame" x="20" y="20" width="374" height="115"/>
+                                                                <rect key="frame" x="20" y="19.999999999999993" width="374" height="120.33333333333331"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Progress" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tit-Hr-iPN" userLabel="Title">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="92" height="25"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="92" height="26.333333333333332"/>
                                                                         <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="22"/>
                                                                         <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="RxK-1G-Xoa" userLabel="Progress labels">
-                                                                        <rect key="frame" x="0.0" y="35" width="212" height="60"/>
+                                                                        <rect key="frame" x="0.0" y="36.333333333333258" width="212" height="64"/>
                                                                         <subviews>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="8 days to finish the challenge." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sDl-b5-BNm">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="212" height="16.666666666666668"/>
+                                                                                <rect key="frame" x="0.0" y="0.0" width="212" height="18"/>
                                                                                 <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="15"/>
                                                                                 <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="25 days executed." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qf6-KL-TXJ">
-                                                                                <rect key="frame" x="0.0" y="21.666666666666629" width="129" height="16.666666666666671"/>
+                                                                                <rect key="frame" x="0.0" y="23" width="129" height="18"/>
                                                                                 <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="15"/>
                                                                                 <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5 days missed." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ACk-Cd-HNW">
-                                                                                <rect key="frame" x="0.0" y="43.333333333333258" width="105.33333333333333" height="16.666666666666671"/>
+                                                                                <rect key="frame" x="0.0" y="46" width="105.33333333333333" height="18"/>
                                                                                 <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="15"/>
                                                                                 <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                         </subviews>
-                                                                        <constraints>
-                                                                            <constraint firstAttribute="height" constant="60" id="zLC-gm-8ZN"/>
-                                                                        </constraints>
                                                                     </stackView>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IYl-LM-LDu" userLabel="Progress Bar" customClass="ProgressView" customModule="Habit_Calendar" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="105" width="374" height="10"/>
+                                                                        <rect key="frame" x="0.0" y="110.33333333333326" width="374" height="10"/>
                                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="10" id="fDp-CK-ONl"/>
@@ -1321,14 +1318,13 @@ Add as many habits as you wish.</string>
                                                             <constraint firstItem="aD8-G3-tBi" firstAttribute="top" secondItem="R4F-r4-Nta" secondAttribute="top" id="FRe-e2-bX6"/>
                                                             <constraint firstItem="y1n-vB-8Jr" firstAttribute="top" secondItem="R4F-r4-Nta" secondAttribute="top" constant="20" symbolic="YES" id="GfM-G4-mCw"/>
                                                             <constraint firstItem="y1n-vB-8Jr" firstAttribute="leading" secondItem="R4F-r4-Nta" secondAttribute="leading" constant="20" symbolic="YES" id="PD5-d3-Pr2"/>
-                                                            <constraint firstAttribute="height" constant="155" id="PY1-VN-4Hk"/>
                                                             <constraint firstAttribute="trailing" secondItem="aD8-G3-tBi" secondAttribute="trailing" id="Uxi-o8-3N5"/>
                                                             <constraint firstAttribute="trailing" secondItem="y1n-vB-8Jr" secondAttribute="trailing" constant="20" symbolic="YES" id="onl-aS-ff0"/>
                                                             <constraint firstAttribute="bottom" secondItem="y1n-vB-8Jr" secondAttribute="bottom" constant="20" symbolic="YES" id="sEg-bo-WFf"/>
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ELQ-9e-pIF" userLabel="Habit fire times">
-                                                        <rect key="frame" x="0.0" y="765.33333333333337" width="414" height="118"/>
+                                                        <rect key="frame" x="0.0" y="770.66666666666663" width="414" height="118"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ugp-uJ-K1k" userLabel="Separator">
                                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="1"/>
@@ -1378,7 +1374,7 @@ Add as many habits as you wish.</string>
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fEU-7k-LGt" userLabel="User notifications not authorized">
-                                                        <rect key="frame" x="0.0" y="885.33333333333337" width="414" height="153.66666666666663"/>
+                                                        <rect key="frame" x="0.0" y="890.66666666666663" width="414" height="153.66666666666663"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CeL-m6-wqL" userLabel="Separator">
                                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="1"/>
@@ -1428,7 +1424,7 @@ Add as many habits as you wish.</string>
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Nu-Y6-GF2" userLabel="No habit fire times">
-                                                        <rect key="frame" x="0.0" y="1041" width="414" height="243"/>
+                                                        <rect key="frame" x="0.0" y="1046.3333333333333" width="414" height="243"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mh6-dY-OHA" userLabel="Separator">
                                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="1"/>
@@ -1488,7 +1484,7 @@ Add as many habits as you wish.</string>
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4dM-YJ-d58" userLabel="No challenge">
-                                                        <rect key="frame" x="0.0" y="1286" width="414" height="166"/>
+                                                        <rect key="frame" x="0.0" y="1291.3333333333333" width="414" height="166"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5A8-Un-6Na" userLabel="Separator">
                                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="1"/>
@@ -1678,6 +1674,6 @@ you think of adding a new one?</string>
     <inferredMetricsTieBreakers>
         <segue reference="G29-rb-isc"/>
         <segue reference="43l-ZQ-AR3"/>
-        <segue reference="Xkx-Wi-bYR"/>
+        <segue reference="5mV-Cj-rFr"/>
     </inferredMetricsTieBreakers>
 </document>
