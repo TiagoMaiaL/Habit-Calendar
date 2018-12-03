@@ -252,6 +252,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         self.notificationScheduler.scheduleNotifications(for: habit)
                     }
                 }
+
+                try? context.save()
             }
         }
     }
