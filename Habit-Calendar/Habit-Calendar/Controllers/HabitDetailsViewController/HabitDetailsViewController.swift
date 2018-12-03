@@ -19,6 +19,19 @@ class HabitDetailsViewController: UIViewController {
     weak var habit: HabitMO! {
         didSet {
             habitColor = habit.getColor().uiColor
+
+            // Store the initial and final calendar dates.
+            startDate = habit.createdAt ?? Date()
+
+            // The final date or is the last day of the habit or today, depending on which date is higher.
+            let today = Date().getBeginningOfDay()
+            let lastHabitDayDate = habit.getFutureDays().compactMap { $0.day?.date }.sorted().last
+
+            if lastHabitDayDate != nil && today.compare(lastHabitDayDate!) == .orderedAscending {
+                finalDate = lastHabitDayDate!
+            } else {
+                finalDate = today
+            }
         }
     }
 
@@ -28,13 +41,7 @@ class HabitDetailsViewController: UIViewController {
     /// The habit's ordered challenge entities to be displayed.
     /// - Note: This array mustn't be empty. The existence of challenges is ensured
     ///         in the habit's creation and edition process.
-    var challenges: [DaysChallengeMO]! {
-        didSet {
-            // Store the initial and final calendar dates.
-            startDate = challenges.first?.fromDate?.getBeginningOfMonth() ?? Date().getBeginningOfDay()
-            finalDate = challenges.last?.toDate ?? Date().getBeginningOfDay()
-        }
-    }
+    var challenges: [DaysChallengeMO]!
 
     /// The initial calendar date.
     internal var startDate: Date!
