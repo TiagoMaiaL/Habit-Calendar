@@ -55,3 +55,9 @@ protocol HabitHandlingViewModel {
     /// Sets the selected fire time components.
     func setSelectedFireTimes(_ fireTimes: [DateComponents])
 }
+
+extension HabitHandlingViewModel {
+    var canDeleteHabit: Bool {
+        return isEditing
+    }
+}

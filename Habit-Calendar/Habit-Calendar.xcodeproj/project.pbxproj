@@ -386,6 +386,9 @@
 		47DBEF9521B7F2110072F49C /* HabitHandlingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DBEF9421B7F2110072F49C /* HabitHandlingViewModel.swift */; };
 		47DBEF9621B7F2110072F49C /* HabitHandlingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DBEF9421B7F2110072F49C /* HabitHandlingViewModel.swift */; };
 		47DBEF9721B7F2110072F49C /* HabitHandlingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DBEF9421B7F2110072F49C /* HabitHandlingViewModel.swift */; };
+		47DBEF9A21B7FD490072F49C /* HabitHandlerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DBEF9921B7FD490072F49C /* HabitHandlerViewModel.swift */; };
+		47DBEF9B21B7FD490072F49C /* HabitHandlerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DBEF9921B7FD490072F49C /* HabitHandlerViewModel.swift */; };
+		47DBEF9C21B7FD490072F49C /* HabitHandlerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DBEF9921B7FD490072F49C /* HabitHandlerViewModel.swift */; };
 		47E4A94C21A5D5580017F1A8 /* SF-Pro-Display-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4732CE422114D9B600E2770C /* SF-Pro-Display-Black.otf */; };
 		47E4A94D21A5D5590017F1A8 /* SF-Pro-Display-BlackItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4732CE442114D9B900E2770C /* SF-Pro-Display-BlackItalic.otf */; };
 		47E4A94E21A5D5590017F1A8 /* SF-Pro-Display-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4732CE4A2114D9C000E2770C /* SF-Pro-Display-Bold.otf */; };
@@ -656,6 +659,7 @@
 		47D8FC9D20DC13990094026B /* UserNotificationManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationManagerTests.swift; sourceTree = "<group>"; };
 		47DA52B1214D9C5B00A45102 /* NotificationObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationObserver.swift; sourceTree = "<group>"; };
 		47DBEF9421B7F2110072F49C /* HabitHandlingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitHandlingViewModel.swift; sourceTree = "<group>"; };
+		47DBEF9921B7FD490072F49C /* HabitHandlerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitHandlerViewModel.swift; sourceTree = "<group>"; };
 		47E4A94A21A5CAE90017F1A8 /* Habit-Calendar.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Habit-Calendar.entitlements"; sourceTree = "<group>"; };
 		47E4A94B21A5CBB10017F1A8 /* HabitReminderNotification.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HabitReminderNotification.entitlements; sourceTree = "<group>"; };
 		47E6C20A20EAF550003BDB4D /* HabitCreationTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitCreationTableViewController.swift; sourceTree = "<group>"; };
@@ -1118,6 +1122,14 @@
 			path = "Manager Tests";
 			sourceTree = "<group>";
 		};
+		47DBEF9821B7FCFE0072F49C /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				47DBEF9921B7FD490072F49C /* HabitHandlerViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		47E6C20E20EB1213003BDB4D /* Seed */ = {
 			isa = PBXGroup;
 			children = (
@@ -1158,6 +1170,7 @@
 				47E4A94A21A5CAE90017F1A8 /* Habit-Calendar.entitlements */,
 				4713A20520C16555008A13D2 /* Model */,
 				4725D05820C8A42E00C3B63F /* Controllers */,
+				47DBEF9821B7FCFE0072F49C /* ViewModels */,
 				4725D05920C8A43B00C3B63F /* Views */,
 				4779588120D8B2AC0080614F /* Managers */,
 				474F9C8420CC7DEF0094C19C /* Extensions */,
@@ -1817,6 +1830,7 @@
 				470C41EC2144B091007F6F35 /* HabitDaysSelectionViewController.swift in Sources */,
 				470C41ED2144B091007F6F35 /* DevelopmentSeeder.swift in Sources */,
 				470C41EE2144B091007F6F35 /* EmptyStateView.swift in Sources */,
+				47DBEF9B21B7FD490072F49C /* HabitHandlerViewModel.swift in Sources */,
 				47EE82EE214988270093A6D6 /* UserDefaults+Login.swift in Sources */,
 				470C41EF2144B091007F6F35 /* DaysChallengeStorage.swift in Sources */,
 				470C41F02144B091007F6F35 /* UserMO.swift in Sources */,
@@ -1910,6 +1924,7 @@
 				470C425D2144B164007F6F35 /* HabitDaysSelectionViewController.swift in Sources */,
 				470C425E2144B164007F6F35 /* DevelopmentSeeder.swift in Sources */,
 				470C425F2144B164007F6F35 /* EmptyStateView.swift in Sources */,
+				47DBEF9C21B7FD490072F49C /* HabitHandlerViewModel.swift in Sources */,
 				47EE82EF214988270093A6D6 /* UserDefaults+Login.swift in Sources */,
 				470C42602144B164007F6F35 /* DaysChallengeStorage.swift in Sources */,
 				470C42612144B164007F6F35 /* UserMO.swift in Sources */,
@@ -2037,6 +2052,7 @@
 				4737312B20ED502800895DD2 /* HabitDaysSelectionViewController.swift in Sources */,
 				470C41B02144A4B9007F6F35 /* DevelopmentSeeder.swift in Sources */,
 				47EE82ED214988270093A6D6 /* UserDefaults+Login.swift in Sources */,
+				47DBEF9A21B7FD490072F49C /* HabitHandlerViewModel.swift in Sources */,
 				47160A4621387AC300E717C9 /* EmptyStateView.swift in Sources */,
 				47D8308A20FCFDD6002D3A97 /* DaysChallengeStorage.swift in Sources */,
 				4713A1FC20C1643E008A13D2 /* UserMO.swift in Sources */,
