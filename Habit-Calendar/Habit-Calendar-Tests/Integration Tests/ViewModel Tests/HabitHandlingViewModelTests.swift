@@ -170,7 +170,55 @@ class HabitHandlingViewModelTests: IntegrationTestCase {
         XCTAssertEqual(
             Set(habitHandler.getSelectedDays() ?? []),
             Set(days),
-            "The view model should return the setted days."
+            "The view model should return the days previously setted."
+        )
+    }
+
+    func testGettingFireTimeComponentsShouldReturnNil() {
+        let habitHandler = makeHabitHandlingViewModel()
+        XCTAssertNil(habitHandler.getFireTimeComponents(), "An empty view model shouldn't return any fire times.")
+    }
+
+    func testGettingFireTimeComponentsShouldReturnTheSettedOnes() {
+        var habitHandler = makeHabitHandlingViewModel()
+        let components = [DateComponents(hour: 15, minute: 30), DateComponents(hour: 16, minute: 0)]
+        habitHandler.setSelectedFireTimes(components)
+
+        XCTAssertEqual(
+            habitHandler.getFireTimeComponents(),
+            components,
+            "The view model should return the previously setted fire times."
+        )
+    }
+
+    func testGettingFireTimeComponentsShouldReturnTheHabitOnes() {
+        let dummyHabit = habitFactory.makeDummy()
+        guard let fireTimes = dummyHabit.fireTimes as? Set<FireTimeMO> else {
+            XCTFail("Couldn't get the fire times from the dummy habit.")
+            return
+        }
+        let habitHandler = makeHabitHandlingViewModel(habit: dummyHabit)
+
+        let components = fireTimes.map { $0.getFireTimeComponents() }
+
+        XCTAssertEqual(
+            Set(habitHandler.getFireTimeComponents() ?? []),
+            Set(components),
+            "The view model's components should match the ones from the passed habit."
+        )
+    }
+
+    func testSettingFireTimeComponentsShouldOverrideTheHabitOnes() {
+        let dummyHabit = habitFactory.makeDummy()
+        var habitHandler = makeHabitHandlingViewModel(habit: dummyHabit)
+
+        let components = [DateComponents(hour: 12, minute: 0), DateComponents(hour: 12, minute: 30)]
+        habitHandler.setSelectedFireTimes(components)
+
+        XCTAssertEqual(
+            habitHandler.getFireTimeComponents(),
+            components,
+            "The view model should override the habit fire time components by using the passed ones."
         )
     }
 

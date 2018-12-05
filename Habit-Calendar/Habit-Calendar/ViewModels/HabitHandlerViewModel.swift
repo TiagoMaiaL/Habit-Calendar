@@ -42,6 +42,9 @@ struct HabitHandlerViewModel: HabitHandlingViewModel {
     /// The selected dates for the challenge of days.
     private var selectedDays: [Date]?
 
+    /// The selected fire time components.
+    private var fireTimes: [DateComponents]?
+
     // MARK: Initializers
 
     init(habit: HabitMO?,
@@ -53,6 +56,7 @@ struct HabitHandlerViewModel: HabitHandlingViewModel {
 
             habitName = habit.name
             habitColor = habit.getColor()
+            fireTimes = (habit.fireTimes as? Set<FireTimeMO>)?.map { $0.getFireTimeComponents() }
         }
         self.habitStorage = habitStorage
         self.userStorage = userStorage
@@ -94,10 +98,10 @@ struct HabitHandlerViewModel: HabitHandlingViewModel {
     }
 
     func getFireTimeComponents() -> [DateComponents]? {
-        return nil
+        return fireTimes
     }
 
-    func setSelectedFireTimes(_ fireTimes: [DateComponents]) {
-
+    mutating func setSelectedFireTimes(_ fireTimes: [DateComponents]) {
+        self.fireTimes = fireTimes
     }
 }
