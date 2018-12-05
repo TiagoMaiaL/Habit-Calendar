@@ -383,6 +383,9 @@
 		47DA52AF214D623000A45102 /* HabitsTableViewController+FetchedResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47961086214D5E3200BFECFC /* HabitsTableViewController+FetchedResultsController.swift */; };
 		47DA52B0214D623000A45102 /* HabitsTableViewController+FetchedResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47961086214D5E3200BFECFC /* HabitsTableViewController+FetchedResultsController.swift */; };
 		47DA52B2214D9C5B00A45102 /* NotificationObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DA52B1214D9C5B00A45102 /* NotificationObserver.swift */; };
+		47DBEF9521B7F2110072F49C /* HabitHandlingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DBEF9421B7F2110072F49C /* HabitHandlingViewModel.swift */; };
+		47DBEF9621B7F2110072F49C /* HabitHandlingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DBEF9421B7F2110072F49C /* HabitHandlingViewModel.swift */; };
+		47DBEF9721B7F2110072F49C /* HabitHandlingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DBEF9421B7F2110072F49C /* HabitHandlingViewModel.swift */; };
 		47E4A94C21A5D5580017F1A8 /* SF-Pro-Display-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4732CE422114D9B600E2770C /* SF-Pro-Display-Black.otf */; };
 		47E4A94D21A5D5590017F1A8 /* SF-Pro-Display-BlackItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4732CE442114D9B900E2770C /* SF-Pro-Display-BlackItalic.otf */; };
 		47E4A94E21A5D5590017F1A8 /* SF-Pro-Display-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4732CE4A2114D9C000E2770C /* SF-Pro-Display-Bold.otf */; };
@@ -652,6 +655,7 @@
 		47D8308F20FD6288002D3A97 /* DaysChallengeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaysChallengeTests.swift; sourceTree = "<group>"; };
 		47D8FC9D20DC13990094026B /* UserNotificationManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationManagerTests.swift; sourceTree = "<group>"; };
 		47DA52B1214D9C5B00A45102 /* NotificationObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationObserver.swift; sourceTree = "<group>"; };
+		47DBEF9421B7F2110072F49C /* HabitHandlingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitHandlingViewModel.swift; sourceTree = "<group>"; };
 		47E4A94A21A5CAE90017F1A8 /* Habit-Calendar.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Habit-Calendar.entitlements"; sourceTree = "<group>"; };
 		47E4A94B21A5CBB10017F1A8 /* HabitReminderNotification.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HabitReminderNotification.entitlements; sourceTree = "<group>"; };
 		47E6C20A20EAF550003BDB4D /* HabitCreationTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitCreationTableViewController.swift; sourceTree = "<group>"; };
@@ -1088,6 +1092,7 @@
 				47C320372130799C0094BBF8 /* HabitCreationTableViewController+ColorField.swift */,
 				47C32039213079AD0094BBF8 /* HabitCreationTableViewController+NameField.swift */,
 				47BC54092176754800A5DC17 /* HabitCreationTableViewController+HabitHandling.swift */,
+				47DBEF9421B7F2110072F49C /* HabitHandlingViewModel.swift */,
 			);
 			path = HabitCreationTableViewController;
 			sourceTree = "<group>";
@@ -1152,8 +1157,8 @@
 			children = (
 				47E4A94A21A5CAE90017F1A8 /* Habit-Calendar.entitlements */,
 				4713A20520C16555008A13D2 /* Model */,
-				4725D05920C8A43B00C3B63F /* Views */,
 				4725D05820C8A42E00C3B63F /* Controllers */,
+				4725D05920C8A43B00C3B63F /* Views */,
 				4779588120D8B2AC0080614F /* Managers */,
 				474F9C8420CC7DEF0094C19C /* Extensions */,
 				47A8DF252154250E00468698 /* Protocols */,
@@ -1804,6 +1809,7 @@
 				47DA52AD214D622C00A45102 /* HabitsTableViewController+DataSource.swift in Sources */,
 				47A2AEF1215ADCC800AF7788 /* HabitDetailsViewController+NotificationObserver.swift in Sources */,
 				470C41E82144B091007F6F35 /* HabitDayMO.swift in Sources */,
+				47DBEF9621B7F2110072F49C /* HabitHandlingViewModel.swift in Sources */,
 				470C41E92144B091007F6F35 /* HabitDetailsViewController.swift in Sources */,
 				470C41EA2144B091007F6F35 /* HabitCreationTableViewController+NameField.swift in Sources */,
 				47DA52AF214D623000A45102 /* HabitsTableViewController+FetchedResultsController.swift in Sources */,
@@ -1896,6 +1902,7 @@
 				47DA52AE214D622D00A45102 /* HabitsTableViewController+DataSource.swift in Sources */,
 				47A2AEF2215ADCC900AF7788 /* HabitDetailsViewController+NotificationObserver.swift in Sources */,
 				470C42592144B164007F6F35 /* HabitDayMO.swift in Sources */,
+				47DBEF9721B7F2110072F49C /* HabitHandlingViewModel.swift in Sources */,
 				470C425A2144B164007F6F35 /* HabitDetailsViewController.swift in Sources */,
 				470C425B2144B164007F6F35 /* HabitCreationTableViewController+NameField.swift in Sources */,
 				47DA52B0214D623000A45102 /* HabitsTableViewController+FetchedResultsController.swift in Sources */,
@@ -2022,6 +2029,7 @@
 				47A2AEF0215ADBBB00AF7788 /* HabitDetailsViewController+NotificationObserver.swift in Sources */,
 				4732CE7C2118DA8400E2770C /* UnderlinedTextField.swift in Sources */,
 				4713A20020C164E6008A13D2 /* HabitDayMO.swift in Sources */,
+				47DBEF9521B7F2110072F49C /* HabitHandlingViewModel.swift in Sources */,
 				47E6C20D20EAF567003BDB4D /* HabitDetailsViewController.swift in Sources */,
 				47961087214D5E3300BFECFC /* HabitsTableViewController+FetchedResultsController.swift in Sources */,
 				47C3203A213079AD0094BBF8 /* HabitCreationTableViewController+NameField.swift in Sources */,
