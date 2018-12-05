@@ -39,6 +39,9 @@ struct HabitHandlerViewModel: HabitHandlingViewModel {
     /// The color of the habit, provided by the entity or set by the user.
     private var habitColor: HabitMO.Color?
 
+    /// The selected dates for the challenge of days.
+    private var selectedDays: [Date]?
+
     // MARK: Initializers
 
     init(habit: HabitMO?,
@@ -47,6 +50,7 @@ struct HabitHandlerViewModel: HabitHandlingViewModel {
          container: NSPersistentContainer) {
         if let habit = habit {
             self.habit = habit
+
             habitName = habit.name
             habitColor = habit.getColor()
         }
@@ -58,7 +62,7 @@ struct HabitHandlerViewModel: HabitHandlingViewModel {
     // MARK: Imperatives
 
     func deleteHabit() {
-        
+
     }
 
     func saveHabit() {
@@ -82,11 +86,11 @@ struct HabitHandlerViewModel: HabitHandlingViewModel {
     }
 
     func getSelectedDays() -> [Date]? {
-        return nil
+        return selectedDays
     }
 
-    func setDays(_ days: [Date]) {
-
+    mutating func setDays(_ days: [Date]) {
+        selectedDays = days
     }
 
     func getFireTimeComponents() -> [DateComponents]? {

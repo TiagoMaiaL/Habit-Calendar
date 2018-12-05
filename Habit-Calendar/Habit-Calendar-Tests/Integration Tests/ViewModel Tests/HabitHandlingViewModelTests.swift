@@ -147,6 +147,33 @@ class HabitHandlingViewModelTests: IntegrationTestCase {
         )
     }
 
+    func testGettingDaysShouldReturnNil() {
+        let habitHandler = makeHabitHandlingViewModel()
+        XCTAssertNil(habitHandler.getSelectedDays(), "An empty habit handler shouldn't return any days.")
+    }
+
+    func testPassingHabitWontChangeTheDaysPropertyOfTheViewModel() {
+        let dummyHabit = habitFactory.makeDummy()
+        let habitHandler = makeHabitHandlingViewModel(habit: dummyHabit)
+
+        XCTAssertNil(
+            habitHandler.getSelectedDays(),
+            "The view model shouldn't take the habit days into account, in case the habit is being edited."
+        )
+    }
+
+    func testGettingDaysShouldReturnTheSettedOnes() {
+        var habitHandler = makeHabitHandlingViewModel()
+        let days = [Date(), Date().byAddingDays(2), Date().byAddingDays(-5)].compactMap {$0}
+        habitHandler.setDays(days)
+
+        XCTAssertEqual(
+            Set(habitHandler.getSelectedDays() ?? []),
+            Set(days),
+            "The view model should return the setted days."
+        )
+    }
+
     // MARK: Imperatives
 
     /// Instantiates and returns an object conforming to the HabitHandlingViewModel protocol. This object is tested
