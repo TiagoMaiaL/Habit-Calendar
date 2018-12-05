@@ -150,4 +150,61 @@ class HabitHandlingViewModelTests: IntegrationTestCase {
             "The view model's name should match the setted one, overriding the one from the associated habit."
         )
     }
+
+    func testGettingColorShouldReturnNil() {
+        let habitHandler: HabitHandlingViewModel = HabitHandlerViewModel(
+            habit: nil,
+            habitStorage: habitStorage,
+            userStorage: UserStorage(),
+            container: memoryPersistentContainer
+        )
+
+        XCTAssertNil(habitHandler.getHabitColor(), "The habit view model is empty and shouldn't return the color.")
+    }
+
+    func testGettingColorShouldReturnTheHabitProperty() {
+        let dummyHabit = habitFactory.makeDummy()
+        let habitHandler: HabitHandlingViewModel = HabitHandlerViewModel(
+            habit: dummyHabit,
+            habitStorage: habitStorage,
+            userStorage: UserStorage(),
+            container: memoryPersistentContainer
+        )
+
+        XCTAssertEqual(
+            dummyHabit.getColor(),
+            habitHandler.getHabitColor(),
+            "The view model color property should match the habit one."
+        )
+    }
+
+    func testGettingColorShouldReturnTheSettedOne() {
+        var habitHandler: HabitHandlingViewModel = HabitHandlerViewModel(
+            habit: nil,
+            habitStorage: habitStorage,
+            userStorage: UserStorage(),
+            container: memoryPersistentContainer
+        )
+        let color = HabitMO.Color.systemBlue
+        habitHandler.setHabitColor(color)
+
+        XCTAssertEqual(color, habitHandler.getHabitColor(), "The color property should match the setted one.")
+    }
+
+    func testSettingColorShouldOverrideTheHabitOne() {
+        var habitHandler: HabitHandlingViewModel = HabitHandlerViewModel(
+            habit: habitFactory.makeDummy(),
+            habitStorage: habitStorage,
+            userStorage: UserStorage(),
+            container: memoryPersistentContainer
+        )
+        let color = HabitMO.Color.systemPink
+        habitHandler.setHabitColor(color)
+
+        XCTAssertEqual(
+            color,
+            habitHandler.getHabitColor(),
+            "Setting the color property should override the habit one."
+        )
+    }
 }

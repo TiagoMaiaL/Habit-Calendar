@@ -33,8 +33,11 @@ struct HabitHandlerViewModel: HabitHandlingViewModel {
         return false
     }
 
-    /// The name of the habit, it can be provided by it, or set by the user.
+    /// The name of the habit, it can be provided by the entity, or set by the user.
     private var habitName: String?
+
+    /// The color of the habit, provided by the entity or set by the user.
+    private var habitColor: HabitMO.Color?
 
     // MARK: Initializers
 
@@ -46,6 +49,7 @@ struct HabitHandlerViewModel: HabitHandlingViewModel {
 
         if let habit = self.habit {
             habitName = habit.name
+            habitColor = habit.getColor()
         }
 
         self.habitStorage = habitStorage
@@ -72,11 +76,11 @@ struct HabitHandlerViewModel: HabitHandlingViewModel {
     }
 
     func getHabitColor() -> HabitMO.Color? {
-        return nil
+        return habitColor
     }
 
-    func setHabitColor(_ color: HabitMO.Color) {
-
+    mutating func setHabitColor(_ color: HabitMO.Color) {
+        habitColor = color
     }
 
     func getSelectedDays() -> [Date]? {
