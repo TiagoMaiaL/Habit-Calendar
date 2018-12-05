@@ -22,6 +22,13 @@ protocol HabitHandlingViewModel {
     /// Flag indicating if the deletion operation is available.
     var canDeleteHabit: Bool { get }
 
+    // MARK: Initializers
+
+    init(habit: HabitMO?,
+         habitStorage: HabitStorage,
+         userStorage: UserStorage,
+         container: NSPersistentContainer)
+
     // MARK: Imperatives
 
     /// Deletes the habit, if deletable (The controller only shows the deletion option in case the habit

@@ -48,57 +48,31 @@ class HabitHandlingViewModelTests: IntegrationTestCase {
     // MARK: Tests
 
     func testIfIsEditingHabitFlagIsTrue() {
-        let habitHandler: HabitHandlingViewModel = HabitHandlerViewModel(
-            habit: habitFactory.makeDummy(),
-            habitStorage: habitStorage,
-            userStorage: UserStorage(),
-            container: memoryPersistentContainer
-        )
+        let habitHandler = makeHabitHandlingViewModel(habit: habitFactory.makeDummy())
 
         XCTAssertTrue(habitHandler.isEditing)
     }
 
     func testIfIsEditingHabitFlagIsFalse() {
-        let habitHandler: HabitHandlingViewModel = HabitHandlerViewModel(
-            habit: nil,
-            habitStorage: habitStorage,
-            userStorage: UserStorage(),
-            container: memoryPersistentContainer
-        )
+        let habitHandler = makeHabitHandlingViewModel()
 
         XCTAssertFalse(habitHandler.isEditing, "The view model shouldn't be editing any habit, none was passed.")
     }
 
     func testIfHabitCanBeDeletedReturnsFalse() {
-        // Declare the view model.
-        let habitHandler: HabitHandlingViewModel = HabitHandlerViewModel(
-            habit: nil,
-            habitStorage: habitStorage,
-            userStorage: UserStorage(),
-            container: memoryPersistentContainer
-        )
+        let habitHandler = makeHabitHandlingViewModel()
 
         XCTAssertFalse(habitHandler.canDeleteHabit, "The habit can't be deleted, since there isn't one being edited.")
     }
 
     func testIfHabitCanBeDeleted() {
-        let habitHandler: HabitHandlingViewModel = HabitHandlerViewModel(
-            habit: habitFactory.makeDummy(),
-            habitStorage: habitStorage,
-            userStorage: UserStorage(),
-            container: memoryPersistentContainer
-        )
+        let habitHandler = makeHabitHandlingViewModel(habit: habitFactory.makeDummy())
 
         XCTAssertTrue(habitHandler.canDeleteHabit, "The view model should be able to delete the habit")
     }
 
     func testGettingNameShouldReturnNothing() {
-        let habitHandler: HabitHandlingViewModel = HabitHandlerViewModel(
-            habit: nil,
-            habitStorage: habitStorage,
-            userStorage: UserStorage(),
-            container: memoryPersistentContainer
-        )
+        let habitHandler = makeHabitHandlingViewModel()
 
         XCTAssertNil(
             habitHandler.getHabitName(),
@@ -108,12 +82,7 @@ class HabitHandlingViewModelTests: IntegrationTestCase {
 
     func testGettingNameShouldReturnThePassedHabitName() {
         let dummyHabit = habitFactory.makeDummy()
-        let habitHandler: HabitHandlingViewModel = HabitHandlerViewModel(
-            habit: dummyHabit,
-            habitStorage: habitStorage,
-            userStorage: UserStorage(),
-            container: memoryPersistentContainer
-        )
+        let habitHandler = makeHabitHandlingViewModel(habit: dummyHabit)
         XCTAssertEqual(
             dummyHabit.name,
             habitHandler.getHabitName(),
@@ -122,12 +91,7 @@ class HabitHandlingViewModelTests: IntegrationTestCase {
     }
 
     func testGettingNameShouldReturnThePassedOne() {
-        var habitHandler: HabitHandlingViewModel = HabitHandlerViewModel(
-            habit: nil,
-            habitStorage: habitStorage,
-            userStorage: UserStorage(),
-            container: memoryPersistentContainer
-        )
+        var habitHandler = makeHabitHandlingViewModel()
         let name = "the name of the habit"
         habitHandler.setHabitName(name)
 
@@ -135,12 +99,7 @@ class HabitHandlingViewModelTests: IntegrationTestCase {
     }
 
     func testSettingNameShouldOverrideTheHabitOne() {
-        var habitHandler: HabitHandlingViewModel = HabitHandlerViewModel(
-            habit: habitFactory.makeDummy(),
-            habitStorage: habitStorage,
-            userStorage: UserStorage(),
-            container: memoryPersistentContainer
-        )
+        var habitHandler = makeHabitHandlingViewModel(habit: habitFactory.makeDummy())
         let name = "The new name of the habit"
         habitHandler.setHabitName(name)
 
@@ -152,24 +111,14 @@ class HabitHandlingViewModelTests: IntegrationTestCase {
     }
 
     func testGettingColorShouldReturnNil() {
-        let habitHandler: HabitHandlingViewModel = HabitHandlerViewModel(
-            habit: nil,
-            habitStorage: habitStorage,
-            userStorage: UserStorage(),
-            container: memoryPersistentContainer
-        )
+        let habitHandler = makeHabitHandlingViewModel()
 
         XCTAssertNil(habitHandler.getHabitColor(), "The habit view model is empty and shouldn't return the color.")
     }
 
     func testGettingColorShouldReturnTheHabitProperty() {
         let dummyHabit = habitFactory.makeDummy()
-        let habitHandler: HabitHandlingViewModel = HabitHandlerViewModel(
-            habit: dummyHabit,
-            habitStorage: habitStorage,
-            userStorage: UserStorage(),
-            container: memoryPersistentContainer
-        )
+        let habitHandler = makeHabitHandlingViewModel(habit: dummyHabit)
 
         XCTAssertEqual(
             dummyHabit.getColor(),
@@ -179,12 +128,7 @@ class HabitHandlingViewModelTests: IntegrationTestCase {
     }
 
     func testGettingColorShouldReturnTheSettedOne() {
-        var habitHandler: HabitHandlingViewModel = HabitHandlerViewModel(
-            habit: nil,
-            habitStorage: habitStorage,
-            userStorage: UserStorage(),
-            container: memoryPersistentContainer
-        )
+        var habitHandler = makeHabitHandlingViewModel()
         let color = HabitMO.Color.systemBlue
         habitHandler.setHabitColor(color)
 
@@ -192,12 +136,7 @@ class HabitHandlingViewModelTests: IntegrationTestCase {
     }
 
     func testSettingColorShouldOverrideTheHabitOne() {
-        var habitHandler: HabitHandlingViewModel = HabitHandlerViewModel(
-            habit: habitFactory.makeDummy(),
-            habitStorage: habitStorage,
-            userStorage: UserStorage(),
-            container: memoryPersistentContainer
-        )
+        var habitHandler = makeHabitHandlingViewModel(habit: habitFactory.makeDummy())
         let color = HabitMO.Color.systemPink
         habitHandler.setHabitColor(color)
 
@@ -205,6 +144,21 @@ class HabitHandlingViewModelTests: IntegrationTestCase {
             color,
             habitHandler.getHabitColor(),
             "Setting the color property should override the habit one."
+        )
+    }
+
+    // MARK: Imperatives
+
+    /// Instantiates and returns an object conforming to the HabitHandlingViewModel protocol. This object is tested
+    /// under the protocol interface.
+    /// - Note: Any object conforming to the HabitHandlingViewModel protocol can be tested under this test suite.
+    /// - Parameter habit: the habit entity associated with the view model.
+    private func makeHabitHandlingViewModel(habit: HabitMO? = nil) -> HabitHandlingViewModel {
+        return HabitHandlerViewModel(
+            habit: habit,
+            habitStorage: habitStorage,
+            userStorage: UserStorage(),
+            container: memoryPersistentContainer
         )
     }
 }

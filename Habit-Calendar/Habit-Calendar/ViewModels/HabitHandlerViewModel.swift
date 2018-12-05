@@ -45,13 +45,11 @@ struct HabitHandlerViewModel: HabitHandlingViewModel {
          habitStorage: HabitStorage,
          userStorage: UserStorage,
          container: NSPersistentContainer) {
-        self.habit = habit
-
-        if let habit = self.habit {
+        if let habit = habit {
+            self.habit = habit
             habitName = habit.name
             habitColor = habit.getColor()
         }
-
         self.habitStorage = habitStorage
         self.userStorage = userStorage
         self.container = container
@@ -60,7 +58,7 @@ struct HabitHandlerViewModel: HabitHandlingViewModel {
     // MARK: Imperatives
 
     func deleteHabit() {
-
+        
     }
 
     func saveHabit() {
