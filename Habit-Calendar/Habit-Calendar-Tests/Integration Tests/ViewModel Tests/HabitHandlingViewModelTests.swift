@@ -82,7 +82,6 @@ class HabitHandlingViewModelTests: IntegrationTestCase {
     }
 
     func testIfHabitCanBeDeleted() {
-        // Declare the view model.
         let habitHandler: HabitHandlingViewModel = HabitHandlerViewModel(
             habit: habitFactory.makeDummy(),
             habitStorage: habitStorage,
@@ -91,5 +90,64 @@ class HabitHandlingViewModelTests: IntegrationTestCase {
         )
 
         XCTAssertTrue(habitHandler.canDeleteHabit, "The view model should be able to delete the habit")
+    }
+
+    func testGettingNameShouldReturnNothing() {
+        let habitHandler: HabitHandlingViewModel = HabitHandlerViewModel(
+            habit: nil,
+            habitStorage: habitStorage,
+            userStorage: UserStorage(),
+            container: memoryPersistentContainer
+        )
+
+        XCTAssertNil(
+            habitHandler.getHabitName(),
+            "The habit name should be nil, since there's no habit in the view model"
+        )
+    }
+
+    func testGettingNameShouldReturnThePassedHabitName() {
+        let dummyHabit = habitFactory.makeDummy()
+        let habitHandler: HabitHandlingViewModel = HabitHandlerViewModel(
+            habit: dummyHabit,
+            habitStorage: habitStorage,
+            userStorage: UserStorage(),
+            container: memoryPersistentContainer
+        )
+        XCTAssertEqual(
+            dummyHabit.name,
+            habitHandler.getHabitName(),
+            "The name returned from the view model should match the habit one."
+        )
+    }
+
+    func testGettingNameShouldReturnThePassedOne() {
+        var habitHandler: HabitHandlingViewModel = HabitHandlerViewModel(
+            habit: nil,
+            habitStorage: habitStorage,
+            userStorage: UserStorage(),
+            container: memoryPersistentContainer
+        )
+        let name = "the name of the habit"
+        habitHandler.setHabitName(name)
+
+        XCTAssertEqual(name, habitHandler.getHabitName(), "The view model's name should match the setted one.")
+    }
+
+    func testSettingNameShouldOverrideTheHabitOne() {
+        var habitHandler: HabitHandlingViewModel = HabitHandlerViewModel(
+            habit: habitFactory.makeDummy(),
+            habitStorage: habitStorage,
+            userStorage: UserStorage(),
+            container: memoryPersistentContainer
+        )
+        let name = "The new name of the habit"
+        habitHandler.setHabitName(name)
+
+        XCTAssertEqual(
+            name,
+            habitHandler.getHabitName(),
+            "The view model's name should match the setted one, overriding the one from the associated habit."
+        )
     }
 }

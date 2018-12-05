@@ -13,12 +13,16 @@ struct HabitHandlerViewModel: HabitHandlingViewModel {
 
     // MARK: Properties
 
+    /// The habit being handled by this view model.
     private var habit: HabitMO?
 
+    /// The habit storage used to create/edit/delete the habit entity.
     private let habitStorage: HabitStorage
 
+    /// The user storage used to get the main user and associate it to the habit.
     private let userStorage: UserStorage
 
+    /// The persistent container used to perform the operations of the habit.
     private let container: NSPersistentContainer
 
     var isEditing: Bool {
@@ -29,6 +33,9 @@ struct HabitHandlerViewModel: HabitHandlingViewModel {
         return false
     }
 
+    /// The name of the habit, it can be provided by it, or set by the user.
+    private var habitName: String?
+
     // MARK: Initializers
 
     init(habit: HabitMO?,
@@ -36,6 +43,11 @@ struct HabitHandlerViewModel: HabitHandlingViewModel {
          userStorage: UserStorage,
          container: NSPersistentContainer) {
         self.habit = habit
+
+        if let habit = self.habit {
+            habitName = habit.name
+        }
+
         self.habitStorage = habitStorage
         self.userStorage = userStorage
         self.container = container
@@ -51,12 +63,12 @@ struct HabitHandlerViewModel: HabitHandlingViewModel {
 
     }
 
-    func getHabitName() -> String {
-        return ""
+    func getHabitName() -> String? {
+        return habitName
     }
 
-    func setHabitName(_ name: String) {
-
+    mutating func setHabitName(_ name: String) {
+        habitName = name
     }
 
     func getHabitColor() -> HabitMO.Color? {

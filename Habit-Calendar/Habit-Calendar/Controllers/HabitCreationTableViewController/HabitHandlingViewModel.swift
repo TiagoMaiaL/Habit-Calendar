@@ -31,29 +31,29 @@ protocol HabitHandlingViewModel {
     /// Saves the habit, if valid.
     func saveHabit()
 
-    /// Returns the name of the habit to be displayed to the user.
-    func getHabitName() -> String
+    /// Returns the name of the habit to be displayed to the user, if set.
+    func getHabitName() -> String?
 
     /// Sets the name of the habit.
-    func setHabitName(_ name: String)
+    mutating func setHabitName(_ name: String)
 
     /// Returns the color of the habit, if set.
     func getHabitColor() -> HabitMO.Color?
 
     /// Sets the color of the habit.
-    func setHabitColor(_ color: HabitMO.Color)
+    mutating func setHabitColor(_ color: HabitMO.Color)
 
     /// Returns the days selected for a challenge of days, if set.
     func getSelectedDays() -> [Date]?
 
     /// Sets the selected days for the challenge.
-    func setDays(_ days: [Date])
+    mutating func setDays(_ days: [Date])
 
     /// Returns the selected fire times components, if set.
     func getFireTimeComponents() -> [DateComponents]?
 
     /// Sets the selected fire time components.
-    func setSelectedFireTimes(_ fireTimes: [DateComponents])
+    mutating func setSelectedFireTimes(_ fireTimes: [DateComponents])
 }
 
 extension HabitHandlingViewModel {
