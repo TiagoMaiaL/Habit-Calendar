@@ -174,6 +174,56 @@ class HabitHandlingViewModelTests: IntegrationTestCase {
         )
     }
 
+    func testGettingTextDescribingNoDaysWereSelected() {
+        let habitHandler = makeHabitHandlingViewModel()
+        XCTAssertEqual(
+            habitHandler.getDaysDescriptionText(),
+            "No days were selected.",
+            "The text should inform that no days were selected."
+        )
+    }
+
+    func testGettingTextDescribingHowManyDaysWereSelected() {
+        var habitHandler = makeHabitHandlingViewModel()
+        let days = (0...Int.random(2..<8)).compactMap { Date().byAddingDays($0)?.getBeginningOfDay() }
+        habitHandler.setDays(days)
+
+        XCTAssertEqual(habitHandler.getDaysDescriptionText(), "\(days.count) days selected.")
+    }
+
+    func testGettingInitialDateDescriptionText() {
+        var habitHandler = makeHabitHandlingViewModel()
+        let days = [Date().getBeginningOfDay(), Date().getBeginningOfDay().byAddingDays(1)].compactMap {$0}
+        habitHandler.setDays(days)
+
+        XCTAssertEqual(
+            habitHandler.getFirstDateDescriptionText(),
+            DateFormatter.shortCurrent.string(from: days.first!),
+            "View model should return the correct date description in the beginning of the range."
+        )
+    }
+
+    func testGettingInitialDateDescriptionTextShouldReturnNil() {
+        let habitHandler = makeHabitHandlingViewModel()
+        XCTAssertNil(habitHandler.getFirstDateDescriptionText())
+    }
+
+    func testGettingFinalDateDescriptionText() {
+        var habitHandler = makeHabitHandlingViewModel()
+        let days = [Date().getBeginningOfDay(), Date().getBeginningOfDay().byAddingDays(5)].compactMap {$0}
+        habitHandler.setDays(days)
+
+        XCTAssertEqual(
+            habitHandler.getLastDateDescriptionText(),
+            DateFormatter.shortCurrent.string(from: days.last!)
+        )
+    }
+
+    func testGettingLastDateDescriptionTextShouldReturnNil() {
+        let habitHandler = makeHabitHandlingViewModel()
+        XCTAssertNil(habitHandler.getLastDateDescriptionText())
+    }
+
     func testGettingFireTimeComponentsShouldReturnNil() {
         let habitHandler = makeHabitHandlingViewModel()
         XCTAssertNil(habitHandler.getFireTimeComponents(), "An empty view model shouldn't return any fire times.")

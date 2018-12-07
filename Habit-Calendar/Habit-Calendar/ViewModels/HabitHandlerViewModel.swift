@@ -94,7 +94,40 @@ struct HabitHandlerViewModel: HabitHandlingViewModel {
     }
 
     mutating func setDays(_ days: [Date]) {
-        selectedDays = days
+        selectedDays = days.sorted()
+    }
+
+    func getDaysDescriptionText() -> String {
+        if let days = selectedDays, !days.isEmpty {
+            return String.localizedStringWithFormat(
+                NSLocalizedString(
+                    "%d day(s) selected.",
+                    comment: "The label showing how many days were selected for the challenge."
+                ),
+                days.count
+            )
+        } else {
+            return NSLocalizedString(
+                "No days were selected.",
+                comment: "Text displayed when the user didn't select any days of a new challenge of days."
+            )
+        }
+    }
+
+    func getFirstDateDescriptionText() -> String? {
+        if let days = selectedDays, !days.isEmpty {
+            return DateFormatter.shortCurrent.string(from: days.first!)
+        } else {
+            return nil
+        }
+    }
+
+    func getLastDateDescriptionText() -> String? {
+        if let days = selectedDays, !days.isEmpty {
+            return DateFormatter.shortCurrent.string(from: days.last!)
+        } else {
+            return nil
+        }
     }
 
     func getFireTimeComponents() -> [DateComponents]? {

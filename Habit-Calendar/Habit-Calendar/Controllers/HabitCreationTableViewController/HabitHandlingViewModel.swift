@@ -56,6 +56,15 @@ protocol HabitHandlingViewModel {
     /// Sets the selected days for the challenge.
     mutating func setDays(_ days: [Date])
 
+    /// Returns a text describing how many days were selected so far.
+    func getDaysDescriptionText() -> String
+
+    /// Returns the first date text from the sorted selected days.
+    func getFirstDateDescriptionText() -> String?
+
+    /// Returns the last date text from the sorted selected days.
+    func getLastDateDescriptionText() -> String?
+
     /// Returns the selected fire times components, if set.
     func getFireTimeComponents() -> [DateComponents]?
 
