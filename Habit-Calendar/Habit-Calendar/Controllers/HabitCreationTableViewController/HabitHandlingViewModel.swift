@@ -70,6 +70,12 @@ protocol HabitHandlingViewModel {
 
     /// Sets the selected fire time components.
     mutating func setSelectedFireTimes(_ fireTimes: [DateComponents])
+
+    /// Returns a text describing how many fire times were selected.
+    func getFireTimesAmountDescriptionText() -> String
+
+    /// Returns a text describing the selected fire times.
+    func getFireTimesDescriptionText() -> String?
 }
 
 extension HabitHandlingViewModel {

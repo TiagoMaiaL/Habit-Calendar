@@ -137,4 +137,40 @@ struct HabitHandlerViewModel: HabitHandlingViewModel {
     mutating func setSelectedFireTimes(_ fireTimes: [DateComponents]) {
         self.fireTimes = fireTimes
     }
+
+    func getFireTimesAmountDescriptionText() -> String {
+        return String.localizedStringWithFormat(
+            NSLocalizedString(
+                "%d fire time(s) selected.",
+                comment: "The number of fire times selected by the user."
+            ),
+            fireTimes?.count ?? 0
+        )
+    }
+
+    func getFireTimesDescriptionText() -> String? {
+        if let fireTimes = fireTimes, !fireTimes.isEmpty {
+            // TODO: This code is replicated between the protocol and this view model. Fix this.
+            // Set the text for the label displaying some of the selected fire times:
+            let fireTimeFormatter = DateFormatter.fireTimeFormatter
+            let fireDates = fireTimes.compactMap {
+                Calendar.current.date(from: $0)
+                }.sorted()
+            var fireTimesText = ""
+
+            for fireDate in fireDates {
+                fireTimesText += fireTimeFormatter.string(from: fireDate)
+
+                // If the current fire time isn't the last one,
+                // include a colon to separate it from the next.
+                if fireDates.index(of: fireDate)! != fireDates.endIndex - 1 {
+                    fireTimesText += ", "
+                }
+            }
+
+            return fireTimesText
+        } else {
+            return nil
+        }
+    }
 }

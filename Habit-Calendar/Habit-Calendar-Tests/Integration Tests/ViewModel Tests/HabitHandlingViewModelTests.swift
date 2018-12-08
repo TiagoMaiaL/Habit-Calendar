@@ -272,6 +272,37 @@ class HabitHandlingViewModelTests: IntegrationTestCase {
         )
     }
 
+    func testGettingTextDescribingFireTimesReturnsNoneWereSelected() {
+        let habitHandler = makeHabitHandlingViewModel()
+        XCTAssertEqual(habitHandler.getFireTimesAmountDescriptionText(), "0 fire times selected.")
+    }
+
+    func testGettingTextDescribingHowManyFireTimesWereSelected() {
+        var habitHandler = makeHabitHandlingViewModel()
+        let fireTimes = [DateComponents(hour: 12, minute: 0),
+                         DateComponents(hour: 12, minute: 30),
+                         DateComponents(hour: 13, minute: 0)]
+        habitHandler.setSelectedFireTimes(fireTimes)
+
+        XCTAssertEqual(
+            habitHandler.getFireTimesAmountDescriptionText(),
+            "\(fireTimes.count) fire times selected."
+        )
+    }
+
+    func testGettingTextDescribingHowManyFireTimesWereSelectedShouldReturnNil() {
+        let habitHandler = makeHabitHandlingViewModel()
+        XCTAssertNil(habitHandler.getFireTimesDescriptionText())
+    }
+
+    func testGettingTextDescribingHowManyFireTimesWereSelectedForHabit() {
+        var habitHandler = makeHabitHandlingViewModel()
+        let fireTimes = [DateComponents(hour: 8, minute: 0),
+                         DateComponents(hour: 13, minute: 0)]
+        habitHandler.setSelectedFireTimes(fireTimes)
+        XCTAssertEqual(habitHandler.getFireTimesDescriptionText(), "08:00, 13:00")
+    }
+
     // MARK: Imperatives
 
     /// Instantiates and returns an object conforming to the HabitHandlingViewModel protocol. This object is tested
