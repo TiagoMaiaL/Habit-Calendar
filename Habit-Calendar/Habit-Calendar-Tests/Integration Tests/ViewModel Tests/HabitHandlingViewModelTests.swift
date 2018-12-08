@@ -15,7 +15,10 @@ class HabitHandlingViewModelTests: IntegrationTestCase {
     // MARK: Properties
 
     /// The habit storage used by the view model. This property needs to be initialized only once.
-    var habitStorage: HabitStorage!
+    private var habitStorage: HabitStorage!
+
+    /// The manager used to test the adition, removal or edition of shortcuts related to the habits.
+    private var shortcutsManager: HabitsShortcutItemsManager!
 
     // MARK: Setup/Teardown
 
@@ -34,6 +37,9 @@ class HabitHandlingViewModelTests: IntegrationTestCase {
             notificationScheduler: notificationScheduler,
             fireTimeStorage: FireTimeStorage()
         )
+
+        // Initialize the shortcuts manager.
+        shortcutsManager = HabitsShortcutItemsManager(application: UIApplication.shared)
 
         super.setUp()
     }
@@ -303,6 +309,71 @@ class HabitHandlingViewModelTests: IntegrationTestCase {
         XCTAssertEqual(habitHandler.getFireTimesDescriptionText(), "08:00, 13:00")
     }
 
+    func testDeletingHabit() {
+        let dummyHabit = habitFactory.makeDummy()
+        dummyHabit.user = userFactory.makeDummy()
+
+        do {
+            try context.save()
+        } catch {
+            print(error)
+            XCTFail("Couldn't save the context.")
+        }
+
+        let habitHandler = makeHabitHandlingViewModel(habit: dummyHabit)
+        habitHandler.deleteHabit()
+
+        XCTAssertTrue(dummyHabit.isDeleted)
+    }
+
+    func testDeletingHabitShouldRemoveItsShortcut() {
+        UIApplication.shared.shortcutItems = []
+
+        let dummyHabit = habitFactory.makeDummy()
+        shortcutsManager.addApplicationShortcut(for: dummyHabit)
+
+        guard !(UIApplication.shared.shortcutItems ?? []).isEmpty else {
+            XCTFail("The shorcuts manager didn't add the expected item. It's impossible to continue this test.")
+            return
+        }
+
+        let habitHandler = makeHabitHandlingViewModel(habit: dummyHabit)
+        habitHandler.deleteHabit()
+
+        XCTAssertTrue(
+            UIApplication.shared.shortcutItems?.isEmpty ?? true,
+            "The shortcut should be removed with the habit."
+        )
+    }
+
+    func testCreatingHabit() {
+        XCTMarkNotImplemented()
+    }
+
+    func testCreatingHabitWithChallenge() {
+        XCTMarkNotImplemented()
+    }
+
+    func testCreatingHabitWithFireTimes() {
+        XCTMarkNotImplemented()
+    }
+
+    func testEditingHabitName() {
+        XCTMarkNotImplemented()
+    }
+
+    func testEditingHabitColor() {
+        XCTMarkNotImplemented()
+    }
+
+    func testEditingHabitChallenge() {
+        XCTMarkNotImplemented()
+    }
+
+    func testEditingHabitFireTimes() {
+        XCTMarkNotImplemented()
+    }
+
     // MARK: Imperatives
 
     /// Instantiates and returns an object conforming to the HabitHandlingViewModel protocol. This object is tested
@@ -314,7 +385,8 @@ class HabitHandlingViewModelTests: IntegrationTestCase {
             habit: habit,
             habitStorage: habitStorage,
             userStorage: UserStorage(),
-            container: memoryPersistentContainer
+            container: memoryPersistentContainer,
+            shortcutsManager: shortcutsManager
         )
     }
 }

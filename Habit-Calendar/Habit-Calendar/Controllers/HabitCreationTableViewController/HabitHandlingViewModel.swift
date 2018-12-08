@@ -27,7 +27,8 @@ protocol HabitHandlingViewModel {
     init(habit: HabitMO?,
          habitStorage: HabitStorage,
          userStorage: UserStorage,
-         container: NSPersistentContainer)
+         container: NSPersistentContainer,
+         shortcutsManager: HabitsShortcutItemsManager)
 
     // MARK: Imperatives
 

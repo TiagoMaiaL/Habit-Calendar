@@ -25,6 +25,10 @@ struct HabitHandlerViewModel: HabitHandlingViewModel {
     /// The persistent container used to perform the operations of the habit.
     private let container: NSPersistentContainer
 
+    /// The shortcuts manager used to add, edit,
+    /// or remove a shortcut related to the habit.
+    private let shortcutsManager: HabitsShortcutItemsManager
+
     var isEditing: Bool {
         return habit != nil
     }
@@ -50,7 +54,8 @@ struct HabitHandlerViewModel: HabitHandlingViewModel {
     init(habit: HabitMO?,
          habitStorage: HabitStorage,
          userStorage: UserStorage,
-         container: NSPersistentContainer) {
+         container: NSPersistentContainer,
+         shortcutsManager: HabitsShortcutItemsManager) {
         if let habit = habit {
             self.habit = habit
 
@@ -61,12 +66,16 @@ struct HabitHandlerViewModel: HabitHandlingViewModel {
         self.habitStorage = habitStorage
         self.userStorage = userStorage
         self.container = container
+        self.shortcutsManager = shortcutsManager
     }
 
     // MARK: Imperatives
 
     func deleteHabit() {
+        guard let habit = habit else { return }
 
+        shortcutsManager.removeApplicationShortcut(for: habit)
+        habitStorage.delete(habit, from: container.viewContext)
     }
 
     func saveHabit() {
