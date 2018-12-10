@@ -34,7 +34,7 @@ struct HabitHandlerViewModel: HabitHandlingViewModel {
     }
 
     var isValid: Bool {
-        return false
+        return !isEditing && habitColor != nil && habitName != nil
     }
 
     /// The name of the habit, it can be provided by the entity, or set by the user.
@@ -79,7 +79,27 @@ struct HabitHandlerViewModel: HabitHandlingViewModel {
     }
 
     func saveHabit() {
+        guard isValid else { return }
 
+        container.performBackgroundTask { context in
+            if self.isEditing {
+                // Edit the habit.
+            } else {
+                // Create a new one.
+                guard let user = self.userStorage.getUser(using: context) else {
+                    assertionFailure("Couldn't get the user of the app.")
+                    return
+                }
+                _ = self.habitStorage.create(
+                    using: context,
+                    user: user,
+                    name: self.habitName!,
+                    color: self.habitColor!
+                )
+            }
+
+            try? context.save()
+        }
     }
 
     func getHabitName() -> String? {

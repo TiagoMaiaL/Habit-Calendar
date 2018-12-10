@@ -327,8 +327,10 @@ class HabitHandlingViewModelTests: IntegrationTestCase {
     }
 
     func testDeletingHabitShouldRemoveItsShortcut() {
+        // Clear the shortcuts.
         UIApplication.shared.shortcutItems = []
 
+        // Create a new item for a dummy habit.
         let dummyHabit = habitFactory.makeDummy()
         shortcutsManager.addApplicationShortcut(for: dummyHabit)
 
@@ -337,25 +339,105 @@ class HabitHandlingViewModelTests: IntegrationTestCase {
             return
         }
 
+        // Remove the habit.
         let habitHandler = makeHabitHandlingViewModel(habit: dummyHabit)
         habitHandler.deleteHabit()
 
+        // Assert that its shortcut item was removed as well.
         XCTAssertTrue(
             UIApplication.shared.shortcutItems?.isEmpty ?? true,
             "The shortcut should be removed with the habit."
         )
     }
 
+    func testIsValidShouldBeFalseWhenEmpty() {
+        XCTAssertFalse(makeHabitHandlingViewModel().isValid)
+    }
+
+    func testIsValidShouldBeFalseWhenOnlyNameIsProvided() {
+        var habitHandler = makeHabitHandlingViewModel()
+        habitHandler.setHabitName("testing validation")
+        
+        XCTAssertFalse(habitHandler.isValid)
+    }
+
+    func testIsValidShouldBeFalseWhenOnlyColorIsProvided() {
+        var habitHandler = makeHabitHandlingViewModel()
+        habitHandler.setHabitColor(HabitMO.Color.systemGreen)
+
+        XCTAssertFalse(habitHandler.isValid)
+    }
+
+    func testIsValidShouldBeTrueWhenColorAndNameAreProvided() {
+        var habitHandler = makeHabitHandlingViewModel()
+        habitHandler.setHabitName("testing validation")
+        habitHandler.setHabitColor(HabitMO.Color.systemGreen)
+
+        XCTAssertTrue(habitHandler.isValid)
+    }
+
     func testCreatingHabit() {
         XCTMarkNotImplemented()
+
+        // Create an app user and save it.
+        _ = userFactory.makeDummy()
+        try? context.save()
+
+        // Create the habit handler view model without a habit (it's going to create a new one).
+        let name = "Swim"
+        let color = HabitMO.Color.systemBlue
+
+        var habitHandler = makeHabitHandlingViewModel()
+        habitHandler.setHabitName(name)
+        habitHandler.setHabitColor(color)
+
+        habitHandler.saveHabit()
+
+        // Ensure it was created and assert on its properties.
+        let request: NSFetchRequest<HabitMO> = HabitMO.fetchRequest()
+
+        do {
+            let results = try context.fetch(request)
+
+            guard !results.isEmpty else {
+                XCTFail("Failed to create the habit.")
+                return
+            }
+
+            let createdHabit = results.first!
+            XCTAssertEqual(createdHabit.name, name)
+            XCTAssertEqual(createdHabit.color, color.rawValue)
+        } catch {
+            XCTFail("Couldn't fetch the created habit.")
+        }
+    }
+
+    func testCreatingHabitShouldAddShortcutItem() {
+        XCTMarkNotImplemented()
+
+        // Clear the application shortcut items.
+        // Create the habit handler view model without a habit (it's going to create a new one).
+        // Change its essential parameters (name and color)
+        // Save it.
+        // Ensure a new shortcut item was added.
     }
 
     func testCreatingHabitWithChallenge() {
         XCTMarkNotImplemented()
+
+        // Create the habit handler view model without a habit.
+        // Change its parameters, including the challenge.
+        // Save it.
+        // Ensure the challenge was correclty added.
     }
 
     func testCreatingHabitWithFireTimes() {
         XCTMarkNotImplemented()
+
+        // Create the habit handler view model without a habit.
+        // Change its parameters, including the fire times.
+        // Save it.
+        // Ensure the challenge was correclty added.
     }
 
     func testEditingHabitName() {
