@@ -395,7 +395,7 @@ class HabitHandlingViewModelTests: IntegrationTestCase {
 
         // Ensure it was created and assert on its properties.
         // Since the save operation is async, use a timer to make the assertions.
-        Timer.scheduledTimer(withTimeInterval: 0.01, repeats: false) { _ in
+        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { _ in
             guard let createdHabit = self.fetchFirstHabit() else {
                 XCTFail("The habit should have been created.")
                 creationExpectation.fulfill()
@@ -517,6 +517,38 @@ class HabitHandlingViewModelTests: IntegrationTestCase {
         }
 
         wait(for: [creationExpectation], timeout: 0.2)
+    }
+
+    func testIfEditionIsNotValidWithEmptyViewModel() {
+        XCTAssertFalse(makeHabitHandlingViewModel(habit: habitFactory.makeDummy()).isValid)
+    }
+
+    func testIfEditionIsValidWhenOnlyNameChanges() {
+        var habitHandler = makeHabitHandlingViewModel(habit: habitFactory.makeDummy())
+        habitHandler.setHabitName("new name test")
+
+        XCTAssertTrue(habitHandler.isValid)
+    }
+
+    func testIfEditionIsValidWhenOnlyColorChanges() {
+        var habitHandler = makeHabitHandlingViewModel(habit: habitFactory.makeDummy())
+        habitHandler.setHabitColor(.systemOrange)
+
+        XCTAssertTrue(habitHandler.isValid)
+    }
+
+    func testIfEditionIsValidWhenOnlyDaysChange() {
+        var habitHandler = makeHabitHandlingViewModel(habit: habitFactory.makeDummy())
+        habitHandler.setDays([Date().getBeginningOfDay()])
+
+        XCTAssertTrue(habitHandler.isValid)
+    }
+
+    func testIfEditionIsValidWhenOnlyFireTimesChange() {
+        var habitHandler = makeHabitHandlingViewModel(habit: habitFactory.makeDummy())
+        habitHandler.setSelectedFireTimes([DateComponents()])
+
+        XCTAssertTrue(habitHandler.isValid)
     }
 
     func testEditingHabitName() {

@@ -34,8 +34,18 @@ struct HabitHandlerViewModel: HabitHandlingViewModel {
     }
 
     var isValid: Bool {
-        // Will it create a habit? if so, its name and color need to be provided.
-        return !isEditing && habitColor != nil && habitName != nil
+        // Its name and color must be provided.
+        let isCreationValid = habitName != nil && habitColor != nil
+
+        let isNameDifferent = !(habitName ?? "").isEmpty && habitName != habit?.name
+        let isColorDifferent = habitColor != nil && habitColor != habit?.getColor()
+        let isChallengeDifferent = selectedDays != nil && !selectedDays!.isEmpty
+        let areFireTimesDifferent = selectedFireTimes != nil
+
+        // One of its properties must be changed.
+        let isEditionValid = (isNameDifferent || isColorDifferent || isChallengeDifferent || areFireTimesDifferent)
+
+        return isEditing ? isEditionValid : isCreationValid
     }
 
     /// The name of the habit, it can be provided by the entity, or set by the user.
@@ -48,7 +58,10 @@ struct HabitHandlerViewModel: HabitHandlingViewModel {
     private var selectedDays: [Date]?
 
     /// The selected fire time components.
-    private var fireTimes: [DateComponents]?
+    private var selectedFireTimes: [DateComponents]?
+
+    /// The fire time components associated with the passed habit for edition.
+    private var habitFireTimes: [DateComponents]?
 
     // MARK: Initializers
 
@@ -62,7 +75,7 @@ struct HabitHandlerViewModel: HabitHandlingViewModel {
 
             habitName = habit.name
             habitColor = habit.getColor()
-            fireTimes = (habit.fireTimes as? Set<FireTimeMO>)?.map { $0.getFireTimeComponents() }
+            habitFireTimes = (habit.fireTimes as? Set<FireTimeMO>)?.map { $0.getFireTimeComponents() }
         }
         self.habitStorage = habitStorage
         self.userStorage = userStorage
@@ -100,7 +113,7 @@ struct HabitHandlerViewModel: HabitHandlingViewModel {
                     name: self.habitName!,
                     color: self.habitColor!,
                     days: self.selectedDays,
-                    and: self.fireTimes
+                    and: self.selectedFireTimes
                 )
             }
 
@@ -181,11 +194,11 @@ struct HabitHandlerViewModel: HabitHandlingViewModel {
     }
 
     func getFireTimeComponents() -> [DateComponents]? {
-        return fireTimes
+        return selectedFireTimes ?? habitFireTimes
     }
 
     mutating func setSelectedFireTimes(_ fireTimes: [DateComponents]) {
-        self.fireTimes = fireTimes
+        self.selectedFireTimes = fireTimes
     }
 
     func getFireTimesAmountDescriptionText() -> String {
@@ -194,18 +207,16 @@ struct HabitHandlerViewModel: HabitHandlingViewModel {
                 "%d fire time(s) selected.",
                 comment: "The number of fire times selected by the user."
             ),
-            fireTimes?.count ?? 0
+            (selectedFireTimes ?? habitFireTimes)?.count ?? 0
         )
     }
 
     func getFireTimesDescriptionText() -> String? {
-        if let fireTimes = fireTimes, !fireTimes.isEmpty {
+        if let fireTimes = selectedFireTimes ?? habitFireTimes, !fireTimes.isEmpty {
             // TODO: This code is replicated between the protocol and this view model. Fix this.
             // Set the text for the label displaying some of the selected fire times:
             let fireTimeFormatter = DateFormatter.fireTimeFormatter
-            let fireDates = fireTimes.compactMap {
-                Calendar.current.date(from: $0)
-                }.sorted()
+            let fireDates = fireTimes.compactMap { Calendar.current.date(from: $0) }.sorted()
             var fireTimesText = ""
 
             for fireDate in fireDates {
