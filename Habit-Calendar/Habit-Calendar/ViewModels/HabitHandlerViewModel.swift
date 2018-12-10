@@ -34,6 +34,7 @@ struct HabitHandlerViewModel: HabitHandlingViewModel {
     }
 
     var isValid: Bool {
+        // Will it create a habit? if so, its name and color need to be provided.
         return !isEditing && habitColor != nil && habitName != nil
     }
 
@@ -82,6 +83,9 @@ struct HabitHandlerViewModel: HabitHandlingViewModel {
         guard isValid else { return }
 
         container.performBackgroundTask { context in
+            var savedHabit: HabitMO!
+            var habitId: String!
+
             if self.isEditing {
                 // Edit the habit.
             } else {
@@ -90,15 +94,32 @@ struct HabitHandlerViewModel: HabitHandlingViewModel {
                     assertionFailure("Couldn't get the user of the app.")
                     return
                 }
-                _ = self.habitStorage.create(
+                savedHabit = self.habitStorage.create(
                     using: context,
                     user: user,
                     name: self.habitName!,
-                    color: self.habitColor!
+                    color: self.habitColor!,
+                    days: self.selectedDays,
+                    and: self.fireTimes
                 )
             }
 
-            try? context.save()
+            // Hold its id.
+            habitId = savedHabit.id
+
+            do {
+                try context.save()
+
+                // Add an app shortcut for the saved habit. Since this needs to be made in the main thread, use
+                // an entity associated with it.
+                DispatchQueue.main.async {
+                    self.shortcutsManager.addApplicationShortcut(
+                        for: self.habitStorage.habit(using: self.container.viewContext, and: habitId)!
+                    )
+                }
+            } catch {
+                print("\(error)")
+            }
         }
     }
 

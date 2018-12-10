@@ -357,7 +357,7 @@ class HabitHandlingViewModelTests: IntegrationTestCase {
     func testIsValidShouldBeFalseWhenOnlyNameIsProvided() {
         var habitHandler = makeHabitHandlingViewModel()
         habitHandler.setHabitName("testing validation")
-        
+
         XCTAssertFalse(habitHandler.isValid)
     }
 
@@ -377,7 +377,7 @@ class HabitHandlingViewModelTests: IntegrationTestCase {
     }
 
     func testCreatingHabit() {
-        XCTMarkNotImplemented()
+        let creationExpectation = XCTestExpectation(description: "Test the creation of the habit.")
 
         // Create an app user and save it.
         _ = userFactory.makeDummy()
@@ -394,50 +394,129 @@ class HabitHandlingViewModelTests: IntegrationTestCase {
         habitHandler.saveHabit()
 
         // Ensure it was created and assert on its properties.
-        let request: NSFetchRequest<HabitMO> = HabitMO.fetchRequest()
-
-        do {
-            let results = try context.fetch(request)
-
-            guard !results.isEmpty else {
-                XCTFail("Failed to create the habit.")
+        // Since the save operation is async, use a timer to make the assertions.
+        Timer.scheduledTimer(withTimeInterval: 0.01, repeats: false) { _ in
+            guard let createdHabit = self.fetchFirstHabit() else {
+                XCTFail("The habit should have been created.")
+                creationExpectation.fulfill()
                 return
             }
 
-            let createdHabit = results.first!
             XCTAssertEqual(createdHabit.name, name)
             XCTAssertEqual(createdHabit.color, color.rawValue)
-        } catch {
-            XCTFail("Couldn't fetch the created habit.")
+
+            creationExpectation.fulfill()
         }
+
+        wait(for: [creationExpectation], timeout: 0.2)
     }
 
     func testCreatingHabitShouldAddShortcutItem() {
-        XCTMarkNotImplemented()
+        let shortcutExpectation = XCTestExpectation(description: "Shortcut items need to be added for the habit.")
 
         // Clear the application shortcut items.
-        // Create the habit handler view model without a habit (it's going to create a new one).
-        // Change its essential parameters (name and color)
-        // Save it.
+        UIApplication.shared.shortcutItems = []
+
+        // Add the main user to the app.
+        _ = userFactory.makeDummy()
+        try? context.save()
+
+        var habitHandler = makeHabitHandlingViewModel()
+        habitHandler.setHabitName("test")
+        habitHandler.setHabitColor(.systemBlue)
+
+        habitHandler.saveHabit()
+
         // Ensure a new shortcut item was added.
+        Timer.scheduledTimer(withTimeInterval: 0.01, repeats: false) { _ in
+            XCTAssertTrue((UIApplication.shared.shortcutItems?.count ?? 0) == 1)
+            shortcutExpectation.fulfill()
+        }
+
+        wait(for: [shortcutExpectation], timeout: 0.2)
     }
 
     func testCreatingHabitWithChallenge() {
-        XCTMarkNotImplemented()
+        let creationExpectation = XCTestExpectation(
+            description: "Test the creation of a habit with a challenge of days."
+        )
 
-        // Create the habit handler view model without a habit.
-        // Change its parameters, including the challenge.
-        // Save it.
-        // Ensure the challenge was correclty added.
+        // Add the main user to the app.
+        _ = userFactory.makeDummy()
+        try? context.save()
+
+        var habitHandler = makeHabitHandlingViewModel()
+        habitHandler.setHabitColor(.systemGreen)
+        habitHandler.setHabitName("testing challenge creation")
+        let days = (0...5).compactMap { Date().byAddingDays($0)?.getBeginningOfDay() }
+        habitHandler.setDays(days)
+
+        habitHandler.saveHabit()
+
+        // Ensure the challenge was correclty created.
+        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { _ in
+            guard let createdHabit = self.fetchFirstHabit() else {
+                XCTFail("The habit should have been created.")
+                creationExpectation.fulfill()
+                return
+            }
+
+            guard let challenge = createdHabit.getCurrentChallenge() else {
+                XCTFail("The challenge should have been created.")
+                creationExpectation.fulfill()
+                return
+            }
+
+            XCTAssertEqual(days.count, challenge.days?.count)
+
+            creationExpectation.fulfill()
+        }
+
+        wait(for: [creationExpectation], timeout: 0.2)
     }
 
     func testCreatingHabitWithFireTimes() {
-        XCTMarkNotImplemented()
+        let creationExpectation = XCTestExpectation(
+            description: "Test the creation of a habit with the selected fire times."
+        )
 
-        // Create the habit handler view model without a habit.
-        // Change its parameters, including the fire times.
-        // Save it.
-        // Ensure the challenge was correclty added.
+        // Add the main user to the app.
+        _ = userFactory.makeDummy()
+        try? context.save()
+
+        var habitHandler = makeHabitHandlingViewModel()
+        habitHandler.setHabitName("name")
+        habitHandler.setHabitColor(.systemRed)
+        let fireTimes = [
+            DateComponents(calendar: Calendar.current, timeZone: TimeZone.current, hour: 12, minute: 0),
+            DateComponents(calendar: Calendar.current, timeZone: TimeZone.current, hour: 23, minute: 30)
+        ]
+        habitHandler.setSelectedFireTimes(fireTimes)
+
+        habitHandler.saveHabit()
+
+        // Ensure the fire times were correclty added.
+        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { _ in
+            guard let createdHabit = self.fetchFirstHabit() else {
+                XCTFail("The habit should have been created.")
+                creationExpectation.fulfill()
+                return
+            }
+
+            guard let fireTimeEntities = createdHabit.fireTimes as? Set<FireTimeMO>,
+                !fireTimeEntities.isEmpty else {
+                    XCTFail("The fire times should have been created.")
+                    creationExpectation.fulfill()
+                    return
+            }
+            let components = fireTimeEntities.map { $0.getFireTimeComponents() }
+
+            XCTAssertEqual(Set(fireTimes), Set(components))
+
+            creationExpectation.fulfill()
+        }
+
+        wait(for: [creationExpectation], timeout: 0.2)
     }
 
     func testEditingHabitName() {
@@ -470,5 +549,21 @@ class HabitHandlingViewModelTests: IntegrationTestCase {
             container: memoryPersistentContainer,
             shortcutsManager: shortcutsManager
         )
+    }
+
+    /// Fetches the first habit from the data store.
+    /// - Returns: the habit, if one exists.
+    private func fetchFirstHabit() -> HabitMO? {
+        let request: NSFetchRequest<HabitMO> = HabitMO.fetchRequest()
+
+        do {
+            let results = try self.context.fetch(request)
+            guard !results.isEmpty else {
+                return nil
+            }
+            return results.first!
+        } catch {
+            return nil
+        }
     }
 }
