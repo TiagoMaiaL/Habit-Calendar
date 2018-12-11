@@ -552,19 +552,132 @@ class HabitHandlingViewModelTests: IntegrationTestCase {
     }
 
     func testEditingHabitName() {
-        XCTMarkNotImplemented()
+        let nameEditionExpectation = XCTestExpectation(description: "Editing name")
+
+        let dummyHabit = habitFactory.makeDummy()
+        var habitHandler = makeHabitHandlingViewModel(habit: dummyHabit)
+        let newName = "new name"
+        habitHandler.setHabitName(newName)
+
+        habitHandler.saveHabit()
+
+        // Assert that the name was changed.
+        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { _ in
+            XCTAssertEqual(
+                dummyHabit.name?.lowercased(),
+                newName,
+                "The habit name should have been edited."
+            )
+            nameEditionExpectation.fulfill()
+        }
+
+        wait(for: [nameEditionExpectation], timeout: 0.2)
     }
 
     func testEditingHabitColor() {
-        XCTMarkNotImplemented()
+        let colorEditionExpectation = XCTestExpectation(description: "Editing color")
+
+        let dummyHabit = habitFactory.makeDummy()
+        var habitHandler = makeHabitHandlingViewModel(habit: dummyHabit)
+        let newColor = HabitMO.Color.systemTeal
+        habitHandler.setHabitColor(newColor)
+
+        habitHandler.saveHabit()
+
+        // Assert that the color was changed.
+        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { _ in
+            XCTAssertEqual(
+                dummyHabit.color,
+                newColor.rawValue,
+                "The habit color should have been edited."
+            )
+            colorEditionExpectation.fulfill()
+        }
+
+        wait(for: [colorEditionExpectation], timeout: 0.2)
     }
 
     func testEditingHabitChallenge() {
-        XCTMarkNotImplemented()
+        let challengeEditionExpectation = XCTestExpectation(description: "Editing challenge of days")
+
+        let dummyHabit = habitFactory.makeDummy()
+        // Remove the challenges and days from the dummy.
+        if let challenges = dummyHabit.challenges, let days = dummyHabit.days {
+            dummyHabit.removeFromChallenges(challenges)
+            dummyHabit.removeFromDays(days)
+        }
+
+        var habitHandler = makeHabitHandlingViewModel(habit: dummyHabit)
+
+        let newChallengeDays = (0...5).compactMap { Date().getBeginningOfDay().byAddingDays($0) }
+        habitHandler.setDays(newChallengeDays)
+
+        habitHandler.saveHabit()
+
+        // Assert that the challenge was changed.
+        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { _ in
+            guard let challenge = dummyHabit.getCurrentChallenge() else {
+                XCTFail("Couldn't get the challenge that should have been added.")
+                challengeEditionExpectation.fulfill()
+                return
+            }
+            guard let days = challenge.days as? Set<HabitDayMO> else {
+                XCTFail("Couldn't get the days of the challenge.")
+                challengeEditionExpectation.fulfill()
+                return
+            }
+            let challengeDates = days.compactMap { $0.day?.date }
+
+            XCTAssertEqual(
+                Set(challengeDates),
+                Set(newChallengeDays),
+                "The dates of the challenge entity don't match with the added ones."
+            )
+
+            challengeEditionExpectation.fulfill()
+        }
+
+        wait(for: [challengeEditionExpectation], timeout: 0.2)
     }
 
     func testEditingHabitFireTimes() {
-        XCTMarkNotImplemented()
+        let fireTimesEditionExpectation = XCTestExpectation(description: "Editing challenge of days")
+
+        let dummyHabit = habitFactory.makeDummy()
+        // Remove the fire times from the dummy.
+        if let fireTimes = dummyHabit.fireTimes {
+            dummyHabit.removeFromFireTimes(fireTimes)
+        }
+
+        var habitHandler = makeHabitHandlingViewModel(habit: dummyHabit)
+        let newFireTimeComponents = [
+            DateComponents(calendar: Calendar.current, timeZone: TimeZone.current, hour: 08, minute: 0),
+            DateComponents(calendar: Calendar.current, timeZone: TimeZone.current, hour: 12, minute: 0)
+        ]
+        habitHandler.setSelectedFireTimes(newFireTimeComponents)
+
+        habitHandler.saveHabit()
+
+        // Assert on the fire times.
+        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { _ in
+            guard let fireTimesEntities = dummyHabit.fireTimes as? Set<FireTimeMO> else {
+                XCTFail("The challenge should have some fire times.")
+                fireTimesEditionExpectation.fulfill()
+                return
+            }
+            let fireTimeComponents = fireTimesEntities.map { $0.getFireTimeComponents() }
+
+            XCTAssertEqual(
+                Set(fireTimeComponents),
+                Set(newFireTimeComponents),
+                "The fire times of the habit entity don't match with the edited ones."
+            )
+
+            fireTimesEditionExpectation.fulfill()
+        }
+
+        wait(for: [fireTimesEditionExpectation], timeout: 0.2)
+
     }
 
     // MARK: Imperatives

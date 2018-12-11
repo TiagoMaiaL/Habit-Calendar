@@ -101,6 +101,14 @@ struct HabitHandlerViewModel: HabitHandlingViewModel {
 
             if self.isEditing {
                 // Edit the habit.
+                savedHabit = self.habitStorage.edit(
+                    self.habit!,
+                    using: context,
+                    name: self.habitName,
+                    color: self.habitColor,
+                    days: self.selectedDays,
+                    andFireTimes: self.selectedFireTimes
+                )
             } else {
                 // Create a new one.
                 guard let user = self.userStorage.getUser(using: context) else {
