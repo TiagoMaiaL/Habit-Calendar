@@ -8,7 +8,7 @@
 
 import UIKit
 
-/// This table view cell displays a field used to inform the names of new habits.
+/// This table view cell displays a field used to inform the names of the habits.
 class HabitNameFieldTableViewCell: UITableViewCell {
 
     // MARK: Properties

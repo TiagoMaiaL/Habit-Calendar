@@ -34,19 +34,19 @@ extension HabitCreationTableViewController {
     /// Configures the colors to be diplayed by the color picker view.
     func configureColorField() {
         // Set the field's title to show it isn't required in case of edition.
-        if habitHandlerViewModel.isEditing {
-            colorFieldTitleLabel.text = NSLocalizedString("Color", comment: "The title of the color field.")
-        }
-
-        // Set the color change handler.
-        colorPicker.colorChangeHandler = { [weak self] uiColor in
-            self?.habitHandlerViewModel.setHabitColor(HabitMO.Color.getInstanceFrom(color: uiColor)!)
-            self?.configureDoneButton()
-            self?.displayThemeColor()
-        }
-        // Get the possible colors to be displayed.
-        let possibleColors = Array(HabitMO.Color.uiColors.values)
-        // Pass the to the picker.
-        colorPicker.colorsToDisplay = possibleColors
+//        if habitHandlerViewModel.isEditing {
+//            colorFieldTitleLabel.text = NSLocalizedString("Color", comment: "The title of the color field.")
+//        }
+//
+//        // Set the color change handler.
+//        colorPicker.colorChangeHandler = { [weak self] uiColor in
+//            self?.habitHandlerViewModel.setHabitColor(HabitMO.Color.getInstanceFrom(color: uiColor)!)
+//            self?.configureDoneButton()
+//            self?.displayThemeColor()
+//        }
+//        // Get the possible colors to be displayed.
+//        let possibleColors = Array(HabitMO.Color.uiColors.values)
+//        // Pass the to the picker.
+//        colorPicker.colorsToDisplay = possibleColors
     }
 }

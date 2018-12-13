@@ -367,7 +367,7 @@
                                             <outlet property="requiredIndicatorLabel" destination="ZZc-vs-FON" id="mZT-wE-Uex"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="281" id="57i-m4-aRN" userLabel="Colors Cell">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="281" id="57i-m4-aRN" userLabel="Colors Cell" customClass="HabitColorFieldTableViewCell" customModule="Habit_Calendar" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="155" width="414" height="281"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="57i-m4-aRN" id="vQC-IB-Nj9">
@@ -423,6 +423,11 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.99215686274509807" green="0.99215686274509807" blue="0.99607843137254903" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <outlet property="colorPicker" destination="41k-RE-w2b" id="bjI-j9-oQd"/>
+                                            <outlet property="requiredIndicatorLabel" destination="xao-gA-zVr" id="FAL-Hb-Yue"/>
+                                            <outlet property="titleLabel" destination="JUM-W9-3bo" id="B4M-yg-cHP"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="160" id="eAI-cd-R7A" userLabel="Days Cell">
                                         <rect key="frame" x="0.0" y="436" width="414" height="160"/>
@@ -607,8 +612,6 @@
                     <connections>
                         <outlet property="challengeFieldQuestionTitle" destination="JOL-oE-7MJ" id="174-Uz-IZF"/>
                         <outlet property="challengeFieldTitleLabel" destination="pyb-N6-nac" id="ZJ8-Dr-TG8"/>
-                        <outlet property="colorFieldTitleLabel" destination="JUM-W9-3bo" id="i4o-UI-onH"/>
-                        <outlet property="colorPicker" destination="41k-RE-w2b" id="aSy-Ak-Arq"/>
                         <outlet property="daysAmountLabel" destination="GyR-VK-GCC" id="aqR-Rj-RRo"/>
                         <outlet property="doneButton" destination="D90-7S-rS4" id="hFv-tY-Ca2"/>
                         <outlet property="fireTimesAmountLabel" destination="OSf-bA-IA0" id="IfS-J8-2BV"/>
@@ -618,7 +621,6 @@
                         <outlet property="fromDayLabel" destination="qIT-Tk-yq9" id="Xvb-pW-3Au"/>
                         <outlet property="notAuthorizedContainer" destination="At8-YD-oiI" id="12s-nx-ZYu"/>
                         <outlet property="toDayLabel" destination="qbf-Ac-7Ay" id="DRe-Ft-XTm"/>
-                        <outletCollection property="requiredLabelMarkers" destination="xao-gA-zVr" collectionClass="NSMutableArray" id="gYe-VA-fCH"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bag-g3-dbf" userLabel="First Responder" sceneMemberID="firstResponder"/>

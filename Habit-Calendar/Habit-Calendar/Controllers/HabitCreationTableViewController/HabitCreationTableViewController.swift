@@ -50,12 +50,6 @@ class HabitCreationTableViewController: UITableViewController {
     /// The label displaying the of fire time times selected.
     @IBOutlet weak var fireTimesLabel: UILabel!
 
-    /// The label displaying the color field's title.
-    @IBOutlet weak var colorFieldTitleLabel: UILabel!
-
-    /// The color's field color picker view.
-    @IBOutlet weak var colorPicker: ColorsPickerView!
-
     /// The container showing that the user hasn't enabled user notifications.
     @IBOutlet weak var notAuthorizedContainer: UIStackView!
 
@@ -126,9 +120,9 @@ class HabitCreationTableViewController: UITableViewController {
         super.viewDidAppear(animated)
 
         // Display the selected habit color.
-        if let habitColor = habitHandlerViewModel.getHabitColor() {
-            colorPicker.selectedColor = habitColor.uiColor
-        }
+//        if let habitColor = habitHandlerViewModel.getHabitColor() {
+//            colorPicker.selectedColor = habitColor.uiColor
+//        }
     }
 
     // MARK: Navigation
