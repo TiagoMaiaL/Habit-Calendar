@@ -429,7 +429,7 @@
                                             <outlet property="titleLabel" destination="JUM-W9-3bo" id="B4M-yg-cHP"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="160" id="eAI-cd-R7A" userLabel="Days Cell">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="160" id="eAI-cd-R7A" userLabel="Days Cell" customClass="HabitChallengeFieldTableViewCell" customModule="Habit_Calendar" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="436" width="414" height="160"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="eAI-cd-R7A" id="SOy-9m-dLh">
@@ -516,6 +516,11 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.99215686270000003" green="0.99215686270000003" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
+                                            <outlet property="daysCountLabel" destination="GyR-VK-GCC" id="NuG-ph-D3w"/>
+                                            <outlet property="fromDateLabel" destination="qIT-Tk-yq9" id="Hon-gG-3b5"/>
+                                            <outlet property="infoLabel" destination="JOL-oE-7MJ" id="MFC-Q0-i3b"/>
+                                            <outlet property="titleLabel" destination="pyb-N6-nac" id="sw5-fD-IO4"/>
+                                            <outlet property="toDateLabel" destination="qbf-Ac-7Ay" id="k0J-r2-Afg"/>
                                             <segue destination="zeZ-9t-rmb" kind="show" identifier="Show days selection controller" id="y7q-nn-pWX"/>
                                         </connections>
                                     </tableViewCell>
@@ -610,17 +615,12 @@
                         </connections>
                     </tableView>
                     <connections>
-                        <outlet property="challengeFieldQuestionTitle" destination="JOL-oE-7MJ" id="174-Uz-IZF"/>
-                        <outlet property="challengeFieldTitleLabel" destination="pyb-N6-nac" id="ZJ8-Dr-TG8"/>
-                        <outlet property="daysAmountLabel" destination="GyR-VK-GCC" id="aqR-Rj-RRo"/>
                         <outlet property="doneButton" destination="D90-7S-rS4" id="hFv-tY-Ca2"/>
                         <outlet property="fireTimesAmountLabel" destination="OSf-bA-IA0" id="IfS-J8-2BV"/>
                         <outlet property="fireTimesCell" destination="5x1-FQ-bQv" id="0pb-Ae-I87"/>
                         <outlet property="fireTimesContainer" destination="3pf-TQ-uQU" id="PKe-t9-lJ6"/>
                         <outlet property="fireTimesLabel" destination="4Ii-SK-90P" id="maA-aC-dqy"/>
-                        <outlet property="fromDayLabel" destination="qIT-Tk-yq9" id="Xvb-pW-3Au"/>
                         <outlet property="notAuthorizedContainer" destination="At8-YD-oiI" id="12s-nx-ZYu"/>
-                        <outlet property="toDayLabel" destination="qbf-Ac-7Ay" id="DRe-Ft-XTm"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bag-g3-dbf" userLabel="First Responder" sceneMemberID="firstResponder"/>

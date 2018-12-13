@@ -23,21 +23,6 @@ class HabitCreationTableViewController: UITableViewController {
     /// The button used to store the habit.
     @IBOutlet weak var doneButton: UIButton!
 
-    /// The label displaying the number of selected days.
-    @IBOutlet weak var daysAmountLabel: UILabel!
-
-    /// The title label of the days' challenge field.
-    @IBOutlet weak var challengeFieldTitleLabel: UILabel!
-
-    /// The question label of the days' challenge field.
-    @IBOutlet weak var challengeFieldQuestionTitle: UILabel!
-
-    /// The label displaying the first day in the selected sequence.
-    @IBOutlet weak var fromDayLabel: UILabel!
-
-    /// The label displaying the last day in the selected sequence.
-    @IBOutlet weak var toDayLabel: UILabel!
-
     /// The fire times table view cell.
     @IBOutlet weak var fireTimesCell: UITableViewCell!
 
@@ -52,9 +37,6 @@ class HabitCreationTableViewController: UITableViewController {
 
     /// The container showing that the user hasn't enabled user notifications.
     @IBOutlet weak var notAuthorizedContainer: UIStackView!
-
-    /// The labels indicating that the associated fields are required.
-    @IBOutlet var requiredLabelMarkers: [UILabel]!
 
     /// The view model responsible for handling the habit. It might edit or create habits, as well as return the
     /// properties of the habit for displaying.
@@ -102,7 +84,6 @@ class HabitCreationTableViewController: UITableViewController {
         if habitHandlerViewModel.isEditing {
             title = NSLocalizedString("Edit habit", comment: "Title of the edition controller.")
             configureDeletionButton()
-            requiredLabelMarkers.forEach { $0.isHidden = true }
         }
     }
 

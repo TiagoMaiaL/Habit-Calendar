@@ -15,20 +15,20 @@ extension HabitCreationTableViewController {
 
     /// Configures the text being displayed by each label within the days field.
     func configureDaysLabels() {
-        if habitHandlerViewModel.isEditing {
-            challengeFieldTitleLabel.text = NSLocalizedString(
-                "New challenge of days",
-                comment: "Text of the title of the days field in the edition controller."
-            )
-            challengeFieldQuestionTitle.text = NSLocalizedString(
-                "Would you like to begin a new challenge of days?",
-                comment: "Description of the days field in the edition controller."
-            )
-        }
-
-        daysAmountLabel.text = habitHandlerViewModel.getDaysDescriptionText()
-        fromDayLabel.text = habitHandlerViewModel.getFirstDateDescriptionText() ?? "--"
-        toDayLabel.text = habitHandlerViewModel.getLastDateDescriptionText() ?? "--"
+//        if habitHandlerViewModel.isEditing {
+//            challengeFieldTitleLabel.text = NSLocalizedString(
+//                "New challenge of days",
+//                comment: "Text of the title of the days field in the edition controller."
+//            )
+//            challengeFieldQuestionTitle.text = NSLocalizedString(
+//                "Would you like to begin a new challenge of days?",
+//                comment: "Description of the days field in the edition controller."
+//            )
+//        }
+//
+//        daysAmountLabel.text = habitHandlerViewModel.getDaysDescriptionText()
+//        fromDayLabel.text = habitHandlerViewModel.getFirstDateDescriptionText() ?? "--"
+//        toDayLabel.text = habitHandlerViewModel.getLastDateDescriptionText() ?? "--"
     }
 }
 
