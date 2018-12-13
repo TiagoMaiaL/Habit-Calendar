@@ -349,9 +349,6 @@
 		47BC540621765D2F00A5DC17 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 47BC53E321752F2300A5DC17 /* Localizable.strings */; };
 		47BC540721765D3300A5DC17 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 47BC53E021752F2300A5DC17 /* InfoPlist.strings */; };
 		47BC540821765D3500A5DC17 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 47BC53E021752F2300A5DC17 /* InfoPlist.strings */; };
-		47BC540A2176754800A5DC17 /* HabitCreationTableViewController+HabitHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47BC54092176754800A5DC17 /* HabitCreationTableViewController+HabitHandling.swift */; };
-		47BC540B2176754800A5DC17 /* HabitCreationTableViewController+HabitHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47BC54092176754800A5DC17 /* HabitCreationTableViewController+HabitHandling.swift */; };
-		47BC540C2176754800A5DC17 /* HabitCreationTableViewController+HabitHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47BC54092176754800A5DC17 /* HabitCreationTableViewController+HabitHandling.swift */; };
 		47C1F3DE212A140F00DDA7BB /* CalendarDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C1F3DD212A140F00DDA7BB /* CalendarDisplayable.swift */; };
 		47C32029212C57D10094BBF8 /* HabitDetailsViewController+ProgressSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C32028212C57D10094BBF8 /* HabitDetailsViewController+ProgressSection.swift */; };
 		47C3202B212DCC230094BBF8 /* HabitDetailsViewController+NoChallengesSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C3202A212DCC230094BBF8 /* HabitDetailsViewController+NoChallengesSection.swift */; };
@@ -632,7 +629,6 @@
 		47BC53E421752F2300A5DC17 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		47BC54012176565C00A5DC17 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/EmptyStateView.xib; sourceTree = "<group>"; };
 		47BC54042176566000A5DC17 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/EmptyStateView.strings"; sourceTree = "<group>"; };
-		47BC54092176754800A5DC17 /* HabitCreationTableViewController+HabitHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HabitCreationTableViewController+HabitHandling.swift"; sourceTree = "<group>"; };
 		47C1F3DD212A140F00DDA7BB /* CalendarDisplayable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDisplayable.swift; sourceTree = "<group>"; };
 		47C32028212C57D10094BBF8 /* HabitDetailsViewController+ProgressSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HabitDetailsViewController+ProgressSection.swift"; sourceTree = "<group>"; };
 		47C3202A212DCC230094BBF8 /* HabitDetailsViewController+NoChallengesSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HabitDetailsViewController+NoChallengesSection.swift"; sourceTree = "<group>"; };
@@ -1098,7 +1094,6 @@
 				47C32035213079770094BBF8 /* HabitCreationTableViewController+FireTimesField.swift */,
 				47C320372130799C0094BBF8 /* HabitCreationTableViewController+ColorField.swift */,
 				47C32039213079AD0094BBF8 /* HabitCreationTableViewController+NameField.swift */,
-				47BC54092176754800A5DC17 /* HabitCreationTableViewController+HabitHandling.swift */,
 				47DBEF9421B7F2110072F49C /* HabitHandlingViewModel.swift */,
 			);
 			path = HabitCreationTableViewController;
@@ -1817,7 +1812,6 @@
 				470C41DB2144B091007F6F35 /* ProgressHabitTableViewCell.swift in Sources */,
 				470C41DC2144B091007F6F35 /* CalendarDisplayable.swift in Sources */,
 				470C41DD2144B091007F6F35 /* HabitMO.swift in Sources */,
-				47BC540B2176754800A5DC17 /* HabitCreationTableViewController+HabitHandling.swift in Sources */,
 				470C41DE2144B091007F6F35 /* HabitDetailsViewController+FireTimesSection.swift in Sources */,
 				470C41DF2144B091007F6F35 /* CardView.swift in Sources */,
 				471D0AE6215AA11A0095750A /* UIAlertController+Factories.swift in Sources */,
@@ -1911,7 +1905,6 @@
 				470C424C2144B164007F6F35 /* ProgressHabitTableViewCell.swift in Sources */,
 				470C424D2144B164007F6F35 /* CalendarDisplayable.swift in Sources */,
 				470C424E2144B164007F6F35 /* HabitMO.swift in Sources */,
-				47BC540C2176754800A5DC17 /* HabitCreationTableViewController+HabitHandling.swift in Sources */,
 				470C424F2144B164007F6F35 /* HabitDetailsViewController+FireTimesSection.swift in Sources */,
 				470C42502144B164007F6F35 /* CardView.swift in Sources */,
 				471D0AE7215AA11A0095750A /* UIAlertController+Factories.swift in Sources */,
@@ -2038,7 +2031,6 @@
 				47B38B0A218A047A00C26A92 /* BlockedDisplayView.swift in Sources */,
 				4732CE782114F23200E2770C /* ProgressHabitTableViewCell.swift in Sources */,
 				47C1F3DE212A140F00DDA7BB /* CalendarDisplayable.swift in Sources */,
-				47BC540A2176754800A5DC17 /* HabitCreationTableViewController+HabitHandling.swift in Sources */,
 				4713A1FE20C16459008A13D2 /* HabitMO.swift in Sources */,
 				47C32031212EFD380094BBF8 /* HabitDetailsViewController+FireTimesSection.swift in Sources */,
 				471D0AE3215A9E620095750A /* UIAlertController+Factories.swift in Sources */,

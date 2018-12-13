@@ -234,12 +234,15 @@ class HabitDetailsViewController: UIViewController {
                 assertionFailure("Error: Couldn't get the HabitCreationController.")
                 return
             }
-            editionController.container = container
-            editionController.userStore = UserStorage()
-            editionController.habitStore = habitStorage
+
+            editionController.habitHandlerViewModel = HabitHandlerViewModel(
+                habit: habit,
+                habitStorage: habitStorage,
+                userStorage: UserStorage(),
+                container: container,
+                shortcutsManager: shortcutsManager
+            )
             editionController.notificationManager = notificationManager
-            editionController.habit = habit
-            editionController.shortcutsManager = shortcutsManager
 
         case newChallengeSegueIdentifier:
             guard let daysSelectionController = segue.destination as? HabitDaysSelectionViewController else {

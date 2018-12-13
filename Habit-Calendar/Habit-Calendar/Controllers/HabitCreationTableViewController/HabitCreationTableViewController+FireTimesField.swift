@@ -17,9 +17,11 @@ extension HabitCreationTableViewController: FireTimesSelectionViewControllerDele
 
     func didSelectFireTimes(_ fireTimes: [FireTimesDisplayable.FireTime]) {
         // Associate the selected fire times.
-        self.fireTimes = fireTimes
+        habitHandlerViewModel.setSelectedFireTimes(fireTimes)
+
         // Change the labels to display the selected fire times.
         displayFireTimes(fireTimes)
+        configureDoneButton()
     }
 }
 

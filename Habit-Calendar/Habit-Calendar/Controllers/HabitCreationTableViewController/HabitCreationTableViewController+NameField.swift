@@ -21,16 +21,18 @@ extension HabitCreationTableViewController {
     /// Listens to the change events emmited the name text field.
     /// - Paramter textField: The textField being editted.
     @objc func nameChanged(textField: UITextField) {
-        // Associate the name with the field's text.
-        name = textField.text
+        habitHandlerViewModel.setHabitName(textField.text ?? "")
+        configureDoneButton()
     }
 
     /// Configures the name field.
     func configureNameField() {
         // If the habit is being editted, change the title to not required.
-        if habit != nil {
+        if habitHandlerViewModel.isEditing {
             nameFieldTitleLabel.text = NSLocalizedString("Name", comment: "The title of the name field.")
         }
+
+        nameTextField.text = habitHandlerViewModel.getHabitName() ?? ""
 
         // Associate the event listener to the textField.
         nameTextField.addTarget(

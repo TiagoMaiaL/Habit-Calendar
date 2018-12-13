@@ -13,11 +13,9 @@ extension HabitCreationTableViewController {
 
     // MARK: Imperatives
 
-    /// Configures the text being displayed by each label within the days
-    /// field.
+    /// Configures the text being displayed by each label within the days field.
     func configureDaysLabels() {
-        if habit != nil {
-            // If the habit is being editted, change the field's title and question texts.
+        if habitHandlerViewModel.isEditing {
             challengeFieldTitleLabel.text = NSLocalizedString(
                 "New challenge of days",
                 comment: "Text of the title of the days field in the edition controller."
@@ -28,28 +26,9 @@ extension HabitCreationTableViewController {
             )
         }
 
-        if let days = days?.sorted(), !days.isEmpty {
-            let formatter = DateFormatter.shortCurrent
-            // Set the text for the label displaying the number of days.
-            daysAmountLabel.text = String.localizedStringWithFormat(
-                NSLocalizedString(
-                    "%d day(s) selected.",
-                    comment: "The label showing how many days were selected for the challenge."
-                ),
-                days.count
-            )
-            // Set the text for the label displaying initial day in the sequence.
-            fromDayLabel.text = formatter.string(from: days.first!)
-            // Set the text for the label displaying final day in the sequence.
-            toDayLabel.text = formatter.string(from: days.last!)
-        } else {
-            daysAmountLabel.text = NSLocalizedString(
-                "No days were selected.",
-                comment: "Text displayed when the user didn't select any days of a new challenge of days."
-            )
-            fromDayLabel.text = "--"
-            toDayLabel.text = "--"
-        }
+        daysAmountLabel.text = habitHandlerViewModel.getDaysDescriptionText()
+        fromDayLabel.text = habitHandlerViewModel.getFirstDateDescriptionText() ?? "--"
+        toDayLabel.text = habitHandlerViewModel.getLastDateDescriptionText() ?? "--"
     }
 }
 
@@ -58,7 +37,8 @@ extension HabitCreationTableViewController: HabitDaysSelectionViewControllerDele
     // MARK: HabitDaysSelectionViewController Delegate Methods
 
     func didSelectDays(_ daysDates: [Date]) {
-        // Associate the habit's days with the dates selected by the user.
-        days = daysDates
+        habitHandlerViewModel.setDays(daysDates)
+        configureDaysLabels()
+        configureDoneButton()
     }
 }

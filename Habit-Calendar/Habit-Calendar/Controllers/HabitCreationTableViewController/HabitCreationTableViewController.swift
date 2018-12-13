@@ -68,61 +68,12 @@ class HabitCreationTableViewController: UITableViewController {
     /// The labels indicating that the associated fields are required.
     @IBOutlet var requiredLabelMarkers: [UILabel]!
 
-    /// The container in which the habit is going to be persisted.
-    weak var container: NSPersistentContainer!
-
-    /// The shortcuts manager used to add a new shortcut when a habit gets added or edited.
-    /// - Note: The manager is used by this controller to add a shortcut every time a habit is created or edited, and
-    ///         to remove one when the habit is deleted.
-    var shortcutsManager: HabitsShortcutItemsManager!
-
-    /// The habit storage used for this controller to
-    /// create/edit the habit.
-    var habitStore: HabitStorage!
-
-    /// The user storage used to associate the main user
-    /// to any created habits.
-    var userStore: UserStorage!
-
-    /// The habit entity being editted.
-    weak var habit: HabitMO?
-
-    /// The habit's name being informed by the user.
-    var name: String? {
-        didSet {
-            // Update the button state.
-            configureDoneButton()
-        }
-    }
+    /// The view model responsible for handling the habit. It might edit or create habits, as well as return the
+    /// properties of the habit for displaying.
+    var habitHandlerViewModel: HabitHandlingViewModel!
 
     /// The color to be used as the theme one in case the user hasn't selected any.
     let defaultThemeColor = UIColor(red: 47/255, green: 54/255, blue: 64/255, alpha: 1)
-
-    /// The habit's color selected by the user.
-    var habitColor: HabitMO.Color? {
-        didSet {
-            displayThemeColor()
-            // Update the button state.
-            configureDoneButton()
-        }
-    }
-
-    /// The habit's days the user has selected.
-    var days: [Date]? {
-        didSet {
-            configureDaysLabels()
-            // Update the button state.
-            configureDoneButton()
-        }
-    }
-
-    /// The habit's notification fire times the user has selected.
-    var fireTimes: [FireTimesDisplayable.FireTime]? {
-        didSet {
-            // Update the button state.
-            configureDoneButton()
-        }
-    }
 
     /// The notification manager used to get the app's authorization status.
     var notificationManager: UserNotificationManager!
@@ -141,12 +92,8 @@ class HabitCreationTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Assert on the values of the injected dependencies (implicitly unwrapped).
-        assert(userStore != nil, "Error: Failed to inject the user store.")
-        assert(container != nil, "Error: failed to inject the persistent container.")
-        assert(habitStore != nil, "Error: failed to inject the habit store.")
+        assert(habitHandlerViewModel != nil, "The habit handler view model must be injected.")
         assert(notificationManager != nil, "Error: failed to inject the notification manager.")
-        assert(shortcutsManager != nil, "Error: The shortcuts manager must be injected.")
 
         // Observe the app's active event to display if the user notifications are allowed.
         startObserving()
@@ -154,26 +101,18 @@ class HabitCreationTableViewController: UITableViewController {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 180
 
-        // Configure the appearance of the navigation bar to never use the
-        // large titles.
+        // Configure the appearance of the navigation bar to never use the large titles.
         navigationItem.largeTitleDisplayMode = .never
 
+        // Configure the initial state of each field.
         configureNameField()
         configureColorField()
-
-        // Display the initial text of the days labels.
         configureDaysLabels()
-
-        // Display the initial text of the notifications labels.
-        displayFireTimes(fireTimes ?? [])
-
-        // Set the done button's initial state.
+        displayFireTimes(habitHandlerViewModel.getFireTimeComponents() ?? [])
         configureDoneButton()
 
-        // If there's a passed habit, it means that the controller should edit it.
-        if isEditingHabit {
+        if habitHandlerViewModel.isEditing {
             title = NSLocalizedString("Edit habit", comment: "Title of the edition controller.")
-            displayHabitProperties()
             configureDeletionButton()
             requiredLabelMarkers.forEach { $0.isHidden = true }
         }
@@ -192,8 +131,8 @@ class HabitCreationTableViewController: UITableViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        // If there's a habit being edited, this property will be set, and the selection should be shown.
-        if let habitColor = habitColor {
+        // Display the selected habit color.
+        if let habitColor = habitHandlerViewModel.getHabitColor() {
             colorPicker.selectedColor = habitColor.uiColor
         }
     }
@@ -202,14 +141,14 @@ class HabitCreationTableViewController: UITableViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Declare the theme color to be passed to the controllers.
-        let themeColor = self.habitColor?.uiColor ?? defaultThemeColor
+        let themeColor = habitHandlerViewModel.getHabitColor()?.uiColor ?? defaultThemeColor
 
         switch segue.identifier {
         case daysSelectionSegue:
             // Associate the DaysSelectionController's delegate.
             if let daysController = segue.destination as? HabitDaysSelectionViewController {
                 daysController.delegate = self
-                daysController.preSelectedDays = days
+                daysController.preSelectedDays = habitHandlerViewModel.getSelectedDays()
                 daysController.themeColor = themeColor
             } else {
                 assertionFailure("Error: Couldn't get the days selection controller.")
@@ -219,13 +158,10 @@ class HabitCreationTableViewController: UITableViewController {
             // Associate the NotificationsSelectionController's delegate.
             if let fireTimesSelectionController = segue.destination as? FireTimesSelectionViewController {
                 fireTimesSelectionController.delegate = self
-                fireTimesSelectionController.container = container
+                fireTimesSelectionController.container = habitHandlerViewModel.container
                 fireTimesSelectionController.fireTimesStorage = FireTimeStorage()
 
-                if let fireTimes = fireTimes {
-                    fireTimesSelectionController.selectedFireTimeComponents = Set(fireTimes)
-                } else if let fireTimes = (habit?.fireTimes as? Set<FireTimeMO>)?.map({ $0.getFireTimeComponents() }) {
-                    // In case the habit is being editted and has some fire times to be displayed.
+                if let fireTimes = habitHandlerViewModel.getFireTimeComponents() {
                     fireTimesSelectionController.selectedFireTimeComponents = Set(fireTimes)
                 }
                 fireTimesSelectionController.themeColor = themeColor
@@ -241,14 +177,8 @@ class HabitCreationTableViewController: UITableViewController {
 
     /// Creates the habit.
     @IBAction func storeHabit(_ sender: UIButton) {
-        // Make assertions on the required values to create/update a habit.
-        // If the habit is being created, make the assertions.
-        if !isEditingHabit {
-            assert(!(name ?? "").isEmpty, "Error: the habit's name must be a valid value.")
-            assert(habitColor != nil, "Error: the habit's color must be a valid value.")
-        }
-
-        handleHabitForPersistency()
+        // TODO: Report any errors back to the user.
+        habitHandlerViewModel.saveHabit()
 
         navigationController?.popViewController(
             animated: true
@@ -277,8 +207,7 @@ class HabitCreationTableViewController: UITableViewController {
                 style: .destructive
             ) { _ in
                 // Remove the shortcut associated with the habit.
-                self.shortcutsManager.removeApplicationShortcut(for: self.habit!)
-                self.habitStore.delete(self.habit!, from: self.container.viewContext)
+                self.habitHandlerViewModel.deleteHabit()
                 self.navigationController?.popToRootViewController(animated: true)
             }
         )
@@ -291,42 +220,11 @@ class HabitCreationTableViewController: UITableViewController {
     // MARK: Imperatives
 
     /// Enables or disables the button depending on the habit's filled data.
-    private func configureDoneButton() {
-        if let habitToEdit = habit {
-            // Change the button's title if there's a habit to be editted.
+    func configureDoneButton() {
+        if habitHandlerViewModel.isEditing {
             doneButton.setTitle(NSLocalizedString("Edit", comment: "Title of the edition button."), for: .normal)
-
-            // Check if anything changed.
-            let isNameDifferent = !(name ?? "").isEmpty && name != habitToEdit.name
-            let isColorDifferent = habitColor != nil && habitColor != habitToEdit.getColor()
-            let isChallengeDifferent = days != nil && !days!.isEmpty
-            let areFireTimesDifferent = fireTimes != nil
-
-            doneButton.isEnabled = isNameDifferent || isColorDifferent || isChallengeDifferent || areFireTimesDifferent
-        } else {
-            // Check if the name and color are set.
-            doneButton.isEnabled = !(name ?? "").isEmpty && habitColor != nil
         }
-    }
-
-    /// Display the provided habit's data for edittion.
-    private func displayHabitProperties() {
-        // Display the habit's name.
-        nameTextField.text = habit!.name
-
-        // Keep the color of the habit to be displayed after the view appears.
-        habitColor = habit!.getColor()
-
-        // Display the habit's current days' challenge.
-
-        // Display the habit's fire times.
-        if habit!.fireTimes!.count > 0 {
-            guard let fireTimesSet = habit?.fireTimes as? Set<FireTimeMO> else {
-                assertionFailure("Error: couldn't get the FireTimeMO entities.")
-                return
-            }
-            displayFireTimes(fireTimesSet.map { $0.getFireTimeComponents() })
-        }
+        doneButton.isEnabled = habitHandlerViewModel.isValid
     }
 
     /// Configures and displays the deletion nav bar button.

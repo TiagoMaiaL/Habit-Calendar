@@ -22,6 +22,9 @@ protocol HabitHandlingViewModel {
     /// Flag indicating if the deletion operation is available.
     var canDeleteHabit: Bool { get }
 
+    /// The container used by the view model.
+    var container: NSPersistentContainer { get }
+
     // MARK: Initializers
 
     init(habit: HabitMO?,

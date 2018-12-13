@@ -23,7 +23,7 @@ struct HabitHandlerViewModel: HabitHandlingViewModel {
     private let userStorage: UserStorage
 
     /// The persistent container used to perform the operations of the habit.
-    private let container: NSPersistentContainer
+    let container: NSPersistentContainer
 
     /// The shortcuts manager used to add, edit,
     /// or remove a shortcut related to the habit.
