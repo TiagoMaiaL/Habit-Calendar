@@ -23,21 +23,6 @@ class HabitCreationTableViewController: UITableViewController {
     /// The button used to store the habit.
     @IBOutlet weak var doneButton: UIButton!
 
-    /// The fire times table view cell.
-    @IBOutlet weak var fireTimesCell: UITableViewCell!
-
-    /// The stack view containing the fire times labels.
-    @IBOutlet weak var fireTimesContainer: UIStackView!
-
-    /// The label displaying the amount of fire times selected.
-    @IBOutlet weak var fireTimesAmountLabel: UILabel!
-
-    /// The label displaying the of fire time times selected.
-    @IBOutlet weak var fireTimesLabel: UILabel!
-
-    /// The container showing that the user hasn't enabled user notifications.
-    @IBOutlet weak var notAuthorizedContainer: UIStackView!
-
     /// The view model responsible for handling the habit. It might edit or create habits, as well as return the
     /// properties of the habit for displaying.
     var habitHandlerViewModel: HabitHandlingViewModel!
@@ -78,7 +63,7 @@ class HabitCreationTableViewController: UITableViewController {
 //        configureNameField()
         configureColorField()
         configureDaysLabels()
-        displayFireTimes(habitHandlerViewModel.getFireTimeComponents() ?? [])
+//        displayFireTimes(habitHandlerViewModel.getFireTimeComponents() ?? [])
         configureDoneButton()
 
         if habitHandlerViewModel.isEditing {

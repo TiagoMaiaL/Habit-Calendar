@@ -468,6 +468,9 @@
 		47F635F520BB920900AC4555 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47F635F320BB920900AC4555 /* Main.storyboard */; };
 		47F635FA20BB920D00AC4555 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 47F635F920BB920D00AC4555 /* Assets.xcassets */; };
 		47F635FD20BB920D00AC4555 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47F635FB20BB920D00AC4555 /* LaunchScreen.storyboard */; };
+		47FADB3221C2DE900012B3FA /* HabitFireTimesFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47FADB3121C2DE900012B3FA /* HabitFireTimesFieldTableViewCell.swift */; };
+		47FADB3321C2DE900012B3FA /* HabitFireTimesFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47FADB3121C2DE900012B3FA /* HabitFireTimesFieldTableViewCell.swift */; };
+		47FADB3421C2DE900012B3FA /* HabitFireTimesFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47FADB3121C2DE900012B3FA /* HabitFireTimesFieldTableViewCell.swift */; };
 		47FB0C2C216F9DE5000BB956 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 47FB0C30216F9DE5000BB956 /* Localizable.stringsdict */; };
 		47FB0C2D216F9DE5000BB956 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 47FB0C30216F9DE5000BB956 /* Localizable.stringsdict */; };
 		47FB0C2E216F9DE5000BB956 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 47FB0C30216F9DE5000BB956 /* Localizable.stringsdict */; };
@@ -688,6 +691,7 @@
 		47F635FE20BB920D00AC4555 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		47F6360320BB920D00AC4555 /* Habit-CalendarTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Habit-CalendarTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		47F6360920BB920D00AC4555 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		47FADB3121C2DE900012B3FA /* HabitFireTimesFieldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitFireTimesFieldTableViewCell.swift; sourceTree = "<group>"; };
 		47FB0C2A216F9D81000BB956 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Main.strings"; sourceTree = "<group>"; };
 		47FB0C2B216F9D84000BB956 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		47FB0C2F216F9DE5000BB956 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = "pt-BR"; path = "pt-BR.lproj/Localizable.stringsdict"; sourceTree = "<group>"; };
@@ -796,6 +800,7 @@
 				471E2CB421C2B7B200E7651F /* HabitNameFieldTableViewCell.swift */,
 				47E5244A21C2CAD60093E760 /* HabitColorFieldTableViewCell.swift */,
 				47AD7D5F21C2D7C400C257E5 /* HabitChallengeFieldTableViewCell.swift */,
+				47FADB3121C2DE900012B3FA /* HabitFireTimesFieldTableViewCell.swift */,
 			);
 			path = "Habit Creation Cells";
 			sourceTree = "<group>";
@@ -1843,6 +1848,7 @@
 				471D0AE6215AA11A0095750A /* UIAlertController+Factories.swift in Sources */,
 				470C41E02144B091007F6F35 /* NotificationStorage.swift in Sources */,
 				470C41E12144B091007F6F35 /* DaysChallengeMO.swift in Sources */,
+				47FADB3321C2DE900012B3FA /* HabitFireTimesFieldTableViewCell.swift in Sources */,
 				470C41E22144B091007F6F35 /* HabitCreationTableViewController.swift in Sources */,
 				470C41E32144B091007F6F35 /* Formatter+Utils.swift in Sources */,
 				470C41E42144B091007F6F35 /* HabitStorage.swift in Sources */,
@@ -1939,6 +1945,7 @@
 				471D0AE7215AA11A0095750A /* UIAlertController+Factories.swift in Sources */,
 				470C42512144B164007F6F35 /* NotificationStorage.swift in Sources */,
 				470C42522144B164007F6F35 /* DaysChallengeMO.swift in Sources */,
+				47FADB3421C2DE900012B3FA /* HabitFireTimesFieldTableViewCell.swift in Sources */,
 				470C42532144B164007F6F35 /* HabitCreationTableViewController.swift in Sources */,
 				470C42542144B164007F6F35 /* Formatter+Utils.swift in Sources */,
 				470C42552144B164007F6F35 /* HabitStorage.swift in Sources */,
@@ -2069,6 +2076,7 @@
 				4732CE7A2114FF5F00E2770C /* CardView.swift in Sources */,
 				4779588520D8B38B0080614F /* NotificationStorage.swift in Sources */,
 				47D8308820FCE82F002D3A97 /* DaysChallengeMO.swift in Sources */,
+				47FADB3221C2DE900012B3FA /* HabitFireTimesFieldTableViewCell.swift in Sources */,
 				47E6C20B20EAF550003BDB4D /* HabitCreationTableViewController.swift in Sources */,
 				474B7B9E212746BE00814A8E /* Formatter+Utils.swift in Sources */,
 				4725D05D20C8A96200C3B63F /* HabitStorage.swift in Sources */,

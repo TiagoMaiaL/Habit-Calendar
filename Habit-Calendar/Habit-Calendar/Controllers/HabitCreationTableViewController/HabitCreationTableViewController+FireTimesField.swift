@@ -9,7 +9,7 @@
 import UIKit
 
 /// Adds the code to manage the fire times field.
-extension HabitCreationTableViewController: FireTimesDisplayable {}
+//extension HabitCreationTableViewController: FireTimesDisplayable {}
 
 extension HabitCreationTableViewController: FireTimesSelectionViewControllerDelegate {
 
@@ -20,7 +20,7 @@ extension HabitCreationTableViewController: FireTimesSelectionViewControllerDele
         habitHandlerViewModel.setSelectedFireTimes(fireTimes)
 
         // Change the labels to display the selected fire times.
-        displayFireTimes(fireTimes)
+//        displayFireTimes(fireTimes)
         configureDoneButton()
     }
 }
@@ -50,10 +50,10 @@ extension HabitCreationTableViewController: NotificationAvailabilityDisplayable 
     func displayNotificationAvailability() {
         notificationManager.getAuthorizationStatus { isAuthorized in
             DispatchQueue.main.async {
-                self.notAuthorizedContainer.isHidden = isAuthorized
-                self.fireTimesContainer.isHidden = !isAuthorized
-                self.fireTimesCell.isUserInteractionEnabled = isAuthorized
-                self.tableView.reloadData()
+//                self.notAuthorizedContainer.isHidden = isAuthorized
+//                self.fireTimesContainer.isHidden = !isAuthorized
+//                self.fireTimesCell.isUserInteractionEnabled = isAuthorized
+//                self.tableView.reloadData()
             }
         }
     }
