@@ -283,7 +283,7 @@
                         <sections>
                             <tableViewSection id="v1W-KV-0Zn">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="155" id="252-Nz-rq0" userLabel="Name Cell">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="155" id="252-Nz-rq0" userLabel="Name Cell" customClass="HabitNameFieldTableViewCell" customModule="Habit_Calendar" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="155"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="252-Nz-rq0" id="BiI-Fo-2wc">
@@ -341,6 +341,9 @@
                                                                     <real key="value" value="2"/>
                                                                 </userDefinedRuntimeAttribute>
                                                             </userDefinedRuntimeAttributes>
+                                                            <connections>
+                                                                <action selector="informNameChanged:" destination="252-Nz-rq0" eventType="editingDidEnd" id="Ok8-g8-q65"/>
+                                                            </connections>
                                                         </textField>
                                                     </subviews>
                                                     <constraints>
@@ -357,6 +360,12 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.99215686274509807" green="0.99215686274509807" blue="0.99607843137254903" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <outlet property="fieldInfoLabel" destination="60s-II-rIh" id="YuT-Ka-uGc"/>
+                                            <outlet property="fieldTitleLabel" destination="0AK-r5-sfZ" id="Iz6-9f-nsA"/>
+                                            <outlet property="nameTextField" destination="IGr-WJ-mRM" id="DUw-hx-jjf"/>
+                                            <outlet property="requiredIndicatorLabel" destination="ZZc-vs-FON" id="mZT-wE-Uex"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="281" id="57i-m4-aRN" userLabel="Colors Cell">
                                         <rect key="frame" x="0.0" y="155" width="414" height="281"/>
@@ -607,11 +616,8 @@
                         <outlet property="fireTimesContainer" destination="3pf-TQ-uQU" id="PKe-t9-lJ6"/>
                         <outlet property="fireTimesLabel" destination="4Ii-SK-90P" id="maA-aC-dqy"/>
                         <outlet property="fromDayLabel" destination="qIT-Tk-yq9" id="Xvb-pW-3Au"/>
-                        <outlet property="nameFieldTitleLabel" destination="0AK-r5-sfZ" id="gtS-sB-ofZ"/>
-                        <outlet property="nameTextField" destination="IGr-WJ-mRM" id="KLh-ua-2fN"/>
                         <outlet property="notAuthorizedContainer" destination="At8-YD-oiI" id="12s-nx-ZYu"/>
                         <outlet property="toDayLabel" destination="qbf-Ac-7Ay" id="DRe-Ft-XTm"/>
-                        <outletCollection property="requiredLabelMarkers" destination="ZZc-vs-FON" collectionClass="NSMutableArray" id="Cf1-3r-fuG"/>
                         <outletCollection property="requiredLabelMarkers" destination="xao-gA-zVr" collectionClass="NSMutableArray" id="gYe-VA-fCH"/>
                     </connections>
                 </tableViewController>

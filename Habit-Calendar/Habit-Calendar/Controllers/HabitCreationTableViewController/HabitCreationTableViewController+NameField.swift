@@ -9,56 +9,34 @@
 import UIKit
 
 /// Adds the code to manage the name field.
+// TODO: Remove this extension.
 extension HabitCreationTableViewController {
 
     // MARK: Imperatives
 
-    /// Finishes editing the name's textField.
-    @objc func endNameEdition() {
-        nameTextField.resignFirstResponder()
-    }
+//    /// Listens to the change events emmited the name text field.
+//    /// - Paramter textField: The textField being editted.
+//    @objc func nameChanged(textField: UITextField) {
+//        habitHandlerViewModel.setHabitName(textField.text ?? "")
+//        configureDoneButton()
+//    }
 
-    /// Listens to the change events emmited the name text field.
-    /// - Paramter textField: The textField being editted.
-    @objc func nameChanged(textField: UITextField) {
-        habitHandlerViewModel.setHabitName(textField.text ?? "")
-        configureDoneButton()
-    }
-
-    /// Configures the name field.
-    func configureNameField() {
-        // If the habit is being editted, change the title to not required.
-        if habitHandlerViewModel.isEditing {
-            nameFieldTitleLabel.text = NSLocalizedString("Name", comment: "The title of the name field.")
-        }
-
-        nameTextField.text = habitHandlerViewModel.getHabitName() ?? ""
-
-        // Associate the event listener to the textField.
-        nameTextField.addTarget(
-            self,
-            action: #selector(nameChanged(textField:)),
-            for: .editingChanged
-        )
-        // Create a toolbar and add it as the field's accessory view.
-        nameTextField.inputAccessoryView = makeToolbar()
-    }
-
-    /// Creates and configures a new UIToolbar with a done button to be
-    /// used as the name field's accessoryView.
-    /// - Returns: An UIToolbar.
-    func makeToolbar() -> UIToolbar {
-        let toolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: 50))
-        toolBar.setItems(
-            [UIBarButtonItem(
-                title: NSLocalizedString("Done", comment: "The title of the toolbar button."),
-                style: .done,
-                target: self,
-                action: #selector(endNameEdition)
-            )],
-            animated: false
-        )
-
-        return toolBar
-    }
+//    /// Configures the name field.
+//    func configureNameField() {
+//        // If the habit is being editted, change the title to not required.
+//        if habitHandlerViewModel.isEditing {
+//            nameFieldTitleLabel.text = NSLocalizedString("Name", comment: "The title of the name field.")
+//        }
+//
+//        nameTextField.text = habitHandlerViewModel.getHabitName() ?? ""
+//
+//        // Associate the event listener to the textField.
+//        nameTextField.addTarget(
+//            self,
+//            action: #selector(nameChanged(textField:)),
+//            for: .editingChanged
+//        )
+//        // Create a toolbar and add it as the field's accessory view.
+//        nameTextField.inputAccessoryView = makeToolbar()
+//    }
 }

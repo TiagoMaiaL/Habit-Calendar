@@ -20,12 +20,6 @@ class HabitCreationTableViewController: UITableViewController {
     /// The segue identifier for the NotificationsSelection controller.
     private let fireTimesSelectionSegue = "Show fire dates selection controller"
 
-    /// The label displaying the name field's title.
-    @IBOutlet weak var nameFieldTitleLabel: UILabel!
-
-    /// The text field used to give the habit a name.
-    @IBOutlet weak var nameTextField: UITextField!
-
     /// The button used to store the habit.
     @IBOutlet weak var doneButton: UIButton!
 
@@ -105,7 +99,7 @@ class HabitCreationTableViewController: UITableViewController {
         navigationItem.largeTitleDisplayMode = .never
 
         // Configure the initial state of each field.
-        configureNameField()
+//        configureNameField()
         configureColorField()
         configureDaysLabels()
         displayFireTimes(habitHandlerViewModel.getFireTimeComponents() ?? [])
