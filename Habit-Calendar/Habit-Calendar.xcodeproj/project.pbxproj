@@ -373,9 +373,9 @@
 		47DA52AF214D623000A45102 /* HabitsTableViewController+FetchedResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47961086214D5E3200BFECFC /* HabitsTableViewController+FetchedResultsController.swift */; };
 		47DA52B0214D623000A45102 /* HabitsTableViewController+FetchedResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47961086214D5E3200BFECFC /* HabitsTableViewController+FetchedResultsController.swift */; };
 		47DA52B2214D9C5B00A45102 /* NotificationObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DA52B1214D9C5B00A45102 /* NotificationObserver.swift */; };
-		47DBEF9521B7F2110072F49C /* HabitHandlingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DBEF9421B7F2110072F49C /* HabitHandlingViewModel.swift */; };
-		47DBEF9621B7F2110072F49C /* HabitHandlingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DBEF9421B7F2110072F49C /* HabitHandlingViewModel.swift */; };
-		47DBEF9721B7F2110072F49C /* HabitHandlingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DBEF9421B7F2110072F49C /* HabitHandlingViewModel.swift */; };
+		47DBEF9521B7F2110072F49C /* HabitHandlerViewModelContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DBEF9421B7F2110072F49C /* HabitHandlerViewModelContract.swift */; };
+		47DBEF9621B7F2110072F49C /* HabitHandlerViewModelContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DBEF9421B7F2110072F49C /* HabitHandlerViewModelContract.swift */; };
+		47DBEF9721B7F2110072F49C /* HabitHandlerViewModelContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DBEF9421B7F2110072F49C /* HabitHandlerViewModelContract.swift */; };
 		47DBEF9A21B7FD490072F49C /* HabitHandlerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DBEF9921B7FD490072F49C /* HabitHandlerViewModel.swift */; };
 		47DBEF9B21B7FD490072F49C /* HabitHandlerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DBEF9921B7FD490072F49C /* HabitHandlerViewModel.swift */; };
 		47DBEF9C21B7FD490072F49C /* HabitHandlerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DBEF9921B7FD490072F49C /* HabitHandlerViewModel.swift */; };
@@ -655,7 +655,7 @@
 		47D8308F20FD6288002D3A97 /* DaysChallengeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaysChallengeTests.swift; sourceTree = "<group>"; };
 		47D8FC9D20DC13990094026B /* UserNotificationManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationManagerTests.swift; sourceTree = "<group>"; };
 		47DA52B1214D9C5B00A45102 /* NotificationObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationObserver.swift; sourceTree = "<group>"; };
-		47DBEF9421B7F2110072F49C /* HabitHandlingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitHandlingViewModel.swift; sourceTree = "<group>"; };
+		47DBEF9421B7F2110072F49C /* HabitHandlerViewModelContract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitHandlerViewModelContract.swift; sourceTree = "<group>"; };
 		47DBEF9921B7FD490072F49C /* HabitHandlerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitHandlerViewModel.swift; sourceTree = "<group>"; };
 		47DBEF9E21B802890072F49C /* HabitHandlingViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitHandlingViewModelTests.swift; sourceTree = "<group>"; };
 		47E4A94A21A5CAE90017F1A8 /* Habit-Calendar.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Habit-Calendar.entitlements"; sourceTree = "<group>"; };
@@ -1036,6 +1036,15 @@
 			path = HabitsTableViewController;
 			sourceTree = "<group>";
 		};
+		47A6AD1821C3F1BE009AFF99 /* HabitHandler */ = {
+			isa = PBXGroup;
+			children = (
+				47DBEF9921B7FD490072F49C /* HabitHandlerViewModel.swift */,
+				47DBEF9421B7F2110072F49C /* HabitHandlerViewModelContract.swift */,
+			);
+			path = HabitHandler;
+			sourceTree = "<group>";
+		};
 		47A7457A21530766003A382C /* Managed Objects */ = {
 			isa = PBXGroup;
 			children = (
@@ -1085,7 +1094,6 @@
 			isa = PBXGroup;
 			children = (
 				47E6C20A20EAF550003BDB4D /* HabitCreationTableViewController.swift */,
-				47DBEF9421B7F2110072F49C /* HabitHandlingViewModel.swift */,
 			);
 			path = HabitCreationTableViewController;
 			sourceTree = "<group>";
@@ -1114,7 +1122,7 @@
 		47DBEF9821B7FCFE0072F49C /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				47DBEF9921B7FD490072F49C /* HabitHandlerViewModel.swift */,
+				47A6AD1821C3F1BE009AFF99 /* HabitHandler */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -1836,7 +1844,7 @@
 				47DA52AD214D622C00A45102 /* HabitsTableViewController+DataSource.swift in Sources */,
 				47A2AEF1215ADCC800AF7788 /* HabitDetailsViewController+NotificationObserver.swift in Sources */,
 				470C41E82144B091007F6F35 /* HabitDayMO.swift in Sources */,
-				47DBEF9621B7F2110072F49C /* HabitHandlingViewModel.swift in Sources */,
+				47DBEF9621B7F2110072F49C /* HabitHandlerViewModelContract.swift in Sources */,
 				470C41E92144B091007F6F35 /* HabitDetailsViewController.swift in Sources */,
 				47DA52AF214D623000A45102 /* HabitsTableViewController+FetchedResultsController.swift in Sources */,
 				470C41EB2144B091007F6F35 /* FireTimesDisplayable.swift in Sources */,
@@ -1929,7 +1937,7 @@
 				47DA52AE214D622D00A45102 /* HabitsTableViewController+DataSource.swift in Sources */,
 				47A2AEF2215ADCC900AF7788 /* HabitDetailsViewController+NotificationObserver.swift in Sources */,
 				470C42592144B164007F6F35 /* HabitDayMO.swift in Sources */,
-				47DBEF9721B7F2110072F49C /* HabitHandlingViewModel.swift in Sources */,
+				47DBEF9721B7F2110072F49C /* HabitHandlerViewModelContract.swift in Sources */,
 				470C425A2144B164007F6F35 /* HabitDetailsViewController.swift in Sources */,
 				47DA52B0214D623000A45102 /* HabitsTableViewController+FetchedResultsController.swift in Sources */,
 				470C425C2144B164007F6F35 /* FireTimesDisplayable.swift in Sources */,
@@ -2056,7 +2064,7 @@
 				47A2AEF0215ADBBB00AF7788 /* HabitDetailsViewController+NotificationObserver.swift in Sources */,
 				4732CE7C2118DA8400E2770C /* UnderlinedTextField.swift in Sources */,
 				4713A20020C164E6008A13D2 /* HabitDayMO.swift in Sources */,
-				47DBEF9521B7F2110072F49C /* HabitHandlingViewModel.swift in Sources */,
+				47DBEF9521B7F2110072F49C /* HabitHandlerViewModelContract.swift in Sources */,
 				47E6C20D20EAF567003BDB4D /* HabitDetailsViewController.swift in Sources */,
 				47961087214D5E3300BFECFC /* HabitsTableViewController+FetchedResultsController.swift in Sources */,
 				47C3203C2130E91F0094BBF8 /* FireTimesDisplayable.swift in Sources */,

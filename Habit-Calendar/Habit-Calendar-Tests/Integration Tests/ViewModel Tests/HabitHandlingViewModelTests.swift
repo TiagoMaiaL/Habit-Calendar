@@ -682,11 +682,11 @@ class HabitHandlingViewModelTests: IntegrationTestCase {
 
     // MARK: Imperatives
 
-    /// Instantiates and returns an object conforming to the HabitHandlingViewModel protocol. This object is tested
+    /// Instantiates and returns an object conforming to the HabitHandlerViewModelContract protocol. This object is tested
     /// under the protocol interface.
-    /// - Note: Any object conforming to the HabitHandlingViewModel protocol can be tested under this test suite.
+    /// - Note: Any object conforming to the HabitHandlerViewModelContract protocol can be tested under this test suite.
     /// - Parameter habit: the habit entity associated with the view model.
-    private func makeHabitHandlingViewModel(habit: HabitMO? = nil) -> HabitHandlingViewModel {
+    private func makeHabitHandlingViewModel(habit: HabitMO? = nil) -> HabitHandlerViewModelContract {
         return HabitHandlerViewModel(
             habit: habit,
             habitStorage: habitStorage,

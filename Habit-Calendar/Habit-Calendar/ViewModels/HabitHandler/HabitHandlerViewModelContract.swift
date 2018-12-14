@@ -1,5 +1,5 @@
 //
-//  HabitHandlingViewModel.swift
+//  HabitHandlerViewModelContract.swift
 //  Habit-Calendar
 //
 //  Created by Tiago Maia Lopes on 05/12/18.
@@ -9,7 +9,7 @@
 import CoreData
 
 /// Protocol defining the interface of any view models to be used with the HabitCreationViewController.
-protocol HabitHandlingViewModel {
+protocol HabitHandlerViewModelContract {
 
     // MARK: Properties
 
@@ -85,7 +85,7 @@ protocol HabitHandlingViewModel {
     func getFireTimesDescriptionText() -> String?
 }
 
-extension HabitHandlingViewModel {
+extension HabitHandlerViewModelContract {
     var canDeleteHabit: Bool {
         return isEditing
     }

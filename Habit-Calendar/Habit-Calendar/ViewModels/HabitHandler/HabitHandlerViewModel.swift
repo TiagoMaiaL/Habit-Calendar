@@ -9,7 +9,7 @@
 import CoreData
 
 /// Manages a habit and presents its values.
-struct HabitHandlerViewModel: HabitHandlingViewModel {
+struct HabitHandlerViewModel: HabitHandlerViewModelContract {
 
     // MARK: Properties
 

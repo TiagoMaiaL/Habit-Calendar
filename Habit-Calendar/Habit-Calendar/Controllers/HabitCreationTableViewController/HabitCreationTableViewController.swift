@@ -66,7 +66,7 @@ class HabitCreationTableViewController: UITableViewController {
 
     /// The view model responsible for handling the habit. It might edit or create habits, as well as return the
     /// properties of the habit for displaying.
-    var habitHandlerViewModel: HabitHandlingViewModel!
+    var habitHandlerViewModel: HabitHandlerViewModelContract!
 
     /// The color to be used as the theme one in case the user hasn't selected any.
     let defaultThemeColor = UIColor(red: 47/255, green: 54/255, blue: 64/255, alpha: 1)
@@ -296,7 +296,7 @@ extension HabitCreationTableViewController {
         cell.selectedColor = habitHandlerViewModel.getHabitColor()?.uiColor
         cell.colorChangeHandler = { [weak self] color in
             self?.habitHandlerViewModel.setHabitColor(HabitMO.Color.getInstanceFrom(color: color)!)
-            // Relaod the challenge and fire times field to display the selected color.
+            // Relaod the challenge and fire times fields to display the selected color.
             self?.tableView.reloadRows(
                 at: [IndexPath(row: Constants.Fields.challenge.rawValue, section: 0),
                      IndexPath(row: Constants.Fields.fireTimes.rawValue, section: 0)],
