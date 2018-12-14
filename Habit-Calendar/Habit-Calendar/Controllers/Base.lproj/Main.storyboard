@@ -249,12 +249,12 @@
         <scene sceneID="dws-Np-ykM">
             <objects>
                 <tableViewController title="New Habit" id="e07-lh-rVp" customClass="HabitCreationTableViewController" customModule="Habit_Calendar" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" delaysContentTouches="NO" keyboardDismissMode="onDrag" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="igq-vq-9s7">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" delaysContentTouches="NO" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="igq-vq-9s7">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.99215686274509807" green="0.99215686274509807" blue="0.99607843137254903" alpha="1" colorSpace="calibratedRGB"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="U4g-rN-Yvd" userLabel="Footer">
-                            <rect key="frame" x="0.0" y="876" width="414" height="104"/>
+                            <rect key="frame" x="0.0" y="904" width="414" height="104"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D90-7S-rS4" customClass="RoundedButton" customModule="Habit_Calendar" customModuleProvider="target">
@@ -280,345 +280,342 @@
                                 <constraint firstItem="D90-7S-rS4" firstAttribute="centerY" secondItem="U4g-rN-Yvd" secondAttribute="centerY" id="PJw-H1-sAe"/>
                             </constraints>
                         </view>
-                        <sections>
-                            <tableViewSection id="v1W-KV-0Zn">
-                                <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="155" id="252-Nz-rq0" userLabel="Name Cell" customClass="HabitNameFieldTableViewCell" customModule="Habit_Calendar" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="155"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="252-Nz-rq0" id="BiI-Fo-2wc">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="154.66666666666666"/>
-                                            <autoresizingMask key="autoresizingMask"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="name field reuse identifier" rowHeight="155" id="252-Nz-rq0" userLabel="Name Cell" customClass="HabitNameFieldTableViewCell" customModule="Habit_Calendar" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="414" height="155"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="252-Nz-rq0" id="BiI-Fo-2wc">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="154.66666666666666"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="sEI-14-LMZ">
+                                            <rect key="frame" x="20" y="21" width="374" height="113"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="sEI-14-LMZ">
-                                                    <rect key="frame" x="20" y="21" width="374" height="113"/>
+                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="GCh-KY-j2G">
+                                                    <rect key="frame" x="0.0" y="0.0" width="73.666666666666671" height="24"/>
                                                     <subviews>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="GCh-KY-j2G">
-                                                            <rect key="frame" x="0.0" y="0.0" width="73.666666666666671" height="24"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0AK-r5-sfZ">
+                                                            <rect key="frame" x="0.0" y="0.0" width="55" height="24"/>
+                                                            <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="20"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZZc-vs-FON">
+                                                            <rect key="frame" x="65" y="0.0" width="8.6666666666666714" height="24"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                            <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rbh-0c-oq7">
+                                                    <rect key="frame" x="0.0" y="34" width="374" height="39"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What would you like to start doing?" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="60s-II-rIh">
+                                                            <rect key="frame" x="0.0" y="0.0" width="374" height="39"/>
+                                                            <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" red="0.99215686270000003" green="0.99215686270000003" blue="0.99607843139999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstItem="60s-II-rIh" firstAttribute="top" secondItem="rbh-0c-oq7" secondAttribute="top" id="5P4-fn-hZW"/>
+                                                        <constraint firstAttribute="bottom" secondItem="60s-II-rIh" secondAttribute="bottom" id="9bA-dO-r2Z"/>
+                                                        <constraint firstAttribute="trailing" secondItem="60s-II-rIh" secondAttribute="trailing" id="BCL-x6-eix"/>
+                                                        <constraint firstItem="60s-II-rIh" firstAttribute="leading" secondItem="rbh-0c-oq7" secondAttribute="leading" id="Cs6-rd-I3p"/>
+                                                    </constraints>
+                                                </view>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Ex: Go jogging" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IGr-WJ-mRM" customClass="UnderlinedTextField" customModule="Habit_Calendar" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="83" width="374" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="MjC-AN-Cde"/>
+                                                    </constraints>
+                                                    <nil key="textColor"/>
+                                                    <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="20"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="thickness">
+                                                            <real key="value" value="2"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="informNameChanged:" destination="252-Nz-rq0" eventType="editingDidEnd" id="Ok8-g8-q65"/>
+                                                    </connections>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="IGr-WJ-mRM" firstAttribute="width" secondItem="sEI-14-LMZ" secondAttribute="width" id="WE2-3l-P1B"/>
+                                                <constraint firstItem="rbh-0c-oq7" firstAttribute="width" secondItem="sEI-14-LMZ" secondAttribute="width" id="jw4-ze-Z5G"/>
+                                            </constraints>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="sEI-14-LMZ" firstAttribute="top" secondItem="BiI-Fo-2wc" secondAttribute="topMargin" constant="10" id="J54-HY-jke"/>
+                                        <constraint firstItem="sEI-14-LMZ" firstAttribute="leading" secondItem="BiI-Fo-2wc" secondAttribute="leadingMargin" id="UKB-WM-wGk"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="sEI-14-LMZ" secondAttribute="trailing" id="mwx-Ts-Sim"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="sEI-14-LMZ" secondAttribute="bottom" constant="10" id="tn5-ZE-PNW"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" red="0.99215686274509807" green="0.99215686274509807" blue="0.99607843137254903" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <outlet property="fieldInfoLabel" destination="60s-II-rIh" id="YuT-Ka-uGc"/>
+                                    <outlet property="fieldTitleLabel" destination="0AK-r5-sfZ" id="Iz6-9f-nsA"/>
+                                    <outlet property="nameTextField" destination="IGr-WJ-mRM" id="DUw-hx-jjf"/>
+                                    <outlet property="requiredIndicatorLabel" destination="ZZc-vs-FON" id="mZT-wE-Uex"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="color field reuse identifier" rowHeight="281" id="57i-m4-aRN" userLabel="Colors Cell" customClass="HabitColorFieldTableViewCell" customModule="Habit_Calendar" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="183" width="414" height="281"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="57i-m4-aRN" id="vQC-IB-Nj9">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="280.66666666666669"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="N01-Ea-GHX" userLabel="Layout">
+                                            <rect key="frame" x="20" y="21" width="374" height="239"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="vHj-BW-YYw">
+                                                    <rect key="frame" x="0.0" y="0.0" width="69.333333333333329" height="34"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Color" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JUM-W9-3bo">
+                                                            <rect key="frame" x="0.0" y="0.0" width="50.666666666666664" height="24"/>
+                                                            <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="20"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xao-gA-zVr">
+                                                            <rect key="frame" x="60.666666666666664" y="0.0" width="8.6666666666666643" height="24"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                            <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
+                                                <view contentMode="scaleToFill" verticalHuggingPriority="249" translatesAutoresizingMaskIntoConstraints="NO" id="41k-RE-w2b" customClass="ColorsPickerView" customModule="Habit_Calendar" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="44" width="374" height="195"/>
+                                                    <color key="backgroundColor" red="0.99215686274509807" green="0.99215686274509807" blue="0.99607843137254903" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="colorNumber">
+                                                            <integer key="value" value="11"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="colorsPerRow">
+                                                            <integer key="value" value="5"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="spaceBetweenItems">
+                                                            <real key="value" value="10"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="41k-RE-w2b" firstAttribute="width" secondItem="N01-Ea-GHX" secondAttribute="width" id="SRQ-cc-cqp"/>
+                                            </constraints>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="N01-Ea-GHX" firstAttribute="leading" secondItem="vQC-IB-Nj9" secondAttribute="leadingMargin" id="2vj-bj-PkJ"/>
+                                        <constraint firstItem="N01-Ea-GHX" firstAttribute="top" secondItem="vQC-IB-Nj9" secondAttribute="topMargin" constant="10" id="378-Z4-IDp"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="N01-Ea-GHX" secondAttribute="bottom" constant="10" id="GrV-UU-IKb"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="N01-Ea-GHX" secondAttribute="trailing" id="iYB-1m-THa"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" red="0.99215686274509807" green="0.99215686274509807" blue="0.99607843137254903" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <outlet property="colorPicker" destination="41k-RE-w2b" id="bjI-j9-oQd"/>
+                                    <outlet property="requiredIndicatorLabel" destination="xao-gA-zVr" id="FAL-Hb-Yue"/>
+                                    <outlet property="titleLabel" destination="JUM-W9-3bo" id="B4M-yg-cHP"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="challenge field reuse identifier" rowHeight="160" id="eAI-cd-R7A" userLabel="Days Cell" customClass="HabitChallengeFieldTableViewCell" customModule="Habit_Calendar" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="464" width="414" height="160"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="eAI-cd-R7A" id="SOy-9m-dLh">
+                                    <rect key="frame" x="0.0" y="0.0" width="376" height="159.66666666666666"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="AnH-Bq-Z54">
+                                            <rect key="frame" x="20" y="10" width="346" height="139.66666666666666"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="WoQ-OW-H8L">
+                                                    <rect key="frame" x="0.0" y="0.0" width="168.33333333333334" height="25.333333333333332"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Challenge of days" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pyb-N6-nac">
+                                                            <rect key="frame" x="0.0" y="0.0" width="168.33333333333334" height="24"/>
+                                                            <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="20"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="For how many days will you keep doing this activity?" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="JOL-oE-7MJ">
+                                                    <rect key="frame" x="0.0" y="35.333333333333336" width="346" height="43.000000000000007"/>
+                                                    <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="89 days selected" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="GyR-VK-GCC">
+                                                    <rect key="frame" x="0.0" y="88.333333333333329" width="121.33333333333333" height="19"/>
+                                                    <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="15"/>
+                                                    <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Znx-e4-uyO" userLabel="Days range">
+                                                    <rect key="frame" x="0.0" y="117.33333333333333" width="133" height="22.333333333333329"/>
+                                                    <subviews>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Eml-HO-QRR" userLabel="From">
+                                                            <rect key="frame" x="0.0" y="0.0" width="66.666666666666671" height="22.333333333333332"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0AK-r5-sfZ">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="55" height="24"/>
-                                                                    <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="20"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="From:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TgM-TB-tff">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="43.333333333333336" height="22.333333333333332"/>
+                                                                    <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="16"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZZc-vs-FON">
-                                                                    <rect key="frame" x="65" y="0.0" width="8.6666666666666714" height="24"/>
-                                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qIT-Tk-yq9">
+                                                                    <rect key="frame" x="53.333333333333329" y="0.0" width="13.333333333333329" height="22.333333333333332"/>
+                                                                    <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="14"/>
                                                                     <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                             </subviews>
                                                         </stackView>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rbh-0c-oq7">
-                                                            <rect key="frame" x="0.0" y="34" width="374" height="39"/>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="DUX-WM-SQk" userLabel="To">
+                                                            <rect key="frame" x="86.666666666666671" y="0.0" width="46.333333333333329" height="22.333333333333332"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What would you like to start doing?" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="60s-II-rIh">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="374" height="39"/>
-                                                                    <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="17"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CQ4-LS-NZO">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="23" height="22.333333333333332"/>
+                                                                    <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="16"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                            </subviews>
-                                                            <color key="backgroundColor" red="0.99215686270000003" green="0.99215686270000003" blue="0.99607843139999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            <constraints>
-                                                                <constraint firstItem="60s-II-rIh" firstAttribute="top" secondItem="rbh-0c-oq7" secondAttribute="top" id="5P4-fn-hZW"/>
-                                                                <constraint firstAttribute="bottom" secondItem="60s-II-rIh" secondAttribute="bottom" id="9bA-dO-r2Z"/>
-                                                                <constraint firstAttribute="trailing" secondItem="60s-II-rIh" secondAttribute="trailing" id="BCL-x6-eix"/>
-                                                                <constraint firstItem="60s-II-rIh" firstAttribute="leading" secondItem="rbh-0c-oq7" secondAttribute="leading" id="Cs6-rd-I3p"/>
-                                                            </constraints>
-                                                        </view>
-                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Ex: Go jogging" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IGr-WJ-mRM" customClass="UnderlinedTextField" customModule="Habit_Calendar" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="83" width="374" height="30"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" constant="30" id="MjC-AN-Cde"/>
-                                                            </constraints>
-                                                            <nil key="textColor"/>
-                                                            <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="20"/>
-                                                            <textInputTraits key="textInputTraits"/>
-                                                            <userDefinedRuntimeAttributes>
-                                                                <userDefinedRuntimeAttribute type="number" keyPath="thickness">
-                                                                    <real key="value" value="2"/>
-                                                                </userDefinedRuntimeAttribute>
-                                                            </userDefinedRuntimeAttributes>
-                                                            <connections>
-                                                                <action selector="informNameChanged:" destination="252-Nz-rq0" eventType="editingDidEnd" id="Ok8-g8-q65"/>
-                                                            </connections>
-                                                        </textField>
-                                                    </subviews>
-                                                    <constraints>
-                                                        <constraint firstItem="IGr-WJ-mRM" firstAttribute="width" secondItem="sEI-14-LMZ" secondAttribute="width" id="WE2-3l-P1B"/>
-                                                        <constraint firstItem="rbh-0c-oq7" firstAttribute="width" secondItem="sEI-14-LMZ" secondAttribute="width" id="jw4-ze-Z5G"/>
-                                                    </constraints>
-                                                </stackView>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="sEI-14-LMZ" firstAttribute="top" secondItem="BiI-Fo-2wc" secondAttribute="topMargin" constant="10" id="J54-HY-jke"/>
-                                                <constraint firstItem="sEI-14-LMZ" firstAttribute="leading" secondItem="BiI-Fo-2wc" secondAttribute="leadingMargin" id="UKB-WM-wGk"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="sEI-14-LMZ" secondAttribute="trailing" id="mwx-Ts-Sim"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="sEI-14-LMZ" secondAttribute="bottom" constant="10" id="tn5-ZE-PNW"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.99215686274509807" green="0.99215686274509807" blue="0.99607843137254903" alpha="1" colorSpace="calibratedRGB"/>
-                                        <connections>
-                                            <outlet property="fieldInfoLabel" destination="60s-II-rIh" id="YuT-Ka-uGc"/>
-                                            <outlet property="fieldTitleLabel" destination="0AK-r5-sfZ" id="Iz6-9f-nsA"/>
-                                            <outlet property="nameTextField" destination="IGr-WJ-mRM" id="DUw-hx-jjf"/>
-                                            <outlet property="requiredIndicatorLabel" destination="ZZc-vs-FON" id="mZT-wE-Uex"/>
-                                        </connections>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="281" id="57i-m4-aRN" userLabel="Colors Cell" customClass="HabitColorFieldTableViewCell" customModule="Habit_Calendar" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="155" width="414" height="281"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="57i-m4-aRN" id="vQC-IB-Nj9">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="280.66666666666669"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="N01-Ea-GHX" userLabel="Layout">
-                                                    <rect key="frame" x="20" y="21" width="374" height="239"/>
-                                                    <subviews>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="vHj-BW-YYw">
-                                                            <rect key="frame" x="0.0" y="0.0" width="69.333333333333329" height="34"/>
-                                                            <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Color" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JUM-W9-3bo">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="50.666666666666664" height="24"/>
-                                                                    <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="20"/>
-                                                                    <nil key="textColor"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xao-gA-zVr">
-                                                                    <rect key="frame" x="60.666666666666664" y="0.0" width="8.6666666666666643" height="24"/>
-                                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qbf-Ac-7Ay">
+                                                                    <rect key="frame" x="32.999999999999986" y="0.0" width="13.333333333333336" height="22.333333333333332"/>
+                                                                    <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="14"/>
                                                                     <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                             </subviews>
                                                         </stackView>
-                                                        <view contentMode="scaleToFill" verticalHuggingPriority="249" translatesAutoresizingMaskIntoConstraints="NO" id="41k-RE-w2b" customClass="ColorsPickerView" customModule="Habit_Calendar" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="44" width="374" height="195"/>
-                                                            <color key="backgroundColor" red="0.99215686274509807" green="0.99215686274509807" blue="0.99607843137254903" alpha="1" colorSpace="calibratedRGB"/>
-                                                            <userDefinedRuntimeAttributes>
-                                                                <userDefinedRuntimeAttribute type="number" keyPath="colorNumber">
-                                                                    <integer key="value" value="11"/>
-                                                                </userDefinedRuntimeAttribute>
-                                                                <userDefinedRuntimeAttribute type="number" keyPath="colorsPerRow">
-                                                                    <integer key="value" value="5"/>
-                                                                </userDefinedRuntimeAttribute>
-                                                                <userDefinedRuntimeAttribute type="number" keyPath="spaceBetweenItems">
-                                                                    <real key="value" value="10"/>
-                                                                </userDefinedRuntimeAttribute>
-                                                            </userDefinedRuntimeAttributes>
-                                                        </view>
                                                     </subviews>
-                                                    <constraints>
-                                                        <constraint firstItem="41k-RE-w2b" firstAttribute="width" secondItem="N01-Ea-GHX" secondAttribute="width" id="SRQ-cc-cqp"/>
-                                                    </constraints>
                                                 </stackView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="N01-Ea-GHX" firstAttribute="leading" secondItem="vQC-IB-Nj9" secondAttribute="leadingMargin" id="2vj-bj-PkJ"/>
-                                                <constraint firstItem="N01-Ea-GHX" firstAttribute="top" secondItem="vQC-IB-Nj9" secondAttribute="topMargin" constant="10" id="378-Z4-IDp"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="N01-Ea-GHX" secondAttribute="bottom" constant="10" id="GrV-UU-IKb"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="N01-Ea-GHX" secondAttribute="trailing" id="iYB-1m-THa"/>
+                                                <constraint firstItem="JOL-oE-7MJ" firstAttribute="width" secondItem="AnH-Bq-Z54" secondAttribute="width" id="mca-4t-caB"/>
                                             </constraints>
-                                        </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.99215686274509807" green="0.99215686274509807" blue="0.99607843137254903" alpha="1" colorSpace="calibratedRGB"/>
-                                        <connections>
-                                            <outlet property="colorPicker" destination="41k-RE-w2b" id="bjI-j9-oQd"/>
-                                            <outlet property="requiredIndicatorLabel" destination="xao-gA-zVr" id="FAL-Hb-Yue"/>
-                                            <outlet property="titleLabel" destination="JUM-W9-3bo" id="B4M-yg-cHP"/>
-                                        </connections>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="160" id="eAI-cd-R7A" userLabel="Days Cell" customClass="HabitChallengeFieldTableViewCell" customModule="Habit_Calendar" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="436" width="414" height="160"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="eAI-cd-R7A" id="SOy-9m-dLh">
-                                            <rect key="frame" x="0.0" y="0.0" width="376" height="159.66666666666666"/>
-                                            <autoresizingMask key="autoresizingMask"/>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="AnH-Bq-Z54" secondAttribute="bottom" constant="10" id="2Wk-gL-QHW"/>
+                                        <constraint firstAttribute="trailing" secondItem="AnH-Bq-Z54" secondAttribute="trailing" constant="10" id="Utq-Wp-gXf"/>
+                                        <constraint firstItem="AnH-Bq-Z54" firstAttribute="leading" secondItem="SOy-9m-dLh" secondAttribute="leading" constant="20" id="bU2-9d-Zmh"/>
+                                        <constraint firstItem="AnH-Bq-Z54" firstAttribute="top" secondItem="SOy-9m-dLh" secondAttribute="top" constant="10" id="xcd-bU-Lfg"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" red="0.99215686270000003" green="0.99215686270000003" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <outlet property="daysCountLabel" destination="GyR-VK-GCC" id="NuG-ph-D3w"/>
+                                    <outlet property="fromDateLabel" destination="qIT-Tk-yq9" id="Hon-gG-3b5"/>
+                                    <outlet property="infoLabel" destination="JOL-oE-7MJ" id="MFC-Q0-i3b"/>
+                                    <outlet property="titleLabel" destination="pyb-N6-nac" id="sw5-fD-IO4"/>
+                                    <outlet property="toDateLabel" destination="qbf-Ac-7Ay" id="k0J-r2-Afg"/>
+                                    <segue destination="zeZ-9t-rmb" kind="show" identifier="Show days selection controller" id="y7q-nn-pWX"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Fire tiems field reuse identifier" rowHeight="160" id="5x1-FQ-bQv" userLabel="Fire Times Cell" customClass="HabitFireTimesFieldTableViewCell" customModule="Habit_Calendar" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="624" width="414" height="160"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5x1-FQ-bQv" id="rtd-gG-HQu">
+                                    <rect key="frame" x="0.0" y="0.0" width="376" height="159.66666666666666"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="3pf-TQ-uQU" userLabel="Selected fire times">
+                                            <rect key="frame" x="20" y="10" width="346" height="139.66666666666666"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="AnH-Bq-Z54">
-                                                    <rect key="frame" x="20" y="10" width="346" height="139.66666666666666"/>
-                                                    <subviews>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="WoQ-OW-H8L">
-                                                            <rect key="frame" x="0.0" y="0.0" width="168.33333333333334" height="25.333333333333332"/>
-                                                            <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Challenge of days" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pyb-N6-nac">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="168.33333333333334" height="24"/>
-                                                                    <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="20"/>
-                                                                    <nil key="textColor"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
-                                                            </subviews>
-                                                        </stackView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="For how many days will you keep doing this activity?" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="JOL-oE-7MJ">
-                                                            <rect key="frame" x="0.0" y="35.333333333333336" width="346" height="43.000000000000007"/>
-                                                            <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="17"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="89 days selected" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="GyR-VK-GCC">
-                                                            <rect key="frame" x="0.0" y="88.333333333333329" width="121.33333333333333" height="19"/>
-                                                            <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="15"/>
-                                                            <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Znx-e4-uyO" userLabel="Days range">
-                                                            <rect key="frame" x="0.0" y="117.33333333333333" width="133" height="22.333333333333329"/>
-                                                            <subviews>
-                                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Eml-HO-QRR" userLabel="From">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="66.666666666666671" height="22.333333333333332"/>
-                                                                    <subviews>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="From:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TgM-TB-tff">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="43.333333333333336" height="22.333333333333332"/>
-                                                                            <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="16"/>
-                                                                            <nil key="textColor"/>
-                                                                            <nil key="highlightedColor"/>
-                                                                        </label>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qIT-Tk-yq9">
-                                                                            <rect key="frame" x="53.333333333333329" y="0.0" width="13.333333333333329" height="22.333333333333332"/>
-                                                                            <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="14"/>
-                                                                            <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                            <nil key="highlightedColor"/>
-                                                                        </label>
-                                                                    </subviews>
-                                                                </stackView>
-                                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="DUX-WM-SQk" userLabel="To">
-                                                                    <rect key="frame" x="86.666666666666671" y="0.0" width="46.333333333333329" height="22.333333333333332"/>
-                                                                    <subviews>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CQ4-LS-NZO">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="23" height="22.333333333333332"/>
-                                                                            <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="16"/>
-                                                                            <nil key="textColor"/>
-                                                                            <nil key="highlightedColor"/>
-                                                                        </label>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qbf-Ac-7Ay">
-                                                                            <rect key="frame" x="32.999999999999986" y="0.0" width="13.333333333333336" height="22.333333333333332"/>
-                                                                            <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="14"/>
-                                                                            <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                            <nil key="highlightedColor"/>
-                                                                        </label>
-                                                                    </subviews>
-                                                                </stackView>
-                                                            </subviews>
-                                                        </stackView>
-                                                    </subviews>
-                                                    <constraints>
-                                                        <constraint firstItem="JOL-oE-7MJ" firstAttribute="width" secondItem="AnH-Bq-Z54" secondAttribute="width" id="mca-4t-caB"/>
-                                                    </constraints>
-                                                </stackView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Notifications" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jfL-Qf-BsI">
+                                                    <rect key="frame" x="0.0" y="0.0" width="119.66666666666667" height="33"/>
+                                                    <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="20"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="At what times would you like to be reminded about this habit?" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="XUS-SP-b8Q">
+                                                    <rect key="frame" x="0.0" y="43" width="278" height="40.666666666666657"/>
+                                                    <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="2 times selected" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="OSf-bA-IA0">
+                                                    <rect key="frame" x="0.0" y="93.666666666666671" width="116.66666666666667" height="18"/>
+                                                    <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="15"/>
+                                                    <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Ii-SK-90P">
+                                                    <rect key="frame" x="0.0" y="121.66666666666666" width="14.666666666666666" height="18"/>
+                                                    <fontDescription key="fontDescription" name="SFProText-Bold" family="SF Pro Text" pointSize="15"/>
+                                                    <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="AnH-Bq-Z54" secondAttribute="bottom" constant="10" id="2Wk-gL-QHW"/>
-                                                <constraint firstAttribute="trailing" secondItem="AnH-Bq-Z54" secondAttribute="trailing" constant="10" id="Utq-Wp-gXf"/>
-                                                <constraint firstItem="AnH-Bq-Z54" firstAttribute="leading" secondItem="SOy-9m-dLh" secondAttribute="leading" constant="20" id="bU2-9d-Zmh"/>
-                                                <constraint firstItem="AnH-Bq-Z54" firstAttribute="top" secondItem="SOy-9m-dLh" secondAttribute="top" constant="10" id="xcd-bU-Lfg"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.99215686270000003" green="0.99215686270000003" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
-                                        <connections>
-                                            <outlet property="daysCountLabel" destination="GyR-VK-GCC" id="NuG-ph-D3w"/>
-                                            <outlet property="fromDateLabel" destination="qIT-Tk-yq9" id="Hon-gG-3b5"/>
-                                            <outlet property="infoLabel" destination="JOL-oE-7MJ" id="MFC-Q0-i3b"/>
-                                            <outlet property="titleLabel" destination="pyb-N6-nac" id="sw5-fD-IO4"/>
-                                            <outlet property="toDateLabel" destination="qbf-Ac-7Ay" id="k0J-r2-Afg"/>
-                                            <segue destination="zeZ-9t-rmb" kind="show" identifier="Show days selection controller" id="y7q-nn-pWX"/>
-                                        </connections>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="160" id="5x1-FQ-bQv" userLabel="Notifications Cell" customClass="HabitFireTimesFieldTableViewCell" customModule="Habit_Calendar" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="596" width="414" height="160"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5x1-FQ-bQv" id="rtd-gG-HQu">
-                                            <rect key="frame" x="0.0" y="0.0" width="376" height="159.66666666666666"/>
-                                            <autoresizingMask key="autoresizingMask"/>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="3pf-TQ-uQU" firstAttribute="leading" secondItem="rtd-gG-HQu" secondAttribute="leading" constant="20" id="ZAM-0o-Hg8"/>
+                                        <constraint firstItem="3pf-TQ-uQU" firstAttribute="top" secondItem="rtd-gG-HQu" secondAttribute="top" constant="10" id="ZdD-as-cdK"/>
+                                        <constraint firstAttribute="trailing" secondItem="3pf-TQ-uQU" secondAttribute="trailing" constant="10" id="h7E-Of-3Us"/>
+                                        <constraint firstAttribute="bottom" secondItem="3pf-TQ-uQU" secondAttribute="bottom" constant="10" id="pIt-ji-Rnk"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" red="0.99215686270000003" green="0.99215686270000003" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <outlet property="fireTimesAmountLabel" destination="OSf-bA-IA0" id="pMZ-sD-8MX"/>
+                                    <outlet property="fireTimesLabel" destination="4Ii-SK-90P" id="g1S-dh-bCO"/>
+                                    <outlet property="titleLabel" destination="jfL-Qf-BsI" id="JpA-Ta-uVA"/>
+                                    <segue destination="hr1-dK-bvy" kind="show" identifier="Show fire dates selection controller" id="J1H-vQ-s49"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="notifications not authorized reuse identifier" rowHeight="120" id="kvo-1d-h50" userLabel="Notifications not authorized Cell">
+                                <rect key="frame" x="0.0" y="784" width="414" height="120"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="kvo-1d-h50" id="r2u-e0-ibf">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="119.66666666666667"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="RKo-W3-vHw" userLabel="Not authorized">
+                                            <rect key="frame" x="20" y="10" width="384" height="99.666666666666671"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="3pf-TQ-uQU" userLabel="Selected fire times">
-                                                    <rect key="frame" x="20" y="10" width="346" height="139.66666666666666"/>
-                                                    <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Notifications" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jfL-Qf-BsI">
-                                                            <rect key="frame" x="0.0" y="0.0" width="119.66666666666667" height="33"/>
-                                                            <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="20"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="At what times would you like to be reminded about this habit?" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="XUS-SP-b8Q">
-                                                            <rect key="frame" x="0.0" y="43" width="278" height="40.666666666666657"/>
-                                                            <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="17"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="2 times selected" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="OSf-bA-IA0">
-                                                            <rect key="frame" x="0.0" y="93.666666666666671" width="116.66666666666667" height="18"/>
-                                                            <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="15"/>
-                                                            <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Ii-SK-90P">
-                                                            <rect key="frame" x="0.0" y="121.66666666666666" width="14.666666666666666" height="18"/>
-                                                            <fontDescription key="fontDescription" name="SFProText-Bold" family="SF Pro Text" pointSize="15"/>
-                                                            <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                    </subviews>
-                                                </stackView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Notifications" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZH0-Pg-oh0">
+                                                    <rect key="frame" x="0.0" y="0.0" width="119.66666666666667" height="25.666666666666668"/>
+                                                    <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="20"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="User notifications are not authorized." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="bgT-aC-9P0">
+                                                    <rect key="frame" x="0.0" y="35.666666666666664" width="262.66666666666669" height="18"/>
+                                                    <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="15"/>
+                                                    <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enable the user notifications to be reminded about your habits" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="eQm-wi-ZtS">
+                                                    <rect key="frame" x="0.0" y="63.666666666666671" width="361.66666666666669" height="36"/>
+                                                    <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="15"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
-                                            <constraints>
-                                                <constraint firstItem="3pf-TQ-uQU" firstAttribute="leading" secondItem="rtd-gG-HQu" secondAttribute="leading" constant="20" id="ZAM-0o-Hg8"/>
-                                                <constraint firstItem="3pf-TQ-uQU" firstAttribute="top" secondItem="rtd-gG-HQu" secondAttribute="top" constant="10" id="ZdD-as-cdK"/>
-                                                <constraint firstAttribute="trailing" secondItem="3pf-TQ-uQU" secondAttribute="trailing" constant="10" id="h7E-Of-3Us"/>
-                                                <constraint firstAttribute="bottom" secondItem="3pf-TQ-uQU" secondAttribute="bottom" constant="10" id="pIt-ji-Rnk"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.99215686270000003" green="0.99215686270000003" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
-                                        <connections>
-                                            <outlet property="fireTimesAmountLabel" destination="OSf-bA-IA0" id="pMZ-sD-8MX"/>
-                                            <outlet property="fireTimesLabel" destination="4Ii-SK-90P" id="g1S-dh-bCO"/>
-                                            <outlet property="titleLabel" destination="jfL-Qf-BsI" id="JpA-Ta-uVA"/>
-                                            <segue destination="hr1-dK-bvy" kind="show" identifier="Show fire dates selection controller" id="J1H-vQ-s49"/>
-                                        </connections>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="120" id="kvo-1d-h50" userLabel="Notifications not authorized Cell">
-                                        <rect key="frame" x="0.0" y="756" width="414" height="120"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="kvo-1d-h50" id="r2u-e0-ibf">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="119.66666666666667"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="RKo-W3-vHw" userLabel="Not authorized">
-                                                    <rect key="frame" x="20" y="10" width="384" height="99.666666666666671"/>
-                                                    <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Notifications" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZH0-Pg-oh0">
-                                                            <rect key="frame" x="0.0" y="0.0" width="119.66666666666667" height="25.666666666666668"/>
-                                                            <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="20"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="User notifications are not authorized." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="bgT-aC-9P0">
-                                                            <rect key="frame" x="0.0" y="35.666666666666664" width="262.66666666666669" height="18"/>
-                                                            <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="15"/>
-                                                            <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enable the user notifications to be reminded about your habits" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="eQm-wi-ZtS">
-                                                            <rect key="frame" x="0.0" y="63.666666666666671" width="361.66666666666669" height="36"/>
-                                                            <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="15"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                    </subviews>
-                                                </stackView>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="RKo-W3-vHw" secondAttribute="trailing" constant="10" id="NXu-PH-dqn"/>
-                                                <constraint firstItem="RKo-W3-vHw" firstAttribute="top" secondItem="r2u-e0-ibf" secondAttribute="top" constant="10" id="Pb3-dt-5xe"/>
-                                                <constraint firstAttribute="bottom" secondItem="RKo-W3-vHw" secondAttribute="bottom" constant="10" id="Q7S-nX-JFn"/>
-                                                <constraint firstItem="RKo-W3-vHw" firstAttribute="leading" secondItem="r2u-e0-ibf" secondAttribute="leading" constant="20" id="vMn-SG-rSd"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.99215686270000003" green="0.99215686270000003" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
-                        </sections>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="RKo-W3-vHw" secondAttribute="trailing" constant="10" id="NXu-PH-dqn"/>
+                                        <constraint firstItem="RKo-W3-vHw" firstAttribute="top" secondItem="r2u-e0-ibf" secondAttribute="top" constant="10" id="Pb3-dt-5xe"/>
+                                        <constraint firstAttribute="bottom" secondItem="RKo-W3-vHw" secondAttribute="bottom" constant="10" id="Q7S-nX-JFn"/>
+                                        <constraint firstItem="RKo-W3-vHw" firstAttribute="leading" secondItem="r2u-e0-ibf" secondAttribute="leading" constant="20" id="vMn-SG-rSd"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" red="0.99215686270000003" green="0.99215686270000003" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
+                            </tableViewCell>
+                        </prototypes>
+                        <sections/>
                         <connections>
                             <outlet property="dataSource" destination="e07-lh-rVp" id="jpE-2h-CQM"/>
                             <outlet property="delegate" destination="e07-lh-rVp" id="OBG-N0-E7A"/>

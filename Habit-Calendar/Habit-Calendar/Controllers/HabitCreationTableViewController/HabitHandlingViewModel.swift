@@ -25,6 +25,9 @@ protocol HabitHandlingViewModel {
     /// The container used by the view model.
     var container: NSPersistentContainer { get }
 
+    /// The delegate of this view model.
+    var delegate: HabitHandlingViewModelDelegate? { get set }
+
     // MARK: Initializers
 
     init(habit: HabitMO?,
@@ -86,4 +89,9 @@ extension HabitHandlingViewModel {
     var canDeleteHabit: Bool {
         return isEditing
     }
+}
+
+protocol HabitHandlingViewModelDelegate: class {
+    /// Handles the errors that might happen while saving the habits.
+    func didReceiveSaveError(_ error: Error)
 }

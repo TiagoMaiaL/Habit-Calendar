@@ -22,6 +22,15 @@ class HabitFireTimesFieldTableViewCell: UITableViewCell {
     /// The label displaying the hour and minute of some fire times.
     @IBOutlet var fireTimesLabel: UILabel!
 
+    var themeColor: UIColor? {
+        didSet {
+            if let color = themeColor {
+                fireTimesAmountLabel.textColor = color
+                fireTimesLabel.textColor = color
+            }
+        }
+    }
+
     // MARK: Impertives
 
     override func prepareForReuse() {

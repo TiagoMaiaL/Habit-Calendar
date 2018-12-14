@@ -25,6 +25,9 @@ struct HabitHandlerViewModel: HabitHandlingViewModel {
     /// The persistent container used to perform the operations of the habit.
     let container: NSPersistentContainer
 
+    /// The delegate of this view model.
+    weak var delegate: HabitHandlingViewModelDelegate?
+
     /// The shortcuts manager used to add, edit,
     /// or remove a shortcut related to the habit.
     private let shortcutsManager: HabitsShortcutItemsManager
@@ -139,7 +142,13 @@ struct HabitHandlerViewModel: HabitHandlingViewModel {
                     )
                 }
             } catch {
-                print("\(error)")
+                context.rollback()
+
+                if let delegate = self.delegate {
+                    DispatchQueue.main.async {
+                        delegate.didReceiveSaveError(error)
+                    }
+                }
             }
         }
     }
