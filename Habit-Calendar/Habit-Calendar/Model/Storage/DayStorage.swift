@@ -60,7 +60,7 @@ struct DayStorage {
         // creation somewhere. There should be only one day entity per date.
         assert(
             results?.count ?? 0 <= 1,
-            "DayStorage -- day: there's more than on Day entity for the passed date attribute."
+            "There's more than on Day entity for the passed date attribute."
         )
 
         return results?.first

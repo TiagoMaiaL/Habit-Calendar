@@ -148,11 +148,14 @@ class HabitsTableViewController: UITableViewController {
             // Inject the controller's habit storage, user storage,
             // and persistent container.
             if let habitCreationController = segue.destination as? HabitCreationTableViewController {
-                habitCreationController.container = container
-                habitCreationController.habitStore = habitStorage
-                habitCreationController.userStore = AppDelegate.current.userStorage
+                habitCreationController.habitHandlerViewModel = HabitHandlerViewModel(
+                    habit: nil,
+                    habitStorage: habitStorage,
+                    userStorage: UserStorage(),
+                    container: container,
+                    shortcutsManager: shortcutsManager
+                )
                 habitCreationController.notificationManager = notificationManager
-                habitCreationController.shortcutsManager = shortcutsManager
             } else {
                 assertionFailure(
                     "Error: Couldn't get the habit creation controller."
